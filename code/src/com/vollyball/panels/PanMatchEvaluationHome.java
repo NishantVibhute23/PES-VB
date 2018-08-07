@@ -10,6 +10,7 @@ import com.vollyball.bean.Player;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.TeamDao;
+import com.vollyball.dialog.DialogPanEvaluation;
 import com.vollyball.dialog.MatchSetDialog;
 import com.vollyball.dialog.SelectTeamPlayerDialog;
 import java.util.LinkedHashMap;
@@ -443,7 +444,12 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
 
     private void set5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_set5MouseClicked
         // TODO add your handling code here:
-        showPanMatchSet(5);
+//        showPanMatchSet(5);
+
+        DialogPanEvaluation obj = new DialogPanEvaluation();
+
+        obj.init();
+        obj.show();
     }//GEN-LAST:event_set5MouseClicked
 
     public void showPanMatchSet(int set) {
