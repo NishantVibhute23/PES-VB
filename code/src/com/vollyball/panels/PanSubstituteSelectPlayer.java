@@ -1,0 +1,397 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.vollyball.panels;
+
+import com.vollyball.bean.Player;
+import com.vollyball.controller.Controller;
+import com.vollyball.dao.MatchDao;
+import com.vollyball.dialog.SetSubstituteSelectPlayerDialog;
+import com.vollyball.enums.PlayerPosition;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author nishant.vibhute
+ */
+public class PanSubstituteSelectPlayer extends javax.swing.JPanel {
+
+    DefaultTableModel modelSelectedPlayer;
+    LinkedHashMap<String, Player> chestMap;
+    public LinkedHashMap<Integer, Player> playerMap;
+    int position;
+    int roPlayerId;
+    int matchEvaluationId;
+    String score;
+    SetSubstituteSelectPlayerDialog s;
+
+    /**
+     * Creates new form PanSubstitueSelectPlayer
+     *
+     * @param playerList
+     * @param position
+     * @param roPlayerId
+     * @param matchEvaluationId
+     * @param score
+     * @param s
+     */
+    public PanSubstituteSelectPlayer(List<Player> playerList, int position, int roPlayerId, int matchEvaluationId, String score, SetSubstituteSelectPlayerDialog s) {
+        initComponents();
+        this.s = s;
+        this.position = position;
+        this.roPlayerId = roPlayerId;
+        this.matchEvaluationId = matchEvaluationId;
+        this.score = score;
+
+        modelSelectedPlayer = (DefaultTableModel) tbSubPlayers.getModel();
+        chestMap = new LinkedHashMap<>();
+
+        for (Player player : playerList) {
+            boolean exist = false;
+            for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.initialPositionMap.entrySet()) {
+                chestMap.put(player.getChestNo(), player);
+
+                if (entry.getKey() != 7) {
+                    Player pl = entry.getValue();
+                    Player plrally = Controller.panMatchSet.rallyPositionMap.get(entry.getKey());
+                    if (player.getId() == pl.getId() || player.getId() == plrally.getId()) {
+                        exist = true;
+                    }
+                }
+            }
+            if (!exist) {
+                Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
+                modelSelectedPlayer.addRow(row);
+            }
+
+//            int j = 0;
+//            for (Player player : playerList) {
+//                playerMap.put(player.getChestNo(), player);
+//                if (selectedPlayers.contains(player.getId())) {
+//                    Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
+//                    modelSelectedPlayer.addRow(row);
+//                    if (!Controller.panMatchSet.positionMap.isEmpty()) {
+//                        for (int i = 1; i <= 7; i++) {
+//                            if (Controller.panMatchSet.positionMap.get(i).getChestNo().equals(player.getChestNo())) {
+//                                modelSelectedPlayer.removeRow(j);
+//                                j--;
+//                            }
+//                        }
+//                    }
+//                }
+//                j++;
+//            }
+            tbSubPlayers.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    if (!e.getValueIsAdjusting()) {
+
+                        String selectedChest = null;
+
+                        int selectedRow = tbSubPlayers.getSelectedRow();
+                        for (int i = 0; i <= selectedRow; i++) {
+
+                            selectedChest = (String) tbSubPlayers.getValueAt(selectedRow, 1);
+
+                        }
+                        String text = "";
+
+                        if (selectedChest != null) {
+                            modelSelectedPlayer.removeRow(selectedRow);
+
+                            text = txtSubPlayer.getText();
+                            txtSubPlayer.setText(selectedChest);
+
+                            if (!text.equals("")) {
+                                Player p = chestMap.get(text);
+                                Object[] row = {p.getName(), p.getChestNo(), "Server"};
+                                modelSelectedPlayer.addRow(row);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbSubPlayers = new javax.swing.JTable(){ private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };};
+            jPanel4 = new javax.swing.JPanel();
+            jPanel5 = new javax.swing.JPanel();
+            jLabel2 = new javax.swing.JLabel();
+            txtSubPlayer = new javax.swing.JTextField();
+            jPanel6 = new javax.swing.JPanel();
+            jLabel3 = new javax.swing.JLabel();
+            jPanel7 = new javax.swing.JPanel();
+            jLabel4 = new javax.swing.JLabel();
+
+            tbSubPlayers.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+            tbSubPlayers.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+
+                },
+                new String [] {
+                    "Name", "Chest No.", "Position"
+                }
+            ));
+            tbSubPlayers.setRowHeight(25);
+            jScrollPane1.setViewportView(tbSubPlayers);
+
+            jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 78, 108)));
+
+            jPanel5.setBackground(new java.awt.Color(54, 78, 108));
+            jPanel5.setForeground(new java.awt.Color(255, 255, 255));
+
+            jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+            jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+            jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jLabel2.setText("SUBSTITUTE");
+
+            javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+            jPanel5.setLayout(jPanel5Layout);
+            jPanel5Layout.setHorizontalGroup(
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            );
+            jPanel5Layout.setVerticalGroup(
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel2)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+
+            txtSubPlayer.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+            txtSubPlayer.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+            txtSubPlayer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+            txtSubPlayer.setCaretColor(new java.awt.Color(255, 255, 255));
+            txtSubPlayer.addFocusListener(new java.awt.event.FocusAdapter() {
+                public void focusGained(java.awt.event.FocusEvent evt) {
+                    txtSubPlayerFocusGained(evt);
+                }
+                public void focusLost(java.awt.event.FocusEvent evt) {
+                    txtSubPlayerFocusLost(evt);
+                }
+            });
+
+            javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+            jPanel4.setLayout(jPanel4Layout);
+            jPanel4Layout.setHorizontalGroup(
+                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(40, 40, 40)
+                    .addComponent(txtSubPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(40, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            );
+            jPanel4Layout.setVerticalGroup(
+                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(20, 20, 20)
+                    .addComponent(txtSubPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(20, 20, 20))
+            );
+
+            jPanel6.setBackground(new java.awt.Color(54, 78, 108));
+            jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+            jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+            jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+            jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+            jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jLabel3.setText("SAVE");
+            jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    jLabel3MouseClicked(evt);
+                }
+            });
+
+            javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+            jPanel6.setLayout(jPanel6Layout);
+            jPanel6Layout.setHorizontalGroup(
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+            );
+            jPanel6Layout.setVerticalGroup(
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            );
+
+            jPanel7.setBackground(new java.awt.Color(54, 78, 108));
+            jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+            jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+            jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+            jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+            jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jLabel4.setText("CANCEL");
+            jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    jLabel4MouseClicked(evt);
+                }
+            });
+
+            javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+            jPanel7.setLayout(jPanel7Layout);
+            jPanel7Layout.setHorizontalGroup(
+                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+            );
+            jPanel7Layout.setVerticalGroup(
+                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            );
+
+            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+            jPanel1.setLayout(jPanel1Layout);
+            jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(93, 93, 93)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(22, 22, 22)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(24, Short.MAX_VALUE))
+            );
+            jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(12, Short.MAX_VALUE))
+            );
+
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+            this.setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 477, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 353, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            );
+        }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSubPlayerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubPlayerFocusGained
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtSubPlayerFocusGained
+
+    private void txtSubPlayerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubPlayerFocusLost
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtSubPlayerFocusLost
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+
+        MatchDao matchDao = new MatchDao();
+        Player p = chestMap.get(txtSubPlayer.getText());
+        int id = matchDao.updateSubstitution(p.getId(), score, position, matchEvaluationId);
+        if (id != 0) {
+//            Controller.panMatchSet.positionMap.put(position, p);
+            String cNo = txtSubPlayer.getText();
+            switch (position) {
+                case 1:
+                    Controller.panMatchSet.su1.setText(cNo);
+                    Controller.panMatchSet.pt11.setText(score);
+                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+                    break;
+                case 2:
+                    Controller.panMatchSet.su2.setText(cNo);
+                    Controller.panMatchSet.pt12.setText(score);
+                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+                    break;
+                case 3:
+                    Controller.panMatchSet.su3.setText(cNo);
+                    Controller.panMatchSet.pt13.setText(score);
+                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+                    break;
+                case 4:
+                    Controller.panMatchSet.su4.setText(cNo);
+                    Controller.panMatchSet.pt14.setText(score);
+                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+                    break;
+                case 5:
+                    Controller.panMatchSet.su5.setText(cNo);
+                    Controller.panMatchSet.pt15.setText(score);
+                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+                    break;
+                case 6:
+                    Controller.panMatchSet.su6.setText(cNo);
+                    Controller.panMatchSet.pt16.setText(score);
+                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+                    break;
+
+            }
+
+        }
+        s.close();
+
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        s.close();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbSubPlayers;
+    private javax.swing.JTextField txtSubPlayer;
+    // End of variables declaration//GEN-END:variables
+}
