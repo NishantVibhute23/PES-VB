@@ -79,6 +79,44 @@ public class PanNewMatch extends javax.swing.JPanel {
             cmbSubPhase.setVisible(false);
         }
     }
+    
+    public PanNewMatch(int id) {
+        initComponents();
+        System.out.println("id panmatchnew"+id);
+//        ((JLabel) cmbHH.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+//
+//        ((JLabel) cmbMm.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+//        cmbMm.getEditor().getEditorComponent().setBackground(Color.WHITE);
+//        ((JLabel) team1combo.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+//        team1combo.getEditor().getEditorComponent().setBackground(Color.WHITE);
+//        ((JLabel) team2combo.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+//        team2combo.getEditor().getEditorComponent().setBackground(Color.WHITE);
+//
+//        datePickerStart.setBounds(10, 5, 144, 28);
+//
+//        JFormattedTextField textField = datePickerStart.getJFormattedTextField();
+//        textField.setBackground(Color.WHITE);
+//        datePickerStart.setButtonFocusable(false);
+//        textField.setBorder(null);
+//        jPanel3.add(datePickerStart);
+//
+//        TeamDao teamDao = new TeamDao();
+//        List<Team> teams = teamDao.getTeams(Controller.competitionId);
+//        teamsMap = new LinkedHashMap<>();
+//        team1combo.addItem("Select");
+//        team2combo.addItem("Select");
+//        for (Team team : teams) {
+//            teamsMap.put(team.getName(), team.getId());
+//            team1combo.addItem(team.getName());
+//            team2combo.addItem(team.getName());
+//        }
+//
+//        for (Phase dir : Phase.values()) {
+//            // do what you want
+//            cmbPhase.addItem(dir.getName());
+//            cmbSubPhase.setVisible(false);
+//        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,12 +149,12 @@ public class PanNewMatch extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        cmbPhase = new javax.swing.JComboBox<String>();
+        cmbPhase = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
-        cmbSubPhase = new javax.swing.JComboBox<String>();
-        cmbHH = new javax.swing.JComboBox<String>();
+        cmbSubPhase = new javax.swing.JComboBox<>();
+        cmbHH = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        cmbMm = new javax.swing.JComboBox<String>();
+        cmbMm = new javax.swing.JComboBox<>();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -252,7 +290,7 @@ public class PanNewMatch extends javax.swing.JPanel {
         );
 
         cmbPhase.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cmbPhase.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select" }));
+        cmbPhase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select" }));
         cmbPhase.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbPhaseItemStateChanged(evt);
@@ -261,7 +299,7 @@ public class PanNewMatch extends javax.swing.JPanel {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        cmbSubPhase.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select" }));
+        cmbSubPhase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select" }));
         cmbSubPhase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSubPhaseActionPerformed(evt);
@@ -285,12 +323,12 @@ public class PanNewMatch extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        cmbHH.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
+        cmbHH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" }));
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel10.setText(":");
 
-        cmbMm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        cmbMm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

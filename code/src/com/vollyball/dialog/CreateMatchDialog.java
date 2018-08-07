@@ -22,6 +22,11 @@ public class CreateMatchDialog {
 
     private JFrame parentFrame;
     private JDialog dialog;
+    int matchId;
+
+    public void setValues(int matchId) {
+        this.matchId = matchId;
+    }
 
     public void init() {
         try {
@@ -44,7 +49,14 @@ public class CreateMatchDialog {
     }
 
     protected Container createPane() {
-        PanNewMatch panMatch = new PanNewMatch();
+        PanNewMatch panMatch;
+        System.out.println("---"+matchId);
+        if(matchId==0){
+        panMatch = new PanNewMatch();
+        }
+        else{
+           panMatch = new PanNewMatch(matchId);
+        }
         return panMatch;
     }
 
