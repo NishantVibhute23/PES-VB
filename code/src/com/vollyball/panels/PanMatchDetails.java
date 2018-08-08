@@ -15,6 +15,7 @@ import com.vollyball.dao.RallyDao;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.dialog.DialogMatchChart;
+import com.vollyball.dialog.DialogPanMatchReportConsolidated;
 import com.vollyball.dialog.DialogPanMatchReportDetails;
 import com.vollyball.enums.Skill;
 import java.awt.BorderLayout;
@@ -241,6 +242,8 @@ public class PanMatchDetails extends javax.swing.JPanel {
         lblPrint1 = new javax.swing.JLabel();
         panDataSheet1 = new javax.swing.JPanel();
         lblChart = new javax.swing.JLabel();
+        panDataSheet2 = new javax.swing.JPanel();
+        lblCosolidated = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         scoreTeam1 = new javax.swing.JLabel();
         scoreTeam2 = new javax.swing.JLabel();
@@ -407,6 +410,30 @@ public class PanMatchDetails extends javax.swing.JPanel {
             .addComponent(lblChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        panDataSheet2.setBackground(new java.awt.Color(153, 153, 153));
+        panDataSheet2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblCosolidated.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblCosolidated.setForeground(new java.awt.Color(51, 51, 51));
+        lblCosolidated.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCosolidated.setText("COnsolidated");
+        lblCosolidated.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCosolidatedMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panDataSheet2Layout = new javax.swing.GroupLayout(panDataSheet2);
+        panDataSheet2.setLayout(panDataSheet2Layout);
+        panDataSheet2Layout.setHorizontalGroup(
+            panDataSheet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCosolidated, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panDataSheet2Layout.setVerticalGroup(
+            panDataSheet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCosolidated, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -417,8 +444,10 @@ public class PanMatchDetails extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblPhase, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(panDataSheet2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panDataSheet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panDataSheet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -437,7 +466,8 @@ public class PanMatchDetails extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblMatch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblPhase, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panDataSheet2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1502,6 +1532,15 @@ public class PanMatchDetails extends javax.swing.JPanel {
         createDialogPanMatchWiseReport.show();
     }//GEN-LAST:event_lblChartMouseClicked
 
+    private void lblCosolidatedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCosolidatedMouseClicked
+        // TODO add your handling code here:
+
+        DialogPanMatchReportConsolidated createDialogPanMatchWiseReport = new DialogPanMatchReportConsolidated();
+        createDialogPanMatchWiseReport.init();
+        createDialogPanMatchWiseReport.show();
+
+    }//GEN-LAST:event_lblCosolidatedMouseClicked
+
     public void setPlayerReport(int skillid) {
         panSkillReports.remove(panMatchBestTeamScorer);
         panSkillReports.add(panMatchSkillWisePlayerReport, BorderLayout.CENTER);
@@ -1624,6 +1663,7 @@ public class PanMatchDetails extends javax.swing.JPanel {
     private javax.swing.JLabel lblAttacker;
     private javax.swing.JLabel lblBlocker;
     private javax.swing.JLabel lblChart;
+    private javax.swing.JLabel lblCosolidated;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDefender;
     private javax.swing.JLabel lblMatch;
@@ -1637,6 +1677,7 @@ public class PanMatchDetails extends javax.swing.JPanel {
     private javax.swing.JPanel panBlocker;
     private javax.swing.JPanel panDataSheet;
     private javax.swing.JPanel panDataSheet1;
+    private javax.swing.JPanel panDataSheet2;
     private javax.swing.JPanel panDefender;
     private javax.swing.JPanel panPrint1;
     private javax.swing.JPanel panReceiver;

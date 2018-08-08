@@ -75,7 +75,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         mapScoreComponent.put(lblRate4, panRate4);
         mapScoreComponent.put(lblRate5, panRate5);
 
-        ImagePanel panel = new ImagePanel(new ImageIcon("E:\\old data\\Personal\\Madhuri sadgir\\volly new\\volly\\code\\src\\com\\vollyball\\images\\vollycorntgreenNEWVertical.png").getImage());
+        ImagePanel panel = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\vollycorntgreenNEWVertical.png").getImage());
         panCourt.add(panel, BorderLayout.CENTER);
 
         panCourt.addMouseListener(new MouseListener() {
@@ -88,7 +88,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 pixel.add(y);
 
                 if (pixel.size() > 2) {
-                    ImagePanel panel = new ImagePanel(new ImageIcon("E:\\old data\\Personal\\Madhuri sadgir\\volly new\\volly\\code\\src\\com\\vollyball\\images\\vollycorntgreenNEWVertical.png").getImage(), pixel.get(0), pixel.get(1), pixel.get(2), pixel.get(3));
+                    ImagePanel panel = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\vollycorntgreenNEWVertical.png").getImage(), pixel.get(0), pixel.get(1), pixel.get(2), pixel.get(3));
                     panCourt.removeAll();
                     panCourt.add(panel, BorderLayout.CENTER);
                     panCourt.validate();
