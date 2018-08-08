@@ -186,6 +186,14 @@ public class PanMatchReport extends javax.swing.JPanel {
                             obj.init();
                             obj.show();
                         }
+                        else if (selectedCol == 12) {
+                            id = matchIdmap.get((int) tbMatch.getValueAt(selectedRow, 0));
+                            CreateMatchDialog obj = new CreateMatchDialog();
+                            tbMatch.clearSelection();
+                            obj.setValues(id);
+                            obj.init();
+                            obj.show();
+                        }
 
                     }
 

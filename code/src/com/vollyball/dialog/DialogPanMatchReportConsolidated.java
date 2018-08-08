@@ -5,7 +5,7 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.panels.PanNewMatch;
+import com.vollyball.panels.PanMatchConsolidatedReportHome;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -16,22 +16,17 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author nishant.vibhute
+ * @author Supriya
  */
-public class CreateMatchDialog {
+public class DialogPanMatchReportConsolidated {
 
     private JFrame parentFrame;
     private JDialog dialog;
-    int matchId;
-
-    public void setValues(int matchId) {
-        this.matchId = matchId;
-    }
 
     public void init() {
         try {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             this.dialog = new JDialog(this.parentFrame, "New Match", true);
 
             this.dialog.setResizable(false);
@@ -49,14 +44,8 @@ public class CreateMatchDialog {
     }
 
     protected Container createPane() {
-        PanNewMatch panMatch;
-        System.out.println("---"+matchId);
-        if(matchId==0){
-        panMatch = new PanNewMatch();
-        }
-        else{
-           panMatch = new PanNewMatch(matchId);
-        }
+        PanMatchConsolidatedReportHome panMatch = new PanMatchConsolidatedReportHome();
+
         return panMatch;
     }
 
@@ -67,7 +56,7 @@ public class CreateMatchDialog {
         this.dialog.setVisible(true);
     }
 
-    public void close() {
+    protected void close() {
         this.dialog.dispose();
         this.dialog.setVisible(false);
     }
@@ -75,5 +64,4 @@ public class CreateMatchDialog {
     public void setFrame(JFrame frame) {
         parentFrame = (JFrame) frame;
     }
-
 }
