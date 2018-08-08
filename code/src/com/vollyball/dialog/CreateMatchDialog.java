@@ -31,8 +31,11 @@ public class CreateMatchDialog {
     public void init() {
         try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-            this.dialog = new JDialog(this.parentFrame, "New Match", true);
+            if (matchId == 0) {
+                this.dialog = new JDialog(this.parentFrame, "New Match", true);
+            } else {
+                this.dialog = new JDialog(this.parentFrame, "Edit Match", true);
+            }
 
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());
@@ -50,12 +53,11 @@ public class CreateMatchDialog {
 
     protected Container createPane() {
         PanNewMatch panMatch;
-        System.out.println("---"+matchId);
-        if(matchId==0){
-        panMatch = new PanNewMatch();
-        }
-        else{
-           panMatch = new PanNewMatch(matchId);
+        System.out.println("---" + matchId);
+        if (matchId == 0) {
+            panMatch = new PanNewMatch();
+        } else {
+            panMatch = new PanNewMatch(matchId);
         }
         return panMatch;
     }

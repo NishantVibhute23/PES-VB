@@ -738,4 +738,49 @@ public class MatchDao {
         }
         return matchList;
     }
+
+    public int updateMatch(MatchBean mb) {
+        int count = 0;
+        int id = 0;
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.match"));
+            
+            ps.setInt(1, mb.getTeam1());
+            ps.setInt(2, mb.getTeam2());
+            ps.setInt(3, mb.getDayNumber());
+            ps.setInt(4, mb.getMatchNumber());
+            ps.setString(5, mb.getDate());
+            ps.setString(6, mb.getTime());
+            ps.setString(7, mb.getPhase());
+            ps.setInt(8, mb.getCompId());
+            ps.setString(9, mb.getPlace());
+            ps.setInt(10, mb.getId());
+            count = ps.executeUpdate();
+            
+            if (count != 0) {
+                
+               
+                    PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchsetevaluationteam"));
+                    ps2.setInt(1, mb.getTeam1());
+                    ps2.setInt(2, mb.getTeam2());
+                    ps2.setInt(3, mb.getId());
+                    count = ps2.executeUpdate();
+                    
+//                    PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchsetevaluationteam"));
+//                    ps3.setInt(1, mb.getTeam2());
+//                    ps3.setInt(2, mb.getTeam1());
+//                    ps2.setInt(3, mb.getId());
+//                    count = ps3.executeUpdate();
+                    
+                
+                
+            }
+            
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
 }
