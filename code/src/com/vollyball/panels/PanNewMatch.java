@@ -39,6 +39,7 @@ public class PanNewMatch extends javax.swing.JPanel {
     JDatePickerImpl datePickerStart = new JDatePickerImpl(datePanelStart, new DateLabelFormatter());
     LinkedHashMap<String, Integer> teamsMap;
     String phase;
+    int matchId;
 
     /**
      * Creates new form PanNewMatch
@@ -79,43 +80,52 @@ public class PanNewMatch extends javax.swing.JPanel {
             cmbSubPhase.setVisible(false);
         }
     }
-    
+
     public PanNewMatch(int id) {
         initComponents();
-        System.out.println("id panmatchnew"+id);
-//        ((JLabel) cmbHH.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-//
-//        ((JLabel) cmbMm.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-//        cmbMm.getEditor().getEditorComponent().setBackground(Color.WHITE);
-//        ((JLabel) team1combo.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-//        team1combo.getEditor().getEditorComponent().setBackground(Color.WHITE);
-//        ((JLabel) team2combo.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-//        team2combo.getEditor().getEditorComponent().setBackground(Color.WHITE);
-//
-//        datePickerStart.setBounds(10, 5, 144, 28);
-//
-//        JFormattedTextField textField = datePickerStart.getJFormattedTextField();
-//        textField.setBackground(Color.WHITE);
-//        datePickerStart.setButtonFocusable(false);
-//        textField.setBorder(null);
-//        jPanel3.add(datePickerStart);
-//
-//        TeamDao teamDao = new TeamDao();
-//        List<Team> teams = teamDao.getTeams(Controller.competitionId);
-//        teamsMap = new LinkedHashMap<>();
-//        team1combo.addItem("Select");
-//        team2combo.addItem("Select");
-//        for (Team team : teams) {
-//            teamsMap.put(team.getName(), team.getId());
-//            team1combo.addItem(team.getName());
-//            team2combo.addItem(team.getName());
-//        }
-//
-//        for (Phase dir : Phase.values()) {
-//            // do what you want
-//            cmbPhase.addItem(dir.getName());
-//            cmbSubPhase.setVisible(false);
-//        }
+        this.matchId = id;
+        System.out.println("id panmatchnew" + id);
+        MatchDao md = new MatchDao();
+        MatchBean mb = md.getMatchesById(Controller.competitionId, matchId);
+        ((JLabel) cmbHH.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+
+        ((JLabel) cmbMm.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        cmbMm.getEditor().getEditorComponent().setBackground(Color.WHITE);
+        ((JLabel) team1combo.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        team1combo.getEditor().getEditorComponent().setBackground(Color.WHITE);
+        ((JLabel) team2combo.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        team2combo.getEditor().getEditorComponent().setBackground(Color.WHITE);
+
+        datePickerStart.setBounds(10, 5, 144, 28);
+
+        JFormattedTextField textField = datePickerStart.getJFormattedTextField();
+        textField.setBackground(Color.WHITE);
+        datePickerStart.setButtonFocusable(false);
+        textField.setBorder(null);
+        jPanel3.add(datePickerStart);
+        txtDayNum.getText();
+        txtCity.setText(mb.getPlace());
+        txtMatchNum.setText(Integer.toString(mb.getMatchNumber()));
+        cmbHH.addItem(mb.getTime());
+
+        TeamDao teamDao = new TeamDao();
+        List<Team> teams = teamDao.getTeams(Controller.competitionId);
+        teamsMap = new LinkedHashMap<>();
+        team1combo.addItem(mb.getTeam1name());
+        team2combo.addItem(mb.getTeam2name());
+
+        for (Team team : teams) {
+            teamsMap.put(team.getName(), team.getId());
+            team1combo.addItem(team.getName());
+            team2combo.addItem(team.getName());
+            
+        }
+//        cmbPhase.addItem(mb.getPhase());
+        for (Phase dir : Phase.values()) {
+            // do what you want
+            cmbPhase.addItem(dir.getName());
+            //cmbSubPhase.setVisible(false);
+        }
     }
 
     /**
@@ -462,29 +472,57 @@ public class PanNewMatch extends javax.swing.JPanel {
         String msg = validateFields();
 
         if (msg.isEmpty()) {
-            MatchDao matchDao = new MatchDao();
-            MatchBean mb = new MatchBean();
-            Date selectedStartDate = (Date) datePickerStart.getModel().getValue();
-            mb.setTeam1(teamsMap.get(team1));
-            mb.setTeam2(teamsMap.get(team2));
-            mb.setDayNumber(Integer.parseInt(txtDayNum.getText()));
-            mb.setMatchNumber(Integer.parseInt(txtMatchNum.getText()));
-            mb.setDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedStartDate));
-            mb.setTime(cmbHH.getSelectedItem() + ":" + (cmbMm.getSelectedItem()));
-            phase = cmbPhase.getSelectedItem() + "" + (cmbSubPhase.getSelectedItem() == null ? "" : cmbSubPhase.getSelectedItem());
-            mb.setPhase(phase);
-            mb.setPlace(txtCity.getText());
-            mb.setCompId(Controller.competitionId);
-            int count = matchDao.insertMatch(mb);
+            if (matchId == 0) {
+                MatchDao matchDao = new MatchDao();
+                MatchBean mb = new MatchBean();
+                Date selectedStartDate = (Date) datePickerStart.getModel().getValue();
+                mb.setTeam1(teamsMap.get(team1));
+                mb.setTeam2(teamsMap.get(team2));
+                mb.setDayNumber(Integer.parseInt(txtDayNum.getText()));
+                mb.setMatchNumber(Integer.parseInt(txtMatchNum.getText()));
+                mb.setDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedStartDate));
+                mb.setTime(cmbHH.getSelectedItem() + ":" + (cmbMm.getSelectedItem()));
+                phase = cmbPhase.getSelectedItem() + "" + (cmbSubPhase.getSelectedItem() == null ? "" : cmbSubPhase.getSelectedItem());
+                mb.setPhase(phase);
+                mb.setPlace(txtCity.getText());
+                mb.setCompId(Controller.competitionId);
+                int count = matchDao.insertMatch(mb);
 
-            if (count != 0) {
+                if (count != 0) {
 
-                Controller.matchDialog.close();
-                Controller.panMatchReport.Refresh();
-                JOptionPane.showMessageDialog(this, "Added New Match '" + teamsMap.get(team1) + "' vs '" + teamsMap.get(team2) + "'");
+                    Controller.matchDialog.close();
+                    Controller.panMatchReport.Refresh();
+                    JOptionPane.showMessageDialog(this, "Added New Match '" + teamsMap.get(team1) + "' vs '" + teamsMap.get(team2) + "'");
 
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Failed");
+                MatchDao matchDao = new MatchDao();
+                MatchBean mb = new MatchBean();
+                mb.setId(matchId);
+                Date selectedStartDate = (Date) datePickerStart.getModel().getValue();
+                mb.setTeam1(teamsMap.get(team1));
+                mb.setTeam2(teamsMap.get(team2));
+                mb.setDayNumber(Integer.parseInt(txtDayNum.getText()));
+                mb.setMatchNumber(Integer.parseInt(txtMatchNum.getText()));
+                mb.setDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedStartDate));
+                mb.setTime(cmbHH.getSelectedItem() + ":" + (cmbMm.getSelectedItem()));
+                phase = cmbPhase.getSelectedItem() + "" + (cmbSubPhase.getSelectedItem() == null ? "" : cmbSubPhase.getSelectedItem());
+                mb.setPhase(phase);
+                mb.setPlace(txtCity.getText());
+                mb.setCompId(Controller.competitionId);
+                int count = matchDao.updateMatch(mb);
+
+                if (count != 0) {
+
+//                    Controller.matchDialog.close();
+                    Controller.panMatchReport.Refresh();
+                    JOptionPane.showMessageDialog(this, "Updated New Match '" + teamsMap.get(team1) + "' vs '" + teamsMap.get(team2) + "'");
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed");
+                }
             }
         } else {
             JOptionPane.showMessageDialog(this, msg);
