@@ -22,7 +22,12 @@ public class CreateCompetitionDialog {
 
     private JFrame parentFrame;
     private JDialog dialog;
+    int compId;
 
+    
+     public void setValues(int compId) {
+        this.compId = compId;
+    }
     public void init() {
         try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -44,9 +49,13 @@ public class CreateCompetitionDialog {
     }
 
     protected Container createPane() {
-        PanNewCompetition panMatch = new PanNewCompetition();
-
-        return panMatch;
+        PanNewCompetition panComp;
+        if (compId == 0) {
+            panComp = new PanNewCompetition();
+        } else {
+            panComp = new PanNewCompetition(compId);
+        }
+        return panComp;
 
     }
 

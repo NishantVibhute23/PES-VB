@@ -33,6 +33,7 @@ public class PanNewCompetition extends javax.swing.JPanel {
     JDatePickerImpl datePickerEnd = new JDatePickerImpl(datePanelEnd, new DateLabelFormatter());
     String ageGroup;
     CompetitionDao competitionDao = new CompetitionDao();
+    int compId;
 
     /**
      * Creates new form PanNewCompetition
@@ -47,6 +48,26 @@ public class PanNewCompetition extends javax.swing.JPanel {
         datePickerEnd.setBounds(0, 0, 319, 28);
         datePickerEnd.setBackground(Color.WHITE);
         panEndDate.add(datePickerEnd);
+
+    }
+
+    public PanNewCompetition(int compId) {
+        initComponents();
+
+        System.out.println("-------" + compId);
+        CompetitionBean cb = competitionDao.getCompetitionById(compId);
+        this.compId = cb.getId();
+
+        datePickerStart.setBounds(0, 0, 319, 28);
+        datePickerStart.setBackground(Color.WHITE);
+        panStartDate.add(datePickerStart);
+
+        datePickerEnd.setBounds(0, 0, 319, 28);
+        datePickerEnd.setBackground(Color.WHITE);
+        panEndDate.add(datePickerEnd);
+        txtCompName.setText(cb.getName());
+        txtVenue.setText(cb.getVenue());
+        cmbAgeGroup.setSelectedItem(cb.getAgeGroup());
 
     }
 
@@ -93,6 +114,11 @@ public class PanNewCompetition extends javax.swing.JPanel {
 
         txtCompName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txtCompName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtCompName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCompNameActionPerformed(evt);
+            }
+        });
         txtCompName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCompNameKeyReleased(evt);
@@ -350,29 +376,89 @@ public class PanNewCompetition extends javax.swing.JPanel {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
-
+        String msg = validateFields();
         // TODO add your handling code here:
-        Date selectedStartDate = (Date) datePickerStart.getModel().getValue();
-        Date selectedEndDate = (Date) datePickerEnd.getModel().getValue();
-        CompetitionBean cb = new CompetitionBean();
-        cb.setName(txtCompName.getText());
-        cb.setVenue(txtVenue.getText());
-        cb.setStartDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedStartDate));
-        cb.setEndDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedEndDate));
-        cb.setAgeGroup(ageGroup);
-        int count = competitionDao.insertCompetition(cb);
+        if (msg.isEmpty()) {
+            if (compId == 0) {
+                Date selectedStartDate = (Date) datePickerStart.getModel().getValue();
+                Date selectedEndDate = (Date) datePickerEnd.getModel().getValue();
+                CompetitionBean cb = new CompetitionBean();
+                cb.setName(txtCompName.getText());
+                cb.setVenue(txtVenue.getText());
+                cb.setStartDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedStartDate));
+                cb.setEndDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedEndDate));
+                cb.setAgeGroup(ageGroup);
+                int count = competitionDao.insertCompetition(cb);
 
-        if (count != 0) {
+                if (count != 0) {
 
-            Controller.createCompetitionDialog.close();
+                    Controller.createCompetitionDialog.close();
 
-            Controller.panCompetitionList.refresh();
-            JOptionPane.showMessageDialog(this, "Inserted");
+                    Controller.panCompetitionList.refresh();
+                    JOptionPane.showMessageDialog(this, "Inserted");
 
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed");
+                }
+            } else {
+                Date selectedStartDate = (Date) datePickerStart.getModel().getValue();
+                Date selectedEndDate = (Date) datePickerEnd.getModel().getValue();
+                CompetitionBean cb = new CompetitionBean();
+
+                cb.setId(compId);
+                cb.setName(txtCompName.getText());
+                cb.setVenue(txtVenue.getText());
+                cb.setStartDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedStartDate));
+                cb.setEndDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedEndDate));
+                cb.setAgeGroup(ageGroup);
+                int count = competitionDao.updateCompetition(cb);
+
+                if (count != 0) {
+
+                    Controller.createCompetitionDialog.close();
+
+                    Controller.panCompetitionList.refresh();
+                    JOptionPane.showMessageDialog(this, "Updated");
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed");
+                }
+
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Failed");
+            JOptionPane.showMessageDialog(this, msg);
         }
     }//GEN-LAST:event_jLabel7MouseClicked
+    public String validateFields() {
+        String msg = "";
+
+        if (txtCompName.getText().equals("")) {
+            msg = msg + "Compitition cannot be Blank\n";
+        }
+
+        if (txtVenue.getText().equals("")) {
+            msg = msg + "Venue cannot be Blank\n";
+        }
+
+        if (datePickerStart.getModel().getValue() == null) {
+            msg = msg + "Start Date cannot be Blank\n";
+        }
+        if (datePickerEnd.getModel().getValue() == null) {
+            msg = msg + "End Date cannot be Blank\n";
+        }
+
+        if (ageGroup == null) {
+            msg = msg + "Select Age Group\n";
+        }
+
+//        if (cmbAgeGroup.getSelectedItem().equals("Select")) {
+//            msg = msg + "Select Age Group \n";
+//        }
+
+        return msg;
+
+    }
+
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         // TODO add your handling code here:
@@ -387,6 +473,10 @@ public class PanNewCompetition extends javax.swing.JPanel {
             lblHeading.setText("New Competition");
         }
     }//GEN-LAST:event_txtCompNameKeyReleased
+
+    private void txtCompNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCompNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCompNameActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbAgeGroup;

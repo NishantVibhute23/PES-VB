@@ -108,18 +108,28 @@ public class PanCompetitionList extends javax.swing.JPanel {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-
+                    int id = 0;
                     int selectedRow = tbComp.getSelectedRow();
+                    int selectedCol = tbComp.getSelectedColumn();
                     if (selectedRow >= 0) {
-                        CompetitionBean comp = compMap.get(tbComp.getValueAt(selectedRow, 1));
-                        tbComp.clearSelection();
-                        Controller.panCompetitionReportHome = new PanCompetitionReportHome(comp);
-                        Controller.competitionId = comp.getId();
-                        Dimension dim = Controller.frmDashBoard.panContent.getSize();
-                        Controller.panCompetitionList.setVisible(false);
-                        Controller.frmDashBoard.panContent.removeAll();
+                        if (selectedCol == 6) {
+                            CompetitionBean comp = compMap.get(tbComp.getValueAt(selectedRow, 1));
+                            tbComp.clearSelection();
+                            Controller.panCompetitionReportHome = new PanCompetitionReportHome(comp);
+                            Controller.competitionId = comp.getId();
+                            Dimension dim = Controller.frmDashBoard.panContent.getSize();
+                            Controller.panCompetitionList.setVisible(false);
+                            Controller.frmDashBoard.panContent.removeAll();
 //        Controller.panComptitionHome.setBounds(0, 0, 800, 686);
-                        Controller.frmDashBoard.panContent.add(Controller.panCompetitionReportHome, BorderLayout.CENTER);
+                            Controller.frmDashBoard.panContent.add(Controller.panCompetitionReportHome, BorderLayout.CENTER);
+                        } else if (selectedCol == 7) {
+                            id = (int) tbComp.getValueAt(selectedRow, 0);
+                            CreateCompetitionDialog obj = new CreateCompetitionDialog();
+                            tbComp.clearSelection();
+                            obj.setValues(id);
+                            obj.init();
+                            obj.show();
+                        }
 
                     }
                 }

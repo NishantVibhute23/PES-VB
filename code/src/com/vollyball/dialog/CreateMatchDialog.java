@@ -53,7 +53,6 @@ public class CreateMatchDialog {
 
     protected Container createPane() {
         PanNewMatch panMatch;
-        System.out.println("---" + matchId);
         if (matchId == 0) {
             panMatch = new PanNewMatch();
         } else {

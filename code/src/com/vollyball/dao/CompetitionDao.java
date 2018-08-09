@@ -71,4 +71,49 @@ public class CompetitionDao {
         return competitionList;
     }
 
+    public CompetitionBean getCompetitionById(int compId) {
+        CompetitionBean cb = new CompetitionBean();
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.competitionlistbyId"));
+            ps.setInt(1, compId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                cb.setId(rs.getInt(1));
+                cb.setName(rs.getString(2));
+                cb.setVenue(rs.getString(3));
+                cb.setStartDate(rs.getString(4));
+                cb.setEndDate(rs.getString(5));
+//                cb.setAgeGroup(rs.getString(6));
+            }
+
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return cb;
+    }
+
+    public int updateCompetition(CompetitionBean cb) {
+        int count = 0;
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.competition"));
+            ps.setString(1, cb.getName());
+            ps.setString(2, cb.getVenue());
+            ps.setString(3, cb.getStartDate());
+            ps.setString(4, cb.getEndDate());
+            ps.setString(5, cb.getAgeGroup());
+            ps.setInt(6, cb.getId());
+            count = ps.executeUpdate();
+
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
 }
