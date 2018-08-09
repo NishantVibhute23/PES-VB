@@ -84,7 +84,7 @@ public class PanNewMatch extends javax.swing.JPanel {
     public PanNewMatch(int id) {
         initComponents();
         this.matchId = id;
-        System.out.println("id panmatchnew" + id);
+//        System.out.println("id panmatchnew" + id);
         MatchDao md = new MatchDao();
         MatchBean mb = md.getMatchesById(Controller.competitionId, matchId);
         ((JLabel) cmbHH.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,7 +103,7 @@ public class PanNewMatch extends javax.swing.JPanel {
         datePickerStart.setButtonFocusable(false);
         textField.setBorder(null);
         jPanel3.add(datePickerStart);
-        txtDayNum.getText();
+        txtDayNum.setText("" + mb.getDayNumber());
         txtCity.setText(mb.getPlace());
         txtMatchNum.setText(Integer.toString(mb.getMatchNumber()));
         cmbHH.addItem(mb.getTime());
@@ -111,21 +111,29 @@ public class PanNewMatch extends javax.swing.JPanel {
         TeamDao teamDao = new TeamDao();
         List<Team> teams = teamDao.getTeams(Controller.competitionId);
         teamsMap = new LinkedHashMap<>();
-        team1combo.addItem(mb.getTeam1name());
-        team2combo.addItem(mb.getTeam2name());
 
         for (Team team : teams) {
             teamsMap.put(team.getName(), team.getId());
             team1combo.addItem(team.getName());
             team2combo.addItem(team.getName());
-            
+
         }
-//        cmbPhase.addItem(mb.getPhase());
+
+        String time[] = mb.getTime().split(":");
+        cmbHH.setSelectedItem(time[0]);
+        cmbMm.setSelectedItem(time[1]);
+
+        team1combo.setSelectedItem(mb.getTeam1name());
+        team2combo.setSelectedItem(mb.getTeam2name());
+        modelStart.setDate(2016, 00, 12);
+        modelStart.setSelected(true);
+
         for (Phase dir : Phase.values()) {
             // do what you want
             cmbPhase.addItem(dir.getName());
             //cmbSubPhase.setVisible(false);
         }
+        cmbPhase.setSelectedItem(mb.getPhase());
     }
 
     /**

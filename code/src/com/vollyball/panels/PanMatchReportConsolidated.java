@@ -107,136 +107,172 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField28 = new javax.swing.JTextField();
         jTextField29 = new javax.swing.JTextField();
         jTextField30 = new javax.swing.JTextField();
-        jTextField31 = new javax.swing.JTextField();
         jTextField32 = new javax.swing.JTextField();
         jTextField33 = new javax.swing.JTextField();
         jTextField34 = new javax.swing.JTextField();
         jTextField122 = new javax.swing.JTextField();
         jTextField123 = new javax.swing.JTextField();
         jTextField124 = new javax.swing.JTextField();
+        jTextField55 = new javax.swing.JTextField();
+        jTextField56 = new javax.swing.JTextField();
+        jTextField57 = new javax.swing.JTextField();
+        jTextField58 = new javax.swing.JTextField();
+        jTextField59 = new javax.swing.JTextField();
+        jTextField60 = new javax.swing.JTextField();
+        jTextField61 = new javax.swing.JTextField();
         jPanel19 = new javax.swing.JPanel();
         jTextField7 = new javax.swing.JTextField();
         jTextField65 = new javax.swing.JTextField();
         jTextField66 = new javax.swing.JTextField();
         jTextField67 = new javax.swing.JTextField();
-        jPanel28 = new javax.swing.JPanel();
-        jTextField18 = new javax.swing.JTextField();
-        jTextField125 = new javax.swing.JTextField();
-        jTextField126 = new javax.swing.JTextField();
-        jTextField127 = new javax.swing.JTextField();
-        jTextField128 = new javax.swing.JTextField();
-        jTextField129 = new javax.swing.JTextField();
-        jTextField130 = new javax.swing.JTextField();
-        jTextField131 = new javax.swing.JTextField();
-        jTextField132 = new javax.swing.JTextField();
-        jTextField133 = new javax.swing.JTextField();
-        jTextField134 = new javax.swing.JTextField();
-        jTextField135 = new javax.swing.JTextField();
-        jTextField136 = new javax.swing.JTextField();
-        jTextField137 = new javax.swing.JTextField();
-        jTextField138 = new javax.swing.JTextField();
-        jTextField139 = new javax.swing.JTextField();
-        jTextField140 = new javax.swing.JTextField();
-        jTextField141 = new javax.swing.JTextField();
-        jTextField142 = new javax.swing.JTextField();
-        jPanel29 = new javax.swing.JPanel();
-        jTextField19 = new javax.swing.JTextField();
-        jTextField143 = new javax.swing.JTextField();
-        jTextField144 = new javax.swing.JTextField();
-        jTextField145 = new javax.swing.JTextField();
-        jTextField146 = new javax.swing.JTextField();
-        jTextField147 = new javax.swing.JTextField();
-        jTextField148 = new javax.swing.JTextField();
-        jTextField149 = new javax.swing.JTextField();
-        jTextField150 = new javax.swing.JTextField();
-        jTextField151 = new javax.swing.JTextField();
-        jTextField152 = new javax.swing.JTextField();
-        jTextField153 = new javax.swing.JTextField();
-        jTextField154 = new javax.swing.JTextField();
-        jTextField155 = new javax.swing.JTextField();
-        jTextField156 = new javax.swing.JTextField();
-        jTextField157 = new javax.swing.JTextField();
-        jTextField158 = new javax.swing.JTextField();
-        jTextField159 = new javax.swing.JTextField();
-        jTextField160 = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
+        jPanel45 = new javax.swing.JPanel();
+        jTextField8 = new javax.swing.JTextField();
+        jTextField31 = new javax.swing.JTextField();
+        jTextField62 = new javax.swing.JTextField();
+        jTextField63 = new javax.swing.JTextField();
+        jTextField64 = new javax.swing.JTextField();
+        jTextField68 = new javax.swing.JTextField();
+        jTextField69 = new javax.swing.JTextField();
+        jTextField70 = new javax.swing.JTextField();
+        jTextField71 = new javax.swing.JTextField();
+        jTextField72 = new javax.swing.JTextField();
+        jTextField73 = new javax.swing.JTextField();
+        jTextField77 = new javax.swing.JTextField();
+        jTextField78 = new javax.swing.JTextField();
+        jTextField79 = new javax.swing.JTextField();
+        jTextField80 = new javax.swing.JTextField();
+        jTextField242 = new javax.swing.JTextField();
+        jTextField243 = new javax.swing.JTextField();
+        jTextField244 = new javax.swing.JTextField();
+        jTextField81 = new javax.swing.JTextField();
+        jTextField82 = new javax.swing.JTextField();
+        jTextField83 = new javax.swing.JTextField();
+        jTextField84 = new javax.swing.JTextField();
+        jTextField85 = new javax.swing.JTextField();
+        jTextField86 = new javax.swing.JTextField();
+        jTextField87 = new javax.swing.JTextField();
+        jPanel46 = new javax.swing.JPanel();
+        jTextField9 = new javax.swing.JTextField();
+        jTextField88 = new javax.swing.JTextField();
+        jTextField89 = new javax.swing.JTextField();
+        jTextField90 = new javax.swing.JTextField();
+        jTextField91 = new javax.swing.JTextField();
+        jTextField92 = new javax.swing.JTextField();
+        jTextField93 = new javax.swing.JTextField();
+        jTextField94 = new javax.swing.JTextField();
+        jTextField95 = new javax.swing.JTextField();
+        jTextField96 = new javax.swing.JTextField();
+        jTextField97 = new javax.swing.JTextField();
+        jTextField98 = new javax.swing.JTextField();
+        jTextField99 = new javax.swing.JTextField();
+        jTextField100 = new javax.swing.JTextField();
+        jTextField101 = new javax.swing.JTextField();
+        jTextField245 = new javax.swing.JTextField();
+        jTextField246 = new javax.swing.JTextField();
+        jTextField247 = new javax.swing.JTextField();
+        jTextField102 = new javax.swing.JTextField();
+        jTextField103 = new javax.swing.JTextField();
+        jTextField104 = new javax.swing.JTextField();
+        jTextField105 = new javax.swing.JTextField();
+        jTextField106 = new javax.swing.JTextField();
+        jTextField107 = new javax.swing.JTextField();
+        jTextField108 = new javax.swing.JTextField();
         jPanel17 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
-        jPanel30 = new javax.swing.JPanel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField35 = new javax.swing.JTextField();
-        jTextField36 = new javax.swing.JTextField();
-        jTextField37 = new javax.swing.JTextField();
-        jTextField38 = new javax.swing.JTextField();
-        jTextField39 = new javax.swing.JTextField();
-        jTextField40 = new javax.swing.JTextField();
-        jTextField41 = new javax.swing.JTextField();
-        jTextField42 = new javax.swing.JTextField();
-        jTextField43 = new javax.swing.JTextField();
-        jTextField44 = new javax.swing.JTextField();
-        jTextField45 = new javax.swing.JTextField();
-        jTextField46 = new javax.swing.JTextField();
-        jTextField47 = new javax.swing.JTextField();
-        jTextField48 = new javax.swing.JTextField();
-        jTextField49 = new javax.swing.JTextField();
-        jTextField161 = new javax.swing.JTextField();
-        jTextField162 = new javax.swing.JTextField();
-        jTextField163 = new javax.swing.JTextField();
-        jPanel37 = new javax.swing.JPanel();
-        jTextField50 = new javax.swing.JTextField();
-        jTextField74 = new javax.swing.JTextField();
-        jTextField75 = new javax.swing.JTextField();
-        jTextField76 = new javax.swing.JTextField();
-        jPanel38 = new javax.swing.JPanel();
-        jTextField51 = new javax.swing.JTextField();
-        jTextField164 = new javax.swing.JTextField();
-        jTextField165 = new javax.swing.JTextField();
-        jTextField166 = new javax.swing.JTextField();
-        jTextField167 = new javax.swing.JTextField();
-        jTextField210 = new javax.swing.JTextField();
-        jTextField211 = new javax.swing.JTextField();
-        jTextField212 = new javax.swing.JTextField();
-        jTextField213 = new javax.swing.JTextField();
-        jTextField214 = new javax.swing.JTextField();
-        jTextField215 = new javax.swing.JTextField();
-        jTextField216 = new javax.swing.JTextField();
-        jTextField217 = new javax.swing.JTextField();
-        jTextField218 = new javax.swing.JTextField();
-        jTextField219 = new javax.swing.JTextField();
-        jTextField220 = new javax.swing.JTextField();
-        jTextField221 = new javax.swing.JTextField();
-        jTextField222 = new javax.swing.JTextField();
-        jTextField223 = new javax.swing.JTextField();
-        jPanel39 = new javax.swing.JPanel();
-        jTextField52 = new javax.swing.JTextField();
-        jTextField224 = new javax.swing.JTextField();
-        jTextField225 = new javax.swing.JTextField();
-        jTextField226 = new javax.swing.JTextField();
-        jTextField227 = new javax.swing.JTextField();
-        jTextField228 = new javax.swing.JTextField();
-        jTextField229 = new javax.swing.JTextField();
-        jTextField230 = new javax.swing.JTextField();
-        jTextField231 = new javax.swing.JTextField();
-        jTextField232 = new javax.swing.JTextField();
-        jTextField233 = new javax.swing.JTextField();
-        jTextField234 = new javax.swing.JTextField();
-        jTextField235 = new javax.swing.JTextField();
-        jTextField236 = new javax.swing.JTextField();
-        jTextField237 = new javax.swing.JTextField();
-        jTextField238 = new javax.swing.JTextField();
-        jTextField239 = new javax.swing.JTextField();
-        jTextField240 = new javax.swing.JTextField();
-        jTextField241 = new javax.swing.JTextField();
-        jPanel40 = new javax.swing.JPanel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField53 = new javax.swing.JTextField();
-        jTextField54 = new javax.swing.JTextField();
         jPanel41 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel47 = new javax.swing.JPanel();
+        jTextField10 = new javax.swing.JTextField();
+        jTextField109 = new javax.swing.JTextField();
+        jTextField110 = new javax.swing.JTextField();
+        jTextField111 = new javax.swing.JTextField();
+        jTextField112 = new javax.swing.JTextField();
+        jTextField113 = new javax.swing.JTextField();
+        jTextField114 = new javax.swing.JTextField();
+        jTextField115 = new javax.swing.JTextField();
+        jTextField116 = new javax.swing.JTextField();
+        jTextField117 = new javax.swing.JTextField();
+        jTextField118 = new javax.swing.JTextField();
+        jTextField119 = new javax.swing.JTextField();
+        jTextField120 = new javax.swing.JTextField();
+        jTextField121 = new javax.swing.JTextField();
+        jTextField248 = new javax.swing.JTextField();
+        jTextField249 = new javax.swing.JTextField();
+        jTextField250 = new javax.swing.JTextField();
+        jTextField251 = new javax.swing.JTextField();
+        jTextField252 = new javax.swing.JTextField();
+        jTextField253 = new javax.swing.JTextField();
+        jTextField254 = new javax.swing.JTextField();
+        jTextField255 = new javax.swing.JTextField();
+        jTextField256 = new javax.swing.JTextField();
+        jTextField257 = new javax.swing.JTextField();
+        jTextField258 = new javax.swing.JTextField();
+        jPanel48 = new javax.swing.JPanel();
+        jTextField11 = new javax.swing.JTextField();
+        jTextField259 = new javax.swing.JTextField();
+        jTextField260 = new javax.swing.JTextField();
+        jTextField261 = new javax.swing.JTextField();
+        jPanel12 = new javax.swing.JPanel();
+        jTextField12 = new javax.swing.JTextField();
+        jTextField13 = new javax.swing.JTextField();
+        jTextField14 = new javax.swing.JTextField();
+        jPanel49 = new javax.swing.JPanel();
+        jTextField262 = new javax.swing.JTextField();
+        jTextField263 = new javax.swing.JTextField();
+        jTextField264 = new javax.swing.JTextField();
+        jTextField265 = new javax.swing.JTextField();
+        jTextField266 = new javax.swing.JTextField();
+        jTextField267 = new javax.swing.JTextField();
+        jTextField268 = new javax.swing.JTextField();
+        jTextField269 = new javax.swing.JTextField();
+        jTextField270 = new javax.swing.JTextField();
+        jTextField271 = new javax.swing.JTextField();
+        jTextField272 = new javax.swing.JTextField();
+        jTextField273 = new javax.swing.JTextField();
+        jTextField274 = new javax.swing.JTextField();
+        jTextField275 = new javax.swing.JTextField();
+        jTextField276 = new javax.swing.JTextField();
+        jTextField277 = new javax.swing.JTextField();
+        jTextField278 = new javax.swing.JTextField();
+        jTextField279 = new javax.swing.JTextField();
+        jTextField280 = new javax.swing.JTextField();
+        jTextField281 = new javax.swing.JTextField();
+        jTextField282 = new javax.swing.JTextField();
+        jTextField283 = new javax.swing.JTextField();
+        jTextField284 = new javax.swing.JTextField();
+        jTextField285 = new javax.swing.JTextField();
+        jTextField286 = new javax.swing.JTextField();
+        jPanel50 = new javax.swing.JPanel();
+        jTextField287 = new javax.swing.JTextField();
+        jTextField288 = new javax.swing.JTextField();
+        jTextField289 = new javax.swing.JTextField();
+        jTextField290 = new javax.swing.JTextField();
+        jTextField291 = new javax.swing.JTextField();
+        jTextField292 = new javax.swing.JTextField();
+        jTextField293 = new javax.swing.JTextField();
+        jTextField294 = new javax.swing.JTextField();
+        jTextField295 = new javax.swing.JTextField();
+        jTextField296 = new javax.swing.JTextField();
+        jTextField297 = new javax.swing.JTextField();
+        jTextField298 = new javax.swing.JTextField();
+        jTextField299 = new javax.swing.JTextField();
+        jTextField300 = new javax.swing.JTextField();
+        jTextField301 = new javax.swing.JTextField();
+        jTextField302 = new javax.swing.JTextField();
+        jTextField303 = new javax.swing.JTextField();
+        jTextField304 = new javax.swing.JTextField();
+        jTextField305 = new javax.swing.JTextField();
+        jTextField306 = new javax.swing.JTextField();
+        jTextField307 = new javax.swing.JTextField();
+        jTextField308 = new javax.swing.JTextField();
+        jTextField309 = new javax.swing.JTextField();
+        jTextField310 = new javax.swing.JTextField();
+        jTextField311 = new javax.swing.JTextField();
         jPanel26 = new javax.swing.JPanel();
         jPanel27 = new javax.swing.JPanel();
         jTextField15 = new javax.swing.JTextField();
@@ -329,6 +365,29 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1000, 1513));
@@ -341,19 +400,19 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Match : ");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText("Maharashtra vs Andhra Pradesh");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Phase  : ");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel4.setText("Semi Final");
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Date    :");
 
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setText("22/08/2018");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -399,13 +458,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTextField4.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField4.setText("SERVICE");
         jTextField4.setBorder(null);
 
         jTextField20.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField20.setText("Tot Pt.");
         jTextField20.setBorder(null);
@@ -415,22 +474,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             }
         });
 
-        jTextField21.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField21.setText("4");
         jTextField21.setBorder(null);
 
-        jTextField22.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField22.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField22.setText("4");
         jTextField22.setBorder(null);
 
-        jTextField23.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField23.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField23.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField23.setText("4");
         jTextField23.setBorder(null);
 
-        jTextField24.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField24.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField24.setText("4");
         jTextField24.setBorder(null);
@@ -441,117 +500,154 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         });
 
         jTextField25.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField25.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField25.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField25.setText("+");
+        jTextField25.setText("-");
         jTextField25.setBorder(null);
 
-        jTextField26.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField26.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField26.setText("4");
         jTextField26.setBorder(null);
 
         jTextField27.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField27.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField27.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField27.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField27.setText("-");
+        jTextField27.setText("<");
         jTextField27.setBorder(null);
 
-        jTextField28.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField28.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField28.setText("4");
         jTextField28.setBorder(null);
 
-        jTextField29.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField29.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField29.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField29.setText("40%");
         jTextField29.setBorder(null);
 
         jTextField30.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField30.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField30.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField30.setText("Succ %");
         jTextField30.setBorder(null);
 
-        jTextField31.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField31.setBorder(null);
-        jTextField31.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField31ActionPerformed(evt);
-            }
-        });
-
-        jTextField32.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField32.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField32.setText("4");
         jTextField32.setBorder(null);
+        jTextField32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField32ActionPerformed(evt);
+            }
+        });
 
         jTextField33.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField33.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField33.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField33.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField33.setText("Adv");
+        jTextField33.setText("@");
         jTextField33.setBorder(null);
 
-        jTextField34.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField34.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField34.setText("4");
         jTextField34.setBorder(null);
 
         jTextField122.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField122.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField122.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField122.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField122.setText("Err %");
         jTextField122.setBorder(null);
 
-        jTextField123.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField123.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField123.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField123.setText("40%");
         jTextField123.setBorder(null);
 
-        jTextField124.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField124.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField124.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField124.setText("40%");
         jTextField124.setBorder(null);
+
+        jTextField55.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField55.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField55.setText("4");
+        jTextField55.setBorder(null);
+
+        jTextField56.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField56.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField56.setText("4");
+        jTextField56.setBorder(null);
+
+        jTextField57.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField57.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField57.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField57.setText(">");
+        jTextField57.setBorder(null);
+
+        jTextField58.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField58.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField58.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField58.setText("+");
+        jTextField58.setBorder(null);
+
+        jTextField59.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField59.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField59.setText("4");
+        jTextField59.setBorder(null);
+
+        jTextField60.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField60.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField60.setText("4");
+        jTextField60.setBorder(null);
+
+        jTextField61.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField61.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField61.setText("40%");
+        jTextField61.setBorder(null);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField20)
-                            .addComponent(jTextField21)
-                            .addComponent(jTextField22))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField25)
-                            .addComponent(jTextField24)
-                            .addComponent(jTextField23))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField27)
-                            .addComponent(jTextField26)
-                            .addComponent(jTextField28))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField32)
-                            .addComponent(jTextField33)
-                            .addComponent(jTextField34))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField30)
-                            .addComponent(jTextField29)
-                            .addComponent(jTextField31))
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField124, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField123)
-                            .addComponent(jTextField122))
-                        .addGap(0, 0, 0)))
-                .addGap(0, 0, 0))
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField20, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jTextField21)
+                    .addComponent(jTextField22))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField25)
+                    .addComponent(jTextField24, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField23))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField27, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField26)
+                    .addComponent(jTextField28))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField32)
+                    .addComponent(jTextField33, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jTextField34))
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField55, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField57, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField56))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField60, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(jTextField59)
+                    .addComponent(jTextField58))
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField61)
+                    .addComponent(jTextField30, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(jTextField29, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField123)
+                    .addComponent(jTextField122, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(jTextField124)))
+            .addComponent(jTextField4)
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -581,46 +677,50 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField122, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField57, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField58, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0))
-                            .addGroup(jPanel16Layout.createSequentialGroup()
                                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField56, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField59, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField123, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, 0)
+                                .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
                                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField124, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, 0)))))
+                                    .addComponent(jTextField124, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField55, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField60, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField61, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, 0))
         );
 
         jPanel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTextField7.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField7.setText("OP +");
         jTextField7.setBorder(null);
 
         jTextField65.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField65.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField65.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField65.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField65.setText("Tot Pt.");
         jTextField65.setBorder(null);
 
-        jTextField66.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField66.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField66.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField66.setText("10");
         jTextField66.setBorder(null);
 
-        jTextField67.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField67.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField67.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField67.setText("5");
         jTextField67.setBorder(null);
@@ -647,418 +747,20 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        jPanel28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jTextField18.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField18.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField18.setText("ATTACK");
-        jTextField18.setBorder(null);
-
-        jTextField125.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField125.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField125.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField125.setText("Tot Pt.");
-        jTextField125.setBorder(null);
-        jTextField125.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField125ActionPerformed(evt);
-            }
-        });
-
-        jTextField126.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField126.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField126.setText("4");
-        jTextField126.setBorder(null);
-
-        jTextField127.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField127.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField127.setText("4");
-        jTextField127.setBorder(null);
-
-        jTextField128.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField128.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField128.setText("4");
-        jTextField128.setBorder(null);
-
-        jTextField129.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField129.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField129.setText("4");
-        jTextField129.setBorder(null);
-        jTextField129.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField129ActionPerformed(evt);
-            }
-        });
-
-        jTextField130.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField130.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField130.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField130.setText("+");
-        jTextField130.setBorder(null);
-
-        jTextField131.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField131.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField131.setText("4");
-        jTextField131.setBorder(null);
-
-        jTextField132.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField132.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField132.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField132.setText("-");
-        jTextField132.setBorder(null);
-
-        jTextField133.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField133.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField133.setText("4");
-        jTextField133.setBorder(null);
-
-        jTextField134.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField134.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField134.setText("40%");
-        jTextField134.setBorder(null);
-
-        jTextField135.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField135.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField135.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField135.setText("Succ %");
-        jTextField135.setBorder(null);
-
-        jTextField136.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField136.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField136.setBorder(null);
-
-        jTextField137.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField137.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField137.setText("4");
-        jTextField137.setBorder(null);
-
-        jTextField138.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField138.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField138.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField138.setText("Adv");
-        jTextField138.setBorder(null);
-
-        jTextField139.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField139.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField139.setText("4");
-        jTextField139.setBorder(null);
-
-        jTextField140.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField140.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField140.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField140.setText("Err %");
-        jTextField140.setBorder(null);
-
-        jTextField141.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField141.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField141.setText("40%");
-        jTextField141.setBorder(null);
-
-        jTextField142.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField142.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField142.setText("40%");
-        jTextField142.setBorder(null);
-
-        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
-        jPanel28.setLayout(jPanel28Layout);
-        jPanel28Layout.setHorizontalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
-                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField18, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel28Layout.createSequentialGroup()
-                        .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField125)
-                            .addComponent(jTextField126)
-                            .addComponent(jTextField127))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField130)
-                            .addComponent(jTextField129)
-                            .addComponent(jTextField128))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField132)
-                            .addComponent(jTextField131)
-                            .addComponent(jTextField133))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField137)
-                            .addComponent(jTextField138)
-                            .addComponent(jTextField139))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField135)
-                            .addComponent(jTextField134)
-                            .addComponent(jTextField136))
-                        .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField142, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField141)
-                            .addComponent(jTextField140))))
-                .addGap(0, 0, 0))
-        );
-        jPanel28Layout.setVerticalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel28Layout.createSequentialGroup()
-                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel28Layout.createSequentialGroup()
-                        .addComponent(jTextField125, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField126, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField127, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel28Layout.createSequentialGroup()
-                        .addComponent(jTextField130, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField129, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField128, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel28Layout.createSequentialGroup()
-                        .addComponent(jTextField132, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField131, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField133, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel28Layout.createSequentialGroup()
-                        .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField135, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField140, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField138, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel28Layout.createSequentialGroup()
-                                .addComponent(jTextField137, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jTextField139, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0))
-                            .addGroup(jPanel28Layout.createSequentialGroup()
-                                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField134, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField141, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, 0)
-                                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField136, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField142, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(0, 0, 0))
-        );
-
-        jPanel29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jTextField19.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField19.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField19.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField19.setText("BLOCK");
-        jTextField19.setBorder(null);
-
-        jTextField143.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField143.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField143.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField143.setText("Tot Pt.");
-        jTextField143.setBorder(null);
-        jTextField143.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField143ActionPerformed(evt);
-            }
-        });
-
-        jTextField144.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField144.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField144.setText("4");
-        jTextField144.setBorder(null);
-
-        jTextField145.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField145.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField145.setText("4");
-        jTextField145.setBorder(null);
-
-        jTextField146.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField146.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField146.setText("4");
-        jTextField146.setBorder(null);
-
-        jTextField147.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField147.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField147.setText("4");
-        jTextField147.setBorder(null);
-        jTextField147.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField147ActionPerformed(evt);
-            }
-        });
-
-        jTextField148.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField148.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField148.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField148.setText("+");
-        jTextField148.setBorder(null);
-
-        jTextField149.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField149.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField149.setText("4");
-        jTextField149.setBorder(null);
-
-        jTextField150.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField150.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField150.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField150.setText("-");
-        jTextField150.setBorder(null);
-
-        jTextField151.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField151.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField151.setText("4");
-        jTextField151.setBorder(null);
-
-        jTextField152.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField152.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField152.setText("40%");
-        jTextField152.setBorder(null);
-
-        jTextField153.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField153.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField153.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField153.setText("Succ %");
-        jTextField153.setBorder(null);
-
-        jTextField154.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField154.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField154.setBorder(null);
-
-        jTextField155.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField155.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField155.setText("4");
-        jTextField155.setBorder(null);
-
-        jTextField156.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField156.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField156.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField156.setText("Adv");
-        jTextField156.setBorder(null);
-
-        jTextField157.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField157.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField157.setText("4");
-        jTextField157.setBorder(null);
-
-        jTextField158.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField158.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField158.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField158.setText("Err %");
-        jTextField158.setBorder(null);
-
-        jTextField159.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField159.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField159.setText("40%");
-        jTextField159.setBorder(null);
-
-        jTextField160.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField160.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField160.setText("40%");
-        jTextField160.setBorder(null);
-
-        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
-        jPanel29.setLayout(jPanel29Layout);
-        jPanel29Layout.setHorizontalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField19, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField143)
-                            .addComponent(jTextField144)
-                            .addComponent(jTextField145))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField148)
-                            .addComponent(jTextField147)
-                            .addComponent(jTextField146))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField150)
-                            .addComponent(jTextField149)
-                            .addComponent(jTextField151))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField155)
-                            .addComponent(jTextField156)
-                            .addComponent(jTextField157))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField153)
-                            .addComponent(jTextField152)
-                            .addComponent(jTextField154))
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField160, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField159)
-                            .addComponent(jTextField158))))
-                .addGap(0, 0, 0))
-        );
-        jPanel29Layout.setVerticalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
-                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addComponent(jTextField143, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField144, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField145, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addComponent(jTextField148, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField147, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField146, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addComponent(jTextField150, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField149, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField151, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField153, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField158, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField156, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel29Layout.createSequentialGroup()
-                                .addComponent(jTextField155, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jTextField157, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0))
-                            .addGroup(jPanel29Layout.createSequentialGroup()
-                                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField152, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField159, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, 0)
-                                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField154, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField160, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, 0)))))
-                .addGap(0, 0, 0))
-        );
-
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTextField2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.setText("Maharashtra");
         jTextField2.setBorder(null);
 
-        jTextField3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField3.setText("Andhra Pradesh");
         jTextField3.setBorder(null);
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setText("TEAM");
         jTextField1.setBorder(null);
@@ -1067,17 +769,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)))
-                .addGap(0, 0, 0))
+            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jTextField3)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1090,6 +785,498 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
+        jPanel45.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTextField8.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField8.setText("ATTACK");
+        jTextField8.setBorder(null);
+
+        jTextField31.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField31.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField31.setText("Tot Pt.");
+        jTextField31.setBorder(null);
+        jTextField31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField31ActionPerformed(evt);
+            }
+        });
+
+        jTextField62.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField62.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField62.setText("4");
+        jTextField62.setBorder(null);
+
+        jTextField63.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField63.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField63.setText("4");
+        jTextField63.setBorder(null);
+
+        jTextField64.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField64.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField64.setText("4");
+        jTextField64.setBorder(null);
+
+        jTextField68.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField68.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField68.setText("4");
+        jTextField68.setBorder(null);
+        jTextField68.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField68ActionPerformed(evt);
+            }
+        });
+
+        jTextField69.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField69.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField69.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField69.setText("-");
+        jTextField69.setBorder(null);
+
+        jTextField70.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField70.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField70.setText("4");
+        jTextField70.setBorder(null);
+
+        jTextField71.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField71.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField71.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField71.setText("<");
+        jTextField71.setBorder(null);
+
+        jTextField72.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField72.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField72.setText("4");
+        jTextField72.setBorder(null);
+
+        jTextField73.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField73.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField73.setText("40%");
+        jTextField73.setBorder(null);
+
+        jTextField77.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField77.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField77.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField77.setText("Succ %");
+        jTextField77.setBorder(null);
+
+        jTextField78.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField78.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField78.setText("4");
+        jTextField78.setBorder(null);
+        jTextField78.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField78ActionPerformed(evt);
+            }
+        });
+
+        jTextField79.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField79.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField79.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField79.setText("@");
+        jTextField79.setBorder(null);
+
+        jTextField80.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField80.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField80.setText("4");
+        jTextField80.setBorder(null);
+
+        jTextField242.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField242.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField242.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField242.setText("Err %");
+        jTextField242.setBorder(null);
+
+        jTextField243.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField243.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField243.setText("40%");
+        jTextField243.setBorder(null);
+
+        jTextField244.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField244.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField244.setText("40%");
+        jTextField244.setBorder(null);
+
+        jTextField81.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField81.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField81.setText("4");
+        jTextField81.setBorder(null);
+
+        jTextField82.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField82.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField82.setText("4");
+        jTextField82.setBorder(null);
+
+        jTextField83.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField83.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField83.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField83.setText(">");
+        jTextField83.setBorder(null);
+
+        jTextField84.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField84.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField84.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField84.setText("+");
+        jTextField84.setBorder(null);
+
+        jTextField85.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField85.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField85.setText("4");
+        jTextField85.setBorder(null);
+
+        jTextField86.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField86.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField86.setText("4");
+        jTextField86.setBorder(null);
+
+        jTextField87.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField87.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField87.setText("40%");
+        jTextField87.setBorder(null);
+
+        javax.swing.GroupLayout jPanel45Layout = new javax.swing.GroupLayout(jPanel45);
+        jPanel45.setLayout(jPanel45Layout);
+        jPanel45Layout.setHorizontalGroup(
+            jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel45Layout.createSequentialGroup()
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField31, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jTextField62, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jTextField63))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField69)
+                    .addComponent(jTextField68, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jTextField64))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField71, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jTextField70)
+                    .addComponent(jTextField72))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField78)
+                    .addComponent(jTextField79, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jTextField80))
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField81, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jTextField83, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField82))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField86, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jTextField85)
+                    .addComponent(jTextField84))
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField87)
+                    .addComponent(jTextField77, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField73, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField243)
+                    .addComponent(jTextField242, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(jTextField244)))
+            .addComponent(jTextField8)
+        );
+        jPanel45Layout.setVerticalGroup(
+            jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel45Layout.createSequentialGroup()
+                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel45Layout.createSequentialGroup()
+                        .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField62, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField63, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel45Layout.createSequentialGroup()
+                        .addComponent(jTextField69, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField68, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField64, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel45Layout.createSequentialGroup()
+                        .addComponent(jTextField71, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField70, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField72, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel45Layout.createSequentialGroup()
+                        .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField77, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField242, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField79, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField83, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField84, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel45Layout.createSequentialGroup()
+                                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField78, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField82, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField85, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField73, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField243, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
+                                .addComponent(jTextField80, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel45Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField244, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField81, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField86, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField87, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 0, 0))
+        );
+
+        jPanel46.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTextField9.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField9.setText("BLOCK");
+        jTextField9.setBorder(null);
+
+        jTextField88.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField88.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField88.setText("Tot Pt.");
+        jTextField88.setBorder(null);
+        jTextField88.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField88ActionPerformed(evt);
+            }
+        });
+
+        jTextField89.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField89.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField89.setText("4");
+        jTextField89.setBorder(null);
+
+        jTextField90.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField90.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField90.setText("4");
+        jTextField90.setBorder(null);
+
+        jTextField91.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField91.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField91.setText("4");
+        jTextField91.setBorder(null);
+
+        jTextField92.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField92.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField92.setText("4");
+        jTextField92.setBorder(null);
+        jTextField92.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField92ActionPerformed(evt);
+            }
+        });
+
+        jTextField93.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField93.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField93.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField93.setText("-");
+        jTextField93.setBorder(null);
+
+        jTextField94.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField94.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField94.setText("4");
+        jTextField94.setBorder(null);
+
+        jTextField95.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField95.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField95.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField95.setText("<");
+        jTextField95.setBorder(null);
+
+        jTextField96.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField96.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField96.setText("4");
+        jTextField96.setBorder(null);
+
+        jTextField97.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField97.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField97.setText("40%");
+        jTextField97.setBorder(null);
+
+        jTextField98.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField98.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField98.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField98.setText("Succ %");
+        jTextField98.setBorder(null);
+
+        jTextField99.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField99.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField99.setText("4");
+        jTextField99.setBorder(null);
+        jTextField99.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField99ActionPerformed(evt);
+            }
+        });
+
+        jTextField100.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField100.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField100.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField100.setText("@");
+        jTextField100.setBorder(null);
+
+        jTextField101.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField101.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField101.setText("4");
+        jTextField101.setBorder(null);
+
+        jTextField245.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField245.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField245.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField245.setText("Err %");
+        jTextField245.setBorder(null);
+
+        jTextField246.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField246.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField246.setText("40%");
+        jTextField246.setBorder(null);
+
+        jTextField247.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField247.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField247.setText("40%");
+        jTextField247.setBorder(null);
+
+        jTextField102.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField102.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField102.setText("4");
+        jTextField102.setBorder(null);
+
+        jTextField103.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField103.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField103.setText("4");
+        jTextField103.setBorder(null);
+
+        jTextField104.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField104.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField104.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField104.setText(">");
+        jTextField104.setBorder(null);
+
+        jTextField105.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField105.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField105.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField105.setText("+");
+        jTextField105.setBorder(null);
+
+        jTextField106.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField106.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField106.setText("4");
+        jTextField106.setBorder(null);
+
+        jTextField107.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField107.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField107.setText("4");
+        jTextField107.setBorder(null);
+
+        jTextField108.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField108.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField108.setText("40%");
+        jTextField108.setBorder(null);
+
+        javax.swing.GroupLayout jPanel46Layout = new javax.swing.GroupLayout(jPanel46);
+        jPanel46.setLayout(jPanel46Layout);
+        jPanel46Layout.setHorizontalGroup(
+            jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel46Layout.createSequentialGroup()
+                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField88, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jTextField89)
+                    .addComponent(jTextField90))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField93)
+                    .addComponent(jTextField92, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField91))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField95, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField94)
+                    .addComponent(jTextField96))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField99)
+                    .addComponent(jTextField100, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jTextField101))
+                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField102, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(jTextField104, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField103))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField107, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addComponent(jTextField106)
+                    .addComponent(jTextField105))
+                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField108)
+                    .addComponent(jTextField98, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(jTextField97, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField246)
+                    .addComponent(jTextField245, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(jTextField247)))
+            .addComponent(jTextField9)
+        );
+        jPanel46Layout.setVerticalGroup(
+            jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel46Layout.createSequentialGroup()
+                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel46Layout.createSequentialGroup()
+                        .addComponent(jTextField88, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField89, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField90, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel46Layout.createSequentialGroup()
+                        .addComponent(jTextField93, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField92, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField91, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel46Layout.createSequentialGroup()
+                        .addComponent(jTextField95, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField94, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField96, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel46Layout.createSequentialGroup()
+                        .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField98, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField245, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField100, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField104, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField105, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel46Layout.createSequentialGroup()
+                                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField99, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField103, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField106, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField97, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField246, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
+                                .addComponent(jTextField101, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel46Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField247, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField102, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField107, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField108, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 0, 0))
+        );
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -1099,9 +1286,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1111,11 +1298,11 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         jPanel17.setBackground(new java.awt.Color(102, 102, 102));
@@ -1132,724 +1319,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1445, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-        );
-
-        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jPanel30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jTextField5.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setText("RECEPTION");
-        jTextField5.setBorder(null);
-
-        jTextField35.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField35.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField35.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField35.setText("Tot Pt.");
-        jTextField35.setBorder(null);
-        jTextField35.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField35ActionPerformed(evt);
-            }
-        });
-
-        jTextField36.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField36.setText("4");
-        jTextField36.setBorder(null);
-
-        jTextField37.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField37.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField37.setText("4");
-        jTextField37.setBorder(null);
-
-        jTextField38.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField38.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField38.setText("4");
-        jTextField38.setBorder(null);
-
-        jTextField39.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField39.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField39.setText("4");
-        jTextField39.setBorder(null);
-        jTextField39.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField39ActionPerformed(evt);
-            }
-        });
-
-        jTextField40.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField40.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField40.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField40.setText("+");
-        jTextField40.setBorder(null);
-
-        jTextField41.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField41.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField41.setText("4");
-        jTextField41.setBorder(null);
-
-        jTextField42.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField42.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField42.setText("-");
-        jTextField42.setBorder(null);
-
-        jTextField43.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField43.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField43.setText("4");
-        jTextField43.setBorder(null);
-
-        jTextField44.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField44.setText("40%");
-        jTextField44.setBorder(null);
-
-        jTextField45.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField45.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField45.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField45.setText("Succ %");
-        jTextField45.setBorder(null);
-
-        jTextField46.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField46.setBorder(null);
-        jTextField46.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField46ActionPerformed(evt);
-            }
-        });
-
-        jTextField47.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField47.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField47.setText("4");
-        jTextField47.setBorder(null);
-
-        jTextField48.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField48.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField48.setText("Adv");
-        jTextField48.setBorder(null);
-
-        jTextField49.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField49.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField49.setText("4");
-        jTextField49.setBorder(null);
-
-        jTextField161.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField161.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField161.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField161.setText("Err %");
-        jTextField161.setBorder(null);
-
-        jTextField162.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField162.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField162.setText("40%");
-        jTextField162.setBorder(null);
-
-        jTextField163.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField163.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField163.setText("40%");
-        jTextField163.setBorder(null);
-
-        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
-        jPanel30.setLayout(jPanel30Layout);
-        jPanel30Layout.setHorizontalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel30Layout.createSequentialGroup()
-                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel30Layout.createSequentialGroup()
-                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField35)
-                            .addComponent(jTextField36)
-                            .addComponent(jTextField37))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField40)
-                            .addComponent(jTextField39)
-                            .addComponent(jTextField38))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField42)
-                            .addComponent(jTextField41)
-                            .addComponent(jTextField43))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField47)
-                            .addComponent(jTextField48)
-                            .addComponent(jTextField49))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField45)
-                            .addComponent(jTextField44)
-                            .addComponent(jTextField46))
-                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField163, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField162)
-                            .addComponent(jTextField161))))
-                .addGap(0, 0, 0))
-        );
-        jPanel30Layout.setVerticalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel30Layout.createSequentialGroup()
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel30Layout.createSequentialGroup()
-                        .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel30Layout.createSequentialGroup()
-                        .addComponent(jTextField40, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField39, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel30Layout.createSequentialGroup()
-                        .addComponent(jTextField42, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField41, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField43, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel30Layout.createSequentialGroup()
-                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField45, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField161, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField48, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel30Layout.createSequentialGroup()
-                                .addComponent(jTextField47, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jTextField49, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel30Layout.createSequentialGroup()
-                                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField44, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField162, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, 0)
-                                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField46, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField163, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 0, 0))
-        );
-
-        jPanel37.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jTextField50.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField50.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField50.setText("TF -");
-        jTextField50.setBorder(null);
-
-        jTextField74.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField74.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField74.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField74.setText("Tot Pt.");
-        jTextField74.setBorder(null);
-
-        jTextField75.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField75.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField75.setText("5");
-        jTextField75.setBorder(null);
-
-        jTextField76.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField76.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField76.setText("3");
-        jTextField76.setToolTipText("");
-        jTextField76.setBorder(null);
-
-        javax.swing.GroupLayout jPanel37Layout = new javax.swing.GroupLayout(jPanel37);
-        jPanel37.setLayout(jPanel37Layout);
-        jPanel37Layout.setHorizontalGroup(
-            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField50)
-            .addComponent(jTextField74, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-            .addComponent(jTextField75, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jTextField76)
-        );
-        jPanel37Layout.setVerticalGroup(
-            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel37Layout.createSequentialGroup()
-                .addComponent(jTextField50, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jTextField74, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jTextField75, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jTextField76)
-                .addGap(0, 0, 0))
-        );
-
-        jPanel38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jTextField51.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField51.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField51.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField51.setText("SET");
-        jTextField51.setBorder(null);
-
-        jTextField164.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField164.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField164.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField164.setText("Tot Pt.");
-        jTextField164.setBorder(null);
-        jTextField164.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField164ActionPerformed(evt);
-            }
-        });
-
-        jTextField165.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField165.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField165.setText("4");
-        jTextField165.setBorder(null);
-
-        jTextField166.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField166.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField166.setText("4");
-        jTextField166.setBorder(null);
-
-        jTextField167.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField167.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField167.setText("4");
-        jTextField167.setBorder(null);
-
-        jTextField210.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField210.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField210.setText("4");
-        jTextField210.setBorder(null);
-        jTextField210.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField210ActionPerformed(evt);
-            }
-        });
-
-        jTextField211.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField211.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField211.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField211.setText("+");
-        jTextField211.setBorder(null);
-
-        jTextField212.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField212.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField212.setText("4");
-        jTextField212.setBorder(null);
-
-        jTextField213.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField213.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField213.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField213.setText("-");
-        jTextField213.setBorder(null);
-
-        jTextField214.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField214.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField214.setText("4");
-        jTextField214.setBorder(null);
-
-        jTextField215.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField215.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField215.setText("40%");
-        jTextField215.setBorder(null);
-
-        jTextField216.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField216.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField216.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField216.setText("Succ %");
-        jTextField216.setBorder(null);
-
-        jTextField217.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField217.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField217.setBorder(null);
-
-        jTextField218.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField218.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField218.setText("4");
-        jTextField218.setBorder(null);
-
-        jTextField219.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField219.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField219.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField219.setText("Adv");
-        jTextField219.setBorder(null);
-
-        jTextField220.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField220.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField220.setText("4");
-        jTextField220.setBorder(null);
-
-        jTextField221.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField221.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField221.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField221.setText("Err %");
-        jTextField221.setBorder(null);
-
-        jTextField222.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField222.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField222.setText("40%");
-        jTextField222.setBorder(null);
-
-        jTextField223.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField223.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField223.setText("40%");
-        jTextField223.setBorder(null);
-
-        javax.swing.GroupLayout jPanel38Layout = new javax.swing.GroupLayout(jPanel38);
-        jPanel38.setLayout(jPanel38Layout);
-        jPanel38Layout.setHorizontalGroup(
-            jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel38Layout.createSequentialGroup()
-                .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField51, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel38Layout.createSequentialGroup()
-                        .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField164)
-                            .addComponent(jTextField165)
-                            .addComponent(jTextField166))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField211)
-                            .addComponent(jTextField210)
-                            .addComponent(jTextField167))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField213)
-                            .addComponent(jTextField212)
-                            .addComponent(jTextField214))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField218)
-                            .addComponent(jTextField219)
-                            .addComponent(jTextField220))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField216)
-                            .addComponent(jTextField215)
-                            .addComponent(jTextField217))
-                        .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField223, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField222)
-                            .addComponent(jTextField221))))
-                .addGap(0, 0, 0))
-        );
-        jPanel38Layout.setVerticalGroup(
-            jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel38Layout.createSequentialGroup()
-                .addComponent(jTextField51, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel38Layout.createSequentialGroup()
-                        .addComponent(jTextField164, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField165, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField166, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel38Layout.createSequentialGroup()
-                        .addComponent(jTextField211, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField210, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField167, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel38Layout.createSequentialGroup()
-                        .addComponent(jTextField213, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField212, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField214, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel38Layout.createSequentialGroup()
-                        .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField216, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField221, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField219, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel38Layout.createSequentialGroup()
-                                .addComponent(jTextField218, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jTextField220, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel38Layout.createSequentialGroup()
-                                .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField215, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField222, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, 0)
-                                .addGroup(jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField217, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField223, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 0, 0))
-        );
-
-        jPanel39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jTextField52.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField52.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField52.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField52.setText("DEFENCE");
-        jTextField52.setBorder(null);
-
-        jTextField224.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField224.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField224.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField224.setText("Tot Pt.");
-        jTextField224.setBorder(null);
-        jTextField224.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField224ActionPerformed(evt);
-            }
-        });
-
-        jTextField225.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField225.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField225.setText("4");
-        jTextField225.setBorder(null);
-
-        jTextField226.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField226.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField226.setText("4");
-        jTextField226.setBorder(null);
-
-        jTextField227.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField227.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField227.setText("4");
-        jTextField227.setBorder(null);
-
-        jTextField228.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField228.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField228.setText("4");
-        jTextField228.setBorder(null);
-        jTextField228.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField228ActionPerformed(evt);
-            }
-        });
-
-        jTextField229.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField229.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField229.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField229.setText("+");
-        jTextField229.setBorder(null);
-
-        jTextField230.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField230.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField230.setText("4");
-        jTextField230.setBorder(null);
-
-        jTextField231.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField231.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField231.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField231.setText("-");
-        jTextField231.setBorder(null);
-
-        jTextField232.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField232.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField232.setText("4");
-        jTextField232.setBorder(null);
-
-        jTextField233.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField233.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField233.setText("40%");
-        jTextField233.setBorder(null);
-
-        jTextField234.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField234.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField234.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField234.setText("Succ %");
-        jTextField234.setBorder(null);
-
-        jTextField235.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField235.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField235.setBorder(null);
-
-        jTextField236.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField236.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField236.setText("4");
-        jTextField236.setBorder(null);
-
-        jTextField237.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField237.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField237.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField237.setText("Adv");
-        jTextField237.setBorder(null);
-
-        jTextField238.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField238.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField238.setText("4");
-        jTextField238.setBorder(null);
-
-        jTextField239.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField239.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField239.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField239.setText("Err %");
-        jTextField239.setBorder(null);
-
-        jTextField240.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField240.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField240.setText("40%");
-        jTextField240.setBorder(null);
-
-        jTextField241.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField241.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField241.setText("40%");
-        jTextField241.setBorder(null);
-
-        javax.swing.GroupLayout jPanel39Layout = new javax.swing.GroupLayout(jPanel39);
-        jPanel39.setLayout(jPanel39Layout);
-        jPanel39Layout.setHorizontalGroup(
-            jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel39Layout.createSequentialGroup()
-                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField52, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel39Layout.createSequentialGroup()
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField224)
-                            .addComponent(jTextField225)
-                            .addComponent(jTextField226))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField229)
-                            .addComponent(jTextField228)
-                            .addComponent(jTextField227))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField231)
-                            .addComponent(jTextField230)
-                            .addComponent(jTextField232))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField236)
-                            .addComponent(jTextField237)
-                            .addComponent(jTextField238))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField234)
-                            .addComponent(jTextField233)
-                            .addComponent(jTextField235))
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField241, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField240)
-                            .addComponent(jTextField239))))
-                .addGap(0, 0, 0))
-        );
-        jPanel39Layout.setVerticalGroup(
-            jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel39Layout.createSequentialGroup()
-                .addComponent(jTextField52, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel39Layout.createSequentialGroup()
-                        .addComponent(jTextField224, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField225, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField226, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel39Layout.createSequentialGroup()
-                        .addComponent(jTextField229, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField228, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField227, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel39Layout.createSequentialGroup()
-                        .addComponent(jTextField231, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField230, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jTextField232, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel39Layout.createSequentialGroup()
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField234, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField239, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField237, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel39Layout.createSequentialGroup()
-                                .addComponent(jTextField236, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jTextField238, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel39Layout.createSequentialGroup()
-                                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField233, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField240, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, 0)
-                                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField235, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField241, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 0, 0))
-        );
-
-        jPanel40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jTextField6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setText("Maharashtra");
-        jTextField6.setBorder(null);
-
-        jTextField53.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField53.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField53.setText("Andhra Pradesh");
-        jTextField53.setBorder(null);
-
-        jTextField54.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField54.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField54.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField54.setText("TEAM");
-        jTextField54.setBorder(null);
-
-        javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
-        jPanel40.setLayout(jPanel40Layout);
-        jPanel40Layout.setHorizontalGroup(
-            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jTextField53)
-                .addComponent(jTextField54, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel40Layout.setVerticalGroup(
-            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel40Layout.createSequentialGroup()
-                .addComponent(jTextField54, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jTextField53, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel41.setBackground(new java.awt.Color(102, 102, 102));
@@ -1874,14 +1349,871 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
         );
 
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jPanel47.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTextField10.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField10.setText("RECEPTION");
+        jTextField10.setToolTipText("");
+        jTextField10.setBorder(null);
+
+        jTextField109.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField109.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField109.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField109.setText("Tot Pt.");
+        jTextField109.setBorder(null);
+        jTextField109.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField109ActionPerformed(evt);
+            }
+        });
+
+        jTextField110.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField110.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField110.setText("4");
+        jTextField110.setBorder(null);
+
+        jTextField111.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField111.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField111.setText("4");
+        jTextField111.setBorder(null);
+
+        jTextField112.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField112.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField112.setText("4");
+        jTextField112.setBorder(null);
+
+        jTextField113.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField113.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField113.setText("4");
+        jTextField113.setBorder(null);
+        jTextField113.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField113ActionPerformed(evt);
+            }
+        });
+
+        jTextField114.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField114.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField114.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField114.setText("-");
+        jTextField114.setBorder(null);
+
+        jTextField115.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField115.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField115.setText("4");
+        jTextField115.setBorder(null);
+
+        jTextField116.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField116.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField116.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField116.setText("<");
+        jTextField116.setBorder(null);
+
+        jTextField117.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField117.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField117.setText("4");
+        jTextField117.setBorder(null);
+
+        jTextField118.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField118.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField118.setText("40%");
+        jTextField118.setBorder(null);
+
+        jTextField119.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField119.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField119.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField119.setText("Succ %");
+        jTextField119.setBorder(null);
+
+        jTextField120.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField120.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField120.setText("4");
+        jTextField120.setBorder(null);
+        jTextField120.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField120ActionPerformed(evt);
+            }
+        });
+
+        jTextField121.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField121.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField121.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField121.setText("@");
+        jTextField121.setBorder(null);
+
+        jTextField248.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField248.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField248.setText("4");
+        jTextField248.setBorder(null);
+
+        jTextField249.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField249.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField249.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField249.setText("Err %");
+        jTextField249.setBorder(null);
+
+        jTextField250.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField250.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField250.setText("40%");
+        jTextField250.setBorder(null);
+
+        jTextField251.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField251.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField251.setText("40%");
+        jTextField251.setBorder(null);
+
+        jTextField252.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField252.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField252.setText("4");
+        jTextField252.setBorder(null);
+
+        jTextField253.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField253.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField253.setText("4");
+        jTextField253.setBorder(null);
+
+        jTextField254.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField254.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField254.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField254.setText(">");
+        jTextField254.setBorder(null);
+
+        jTextField255.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField255.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField255.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField255.setText("+");
+        jTextField255.setBorder(null);
+
+        jTextField256.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField256.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField256.setText("4");
+        jTextField256.setBorder(null);
+
+        jTextField257.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField257.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField257.setText("4");
+        jTextField257.setBorder(null);
+
+        jTextField258.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField258.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField258.setText("40%");
+        jTextField258.setBorder(null);
+
+        javax.swing.GroupLayout jPanel47Layout = new javax.swing.GroupLayout(jPanel47);
+        jPanel47.setLayout(jPanel47Layout);
+        jPanel47Layout.setHorizontalGroup(
+            jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel47Layout.createSequentialGroup()
+                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField109, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jTextField110)
+                    .addComponent(jTextField111))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField114)
+                    .addComponent(jTextField113, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField112))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField116, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField115)
+                    .addComponent(jTextField117))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField120)
+                    .addComponent(jTextField121, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jTextField248))
+                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField252, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField254, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField253))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField257, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField256)
+                    .addComponent(jTextField255))
+                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField258)
+                    .addComponent(jTextField119, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(jTextField118, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField250)
+                    .addComponent(jTextField249, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(jTextField251)))
+            .addComponent(jTextField10)
+        );
+        jPanel47Layout.setVerticalGroup(
+            jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel47Layout.createSequentialGroup()
+                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel47Layout.createSequentialGroup()
+                        .addComponent(jTextField109, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField110, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField111, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel47Layout.createSequentialGroup()
+                        .addComponent(jTextField114, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField113, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField112, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel47Layout.createSequentialGroup()
+                        .addComponent(jTextField116, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField115, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField117, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel47Layout.createSequentialGroup()
+                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField119, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField249, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField121, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField254, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField255, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel47Layout.createSequentialGroup()
+                                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField120, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField253, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField256, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField118, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField250, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
+                                .addComponent(jTextField248, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel47Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField251, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField252, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField257, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField258, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 0, 0))
+        );
+
+        jPanel48.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTextField11.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField11.setText("TF -");
+        jTextField11.setBorder(null);
+
+        jTextField259.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField259.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField259.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField259.setText("Tot Pt.");
+        jTextField259.setBorder(null);
+
+        jTextField260.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField260.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField260.setText("10");
+        jTextField260.setBorder(null);
+
+        jTextField261.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField261.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField261.setText("5");
+        jTextField261.setBorder(null);
+
+        javax.swing.GroupLayout jPanel48Layout = new javax.swing.GroupLayout(jPanel48);
+        jPanel48.setLayout(jPanel48Layout);
+        jPanel48Layout.setHorizontalGroup(
+            jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTextField11)
+            .addComponent(jTextField259, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+            .addComponent(jTextField260, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTextField261)
+        );
+        jPanel48Layout.setVerticalGroup(
+            jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel48Layout.createSequentialGroup()
+                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jTextField259, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jTextField260, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jTextField261)
+                .addGap(0, 0, 0))
+        );
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTextField12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField12.setText("Maharashtra");
+        jTextField12.setBorder(null);
+
+        jTextField13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField13.setText("Andhra Pradesh");
+        jTextField13.setBorder(null);
+
+        jTextField14.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField14.setText("TEAM");
+        jTextField14.setBorder(null);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jTextField13)
+                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        jPanel49.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTextField262.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField262.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField262.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField262.setText("SET");
+        jTextField262.setBorder(null);
+
+        jTextField263.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField263.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField263.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField263.setText("Tot Pt.");
+        jTextField263.setBorder(null);
+        jTextField263.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField263ActionPerformed(evt);
+            }
+        });
+
+        jTextField264.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField264.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField264.setText("4");
+        jTextField264.setBorder(null);
+
+        jTextField265.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField265.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField265.setText("4");
+        jTextField265.setBorder(null);
+
+        jTextField266.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField266.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField266.setText("4");
+        jTextField266.setBorder(null);
+
+        jTextField267.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField267.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField267.setText("4");
+        jTextField267.setBorder(null);
+        jTextField267.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField267ActionPerformed(evt);
+            }
+        });
+
+        jTextField268.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField268.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField268.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField268.setText("-");
+        jTextField268.setBorder(null);
+
+        jTextField269.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField269.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField269.setText("4");
+        jTextField269.setBorder(null);
+
+        jTextField270.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField270.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField270.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField270.setText("<");
+        jTextField270.setBorder(null);
+
+        jTextField271.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField271.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField271.setText("4");
+        jTextField271.setBorder(null);
+
+        jTextField272.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField272.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField272.setText("40%");
+        jTextField272.setBorder(null);
+
+        jTextField273.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField273.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField273.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField273.setText("Succ %");
+        jTextField273.setBorder(null);
+
+        jTextField274.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField274.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField274.setText("4");
+        jTextField274.setBorder(null);
+        jTextField274.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField274ActionPerformed(evt);
+            }
+        });
+
+        jTextField275.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField275.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField275.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField275.setText("@");
+        jTextField275.setBorder(null);
+
+        jTextField276.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField276.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField276.setText("4");
+        jTextField276.setBorder(null);
+
+        jTextField277.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField277.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField277.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField277.setText("Err %");
+        jTextField277.setBorder(null);
+
+        jTextField278.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField278.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField278.setText("40%");
+        jTextField278.setBorder(null);
+
+        jTextField279.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField279.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField279.setText("40%");
+        jTextField279.setBorder(null);
+
+        jTextField280.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField280.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField280.setText("4");
+        jTextField280.setBorder(null);
+
+        jTextField281.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField281.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField281.setText("4");
+        jTextField281.setBorder(null);
+
+        jTextField282.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField282.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField282.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField282.setText(">");
+        jTextField282.setBorder(null);
+
+        jTextField283.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField283.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField283.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField283.setText("+");
+        jTextField283.setBorder(null);
+
+        jTextField284.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField284.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField284.setText("4");
+        jTextField284.setBorder(null);
+
+        jTextField285.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField285.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField285.setText("4");
+        jTextField285.setBorder(null);
+
+        jTextField286.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField286.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField286.setText("40%");
+        jTextField286.setBorder(null);
+
+        javax.swing.GroupLayout jPanel49Layout = new javax.swing.GroupLayout(jPanel49);
+        jPanel49.setLayout(jPanel49Layout);
+        jPanel49Layout.setHorizontalGroup(
+            jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel49Layout.createSequentialGroup()
+                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField263, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jTextField264, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jTextField265))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField268)
+                    .addComponent(jTextField267, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jTextField266))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField270, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jTextField269)
+                    .addComponent(jTextField271))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField274)
+                    .addComponent(jTextField275, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jTextField276))
+                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField280, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jTextField282, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField281))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField285, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(jTextField284)
+                    .addComponent(jTextField283))
+                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField286)
+                    .addComponent(jTextField273, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(jTextField272, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField278)
+                    .addComponent(jTextField277, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                    .addComponent(jTextField279)))
+            .addComponent(jTextField262)
+        );
+        jPanel49Layout.setVerticalGroup(
+            jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel49Layout.createSequentialGroup()
+                .addComponent(jTextField262, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel49Layout.createSequentialGroup()
+                        .addComponent(jTextField263, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField264, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField265, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel49Layout.createSequentialGroup()
+                        .addComponent(jTextField268, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField267, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField266, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel49Layout.createSequentialGroup()
+                        .addComponent(jTextField270, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField269, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField271, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel49Layout.createSequentialGroup()
+                        .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField273, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField277, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField275, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField282, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField283, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel49Layout.createSequentialGroup()
+                                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField274, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField281, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField284, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField272, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField278, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
+                                .addComponent(jTextField276, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel49Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField279, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField280, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField285, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField286, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 0, 0))
+        );
+
+        jPanel50.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTextField287.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField287.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField287.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField287.setText("DEFENCE");
+        jTextField287.setBorder(null);
+
+        jTextField288.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField288.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField288.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField288.setText("Tot Pt.");
+        jTextField288.setBorder(null);
+        jTextField288.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField288ActionPerformed(evt);
+            }
+        });
+
+        jTextField289.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField289.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField289.setText("4");
+        jTextField289.setBorder(null);
+
+        jTextField290.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField290.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField290.setText("4");
+        jTextField290.setBorder(null);
+
+        jTextField291.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField291.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField291.setText("4");
+        jTextField291.setBorder(null);
+
+        jTextField292.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField292.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField292.setText("4");
+        jTextField292.setBorder(null);
+        jTextField292.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField292ActionPerformed(evt);
+            }
+        });
+
+        jTextField293.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField293.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField293.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField293.setText("-");
+        jTextField293.setBorder(null);
+
+        jTextField294.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField294.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField294.setText("4");
+        jTextField294.setBorder(null);
+
+        jTextField295.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField295.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField295.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField295.setText("<");
+        jTextField295.setBorder(null);
+
+        jTextField296.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField296.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField296.setText("4");
+        jTextField296.setBorder(null);
+
+        jTextField297.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField297.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField297.setText("40%");
+        jTextField297.setBorder(null);
+
+        jTextField298.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField298.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField298.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField298.setText("Succ %");
+        jTextField298.setBorder(null);
+
+        jTextField299.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField299.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField299.setText("4");
+        jTextField299.setBorder(null);
+        jTextField299.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField299ActionPerformed(evt);
+            }
+        });
+
+        jTextField300.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField300.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField300.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField300.setText("@");
+        jTextField300.setBorder(null);
+
+        jTextField301.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField301.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField301.setText("4");
+        jTextField301.setBorder(null);
+
+        jTextField302.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField302.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField302.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField302.setText("Err %");
+        jTextField302.setBorder(null);
+
+        jTextField303.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField303.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField303.setText("40%");
+        jTextField303.setBorder(null);
+
+        jTextField304.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField304.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField304.setText("40%");
+        jTextField304.setBorder(null);
+
+        jTextField305.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField305.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField305.setText("4");
+        jTextField305.setBorder(null);
+
+        jTextField306.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField306.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField306.setText("4");
+        jTextField306.setBorder(null);
+
+        jTextField307.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField307.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField307.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField307.setText(">");
+        jTextField307.setBorder(null);
+
+        jTextField308.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField308.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField308.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField308.setText("+");
+        jTextField308.setBorder(null);
+
+        jTextField309.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField309.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField309.setText("4");
+        jTextField309.setBorder(null);
+
+        jTextField310.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField310.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField310.setText("4");
+        jTextField310.setBorder(null);
+
+        jTextField311.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField311.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField311.setText("40%");
+        jTextField311.setBorder(null);
+
+        javax.swing.GroupLayout jPanel50Layout = new javax.swing.GroupLayout(jPanel50);
+        jPanel50.setLayout(jPanel50Layout);
+        jPanel50Layout.setHorizontalGroup(
+            jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel50Layout.createSequentialGroup()
+                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField288, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jTextField289)
+                    .addComponent(jTextField290))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField293)
+                    .addComponent(jTextField292, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField291))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField295, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField294)
+                    .addComponent(jTextField296))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField299)
+                    .addComponent(jTextField300, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jTextField301))
+                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField305, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(jTextField307, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField306))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField310, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addComponent(jTextField309)
+                    .addComponent(jTextField308))
+                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField311)
+                    .addComponent(jTextField298, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(jTextField297, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField303)
+                    .addComponent(jTextField302, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(jTextField304)))
+            .addComponent(jTextField287)
+        );
+        jPanel50Layout.setVerticalGroup(
+            jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel50Layout.createSequentialGroup()
+                .addComponent(jTextField287, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel50Layout.createSequentialGroup()
+                        .addComponent(jTextField288, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField289, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField290, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel50Layout.createSequentialGroup()
+                        .addComponent(jTextField293, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField292, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField291, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel50Layout.createSequentialGroup()
+                        .addComponent(jTextField295, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField294, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jTextField296, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel50Layout.createSequentialGroup()
+                        .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField298, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField302, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField300, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField307, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField308, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel50Layout.createSequentialGroup()
+                                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField299, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField306, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField309, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField297, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField303, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
+                                .addComponent(jTextField301, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel50Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField304, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField305, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField310, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField311, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 0, 0))
+        );
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel49, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel49, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
+        );
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1890,11 +2222,11 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel26.setBackground(new java.awt.Color(255, 255, 255));
@@ -1903,55 +2235,55 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel27.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextField15.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField15.setText("TEAM");
         jTextField15.setBorder(null);
 
-        jTextField16.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField16.setText("Maharashtra");
         jTextField16.setBorder(null);
 
-        jTextField17.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField17.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField17.setText("Andhra Pradesh");
         jTextField17.setBorder(null);
 
         jTextField168.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField168.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField168.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField168.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField168.setText("SERVICE");
         jTextField168.setBorder(null);
 
         jTextField169.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField169.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField169.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField169.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField169.setText("SUCCESS");
         jTextField169.setBorder(null);
 
-        jTextField170.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField170.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField170.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField170.setText("20%");
         jTextField170.setBorder(null);
 
-        jTextField171.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField171.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField171.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField171.setText("20%");
         jTextField171.setBorder(null);
 
-        jTextField172.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField172.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField172.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField172.setText("20%");
         jTextField172.setBorder(null);
 
         jTextField173.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField173.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField173.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField173.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField173.setText("ERROR");
         jTextField173.setBorder(null);
 
-        jTextField174.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField174.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField174.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField174.setText("20%");
         jTextField174.setBorder(null);
@@ -1995,39 +2327,39 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         );
 
         jTextField175.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField175.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField175.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField175.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField175.setText("ATTACK");
         jTextField175.setBorder(null);
 
         jTextField176.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField176.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField176.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField176.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField176.setText("SUCCESS");
         jTextField176.setBorder(null);
 
-        jTextField177.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField177.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField177.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField177.setText("20%");
         jTextField177.setBorder(null);
 
-        jTextField178.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField178.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField178.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField178.setText("20%");
         jTextField178.setBorder(null);
 
-        jTextField179.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField179.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField179.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField179.setText("20%");
         jTextField179.setBorder(null);
 
         jTextField180.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField180.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField180.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField180.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField180.setText("ERROR");
         jTextField180.setBorder(null);
 
-        jTextField181.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField181.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField181.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField181.setText("20%");
         jTextField181.setBorder(null);
@@ -2073,34 +2405,34 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel33.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextField182.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField182.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField182.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField182.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField182.setText("BLOCK");
         jTextField182.setBorder(null);
 
         jTextField183.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField183.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField183.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField183.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField183.setText("SUCCESS");
         jTextField183.setBorder(null);
 
-        jTextField184.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField184.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField184.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField184.setText("20%");
         jTextField184.setBorder(null);
 
-        jTextField185.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField185.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField185.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField185.setText("20%");
         jTextField185.setBorder(null);
 
-        jTextField186.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField186.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField186.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField186.setText("20%");
         jTextField186.setBorder(null);
 
         jTextField187.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField187.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField187.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField187.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField187.setText("ERROR");
         jTextField187.setBorder(null);
@@ -2110,7 +2442,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             }
         });
 
-        jTextField188.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField188.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField188.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField188.setText("20%");
         jTextField188.setBorder(null);
@@ -2157,39 +2489,39 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel34.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextField189.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField189.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField189.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField189.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField189.setText("RECEPTION");
         jTextField189.setBorder(null);
 
         jTextField190.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField190.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField190.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField190.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField190.setText("SUCCESS");
         jTextField190.setBorder(null);
 
-        jTextField191.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField191.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField191.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField191.setText("20%");
         jTextField191.setBorder(null);
 
-        jTextField192.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField192.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField192.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField192.setText("20%");
         jTextField192.setBorder(null);
 
-        jTextField193.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField193.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField193.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField193.setText("20%");
         jTextField193.setBorder(null);
 
         jTextField194.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField194.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField194.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField194.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField194.setText("ERROR");
         jTextField194.setBorder(null);
 
-        jTextField195.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField195.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField195.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField195.setText("20%");
         jTextField195.setBorder(null);
@@ -2236,39 +2568,39 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel35.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextField196.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField196.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField196.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField196.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField196.setText("SET");
         jTextField196.setBorder(null);
 
         jTextField197.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField197.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField197.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField197.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField197.setText("SUCCESS");
         jTextField197.setBorder(null);
 
-        jTextField198.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField198.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField198.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField198.setText("20%");
         jTextField198.setBorder(null);
 
-        jTextField199.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField199.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField199.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField199.setText("20%");
         jTextField199.setBorder(null);
 
-        jTextField200.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField200.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField200.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField200.setText("20%");
         jTextField200.setBorder(null);
 
         jTextField201.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField201.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField201.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField201.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField201.setText("ERROR");
         jTextField201.setBorder(null);
 
-        jTextField202.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField202.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField202.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField202.setText("20%");
         jTextField202.setBorder(null);
@@ -2315,40 +2647,40 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel36.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextField203.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField203.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField203.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField203.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField203.setText("DEFENCE");
         jTextField203.setToolTipText("");
         jTextField203.setBorder(null);
 
         jTextField204.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField204.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField204.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField204.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField204.setText("SUCCESS");
         jTextField204.setBorder(null);
 
-        jTextField205.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField205.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField205.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField205.setText("20%");
         jTextField205.setBorder(null);
 
-        jTextField206.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField206.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField206.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField206.setText("20%");
         jTextField206.setBorder(null);
 
-        jTextField207.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField207.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField207.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField207.setText("20%");
         jTextField207.setBorder(null);
 
         jTextField208.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField208.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField208.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField208.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField208.setText("ERROR");
         jTextField208.setBorder(null);
 
-        jTextField209.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField209.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField209.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField209.setText("20%");
         jTextField209.setBorder(null);
@@ -2474,7 +2806,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tbSetDetails.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tbSetDetails.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbSetDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"I", "10:00", "43", "4", "25 : 23"},
@@ -2531,7 +2863,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel22.setText("Total Win Score");
 
-        tbTeam1Win.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tbTeam1Win.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbTeam1Win.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"I", "25", "8", "8", "8", "8"},
@@ -2582,7 +2914,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel23.setText("Total Loss Score");
 
-        tbTeam1Loss.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tbTeam1Loss.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbTeam1Loss.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"I", "25", "8", "8", "8", "8", "8", "8", "8"},
@@ -2621,7 +2953,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTable3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"01 L", "Player 1", null, null, null, null, null},
@@ -2686,7 +3018,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 514, Short.MAX_VALUE)
                     .addComponent(jPanel23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel21Layout.setVerticalGroup(
@@ -2738,7 +3070,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jLabel26.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel26.setText("Total Win Score");
 
-        tbTeam2Win.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tbTeam2Win.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbTeam2Win.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"I", "25", "8", "8", "8", "8"},
@@ -2789,7 +3121,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jLabel27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel27.setText("Total Loss Score");
 
-        tbTeam2Loss.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tbTeam2Loss.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbTeam2Loss.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"I", "25", "8", "8", "8", "8", "8", "8", "8"},
@@ -2826,7 +3158,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTable4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTable4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"01 L", "Player 1", null, null, null, null, null},
@@ -2891,7 +3223,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel44, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel44, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 514, Short.MAX_VALUE)
                     .addComponent(jPanel43, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel25Layout.setVerticalGroup(
@@ -2960,7 +3292,6 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         panMatchReport1Layout.setHorizontalGroup(
             panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMatchReport1Layout.createSequentialGroup()
@@ -2969,6 +3300,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
+            .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         panMatchReport1Layout.setVerticalGroup(
             panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2991,19 +3323,178 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGap(5, 5, 5))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel11.setText("Tot Pt : ");
+
+        jLabel12.setText("Total Points");
+
+        jLabel14.setText("SRV : ");
+
+        jLabel15.setText("Service");
+
+        jLabel16.setText("BLK : ");
+
+        jLabel17.setText("Block");
+
+        jLabel19.setText("Attack");
+
+        jLabel29.setText("ATK : ");
+
+        jLabel30.setText("REC : ");
+
+        jLabel31.setText("Reception");
+
+        jLabel32.setText("Defence");
+
+        jLabel33.setText("DEF : ");
+
+        jLabel34.setText("Excellent");
+
+        jLabel35.setText("+ : ");
+
+        jLabel36.setText("> : ");
+
+        jLabel37.setText("Above Average");
+
+        jLabel38.setText("@ : ");
+
+        jLabel39.setText("Average");
+
+        jLabel40.setText("< : ");
+
+        jLabel41.setText("Below Average");
+
+        jLabel42.setText("-  : ");
+
+        jLabel43.setText("Poor");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel33)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel32))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel17))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel15))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel29)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel19))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel30)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel31)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel42)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel43))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel40)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel41))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel35)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel34))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel36)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel37))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel38)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel39)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel19)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel35)
+                            .addComponent(jLabel34))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel36)
+                            .addComponent(jLabel37))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel39))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel40)
+                            .addComponent(jLabel41))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel30)
+                        .addComponent(jLabel31))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel42)
+                        .addComponent(jLabel43)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(jLabel32))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panMatchReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panMatchReport1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panMatchReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -3019,59 +3510,82 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField20ActionPerformed
 
-    private void jTextField125ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField125ActionPerformed
+    private void jTextField32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField32ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField125ActionPerformed
-
-    private void jTextField129ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField129ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField129ActionPerformed
-
-    private void jTextField143ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField143ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField143ActionPerformed
-
-    private void jTextField147ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField147ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField147ActionPerformed
+    }//GEN-LAST:event_jTextField32ActionPerformed
 
     private void jTextField31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField31ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField31ActionPerformed
 
-    private void jTextField35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField35ActionPerformed
+    private void jTextField68ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField68ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField35ActionPerformed
+    }//GEN-LAST:event_jTextField68ActionPerformed
 
-    private void jTextField39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField39ActionPerformed
+    private void jTextField78ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField78ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField39ActionPerformed
+    }//GEN-LAST:event_jTextField78ActionPerformed
 
-    private void jTextField46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField46ActionPerformed
+    private void jTextField88ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField88ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField46ActionPerformed
+    }//GEN-LAST:event_jTextField88ActionPerformed
 
-    private void jTextField164ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField164ActionPerformed
+    private void jTextField92ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField92ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField164ActionPerformed
+    }//GEN-LAST:event_jTextField92ActionPerformed
 
-    private void jTextField210ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField210ActionPerformed
+    private void jTextField99ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField99ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField210ActionPerformed
+    }//GEN-LAST:event_jTextField99ActionPerformed
 
-    private void jTextField224ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField224ActionPerformed
+    private void jTextField109ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField109ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField224ActionPerformed
+    }//GEN-LAST:event_jTextField109ActionPerformed
 
-    private void jTextField228ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField228ActionPerformed
+    private void jTextField113ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField113ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField228ActionPerformed
+    }//GEN-LAST:event_jTextField113ActionPerformed
+
+    private void jTextField120ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField120ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField120ActionPerformed
+
+    private void jTextField263ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField263ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField263ActionPerformed
+
+    private void jTextField267ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField267ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField267ActionPerformed
+
+    private void jTextField274ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField274ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField274ActionPerformed
+
+    private void jTextField288ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField288ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField288ActionPerformed
+
+    private void jTextField292ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField292ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField292ActionPerformed
+
+    private void jTextField299ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField299ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField299ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -3082,8 +3596,23 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -3091,10 +3620,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
@@ -3103,25 +3634,24 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
-    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel36;
-    private javax.swing.JPanel jPanel37;
-    private javax.swing.JPanel jPanel38;
-    private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel40;
     private javax.swing.JPanel jPanel41;
     private javax.swing.JPanel jPanel42;
     private javax.swing.JPanel jPanel43;
     private javax.swing.JPanel jPanel44;
+    private javax.swing.JPanel jPanel45;
+    private javax.swing.JPanel jPanel46;
+    private javax.swing.JPanel jPanel47;
+    private javax.swing.JPanel jPanel48;
+    private javax.swing.JPanel jPanel49;
+    private javax.swing.JPanel jPanel50;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -3135,54 +3665,38 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField100;
+    private javax.swing.JTextField jTextField101;
+    private javax.swing.JTextField jTextField102;
+    private javax.swing.JTextField jTextField103;
+    private javax.swing.JTextField jTextField104;
+    private javax.swing.JTextField jTextField105;
+    private javax.swing.JTextField jTextField106;
+    private javax.swing.JTextField jTextField107;
+    private javax.swing.JTextField jTextField108;
+    private javax.swing.JTextField jTextField109;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField110;
+    private javax.swing.JTextField jTextField111;
+    private javax.swing.JTextField jTextField112;
+    private javax.swing.JTextField jTextField113;
+    private javax.swing.JTextField jTextField114;
+    private javax.swing.JTextField jTextField115;
+    private javax.swing.JTextField jTextField116;
+    private javax.swing.JTextField jTextField117;
+    private javax.swing.JTextField jTextField118;
+    private javax.swing.JTextField jTextField119;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField120;
+    private javax.swing.JTextField jTextField121;
     private javax.swing.JTextField jTextField122;
     private javax.swing.JTextField jTextField123;
     private javax.swing.JTextField jTextField124;
-    private javax.swing.JTextField jTextField125;
-    private javax.swing.JTextField jTextField126;
-    private javax.swing.JTextField jTextField127;
-    private javax.swing.JTextField jTextField128;
-    private javax.swing.JTextField jTextField129;
-    private javax.swing.JTextField jTextField130;
-    private javax.swing.JTextField jTextField131;
-    private javax.swing.JTextField jTextField132;
-    private javax.swing.JTextField jTextField133;
-    private javax.swing.JTextField jTextField134;
-    private javax.swing.JTextField jTextField135;
-    private javax.swing.JTextField jTextField136;
-    private javax.swing.JTextField jTextField137;
-    private javax.swing.JTextField jTextField138;
-    private javax.swing.JTextField jTextField139;
-    private javax.swing.JTextField jTextField140;
-    private javax.swing.JTextField jTextField141;
-    private javax.swing.JTextField jTextField142;
-    private javax.swing.JTextField jTextField143;
-    private javax.swing.JTextField jTextField144;
-    private javax.swing.JTextField jTextField145;
-    private javax.swing.JTextField jTextField146;
-    private javax.swing.JTextField jTextField147;
-    private javax.swing.JTextField jTextField148;
-    private javax.swing.JTextField jTextField149;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField150;
-    private javax.swing.JTextField jTextField151;
-    private javax.swing.JTextField jTextField152;
-    private javax.swing.JTextField jTextField153;
-    private javax.swing.JTextField jTextField154;
-    private javax.swing.JTextField jTextField155;
-    private javax.swing.JTextField jTextField156;
-    private javax.swing.JTextField jTextField157;
-    private javax.swing.JTextField jTextField158;
-    private javax.swing.JTextField jTextField159;
     private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField160;
-    private javax.swing.JTextField jTextField161;
-    private javax.swing.JTextField jTextField162;
-    private javax.swing.JTextField jTextField163;
-    private javax.swing.JTextField jTextField164;
-    private javax.swing.JTextField jTextField165;
-    private javax.swing.JTextField jTextField166;
-    private javax.swing.JTextField jTextField167;
     private javax.swing.JTextField jTextField168;
     private javax.swing.JTextField jTextField169;
     private javax.swing.JTextField jTextField17;
@@ -3196,7 +3710,6 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField177;
     private javax.swing.JTextField jTextField178;
     private javax.swing.JTextField jTextField179;
-    private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField180;
     private javax.swing.JTextField jTextField181;
     private javax.swing.JTextField jTextField182;
@@ -3207,7 +3720,6 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField187;
     private javax.swing.JTextField jTextField188;
     private javax.swing.JTextField jTextField189;
-    private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField190;
     private javax.swing.JTextField jTextField191;
     private javax.swing.JTextField jTextField192;
@@ -3231,82 +3743,136 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField208;
     private javax.swing.JTextField jTextField209;
     private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField210;
-    private javax.swing.JTextField jTextField211;
-    private javax.swing.JTextField jTextField212;
-    private javax.swing.JTextField jTextField213;
-    private javax.swing.JTextField jTextField214;
-    private javax.swing.JTextField jTextField215;
-    private javax.swing.JTextField jTextField216;
-    private javax.swing.JTextField jTextField217;
-    private javax.swing.JTextField jTextField218;
-    private javax.swing.JTextField jTextField219;
     private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField220;
-    private javax.swing.JTextField jTextField221;
-    private javax.swing.JTextField jTextField222;
-    private javax.swing.JTextField jTextField223;
-    private javax.swing.JTextField jTextField224;
-    private javax.swing.JTextField jTextField225;
-    private javax.swing.JTextField jTextField226;
-    private javax.swing.JTextField jTextField227;
-    private javax.swing.JTextField jTextField228;
-    private javax.swing.JTextField jTextField229;
     private javax.swing.JTextField jTextField23;
-    private javax.swing.JTextField jTextField230;
-    private javax.swing.JTextField jTextField231;
-    private javax.swing.JTextField jTextField232;
-    private javax.swing.JTextField jTextField233;
-    private javax.swing.JTextField jTextField234;
-    private javax.swing.JTextField jTextField235;
-    private javax.swing.JTextField jTextField236;
-    private javax.swing.JTextField jTextField237;
-    private javax.swing.JTextField jTextField238;
-    private javax.swing.JTextField jTextField239;
     private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField240;
-    private javax.swing.JTextField jTextField241;
+    private javax.swing.JTextField jTextField242;
+    private javax.swing.JTextField jTextField243;
+    private javax.swing.JTextField jTextField244;
+    private javax.swing.JTextField jTextField245;
+    private javax.swing.JTextField jTextField246;
+    private javax.swing.JTextField jTextField247;
+    private javax.swing.JTextField jTextField248;
+    private javax.swing.JTextField jTextField249;
     private javax.swing.JTextField jTextField25;
+    private javax.swing.JTextField jTextField250;
+    private javax.swing.JTextField jTextField251;
+    private javax.swing.JTextField jTextField252;
+    private javax.swing.JTextField jTextField253;
+    private javax.swing.JTextField jTextField254;
+    private javax.swing.JTextField jTextField255;
+    private javax.swing.JTextField jTextField256;
+    private javax.swing.JTextField jTextField257;
+    private javax.swing.JTextField jTextField258;
+    private javax.swing.JTextField jTextField259;
     private javax.swing.JTextField jTextField26;
+    private javax.swing.JTextField jTextField260;
+    private javax.swing.JTextField jTextField261;
+    private javax.swing.JTextField jTextField262;
+    private javax.swing.JTextField jTextField263;
+    private javax.swing.JTextField jTextField264;
+    private javax.swing.JTextField jTextField265;
+    private javax.swing.JTextField jTextField266;
+    private javax.swing.JTextField jTextField267;
+    private javax.swing.JTextField jTextField268;
+    private javax.swing.JTextField jTextField269;
     private javax.swing.JTextField jTextField27;
+    private javax.swing.JTextField jTextField270;
+    private javax.swing.JTextField jTextField271;
+    private javax.swing.JTextField jTextField272;
+    private javax.swing.JTextField jTextField273;
+    private javax.swing.JTextField jTextField274;
+    private javax.swing.JTextField jTextField275;
+    private javax.swing.JTextField jTextField276;
+    private javax.swing.JTextField jTextField277;
+    private javax.swing.JTextField jTextField278;
+    private javax.swing.JTextField jTextField279;
     private javax.swing.JTextField jTextField28;
+    private javax.swing.JTextField jTextField280;
+    private javax.swing.JTextField jTextField281;
+    private javax.swing.JTextField jTextField282;
+    private javax.swing.JTextField jTextField283;
+    private javax.swing.JTextField jTextField284;
+    private javax.swing.JTextField jTextField285;
+    private javax.swing.JTextField jTextField286;
+    private javax.swing.JTextField jTextField287;
+    private javax.swing.JTextField jTextField288;
+    private javax.swing.JTextField jTextField289;
     private javax.swing.JTextField jTextField29;
+    private javax.swing.JTextField jTextField290;
+    private javax.swing.JTextField jTextField291;
+    private javax.swing.JTextField jTextField292;
+    private javax.swing.JTextField jTextField293;
+    private javax.swing.JTextField jTextField294;
+    private javax.swing.JTextField jTextField295;
+    private javax.swing.JTextField jTextField296;
+    private javax.swing.JTextField jTextField297;
+    private javax.swing.JTextField jTextField298;
+    private javax.swing.JTextField jTextField299;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField30;
+    private javax.swing.JTextField jTextField300;
+    private javax.swing.JTextField jTextField301;
+    private javax.swing.JTextField jTextField302;
+    private javax.swing.JTextField jTextField303;
+    private javax.swing.JTextField jTextField304;
+    private javax.swing.JTextField jTextField305;
+    private javax.swing.JTextField jTextField306;
+    private javax.swing.JTextField jTextField307;
+    private javax.swing.JTextField jTextField308;
+    private javax.swing.JTextField jTextField309;
     private javax.swing.JTextField jTextField31;
+    private javax.swing.JTextField jTextField310;
+    private javax.swing.JTextField jTextField311;
     private javax.swing.JTextField jTextField32;
     private javax.swing.JTextField jTextField33;
     private javax.swing.JTextField jTextField34;
-    private javax.swing.JTextField jTextField35;
-    private javax.swing.JTextField jTextField36;
-    private javax.swing.JTextField jTextField37;
-    private javax.swing.JTextField jTextField38;
-    private javax.swing.JTextField jTextField39;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField40;
-    private javax.swing.JTextField jTextField41;
-    private javax.swing.JTextField jTextField42;
-    private javax.swing.JTextField jTextField43;
-    private javax.swing.JTextField jTextField44;
-    private javax.swing.JTextField jTextField45;
-    private javax.swing.JTextField jTextField46;
-    private javax.swing.JTextField jTextField47;
-    private javax.swing.JTextField jTextField48;
-    private javax.swing.JTextField jTextField49;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField50;
-    private javax.swing.JTextField jTextField51;
-    private javax.swing.JTextField jTextField52;
-    private javax.swing.JTextField jTextField53;
-    private javax.swing.JTextField jTextField54;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField55;
+    private javax.swing.JTextField jTextField56;
+    private javax.swing.JTextField jTextField57;
+    private javax.swing.JTextField jTextField58;
+    private javax.swing.JTextField jTextField59;
+    private javax.swing.JTextField jTextField60;
+    private javax.swing.JTextField jTextField61;
+    private javax.swing.JTextField jTextField62;
+    private javax.swing.JTextField jTextField63;
+    private javax.swing.JTextField jTextField64;
     private javax.swing.JTextField jTextField65;
     private javax.swing.JTextField jTextField66;
     private javax.swing.JTextField jTextField67;
+    private javax.swing.JTextField jTextField68;
+    private javax.swing.JTextField jTextField69;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField74;
-    private javax.swing.JTextField jTextField75;
-    private javax.swing.JTextField jTextField76;
+    private javax.swing.JTextField jTextField70;
+    private javax.swing.JTextField jTextField71;
+    private javax.swing.JTextField jTextField72;
+    private javax.swing.JTextField jTextField73;
+    private javax.swing.JTextField jTextField77;
+    private javax.swing.JTextField jTextField78;
+    private javax.swing.JTextField jTextField79;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField80;
+    private javax.swing.JTextField jTextField81;
+    private javax.swing.JTextField jTextField82;
+    private javax.swing.JTextField jTextField83;
+    private javax.swing.JTextField jTextField84;
+    private javax.swing.JTextField jTextField85;
+    private javax.swing.JTextField jTextField86;
+    private javax.swing.JTextField jTextField87;
+    private javax.swing.JTextField jTextField88;
+    private javax.swing.JTextField jTextField89;
+    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextField90;
+    private javax.swing.JTextField jTextField91;
+    private javax.swing.JTextField jTextField92;
+    private javax.swing.JTextField jTextField93;
+    private javax.swing.JTextField jTextField94;
+    private javax.swing.JTextField jTextField95;
+    private javax.swing.JTextField jTextField96;
+    private javax.swing.JTextField jTextField97;
+    private javax.swing.JTextField jTextField98;
+    private javax.swing.JTextField jTextField99;
     private javax.swing.JPanel panMatchReport1;
     private javax.swing.JTable tbSetDetails;
     private javax.swing.JTable tbTeam1Loss;

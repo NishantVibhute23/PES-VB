@@ -61,12 +61,12 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="panPlayer" pref="468" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              <Component id="panPlayer" pref="462" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="panRallyEvalHead" alignment="1" max="32767" attributes="0"/>
                   <Component id="jPanel3" max="32767" attributes="0"/>
-                  <Component id="panEvalRallyRow" alignment="1" pref="552" max="32767" attributes="0"/>
+                  <Component id="panEvalRallyRow" alignment="1" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -143,7 +143,7 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jComboBox1" min="-2" pref="75" max="-2" attributes="0"/>
-                  <EmptySpace pref="304" max="32767" attributes="0"/>
+                  <EmptySpace pref="340" max="32767" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

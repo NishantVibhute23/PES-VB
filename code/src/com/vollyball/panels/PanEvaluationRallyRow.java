@@ -1,7 +1,16 @@
 package com.vollyball.panels;
 
-
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,14 +23,98 @@ import java.awt.BorderLayout;
  */
 public class PanEvaluationRallyRow extends javax.swing.JPanel {
 
-    PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail();
+    PanEvaluationRowDetail panEvaluationRowDetail;
+    GridBagConstraints gbc;
+    int i = 0;
+    public PanCompListValue panCompListValue = new PanCompListValue();
+    int k;
+    LinkedHashMap<PanEvaluationRallyRowText, PanEvaluationRowDetail> panRallyRow = new LinkedHashMap<>();
+    PanEvaluationRallyRowText currentPanRow;
 
     /**
      * Creates new form PanEvaluationRallyRow
      */
     public PanEvaluationRallyRow() {
         initComponents();
-        panEvalDetail.add(panEvaluationRowDetail, BorderLayout.CENTER);
+
+        panRallyList.add(panCompListValue, BorderLayout.CENTER);
+        panCompListValue.add();
+    }
+
+    public class PanCompListValue extends JPanel {
+
+        private JPanel mainList;
+        JScrollPane s;
+
+        public PanCompListValue() {
+            k = 0;
+            setLayout(new BorderLayout());
+            mainList = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridwidth = GridBagConstraints.REMAINDER;
+            gbc.weightx = 1;
+            gbc.weighty = 1;
+            JPanel p = new JPanel();
+            p.setBackground(new Color(57, 74, 108));
+            mainList.add(p, gbc);
+            mainList.setBackground(new Color(57, 74, 108));
+            s = new JScrollPane(mainList);
+            s.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+            s.getVerticalScrollBar().setPreferredSize(new Dimension(15, 0));
+            s.getVerticalScrollBar().setBackground(Color.red);
+            s.setBackground(Color.WHITE);
+            s.setBorder(null);
+            s.setSize(110, 500);
+            add(s, BorderLayout.CENTER);
+        }
+
+//        public void addBlankRow() {
+//            PanEvaluationRallyRowText panel = new PanEvaluationRallyRowText("" + k + 1);
+//            GridBagConstraints gbcRow = new GridBagConstraints();
+//            gbcRow.gridwidth = GridBagConstraints.REMAINDER;
+//            gbcRow.weightx = 1;
+//            gbcRow.gridheight = 2;
+//            gbcRow.fill = GridBagConstraints.HORIZONTAL;
+//            mainList.add(panel, gbcRow, 0);
+//
+//            validate();
+//            repaint();
+//
+//        }
+        public void add() {
+
+            PanEvaluationRallyRowText panel = new PanEvaluationRallyRowText(PanEvaluationRallyRow.this, "" + (k + 1));
+            currentPanRow = panel;
+            panEvalDetail.removeAll();
+            PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(PanEvaluationRallyRow.this);
+            panEvalDetail.add(panEvaluationRowDetail, BorderLayout.CENTER);
+            panEvalDetail.validate();
+            panEvalDetail.repaint();
+            GridBagConstraints gbcRow = new GridBagConstraints();
+            gbcRow.gridwidth = GridBagConstraints.REMAINDER;
+            gbcRow.weightx = 1;
+            gbcRow.gridheight = 2;
+            gbcRow.fill = GridBagConstraints.HORIZONTAL;
+            mainList.add(panel, gbcRow, k);
+            validate();
+            repaint();
+            JScrollBar vertical = s.getVerticalScrollBar();
+            vertical.setValue(vertical.getMaximum());
+            panRallyRow.put(panel, panEvaluationRowDetail);
+            k++;
+
+            for (Map.Entry<PanEvaluationRallyRowText, PanEvaluationRowDetail> entry : panRallyRow.entrySet()) {
+                PanEvaluationRallyRowText jPanel = entry.getKey();
+                if (jPanel != panel) {
+                    jPanel.panShow.setBackground(new Color(57, 74, 108));
+                    jPanel.txtPlayer.setForeground(Color.WHITE);
+                    jPanel.txtSkill.setForeground(Color.WHITE);
+                    jPanel.txtRate.setForeground(Color.WHITE);
+
+                }
+            }
+
+        }
     }
 
     /**
@@ -33,23 +126,14 @@ public class PanEvaluationRallyRow extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panRallyList = new javax.swing.JPanel();
         panEvalDetail = new javax.swing.JPanel();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panRallyList.setBackground(new java.awt.Color(57, 74, 108));
+        panRallyList.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        panEvalDetail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panEvalDetail.setBackground(new java.awt.Color(255, 255, 255));
+        panEvalDetail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
         panEvalDetail.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -58,20 +142,19 @@ public class PanEvaluationRallyRow extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(panEvalDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(panEvalDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panRallyList, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panEvalDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panEvalDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+            .addComponent(panRallyList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel panEvalDetail;
+    public javax.swing.JPanel panEvalDetail;
+    public javax.swing.JPanel panRallyList;
     // End of variables declaration//GEN-END:variables
 }
