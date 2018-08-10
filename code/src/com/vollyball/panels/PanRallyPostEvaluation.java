@@ -6,7 +6,6 @@
 package com.vollyball.panels;
 
 import com.vollyball.bean.VollyCourtCoordinateBean;
-import com.vollyball.controller.Controller;
 import com.vollyball.dao.RallyDao;
 import com.vollyball.dialog.CreateDiagram;
 import com.vollyball.enums.Skill;
@@ -57,7 +56,7 @@ public class PanRallyPostEvaluation extends javax.swing.JPanel {
         this.detailsValues = detailsValues;
 
         panSkillDetailsListValue = new PanSkillDetailsListValue();
-        Controller.panMatchSet.panButton.setVisible(false);
+//        Controller.panMatchSet.panButton.setVisible(false);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ex) {

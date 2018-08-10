@@ -67,6 +67,13 @@ public class PanNewCompetition extends javax.swing.JPanel {
         panEndDate.add(datePickerEnd);
         txtCompName.setText(cb.getName());
         txtVenue.setText(cb.getVenue());
+
+        modelStart.setDate(2016, 00, 12);
+        modelStart.setSelected(true);
+
+        modelEnd.setDate(2016, 00, 12);
+        modelEnd.setSelected(true);
+
         cmbAgeGroup.setSelectedItem(cb.getAgeGroup());
 
     }
@@ -429,6 +436,7 @@ public class PanNewCompetition extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, msg);
         }
     }//GEN-LAST:event_jLabel7MouseClicked
+
     public String validateFields() {
         String msg = "";
 
@@ -454,11 +462,9 @@ public class PanNewCompetition extends javax.swing.JPanel {
 //        if (cmbAgeGroup.getSelectedItem().equals("Select")) {
 //            msg = msg + "Select Age Group \n";
 //        }
-
         return msg;
 
     }
-
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         // TODO add your handling code here:

@@ -319,7 +319,7 @@ public class PanMatchDetails extends javax.swing.JPanel {
         panSetter = new javax.swing.JPanel();
         lblSetter = new javax.swing.JLabel();
         jPanel33 = new javax.swing.JPanel();
-        cmbTeams = new javax.swing.JComboBox<>();
+        cmbTeams = new javax.swing.JComboBox<String>();
         panScorer = new javax.swing.JPanel();
         lblScorer = new javax.swing.JLabel();
         jPanel34 = new javax.swing.JPanel();
@@ -463,11 +463,11 @@ public class PanMatchDetails extends javax.swing.JPanel {
                     .addComponent(panDataSheet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panDataSheet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panPrint1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panDataSheet2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblMatch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblPhase, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panDataSheet2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1290,7 +1290,7 @@ public class PanMatchDetails extends javax.swing.JPanel {
 
         cmbTeams.setBackground(new java.awt.Color(0, 0, 0));
         cmbTeams.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        cmbTeams.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOTH" }));
+        cmbTeams.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BOTH" }));
         cmbTeams.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbTeamsItemStateChanged(evt);

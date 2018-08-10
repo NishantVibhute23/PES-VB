@@ -6,7 +6,7 @@
 package com.vollyball.dialog;
 
 import com.vollyball.controller.Controller;
-import com.vollyball.panels.PanMatchSet;
+import com.vollyball.panels.PanEvaluation;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -60,7 +60,7 @@ public class MatchSetDialog {
     }
 
     protected Container createPane() {
-        Controller.panMatchSet = new PanMatchSet(setNum, matchId, teamEvaluateId, opponentId, evaluationType, matchEvaluationTeamId);
+        Controller.panMatchSet = new PanEvaluation(setNum, matchId, teamEvaluateId, opponentId, evaluationType, matchEvaluationTeamId);
 
         return Controller.panMatchSet;
 

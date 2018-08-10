@@ -229,11 +229,11 @@ public class PanRallyEvaluationRow extends javax.swing.JPanel {
                 if (!p.isInserted) {
                     if (p.evaluationType == 2) {
                         isDetailed = true;
-                        Controller.panMatchSet.panRallyShow.removeAll();
-                        PanRallyPostEvaluation panRallyPostEvaluation = new PanRallyPostEvaluation(item, this, skill, txtChestNum.getText(), this.detailsValues);
-                        Controller.panMatchSet.panRallyShow.add(panRallyPostEvaluation);
-                        Controller.panMatchSet.panRallyShow.validate();
-                        Controller.panMatchSet.panRallyShow.repaint();
+//                        Controller.panMatchSet.panRallyShow.removeAll();
+//                        PanRallyPostEvaluation panRallyPostEvaluation = new PanRallyPostEvaluation(item, this, skill, txtChestNum.getText(), this.detailsValues);
+//                        Controller.panMatchSet.panRallyShow.add(panRallyPostEvaluation);
+//                        Controller.panMatchSet.panRallyShow.validate();
+//                        Controller.panMatchSet.panRallyShow.repaint();
                     } else {
                         setRallyRow(item);
                     }
@@ -285,21 +285,21 @@ public class PanRallyEvaluationRow extends javax.swing.JPanel {
 
     private void lblDetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDetailMouseClicked
         // TODO add your handling code here:
-        Controller.panMatchSet.panRallyShow.removeAll();
-        isDetailed = true;
-        PanRallyPostEvaluation panRallyPostEvaluation = new PanRallyPostEvaluation("" + this.score, this, skill, txtChestNum.getText(), this.detailsValues);
-        Controller.panMatchSet.panRallyShow.add(panRallyPostEvaluation);
-        Controller.panMatchSet.panRallyShow.validate();
-        Controller.panMatchSet.panRallyShow.repaint();
+//        Controller.panMatchSet.panRallyShow.removeAll();
+//        isDetailed = true;
+//        PanRallyPostEvaluation panRallyPostEvaluation = new PanRallyPostEvaluation("" + this.score, this, skill, txtChestNum.getText(), this.detailsValues);
+//        Controller.panMatchSet.panRallyShow.add(panRallyPostEvaluation);
+//        Controller.panMatchSet.panRallyShow.validate();
+//        Controller.panMatchSet.panRallyShow.repaint();
     }//GEN-LAST:event_lblDetailMouseClicked
 
     public void setRallyRow(String item) {
         if (p.evaluationType == 2) {
-            Controller.panMatchSet.panRallyShow.removeAll();
-            Controller.panMatchSet.panRallyShow.add(p);
-            Controller.panMatchSet.panRallyShow.validate();
-            Controller.panMatchSet.panRallyShow.repaint();
-            Controller.panMatchSet.panButton.setVisible(true);
+//            Controller.panMatchSet.panRallyShow.removeAll();
+//            Controller.panMatchSet.panRallyShow.add(p);
+//            Controller.panMatchSet.panRallyShow.validate();
+//            Controller.panMatchSet.panRallyShow.repaint();
+//            Controller.panMatchSet.panButton.setVisible(true);
         }
         switch (item) {
 

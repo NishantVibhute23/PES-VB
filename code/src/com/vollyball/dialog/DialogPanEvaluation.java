@@ -5,6 +5,7 @@
  */
 package com.vollyball.dialog;
 
+import com.vollyball.controller.Controller;
 import com.vollyball.panels.PanEvaluation;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -28,6 +29,13 @@ public class DialogPanEvaluation {
     String playerName;
     String teamName;
     ChartPanel panel;
+
+    int setNum;
+    int matchId;
+    int teamEvaluateId;
+    int opponentId;
+    int evaluationType;
+    int matchEvaluationTeamId;
 
     public void init() {
         try {
@@ -54,10 +62,19 @@ public class DialogPanEvaluation {
         }
     }
 
-    protected Container createPane() {
-        PanEvaluation panMatch = new PanEvaluation();
+    public void setSetFields(int setNum, int matchId, int teamEvaluateId, int opponentId, int evaluationType, int matchEvaluationTeamId) {
+        this.setNum = setNum;
+        this.matchId = matchId;
+        this.teamEvaluateId = teamEvaluateId;
+        this.opponentId = opponentId;
+        this.evaluationType = evaluationType;
+        this.matchEvaluationTeamId = matchEvaluationTeamId;
+    }
 
-        return panMatch;
+    protected Container createPane() {
+        Controller.panMatchSet = new PanEvaluation(setNum, matchId, teamEvaluateId, opponentId, evaluationType, matchEvaluationTeamId);
+
+        return Controller.panMatchSet;
     }
 
     public void show() {
@@ -67,7 +84,7 @@ public class DialogPanEvaluation {
         this.dialog.setVisible(true);
     }
 
-    protected void close() {
+    public void close() {
         this.dialog.dispose();
         this.dialog.setVisible(false);
     }

@@ -85,7 +85,7 @@ public class CompetitionDao {
                 cb.setVenue(rs.getString(3));
                 cb.setStartDate(rs.getString(4));
                 cb.setEndDate(rs.getString(5));
-//                cb.setAgeGroup(rs.getString(6));
+                cb.setAgeGroup(rs.getString(6));
             }
 
             db.closeConnection(con);

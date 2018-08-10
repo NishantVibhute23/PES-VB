@@ -73,7 +73,7 @@ public class PanRallyLiveEvaluation extends javax.swing.JPanel {
         this.rallyNum = rallyNum;
         this.matchEvaluationId = matchEvaluationId;
         this.evaluationType = evaluationType;
-        Controller.panMatchSet.lblRallyHeading.setText("RALLY : " + rallyNum);
+//        Controller.panMatchSet.lblRallyHeading.setText("RALLY : " + rallyNum);
 
         try {
             robot = new Robot();
@@ -86,10 +86,10 @@ public class PanRallyLiveEvaluation extends javax.swing.JPanel {
             isInserted = true;
             panCompListValue.addRallyList();
             this.id = re.getId();
-            Controller.panMatchSet.butNext.setText("UPDATE");
+//            Controller.panMatchSet.butNext.setText("UPDATE");
         } else {
             panCompListValue.addBlankRow();
-            Controller.panMatchSet.butNext.setText("SAVE");
+//            Controller.panMatchSet.butNext.setText("SAVE");
         }
         panCompListValue.setBounds(0, 0, 378, 294);
         panDynamic.add(panCompListValue);
@@ -515,8 +515,8 @@ public class PanRallyLiveEvaluation extends javax.swing.JPanel {
 
     private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
         // TODO add your handling code here:
-        Controller.panMatchSet.setBackNextInVisible();
-        Controller.panMatchSet.showRallyList();
+//        Controller.panMatchSet.setBackNextInVisible();
+//        Controller.panMatchSet.showRallyList();
     }//GEN-LAST:event_lblBackMouseClicked
 
     private void rallyRotationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rallyRotationMouseClicked

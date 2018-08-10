@@ -76,10 +76,10 @@ public class PanRallyBut extends javax.swing.JPanel {
     private void butRallyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butRallyMouseClicked
         Controller.panMatchSet.rallyNumNext = rallyNum;
         Controller.panMatchSet.panRallyCurrent = new PanRallyLiveEvaluation(rallyNum, evaluationId, rallyPositionMap, evaluationType);
-        Controller.panMatchSet.panNext.setVisible(true);
-        Controller.panMatchSet.panRallyShow.removeAll();
-        Controller.panMatchSet.panRallyShow.add(Controller.panMatchSet.panRallyCurrent);
-        Controller.panMatchSet.setBackNextVisible();
+//        Controller.panMatchSet.panNext.setVisible(true);
+//        Controller.panMatchSet.panRallyShow.removeAll();
+//        Controller.panMatchSet.panRallyShow.add(Controller.panMatchSet.panRallyCurrent);
+//        Controller.panMatchSet.setBackNextVisible();
         Controller.panMatchSet.validate();
         Controller.panMatchSet.repaint();
 

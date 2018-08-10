@@ -10,7 +10,6 @@ import com.sun.jna.NativeLibrary;
 import com.vollyball.bean.MatchSet;
 import com.vollyball.bean.Player;
 import com.vollyball.bean.RallyEvaluation;
-import com.vollyball.bean.RallyEvaluationSkillScore;
 import com.vollyball.bean.SetRotationOrder;
 import com.vollyball.bean.SetSubstitution;
 import com.vollyball.bean.SetTimeout;
@@ -22,7 +21,6 @@ import com.vollyball.dialog.CreateRallyRotationDialog;
 import com.vollyball.dialog.SetRotationDialog;
 import com.vollyball.dialog.SetSubstituteSelectPlayerDialog;
 import com.vollyball.enums.HomeOpponent;
-import com.vollyball.enums.Skill;
 import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
@@ -35,10 +33,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
@@ -1891,412 +1886,412 @@ public class PanMatchSet extends javax.swing.JPanel {
 
     private void butNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butNextMouseClicked
         // TODO add your handling code here:
-        Object o = evt.getSource();
-        String type = ((JLabel) o).getText();
-        switch (type) {
-            case "EXIT":
-                Controller.panMatchEvaluationHome.obj.close();
-                break;
-            case "NEW":
-                newRally();
-                break;
-            case "START":
-                if (txtEvaluator.getText().equals("")) {
-                    JOptionPane.showMessageDialog(this, "Please Enter Evaluator Name", "Error", 2);
-                } else if (initialPositionMap.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Please Set Rotation Order", "Error", 2);
-                } else {
-
-                    panNext.setVisible(true);
-//                    currentRally++;
-                    if (this.matchEvaluationId == 0) {
-                        MatchSet ms = new MatchSet();
-                        ms.setMatchEvaluationTeamId(matchEvaluationTeamId);
-                        ms.setEvaluationTeamId(teamEvaluateId);
-                        ms.setOpponentTeamId(opponentId);
-                        ms.setStart_time(lblTime.getText());
-                        ms.setEvaluator(txtEvaluator.getText());
-                        ms.setSetNo(setNum);
-                        ms.setEnd_time("00:00");
-                        ms.setDate(CommonUtil.ConvertDateFromNormalToDB(lblDate.getText()));
-
-                        for (Map.Entry<Integer, Player> entry : initialPositionMap.entrySet()) {
-                            SetRotationOrder sro = new SetRotationOrder();
-                            sro.setPosition(entry.getKey());
-                            sro.setPlayerId(entry.getValue().getId());
-                            ms.getRotationOrder().add(sro);
-                        }
-
-                        for (Map.Entry<Integer, Player> entry : initialPositionMap.entrySet()) {
-                            SetSubstitution sro = new SetSubstitution();
-                            sro.setPosition(entry.getKey());
-                            sro.setRotation_player_id(entry.getValue().getId());
-                            ms.getSetSubstitutions().add(sro);
-                        }
-
-                        matchEvaluationId = matchDao.saveMatchSet(ms);
-                    }
-//                    PanRallyBut pnBut = new PanRallyBut();
-//                    pnBut.setRally(currentRally, matchEvaluationId, positionMap);
-//                    panRallyList.add(pnBut);
-                    rallyPositionMap.putAll(initialPositionMap);
-                    CreateRallyRotationDialog obj = new CreateRallyRotationDialog();
-                    obj.init(obj);
-                    obj.show();
-
-                    panRallyShow.removeAll();
-                    int rallynum = currentRally + 1;
-                    panRallyCurrent = new PanRallyLiveEvaluation(rallynum, matchEvaluationId, rallyPositionMap, evaluationType);
-                    panRallyShow.add(panRallyCurrent);
-                    Controller.panMatchSet.validate();
-                    Controller.panMatchSet.repaint();
-                    panNext.setVisible(true);
-                    butNext.setText("SAVE");
-                }
-                break;
-            case "UPDATE":
-                List<Integer> updated = new ArrayList<>();
-                RallyEvaluation rallyUpdate = new RallyEvaluation();
-                rallyUpdate.setId(panRallyCurrent.id);
-                rallyUpdate.setRallyNum(panRallyCurrent.rallyNum);
-//                rallyUpdate.setHomeScore();
-                rallyUpdate.setMatchEvaluationId(matchEvaluationId);
-                rallyUpdate.setRallyPositionMap(rallyPositionMap);
-
-                if (panRallyCurrent.panListRow.size() != 0) {
-                    for (int i = 0; i < panRallyCurrent.panListRow.size(); i++) {
-                        try {
-                            PanRallyEvaluationRow panRallyEvaluationRow = panRallyCurrent.panListRow.get(i);
-                            if (!panRallyEvaluationRow.txtSkill.getText().isEmpty()) {
-                                RallyEvaluationSkillScore rs = new RallyEvaluationSkillScore();
-                                updated.add(panRallyEvaluationRow.id);
-                                rs.setId(panRallyEvaluationRow.id);
-                                rs.setSkill(panRallyEvaluationRow.txtSkill.getText());
-                                rs.setSkillId(Skill.getIdByName(panRallyEvaluationRow.txtSkill.getText()).getId());
-                                rs.setChestNo(String.valueOf(panRallyEvaluationRow.txtChestNum.getText()));
-                                rs.setPlayerId(panRallyEvaluationRow.playerId);
-                                rs.setScore(Integer.parseInt(String.valueOf(panRallyEvaluationRow.cmbScore.getSelectedItem())));
-                                rs.setOrderNum(i + 1);
-                                if (panRallyEvaluationRow.isDetailed) {
-                                    rs.setIsDetailed(true);
-                                    rs.setDetailsValues(panRallyEvaluationRow.getDetailsValues());
-                                }
-                                rallyUpdate.getRallyEvaluationSkillScore().add(rs);
-                            }
-                        } catch (Exception ex) {
-                            Logger.getLogger(PanRallyLiveEvaluation.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                    }
-
-                    PanRallyEvaluationRow panRallyEvaluationRowStart = panRallyCurrent.panListRow.get(0);
-                    PanRallyEvaluationRow panRallyEvaluationRowEnd = panRallyCurrent.panListRow.get(panRallyCurrent.panListRow.size() - 1);
-                    if (panRallyEvaluationRowStart.txtSkill.getText().equals(Skill.Service.getType())) {
-                        rallyUpdate.setStartby(HomeOpponent.HOME.getId());
-                    } else {
-                        rallyUpdate.setStartby(HomeOpponent.OPPONENT.getId());
-                    }
-
-                    if (Integer.parseInt(String.valueOf(panRallyEvaluationRowEnd.cmbScore.getSelectedItem())) == 5) {
-                        rallyUpdate.setWonby(HomeOpponent.HOME.getId());
-                    } else {
-                        rallyUpdate.setWonby(HomeOpponent.OPPONENT.getId());
-                    }
-
-                    int updatedScore = Integer.parseInt(String.valueOf(panRallyCurrent.panListRow.get(panRallyCurrent.panListRow.size() - 1).cmbScore.getSelectedItem()));
-                    String updatedSkill = panRallyCurrent.panListRow.get(panRallyCurrent.panListRow.size() - 1).txtSkill.getText();
-
-                    int updatedSkillid = Skill.getIdByName(panRallyCurrent.panListRow.get(panRallyCurrent.panListRow.size() - 1).txtSkill.getText()).getId();
-                    if (panRallyCurrent.oldSkillid == Skill.OP.getId() || panRallyCurrent.oldSkillid == Skill.TF.getId()) {
-                        if (panRallyCurrent.oldSkillid == Skill.OP.getId() && updatedSkillid != Skill.OP.getId()) {
-                            if (updatedSkillid == Skill.TF.getId()) {
-                                tf++;
-                            }
-                            op--;
-                        }
-
-                        if (panRallyCurrent.oldSkillid == Skill.TF.getId() && updatedSkillid != Skill.TF.getId()) {
-                            if (updatedSkillid == Skill.OP.getId()) {
-                                op++;
-                            }
-                            tf--;
-                        }
-                    } else {
-                        if (updatedSkillid == Skill.TF.getId()) {
-                            tf++;
-                        }
-                        if (updatedSkillid == Skill.OP.getId()) {
-                            op++;
-                        }
-                    }
-
-                    if (panRallyCurrent.oldRallyEndScore != updatedScore) {
-
-                        switch (updatedScore) {
-
-                            case 1:
-
-                                if (panRallyCurrent.homeScore != 0) {
-                                    panRallyCurrent.homeScore--;
-                                }
-                                panRallyCurrent.opponentScore++;
-                                rallyUpdate.setScoreSubtracted("Home");
-
-                                break;
-                            case 5:
-                                if (updatedSkill.equals(Skill.Service.getType()) || updatedSkill.equals(Skill.Attack.getType()) || updatedSkill.equals(Skill.Block.getType()) || updatedSkill.equals(Skill.OP.getType())) {
-                                    panRallyCurrent.homeScore++;
-                                    if (panRallyCurrent.opponentScore != 0) {
-                                        panRallyCurrent.opponentScore--;
-                                    }
-                                    rallyUpdate.setScoreSubtracted("Opponent");
-                                } else {
-                                    JOptionPane.showMessageDialog(panRallyCurrent, "Rally Not End");
-                                }
-                                break;
-                            default:
-                                JOptionPane.showMessageDialog(panRallyCurrent, "Rally Not End");
-                                break;
-                        }
-                        rallyUpdate.setHomeScore(panRallyCurrent.homeScore);
-                        rallyUpdate.setOpponentScore(panRallyCurrent.opponentScore);
-                        rallyUpdate.setOp(op);
-                        rallyUpdate.setTf(tf);
-
-//                    JOptionPane.showMessageDialog(panRallyCurrent, "New score of rally : \nHome Score = " + panRallyCurrent.homeScore + "\nOpp Score =" + panRallyCurrent.opponentScore);
-                    } else {
-//                    JOptionPane.showMessageDialog(panRallyCurrent, "Same Score");
-                        rallyUpdate.setHomeScore(panRallyCurrent.homeScore);
-                        rallyUpdate.setOpponentScore(panRallyCurrent.opponentScore);
-                        rallyUpdate.setScoreSubtracted("None");
-                        rallyUpdate.setOp(op);
-                        rallyUpdate.setTf(tf);
-                    }
-
-                    int id = rallyDao.updateRally(rallyUpdate, updated);
-                    if (id != 0) {
-                        JOptionPane.showMessageDialog(panRallyCurrent, "Updated Successfully");
-
-                        Controller.panMatchSet.panRallyCurrent = new PanRallyLiveEvaluation(rallyNumNext, matchEvaluationId, rallyPositionMap, evaluationType);
-                        Controller.panMatchSet.panNext.setVisible(true);
-                        Controller.panMatchSet.panRallyShow.removeAll();
-                        Controller.panMatchSet.panRallyShow.add(Controller.panMatchSet.panRallyCurrent);
-
-                        MatchSet ms = matchDao.getMatchSet(setNum, matchEvaluationTeamId);
-                        lblScore.setText(ms.getHomeScore() + " - " + ms.getOpponentScore());
-                        homeScore = ms.getHomeScore();
-                        opponentScore = ms.getOpponentScore();
-                        op = ms.getOp();
-                        tf = ms.getTf();
-                        lblOp.setText("" + op);
-                        lblTf.setText("" + tf);
-
-                        if (homeScore >= 25 || opponentScore >= 25) {
-                            List<Integer> arr = new ArrayList();
-                            arr.add(homeScore);
-                            arr.add(opponentScore);
-                            int max = Collections.max(arr);
-                            int min = Collections.min(arr);
-                            if ((max - min) >= 2) {
-
-                                showRallyList();
-
-                                if (max == homeScore) {
-                                    lblWonBy.setText(lblevaluationName.getText());
-                                    matchDao.updateMatchSetWonBy(teamEvaluateId, matchEvaluationId);
-                                } else {
-                                    lblWonBy.setText(lblopponentName.getText());
-                                    matchDao.updateMatchSetWonBy(opponentId, matchEvaluationId);
-                                }
-                                setScore();
-                                JOptionPane.showMessageDialog(Controller.panMatchSet, "Set Won By : " + lblWonBy.getText() + "\n Score is := " + homeScore + " : " + opponentScore);
-                                Controller.panMatchSet.validate();
-                                Controller.panMatchSet.repaint();
-                            }
-                        }
-
-                        for (SetTimeout s : ms.getSetTimeout()) {
-                            setTimeOut(s);
-                        }
-
-                        for (SetSubstitution s : ms.getSetSubstitutions()) {
-                            String cNo = s.getSubstitutePlayerId() == 0 ? "" : playerMap.get(s.getSubstitutePlayerId()).getChestNo();
-                            String p1 = s.getPoint1();
-                            String p2 = s.getPoint2();
-                            switch (s.getPosition()) {
-                                case 1:
-                                    su1.setText(cNo);
-                                    pt11.setText(p1);
-                                    pt21.setText(p2);
-                                    break;
-                                case 2:
-                                    su2.setText(cNo);
-                                    pt12.setText(p1);
-                                    pt22.setText(p2);
-                                    break;
-                                case 3:
-                                    su3.setText(cNo);
-                                    pt13.setText(p1);
-                                    pt23.setText(p2);
-                                    break;
-                                case 4:
-                                    su4.setText(cNo);
-                                    pt14.setText(p1);
-                                    pt24.setText(p2);
-                                    break;
-                                case 5:
-                                    su5.setText(cNo);
-                                    pt15.setText(p1);
-                                    pt25.setText(p2);
-                                    break;
-                                case 6:
-                                    su6.setText(cNo);
-                                    pt16.setText(p1);
-                                    pt26.setText(p2);
-                                    break;
-                            }
-                        }
-
-                        validate();
-                        repaint();
-                    } else {
-                        JOptionPane.showMessageDialog(panRallyCurrent, "Failed to save Rally");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(panRallyCurrent, "Rally cannot be blank");
-                }
-                break;
-
-            case "SAVE":
-                if (!panRallyCurrent.panListRow.get(0).txtSkill.getText().equals("")) {
-                    RallyEvaluation rallyInsert = new RallyEvaluation();
-                    rallyInsert.setRallyNum(panRallyCurrent.rallyNum);
-                    rallyInsert.setHomeScore(homeScore);
-                    rallyInsert.setOpponentScore(opponentScore);
-                    rallyInsert.setStartTime(panRallyCurrent.startTime);
-                    rallyInsert.setEndTime(panRallyCurrent.endTime);
-                    rallyInsert.setMatchEvaluationId(matchEvaluationId);
-                    rallyInsert.setRallyPositionMap(rallyPositionMap);
-
-                    for (int i = 0; i < panRallyCurrent.panListRow.size(); i++) {
-                        try {
-                            PanRallyEvaluationRow panRallyEvaluationRow = panRallyCurrent.panListRow.get(i);
-                            if (!panRallyEvaluationRow.txtSkill.getText().isEmpty()) {
-                                RallyEvaluationSkillScore rs = new RallyEvaluationSkillScore();
-                                rs.setSkill(panRallyEvaluationRow.txtSkill.getText());
-
-                                if (panRallyEvaluationRow.txtSkill.getText().equals(Skill.OP.getType())) {
-                                    op++;
-                                    lblOp.setText("" + op);
-                                    rs.setChestNo("0");
-                                    rs.setPlayerId(0);
-                                } else if (panRallyEvaluationRow.txtSkill.getText().equals(Skill.TF.getType())) {
-                                    tf++;
-                                    lblTf.setText("" + tf);
-                                    rs.setChestNo("0");
-                                    rs.setPlayerId(0);
-                                } else {
-                                    rs.setChestNo(String.valueOf(panRallyEvaluationRow.txtChestNum.getText()));
-                                    rs.setPlayerId(panRallyEvaluationRow.playerId);
-                                }
-                                rallyInsert.setOp(op);
-                                rallyInsert.setTf(tf);
-                                rs.setSkillId(Skill.getIdByName(panRallyEvaluationRow.txtSkill.getText()).getId());
-                                rs.setOrderNum(i + 1);
-                                rs.setScore(Integer.parseInt(String.valueOf(panRallyEvaluationRow.cmbScore.getSelectedItem())));
-
-                                if (panRallyEvaluationRow.isDetailed) {
-                                    rs.setIsDetailed(true);
-                                    rs.setDetailsValues(panRallyEvaluationRow.getDetailsValues());
-                                }
-
-                                rallyInsert.getRallyEvaluationSkillScore().add(rs);
-                            }
-                        } catch (Exception ex) {
-                            Logger.getLogger(PanRallyLiveEvaluation.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    PanRallyEvaluationRow panRallyEvaluationRowStart = panRallyCurrent.panListRow.get(0);
-                    PanRallyEvaluationRow panRallyEvaluationRowEnd = panRallyCurrent.panListRow.get(panRallyCurrent.panListRow.size() - 1);
-                    if (panRallyEvaluationRowStart.txtSkill.getText().equals(Skill.Service.getType())) {
-                        rallyInsert.setStartby(HomeOpponent.HOME.getId());
-                    } else {
-                        rallyInsert.setStartby(HomeOpponent.OPPONENT.getId());
-                    }
-
-                    if (Integer.parseInt(String.valueOf(panRallyEvaluationRowEnd.cmbScore.getSelectedItem())) == 5) {
-                        rallyInsert.setWonby(HomeOpponent.HOME.getId());
-                    } else {
-                        rallyInsert.setWonby(HomeOpponent.OPPONENT.getId());
-                    }
-                    int idInserted = rallyDao.insertRally(rallyInsert);
-                    if (idInserted != 0) {
-                        totalRallies++;
-                        currentRally++;
-                        PanRallyBut pnBut = new PanRallyBut();
-                        pnBut.setRally(currentRally, matchEvaluationId, initialPositionMap, evaluationType);
-                        panRallyList.add(pnBut);
-                        validate();
-                        repaint();
-
-                        if (homeScore >= 25 || opponentScore >= 25) {
-                            List<Integer> arr = new ArrayList();
-                            arr.add(homeScore);
-                            arr.add(opponentScore);
-                            int max = Collections.max(arr);
-                            int min = Collections.min(arr);
-                            if ((max - min) >= 2) {
-
-                                showRallyList();
-
-                                if (max == homeScore) {
-                                    lblWonBy.setText(lblevaluationName.getText());
-                                    matchDao.updateMatchSetWonBy(teamEvaluateId, matchEvaluationId);
-                                } else {
-                                    lblWonBy.setText(lblopponentName.getText());
-                                    matchDao.updateMatchSetWonBy(opponentId, matchEvaluationId);
-                                }
-                                setScore();
-                                JOptionPane.showMessageDialog(Controller.panMatchSet, "Set Won By : " + lblWonBy.getText() + "\n Score is := " + homeScore + " : " + opponentScore);
-
-                                List<Integer> wonBy = matchDao.getSetNadWonBy(matchId);
-
-                                int team1WonBy = Collections.frequency(wonBy, teamEvaluateId);
-                                int team2wonBy = Collections.frequency(wonBy, opponentId);
-
-                                if (team1WonBy == 0 && team2wonBy >= 3) {
-                                    matchDao.updateMatchWonBy(opponentId, matchId);
-                                } else if (team2wonBy == 0 && team1WonBy >= 3) {
-                                    matchDao.updateMatchWonBy(teamEvaluateId, matchId);
-                                } else {
-                                    if (team2wonBy != 0 && team1WonBy != 0) {
-                                        if (team2wonBy >= 3) {
-                                            matchDao.updateMatchWonBy(opponentId, matchId);
-                                        } else if (team1WonBy >= 3) {
-                                            matchDao.updateMatchWonBy(teamEvaluateId, matchId);
-                                        }
-                                    }
-                                }
-
-                                Controller.panMatchSet.validate();
-                                Controller.panMatchSet.repaint();
-                            } else {
-                                setScore();
-                                showRallyList();
-                            }
-                        } else {
-                            setScore();
-                            showRallyList();
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(panRallyCurrent, "Failed to save Rally");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(panRallyCurrent, "Please Insert Skill");
-                }
-                break;
-
-        }
+//        Object o = evt.getSource();
+//        String type = ((JLabel) o).getText();
+//        switch (type) {
+//            case "EXIT":
+//                Controller.panMatchEvaluationHome.obj.close();
+//                break;
+//            case "NEW":
+//                newRally();
+//                break;
+//            case "START":
+//                if (txtEvaluator.getText().equals("")) {
+//                    JOptionPane.showMessageDialog(this, "Please Enter Evaluator Name", "Error", 2);
+//                } else if (initialPositionMap.isEmpty()) {
+//                    JOptionPane.showMessageDialog(this, "Please Set Rotation Order", "Error", 2);
+//                } else {
+//
+//                    panNext.setVisible(true);
+////                    currentRally++;
+//                    if (this.matchEvaluationId == 0) {
+//                        MatchSet ms = new MatchSet();
+//                        ms.setMatchEvaluationTeamId(matchEvaluationTeamId);
+//                        ms.setEvaluationTeamId(teamEvaluateId);
+//                        ms.setOpponentTeamId(opponentId);
+//                        ms.setStart_time(lblTime.getText());
+//                        ms.setEvaluator(txtEvaluator.getText());
+//                        ms.setSetNo(setNum);
+//                        ms.setEnd_time("00:00");
+//                        ms.setDate(CommonUtil.ConvertDateFromNormalToDB(lblDate.getText()));
+//
+//                        for (Map.Entry<Integer, Player> entry : initialPositionMap.entrySet()) {
+//                            SetRotationOrder sro = new SetRotationOrder();
+//                            sro.setPosition(entry.getKey());
+//                            sro.setPlayerId(entry.getValue().getId());
+//                            ms.getRotationOrder().add(sro);
+//                        }
+//
+//                        for (Map.Entry<Integer, Player> entry : initialPositionMap.entrySet()) {
+//                            SetSubstitution sro = new SetSubstitution();
+//                            sro.setPosition(entry.getKey());
+//                            sro.setRotation_player_id(entry.getValue().getId());
+//                            ms.getSetSubstitutions().add(sro);
+//                        }
+//
+//                        matchEvaluationId = matchDao.saveMatchSet(ms);
+//                    }
+////                    PanRallyBut pnBut = new PanRallyBut();
+////                    pnBut.setRally(currentRally, matchEvaluationId, positionMap);
+////                    panRallyList.add(pnBut);
+//                    rallyPositionMap.putAll(initialPositionMap);
+//                    CreateRallyRotationDialog obj = new CreateRallyRotationDialog();
+//                    obj.init(obj);
+//                    obj.show();
+//
+//                    panRallyShow.removeAll();
+//                    int rallynum = currentRally + 1;
+//                    panRallyCurrent = new PanRallyLiveEvaluation(rallynum, matchEvaluationId, rallyPositionMap, evaluationType);
+//                    panRallyShow.add(panRallyCurrent);
+//                    Controller.panMatchSet.validate();
+//                    Controller.panMatchSet.repaint();
+//                    panNext.setVisible(true);
+//                    butNext.setText("SAVE");
+//                }
+//                break;
+//            case "UPDATE":
+//                List<Integer> updated = new ArrayList<>();
+//                RallyEvaluation rallyUpdate = new RallyEvaluation();
+//                rallyUpdate.setId(panRallyCurrent.id);
+//                rallyUpdate.setRallyNum(panRallyCurrent.rallyNum);
+////                rallyUpdate.setHomeScore();
+//                rallyUpdate.setMatchEvaluationId(matchEvaluationId);
+//                rallyUpdate.setRallyPositionMap(rallyPositionMap);
+//
+//                if (panRallyCurrent.panListRow.size() != 0) {
+//                    for (int i = 0; i < panRallyCurrent.panListRow.size(); i++) {
+//                        try {
+//                            PanRallyEvaluationRow panRallyEvaluationRow = panRallyCurrent.panListRow.get(i);
+//                            if (!panRallyEvaluationRow.txtSkill.getText().isEmpty()) {
+//                                RallyEvaluationSkillScore rs = new RallyEvaluationSkillScore();
+//                                updated.add(panRallyEvaluationRow.id);
+//                                rs.setId(panRallyEvaluationRow.id);
+//                                rs.setSkill(panRallyEvaluationRow.txtSkill.getText());
+//                                rs.setSkillId(Skill.getIdByName(panRallyEvaluationRow.txtSkill.getText()).getId());
+//                                rs.setChestNo(String.valueOf(panRallyEvaluationRow.txtChestNum.getText()));
+//                                rs.setPlayerId(panRallyEvaluationRow.playerId);
+//                                rs.setScore(Integer.parseInt(String.valueOf(panRallyEvaluationRow.cmbScore.getSelectedItem())));
+//                                rs.setOrderNum(i + 1);
+//                                if (panRallyEvaluationRow.isDetailed) {
+//                                    rs.setIsDetailed(true);
+//                                    rs.setDetailsValues(panRallyEvaluationRow.getDetailsValues());
+//                                }
+//                                rallyUpdate.getRallyEvaluationSkillScore().add(rs);
+//                            }
+//                        } catch (Exception ex) {
+//                            Logger.getLogger(PanRallyLiveEvaluation.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//
+//                    }
+//
+//                    PanRallyEvaluationRow panRallyEvaluationRowStart = panRallyCurrent.panListRow.get(0);
+//                    PanRallyEvaluationRow panRallyEvaluationRowEnd = panRallyCurrent.panListRow.get(panRallyCurrent.panListRow.size() - 1);
+//                    if (panRallyEvaluationRowStart.txtSkill.getText().equals(Skill.Service.getType())) {
+//                        rallyUpdate.setStartby(HomeOpponent.HOME.getId());
+//                    } else {
+//                        rallyUpdate.setStartby(HomeOpponent.OPPONENT.getId());
+//                    }
+//
+//                    if (Integer.parseInt(String.valueOf(panRallyEvaluationRowEnd.cmbScore.getSelectedItem())) == 5) {
+//                        rallyUpdate.setWonby(HomeOpponent.HOME.getId());
+//                    } else {
+//                        rallyUpdate.setWonby(HomeOpponent.OPPONENT.getId());
+//                    }
+//
+//                    int updatedScore = Integer.parseInt(String.valueOf(panRallyCurrent.panListRow.get(panRallyCurrent.panListRow.size() - 1).cmbScore.getSelectedItem()));
+//                    String updatedSkill = panRallyCurrent.panListRow.get(panRallyCurrent.panListRow.size() - 1).txtSkill.getText();
+//
+//                    int updatedSkillid = Skill.getIdByName(panRallyCurrent.panListRow.get(panRallyCurrent.panListRow.size() - 1).txtSkill.getText()).getId();
+//                    if (panRallyCurrent.oldSkillid == Skill.OP.getId() || panRallyCurrent.oldSkillid == Skill.TF.getId()) {
+//                        if (panRallyCurrent.oldSkillid == Skill.OP.getId() && updatedSkillid != Skill.OP.getId()) {
+//                            if (updatedSkillid == Skill.TF.getId()) {
+//                                tf++;
+//                            }
+//                            op--;
+//                        }
+//
+//                        if (panRallyCurrent.oldSkillid == Skill.TF.getId() && updatedSkillid != Skill.TF.getId()) {
+//                            if (updatedSkillid == Skill.OP.getId()) {
+//                                op++;
+//                            }
+//                            tf--;
+//                        }
+//                    } else {
+//                        if (updatedSkillid == Skill.TF.getId()) {
+//                            tf++;
+//                        }
+//                        if (updatedSkillid == Skill.OP.getId()) {
+//                            op++;
+//                        }
+//                    }
+//
+//                    if (panRallyCurrent.oldRallyEndScore != updatedScore) {
+//
+//                        switch (updatedScore) {
+//
+//                            case 1:
+//
+//                                if (panRallyCurrent.homeScore != 0) {
+//                                    panRallyCurrent.homeScore--;
+//                                }
+//                                panRallyCurrent.opponentScore++;
+//                                rallyUpdate.setScoreSubtracted("Home");
+//
+//                                break;
+//                            case 5:
+//                                if (updatedSkill.equals(Skill.Service.getType()) || updatedSkill.equals(Skill.Attack.getType()) || updatedSkill.equals(Skill.Block.getType()) || updatedSkill.equals(Skill.OP.getType())) {
+//                                    panRallyCurrent.homeScore++;
+//                                    if (panRallyCurrent.opponentScore != 0) {
+//                                        panRallyCurrent.opponentScore--;
+//                                    }
+//                                    rallyUpdate.setScoreSubtracted("Opponent");
+//                                } else {
+//                                    JOptionPane.showMessageDialog(panRallyCurrent, "Rally Not End");
+//                                }
+//                                break;
+//                            default:
+//                                JOptionPane.showMessageDialog(panRallyCurrent, "Rally Not End");
+//                                break;
+//                        }
+//                        rallyUpdate.setHomeScore(panRallyCurrent.homeScore);
+//                        rallyUpdate.setOpponentScore(panRallyCurrent.opponentScore);
+//                        rallyUpdate.setOp(op);
+//                        rallyUpdate.setTf(tf);
+//
+////                    JOptionPane.showMessageDialog(panRallyCurrent, "New score of rally : \nHome Score = " + panRallyCurrent.homeScore + "\nOpp Score =" + panRallyCurrent.opponentScore);
+//                    } else {
+////                    JOptionPane.showMessageDialog(panRallyCurrent, "Same Score");
+//                        rallyUpdate.setHomeScore(panRallyCurrent.homeScore);
+//                        rallyUpdate.setOpponentScore(panRallyCurrent.opponentScore);
+//                        rallyUpdate.setScoreSubtracted("None");
+//                        rallyUpdate.setOp(op);
+//                        rallyUpdate.setTf(tf);
+//                    }
+//
+//                    int id = rallyDao.updateRally(rallyUpdate, updated);
+//                    if (id != 0) {
+//                        JOptionPane.showMessageDialog(panRallyCurrent, "Updated Successfully");
+//
+//                        Controller.panMatchSet.panRallyCurrent = new PanRallyLiveEvaluation(rallyNumNext, matchEvaluationId, rallyPositionMap, evaluationType);
+//                        Controller.panMatchSet.panNext.setVisible(true);
+//                        Controller.panMatchSet.panRallyShow.removeAll();
+//                        Controller.panMatchSet.panRallyShow.add(Controller.panMatchSet.panRallyCurrent);
+//
+//                        MatchSet ms = matchDao.getMatchSet(setNum, matchEvaluationTeamId);
+//                        lblScore.setText(ms.getHomeScore() + " - " + ms.getOpponentScore());
+//                        homeScore = ms.getHomeScore();
+//                        opponentScore = ms.getOpponentScore();
+//                        op = ms.getOp();
+//                        tf = ms.getTf();
+//                        lblOp.setText("" + op);
+//                        lblTf.setText("" + tf);
+//
+//                        if (homeScore >= 25 || opponentScore >= 25) {
+//                            List<Integer> arr = new ArrayList();
+//                            arr.add(homeScore);
+//                            arr.add(opponentScore);
+//                            int max = Collections.max(arr);
+//                            int min = Collections.min(arr);
+//                            if ((max - min) >= 2) {
+//
+//                                showRallyList();
+//
+//                                if (max == homeScore) {
+//                                    lblWonBy.setText(lblevaluationName.getText());
+//                                    matchDao.updateMatchSetWonBy(teamEvaluateId, matchEvaluationId);
+//                                } else {
+//                                    lblWonBy.setText(lblopponentName.getText());
+//                                    matchDao.updateMatchSetWonBy(opponentId, matchEvaluationId);
+//                                }
+//                                setScore();
+//                                JOptionPane.showMessageDialog(Controller.panMatchSet, "Set Won By : " + lblWonBy.getText() + "\n Score is := " + homeScore + " : " + opponentScore);
+//                                Controller.panMatchSet.validate();
+//                                Controller.panMatchSet.repaint();
+//                            }
+//                        }
+//
+//                        for (SetTimeout s : ms.getSetTimeout()) {
+//                            setTimeOut(s);
+//                        }
+//
+//                        for (SetSubstitution s : ms.getSetSubstitutions()) {
+//                            String cNo = s.getSubstitutePlayerId() == 0 ? "" : playerMap.get(s.getSubstitutePlayerId()).getChestNo();
+//                            String p1 = s.getPoint1();
+//                            String p2 = s.getPoint2();
+//                            switch (s.getPosition()) {
+//                                case 1:
+//                                    su1.setText(cNo);
+//                                    pt11.setText(p1);
+//                                    pt21.setText(p2);
+//                                    break;
+//                                case 2:
+//                                    su2.setText(cNo);
+//                                    pt12.setText(p1);
+//                                    pt22.setText(p2);
+//                                    break;
+//                                case 3:
+//                                    su3.setText(cNo);
+//                                    pt13.setText(p1);
+//                                    pt23.setText(p2);
+//                                    break;
+//                                case 4:
+//                                    su4.setText(cNo);
+//                                    pt14.setText(p1);
+//                                    pt24.setText(p2);
+//                                    break;
+//                                case 5:
+//                                    su5.setText(cNo);
+//                                    pt15.setText(p1);
+//                                    pt25.setText(p2);
+//                                    break;
+//                                case 6:
+//                                    su6.setText(cNo);
+//                                    pt16.setText(p1);
+//                                    pt26.setText(p2);
+//                                    break;
+//                            }
+//                        }
+//
+//                        validate();
+//                        repaint();
+//                    } else {
+//                        JOptionPane.showMessageDialog(panRallyCurrent, "Failed to save Rally");
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(panRallyCurrent, "Rally cannot be blank");
+//                }
+//                break;
+//
+//            case "SAVE":
+//                if (!panRallyCurrent.panListRow.get(0).txtSkill.getText().equals("")) {
+//                    RallyEvaluation rallyInsert = new RallyEvaluation();
+//                    rallyInsert.setRallyNum(panRallyCurrent.rallyNum);
+//                    rallyInsert.setHomeScore(homeScore);
+//                    rallyInsert.setOpponentScore(opponentScore);
+//                    rallyInsert.setStartTime(panRallyCurrent.startTime);
+//                    rallyInsert.setEndTime(panRallyCurrent.endTime);
+//                    rallyInsert.setMatchEvaluationId(matchEvaluationId);
+//                    rallyInsert.setRallyPositionMap(rallyPositionMap);
+//
+//                    for (int i = 0; i < panRallyCurrent.panListRow.size(); i++) {
+//                        try {
+//                            PanRallyEvaluationRow panRallyEvaluationRow = panRallyCurrent.panListRow.get(i);
+//                            if (!panRallyEvaluationRow.txtSkill.getText().isEmpty()) {
+//                                RallyEvaluationSkillScore rs = new RallyEvaluationSkillScore();
+//                                rs.setSkill(panRallyEvaluationRow.txtSkill.getText());
+//
+//                                if (panRallyEvaluationRow.txtSkill.getText().equals(Skill.OP.getType())) {
+//                                    op++;
+//                                    lblOp.setText("" + op);
+//                                    rs.setChestNo("0");
+//                                    rs.setPlayerId(0);
+//                                } else if (panRallyEvaluationRow.txtSkill.getText().equals(Skill.TF.getType())) {
+//                                    tf++;
+//                                    lblTf.setText("" + tf);
+//                                    rs.setChestNo("0");
+//                                    rs.setPlayerId(0);
+//                                } else {
+//                                    rs.setChestNo(String.valueOf(panRallyEvaluationRow.txtChestNum.getText()));
+//                                    rs.setPlayerId(panRallyEvaluationRow.playerId);
+//                                }
+//                                rallyInsert.setOp(op);
+//                                rallyInsert.setTf(tf);
+//                                rs.setSkillId(Skill.getIdByName(panRallyEvaluationRow.txtSkill.getText()).getId());
+//                                rs.setOrderNum(i + 1);
+//                                rs.setScore(Integer.parseInt(String.valueOf(panRallyEvaluationRow.cmbScore.getSelectedItem())));
+//
+//                                if (panRallyEvaluationRow.isDetailed) {
+//                                    rs.setIsDetailed(true);
+//                                    rs.setDetailsValues(panRallyEvaluationRow.getDetailsValues());
+//                                }
+//
+//                                rallyInsert.getRallyEvaluationSkillScore().add(rs);
+//                            }
+//                        } catch (Exception ex) {
+//                            Logger.getLogger(PanRallyLiveEvaluation.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//                    }
+//                    PanRallyEvaluationRow panRallyEvaluationRowStart = panRallyCurrent.panListRow.get(0);
+//                    PanRallyEvaluationRow panRallyEvaluationRowEnd = panRallyCurrent.panListRow.get(panRallyCurrent.panListRow.size() - 1);
+//                    if (panRallyEvaluationRowStart.txtSkill.getText().equals(Skill.Service.getType())) {
+//                        rallyInsert.setStartby(HomeOpponent.HOME.getId());
+//                    } else {
+//                        rallyInsert.setStartby(HomeOpponent.OPPONENT.getId());
+//                    }
+//
+//                    if (Integer.parseInt(String.valueOf(panRallyEvaluationRowEnd.cmbScore.getSelectedItem())) == 5) {
+//                        rallyInsert.setWonby(HomeOpponent.HOME.getId());
+//                    } else {
+//                        rallyInsert.setWonby(HomeOpponent.OPPONENT.getId());
+//                    }
+//                    int idInserted = rallyDao.insertRally(rallyInsert);
+//                    if (idInserted != 0) {
+//                        totalRallies++;
+//                        currentRally++;
+//                        PanRallyBut pnBut = new PanRallyBut();
+//                        pnBut.setRally(currentRally, matchEvaluationId, initialPositionMap, evaluationType);
+//                        panRallyList.add(pnBut);
+//                        validate();
+//                        repaint();
+//
+//                        if (homeScore >= 25 || opponentScore >= 25) {
+//                            List<Integer> arr = new ArrayList();
+//                            arr.add(homeScore);
+//                            arr.add(opponentScore);
+//                            int max = Collections.max(arr);
+//                            int min = Collections.min(arr);
+//                            if ((max - min) >= 2) {
+//
+//                                showRallyList();
+//
+//                                if (max == homeScore) {
+//                                    lblWonBy.setText(lblevaluationName.getText());
+//                                    matchDao.updateMatchSetWonBy(teamEvaluateId, matchEvaluationId);
+//                                } else {
+//                                    lblWonBy.setText(lblopponentName.getText());
+//                                    matchDao.updateMatchSetWonBy(opponentId, matchEvaluationId);
+//                                }
+//                                setScore();
+//                                JOptionPane.showMessageDialog(Controller.panMatchSet, "Set Won By : " + lblWonBy.getText() + "\n Score is := " + homeScore + " : " + opponentScore);
+//
+//                                List<Integer> wonBy = matchDao.getSetNadWonBy(matchId);
+//
+//                                int team1WonBy = Collections.frequency(wonBy, teamEvaluateId);
+//                                int team2wonBy = Collections.frequency(wonBy, opponentId);
+//
+//                                if (team1WonBy == 0 && team2wonBy >= 3) {
+//                                    matchDao.updateMatchWonBy(opponentId, matchId);
+//                                } else if (team2wonBy == 0 && team1WonBy >= 3) {
+//                                    matchDao.updateMatchWonBy(teamEvaluateId, matchId);
+//                                } else {
+//                                    if (team2wonBy != 0 && team1WonBy != 0) {
+//                                        if (team2wonBy >= 3) {
+//                                            matchDao.updateMatchWonBy(opponentId, matchId);
+//                                        } else if (team1WonBy >= 3) {
+//                                            matchDao.updateMatchWonBy(teamEvaluateId, matchId);
+//                                        }
+//                                    }
+//                                }
+//
+//                                Controller.panMatchSet.validate();
+//                                Controller.panMatchSet.repaint();
+//                            } else {
+//                                setScore();
+//                                showRallyList();
+//                            }
+//                        } else {
+//                            setScore();
+//                            showRallyList();
+//                        }
+//                    } else {
+//                        JOptionPane.showMessageDialog(panRallyCurrent, "Failed to save Rally");
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(panRallyCurrent, "Please Insert Skill");
+//                }
+//                break;
+//
+//        }
     }//GEN-LAST:event_butNextMouseClicked
 
     public void showRallyList() {
@@ -2337,7 +2332,7 @@ public class PanMatchSet extends javax.swing.JPanel {
         } else {
             matchDao.updateSubstitutionPoint2(score, 1, matchEvaluationId);
             rallyPositionMap.put(1, initialPositionMap.get(1));
-            Controller.panMatchSet.pt21.setText(score);
+//            Controller.panMatchSet.pt21.setText(score);
         }
     }//GEN-LAST:event_but1MouseClicked
 
@@ -2353,7 +2348,7 @@ public class PanMatchSet extends javax.swing.JPanel {
         } else {
             matchDao.updateSubstitutionPoint2(score, 2, matchEvaluationId);
             rallyPositionMap.put(2, initialPositionMap.get(2));
-            Controller.panMatchSet.pt22.setText(score);
+//            Controller.panMatchSet.pt22.setText(score);
         }
     }//GEN-LAST:event_but2MouseClicked
 
@@ -2369,7 +2364,7 @@ public class PanMatchSet extends javax.swing.JPanel {
         } else {
             matchDao.updateSubstitutionPoint2(score, 3, matchEvaluationId);
             rallyPositionMap.put(3, initialPositionMap.get(3));
-            Controller.panMatchSet.pt23.setText(score);
+//            Controller.panMatchSet.pt23.setText(score);
         }
     }//GEN-LAST:event_but3MouseClicked
 
@@ -2385,7 +2380,7 @@ public class PanMatchSet extends javax.swing.JPanel {
         } else {
             matchDao.updateSubstitutionPoint2(score, 4, matchEvaluationId);
             rallyPositionMap.put(4, initialPositionMap.get(4));
-            Controller.panMatchSet.pt24.setText(score);
+//            Controller.panMatchSet.pt24.setText(score);
         }
 
     }//GEN-LAST:event_jLabel28MouseClicked
@@ -2402,7 +2397,7 @@ public class PanMatchSet extends javax.swing.JPanel {
         } else {
             matchDao.updateSubstitutionPoint2(score, 5, matchEvaluationId);
             rallyPositionMap.put(5, initialPositionMap.get(5));
-            Controller.panMatchSet.pt25.setText(score);
+//            Controller.panMatchSet.pt25.setText(score);
         }
     }//GEN-LAST:event_but5MouseClicked
 
@@ -2418,7 +2413,7 @@ public class PanMatchSet extends javax.swing.JPanel {
         } else {
             matchDao.updateSubstitutionPoint2(score, 6, matchEvaluationId);
             rallyPositionMap.put(6, initialPositionMap.get(6));
-            Controller.panMatchSet.pt26.setText(score);
+//            Controller.panMatchSet.pt26.setText(score);
         }
     }//GEN-LAST:event_but6MouseClicked
 
@@ -2441,10 +2436,10 @@ public class PanMatchSet extends javax.swing.JPanel {
         rallyNumNext++;
         if (rallyNumNext <= totalRallies) {
             Controller.panMatchSet.panRallyCurrent = new PanRallyLiveEvaluation(rallyNumNext, matchEvaluationId, rallyPositionMap, evaluationType);
-            Controller.panMatchSet.panNext.setVisible(true);
-            Controller.panMatchSet.panRallyShow.removeAll();
-            Controller.panMatchSet.panRallyShow.add(Controller.panMatchSet.panRallyCurrent);
-            Controller.panMatchSet.setBackNextVisible();
+//            Controller.panMatchSet.panNext.setVisible(true);
+//            Controller.panMatchSet.panRallyShow.removeAll();
+//            Controller.panMatchSet.panRallyShow.add(Controller.panMatchSet.panRallyCurrent);
+//            Controller.panMatchSet.setBackNextVisible();
 
 //        if (rallyNumNext == totalRallies) {
 //            lblNext.setVisible(false);
@@ -2467,10 +2462,10 @@ public class PanMatchSet extends javax.swing.JPanel {
         rallyNumNext--;
         if (rallyNumNext > 0) {
             Controller.panMatchSet.panRallyCurrent = new PanRallyLiveEvaluation(rallyNumNext, matchEvaluationId, rallyPositionMap, evaluationType);
-            Controller.panMatchSet.panNext.setVisible(true);
-            Controller.panMatchSet.panRallyShow.removeAll();
-            Controller.panMatchSet.panRallyShow.add(Controller.panMatchSet.panRallyCurrent);
-            Controller.panMatchSet.setBackNextVisible();
+//            Controller.panMatchSet.panNext.setVisible(true);
+//            Controller.panMatchSet.panRallyShow.removeAll();
+//            Controller.panMatchSet.panRallyShow.add(Controller.panMatchSet.panRallyCurrent);
+//            Controller.panMatchSet.setBackNextVisible();
 //            if (rallyNumNext == totalRallies) {
 //                lblNext.setVisible(false);
 //                lblBack.setVisible(true);
