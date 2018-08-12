@@ -9,6 +9,7 @@ import com.vollyball.bean.UserBean;
 import com.vollyball.dialog.CreateCompetitionDialog;
 import com.vollyball.dialog.CreateMatchDialog;
 import com.vollyball.dialog.CreateTeamDialog;
+import com.vollyball.dialog.CreateUserDialog;
 import com.vollyball.frames.FrmDashboard;
 import com.vollyball.frames.FrmLogin;
 import com.vollyball.frames.FrmRegister;
@@ -25,6 +26,8 @@ import com.vollyball.panels.PanTeamBestScorer;
 import com.vollyball.panels.PanTeams;
 import com.vollyball.panels.PanUserDetails;
 import com.vollyball.panels.panLoading;
+import com.vollyball.training.dialog.CreateBatchDialog;
+import com.vollyball.training.panel.PanTrainingBestScorer;
 import com.vollyball.util.CommonUtil;
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -58,7 +61,10 @@ public class Controller {
     public static CreateTeamDialog teamDialog;
     public static PanTeamBestScorer panTeamBestScorer;
     public static CreateCompetitionDialog createCompetitionDialog;
-
+    public static CreateUserDialog createUserDialog;
+    public static PanTrainingBestScorer panTrainingBestScorer;
+    public static CreateBatchDialog batchDialog;
+    
     public static void main(String args[]) {
 
         new CommonUtil();

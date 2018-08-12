@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vollyball.dialog;
+package com.vollyball.training.dialog;
 
-import com.vollyball.panels.PanNewMatch;
+import com.vollyball.dialog.*;
+import com.vollyball.panels.PanNewCompetition;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -17,31 +18,27 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author nishant.vibhute
+ * @author #dabbu
  */
-public class CreateMatchDialog {
-
+public class CreateTrainingDialog {
     private JFrame parentFrame;
     private JDialog dialog;
-    int matchId;
+    int compId;
 
-    public void setValues(int matchId) {
-        this.matchId = matchId;
+    
+     public void setValues(int compId) {
+        this.compId = compId;
     }
-
     public void init() {
         try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            if (matchId == 0) {
-                this.dialog = new JDialog(this.parentFrame, "New Match", true);
-            } else {
-                this.dialog = new JDialog(this.parentFrame, "Edit Match", true);
-            }
+
+            this.dialog = new JDialog(this.parentFrame, "New Competition", true);
 
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());
             this.dialog.pack();
-//            this.dialog.setSize(418, 505);//
+//            this.dialog.setSize(470, 560);
 
             Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
             this.dialog.setLocation(new Double((Size.getWidth() / 2) - (dialog.getWidth() / 2)).intValue(), new Double((Size.getHeight() / 2) - (dialog.getHeight() / 2)).intValue());
@@ -53,17 +50,18 @@ public class CreateMatchDialog {
     }
 
     protected Container createPane() {
-        PanNewMatch panMatch = null;
-        if (matchId == 0) {
-            panMatch = new PanNewMatch();
+        PanNewCompetition panComp = null;
+        if (compId == 0) {
+            panComp = new PanNewCompetition();
         } else {
             try {
-                panMatch = new PanNewMatch(matchId);
+                panComp = new PanNewCompetition(compId);
             } catch (ParseException ex) {
-                Logger.getLogger(CreateMatchDialog.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CreateCompetitionDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return panMatch;
+        return panComp;
+
     }
 
     public void show() {
@@ -82,4 +80,5 @@ public class CreateMatchDialog {
         parentFrame = (JFrame) frame;
     }
 
+    
 }

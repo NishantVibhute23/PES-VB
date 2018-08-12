@@ -5,6 +5,7 @@
  */
 package com.vollyball.dao;
 
+import com.vollyball.bean.UserBean;
 import com.vollyball.db.DbUtil;
 import com.vollyball.util.CommonUtil;
 import java.sql.Connection;
@@ -38,6 +39,26 @@ public class LoginDao {
             ex.printStackTrace();
         }
         return count;
+
+    }
+      public UserBean getUserDetails(String name) {
+           UserBean ub=new UserBean();
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.userDetails"));
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ub.setId(rs.getInt(1));
+                ub.setUserName(rs.getString(2));
+                ub.setEmailId(rs.getString(3));
+            }
+
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return ub;
 
     }
 

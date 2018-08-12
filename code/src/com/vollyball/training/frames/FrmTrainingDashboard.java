@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vollyball.frames;
+package com.vollyball.training.frames;
 
 import com.vollyball.controller.Controller;
 import com.vollyball.dialog.CreateUserDialog;
 import com.vollyball.panels.PanCompetitionList;
+import com.vollyball.training.panel.PanTrainingBestScorer;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -15,14 +16,14 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author nishant.vibhute
+ * @author #my
  */
-public class FrmDashboard extends javax.swing.JFrame {
+public class FrmTrainingDashboard extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmMain
+     * Creates new form FrmTainingDashboard
      */
-    public FrmDashboard() {
+    public FrmTrainingDashboard() {
         setVisible(true);
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -32,10 +33,10 @@ public class FrmDashboard extends javax.swing.JFrame {
         }
         panContent.removeAll();
         Dimension dim = panContent.getSize();
-        Controller.panCompetitionList = new PanCompetitionList();
+        Controller.panTrainingBestScorer = new PanTrainingBestScorer();
 
         panMyProfile.setVisible(false);
-        panContent.add(Controller.panCompetitionList, BorderLayout.CENTER);
+        panContent.add(Controller.panTrainingBestScorer, BorderLayout.CENTER);
         this.validate();
         this.repaint();
     }
@@ -49,9 +50,6 @@ public class FrmDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        lblName = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         panContent = new javax.swing.JPanel();
@@ -60,50 +58,11 @@ public class FrmDashboard extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(57, 74, 108));
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("PES-VB");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
-        lblName.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblName.setForeground(new java.awt.Color(255, 255, 255));
-        lblName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lblName.setText("UserName");
-        lblName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblNameMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblName))
-                .addGap(10, 10, 10))
-        );
 
         jPanel3.setBackground(new java.awt.Color(251, 205, 1));
         jPanel3.setMinimumSize(new java.awt.Dimension(1024, 768));
@@ -120,7 +79,7 @@ public class FrmDashboard extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(panContent, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+                .addComponent(panContent, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         jPanel4Layout.setVerticalGroup(
@@ -219,6 +178,48 @@ public class FrmDashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.setBackground(new java.awt.Color(57, 74, 108));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("PES-VB");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        lblName.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblName.setForeground(new java.awt.Color(255, 255, 255));
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblName.setText("UserName");
+        lblName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNameMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblName))
+                .addGap(10, 10, 10))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -237,6 +238,27 @@ public class FrmDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        CreateUserDialog createUserDialog = new CreateUserDialog();
+        createUserDialog.setValues(Controller.userBean.getId());
+        createUserDialog.init();
+        createUserDialog.show();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        CreateUserDialog createUserDialog = new CreateUserDialog();
+        createUserDialog.setValues(Controller.userBean.getId());
+        createUserDialog.init();
+        createUserDialog.show();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
         panContent.removeAll();
@@ -254,27 +276,6 @@ public class FrmDashboard extends javax.swing.JFrame {
             panMyProfile.setVisible(true);
         }
     }//GEN-LAST:event_lblNameMouseClicked
-
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        // TODO add your handling code here:
-        CreateUserDialog createUserDialog = new CreateUserDialog();
-        createUserDialog.setValues(Controller.userBean.getId());
-        createUserDialog.init();
-        createUserDialog.show();
-    }//GEN-LAST:event_jLabel6MouseClicked
-
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO add your handling code here:
-        CreateUserDialog createUserDialog = new CreateUserDialog();
-        createUserDialog.setValues(Controller.userBean.getId());
-        createUserDialog.init();
-        createUserDialog.show();
-    }//GEN-LAST:event_jLabel4MouseClicked
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        // TODO add your handling code here:
-         System.exit(0);
-    }//GEN-LAST:event_jLabel5MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
