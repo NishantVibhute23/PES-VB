@@ -1,5 +1,10 @@
 package com.vollyball.panels;
 
+import com.vollyball.bean.Player;
+import com.vollyball.bean.RallyEvaluationSkillScore;
+import com.vollyball.controller.Controller;
+import com.vollyball.dao.TeamDao;
+import com.vollyball.enums.Skill;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,8 +19,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,26 +42,41 @@ import javax.swing.JTextField;
  */
 public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
-    Map<JLabel, JPanel> mapSkillComponent = new HashMap<JLabel, JPanel>();
-    Map<JLabel, JPanel> mapPlayerComponent = new HashMap<JLabel, JPanel>();
-    Map<JLabel, JPanel> mapScoreComponent = new HashMap<JLabel, JPanel>();
+    LinkedHashMap<JLabel, JPanel> mapSkillComponent = new LinkedHashMap<JLabel, JPanel>();
+    LinkedHashMap<JLabel, JPanel> mapPlayerComponent = new LinkedHashMap<JLabel, JPanel>();
+    LinkedHashMap<JLabel, JPanel> mapScoreComponent = new LinkedHashMap<JLabel, JPanel>();
+    LinkedHashMap<String, JLabel> mapSkillLabel = new LinkedHashMap<String, JLabel>();
+    LinkedHashMap<String, JLabel> mapPlayerLabel = new LinkedHashMap<String, JLabel>();
+    LinkedHashMap<Integer, JLabel> mapScoreLabel = new LinkedHashMap<Integer, JLabel>();
     private BufferedImage image;
     ImagePanel panel;
 
-    String skill;
-    String chestNo;
-    int score;
+    TeamDao teamDao = new TeamDao();
+    String skill = "";
+    String chestNo = "";
+    int score = 0;
     JTextField txtRallyRow = new JTextField();
+    public LinkedHashMap<Integer, Player> playerMap = new LinkedHashMap<Integer, Player>();
+    public LinkedHashMap<String, Player> ChestMap = new LinkedHashMap<String, Player>();
 
+//    List<JLabel> playerLabelList = new ArrayList<>();
     List<Integer> pixel = new ArrayList<>();
-    PanEvaluationRallyRow p;
+    PanEvaluationRally p;
+    boolean isNew = true;
+    boolean isLast = true;
+    boolean isSelected = false;
+    boolean isFirst = true;
+    SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
+
+    RallyEvaluationSkillScore rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
 
     /**
      * Creates new form PanEvaluationRowDetail
      */
-    public PanEvaluationRowDetail(final PanEvaluationRallyRow p) {
+    public PanEvaluationRowDetail(final PanEvaluationRally p, boolean isFirst) {
         initComponents();
         this.p = p;
+        this.isFirst = isFirst;
         mapSkillComponent.put(lblService, panService);
         mapSkillComponent.put(lblAttack, panAttack);
         mapSkillComponent.put(lblBlock, panBlock);
@@ -64,6 +85,14 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         mapSkillComponent.put(lblDefence, panDefence);
         mapSkillComponent.put(lblOp, panOp);
         mapSkillComponent.put(lblTF, panTF);
+        mapSkillLabel.put(Skill.Service.getType(), lblService);
+        mapSkillLabel.put(Skill.Attack.getType(), lblAttack);
+        mapSkillLabel.put(Skill.Block.getType(), lblBlock);
+        mapSkillLabel.put(Skill.Set.getType(), lblSet);
+        mapSkillLabel.put(Skill.Reception.getType(), lblReception);
+        mapSkillLabel.put(Skill.Defence.getType(), lblDefence);
+        mapSkillLabel.put(Skill.OP.getType(), lblOp);
+        mapSkillLabel.put(Skill.TF.getType(), lblTF);
 
         mapPlayerComponent.put(lbl1, pan1);
         mapPlayerComponent.put(lbl2, pan2);
@@ -86,10 +115,28 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         mapScoreComponent.put(lblRate3, panRate3);
         mapScoreComponent.put(lblRate4, panRate4);
         mapScoreComponent.put(lblRate5, panRate5);
+        mapScoreLabel.put(1, lblRate1);
+        mapScoreLabel.put(2, lblRate2);
+        mapScoreLabel.put(3, lblRate3);
+        mapScoreLabel.put(4, lblRate4);
+        mapScoreLabel.put(5, lblRate5);
 
         panel = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage());
         panCourt.add(panel, BorderLayout.CENTER);
 
+        List<JLabel> playerLabelList = new ArrayList<JLabel>(mapPlayerComponent.keySet());
+        for (JLabel label : playerLabelList) {
+            label.setVisible(false);
+
+        }
+
+        int i = 0;
+        for (Player pl : Controller.panMatchSet.playerList) {
+            mapPlayerLabel.put(pl.getChestNo(), playerLabelList.get(i));
+            playerLabelList.get(i).setText(pl.getChestNo());
+            playerLabelList.get(i).setVisible(true);
+            i++;
+        }
         panCourt.addMouseListener(new MouseListener() {
 
             @Override
@@ -133,7 +180,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    selectPlayer(e);
+                    selectPlayer((JLabel) e.getSource());
                 }
 
                 @Override
@@ -164,8 +211,8 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    selectScore(e);
-                    p.panCompListValue.add();
+                    selectScore((JLabel) e.getSource());
+
                 }
 
                 @Override
@@ -192,13 +239,109 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         }
     }
 
+    public void save() {
+        if (isFirst && isNew) {
+            isFirst = false;
+            Date time = new Date();
+            p.startTime = formatterTime.format(time);
+            p.lblRallyStartTime.setText(p.startTime);
+        }
+
+        if (skill.equalsIgnoreCase("op+") || skill.equalsIgnoreCase("tf-")) {
+
+            if (skill.equalsIgnoreCase("tf-")) {
+                mapScoreComponent.get(lblRate1).setBackground(new Color(255, 11, 0));
+                score = 1;
+            } else {
+                mapScoreComponent.get(lblRate5).setBackground(new Color(255, 11, 0));
+                score = 5;
+            }
+
+            rallyEvaluationSkillScore.setSkill(skill);
+            rallyEvaluationSkillScore.setSkillId(Skill.getIdByName(skill).getId());
+            rallyEvaluationSkillScore.setScore(score);
+            rallyEvaluationSkillScore.setChestNo("0");
+            rallyEvaluationSkillScore.setPlayerId(0);
+            isSelected = true;
+
+        } else if (!skill.equals("") && !chestNo.equals("") && score != 0) {
+            rallyEvaluationSkillScore.setSkill(skill);
+            rallyEvaluationSkillScore.setSkillId(Skill.getIdByName(skill).getId());
+            rallyEvaluationSkillScore.setScore(score);
+            rallyEvaluationSkillScore.setChestNo(chestNo);
+            rallyEvaluationSkillScore.setPlayerId(Controller.panMatchSet.ChestMap.get(chestNo).getId());
+            isSelected = true;
+        }
+
+        if (isSelected) {
+            p.rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
+            switch (score) {
+                case 1:
+                    Controller.panMatchSet.opponentScore++;
+                    p.lblResult.setText(Controller.panMatchSet.homeScore + " : " + Controller.panMatchSet.opponentScore);
+                    Date time = new Date();
+                    p.endTime = formatterTime.format(time);
+                    p.lblRallyEndTime.setText(p.endTime);
+                    p.save();
+                    break;
+                case 5:
+                    if (skill.equals(Skill.Service.getType()) || skill.equals(Skill.Attack.getType()) || skill.equals(Skill.Block.getType()) || skill.equals(Skill.OP.getType())) {
+                        Controller.panMatchSet.homeScore++;
+                        p.lblResult.setText(Controller.panMatchSet.homeScore + " : " + Controller.panMatchSet.opponentScore);
+                        Date time1 = new Date();
+                        p.endTime = formatterTime.format(time1);
+                        p.lblRallyEndTime.setText(p.endTime);
+                        p.save();
+                    } else {
+                        if (isNew || isLast) {
+                            isLast = false;
+                            p.panCompListValue.add(false);
+                        }
+                    }
+                    break;
+                default:
+                    if (isNew || isLast) {
+                        isLast = false;
+                        p.panCompListValue.add(false);
+                    }
+                    break;
+            }
+        }
+    }
+
+    public void setValues(RallyEvaluationSkillScore rallyEvaluationSkillScore1) {
+        skill = Skill.getNameById(rallyEvaluationSkillScore1.getSkillId()).getType();
+        chestNo = Controller.panMatchSet.playerMap.get(rallyEvaluationSkillScore1.getPlayerId()).getChestNo();
+        p.currentPanRow.txtRate.setText("" + rallyEvaluationSkillScore1.getScore());
+        p.currentPanRow.txtSkill.setText(skill);
+        p.currentPanRow.txtPlayer.setText(chestNo);
+        score = rallyEvaluationSkillScore1.getScore();
+        JLabel lblScore = mapScoreLabel.get(score);
+        if (lblScore == lblRate1) {
+            mapScoreComponent.get(lblScore).setBackground(new Color(255, 11, 0));
+        } else if (lblScore == lblRate2) {
+            mapScoreComponent.get(lblScore).setBackground(new Color(255, 144, 0));
+        } else if (lblScore == lblRate3) {
+            mapScoreComponent.get(lblScore).setBackground(new Color(255, 255, 0));
+        } else if (lblScore == lblRate4) {
+            mapScoreComponent.get(lblScore).setBackground(new Color(157, 242, 0));
+        } else if (lblScore == lblRate5) {
+            mapScoreComponent.get(lblScore).setBackground(new Color(3, 129, 0));
+        }
+
+        mapSkillComponent.get(mapSkillLabel.get(skill)).setBackground(Color.ORANGE);
+
+        mapPlayerComponent.get(mapPlayerLabel.get(chestNo)).setBackground(Color.ORANGE);
+    }
+
     public void dig(String txt1, String txt2) {
         panel.dig(txt1, txt2);
     }
 
-    public void selectScore(java.awt.event.MouseEvent evt) {
-        JLabel lblScore = (JLabel) evt.getSource();
+    public void selectScore(JLabel j) {
+        JLabel lblScore = j;
         p.currentPanRow.txtRate.setText(lblScore.getText());
+        score = Integer.parseInt(lblScore.getText());
         for (Map.Entry<JLabel, JPanel> entry : mapScoreComponent.entrySet()) {
 
             if (lblScore == entry.getKey()) {
@@ -219,26 +362,32 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             }
 
         }
+
+        save();
+
     }
 
-    public void selectSkill(java.awt.event.MouseEvent evt) {
-        JLabel lblSkill = (JLabel) evt.getSource();
+    public void selectSkill(JLabel j) {
+        JLabel lblSkill = j;
         p.currentPanRow.txtSkill.setText(lblSkill.getText());
+        skill = lblSkill.getText();
         for (Map.Entry<JLabel, JPanel> entry : mapSkillComponent.entrySet()) {
 
             if (lblSkill == entry.getKey()) {
                 mapSkillComponent.get(entry.getKey()).setBackground(Color.ORANGE);
+
             } else {
                 mapSkillComponent.get(entry.getKey()).setBackground(Color.WHITE);
             }
 
         }
-
+        save();
     }
 
-    public void selectPlayer(java.awt.event.MouseEvent evt) {
-        JLabel txtPlayer = (JLabel) evt.getSource();
+    public void selectPlayer(JLabel j) {
+        JLabel txtPlayer = j;
         p.currentPanRow.txtPlayer.setText(txtPlayer.getText());
+        chestNo = txtPlayer.getText();
         for (Map.Entry<JLabel, JPanel> entry : mapPlayerComponent.entrySet()) {
 
             if (txtPlayer == entry.getKey()) {
@@ -248,7 +397,15 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             }
 
         }
+        save();
+    }
 
+    public boolean isIsNew() {
+        return isNew;
+    }
+
+    public void setIsNew(boolean isNew) {
+        this.isNew = isNew;
     }
 
     /**
@@ -309,24 +466,24 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         lbl5 = new javax.swing.JLabel();
         pan6 = new javax.swing.JPanel();
         lbl6 = new javax.swing.JLabel();
-        pan7 = new javax.swing.JPanel();
-        lbl7 = new javax.swing.JLabel();
-        pan8 = new javax.swing.JPanel();
-        lbl8 = new javax.swing.JLabel();
         pan9 = new javax.swing.JPanel();
         lbl9 = new javax.swing.JLabel();
-        pan10 = new javax.swing.JPanel();
-        lbl10 = new javax.swing.JLabel();
-        pan11 = new javax.swing.JPanel();
-        lbl11 = new javax.swing.JLabel();
+        pan8 = new javax.swing.JPanel();
+        lbl8 = new javax.swing.JLabel();
+        pan7 = new javax.swing.JPanel();
+        lbl7 = new javax.swing.JLabel();
         pan12 = new javax.swing.JPanel();
         lbl12 = new javax.swing.JLabel();
-        pan13 = new javax.swing.JPanel();
-        lbl13 = new javax.swing.JLabel();
-        pan14 = new javax.swing.JPanel();
-        lbl14 = new javax.swing.JLabel();
+        pan11 = new javax.swing.JPanel();
+        lbl11 = new javax.swing.JLabel();
+        pan10 = new javax.swing.JPanel();
+        lbl10 = new javax.swing.JLabel();
         pan15 = new javax.swing.JPanel();
         lbl15 = new javax.swing.JLabel();
+        pan14 = new javax.swing.JPanel();
+        lbl14 = new javax.swing.JLabel();
+        pan13 = new javax.swing.JPanel();
+        lbl13 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -536,7 +693,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         lblTF.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblTF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTF.setText("TF -");
+        lblTF.setText("TF-");
         lblTF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblTF.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -560,7 +717,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         lblOp.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblOp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblOp.setText("OP +");
+        lblOp.setText("OP+");
         lblOp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblOp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -760,7 +917,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         lbl1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl1.setText("44");
+        lbl1.setText(" ");
         lbl1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pan1Layout = new javax.swing.GroupLayout(pan1);
@@ -778,7 +935,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         lbl2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl2.setText("44");
         lbl2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pan2Layout = new javax.swing.GroupLayout(pan2);
@@ -789,14 +945,13 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         );
         pan2Layout.setVerticalGroup(
             pan2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl2, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+            .addComponent(lbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pan3.setBackground(new java.awt.Color(255, 255, 255));
 
         lbl3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl3.setText("44");
         lbl3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pan3Layout = new javax.swing.GroupLayout(pan3);
@@ -814,7 +969,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         lbl4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl4.setText("44");
         lbl4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pan4Layout = new javax.swing.GroupLayout(pan4);
@@ -832,7 +986,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         lbl5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl5.setText("44");
         lbl5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pan5Layout = new javax.swing.GroupLayout(pan5);
@@ -850,7 +1003,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         lbl6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl6.setText("44");
         lbl6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pan6Layout = new javax.swing.GroupLayout(pan6);
@@ -864,47 +1016,10 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             .addComponent(lbl6, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        pan7.setBackground(new java.awt.Color(255, 255, 255));
-
-        lbl7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lbl7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl7.setText("44");
-        lbl7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout pan7Layout = new javax.swing.GroupLayout(pan7);
-        pan7.setLayout(pan7Layout);
-        pan7Layout.setHorizontalGroup(
-            pan7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl7, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-        pan7Layout.setVerticalGroup(
-            pan7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl7, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        pan8.setBackground(new java.awt.Color(255, 255, 255));
-
-        lbl8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lbl8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl8.setText("44");
-        lbl8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout pan8Layout = new javax.swing.GroupLayout(pan8);
-        pan8.setLayout(pan8Layout);
-        pan8Layout.setHorizontalGroup(
-            pan8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl8, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-        pan8Layout.setVerticalGroup(
-            pan8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl8, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
         pan9.setBackground(new java.awt.Color(255, 255, 255));
 
         lbl9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl9.setText("44");
         lbl9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pan9Layout = new javax.swing.GroupLayout(pan9);
@@ -918,47 +1033,44 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             .addComponent(lbl9, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        pan10.setBackground(new java.awt.Color(255, 255, 255));
+        pan8.setBackground(new java.awt.Color(255, 255, 255));
 
-        lbl10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lbl10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl10.setText("44");
-        lbl10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout pan10Layout = new javax.swing.GroupLayout(pan10);
-        pan10.setLayout(pan10Layout);
-        pan10Layout.setHorizontalGroup(
-            pan10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl10, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        javax.swing.GroupLayout pan8Layout = new javax.swing.GroupLayout(pan8);
+        pan8.setLayout(pan8Layout);
+        pan8Layout.setHorizontalGroup(
+            pan8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl8, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
-        pan10Layout.setVerticalGroup(
-            pan10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl10, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        pan8Layout.setVerticalGroup(
+            pan8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl8, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        pan11.setBackground(new java.awt.Color(255, 255, 255));
+        pan7.setBackground(new java.awt.Color(255, 255, 255));
 
-        lbl11.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lbl11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl11.setText("44");
-        lbl11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout pan11Layout = new javax.swing.GroupLayout(pan11);
-        pan11.setLayout(pan11Layout);
-        pan11Layout.setHorizontalGroup(
-            pan11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl11, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        javax.swing.GroupLayout pan7Layout = new javax.swing.GroupLayout(pan7);
+        pan7.setLayout(pan7Layout);
+        pan7Layout.setHorizontalGroup(
+            pan7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl7, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
-        pan11Layout.setVerticalGroup(
-            pan11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl11, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        pan7Layout.setVerticalGroup(
+            pan7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl7, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         pan12.setBackground(new java.awt.Color(255, 255, 255));
 
         lbl12.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl12.setText("44");
         lbl12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pan12Layout = new javax.swing.GroupLayout(pan12);
@@ -972,29 +1084,61 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             .addComponent(lbl12, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        pan13.setBackground(new java.awt.Color(255, 255, 255));
+        pan11.setBackground(new java.awt.Color(255, 255, 255));
 
-        lbl13.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lbl13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl13.setText("44");
-        lbl13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl11.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout pan13Layout = new javax.swing.GroupLayout(pan13);
-        pan13.setLayout(pan13Layout);
-        pan13Layout.setHorizontalGroup(
-            pan13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout pan11Layout = new javax.swing.GroupLayout(pan11);
+        pan11.setLayout(pan11Layout);
+        pan11Layout.setHorizontalGroup(
+            pan11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl11, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
-        pan13Layout.setVerticalGroup(
-            pan13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        pan11Layout.setVerticalGroup(
+            pan11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl11, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        pan10.setBackground(new java.awt.Color(255, 255, 255));
+
+        lbl10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout pan10Layout = new javax.swing.GroupLayout(pan10);
+        pan10.setLayout(pan10Layout);
+        pan10Layout.setHorizontalGroup(
+            pan10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl10, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+        pan10Layout.setVerticalGroup(
+            pan10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl10, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        pan15.setBackground(new java.awt.Color(255, 255, 255));
+
+        lbl15.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout pan15Layout = new javax.swing.GroupLayout(pan15);
+        pan15.setLayout(pan15Layout);
+        pan15Layout.setHorizontalGroup(
+            pan15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pan15Layout.setVerticalGroup(
+            pan15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pan14.setBackground(new java.awt.Color(255, 255, 255));
 
         lbl14.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl14.setText("44");
         lbl14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pan14Layout = new javax.swing.GroupLayout(pan14);
@@ -1008,22 +1152,21 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             .addComponent(lbl14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pan15.setBackground(new java.awt.Color(255, 255, 255));
+        pan13.setBackground(new java.awt.Color(255, 255, 255));
 
-        lbl15.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lbl15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl15.setText("44");
-        lbl15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl13.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout pan15Layout = new javax.swing.GroupLayout(pan15);
-        pan15.setLayout(pan15Layout);
-        pan15Layout.setHorizontalGroup(
-            pan15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl15, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        javax.swing.GroupLayout pan13Layout = new javax.swing.GroupLayout(pan13);
+        pan13.setLayout(pan13Layout);
+        pan13Layout.setHorizontalGroup(
+            pan13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl13, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
-        pan15Layout.setVerticalGroup(
-            pan15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl15, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+        pan13Layout.setVerticalGroup(
+            pan13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl13, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
@@ -1044,31 +1187,31 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 .addComponent(pan6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addGroup(jPanel22Layout.createSequentialGroup()
-                    .addComponent(pan15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pan13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
                     .addComponent(pan14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
-                    .addComponent(pan13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pan15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel22Layout.createSequentialGroup()
-                    .addComponent(pan12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pan10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
                     .addComponent(pan11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
-                    .addComponent(pan10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pan12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel22Layout.createSequentialGroup()
-                    .addComponent(pan9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pan7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
                     .addComponent(pan8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
-                    .addComponent(pan7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pan9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
-                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pan2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pan3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pan1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pan3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pan2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pan4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1076,19 +1219,19 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     .addComponent(pan6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pan9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pan7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pan8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pan7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pan9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pan12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pan10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pan11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pan10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pan12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pan15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pan13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pan14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pan13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pan15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1143,8 +1286,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -1189,42 +1331,42 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
     private void lblDefenceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDefenceMouseClicked
         // TODO add your handling code here:
-        selectSkill(evt);
+        selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblDefenceMouseClicked
 
     private void lblServiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblServiceMouseClicked
         // TODO add your handling code here:
-        selectSkill(evt);
+        selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblServiceMouseClicked
 
     private void lblTFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTFMouseClicked
         // TODO add your handling code here:
-        selectSkill(evt);
+        selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblTFMouseClicked
 
     private void lblOpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpMouseClicked
         // TODO add your handling code here:
-        selectSkill(evt);
+        selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblOpMouseClicked
 
     private void lblAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAttackMouseClicked
         // TODO add your handling code here:
-        selectSkill(evt);
+        selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblAttackMouseClicked
 
     private void lblBlockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBlockMouseClicked
         // TODO add your handling code here:
-        selectSkill(evt);
+        selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblBlockMouseClicked
 
     private void lblReceptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReceptionMouseClicked
         // TODO add your handling code here:
-        selectSkill(evt);
+        selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblReceptionMouseClicked
 
     private void lblSetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSetMouseClicked
         // TODO add your handling code here:
-        selectSkill(evt);
+        selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblSetMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1299,6 +1441,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     private javax.swing.JPanel panSet;
     private javax.swing.JPanel panTF;
     // End of variables declaration//GEN-END:variables
+
 }
 
 class ImagePanel extends JPanel {
@@ -1548,4 +1691,5 @@ class ImagePanel extends JPanel {
 
         }
     }
+
 }

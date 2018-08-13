@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -72,7 +72,6 @@
                           <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                           <Component id="jPanel4" max="32767" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel26" min="-2" max="-2" attributes="0"/>
@@ -543,7 +542,7 @@
                       <Font name="Times New Roman" size="12" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="TF -"/>
+                    <Property name="text" type="java.lang.String" value="TF-"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -585,7 +584,7 @@
                       <Font name="Times New Roman" size="12" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="OP +"/>
+                    <Property name="text" type="java.lang.String" value="OP+"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -875,25 +874,25 @@
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="pan15" min="-2" max="-2" attributes="0"/>
+                          <Component id="pan13" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="pan14" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="pan13" max="32767" attributes="0"/>
+                          <Component id="pan15" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="pan12" min="-2" max="-2" attributes="0"/>
+                          <Component id="pan10" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="pan11" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="pan10" min="-2" max="-2" attributes="0"/>
+                          <Component id="pan12" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="pan9" min="-2" max="-2" attributes="0"/>
+                          <Component id="pan7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="pan8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="pan7" min="-2" max="-2" attributes="0"/>
+                          <Component id="pan9" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -901,10 +900,10 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pan1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="pan2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="pan3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="pan1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pan3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pan2" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -914,21 +913,21 @@
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pan9" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="pan8" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="pan7" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="pan8" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="pan9" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pan12" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="pan11" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="pan10" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="pan11" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="pan12" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="pan15" alignment="0" max="32767" attributes="0"/>
-                          <Component id="pan14" alignment="0" max="32767" attributes="0"/>
                           <Component id="pan13" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pan14" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pan15" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -962,7 +961,7 @@
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
+                    <Property name="text" type="java.lang.String" value=" "/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -985,7 +984,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl2" alignment="0" pref="33" max="32767" attributes="0"/>
+                      <Component id="lbl2" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -996,7 +995,6 @@
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1030,7 +1028,6 @@
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1064,7 +1061,6 @@
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1098,7 +1094,6 @@
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1132,75 +1127,6 @@
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
-                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Hand Cursor"/>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="pan7">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl7" alignment="0" pref="30" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl7" alignment="0" pref="30" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JLabel" name="lbl7">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="18" style="1"/>
-                    </Property>
-                    <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
-                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Hand Cursor"/>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="pan8">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl8" alignment="0" pref="30" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl8" alignment="0" pref="30" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JLabel" name="lbl8">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Times New Roman" size="18" style="1"/>
-                    </Property>
-                    <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1234,7 +1160,6 @@
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1242,7 +1167,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="pan10">
+            <Container class="javax.swing.JPanel" name="pan8">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1252,23 +1177,22 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl10" alignment="0" pref="30" max="32767" attributes="0"/>
+                      <Component id="lbl8" alignment="0" pref="30" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl10" alignment="0" pref="30" max="32767" attributes="0"/>
+                      <Component id="lbl8" alignment="0" pref="30" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lbl10">
+                <Component class="javax.swing.JLabel" name="lbl8">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1276,7 +1200,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="pan11">
+            <Container class="javax.swing.JPanel" name="pan7">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1286,23 +1210,22 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl11" alignment="0" pref="30" max="32767" attributes="0"/>
+                      <Component id="lbl7" alignment="0" pref="30" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl11" alignment="0" pref="30" max="32767" attributes="0"/>
+                      <Component id="lbl7" alignment="0" pref="30" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lbl11">
+                <Component class="javax.swing.JLabel" name="lbl7">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1336,7 +1259,6 @@
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1344,7 +1266,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="pan13">
+            <Container class="javax.swing.JPanel" name="pan11">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1354,23 +1276,88 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl13" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbl11" alignment="0" pref="30" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl13" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbl11" alignment="0" pref="30" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lbl13">
+                <Component class="javax.swing.JLabel" name="lbl11">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pan10">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lbl10" alignment="0" pref="30" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lbl10" alignment="0" pref="30" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lbl10">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="18" style="1"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pan15">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lbl15" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lbl15" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lbl15">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="18" style="1"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1404,7 +1391,6 @@
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1412,7 +1398,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="pan15">
+            <Container class="javax.swing.JPanel" name="pan13">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1422,23 +1408,22 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl15" alignment="0" pref="30" max="32767" attributes="0"/>
+                      <Component id="lbl13" alignment="0" pref="30" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl15" alignment="0" pref="33" max="32767" attributes="0"/>
+                      <Component id="lbl13" alignment="0" pref="33" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lbl15">
+                <Component class="javax.swing.JLabel" name="lbl13">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Times New Roman" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="44"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>

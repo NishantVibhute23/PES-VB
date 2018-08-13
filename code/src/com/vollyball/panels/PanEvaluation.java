@@ -15,11 +15,14 @@ import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import javax.swing.JOptionPane;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
@@ -38,8 +41,7 @@ import uk.co.caprica.vlcj.runtime.x.LibXUtil;
  */
 public class PanEvaluation extends javax.swing.JPanel {
 
-    PanEvaluationRallyHead ph;
-    PanEvaluationRallyRow pw = new PanEvaluationRallyRow();
+    PanEvaluationRally pw;
 
     public int currentRally = 0;
     int setNum;
@@ -218,7 +220,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     }
 
     private void registerLibrary() {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\VLC\\VLC64");
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "H:\\vollyball\\PES-VB\\PES-VB\\VLC\\VLC64");
         Native
                 .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
                 );
@@ -271,7 +273,7 @@ public class PanEvaluation extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         jPanel29 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        lblCurrentRally = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel43 = new javax.swing.JPanel();
@@ -307,10 +309,8 @@ public class PanEvaluation extends javax.swing.JPanel {
         lblopponentName = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
-        panRallyEvalHead = new javax.swing.JPanel();
-        panStart = new javax.swing.JPanel();
-        lblStart = new javax.swing.JLabel();
         panEvalRallyRow = new javax.swing.JPanel();
+        lblStart = new javax.swing.JLabel();
 
         jPanel17.setBackground(new java.awt.Color(51, 51, 51));
         jPanel17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -347,6 +347,11 @@ public class PanEvaluation extends javax.swing.JPanel {
 
         cmbRallies.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         cmbRallies.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select" }));
+        cmbRallies.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbRalliesItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -391,6 +396,11 @@ public class PanEvaluation extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("NEW");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -425,16 +435,26 @@ public class PanEvaluation extends javax.swing.JPanel {
         jPanel29.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/arrowback.png"))); // NOI18N
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
         jPanel29.add(jLabel18);
 
-        jLabel19.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("RALLY :");
-        jPanel29.add(jLabel19);
+        lblCurrentRally.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblCurrentRally.setForeground(new java.awt.Color(255, 255, 255));
+        lblCurrentRally.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentRally.setText("RALLY :");
+        jPanel29.add(lblCurrentRally);
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/arrownext.png"))); // NOI18N
+        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel20MouseClicked(evt);
+            }
+        });
         jPanel29.add(jLabel20);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -652,9 +672,7 @@ public class PanEvaluation extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblOp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0)))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblTf)
                     .addGroup(jPanel13Layout.createSequentialGroup()
@@ -713,7 +731,7 @@ public class PanEvaluation extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblWonBy, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
+                        .addComponent(lblWonBy, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -803,20 +821,20 @@ public class PanEvaluation extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblevaluationName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblopponentName)
+                    .addComponent(jLabel6)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblopponentName)
-                        .addComponent(jLabel6)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblevaluationName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(8, 8, 8))
         );
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(57, 74, 108), 10));
 
-        panRallyEvalHead.setBackground(new java.awt.Color(255, 255, 255));
-        panRallyEvalHead.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(57, 74, 108)));
-        panRallyEvalHead.setLayout(new java.awt.BorderLayout());
+        panEvalRallyRow.setBackground(new java.awt.Color(255, 255, 255));
+        panEvalRallyRow.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(57, 74, 108)));
+        panEvalRallyRow.setLayout(new java.awt.BorderLayout());
 
         lblStart.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblStart.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -826,29 +844,7 @@ public class PanEvaluation extends javax.swing.JPanel {
                 lblStartMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout panStartLayout = new javax.swing.GroupLayout(panStart);
-        panStart.setLayout(panStartLayout);
-        panStartLayout.setHorizontalGroup(
-            panStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panStartLayout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(lblStart, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
-        );
-        panStartLayout.setVerticalGroup(
-            panStartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panStartLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblStart, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        panRallyEvalHead.add(panStart, java.awt.BorderLayout.CENTER);
-
-        panEvalRallyRow.setBackground(new java.awt.Color(255, 255, 255));
-        panEvalRallyRow.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(57, 74, 108)));
-        panEvalRallyRow.setLayout(new java.awt.BorderLayout());
+        panEvalRallyRow.add(lblStart, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -856,17 +852,14 @@ public class PanEvaluation extends javax.swing.JPanel {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panRallyEvalHead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panEvalRallyRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panEvalRallyRow, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(panRallyEvalHead, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panEvalRallyRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panEvalRallyRow, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -912,13 +905,148 @@ public class PanEvaluation extends javax.swing.JPanel {
 
     private void lblStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStartMouseClicked
         // TODO add your handling code here:
-        panRallyEvalHead.removeAll();
-        ph = new PanEvaluationRallyHead(rallyNumNext, matchEvaluationId, rallyPositionMap, evaluationType);
-        panRallyEvalHead.add(ph, BorderLayout.CENTER);
+        rallyNumNext++;
+        panEvalRallyRow.removeAll();
+        lblCurrentRally.setText("RALLY : " + rallyNumNext);
+        pw = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
         panEvalRallyRow.add(pw, BorderLayout.CENTER);
         validate();
         repaint();
     }//GEN-LAST:event_lblStartMouseClicked
+
+    private void cmbRalliesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbRalliesItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            String item = String.valueOf(evt.getItem());
+            if (!evt.getItem().equals("Select")) {
+                RallyEvaluation re = rallyDao.getRally(Integer.parseInt(item), matchEvaluationId, 0);
+                panEvalRallyRow.removeAll();
+                rallyNumNext = re.getRallyNum();
+                lblCurrentRally.setText("RALLY : " + re.getRallyNum());
+                pw = new PanEvaluationRally(re);
+                panEvalRallyRow.add(pw, BorderLayout.CENTER);
+                validate();
+                repaint();
+            }
+        }
+
+    }//GEN-LAST:event_cmbRalliesItemStateChanged
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        rallyNumNext = totalRallies + 1;
+        cmbRallies.setSelectedItem("Select");
+        lblCurrentRally.setText("RALLY : " + rallyNumNext);
+        panEvalRallyRow.removeAll();
+        pw = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
+        panEvalRallyRow.add(pw, BorderLayout.CENTER);
+        validate();
+        repaint();
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        // TODO add your handling code here:
+        cmbRallies.setSelectedItem("Select");
+        rallyNumNext--;
+        if (rallyNumNext > 0) {
+            RallyEvaluation re = rallyDao.getRally(rallyNumNext, matchEvaluationId, 0);
+            panEvalRallyRow.removeAll();
+            rallyNumNext = re.getRallyNum();
+            lblCurrentRally.setText("RALLY : " + re.getRallyNum());
+            pw = new PanEvaluationRally(re);
+            panEvalRallyRow.add(pw, BorderLayout.CENTER);
+            validate();
+            repaint();
+        } else {
+            rallyNumNext++;
+            JOptionPane.showMessageDialog(panRallyCurrent, "Start Of the Rally");
+        }
+    }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
+        // TODO add your handling code here:
+        cmbRallies.setSelectedItem("Select");
+        rallyNumNext++;
+        if (rallyNumNext <= totalRallies) {
+            RallyEvaluation re = rallyDao.getRally(rallyNumNext, matchEvaluationId, 0);
+            panEvalRallyRow.removeAll();
+            rallyNumNext = re.getRallyNum();
+            lblCurrentRally.setText("RALLY : " + re.getRallyNum());
+            pw = new PanEvaluationRally(re);
+            panEvalRallyRow.add(pw, BorderLayout.CENTER);
+            validate();
+            repaint();
+        } else {
+            rallyNumNext--;
+            JOptionPane.showMessageDialog(panRallyCurrent, "End Of the Rally");
+        }
+    }//GEN-LAST:event_jLabel20MouseClicked
+
+    public void setScore() {
+        currentScore = homeScore + " - " + opponentScore;
+        lblScore.setText(currentScore);
+    }
+
+    public void next() {
+
+        cmbRallies.addItem(rallyNumNext);
+
+        if (homeScore >= 25 || opponentScore >= 25) {
+            List<Integer> arr = new ArrayList();
+            arr.add(homeScore);
+            arr.add(opponentScore);
+            int max = Collections.max(arr);
+            int min = Collections.min(arr);
+            if ((max - min) >= 2) {
+                if (max == homeScore) {
+                    lblWonBy.setText(lblevaluationName.getText());
+                    matchDao.updateMatchSetWonBy(teamEvaluateId, matchEvaluationId);
+                } else {
+                    lblWonBy.setText(lblopponentName.getText());
+                    matchDao.updateMatchSetWonBy(opponentId, matchEvaluationId);
+                }
+                setScore();
+                JOptionPane.showMessageDialog(Controller.panMatchSet, "Set Won By : " + lblWonBy.getText() + "\n Score is := " + homeScore + " : " + opponentScore);
+                List<Integer> wonBy = matchDao.getSetNadWonBy(matchId);
+
+                int team1WonBy = Collections.frequency(wonBy, teamEvaluateId);
+                int team2wonBy = Collections.frequency(wonBy, opponentId);
+
+                if (team1WonBy == 0 && team2wonBy >= 3) {
+                    matchDao.updateMatchWonBy(opponentId, matchId);
+                } else if (team2wonBy == 0 && team1WonBy >= 3) {
+                    matchDao.updateMatchWonBy(teamEvaluateId, matchId);
+                } else {
+                    if (team2wonBy != 0 && team1WonBy != 0) {
+                        if (team2wonBy >= 3) {
+                            matchDao.updateMatchWonBy(opponentId, matchId);
+                        } else if (team1WonBy >= 3) {
+                            matchDao.updateMatchWonBy(teamEvaluateId, matchId);
+                        }
+                    }
+                }
+
+                Controller.panMatchSet.validate();
+                Controller.panMatchSet.repaint();
+            } else {
+                setScore();
+            }
+        } else {
+            setScore();
+            totalRallies++;
+            rallyNumNext++;
+            lblCurrentRally.setText("RALLY : " + rallyNumNext);
+            // TODO add your handling code here:
+            panEvalRallyRow.removeAll();
+//        ph = new PanEvaluationRallyHead(rallyNumNext, matchEvaluationId, rallyPositionMap, evaluationType);
+            pw = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
+//        panRallyEvalHead.add(ph, BorderLayout.CENTER);
+            panEvalRallyRow.add(pw, BorderLayout.CENTER);
+            validate();
+            repaint();
+        }
+
+    }
 
     public void setRotations() {
         pos1.setText(initialPositionMap.get(1).getChestNo());
@@ -942,7 +1070,6 @@ public class PanEvaluation extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
@@ -967,19 +1094,18 @@ public class PanEvaluation extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JLabel lblCurrentRally;
     private javax.swing.JLabel lblDate;
-    private javax.swing.JTextField lblOp;
+    public javax.swing.JTextField lblOp;
     private javax.swing.JLabel lblScore;
     private javax.swing.JLabel lblStart;
-    private javax.swing.JTextField lblTf;
+    public javax.swing.JTextField lblTf;
     private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblWonBy;
     private javax.swing.JLabel lblevaluationName;
     private javax.swing.JLabel lblopponentName;
     private javax.swing.JPanel panEvalRallyRow;
     private javax.swing.JPanel panPlayer;
-    private javax.swing.JPanel panRallyEvalHead;
-    private javax.swing.JPanel panStart;
     private javax.swing.JTextField pos1;
     private javax.swing.JTextField pos2;
     private javax.swing.JTextField pos3;
