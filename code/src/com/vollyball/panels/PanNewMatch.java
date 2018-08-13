@@ -15,7 +15,9 @@ import com.vollyball.enums.SubPhase;
 import com.vollyball.util.DateLabelFormatter;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -81,7 +83,7 @@ public class PanNewMatch extends javax.swing.JPanel {
         }
     }
 
-    public PanNewMatch(int id) {
+    public PanNewMatch(int id) throws ParseException {
         initComponents();
         this.matchId = id;
 //        System.out.println("id panmatchnew" + id);
@@ -125,7 +127,19 @@ public class PanNewMatch extends javax.swing.JPanel {
 
         team1combo.setSelectedItem(mb.getTeam1name());
         team2combo.setSelectedItem(mb.getTeam2name());
-        modelStart.setDate(2016, 00, 12);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        int year;
+        int month;
+        int day;
+        Date date;
+        Calendar calendar = Calendar.getInstance();
+        date = sdf.parse(mb.getDate());
+        calendar.setTime(date);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH) + 1;
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        modelStart.setDate(year, month, day);
         modelStart.setSelected(true);
 
         for (Phase dir : Phase.values()) {
@@ -133,7 +147,12 @@ public class PanNewMatch extends javax.swing.JPanel {
             cmbPhase.addItem(dir.getName());
             //cmbSubPhase.setVisible(false);
         }
-        cmbPhase.setSelectedItem(mb.getPhase());
+        String phase[]=mb.getPhase().split("-");
+        
+        cmbPhase.setSelectedItem(phase[0]);
+        if(phase.length!=1){
+            cmbSubPhase.setSelectedItem(phase[1]);
+        }
     }
 
     /**
@@ -490,7 +509,7 @@ public class PanNewMatch extends javax.swing.JPanel {
                 mb.setMatchNumber(Integer.parseInt(txtMatchNum.getText()));
                 mb.setDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedStartDate));
                 mb.setTime(cmbHH.getSelectedItem() + ":" + (cmbMm.getSelectedItem()));
-                phase = cmbPhase.getSelectedItem() + "" + (cmbSubPhase.getSelectedItem() == null ? "" : cmbSubPhase.getSelectedItem());
+                phase = cmbPhase.getSelectedItem() + "-" + (cmbSubPhase.getSelectedItem() == null ? "" : cmbSubPhase.getSelectedItem());
                 mb.setPhase(phase);
                 mb.setPlace(txtCity.getText());
                 mb.setCompId(Controller.competitionId);
@@ -516,7 +535,7 @@ public class PanNewMatch extends javax.swing.JPanel {
                 mb.setMatchNumber(Integer.parseInt(txtMatchNum.getText()));
                 mb.setDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedStartDate));
                 mb.setTime(cmbHH.getSelectedItem() + ":" + (cmbMm.getSelectedItem()));
-                phase = cmbPhase.getSelectedItem() + "" + (cmbSubPhase.getSelectedItem() == null ? "" : cmbSubPhase.getSelectedItem());
+                phase = cmbPhase.getSelectedItem() + "-" + (cmbSubPhase.getSelectedItem() == null ? "" : cmbSubPhase.getSelectedItem());
                 mb.setPhase(phase);
                 mb.setPlace(txtCity.getText());
                 mb.setCompId(Controller.competitionId);
