@@ -11,7 +11,9 @@ import com.vollyball.dao.CompetitionDao;
 import com.vollyball.util.DateLabelFormatter;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -34,6 +36,7 @@ public class PanNewCompetition extends javax.swing.JPanel {
     String ageGroup;
     CompetitionDao competitionDao = new CompetitionDao();
     int compId;
+    CompetitionBean cb;
 
     /**
      * Creates new form PanNewCompetition
@@ -51,11 +54,11 @@ public class PanNewCompetition extends javax.swing.JPanel {
 
     }
 
-    public PanNewCompetition(int compId) {
+    public PanNewCompetition(int compId) throws ParseException {
         initComponents();
 
         System.out.println("-------" + compId);
-        CompetitionBean cb = competitionDao.getCompetitionById(compId);
+        cb = competitionDao.getCompetitionById(compId);
         this.compId = cb.getId();
 
         datePickerStart.setBounds(0, 0, 319, 28);
@@ -68,13 +71,32 @@ public class PanNewCompetition extends javax.swing.JPanel {
         txtCompName.setText(cb.getName());
         txtVenue.setText(cb.getVenue());
 
-        modelStart.setDate(2016, 00, 12);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        int year;
+        int month;
+        int day;
+        Date date;
+        Calendar calendar = Calendar.getInstance();
+        date = sdf.parse(cb.getStartDate());
+        calendar.setTime(date);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH) + 1;
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        modelStart.setDate(year, month, day);
         modelStart.setSelected(true);
-
-        modelEnd.setDate(2016, 00, 12);
+        date = sdf.parse(cb.getEndDate());
+        calendar.setTime(date);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH) + 1;
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        
+        modelEnd.setDate(year, month, day);
         modelEnd.setSelected(true);
-
-        cmbAgeGroup.setSelectedItem(cb.getAgeGroup());
+        String group[] = cb.getAgeGroup().split(" ");
+        jComboBox1.setSelectedItem(group[0]);
+        if (group.length != 1) {
+            cmbAgeGroup.setSelectedItem(group[1]);
+        }
 
     }
 
@@ -422,10 +444,10 @@ public class PanNewCompetition extends javax.swing.JPanel {
 
                 if (count != 0) {
 
-                    Controller.createCompetitionDialog.close();
+//                    Controller.createCompetitionDialog.close();
 
                     Controller.panCompetitionList.refresh();
-                    JOptionPane.showMessageDialog(this, "Updated");
+                    JOptionPane.showMessageDialog(this, "Updated Competition '" + cb.getName()+ "'");
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed");

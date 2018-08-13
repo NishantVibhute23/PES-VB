@@ -9,6 +9,7 @@ import com.vollyball.panels.PanNewCompetition;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -49,11 +50,15 @@ public class CreateCompetitionDialog {
     }
 
     protected Container createPane() {
-        PanNewCompetition panComp;
+        PanNewCompetition panComp = null;
         if (compId == 0) {
             panComp = new PanNewCompetition();
         } else {
-            panComp = new PanNewCompetition(compId);
+            try {
+                panComp = new PanNewCompetition(compId);
+            } catch (ParseException ex) {
+                Logger.getLogger(CreateCompetitionDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return panComp;
 
