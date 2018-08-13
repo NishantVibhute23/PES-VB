@@ -311,7 +311,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
     public void setValues(RallyEvaluationSkillScore rallyEvaluationSkillScore1) {
         skill = Skill.getNameById(rallyEvaluationSkillScore1.getSkillId()).getType();
-        chestNo = Controller.panMatchSet.playerMap.get(rallyEvaluationSkillScore1.getPlayerId()).getChestNo();
+        chestNo = rallyEvaluationSkillScore1.getPlayerId() == 0 ? "" : Controller.panMatchSet.playerMap.get(rallyEvaluationSkillScore1.getPlayerId()).getChestNo();
         p.currentPanRow.txtRate.setText("" + rallyEvaluationSkillScore1.getScore());
         p.currentPanRow.txtSkill.setText(skill);
         p.currentPanRow.txtPlayer.setText(chestNo);
@@ -330,8 +330,9 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         }
 
         mapSkillComponent.get(mapSkillLabel.get(skill)).setBackground(Color.ORANGE);
-
-        mapPlayerComponent.get(mapPlayerLabel.get(chestNo)).setBackground(Color.ORANGE);
+        if (!chestNo.equals("")) {
+            mapPlayerComponent.get(mapPlayerLabel.get(chestNo)).setBackground(Color.ORANGE);
+        }
     }
 
     public void dig(String txt1, String txt2) {

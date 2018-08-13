@@ -88,9 +88,6 @@ public class PanMatchSet extends javax.swing.JPanel {
 
         initComponents();
 
-//        Setup s1 = new Setup();
-//        s1.executeQuery("delete from VollyCourtCoordinates", SetupEnum.Database, 155);
-//        s1.insertVollyCoordinate(100);
         setBackNextInVisible();
         if (evaluationType == 2) {
             initializePlayer();

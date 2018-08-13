@@ -56,6 +56,7 @@ public class Setup extends Thread {
             createRallyRotationOrder(80);
             createMatchPlayer(80);
             createVollyCoordinate(80);
+            creatematchevaluationsetlatestrotation(80);
             insertRatings(90);
             insertSkills(95);
             insertSkillDetails(97);
@@ -167,6 +168,10 @@ public class Setup extends Thread {
 
     public void createVollyCoordinate(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.vollycoordinate"), SetupEnum.VollyCoordinate, status);
+    }
+
+    public void creatematchevaluationsetlatestrotation(int status) {
+        executeQuery(CommonUtil.getResourceProperty("create.matchevaluationsetlatestrotation"), SetupEnum.VollyCoordinate, status);
     }
 
     public void insertRatings(int status) {

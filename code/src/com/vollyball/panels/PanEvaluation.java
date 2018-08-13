@@ -6,10 +6,12 @@ import com.vollyball.bean.MatchSet;
 import com.vollyball.bean.Player;
 import com.vollyball.bean.RallyEvaluation;
 import com.vollyball.bean.SetRotationOrder;
+import com.vollyball.bean.SetSubstitution;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.RallyDao;
 import com.vollyball.dao.TeamDao;
+import com.vollyball.dialog.DialogEvaluationSubstitute;
 import com.vollyball.dialog.SetRotationDialog;
 import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
@@ -22,6 +24,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
@@ -51,6 +54,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     public int matchEvaluationId = 0;
     public int rallyNumNext = 0, totalRallies = 0;
     public SetRotationDialog setRotationDialog;
+    public DialogEvaluationSubstitute dialogEvaluationSubstitute;
     public LinkedHashMap<Integer, RallyEvaluation> rallyMap = new LinkedHashMap<Integer, RallyEvaluation>();
     public LinkedHashMap<Integer, PanRallyLiveEvaluation> panRallyMap = new LinkedHashMap<Integer, PanRallyLiveEvaluation>();
     public LinkedHashMap<Integer, Player> initialPositionMap;
@@ -70,6 +74,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     String startTime, endTime;
     int op = 0, tf = 0;
     int evaluationType, matchEvaluationTeamId;
+    MatchSet ms;
 
     /**
      * Creates new form PanEvaluation
@@ -77,7 +82,8 @@ public class PanEvaluation extends javax.swing.JPanel {
     public PanEvaluation(int setNum, int matchId, int teamEvaluateId, int opponentId, int evaluationType, int matchEvaluationTeamId) {
         initComponents();
         initializePlayer();
-
+//        Setup s1 = new Setup();
+//        s1.creatematchevaluationsetlatestrotation(100);
         playerList = teamDao.getTeamPlayers(teamEvaluateId);
 //        panRallyList.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setNum = setNum;
@@ -89,7 +95,7 @@ public class PanEvaluation extends javax.swing.JPanel {
         initialPositionMap = new LinkedHashMap<>();
         rallyPositionMap = new LinkedHashMap<>();
 
-        MatchSet ms = matchDao.getMatchSet(setNum, matchEvaluationTeamId);
+        ms = matchDao.getMatchSet(setNum, matchEvaluationTeamId);
 
 //        List<Player> playerListL = teamDao.getTeamPlayers(matchEvaluationTeamId);
         for (Player p : playerList) {
@@ -121,65 +127,18 @@ public class PanEvaluation extends javax.swing.JPanel {
                 initialPositionMap.put(s.getPosition(), playerMap.get(s.getPlayerId()));
             }
 
-//            for (SetTimeout s : ms.getSetTimeout()) {
-//                setTimeOut(s);
-//            }
-//
-//            for (SetSubstitution s : ms.getSetSubstitutions()) {
-//                String cNo = s.getSubstitutePlayerId() == 0 ? "" : playerMap.get(s.getSubstitutePlayerId()).getChestNo();
-//                String p1 = s.getPoint1();
-//                String p2 = s.getPoint2();
-//                switch (s.getPosition()) {
-//                    case 1:
-//                        su1.setText(cNo);
-//                        pt11.setText(p1);
-//                        pt21.setText(p2);
-//                        break;
-//                    case 2:
-//                        su2.setText(cNo);
-//                        pt12.setText(p1);
-//                        pt22.setText(p2);
-//                        break;
-//                    case 3:
-//                        su3.setText(cNo);
-//                        pt13.setText(p1);
-//                        pt23.setText(p2);
-//                        break;
-//                    case 4:
-//                        su4.setText(cNo);
-//                        pt14.setText(p1);
-//                        pt24.setText(p2);
-//                        break;
-//                    case 5:
-//                        su5.setText(cNo);
-//                        pt15.setText(p1);
-//                        pt25.setText(p2);
-//                        break;
-//                    case 6:
-//                        su6.setText(cNo);
-//                        pt16.setText(p1);
-//                        pt26.setText(p2);
-//                        break;
-//                }
-//            }
-//
-//            pos1.setText(initialPositionMap.get(1).getChestNo());
-//            pos2.setText(initialPositionMap.get(2).getChestNo());
-//            pos3.setText(initialPositionMap.get(3).getChestNo());
-//            pos4.setText(initialPositionMap.get(4).getChestNo());
-//            pos5.setText(initialPositionMap.get(5).getChestNo());
-//            pos6.setText(initialPositionMap.get(6).getChestNo());
+            pos1.setText(initialPositionMap.get(1).getChestNo());
+            pos2.setText(initialPositionMap.get(2).getChestNo());
+            pos3.setText(initialPositionMap.get(3).getChestNo());
+            pos4.setText(initialPositionMap.get(4).getChestNo());
+            pos5.setText(initialPositionMap.get(5).getChestNo());
+            pos6.setText(initialPositionMap.get(6).getChestNo());
 //            libero.setText(initialPositionMap.get(7).getChestNo());
-//
-//            ro1.setText(initialPositionMap.get(1).getChestNo());
-//            ro2.setText(initialPositionMap.get(2).getChestNo());
-//            ro3.setText(initialPositionMap.get(3).getChestNo());
-//            ro4.setText(initialPositionMap.get(4).getChestNo());
-//            ro5.setText(initialPositionMap.get(5).getChestNo());
-//            ro6.setText(initialPositionMap.get(6).getChestNo());
+
             List<RallyEvaluation> rallies = rallyDao.getRalliesList(matchEvaluationId);
 
             totalRallies = rallies.size();
+            rallyNumNext = totalRallies;
             for (RallyEvaluation rally : rallies) {
 
                 cmbRallies.addItem(rally.getRallyNum());
@@ -220,7 +179,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     }
 
     private void registerLibrary() {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "H:\\vollyball\\PES-VB\\PES-VB\\VLC\\VLC64");
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\VLC\\VLC64");
         Native
                 .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
                 );
@@ -626,6 +585,11 @@ public class PanEvaluation extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Substitute");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -905,6 +869,34 @@ public class PanEvaluation extends javax.swing.JPanel {
 
     private void lblStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStartMouseClicked
         // TODO add your handling code here:
+        if (this.matchEvaluationId == 0) {
+            MatchSet ms = new MatchSet();
+            ms.setMatchEvaluationTeamId(matchEvaluationTeamId);
+            ms.setEvaluationTeamId(teamEvaluateId);
+            ms.setOpponentTeamId(opponentId);
+            ms.setStart_time(lblTime.getText());
+            ms.setEvaluator("");
+            ms.setSetNo(setNum);
+            ms.setEnd_time("00:00");
+            ms.setDate(CommonUtil.ConvertDateFromNormalToDB(lblDate.getText()));
+
+            for (Map.Entry<Integer, Player> entry : initialPositionMap.entrySet()) {
+                SetRotationOrder sro = new SetRotationOrder();
+                sro.setPosition(entry.getKey());
+                sro.setPlayerId(entry.getValue().getId());
+                ms.getRotationOrder().add(sro);
+            }
+
+            for (Map.Entry<Integer, Player> entry : initialPositionMap.entrySet()) {
+                SetSubstitution sro = new SetSubstitution();
+                sro.setPosition(entry.getKey());
+                sro.setRotation_player_id(entry.getValue().getId());
+                ms.getSetSubstitutions().add(sro);
+            }
+
+            matchEvaluationId = matchDao.saveMatchSet(ms);
+        }
+
         rallyNumNext++;
         panEvalRallyRow.removeAll();
         lblCurrentRally.setText("RALLY : " + rallyNumNext);
@@ -981,6 +973,14 @@ public class PanEvaluation extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(panRallyCurrent, "End Of the Rally");
         }
     }//GEN-LAST:event_jLabel20MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        // TODO add your handling code here:
+        dialogEvaluationSubstitute = new DialogEvaluationSubstitute();
+
+        dialogEvaluationSubstitute.init(ms);
+        dialogEvaluationSubstitute.show();
+    }//GEN-LAST:event_jLabel9MouseClicked
 
     public void setScore() {
         currentScore = homeScore + " - " + opponentScore;

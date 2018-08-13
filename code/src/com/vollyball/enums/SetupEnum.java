@@ -33,13 +33,14 @@ public enum SetupEnum {
     PLUSMINUS(20, "Plus Minus"),
     TIMEOUT(21, "Time out"),
     RALLYROTATIONORDER(22, "Rally Rotation Order"),
-    InsertRating(23, "Ratings Inserted"),
-    InsertSkills(24, "Skills Inserted"),
-    InsertSkillDetails(25, "Skill details Inserted"),
-    InsertUser(26, "User Inserted"),
-    MatchPlayers(27, "Match Player"),
-    VollyCoordinate(28, "Volly Coordinate"),
-    InsertVollyCoordinate(29, "Insert Volly Coordinate");
+    EVALUATIONSETLATESTROTATION(23, "Evaluation Set Latest Rotation"),
+    InsertRating(24, "Ratings Inserted"),
+    InsertSkills(25, "Skills Inserted"),
+    InsertSkillDetails(26, "Skill details Inserted"),
+    InsertUser(27, "User Inserted"),
+    MatchPlayers(28, "Match Player"),
+    VollyCoordinate(29, "Volly Coordinate"),
+    InsertVollyCoordinate(30, "Insert Volly Coordinate");
 
     int step;
 

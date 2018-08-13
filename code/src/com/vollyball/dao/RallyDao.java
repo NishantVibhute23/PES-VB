@@ -564,6 +564,35 @@ public class RallyDao {
         return rallyPositionMap;
     }
 
+    public LinkedHashMap<Integer, Player> getLatestMatchSetRotationOrder(int matchevaluationId) {
+        LinkedHashMap<Integer, Player> rallyPositionMap = new LinkedHashMap<>();
+
+        int rallyId = 0;
+        try {
+            this.con = db.getConnection();
+
+            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchset.latestorder"));
+            ps1.setInt(1, matchevaluationId);
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()) {
+
+                rallyPositionMap.put(1, Controller.panMatchSet.playerMap.get(rs1.getInt(1)));
+                rallyPositionMap.put(2, Controller.panMatchSet.playerMap.get(rs1.getInt(2)));
+                rallyPositionMap.put(3, Controller.panMatchSet.playerMap.get(rs1.getInt(3)));
+                rallyPositionMap.put(4, Controller.panMatchSet.playerMap.get(rs1.getInt(4)));
+                rallyPositionMap.put(5, Controller.panMatchSet.playerMap.get(rs1.getInt(5)));
+                rallyPositionMap.put(6, Controller.panMatchSet.playerMap.get(rs1.getInt(6)));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RallyDao.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return rallyPositionMap;
+    }
+
     public VollyCourtCoordinateBean getCordinates(String type, int from, int to) {
         VollyCourtCoordinateBean v = new VollyCourtCoordinateBean();
 

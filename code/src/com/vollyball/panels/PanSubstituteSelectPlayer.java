@@ -335,7 +335,6 @@ public class PanSubstituteSelectPlayer extends javax.swing.JPanel {
         Player p = chestMap.get(txtSubPlayer.getText());
         int id = matchDao.updateSubstitution(p.getId(), score, position, matchEvaluationId);
         if (id != 0) {
-//            Controller.panMatchSet.positionMap.put(position, p);
             String cNo = txtSubPlayer.getText();
             switch (position) {
                 case 1:

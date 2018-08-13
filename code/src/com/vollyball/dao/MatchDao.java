@@ -246,6 +246,16 @@ public class MatchDao {
                 ps5.setInt(3, mid);
                 ps5.executeUpdate();
 
+                PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.setLatestorder"));
+                ps1.setInt(1, ms.getRotationOrder().get(0).getPlayerId());
+                ps1.setInt(2, ms.getRotationOrder().get(1).getPlayerId());
+                ps1.setInt(3, ms.getRotationOrder().get(2).getPlayerId());
+                ps1.setInt(4, ms.getRotationOrder().get(3).getPlayerId());
+                ps1.setInt(5, ms.getRotationOrder().get(4).getPlayerId());
+                ps1.setInt(6, ms.getRotationOrder().get(5).getPlayerId());
+                ps1.setInt(7, mid);
+                ps1.executeUpdate();
+
             }
 
             db.closeConnection(con);
