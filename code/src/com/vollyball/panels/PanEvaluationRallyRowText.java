@@ -15,15 +15,19 @@ import java.util.Map;
  */
 public class PanEvaluationRallyRowText extends javax.swing.JPanel {
 
-    PanEvaluationRallyRow p;
+    PanEvaluationRally p;
 
     /**
      * Creates new form PanEvaluationRallyRowText
      */
-    public PanEvaluationRallyRowText(PanEvaluationRallyRow p, String text) {
+    public PanEvaluationRallyRowText(PanEvaluationRally p) {
         initComponents();
 //        txtPlayer.setText(text);
         this.p = p;
+    }
+
+    public void setValues() {
+
     }
 
     /**
@@ -131,6 +135,7 @@ public class PanEvaluationRallyRowText extends javax.swing.JPanel {
         this.txtPlayer.setForeground(Color.BLACK);
         this.txtSkill.setForeground(Color.BLACK);
         this.txtRate.setForeground(Color.BLACK);
+        panEvaluationRowDetail.setIsNew(false);
         p.currentPanRow = this;
 
         for (Map.Entry<PanEvaluationRallyRowText, PanEvaluationRowDetail> entry : p.panRallyRow.entrySet()) {

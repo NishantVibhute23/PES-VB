@@ -2163,8 +2163,8 @@ public class PanMatchSet extends javax.swing.JPanel {
 //                break;
 //
 //            case "SAVE":
-//                if (!panRallyCurrent.panListRow.get(0).txtSkill.getText().equals("")) {
-//                    RallyEvaluation rallyInsert = new RallyEvaluation();
+        if (!panRallyCurrent.panListRow.get(0).txtSkill.getText().equals("")) {
+            RallyEvaluation rallyInsert = new RallyEvaluation();
 //                    rallyInsert.setRallyNum(panRallyCurrent.rallyNum);
 //                    rallyInsert.setHomeScore(homeScore);
 //                    rallyInsert.setOpponentScore(opponentScore);
@@ -2175,7 +2175,7 @@ public class PanMatchSet extends javax.swing.JPanel {
 //
 //                    for (int i = 0; i < panRallyCurrent.panListRow.size(); i++) {
 //                        try {
-//                            PanRallyEvaluationRow panRallyEvaluationRow = panRallyCurrent.panListRow.get(i);
+//        PanRallyEvaluationRow panRallyEvaluationRow = panRallyCurrent.panListRow.get(i);
 //                            if (!panRallyEvaluationRow.txtSkill.getText().isEmpty()) {
 //                                RallyEvaluationSkillScore rs = new RallyEvaluationSkillScore();
 //                                rs.setSkill(panRallyEvaluationRow.txtSkill.getText());
@@ -2228,8 +2228,8 @@ public class PanMatchSet extends javax.swing.JPanel {
 //                    if (idInserted != 0) {
 //                        totalRallies++;
 //                        currentRally++;
-//                        PanRallyBut pnBut = new PanRallyBut();
-//                        pnBut.setRally(currentRally, matchEvaluationId, initialPositionMap, evaluationType);
+//            PanRallyBut pnBut = new PanRallyBut();
+//            pnBut.setRally(currentRally, matchEvaluationId, initialPositionMap, evaluationType);
 //                        panRallyList.add(pnBut);
 //                        validate();
 //                        repaint();
@@ -2291,7 +2291,7 @@ public class PanMatchSet extends javax.swing.JPanel {
 //                }
 //                break;
 //
-//        }
+        }
     }//GEN-LAST:event_butNextMouseClicked
 
     public void showRallyList() {

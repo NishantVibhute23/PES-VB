@@ -12,9 +12,7 @@ import com.vollyball.dialog.CreateCompetitionDialog;
 import com.vollyball.renderer.EditButtonRenderer;
 import com.vollyball.renderer.TableHeaderRenderer;
 import com.vollyball.renderer.ViewButtonRenderer;
-import com.vollyball.training.dialog.CreateTrainingDialog;
 import com.vollyball.training.panel.PanTrainingBestScorer;
-import com.vollyball.training.panel.PanTrainingSkillWiseReport;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -135,11 +133,11 @@ public class PanCompetitionList extends javax.swing.JPanel {
                             Controller.frmDashBoard.panContent.add(Controller.panCompetitionReportHome, BorderLayout.CENTER);
                         } else if (selectedCol == 7) {
                             id = (int) tbComp.getValueAt(selectedRow, 0);
-                            CreateCompetitionDialog obj = new CreateCompetitionDialog();
+                            Controller.createCompetitionDialog = new CreateCompetitionDialog();
 
-                            obj.setValues(id);
-                            obj.init();
-                            obj.show();
+                            Controller.createCompetitionDialog.setValues(id);
+                            Controller.createCompetitionDialog.init();
+                            Controller.createCompetitionDialog.show();
                         }
 
                     }
@@ -257,7 +255,7 @@ public class PanCompetitionList extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblNewCompetition = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         trainingLabel = new javax.swing.JLabel();
@@ -306,13 +304,13 @@ public class PanCompetitionList extends javax.swing.JPanel {
         jPanel5.setBackground(new java.awt.Color(57, 74, 108));
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("New Competition");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblNewCompetition.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblNewCompetition.setForeground(new java.awt.Color(255, 255, 255));
+        lblNewCompetition.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNewCompetition.setText("New Competition");
+        lblNewCompetition.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                lblNewCompetitionMouseClicked(evt);
             }
         });
 
@@ -320,11 +318,11 @@ public class PanCompetitionList extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+            .addComponent(lblNewCompetition, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+            .addComponent(lblNewCompetition, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -528,12 +526,12 @@ public class PanCompetitionList extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void lblNewCompetitionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewCompetitionMouseClicked
         // TODO add your handling code here:
         Controller.createCompetitionDialog = new CreateCompetitionDialog();
         Controller.createCompetitionDialog.init();
         Controller.createCompetitionDialog.show();
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_lblNewCompetitionMouseClicked
 
     private void cmbTeam2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTeam2ActionPerformed
         // TODO add your handling code here:
@@ -546,19 +544,18 @@ public class PanCompetitionList extends javax.swing.JPanel {
 
     private void trainingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trainingLabelMouseClicked
         // TODO add your handling code here:
-//        Controller.panTrainingBestScorer = new PanTrainingBestScorer();
-        PanTrainingSkillWiseReport panTrainingSkillWiseReport = new PanTrainingSkillWiseReport();
-        Dimension dim = Controller.frmDashBoard.panContent.getSize();
+        Controller.panTrainingBestScorer = new PanTrainingBestScorer();
+//        PanTrainingSkillWiseReport panTrainingSkillWiseReport = new PanTrainingSkillWiseReport();
+//        Dimension dim = Controller.frmDashBoard.panContent.getSize();
         Controller.panCompetitionList.setVisible(false);
         Controller.frmDashBoard.panContent.removeAll();
-        Controller.frmDashBoard.panContent.add(panTrainingSkillWiseReport, BorderLayout.CENTER);
+        Controller.frmDashBoard.panContent.add(Controller.panTrainingBestScorer, BorderLayout.CENTER);
     }//GEN-LAST:event_trainingLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbPhase;
     private javax.swing.JComboBox cmbTeam1;
     private javax.swing.JComboBox cmbTeam2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -573,6 +570,7 @@ public class PanCompetitionList extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel lblNewCompetition;
     private javax.swing.JPanel panListContent;
     private javax.swing.JLabel trainingLabel;
     // End of variables declaration//GEN-END:variables

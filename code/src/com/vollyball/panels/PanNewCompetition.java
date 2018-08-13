@@ -89,7 +89,7 @@ public class PanNewCompetition extends javax.swing.JPanel {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH) + 1;
         day = calendar.get(Calendar.DAY_OF_MONTH);
-        
+
         modelEnd.setDate(year, month, day);
         modelEnd.setSelected(true);
         String group[] = cb.getAgeGroup().split(" ");
@@ -444,10 +444,10 @@ public class PanNewCompetition extends javax.swing.JPanel {
 
                 if (count != 0) {
 
-//                    Controller.createCompetitionDialog.close();
+                    Controller.createCompetitionDialog.close();
 
                     Controller.panCompetitionList.refresh();
-                    JOptionPane.showMessageDialog(this, "Updated Competition '" + cb.getName()+ "'");
+                    JOptionPane.showMessageDialog(this, "Updated Competition '" + cb.getName() + "'");
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed");

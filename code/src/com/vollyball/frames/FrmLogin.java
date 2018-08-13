@@ -268,12 +268,12 @@ public class FrmLogin extends javax.swing.JFrame {
         int i = lg.checkLogin(user, pass);
 
         if (i != 0) {
-         Controller.userBean=lg.getUserDetails(user);
+            Controller.userBean = lg.getUserDetails(user);
 //            JOptionPane.showMessageDialog(this, "Success");
             this.dispose();
             Controller.frmDashBoard = new FrmDashboard();
-            System.out.println("name"+Controller.userBean.getUserName());
-            Controller.frmDashBoard.lblName.setText(Controller.userBean.getUserName());
+//            System.out.println("name"+Controller.userBean.getUserName());
+            Controller.frmDashBoard.lblName.setText(Controller.userBean.getUserName().equals("") || Controller.userBean.getUserName() == null ? "User" : Controller.userBean.getUserName());
 
         } else {
             JOptionPane.showMessageDialog(this, "Failed");
