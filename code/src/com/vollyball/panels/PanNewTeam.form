@@ -723,7 +723,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel15" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jPanel15" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblSrNo1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtPlayerName1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -733,7 +733,7 @@
                           </Group>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel17" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jPanel17" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblSrNo2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtPlayerName2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -743,7 +743,7 @@
                           </Group>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel18" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jPanel18" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblSrNo3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtPlayerName3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -753,7 +753,7 @@
                           </Group>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel19" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jPanel19" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblSrNo4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtPlayerName4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -763,7 +763,7 @@
                           </Group>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel20" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jPanel20" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblSrNo5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtPlayerName5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -773,7 +773,7 @@
                           </Group>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel21" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jPanel21" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblSrNo6" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtPlayerName6" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -1479,17 +1479,12 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="lblSub" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jPanel22" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="lblSrNo7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                              <Component id="txtPlayerName7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                              <Component id="txtChest7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                              <Component id="cmbPositon7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                  <Component id="jPanel22" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblSrNo7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="txtPlayerName7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="txtChest7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="cmbPositon7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -1653,7 +1648,7 @@
                           <Component id="lblSub1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jPanel23" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="jPanel23" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblSrNo8" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="txtPlayerName8" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -1826,7 +1821,7 @@
                                   <Component id="lblSub2" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jPanel24" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="jPanel24" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="lblSrNo9" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                               <Component id="txtPlayerName9" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -1994,7 +1989,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblSub3" max="32767" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jPanel25" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jPanel25" alignment="0" max="32767" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="lblSrNo10" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtPlayerName10" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -2159,7 +2154,7 @@
                           <Component id="lblSub4" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jPanel26" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="jPanel26" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblSrNo11" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="txtPlayerName11" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -2325,7 +2320,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblSub5" max="32767" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jPanel27" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jPanel27" alignment="0" max="32767" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="lblSrNo12" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtPlayerName12" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -2493,7 +2488,7 @@
                                   <Component id="lblSub6" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jPanel28" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="jPanel28" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="lblSrNo13" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                               <Component id="txtPlayerName13" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -2661,7 +2656,7 @@
                           <Component id="lblSub7" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jPanel29" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="jPanel29" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblSrNo14" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="txtPlayerName14" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -2831,7 +2826,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="panAddPlayer" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="38" max="32767" attributes="0"/>
               </Group>
               <Component id="jPanel7" alignment="0" max="32767" attributes="0"/>
           </Group>

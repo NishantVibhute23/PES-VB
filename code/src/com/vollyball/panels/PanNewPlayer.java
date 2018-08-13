@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
@@ -27,9 +28,9 @@ import javax.swing.SwingConstants;
 
 /**
  *
- * @author nishant.vibhute
+ * @author #my
  */
-public class PanNewTeam extends javax.swing.JPanel {
+public class PanNewPlayer extends javax.swing.JPanel {
 
     List<Player> playerList;
     List<JComboBox> position = new ArrayList<>();
@@ -38,17 +39,16 @@ public class PanNewTeam extends javax.swing.JPanel {
     List<TeamRowBean> teamRow = new ArrayList<>();
     List<JPanel> rowPanels = new ArrayList<>();
     List<JLabel> lblMinusList = new ArrayList<>();
-
+    LinkedHashMap<String, Integer> teamsMap;
     int i = 0, m = 6;
 
     String message;
 
     /**
-     * Creates new form PanNewTeam
+     * Creates new form PanNewPlayer
      */
-    public PanNewTeam() {
+    public PanNewPlayer() {
         initComponents();
-
         position.add(cmbPositon1);
         position.add(cmbPositon2);
         position.add(cmbPositon3);
@@ -132,6 +132,17 @@ public class PanNewTeam extends javax.swing.JPanel {
         for (JPanel p : rowPanels) {
             p.setVisible(false);
         }
+        team1combo.addItem("Select");
+        TeamDao teamDao = new TeamDao();
+        List<Team> teams = teamDao.getTeams(Controller.competitionId);
+        teamsMap = new LinkedHashMap<>();
+
+        for (Team team : teams) {
+            teamsMap.put(team.getName(), team.getId());
+            team1combo.addItem(team.getName());
+
+        }
+
     }
 
     /**
@@ -143,32 +154,15 @@ public class PanNewTeam extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel9 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jPanel16 = new javax.swing.JPanel();
-        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
-        lblHeading = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtTeamName = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtCoachName = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtAsstCoachName = new javax.swing.JTextField();
-        txtAnalyzerName = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtMedOffName = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txtrainerName = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        txtShortCode = new javax.swing.JTextField();
+        lblHeading = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        team1combo = new javax.swing.JComboBox();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -277,8 +271,8 @@ public class PanNewTeam extends javax.swing.JPanel {
         lblSub7 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         lblSave = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
@@ -286,148 +280,14 @@ public class PanNewTeam extends javax.swing.JPanel {
         panAddPlayer = new javax.swing.JPanel();
         lblAddNew = new javax.swing.JLabel();
 
-        jLabel9.setText("jLabel9");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jLabel14.setText("jLabel14");
-
-        jLabel16.setText("jLabel16");
-
-        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
-        );
-
-        setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jPanel1.setBackground(new java.awt.Color(57, 74, 108));
+        jPanel2.setBackground(new java.awt.Color(57, 74, 108));
 
         lblHeading.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblHeading.setForeground(new java.awt.Color(255, 255, 255));
         lblHeading.setText("New Team");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblHeading, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
-                .addGap(140, 140, 140))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblHeading)
-                .addGap(10, 10, 10))
-        );
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(45, 62, 79));
-        jLabel2.setText("Team Name*");
-
-        txtTeamName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtTeamName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtTeamName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTeamNameKeyTyped(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(45, 62, 79));
-        jLabel3.setText("Coach Name*");
-
-        txtCoachName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtCoachName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtCoachName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCoachNameKeyTyped(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(45, 62, 79));
-        jLabel4.setText("Asst. Coach Name ");
-
-        txtAsstCoachName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtAsstCoachName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtAsstCoachName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtAsstCoachNameKeyTyped(evt);
-            }
-        });
-
-        txtAnalyzerName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtAnalyzerName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtAnalyzerName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtAnalyzerNameKeyTyped(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(45, 62, 79));
-        jLabel6.setText("Medical Officer Name");
-
-        txtMedOffName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtMedOffName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtMedOffName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtMedOffNameKeyTyped(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(45, 62, 79));
-        jLabel7.setText("Analyzer  Name");
-
-        txtrainerName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtrainerName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtrainerName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtrainerNameKeyTyped(evt);
-            }
-        });
-
-        jLabel18.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(45, 62, 79));
-        jLabel18.setText("Trainer Name");
-
-        jLabel20.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(45, 62, 79));
-        jLabel20.setText("Short Code*");
-
-        txtShortCode.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtShortCode.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtShortCode.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtShortCodeKeyTyped(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -435,73 +295,62 @@ public class PanNewTeam extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(10, 10, 10)
-                        .addComponent(txtTeamName))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtAnalyzerName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtShortCode, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtrainerName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMedOffName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAsstCoachName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCoachName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(19, 19, 19))
+                .addComponent(lblHeading, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                .addGap(140, 140, 140))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCoachName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel20)
-                    .addComponent(txtShortCode, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtrainerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18)
-                    .addComponent(txtAsstCoachName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtMedOffName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtAnalyzerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(lblHeading)
+                .addGap(10, 10, 10))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(45, 62, 79));
+        jLabel2.setText("Team Name*");
+
+        team1combo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        team1combo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                team1comboItemStateChanged(evt);
+            }
+        });
+        team1combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                team1comboActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(team1combo, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(team1combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -530,11 +379,11 @@ public class PanNewTeam extends javax.swing.JPanel {
         lblCaptain.setText("CAPTAIN *");
         lblCaptain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -545,8 +394,8 @@ public class PanNewTeam extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblCaptain, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblCaptain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1910,19 +1759,19 @@ public class PanNewTeam extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(panRowShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(panRowShow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -1934,15 +1783,15 @@ public class PanNewTeam extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("* Mandatory Fields");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 676, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 676, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel13)
                         .addGap(178, 178, 178)
@@ -1950,20 +1799,20 @@ public class PanNewTeam extends javax.swing.JPanel {
                         .addGap(37, 37, 37)))
                 .addGap(0, 0, 0))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel10.setBackground(new java.awt.Color(57, 74, 108));
         jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -2017,22 +1866,22 @@ public class PanNewTeam extends javax.swing.JPanel {
             .addComponent(lblCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(233, 233, 233)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(233, 233, 233))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
@@ -2065,44 +1914,65 @@ public class PanNewTeam extends javax.swing.JPanel {
             .addComponent(lblAddNew, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(panAddPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE))
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addComponent(panAddPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 701, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 893, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 43, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 43, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -2110,43 +1980,335 @@ public class PanNewTeam extends javax.swing.JPanel {
 
         playerList = new ArrayList<>();
 
-        String msg = validateFields();
-        if (!msg.isEmpty()) {
-            JOptionPane.showMessageDialog(this, msg);
-        } else {
-            msg = checkDuplicateChestNum();
-            if (!msg.isEmpty()) {
-                JOptionPane.showMessageDialog(this, msg);
-            } else {
-                TeamDao teamDao = new TeamDao();
-                Team team = new Team();
-                team.setName(txtTeamName.getText());
-                team.setShortCode(txtShortCode.getText());
-                team.setCoach(txtCoachName.getText());
-                team.setAsstCoach(txtAsstCoachName.getText());
-                team.setTrainer(txtrainerName.getText());
-                team.setMedicalOffice(txtMedOffName.getText());
-                team.setAnalyzer(txtAnalyzerName.getText());
-                team.setCompId(Controller.competitionId);
+//        String msg = validateFields();
+//        if (!msg.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, msg);
+//        } else {
+//            msg = checkDuplicateChestNum();
+//            if (!msg.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, msg);
+//            } else {
+        TeamDao teamDao = new TeamDao();
+        Team team = new Team();
+        team.setId(team1combo.getSelectedIndex());
+        team.setName((String) team1combo.getSelectedItem());
+        team.setCompId(Controller.competitionId);
 
-                for (TeamRowBean tr : teamRow) {
-                    addPlayer(tr.getName().getText(), tr.getChestnum().getText(), PlayerPosition.getIdByName(String.valueOf(tr.getPosition().getSelectedItem())).getId(), tr.getCaptain().isSelected());
-                }
-
-                team.setPlayerList(playerList);
-
-                int id = teamDao.insertTeam(team);
-
-                if (id != 0) {
-                    Controller.teamDialog.close();
-                    Controller.panTeamBestScorer.setRow(null);
-                    JOptionPane.showMessageDialog(this, "Team '" + txtTeamName.getText() + "' Created Successfully");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Failed to add team");
-                }
+        for (TeamRowBean tr : teamRow) {
+            if (tr.getName().equals("") || tr.getName() == null) {
+                break;
             }
+            addPlayer(tr.getName().getText(), tr.getChestnum().getText(), PlayerPosition.getIdByName(String.valueOf(tr.getPosition().getSelectedItem())).getId(), tr.getCaptain().isSelected());
         }
+
+        team.setPlayerList(playerList);
+
+        int id = teamDao.insertPlayer(team);
+
+        if (id != 0) {
+//            Controller.teamDialog.close();
+//            Controller.panTeamBestScorer.setRow(null);
+            JOptionPane.showMessageDialog(this, "Player Added Successfully");
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to add player");
+        }
+//            }
+//        }
     }//GEN-LAST:event_lblSaveMouseClicked
+
+    private void lblCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseClicked
+        Controller.teamDialog.close();
+    }//GEN-LAST:event_lblCancelMouseClicked
+
+    private void lblAddNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddNewMouseClicked
+        // TODO add your handling code here:
+        if (i != 0) {
+            lblMinusList.get(i - 1).setVisible(false);
+        }
+        rowPanels.get(i).setVisible(true);
+        i++;
+        m++;
+        if (i == 8) {
+            panAddPlayer.setVisible(false);
+        }
+    }//GEN-LAST:event_lblAddNewMouseClicked
+
+    private void lblSub7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub7MouseClicked
+        // TODO add your handling code here:
+        hidePanel(7);
+    }//GEN-LAST:event_lblSub7MouseClicked
+
+    private void captain14ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain14ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain14ItemStateChanged
+
+    private void txtChest14KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest14KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest14KeyTyped
+
+    private void txtChest14FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest14FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest14FocusLost
+
+    private void txtPlayerName14KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName14KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName14KeyTyped
+
+    private void lblSub6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub6MouseClicked
+        // TODO add your handling code here:
+        hidePanel(6);
+    }//GEN-LAST:event_lblSub6MouseClicked
+
+    private void captain13ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain13ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain13ItemStateChanged
+
+    private void txtChest13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest13KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest13KeyTyped
+
+    private void txtChest13FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest13FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest13FocusLost
+
+    private void txtPlayerName13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName13KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName13KeyTyped
+
+    private void lblSub5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub5MouseClicked
+        // TODO add your handling code here:
+        hidePanel(5);
+    }//GEN-LAST:event_lblSub5MouseClicked
+
+    private void captain12ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain12ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain12ItemStateChanged
+
+    private void txtChest12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest12KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest12KeyTyped
+
+    private void txtChest12FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest12FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest12FocusLost
+
+    private void txtPlayerName12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName12KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName12KeyTyped
+
+    private void lblSub4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub4MouseClicked
+        // TODO add your handling code here:
+        hidePanel(4);
+    }//GEN-LAST:event_lblSub4MouseClicked
+
+    private void captain11ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain11ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain11ItemStateChanged
+
+    private void txtChest11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest11KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest11KeyTyped
+
+    private void txtChest11FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest11FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest11FocusLost
+
+    private void txtPlayerName11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName11KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName11KeyTyped
+
+    private void lblSub3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub3MouseClicked
+        // TODO add your handling code here:
+        hidePanel(3);
+    }//GEN-LAST:event_lblSub3MouseClicked
+
+    private void captain10ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain10ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain10ItemStateChanged
+
+    private void txtChest10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest10KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest10KeyTyped
+
+    private void txtChest10FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest10FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest10FocusLost
+
+    private void txtPlayerName10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName10KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName10KeyTyped
+
+    private void lblSub2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub2MouseClicked
+        // TODO add your handling code here:
+        hidePanel(2);
+    }//GEN-LAST:event_lblSub2MouseClicked
+
+    private void captain9ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain9ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain9ItemStateChanged
+
+    private void txtPlayerName9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName9KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName9KeyTyped
+
+    private void txtChest9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest9KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest9KeyTyped
+
+    private void txtChest9FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest9FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest9FocusLost
+
+    private void lblSub1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub1MouseClicked
+        // TODO add your handling code here:
+        hidePanel(1);
+    }//GEN-LAST:event_lblSub1MouseClicked
+
+    private void captain8ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain8ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain8ItemStateChanged
+
+    private void txtChest8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest8KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest8KeyTyped
+
+    private void txtChest8FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest8FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest8FocusLost
+
+    private void txtPlayerName8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName8KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName8KeyTyped
+
+    private void lblSubMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSubMouseClicked
+        // TODO add your handling code here:
+        hidePanel(0);
+    }//GEN-LAST:event_lblSubMouseClicked
+
+    private void captain7ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain7ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain7ItemStateChanged
+
+    private void cmbPositon7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPositon7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPositon7ActionPerformed
+
+    private void txtChest7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest7KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest7KeyTyped
+
+    private void txtChest7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest7FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest7FocusLost
+
+    private void txtPlayerName7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName7KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName7KeyTyped
+
+    private void txtChest6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest6KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest6KeyTyped
+
+    private void txtChest6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest6FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest6FocusLost
+
+    private void txtPlayerName6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName6KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName6KeyTyped
+
+    private void captain6ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain6ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain6ItemStateChanged
+
+    private void txtChest5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest5KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest5KeyTyped
+
+    private void txtChest5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest5FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest5FocusLost
+
+    private void txtPlayerName5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName5KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName5KeyTyped
+
+    private void captain5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain5ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain5ItemStateChanged
+
+    private void txtChest4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest4KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest4KeyTyped
+
+    private void txtChest4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest4FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest4FocusLost
+
+    private void txtPlayerName4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName4KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName4KeyTyped
+
+    private void captain4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain4ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain4ItemStateChanged
+
+    private void txtChest3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest3KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest3KeyTyped
+
+    private void txtChest3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest3FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest3FocusLost
+
+    private void txtPlayerName3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName3KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName3KeyTyped
+
+    private void captain3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain3ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain3ItemStateChanged
+
+    private void captain2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain2ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain2ItemStateChanged
+
+    private void txtChest2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest2KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest2KeyTyped
+
+    private void txtChest2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest2FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest2FocusLost
+
+    private void txtPlayerName2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName2KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName2KeyTyped
+
+    private void captain1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain1ItemStateChanged
+        enabledDisabledCheckBox(evt);
+    }//GEN-LAST:event_captain1ItemStateChanged
+
+    private void txtChest1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest1KeyTyped
+        checkNumber(evt);
+    }//GEN-LAST:event_txtChest1KeyTyped
+
+    private void txtChest1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest1FocusLost
+        setNumber(evt);
+    }//GEN-LAST:event_txtChest1FocusLost
+
+    private void txtPlayerName1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName1KeyTyped
+        checkCharacter(evt);
+    }//GEN-LAST:event_txtPlayerName1KeyTyped
+
+    private void team1comboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_team1comboItemStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_team1comboItemStateChanged
+
+    private void team1comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_team1comboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_team1comboActionPerformed
 
     public String validate(JTextField jf) {
         String regexName = "^[a-zA-Z ]*$";
@@ -2229,376 +2391,41 @@ public class PanNewTeam extends javax.swing.JPanel {
     }
 
     public String validateFields() {
-        String msg = "";
+        String msg = "ttest";
         boolean isCaptainSelected = false;
         int k = 1;
 
-        if (!validate(txtTeamName).isEmpty()) {
-            msg = msg + "Name" + message + "\n";
-            txtTeamName.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-        }
-        if (!validate(txtShortCode).isEmpty()) {
-            msg = msg + "ShortCode" + message + "\n";
-            txtShortCode.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-        }
-        if (!validate(txtCoachName).isEmpty()) {
-            msg = msg + "Coach Name" + message + "\n";
-            txtCoachName.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-
-        }
-
-        for (TeamRowBean tr : teamRow) {
-            if (k <= m) {
-                if (!validate(tr.getName()).isEmpty()) {
-                    msg = msg + "Player Name " + k + " :" + message + "\n";
-                    tr.getName().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-                }
-                if (!validateNumber(tr.getChestnum()).isEmpty()) {
-                    msg = msg + "Chest Num " + k + " : " + message + "\n";
-                    tr.getChestnum().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-                }
-                if (tr.getPosition().getSelectedIndex() == 0) {
-                    msg = msg + "Position " + k + " : Select position of player" + "\n";
-                    tr.getPosition().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-                }
-                if (!isCaptainSelected) {
-                    if (tr.getCaptain().isSelected()) {
-                        isCaptainSelected = true;
-                    }
-                }
-            }
-            k++;
-
-        }
-
-        if (!isCaptainSelected) {
-
-            msg = msg + "Select Atleast One Captain";
-            lblCaptain.setForeground(Color.red);
-        }
+//        for (TeamRowBean tr : teamRow) {
+//            if (k <= m) {
+//                if (!validate(tr.getName()).isEmpty()) {
+//                    msg = msg + "Player Name " + k + " :" + message + "\n";
+//                    tr.getName().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+//                }
+//                if (!validateNumber(tr.getChestnum()).isEmpty()) {
+//                    msg = msg + "Chest Num " + k + " : " + message + "\n";
+//                    tr.getChestnum().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+//                }
+//                if (tr.getPosition().getSelectedIndex() == 0) {
+//                    msg = msg + "Position " + k + " : Select position of player" + "\n";
+//                    tr.getPosition().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
+//                }
+//                if (!isCaptainSelected) {
+//                    if (tr.getCaptain().isSelected()) {
+//                        isCaptainSelected = true;
+//                    }
+//                }
+//            }
+//            k++;
+//
+//        }
+//        if (!isCaptainSelected) {
+//
+//            msg = msg + "Select Atleast One Captain";
+//            lblCaptain.setForeground(Color.red);
+//        }
         return msg;
 
     }
-
-    private void lblCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseClicked
-        Controller.teamDialog.close();
-    }//GEN-LAST:event_lblCancelMouseClicked
-
-    private void txtrainerNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrainerNameKeyTyped
-
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtrainerNameKeyTyped
-
-    private void txtTeamNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTeamNameKeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtTeamNameKeyTyped
-
-    private void txtAsstCoachNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAsstCoachNameKeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtAsstCoachNameKeyTyped
-
-    private void txtAnalyzerNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnalyzerNameKeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtAnalyzerNameKeyTyped
-
-    private void txtMedOffNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedOffNameKeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtMedOffNameKeyTyped
-
-    private void txtShortCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtShortCodeKeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtShortCodeKeyTyped
-
-    private void txtCoachNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCoachNameKeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtCoachNameKeyTyped
-
-    private void txtChest1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest1FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest1FocusLost
-
-    private void captain1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain1ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain1ItemStateChanged
-
-    private void txtChest2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest2FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest2FocusLost
-
-    private void captain2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain2ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain2ItemStateChanged
-
-    private void captain3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain3ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain3ItemStateChanged
-
-    private void txtChest3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest3FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest3FocusLost
-
-    private void captain4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain4ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain4ItemStateChanged
-
-    private void txtChest4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest4FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest4FocusLost
-
-    private void captain5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain5ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain5ItemStateChanged
-
-    private void txtChest5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest5FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest5FocusLost
-
-    private void captain6ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain6ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain6ItemStateChanged
-
-    private void txtChest6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest6FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest6FocusLost
-
-    private void captain7ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain7ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain7ItemStateChanged
-
-    private void txtChest7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest7FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest7FocusLost
-
-    private void captain8ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain8ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain8ItemStateChanged
-
-    private void txtChest8FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest8FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest8FocusLost
-
-    private void captain9ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain9ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain9ItemStateChanged
-
-    private void txtChest9FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest9FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest9FocusLost
-
-    private void captain10ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain10ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain10ItemStateChanged
-
-    private void txtChest10FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest10FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest10FocusLost
-
-    private void captain11ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain11ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain11ItemStateChanged
-
-    private void txtChest11FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest11FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest11FocusLost
-
-    private void captain12ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain12ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain12ItemStateChanged
-
-    private void txtChest12FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest12FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest12FocusLost
-
-    private void txtPlayerName1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName1KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName1KeyTyped
-
-    private void txtPlayerName2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName2KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName2KeyTyped
-
-    private void txtPlayerName3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName3KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName3KeyTyped
-
-    private void txtPlayerName4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName4KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName4KeyTyped
-
-    private void txtPlayerName5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName5KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName5KeyTyped
-
-    private void txtPlayerName6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName6KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName6KeyTyped
-
-    private void txtPlayerName7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName7KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName7KeyTyped
-
-    private void txtPlayerName8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName8KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName8KeyTyped
-
-    private void txtPlayerName9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName9KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName9KeyTyped
-
-    private void txtPlayerName10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName10KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName10KeyTyped
-
-    private void txtPlayerName11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName11KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName11KeyTyped
-
-    private void txtPlayerName12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName12KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName12KeyTyped
-
-    private void txtChest1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest1KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest1KeyTyped
-
-    private void txtChest2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest2KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest2KeyTyped
-
-    private void txtChest3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest3KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest3KeyTyped
-
-    private void txtChest4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest4KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest4KeyTyped
-
-    private void txtChest5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest5KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest5KeyTyped
-
-    private void txtChest6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest6KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest6KeyTyped
-
-    private void txtChest7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest7KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest7KeyTyped
-
-    private void txtChest8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest8KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest8KeyTyped
-
-    private void txtChest9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest9KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest9KeyTyped
-
-    private void txtChest10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest10KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest10KeyTyped
-
-    private void txtChest11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest11KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest11KeyTyped
-
-    private void txtChest12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest12KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest12KeyTyped
-
-    private void txtPlayerName13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName13KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName13KeyTyped
-
-    private void txtChest13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest13KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest13KeyTyped
-
-    private void txtChest13FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest13FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest13FocusLost
-
-    private void captain13ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain13ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain13ItemStateChanged
-
-    private void captain14ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_captain14ItemStateChanged
-        enabledDisabledCheckBox(evt);
-    }//GEN-LAST:event_captain14ItemStateChanged
-
-    private void txtChest14KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChest14KeyTyped
-        checkNumber(evt);
-    }//GEN-LAST:event_txtChest14KeyTyped
-
-    private void txtChest14FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtChest14FocusLost
-        setNumber(evt);
-    }//GEN-LAST:event_txtChest14FocusLost
-
-    private void txtPlayerName14KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerName14KeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtPlayerName14KeyTyped
-
-    private void lblAddNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddNewMouseClicked
-        // TODO add your handling code here:
-        if (i != 0) {
-            lblMinusList.get(i - 1).setVisible(false);
-        }
-        rowPanels.get(i).setVisible(true);
-        i++;
-        m++;
-        if (i == 8) {
-            panAddPlayer.setVisible(false);
-        }
-    }//GEN-LAST:event_lblAddNewMouseClicked
-
-    private void lblSubMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSubMouseClicked
-        // TODO add your handling code here:
-        hidePanel(0);
-    }//GEN-LAST:event_lblSubMouseClicked
-
-    private void lblSub1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub1MouseClicked
-        // TODO add your handling code here:
-        hidePanel(1);
-    }//GEN-LAST:event_lblSub1MouseClicked
-
-    private void lblSub2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub2MouseClicked
-        // TODO add your handling code here:
-        hidePanel(2);
-
-    }//GEN-LAST:event_lblSub2MouseClicked
-
-    private void lblSub3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub3MouseClicked
-        // TODO add your handling code here:
-        hidePanel(3);
-
-    }//GEN-LAST:event_lblSub3MouseClicked
-
-    private void lblSub4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub4MouseClicked
-        // TODO add your handling code here:
-        hidePanel(4);
-
-    }//GEN-LAST:event_lblSub4MouseClicked
-
-    private void lblSub5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub5MouseClicked
-        // TODO add your handling code here:
-        hidePanel(5);
-
-    }//GEN-LAST:event_lblSub5MouseClicked
-
-    private void lblSub6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub6MouseClicked
-        // TODO add your handling code here:
-        hidePanel(6);
-
-    }//GEN-LAST:event_lblSub6MouseClicked
-
-    private void lblSub7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSub7MouseClicked
-        // TODO add your handling code here:
-        hidePanel(7);
-
-    }//GEN-LAST:event_lblSub7MouseClicked
-
-    private void cmbPositon7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPositon7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbPositon7ActionPerformed
 
     public void hidePanel(int j) {
         if (j != 0) {
@@ -2673,28 +2500,17 @@ public class PanNewTeam extends javax.swing.JPanel {
     private javax.swing.JComboBox cmbPositon7;
     private javax.swing.JComboBox cmbPositon8;
     private javax.swing.JComboBox cmbPositon9;
-    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
@@ -2744,6 +2560,7 @@ public class PanNewTeam extends javax.swing.JPanel {
     private javax.swing.JLabel lblSub7;
     private javax.swing.JPanel panAddPlayer;
     private javax.swing.JPanel panRowShow;
+    public javax.swing.JComboBox team1combo;
     private javax.swing.JPanel trRow10;
     private javax.swing.JPanel trRow11;
     private javax.swing.JPanel trRow12;
@@ -2752,8 +2569,6 @@ public class PanNewTeam extends javax.swing.JPanel {
     private javax.swing.JPanel trRow7;
     private javax.swing.JPanel trRow8;
     private javax.swing.JPanel trRow9;
-    private javax.swing.JTextField txtAnalyzerName;
-    private javax.swing.JTextField txtAsstCoachName;
     private javax.swing.JTextField txtChest1;
     private javax.swing.JTextField txtChest10;
     private javax.swing.JTextField txtChest11;
@@ -2768,8 +2583,6 @@ public class PanNewTeam extends javax.swing.JPanel {
     private javax.swing.JTextField txtChest7;
     private javax.swing.JTextField txtChest8;
     private javax.swing.JTextField txtChest9;
-    private javax.swing.JTextField txtCoachName;
-    private javax.swing.JTextField txtMedOffName;
     private javax.swing.JTextField txtPlayerName1;
     private javax.swing.JTextField txtPlayerName10;
     private javax.swing.JTextField txtPlayerName11;
@@ -2784,8 +2597,5 @@ public class PanNewTeam extends javax.swing.JPanel {
     private javax.swing.JTextField txtPlayerName7;
     private javax.swing.JTextField txtPlayerName8;
     private javax.swing.JTextField txtPlayerName9;
-    private javax.swing.JTextField txtShortCode;
-    private javax.swing.JTextField txtTeamName;
-    private javax.swing.JTextField txtrainerName;
     // End of variables declaration//GEN-END:variables
 }
