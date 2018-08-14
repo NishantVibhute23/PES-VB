@@ -118,7 +118,6 @@ public class PanNewMatch extends javax.swing.JPanel {
             teamsMap.put(team.getName(), team.getId());
             team1combo.addItem(team.getName());
             team2combo.addItem(team.getName());
-
         }
 
         String time[] = mb.getTime().split(":");
@@ -127,7 +126,7 @@ public class PanNewMatch extends javax.swing.JPanel {
 
         team1combo.setSelectedItem(mb.getTeam1name());
         team2combo.setSelectedItem(mb.getTeam2name());
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         int year;
         int month;
@@ -137,7 +136,7 @@ public class PanNewMatch extends javax.swing.JPanel {
         date = sdf.parse(mb.getDate());
         calendar.setTime(date);
         year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH) + 1;
+        month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         modelStart.setDate(year, month, day);
         modelStart.setSelected(true);
@@ -147,10 +146,10 @@ public class PanNewMatch extends javax.swing.JPanel {
             cmbPhase.addItem(dir.getName());
             //cmbSubPhase.setVisible(false);
         }
-        String phase[]=mb.getPhase().split("-");
-        
+        String phase[] = mb.getPhase().split("-");
+
         cmbPhase.setSelectedItem(phase[0]);
-        if(phase.length!=1){
+        if (phase.length != 1) {
             cmbSubPhase.setSelectedItem(phase[1]);
         }
     }

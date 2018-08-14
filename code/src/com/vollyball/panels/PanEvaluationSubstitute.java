@@ -12,11 +12,13 @@ import com.vollyball.bean.SetSubstitution;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.RallyDao;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -26,6 +28,8 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
 
     public LinkedHashMap<Integer, Player> initialPositionMap;
     public LinkedHashMap<Integer, Player> substituePositionMap;
+    LinkedHashMap<JLabel, JPanel> mapInPlayerLabel = new LinkedHashMap<JLabel, JPanel>();
+    LinkedHashMap<JLabel, JPanel> mapOutPlayerLabel = new LinkedHashMap<JLabel, JPanel>();
     public List<JLabel> inPlayerLable = new ArrayList<>();
     public List<JLabel> outPlayerLable = new ArrayList<>();
     RallyDao rallyDao = new RallyDao();
@@ -42,7 +46,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         initComponents();
         initialPositionMap = new LinkedHashMap<>();
         substituePositionMap = new LinkedHashMap<>();
-        substituePositionMap.putAll(initialPositionMap);
+
         this.ms = ms;
         LinkedHashMap<Integer, Player> latestPositionMap = rallyDao.getLatestMatchSetRotationOrder(ms.getId());
 
@@ -62,9 +66,36 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         outPlayerLable.add(lblOut6);
         outPlayerLable.add(lblOut7);
         outPlayerLable.add(lblOut8);
+
+        mapInPlayerLabel.put(lblIn1, panIn1);
+        mapInPlayerLabel.put(lblIn2, panIn2);
+        mapInPlayerLabel.put(lblIn3, panIn3);
+        mapInPlayerLabel.put(lblIn4, panIn4);
+        mapInPlayerLabel.put(lblIn5, panIn5);
+        mapInPlayerLabel.put(lblIn6, panIn6);
+        mapInPlayerLabel.put(lblIn7, panIn7);
+
+        mapOutPlayerLabel.put(lblOut1, panOut1);
+        mapOutPlayerLabel.put(lblOut2, panOut2);
+        mapOutPlayerLabel.put(lblOut3, panOut3);
+        mapOutPlayerLabel.put(lblOut4, panOut4);
+        mapOutPlayerLabel.put(lblOut5, panOut5);
+        mapOutPlayerLabel.put(lblOut6, panOut6);
+        mapOutPlayerLabel.put(lblOut7, panOut7);
+        mapOutPlayerLabel.put(lblOut8, panOut8);
+
+        for (Map.Entry<JLabel, JPanel> entry : mapInPlayerLabel.entrySet()) {
+            entry.getValue().setVisible(false);
+        }
+
+        for (Map.Entry<JLabel, JPanel> entry : mapOutPlayerLabel.entrySet()) {
+            entry.getValue().setVisible(false);
+        }
+
         for (SetRotationOrder s : ms.getRotationOrder()) {
             initialPositionMap.put(s.getPosition(), Controller.panMatchSet.playerMap.get(s.getPlayerId()));
         }
+        substituePositionMap.putAll(initialPositionMap);
         for (SetSubstitution s : ms.getSetSubstitutions()) {
             String cNo = s.getSubstitutePlayerId() == 0 ? "" : Controller.panMatchSet.playerMap.get(s.getSubstitutePlayerId()).getChestNo();
             Player p = s.getSubstitutePlayerId() == 0 ? null : Controller.panMatchSet.playerMap.get(s.getSubstitutePlayerId());
@@ -129,8 +160,8 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
 
                 if (entry.getKey() != 7) {
                     Player pl = entry.getValue();
-                    Player plrally = latestPositionMap.get(entry.getKey());
-                    if (player.getId() == pl.getId() || player.getId() == plrally.getId()) {
+//                    Player plrally = latestPositionMap.get(entry.getKey());
+                    if (player.getId() == pl.getId()) {
                         exist = true;
                         break;
                     }
@@ -149,9 +180,12 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
             }
             if (!exist) {
                 outPlayerLable.get(out).setText(player.getChestNo());
+                mapOutPlayerLabel.get(outPlayerLable.get(out)).setVisible(true);
+
                 out++;
             } else {
                 inPlayerLable.get(in).setText(player.getChestNo());
+                mapInPlayerLabel.get(inPlayerLable.get(in)).setVisible(true);
                 in++;
             }
 //
@@ -285,9 +319,9 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         lblIn1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblIn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIn1.setText("1");
-        lblIn1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                lblIn1KeyPressed(evt);
+        lblIn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIn1MouseClicked(evt);
             }
         });
 
@@ -318,7 +352,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         panIn2.setLayout(panIn2Layout);
         panIn2Layout.setHorizontalGroup(
             panIn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblIn2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
         panIn2Layout.setVerticalGroup(
             panIn2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,7 +375,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         panIn3.setLayout(panIn3Layout);
         panIn3Layout.setHorizontalGroup(
             panIn3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblIn3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
         panIn3Layout.setVerticalGroup(
             panIn3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,7 +398,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         panIn4.setLayout(panIn4Layout);
         panIn4Layout.setHorizontalGroup(
             panIn4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIn4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblIn4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
         panIn4Layout.setVerticalGroup(
             panIn4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,7 +421,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         panIn5.setLayout(panIn5Layout);
         panIn5Layout.setHorizontalGroup(
             panIn5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIn5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblIn5, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
         panIn5Layout.setVerticalGroup(
             panIn5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,7 +444,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         panIn6.setLayout(panIn6Layout);
         panIn6Layout.setHorizontalGroup(
             panIn6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIn6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblIn6, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
         panIn6Layout.setVerticalGroup(
             panIn6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1169,9 +1203,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
                                 .addComponent(ro2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ro3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
-                                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jPanel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1252,8 +1284,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1261,9 +1292,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1271,97 +1300,150 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         MatchDao matchDao = new MatchDao();
-        Player pIn = Controller.panMatchSet.ChestMap.get(outChestNo);
+        Player pIn = Controller.panMatchSet.ChestMap.get(chestNo);
         Player pOut = Controller.panMatchSet.ChestMap.get(outChestNo);
         String score = Controller.panMatchSet.homeScore + " : " + Controller.panMatchSet.opponentScore;
-        int id = matchDao.updateSubstitution(pOut.getId(), score, position, ms.getId());
+        int id = 0;
+        if (pIn.equals(su1ChestNo)
+                || pIn.equals(su2ChestNo)
+                || pIn.equals(su3ChestNo)
+                || pIn.equals(su4ChestNo)
+                || pIn.equals(su5ChestNo)
+                || pIn.equals(su6ChestNo)) {
+
+            id = matchDao.updateSubstitutionPoint2(score, position, ms.getId());
+
+        } else {
+            id = matchDao.updateSubstitution(pOut.getId(), score, position, ms.getId());
+
+        }
+
         if (id != 0) {
             for (Map.Entry<Integer, Player> entry : initialPositionMap.entrySet()) {
                 Player player = entry.getValue();
-                if (player.getChestNo().equals(pIn.getChestNo())) {
-                    initialPositionMap.put(entry.getKey(), pIn);
+                if (player.getChestNo().equals(pOut.getChestNo())) {
+                    initialPositionMap.put(entry.getKey(), pOut);
                 }
             }
         }
+
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void lblIn1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblIn1KeyPressed
-        // TODO add your handling code here:
-        position = 1;
-        chestNo = lblIn1.getText();
+    public void setInPlyerHighlight(JLabel lbl) {
+        for (Map.Entry<JLabel, JPanel> entry : mapInPlayerLabel.entrySet()) {
 
-    }//GEN-LAST:event_lblIn1KeyPressed
+            if (lbl == entry.getKey()) {
+                mapInPlayerLabel.get(entry.getKey()).setBackground(Color.RED);
+
+            } else {
+                mapInPlayerLabel.get(entry.getKey()).setBackground(Color.WHITE);
+            }
+
+        }
+    }
+
+    public void setOutPlyerHighlight(JLabel lbl) {
+        for (Map.Entry<JLabel, JPanel> entry : mapOutPlayerLabel.entrySet()) {
+
+            if (lbl == entry.getKey()) {
+                mapOutPlayerLabel.get(entry.getKey()).setBackground(Color.GREEN);
+
+            } else {
+                mapOutPlayerLabel.get(entry.getKey()).setBackground(Color.WHITE);
+            }
+
+        }
+    }
 
     private void lblIn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIn2MouseClicked
         // TODO add your handling code here:
         position = 2;
         chestNo = lblIn2.getText();
+        setInPlyerHighlight(lblIn2);
     }//GEN-LAST:event_lblIn2MouseClicked
 
     private void lblIn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIn3MouseClicked
         // TODO add your handling code here:
-
         position = 3;
         chestNo = lblIn3.getText();
+        setInPlyerHighlight(lblIn3);
     }//GEN-LAST:event_lblIn3MouseClicked
 
     private void lblIn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIn4MouseClicked
         // TODO add your handling code here:
         position = 4;
         chestNo = lblIn4.getText();
+        setInPlyerHighlight(lblIn4);
     }//GEN-LAST:event_lblIn4MouseClicked
 
     private void lblIn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIn5MouseClicked
         // TODO add your handling code here:
         position = 5;
         chestNo = lblIn5.getText();
+        setInPlyerHighlight(lblIn5);
     }//GEN-LAST:event_lblIn5MouseClicked
 
     private void lblIn6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIn6MouseClicked
         // TODO add your handling code here:
         position = 6;
         chestNo = lblIn6.getText();
+        setInPlyerHighlight(lblIn6);
     }//GEN-LAST:event_lblIn6MouseClicked
 
     private void lblOut1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOut1MouseClicked
         // TODO add your handling code here:
         outChestNo = lblOut1.getText();
+        setOutPlyerHighlight(lblOut1);
     }//GEN-LAST:event_lblOut1MouseClicked
 
     private void lblOut2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOut2MouseClicked
         // TODO add your handling code here:
         outChestNo = lblOut2.getText();
+        setOutPlyerHighlight(lblOut2);
     }//GEN-LAST:event_lblOut2MouseClicked
 
     private void lblOut3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOut3MouseClicked
         // TODO add your handling code here:
         outChestNo = lblOut3.getText();
+        setOutPlyerHighlight(lblOut3);
     }//GEN-LAST:event_lblOut3MouseClicked
 
     private void lblOut4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOut4MouseClicked
         // TODO add your handling code here:
         outChestNo = lblOut4.getText();
+        setOutPlyerHighlight(lblOut4);
     }//GEN-LAST:event_lblOut4MouseClicked
 
     private void lblOut5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOut5MouseClicked
         // TODO add your handling code here:
         outChestNo = lblOut5.getText();
+        setOutPlyerHighlight(lblOut5);
     }//GEN-LAST:event_lblOut5MouseClicked
 
     private void lblOut6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOut6MouseClicked
         // TODO add your handling code here:
         outChestNo = lblOut6.getText();
+        setOutPlyerHighlight(lblOut6);
     }//GEN-LAST:event_lblOut6MouseClicked
 
     private void lblOut7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOut7MouseClicked
         // TODO add your handling code here:
         outChestNo = lblOut7.getText();
+        setOutPlyerHighlight(lblOut7);
     }//GEN-LAST:event_lblOut7MouseClicked
 
     private void lblOut8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOut8MouseClicked
         // TODO add your handling code here:
         outChestNo = lblOut8.getText();
+        setOutPlyerHighlight(lblOut8);
     }//GEN-LAST:event_lblOut8MouseClicked
+
+    private void lblIn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIn1MouseClicked
+        // TODO add your handling code here:
+        position = 1;
+        chestNo = lblIn1.getText();
+        setInPlyerHighlight(lblIn1);
+    }//GEN-LAST:event_lblIn1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel but1;

@@ -22,7 +22,6 @@
               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -32,10 +31,7 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel2" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="jPanel4" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel4" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -228,7 +224,7 @@
                     <Property name="text" type="java.lang.String" value="1"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="lblIn1KeyPressed"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblIn1MouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -248,7 +244,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblIn2" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblIn2" alignment="0" pref="40" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -287,7 +283,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblIn3" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblIn3" alignment="0" pref="40" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -326,7 +322,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblIn4" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblIn4" alignment="0" pref="40" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -365,7 +361,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblIn5" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblIn5" alignment="0" pref="40" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -404,7 +400,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblIn6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblIn6" alignment="0" pref="40" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -1030,10 +1026,7 @@
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="ro3" min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jPanel27" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jPanel27" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
