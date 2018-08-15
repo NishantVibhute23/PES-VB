@@ -22,6 +22,13 @@ public class CreateTeamDialog {
 
     private JFrame parentFrame;
     private JDialog dialog;
+    int compId;
+    int teamId;
+
+    public void setValues(int compId, int teamId) {
+        this.compId = compId;
+        this.teamId = teamId;
+    }
 
     public void init() {
         try {
@@ -43,8 +50,12 @@ public class CreateTeamDialog {
     }
 
     protected Container createPane() {
-        PanNewTeam panTeam = new PanNewTeam();
-
+        PanNewTeam panTeam;
+        if (compId == 0 && teamId == 0) {
+            panTeam = new PanNewTeam();
+        } else {
+            panTeam = new PanNewTeam();
+        }
         return panTeam;
 
     }

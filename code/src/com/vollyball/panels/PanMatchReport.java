@@ -69,7 +69,13 @@ public class PanMatchReport extends javax.swing.JPanel {
         ((JLabel) cmbTeam1.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         ((JLabel) cmbTeam2.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         ((JLabel) cmbPhase.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-        model = new DefaultTableModel();
+        model = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
 
         model.setDataVector(new Object[][]{},
                 new Object[]{"SR No.", "Match", "Won By", "Date", "Time", "Phase", "Place", "Day Number", "Match Number", "Report", "LIVE", "POST", "Action"});
@@ -185,8 +191,7 @@ public class PanMatchReport extends javax.swing.JPanel {
                             obj.setValues(id, EvaluationType.POST.getId());
                             obj.init();
                             obj.show();
-                        }
-                        else if (selectedCol == 12) {
+                        } else if (selectedCol == 12) {
                             id = matchIdmap.get((int) tbMatch.getValueAt(selectedRow, 0));
                             CreateMatchDialog obj = new CreateMatchDialog();
                             tbMatch.clearSelection();

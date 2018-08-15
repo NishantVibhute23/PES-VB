@@ -8,6 +8,7 @@ package com.vollyball.controller;
 import com.vollyball.bean.UserBean;
 import com.vollyball.dialog.CreateCompetitionDialog;
 import com.vollyball.dialog.CreateMatchDialog;
+import com.vollyball.dialog.CreatePlayerDialog;
 import com.vollyball.dialog.CreateTeamDialog;
 import com.vollyball.dialog.CreateUserDialog;
 import com.vollyball.frames.FrmDashboard;
@@ -64,6 +65,7 @@ public class Controller {
     public static CreateUserDialog createUserDialog;
     public static PanTrainingBestScorer panTrainingBestScorer;
     public static CreateBatchDialog batchDialog;
+    public static CreatePlayerDialog createPlayerDialog;
     
     public static void main(String args[]) {
 
