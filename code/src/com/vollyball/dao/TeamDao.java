@@ -61,6 +61,7 @@ public class TeamDao {
                             ps2.setInt(3, id);
                             ps2.setInt(4, p.getPosition());
                             ps2.setInt(5, p.isCaptain() == true ? TrueFalse.TRUE.getId() : TrueFalse.FALSE.getId());
+                            ps2.setInt(6, 0);
                             ps2.executeUpdate();
                         }
                     }
@@ -115,6 +116,7 @@ public class TeamDao {
                 t.setChestNo(rs.getString(3));
                 t.setPosition(rs.getInt(4));
                 t.setTeamName(rs.getString(5));
+                t.setCaptain(rs.getInt(6) == 0 ? false : true);
                 t.setTeamId(id);
                 playerList.add(t);
             }
@@ -224,24 +226,25 @@ public class TeamDao {
         }
         return p;
     }
+
     public int insertPlayer(Team team) {
         int count = 0;
         int id = 0;
-        Team t=new Team();
+        Team t = new Team();
         try {
             this.con = db.getConnection();
-            
+
             for (Player p : team.getPlayerList()) {
-                        if (p.getName() != null && !p.getName().equals("")) {
-                            PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.player"));
-                            ps2.setString(1, p.getName());
-                            ps2.setString(2, p.getChestNo());
-                            ps2.setInt(3, team.getId());
-                            ps2.setInt(4, p.getPosition());
-                            ps2.setInt(5, p.isCaptain() == true ? TrueFalse.TRUE.getId() : TrueFalse.FALSE.getId());
-                            count=ps2.executeUpdate();
-                        }
-                    }
+                if (p.getName() != null && !p.getName().equals("")) {
+                    PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.player"));
+                    ps2.setString(1, p.getName());
+                    ps2.setString(2, p.getChestNo());
+                    ps2.setInt(3, team.getId());
+                    ps2.setInt(4, p.getPosition());
+                    ps2.setInt(5, p.isCaptain() == true ? TrueFalse.TRUE.getId() : TrueFalse.FALSE.getId());
+                    count = ps2.executeUpdate();
+                }
+            }
 
             db.closeConnection(con);
         } catch (Exception ex) {
@@ -250,25 +253,26 @@ public class TeamDao {
         return count;
 
     }
+
     public int updatePlayer(Team team) {
         int count = 0;
         int id = 0;
-        Team t=new Team();
+        Team t = new Team();
         try {
             this.con = db.getConnection();
-            
+
             for (Player p : team.getPlayerList()) {
-                        if (p.getName() != null && !p.getName().equals("")) {
-                            PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.player"));
-                            ps2.setString(1, p.getName());
-                            ps2.setString(2, p.getChestNo());
-                            ps2.setInt(3, team.getId());
-                            ps2.setInt(4, p.getPosition());
-                            ps2.setInt(5, p.isCaptain() == true ? TrueFalse.TRUE.getId() : TrueFalse.FALSE.getId());
-                            ps2.setInt(6, p.getId());
-                            count=ps2.executeUpdate();
-                        }
-                    }
+                if (p.getName() != null && !p.getName().equals("")) {
+                    PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.player"));
+                    ps2.setString(1, p.getName());
+                    ps2.setString(2, p.getChestNo());
+                    ps2.setInt(3, team.getId());
+                    ps2.setInt(4, p.getPosition());
+                    ps2.setInt(5, p.isCaptain() == true ? TrueFalse.TRUE.getId() : TrueFalse.FALSE.getId());
+                    ps2.setInt(6, p.getId());
+                    count = ps2.executeUpdate();
+                }
+            }
 
             db.closeConnection(con);
         } catch (Exception ex) {
@@ -276,6 +280,21 @@ public class TeamDao {
         }
         return count;
 
+    }
+
+    public int deletePlayer(int id) {
+        int count = 0;
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("delete.player"));
+            ps.setInt(1, id);
+            count = ps.executeUpdate();
+
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return count;
     }
 
 }

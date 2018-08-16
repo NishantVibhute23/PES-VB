@@ -65,22 +65,6 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
     public PanTeamBestScorer(final CompetitionBean cb, List<Team> teamList) {
         initComponents();
         createTable();
-//        
-//        model = new DefaultTableModel() {
-//            @Override
-//            public boolean isCellEditable(int row, int column) {
-//                //all cells false
-//                return false;
-//            }
-//        };
-//        
-//         dm = new DefaultTableModel() {
-//            @Override
-//            public boolean isCellEditable(int row, int column) {
-//                //all cells false
-//                return false;
-//            }
-//        };
         this.teamList = teamList;
         this.cb = cb;
         cmbPlayer.addItem("All");
@@ -104,6 +88,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
 
                     int selectedRow = tbReport.getSelectedRow();
                     int selectedCol = tbReport.getSelectedColumn();
+                    tbReport.clearSelection();
                     for (int i = 0; i <= selectedRow; i++) {
 
                         selectedName = (String) tbReport.getValueAt(selectedRow, 1);

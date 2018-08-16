@@ -273,7 +273,7 @@ public class PanNewPlayer extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -307,10 +307,10 @@ public class PanNewPlayer extends javax.swing.JPanel {
     private void txtPlayerNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlayerNameKeyReleased
         // TODO add your handling code here:
 
-//        lblHeading.setText(txtPlayerName.getText());
-//        if (txtPlayerName.getText().equals("")) {
-//            lblHeading.setText("New Player");
-//        }
+        //        lblHeading.setText(txtPlayerName.getText());
+        //        if (txtPlayerName.getText().equals("")) {
+            //            lblHeading.setText("New Player");
+            //        }
     }//GEN-LAST:event_txtPlayerNameKeyReleased
 
     private void txtPlayerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlayerNameActionPerformed
@@ -359,39 +359,38 @@ public class PanNewPlayer extends javax.swing.JPanel {
             if (!msg.isEmpty()) {
                 JOptionPane.showMessageDialog(this, msg);
             } else {
-//                msg = checkDuplicateChestNum();
-//                if (!msg.isEmpty()) {
-//                    JOptionPane.showMessageDialog(this, msg);
-//                } else {
-                playerList = new ArrayList<>();
+                //                msg = checkDuplicateChestNum();
+                //                if (!msg.isEmpty()) {
+                    //                    JOptionPane.showMessageDialog(this, msg);
+                    //                } else {
+                    playerList = new ArrayList<>();
 
-                Team team = new Team();
-                team.setId(teamsMap.get(team1combo1.getSelectedItem()));
-                team.setName((String) team1combo1.getSelectedItem());
-                team.setCompId(Controller.competitionId);
+                    Team team = new Team();
+                    team.setId(teamsMap.get(team1combo1.getSelectedItem()));
+                    team.setName((String) team1combo1.getSelectedItem());
+                    team.setCompId(Controller.competitionId);
 
-                Player p = new Player();
-                p.setId(playerId);
-                p.setChestNo(txtPlayerChestNo.getText());
-                p.setName(txtPlayerName.getText());
-                p.setCaptain(captain1.isSelected());
-                playerList.add(p);
-                team.setPlayerList(playerList);
+                    Player p = new Player();
+                    p.setId(playerId);
+                    p.setChestNo(txtPlayerChestNo.getText());
+                    p.setName(txtPlayerName.getText());
+                    p.setCaptain(captain1.isSelected());
+                    playerList.add(p);
+                    team.setPlayerList(playerList);
 
-                int id = td.updatePlayer(team);
+                    int id = td.updatePlayer(team);
 
-                if (id != 0) {
-                    Controller.createPlayerDialog.close();
-
-                    JOptionPane.showMessageDialog(this, "Player '" + txtPlayerName.getText() + "' Updated Successfully");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Failed to Update Player");
-                }
-//                }
+                    if (id != 0) {
+                        Controller.createPlayerDialog.close();
+                       
+                        JOptionPane.showMessageDialog(this, "Player '" + txtPlayerName.getText() + "' Updated Successfully");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Failed to Update Player");
+                    }
+                    //                }
             }
 
         }
-
     }//GEN-LAST:event_savePlayerLabelMouseClicked
 
     private void team1combo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_team1combo1ItemStateChanged
@@ -428,7 +427,7 @@ public class PanNewPlayer extends javax.swing.JPanel {
         List<Player> chestNumList = new ArrayList<>();
         int k = 1;
         String chestNo = txtPlayerChestNo.getText();
-        chestNumList = td.getTeamPlayers(team1combo1.getSelectedIndex());
+        chestNumList = td.getTeamPlayers(teamsMap.get(team1combo1.getSelectedItem()));
         for (Player player : chestNumList) {
             if (player.getChestNo().equals(chestNo)) {
                 msg = "Chest No Exist";
@@ -455,10 +454,10 @@ public class PanNewPlayer extends javax.swing.JPanel {
 
         if (captain1.isSelected()) {
             List<Player> capList = new ArrayList<>();
-            capList = td.getTeamPlayers(team1combo1.getSelectedIndex());
+            capList = td.getTeamPlayers(teamsMap.get(team1combo1.getSelectedItem()));
             for (Player player : capList) {
-                if (player.isCaptain() || player.isCaptain() == true) {
-                    msg = msg + "Team have captain";
+                if (player.isCaptain() && player.getId()!=playerId) {
+                    msg = "Team Already have captain";
                     captain1.setForeground(Color.red);
                 }
             }
@@ -513,7 +512,7 @@ public class PanNewPlayer extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel savePlayerLabel;
-    public javax.swing.JComboBox team1combo1;
+    private javax.swing.JComboBox team1combo1;
     private javax.swing.JTextField txtPlayerChestNo;
     private javax.swing.JTextField txtPlayerName;
     // End of variables declaration//GEN-END:variables

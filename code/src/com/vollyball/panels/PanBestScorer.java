@@ -14,6 +14,7 @@ import com.vollyball.dao.TeamDao;
 import com.vollyball.dialog.CreatePlayerDialog;
 import com.vollyball.dialog.DialogAllScoreChart;
 import com.vollyball.renderer.ColumnGroup;
+import com.vollyball.renderer.DeleteButtonRenderer;
 import com.vollyball.renderer.EditButtonRenderer;
 import com.vollyball.renderer.GroupableTableHeader;
 import com.vollyball.renderer.TableHeaderRenderer;
@@ -28,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -105,8 +107,19 @@ public class PanBestScorer extends javax.swing.JPanel {
                             Controller.createPlayerDialog.init();
                             Controller.createPlayerDialog.show();
 
+                        } else if (selectedCol == 13) {
+                            id = (int) tbReport.getValueAt(selectedRow, 0);
+                            int dialogButton = JOptionPane.YES_NO_OPTION;
+                            int dialogResult = JOptionPane.showConfirmDialog(null, "Are You Sure ?", "Warning", dialogButton);
+                            if (dialogResult == JOptionPane.YES_OPTION) {
+                                int count = td.deletePlayer(id);
+                                if (count != 0) {
+                                    JOptionPane.showMessageDialog(null, "Player Deleted Successfully");
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Not Able to Deleted Player");
+                                }
+                            }
                         }
-
                     }
                 }
             }
@@ -166,7 +179,7 @@ public class PanBestScorer extends javax.swing.JPanel {
         };
 
         dm.setDataVector(new Object[][]{},
-                new Object[]{"SNo.", "Player Name", "<html>Team<br> Name</html>", "<html>Matches<br> Played</html>", "Service", "Attack", "Block", "Set", "Reception", "Defend", "Total", "View", "Edit"});
+                new Object[]{"SNo.", "Player Name", "<html>Team<br> Name</html>", "<html>Matches<br> Played</html>", "Service", "Attack", "Block", "Set", "Reception", "Defend", "Total", "View", "Edit", "Delete"});
 
         tbReport = new JTable(dm) {
             protected JTableHeader createDefaultTableHeader() {
@@ -184,8 +197,6 @@ public class PanBestScorer extends javax.swing.JPanel {
         g_name.add(cm.getColumn(8));
         g_name.add(cm.getColumn(9));
         g_name.add(cm.getColumn(10));
-        g_name.add(cm.getColumn(11));
-        g_name.add(cm.getColumn(12));
 
         GroupableTableHeader header = (GroupableTableHeader) tbReport.getTableHeader();
         header.addColumnGroup(g_name);
@@ -221,6 +232,9 @@ public class PanBestScorer extends javax.swing.JPanel {
         EditButtonRenderer editButtonRenderer = new EditButtonRenderer();
         tbReport.getColumnModel().getColumn(12).setCellRenderer(editButtonRenderer);
 
+        DeleteButtonRenderer deleteButtonRenderer = new DeleteButtonRenderer();
+        tbReport.getColumnModel().getColumn(13).setCellRenderer(deleteButtonRenderer);
+
         Color ivory = new Color(255, 255, 255);
         tbReport.setOpaque(true);
         tbReport.setFillsViewportHeight(true);
@@ -230,7 +244,7 @@ public class PanBestScorer extends javax.swing.JPanel {
         resizeColumns();
         panReport.add(scroll, BorderLayout.CENTER);
     }
-    float[] columnWidthPercentage = {5.0f, 23.0f, 9.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f};
+    float[] columnWidthPercentage = {5.0f, 23.0f, 9.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f};
 
     private void resizeColumns() {
         int tW = tbReport.getPreferredSize().width;
@@ -271,7 +285,7 @@ public class PanBestScorer extends javax.swing.JPanel {
         lblReportHeading.setBackground(new java.awt.Color(255, 255, 255));
         lblReportHeading.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblReportHeading.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblReportHeading.setText("BEST SCORER");
+        lblReportHeading.setText("BEST PLAYER");
 
         jPanel1.setBackground(new java.awt.Color(57, 74, 108));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

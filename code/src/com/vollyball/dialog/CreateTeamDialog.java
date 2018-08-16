@@ -5,6 +5,7 @@
  */
 package com.vollyball.dialog;
 
+import com.vollyball.panels.PanEditTeam;
 import com.vollyball.panels.PanNewTeam;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -50,13 +51,14 @@ public class CreateTeamDialog {
     }
 
     protected Container createPane() {
-        PanNewTeam panTeam;
         if (compId == 0 && teamId == 0) {
-            panTeam = new PanNewTeam();
+           PanNewTeam panTeam = new PanNewTeam();
+           return panTeam;
         } else {
-            panTeam = new PanNewTeam();
+            PanEditTeam panEditTeam=new PanEditTeam();
+            return panEditTeam;
         }
-        return panTeam;
+        
 
     }
 
