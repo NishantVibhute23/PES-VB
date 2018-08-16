@@ -21,14 +21,15 @@ import javax.swing.JFrame;
  * @author #my
  */
 public class CreatePlayerDialog {
-     private JFrame parentFrame;
-    private JDialog dialog;
-    int compId;
 
-    
-     public void setValues(int compId) {
-        this.compId = compId;
+    private JFrame parentFrame;
+    private JDialog dialog;
+    int playerId;
+
+    public void setValues(int playerId) {
+        this.playerId = playerId;
     }
+
     public void init() {
         try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -50,7 +51,12 @@ public class CreatePlayerDialog {
     }
 
     protected Container createPane() {
-        PanNewPlayer panPlayer=new PanNewPlayer();
+        PanNewPlayer panPlayer;
+        if (playerId == 0) {
+            panPlayer = new PanNewPlayer();
+        } else {
+            panPlayer = new PanNewPlayer(playerId);
+        }
         return panPlayer;
 
     }

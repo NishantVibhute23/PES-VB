@@ -250,5 +250,32 @@ public class TeamDao {
         return count;
 
     }
+    public int updatePlayer(Team team) {
+        int count = 0;
+        int id = 0;
+        Team t=new Team();
+        try {
+            this.con = db.getConnection();
+            
+            for (Player p : team.getPlayerList()) {
+                        if (p.getName() != null && !p.getName().equals("")) {
+                            PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.player"));
+                            ps2.setString(1, p.getName());
+                            ps2.setString(2, p.getChestNo());
+                            ps2.setInt(3, team.getId());
+                            ps2.setInt(4, p.getPosition());
+                            ps2.setInt(5, p.isCaptain() == true ? TrueFalse.TRUE.getId() : TrueFalse.FALSE.getId());
+                            ps2.setInt(6, p.getId());
+                            count=ps2.executeUpdate();
+                        }
+                    }
+
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return count;
+
+    }
 
 }

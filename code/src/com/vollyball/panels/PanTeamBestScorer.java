@@ -65,6 +65,22 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
     public PanTeamBestScorer(final CompetitionBean cb, List<Team> teamList) {
         initComponents();
         createTable();
+//        
+//        model = new DefaultTableModel() {
+//            @Override
+//            public boolean isCellEditable(int row, int column) {
+//                //all cells false
+//                return false;
+//            }
+//        };
+//        
+//         dm = new DefaultTableModel() {
+//            @Override
+//            public boolean isCellEditable(int row, int column) {
+//                //all cells false
+//                return false;
+//            }
+//        };
         this.teamList = teamList;
         this.cb = cb;
         cmbPlayer.addItem("All");
@@ -99,6 +115,12 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
                             createDialogPanMatchWiseReport.init(cb.getId(), playerTeamMap.get(selectedName).getId());
                             tbReport.clearSelection();
                             createDialogPanMatchWiseReport.show();
+                        }
+                        if (selectedCol == 11) {
+                            CreateTeamDialog createTeamDialog = new CreateTeamDialog();
+                            createTeamDialog.setValues(cb.getId(), playerTeamMap.get(selectedName).getId());
+                            createTeamDialog.init();
+                            createTeamDialog.show();
                         }
                     }
 
@@ -155,6 +177,13 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
                 return false;//This causes all cells to be not editable
             }
         };
+//        model = new DefaultTableModel() {
+//            @Override
+//            public boolean isCellEditable(int row, int column) {
+//                //all cells false
+//                return false;
+//            }
+//        };
 
         dm.setDataVector(new Object[][]{},
                 new Object[]{"SR No.", "Team Name", "<html>Matches<br> Played</html>", "Service", "Attack", "Block", "Set", "Reception", "Defend", "Total", "Report", "Action"});
@@ -248,7 +277,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
             column.setPreferredWidth(pWidth);
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
