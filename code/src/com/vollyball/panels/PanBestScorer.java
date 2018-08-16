@@ -11,9 +11,7 @@ import com.vollyball.bean.PlayerScores;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.dao.TeamDao;
-import com.vollyball.dialog.CreateCompetitionDialog;
 import com.vollyball.dialog.CreatePlayerDialog;
-import com.vollyball.dialog.CreateTeamDialog;
 import com.vollyball.dialog.DialogAllScoreChart;
 import com.vollyball.renderer.ColumnGroup;
 import com.vollyball.renderer.EditButtonRenderer;
@@ -73,10 +71,12 @@ public class PanBestScorer extends javax.swing.JPanel {
 
         }
         setRow(null);
-
+        tbReport.setSelectionBackground(Color.WHITE);
+        tbReport.setSelectionForeground(Color.BLACK);
         tbReport.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+
                 if (!e.getValueIsAdjusting()) {
 
                     String selectedName = null, teamName = "";
@@ -85,6 +85,7 @@ public class PanBestScorer extends javax.swing.JPanel {
                     int id = 0;
                     int selectedRow = tbReport.getSelectedRow();
                     int selectedCol = tbReport.getSelectedColumn();
+                    tbReport.clearSelection();
                     if (selectedRow >= 0) {
                         if (selectedCol == 11) {
                             for (int i = 0; i <= selectedRow; i++) {
@@ -421,7 +422,6 @@ public class PanBestScorer extends javax.swing.JPanel {
         Controller.createPlayerDialog = new CreatePlayerDialog();
         Controller.createPlayerDialog.init();
         Controller.createPlayerDialog.show();
-
 
     }//GEN-LAST:event_PlayerLabel1MouseClicked
 

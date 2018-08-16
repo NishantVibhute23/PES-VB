@@ -67,6 +67,9 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     boolean isSelected = false;
     boolean isFirst = true;
     SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
+    String command = "";
+    List<JLabel> playerLabelList;
+    String fromPlace, toPlace;
 
     RallyEvaluationSkillScore rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
 
@@ -124,7 +127,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         panel = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage());
         panCourt.add(panel, BorderLayout.CENTER);
 
-        List<JLabel> playerLabelList = new ArrayList<JLabel>(mapPlayerComponent.keySet());
+        playerLabelList = new ArrayList<JLabel>(mapPlayerComponent.keySet());
         for (JLabel label : playerLabelList) {
             label.setVisible(false);
 
@@ -488,6 +491,8 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        txtDig = new javax.swing.JTextField();
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1259,7 +1264,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 99, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1300,15 +1305,33 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
+
+        txtDig.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDigFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(txtDig, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addComponent(txtDig)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1370,6 +1393,104 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblSetMouseClicked
 
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        switch (c) {
+            case 's':
+                selectSkill(lblService);
+                command = "";
+                break;
+            case 'a':
+                selectSkill(lblAttack);
+                command = "";
+                break;
+            case 'b':
+                selectSkill(lblBlock);
+                command = "";
+                break;
+            case 'd':
+                selectSkill(lblDefence);
+                command = "";
+                break;
+            case 'r':
+                selectSkill(lblReception);
+                command = "";
+                break;
+            case 'e':
+                selectSkill(lblSet);
+                command = "";
+                break;
+            case '-':
+                checkPrev(command);
+                selectScore(lblRate1);
+                command = "";
+                break;
+            case '/':
+                checkPrev(command);
+                selectScore(lblRate2);
+                command = "";
+                break;
+            case '.':
+                checkPrev(command);
+                selectScore(lblRate3);
+                command = "";
+                break;
+            case '*':
+                checkPrev(command);
+                selectScore(lblRate4);
+                command = "";
+                break;
+            case '+':
+                checkPrev(command);
+                selectScore(lblRate5);
+                command = "";
+                break;
+            case 'h':
+                checkPrev(command);
+                command = "";
+                command = command + "" + c;
+                break;
+            case 'o':
+                checkPrev(command);
+                command = "";
+                command = command + "" + c;
+                break;
+            default:
+                command = command + "" + c;
+                break;
+        }
+
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void txtDigFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDigFocusLost
+        // TODO add your handling code here:
+        String val = txtDig.getText();
+
+        String p[] = val.split("-");
+        panel.dig(p[0], p[1]);
+
+    }//GEN-LAST:event_txtDigFocusLost
+
+    public void checkPrev(String command) {
+
+        if (command.startsWith("h")) {
+            fromPlace = command;
+        } else if (command.startsWith("o")) {
+            toPlace = command;
+            panel.dig(fromPlace, toPlace);
+        } else {
+            int i = 0;
+            for (Player pl : Controller.panMatchSet.playerList) {
+                if (pl.getChestNo().equals(command)) {
+                    selectPlayer(playerLabelList.get(i));
+                }
+                i++;
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
@@ -1384,6 +1505,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl10;
     private javax.swing.JLabel lbl11;
@@ -1441,6 +1563,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     private javax.swing.JPanel panService;
     private javax.swing.JPanel panSet;
     private javax.swing.JPanel panTF;
+    private javax.swing.JTextField txtDig;
     // End of variables declaration//GEN-END:variables
 
 }
@@ -1473,140 +1596,140 @@ class ImagePanel extends JPanel {
             }
         }
 
-//        for (int i = 1; i <= 8; i++) {
-//            for (int j = 1; j <= 5; j++) {
-//
-//                if (i == 1) {
-//                    String panCode = "OB";
-//                    if (j == 1) {
-//                        panCode = panCode + "1";
-//                    } else if (j == 2) {
-//                        panCode = panCode + "2";
-//                    } else if (j == 3) {
-//                        panCode = panCode + "3";
-//                    } else if (j == 4) {
-//                        panCode = panCode + "4";
-//                    } else if (j == 5) {
-//                        panCode = panCode + "5";
-//                    }
-//                    addPanel(panCode);
-//                }
-//
-//                if (i == 2) {
-//                    String panCode = "O";
-//                    if (j == 1) {
-//                        panCode = panCode + "L3";
-//                    } else if (j == 2) {
-//                        panCode = panCode + "7";
-//                    } else if (j == 3) {
-//                        panCode = panCode + "8";
-//                    } else if (j == 4) {
-//                        panCode = panCode + "9";
-//                    } else if (j == 5) {
-//                        panCode = panCode + "R3";
-//                    }
-//                    addPanel(panCode);
-//                }
-//
-//                if (i == 3) {
-//                    String panCode = "O";
-//                    if (j == 1) {
-//                        panCode = panCode + "L2";
-//                    } else if (j == 2) {
-//                        panCode = panCode + "4";
-//                    } else if (j == 3) {
-//                        panCode = panCode + "5";
-//                    } else if (j == 4) {
-//                        panCode = panCode + "6";
-//                    } else if (j == 5) {
-//                        panCode = panCode + "R2";
-//                    }
-//                    addPanel(panCode);
-//                }
-//
-//                if (i == 4) {
-//                    String panCode = "O";
-//                    if (j == 1) {
-//                        panCode = panCode + "L1";
-//                    } else if (j == 2) {
-//                        panCode = panCode + "1";
-//                    } else if (j == 3) {
-//                        panCode = panCode + "2";
-//                    } else if (j == 4) {
-//                        panCode = panCode + "3";
-//                    } else if (j == 5) {
-//                        panCode = panCode + "R1";
-//                    }
-//                    addPanel(panCode);
-//                }
-//
-//                if (i == 5) {
-//                    String panCode = "H";
-//                    if (j == 1) {
-//                        panCode = panCode + "L1";
-//                    } else if (j == 2) {
-//                        panCode = panCode + "1";
-//                    } else if (j == 3) {
-//                        panCode = panCode + "2";
-//                    } else if (j == 4) {
-//                        panCode = panCode + "3";
-//                    } else if (j == 5) {
-//                        panCode = panCode + "R1";
-//                    }
-//                    addPanel(panCode);
-//                }
-//
-//                if (i == 6) {
-//                    String panCode = "H";
-//                    if (j == 1) {
-//                        panCode = panCode + "L2";
-//                    } else if (j == 2) {
-//                        panCode = panCode + "4";
-//                    } else if (j == 3) {
-//                        panCode = panCode + "5";
-//                    } else if (j == 4) {
-//                        panCode = panCode + "6";
-//                    } else if (j == 5) {
-//                        panCode = panCode + "R2";
-//                    }
-//                    addPanel(panCode);
-//                }
-//
-//                if (i == 7) {
-//                    String panCode = "H";
-//                    if (j == 1) {
-//                        panCode = panCode + "L3";
-//                    } else if (j == 2) {
-//                        panCode = panCode + "7";
-//                    } else if (j == 3) {
-//                        panCode = panCode + "8";
-//                    } else if (j == 4) {
-//                        panCode = panCode + "9";
-//                    } else if (j == 5) {
-//                        panCode = panCode + "R3";
-//                    }
-//                    addPanel(panCode);
-//
-//                }
-//
-//                if (i == 8) {
-//                    String panCode = "HB";
-//                    if (j == 1) {
-//                        panCode = panCode + "1";
-//                    } else if (j == 2) {
-//                        panCode = panCode + "2";
-//                    } else if (j == 3) {
-//                        panCode = panCode + "3";
-//                    } else if (j == 4) {
-//                        panCode = panCode + "4";
-//                    } else if (j == 5) {
-//                        panCode = panCode + "5";
-//                    }
-//                    addPanel(panCode);
-//                }
-//
-//            }
-//        }
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 5; j++) {
+
+                if (i == 1) {
+                    String panCode = "OB";
+                    if (j == 1) {
+                        panCode = panCode + "1";
+                    } else if (j == 2) {
+                        panCode = panCode + "2";
+                    } else if (j == 3) {
+                        panCode = panCode + "3";
+                    } else if (j == 4) {
+                        panCode = panCode + "4";
+                    } else if (j == 5) {
+                        panCode = panCode + "5";
+                    }
+                    addPanel(panCode);
+                }
+
+                if (i == 2) {
+                    String panCode = "O";
+                    if (j == 1) {
+                        panCode = panCode + "L3";
+                    } else if (j == 2) {
+                        panCode = panCode + "7";
+                    } else if (j == 3) {
+                        panCode = panCode + "8";
+                    } else if (j == 4) {
+                        panCode = panCode + "9";
+                    } else if (j == 5) {
+                        panCode = panCode + "R3";
+                    }
+                    addPanel(panCode);
+                }
+
+                if (i == 3) {
+                    String panCode = "O";
+                    if (j == 1) {
+                        panCode = panCode + "L2";
+                    } else if (j == 2) {
+                        panCode = panCode + "4";
+                    } else if (j == 3) {
+                        panCode = panCode + "5";
+                    } else if (j == 4) {
+                        panCode = panCode + "6";
+                    } else if (j == 5) {
+                        panCode = panCode + "R2";
+                    }
+                    addPanel(panCode);
+                }
+
+                if (i == 4) {
+                    String panCode = "O";
+                    if (j == 1) {
+                        panCode = panCode + "L1";
+                    } else if (j == 2) {
+                        panCode = panCode + "1";
+                    } else if (j == 3) {
+                        panCode = panCode + "2";
+                    } else if (j == 4) {
+                        panCode = panCode + "3";
+                    } else if (j == 5) {
+                        panCode = panCode + "R1";
+                    }
+                    addPanel(panCode);
+                }
+
+                if (i == 5) {
+                    String panCode = "H";
+                    if (j == 1) {
+                        panCode = panCode + "L1";
+                    } else if (j == 2) {
+                        panCode = panCode + "1";
+                    } else if (j == 3) {
+                        panCode = panCode + "2";
+                    } else if (j == 4) {
+                        panCode = panCode + "3";
+                    } else if (j == 5) {
+                        panCode = panCode + "R1";
+                    }
+                    addPanel(panCode);
+                }
+
+                if (i == 6) {
+                    String panCode = "H";
+                    if (j == 1) {
+                        panCode = panCode + "L2";
+                    } else if (j == 2) {
+                        panCode = panCode + "4";
+                    } else if (j == 3) {
+                        panCode = panCode + "5";
+                    } else if (j == 4) {
+                        panCode = panCode + "6";
+                    } else if (j == 5) {
+                        panCode = panCode + "R2";
+                    }
+                    addPanel(panCode);
+                }
+
+                if (i == 7) {
+                    String panCode = "H";
+                    if (j == 1) {
+                        panCode = panCode + "L3";
+                    } else if (j == 2) {
+                        panCode = panCode + "7";
+                    } else if (j == 3) {
+                        panCode = panCode + "8";
+                    } else if (j == 4) {
+                        panCode = panCode + "9";
+                    } else if (j == 5) {
+                        panCode = panCode + "R3";
+                    }
+                    addPanel(panCode);
+
+                }
+
+                if (i == 8) {
+                    String panCode = "HB";
+                    if (j == 1) {
+                        panCode = panCode + "1";
+                    } else if (j == 2) {
+                        panCode = panCode + "2";
+                    } else if (j == 3) {
+                        panCode = panCode + "3";
+                    } else if (j == 4) {
+                        panCode = panCode + "4";
+                    } else if (j == 5) {
+                        panCode = panCode + "5";
+                    }
+                    addPanel(panCode);
+                }
+
+            }
+        }
         for (Map.Entry<String, JPanel> entry : panGrid.entrySet()) {
             String string = entry.getKey();
             System.out.println(string);
@@ -1641,7 +1764,7 @@ class ImagePanel extends JPanel {
 
                 JPanel pin = new JPanel();
                 pin.setSize(33, 33);
-                pin.setBorder(BorderFactory.createDashedBorder(Color.pink));
+                pin.setBorder(BorderFactory.createDashedBorder(Color.LIGHT_GRAY));
                 pin.setOpaque(false);
                 p.add(pin);
                 panGrid.put(code, pin);

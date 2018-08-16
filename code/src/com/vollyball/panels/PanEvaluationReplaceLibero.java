@@ -5,10 +5,16 @@
  */
 package com.vollyball.panels;
 
+import com.vollyball.bean.Player;
+import com.vollyball.controller.Controller;
+import com.vollyball.dao.RallyDao;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JTextField;
 
 /**
@@ -18,13 +24,16 @@ import javax.swing.JTextField;
 public class PanEvaluationReplaceLibero extends javax.swing.JPanel {
 
     List<JTextField> rallyPos = new ArrayList<>();
+    PanEvaluationRally panEvaluationRally;
+    RallyDao rallyDao = new RallyDao();
 
     /**
      * Creates new form PanEvaluationReplaceLibero
      */
-    public PanEvaluationReplaceLibero() {
+    public PanEvaluationReplaceLibero(PanEvaluationRally panEvaluationRally) {
 
         initComponents();
+        this.panEvaluationRally = panEvaluationRally;
 
         rallyPos.add(rallyPos1);
         rallyPos.add(rallyPos2);
@@ -65,10 +74,74 @@ public class PanEvaluationReplaceLibero extends javax.swing.JPanel {
 
         }
 
+        LinkedHashMap<Integer, Player> subStitutePositionMap = Controller.panMatchSet.substituePositionMap;
+        LinkedHashMap<Integer, Player> rallyPositionMap = Controller.panMatchSet.rallyPositionMap;
+        int i = 0;
+
+        Player playerP = null;
+
+        for (Map.Entry<Integer, Player> entrySub : subStitutePositionMap.entrySet()) {
+            boolean found = false;
+            Integer integer = entrySub.getKey();
+            Player player = entrySub.getValue();
+            if (integer != 7) {
+                for (Map.Entry<Integer, Player> entryRally : rallyPositionMap.entrySet()) {
+                    if (player.getChestNo().equals(entryRally.getValue().getChestNo())) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    playerP = player;
+                }
+            }
+            i++;
+        }
+
+        int j = 0;
+        for (Map.Entry<Integer, Player> entryRally : rallyPositionMap.entrySet()) {
+            rallyPos.get(j).setText(entryRally.getValue().getChestNo());
+            if (Controller.panMatchSet.initialPositionMap.get(7).getChestNo().equals(entryRally.getValue().getChestNo())) {
+                rallyPos.get(j).setForeground(Color.red);
+            }
+            j++;
+        }
+
+        if (playerP == null) {
+            if (lblLibero.getText().equals("")) {
+                lblLibero.setText(Controller.panMatchSet.initialPositionMap.get(7).getChestNo());
+                lblLibero.setForeground(Color.red);
+            }
+        } else {
+            lblLibero.setText("" + playerP.getChestNo());
+            if (Controller.panMatchSet.initialPositionMap.get(7).getChestNo().equals("" + playerP.getChestNo())) {
+                lblLibero.setForeground(Color.red);
+            }
+        }
+
     }
 
     public void replace(MouseEvent me) {
         JTextField t = (JTextField) me.getSource();
+
+        if (t.equals(rallyPos1)) {
+            Controller.panMatchSet.rallyPositionMap.put(1, Controller.panMatchSet.ChestMap.get(lblLibero.getText()));
+        } else if (t.equals(rallyPos2)) {
+            Controller.panMatchSet.rallyPositionMap.put(2, Controller.panMatchSet.ChestMap.get(lblLibero.getText()));
+        } else if (t.equals(rallyPos3)) {
+            Controller.panMatchSet.rallyPositionMap.put(3, Controller.panMatchSet.ChestMap.get(lblLibero.getText()));
+        } else if (t.equals(rallyPos4)) {
+            Controller.panMatchSet.rallyPositionMap.put(4, Controller.panMatchSet.ChestMap.get(lblLibero.getText()));
+        } else if (t.equals(rallyPos5)) {
+            Controller.panMatchSet.rallyPositionMap.put(5, Controller.panMatchSet.ChestMap.get(lblLibero.getText()));
+        } else if (t.equals(rallyPos6)) {
+            Controller.panMatchSet.rallyPositionMap.put(6, Controller.panMatchSet.ChestMap.get(lblLibero.getText()));
+        }
+
+//        rallyDao.updateLatestOrder(Controller.panMatchSet.rallyPositionMap, ms.getId());
+        this.panEvaluationRally.setRotation();
+        this.panEvaluationRally.dialogReplaceLibero.close();
+
     }
 
     /**
@@ -92,7 +165,7 @@ public class PanEvaluationReplaceLibero extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        lblLibero = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         jPanel43.setBackground(new java.awt.Color(255, 255, 255));
@@ -101,32 +174,26 @@ public class PanEvaluationReplaceLibero extends javax.swing.JPanel {
         rallyPos4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         rallyPos4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos4.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos4.setEnabled(false);
 
         rallyPos3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         rallyPos3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos3.setEnabled(false);
 
         rallyPos2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         rallyPos2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos2.setEnabled(false);
 
         rallyPos5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         rallyPos5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos5.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos5.setEnabled(false);
 
         rallyPos6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         rallyPos6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos6.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos6.setEnabled(false);
 
         rallyPos1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         rallyPos1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos1.setEnabled(false);
 
         javax.swing.GroupLayout jPanel43Layout = new javax.swing.GroupLayout(jPanel43);
         jPanel43.setLayout(jPanel43Layout);
@@ -182,7 +249,7 @@ public class PanEvaluationReplaceLibero extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -191,18 +258,18 @@ public class PanEvaluationReplaceLibero extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLibero.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        lblLibero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+            .addComponent(lblLibero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+            .addComponent(lblLibero, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -258,12 +325,12 @@ public class PanEvaluationReplaceLibero extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel43;
+    private javax.swing.JLabel lblLibero;
     private javax.swing.JTextField rallyPos1;
     private javax.swing.JTextField rallyPos2;
     private javax.swing.JTextField rallyPos3;

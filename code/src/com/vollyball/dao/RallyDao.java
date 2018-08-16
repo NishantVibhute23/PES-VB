@@ -84,6 +84,18 @@ public class RallyDao {
                 ps6.setInt(7, rid);
                 ps6.executeUpdate();
 
+                PreparedStatement ps10 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.setLatestorder"));
+
+                for (Map.Entry<Integer, Player> entry : re.rallyPositionMap.entrySet()) {
+                    Integer key = entry.getKey();
+                    Player value = entry.getValue();
+
+                    ps10.setInt(key, value.getId());
+                }
+
+                ps10.setInt(7, re.getMatchEvaluationId());
+                ps10.executeUpdate();
+
                 for (RallyEvaluationSkillScore ress : re.getRallyEvaluationSkillScore()) {
                     PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.rallydetails"));
                     ps1.setInt(1, ress.getSkillId());
@@ -707,7 +719,7 @@ public class RallyDao {
         try {
             this.con = db.getConnection();
 
-            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.setLatestorder"));
+            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.setLatestorder"));
 
             for (Map.Entry<Integer, Player> entry : latestPositionMap.entrySet()) {
                 Integer key = entry.getKey();

@@ -1890,7 +1890,7 @@ public class PanMatchSet extends javax.swing.JPanel {
 //                Controller.panMatchEvaluationHome.obj.close();
 //                break;
 //            case "NEW":
-//                newRally();
+        newRally();
 //                break;
 //            case "START":
 //                if (txtEvaluator.getText().equals("")) {
@@ -2490,7 +2490,7 @@ public class PanMatchSet extends javax.swing.JPanel {
         st.setScoreB(opponentScore);
         st.setMatchEvalId(matchEvaluationId);
 
-        int count = matchDao.insertTimeout(st);
+//        int count = matchDao.insertTimeout(st);
         setTimeOut(st);
 
     }

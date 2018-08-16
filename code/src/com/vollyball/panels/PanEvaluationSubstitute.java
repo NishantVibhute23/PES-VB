@@ -45,6 +45,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
     MatchSet ms;
     String focus = "out";
     LinkedHashMap<Integer, Player> latestPositionMap;
+    RallyEvaluation re;
 
     /**
      * Creates new form PanEvaluationSubstitute
@@ -92,7 +93,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
 
         lblRallyNum.setText("" + Controller.panMatchSet.currentRally);
 
-        RallyEvaluation re = rallyDao.getRally(Integer.parseInt(lblRallyNum.getText()), ms.getId(), 0);
+        re = rallyDao.getRally(Integer.parseInt(lblRallyNum.getText()), ms.getId(), 0);
 
         lblScore.setText(re.getHomeScore() + " : " + re.getOpponentScore());
 
@@ -1170,7 +1171,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblRallyNum)
                     .addComponent(lblScore, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1222,6 +1223,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         lblMsg.setText("Select OUT Player");
 
         jPanel5.setBackground(new java.awt.Color(57, 74, 108));
+        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -1271,8 +1273,8 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
                                         .addGap(78, 78, 78)
                                         .addComponent(jLabel5))))
                             .addComponent(lblMsg))
-                        .addGap(257, 257, 257)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(304, 304, 304)
@@ -1350,7 +1352,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
 
     private void lblRallyNumFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lblRallyNumFocusLost
         // TODO add your handling code here:
-        RallyEvaluation re = rallyDao.getRally(Integer.parseInt(lblRallyNum.getText()), ms.getId(), 0);
+        re = rallyDao.getRally(Integer.parseInt(lblRallyNum.getText()), ms.getId(), 0);
         lblScore.setText(re.getHomeScore() + " : " + re.getOpponentScore());
     }//GEN-LAST:event_lblRallyNumFocusLost
 
@@ -1374,12 +1376,15 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         SetSubstitution s = ms.getSetSubstitutions().get(i);
         int id = 0;
         if (s.getPoint1() == null) {
-            id = matchDao.updateSubstitution(pIn.getId(), lblScore.getText(), position, ms.getId(), Integer.parseInt(lblRallyNum.getText()));
+
+            id = matchDao.updateSubstitution(pIn.getId(), lblScore.getText(), position, ms.getId(), re.getId());
         } else {
-            id = matchDao.updateSubstitutionPoint2(lblScore.getText(), position, ms.getId(), Integer.parseInt(lblRallyNum.getText()));
+
+            id = matchDao.updateSubstitutionPoint2(lblScore.getText(), position, ms.getId(), re.getId());
         }
 
         if (id != 0) {
+            Controller.panMatchSet.substituePositionMap.put(position, pIn);
 //            latestPositionMap
             for (Map.Entry<Integer, Player> entry : latestPositionMap.entrySet()) {
                 Integer key = entry.getKey();

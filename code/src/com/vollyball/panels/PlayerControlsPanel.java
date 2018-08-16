@@ -9,12 +9,16 @@ package com.vollyball.panels;
  *
  * @author nishant.vibhute
  */
+import com.vollyball.controller.Controller;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.Executors;
@@ -23,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -76,6 +81,8 @@ public class PlayerControlsPanel extends JPanel {
     private JButton subTitlesButton;
 
     private JFileChooser fileChooser;
+
+    private JComboBox cmbPlayBackSpeed;
 
     private boolean mousePressedPlaying = false;
 
@@ -140,6 +147,17 @@ public class PlayerControlsPanel extends JPanel {
         toggleMuteButton = new JButton();
         toggleMuteButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\sound_mute.png"));
         toggleMuteButton.setToolTipText("Toggle Mute");
+
+        cmbPlayBackSpeed = new JComboBox<String>();
+        cmbPlayBackSpeed.setFont(new Font("Times New Roman", 0, 14));
+        cmbPlayBackSpeed.addItem("0.25");
+        cmbPlayBackSpeed.addItem("0.5");
+        cmbPlayBackSpeed.addItem("Normal");
+        cmbPlayBackSpeed.addItem("1.25");
+        cmbPlayBackSpeed.addItem("1.5");
+        cmbPlayBackSpeed.addItem("2");
+        cmbPlayBackSpeed.setToolTipText("Playback Speed");
+        cmbPlayBackSpeed.setSize(new Dimension(100, 40));
 
         volumeSlider = new JSlider();
         volumeSlider.setOrientation(JSlider.HORIZONTAL);
@@ -208,6 +226,7 @@ public class PlayerControlsPanel extends JPanel {
         bottomPanel.add(pauseButton);
         bottomPanel.add(playButton);
         bottomPanel.add(fastForwardButton);
+        bottomPanel.add(cmbPlayBackSpeed);
 //        bottomPanel.add(nextChapterButton);
 
         bottomPanel.add(volumeSlider);
@@ -372,10 +391,26 @@ public class PlayerControlsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mediaPlayer.enableOverlay(false);
-                if (JFileChooser.APPROVE_OPTION == fileChooser.showOpenDialog(PlayerControlsPanel.this)) {
+                if (JFileChooser.APPROVE_OPTION == fileChooser.showOpenDialog(Controller.panMatchSet)) {
                     mediaPlayer.playMedia(fileChooser.getSelectedFile().getAbsolutePath());
                 }
                 mediaPlayer.enableOverlay(true);
+            }
+        });
+
+        cmbPlayBackSpeed.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    float rate = Float.parseFloat("1.0");
+                    String item = String.valueOf(e.getItem());
+
+                    if (!item.equalsIgnoreCase("Normal")) {
+                        rate = Float.parseFloat(item);
+                    }
+                    mediaPlayer.setRate(rate);
+                }
             }
         });
 

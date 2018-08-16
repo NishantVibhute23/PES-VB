@@ -4,7 +4,9 @@ import com.vollyball.bean.Player;
 import com.vollyball.bean.RallyEvaluation;
 import com.vollyball.bean.RallyEvaluationSkillScore;
 import com.vollyball.controller.Controller;
+import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.RallyDao;
+import com.vollyball.dialog.DialogReplaceLibero;
 import com.vollyball.enums.HomeOpponent;
 import com.vollyball.enums.Skill;
 import java.awt.BorderLayout;
@@ -13,6 +15,7 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -47,12 +51,21 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     RallyEvaluation rallyEvaluation = new RallyEvaluation();
     String startTime, endTime;
     int rallyNum;
+    public DialogReplaceLibero dialogReplaceLibero;
+    List<JTextField> rallyPos = new ArrayList<>();
+    MatchDao matchDao = new MatchDao();
 
     /**
      * Creates new form PanEvaluationRallyRow
      */
     public PanEvaluationRally(int teamEvaluateId, int opponentId, int rallyNum) {
         initComponents();
+        rallyPos.add(rallyPos1);
+        rallyPos.add(rallyPos2);
+        rallyPos.add(rallyPos3);
+        rallyPos.add(rallyPos4);
+        rallyPos.add(rallyPos5);
+        rallyPos.add(rallyPos6);
         this.rallyNum = rallyNum;
         this.teamEvaluateId = teamEvaluateId;
         this.opponentId = opponentId;
@@ -88,16 +101,71 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     }
 
     public void setRotationForRally() {
-        LinkedHashMap<Integer, Player> rallyPositionMap = rallyDao.getLatestMatchSetRotationOrder(Controller.panMatchSet.matchEvaluationId);
+        LinkedHashMap<Integer, Player> latestPositionMap = rallyDao.getLatestMatchSetRotationOrder(Controller.panMatchSet.matchEvaluationId);
 
-        rallyPos1.setText(rallyPositionMap.get(1).getChestNo());
-        rallyPos2.setText(rallyPositionMap.get(2).getChestNo());
-        rallyPos3.setText(rallyPositionMap.get(3).getChestNo());
-        rallyPos4.setText(rallyPositionMap.get(4).getChestNo());
-        rallyPos5.setText(rallyPositionMap.get(5).getChestNo());
-        rallyPos6.setText(rallyPositionMap.get(6).getChestNo());
+        RallyEvaluation re = matchDao.getLatestRallyDetails(Controller.panMatchSet.matchEvaluationId);
 
-        Controller.panMatchSet.rallyPositionMap.putAll(rallyPositionMap);
+        if (re.getStartby() != HomeOpponent.HOME.getId() && re.getWonby() == HomeOpponent.HOME.getId()) {
+            Player temp = latestPositionMap.get(1);
+            latestPositionMap.put(1, latestPositionMap.get(2));
+            latestPositionMap.put(2, latestPositionMap.get(3));
+            latestPositionMap.put(3, latestPositionMap.get(4));
+            Player playerP = null;
+            int i = 0;
+            if (latestPositionMap.get(5).getChestNo().equals(Controller.panMatchSet.initialPositionMap.get(7).getChestNo())) {
+                for (Map.Entry<Integer, Player> entrySub : Controller.panMatchSet.substituePositionMap.entrySet()) {
+                    boolean found = false;
+                    Integer integer = entrySub.getKey();
+                    Player player = entrySub.getValue();
+                    if (integer != 7) {
+                        for (Map.Entry<Integer, Player> entryRally : latestPositionMap.entrySet()) {
+                            if (player.getChestNo().equals(entryRally.getValue().getChestNo())) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            playerP = player;
+                        }
+                    }
+                    i++;
+                }
+                if (playerP != null) {
+                    latestPositionMap.put(4, playerP);
+                }
+            } else {
+                latestPositionMap.put(4, latestPositionMap.get(5));
+            }
+            latestPositionMap.put(5, latestPositionMap.get(6));
+            latestPositionMap.put(6, temp);
+        }
+
+        int i = 0;
+        for (Map.Entry<Integer, Player> entry : latestPositionMap.entrySet()) {
+            rallyPos.get(i).setText("" + entry.getValue().getChestNo());
+            if (Controller.panMatchSet.initialPositionMap.get(7).getChestNo().equals(entry.getValue().getChestNo())) {
+                rallyPos.get(i).setForeground(Color.red);
+            } else {
+                rallyPos.get(i).setForeground(Color.BLACK);
+            }
+            i++;
+        }
+
+        Controller.panMatchSet.rallyPositionMap.putAll(latestPositionMap);
+
+    }
+
+    public void setRotation() {
+        int i = 0;
+        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMap.entrySet()) {
+            rallyPos.get(i).setText("" + entry.getValue().getChestNo());
+            if (Controller.panMatchSet.initialPositionMap.get(7).getChestNo().equals(entry.getValue().getChestNo())) {
+                rallyPos.get(i).setForeground(Color.red);
+            } else {
+                rallyPos.get(i).setForeground(Color.BLACK);
+            }
+            i++;
+        }
 
     }
 
@@ -310,6 +378,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         panEvalDetail.setLayout(new java.awt.BorderLayout());
 
         jPanel25.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel43.setBackground(new java.awt.Color(255, 255, 255));
         jPanel43.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -317,32 +386,26 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         rallyPos4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         rallyPos4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos4.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos4.setEnabled(false);
 
         rallyPos3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         rallyPos3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos3.setEnabled(false);
 
         rallyPos2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         rallyPos2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos2.setEnabled(false);
 
         rallyPos5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         rallyPos5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos5.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos5.setEnabled(false);
 
         rallyPos6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         rallyPos6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos6.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos6.setEnabled(false);
 
         rallyPos1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         rallyPos1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        rallyPos1.setEnabled(false);
 
         javax.swing.GroupLayout jPanel43Layout = new javax.swing.GroupLayout(jPanel43);
         jPanel43.setLayout(jPanel43Layout);
@@ -360,7 +423,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                         .addComponent(rallyPos6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(rallyPos1, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                    .addComponent(rallyPos2, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                    .addComponent(rallyPos2))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel43Layout.setVerticalGroup(
@@ -410,6 +473,11 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Replace Libero");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -443,7 +511,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lblRallyEndTime, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblRallyStartTime, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -476,11 +544,11 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panEvalDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 0, 0)
                         .addComponent(panRallyList, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
@@ -493,6 +561,13 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                     .addComponent(panEvalDetail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        dialogReplaceLibero = new DialogReplaceLibero();
+        dialogReplaceLibero.init(this);
+        dialogReplaceLibero.show();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

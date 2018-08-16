@@ -423,19 +423,44 @@ public class MatchDao {
         return id;
     }
 
-    public int insertTimeout(SetTimeout st) {
+    public int insertTimeout(SetTimeout st, int rallyId) {
         int id = 0;
         try {
-            int rallyId = getLatestRally(st.getMatchEvalId());
+
             this.con = db.getConnection();
-            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.matchset.timeout"));
+
+            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchsetset.timeout.id"));
             ps1.setInt(1, st.getPosition());
-            ps1.setString(2, st.getTeam());
-            ps1.setInt(3, st.getScoreA());
-            ps1.setInt(4, st.getScoreB());
-            ps1.setInt(5, st.getMatchEvalId());
-            ps1.setInt(6, rallyId);
-            id = ps1.executeUpdate();
+            ps1.setInt(2, st.getMatchEvalId());
+
+            ResultSet rs = ps1.executeQuery();
+
+            while (rs.next()) {
+                id = rs.getInt(1);
+            }
+
+            if (id == 0) {
+                PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.matchset.timeout"));
+                ps2.setInt(1, st.getPosition());
+                ps2.setString(2, st.getTeam());
+                ps2.setInt(3, st.getScoreA());
+                ps2.setInt(4, st.getScoreB());
+                ps2.setInt(5, st.getMatchEvalId());
+                ps2.setInt(6, rallyId);
+                id = ps2.executeUpdate();
+            } else {
+                PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchseteval.timeout"));
+
+                ps2.setString(1, st.getTeam());
+                ps2.setInt(2, st.getScoreA());
+                ps2.setInt(3, st.getScoreB());
+                ps2.setInt(4, rallyId);
+                ps2.setInt(5, st.getPosition());
+                ps2.setInt(6, st.getMatchEvalId());
+
+                id = ps2.executeUpdate();
+            }
+
             this.db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);

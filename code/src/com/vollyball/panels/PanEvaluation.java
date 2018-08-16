@@ -12,6 +12,7 @@ import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.RallyDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.dialog.DialogEvaluationSubstitute;
+import com.vollyball.dialog.DialogEvaluationTimeout;
 import com.vollyball.dialog.SetRotationDialog;
 import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
@@ -55,10 +56,12 @@ public class PanEvaluation extends javax.swing.JPanel {
     public int rallyNumNext = 0, totalRallies = 0;
     public SetRotationDialog setRotationDialog;
     public DialogEvaluationSubstitute dialogEvaluationSubstitute;
+    public DialogEvaluationTimeout dialogEvaluationTimeout;
     public LinkedHashMap<Integer, RallyEvaluation> rallyMap = new LinkedHashMap<Integer, RallyEvaluation>();
     public LinkedHashMap<Integer, PanRallyLiveEvaluation> panRallyMap = new LinkedHashMap<Integer, PanRallyLiveEvaluation>();
     public LinkedHashMap<Integer, Player> initialPositionMap;
     public LinkedHashMap<Integer, Player> rallyPositionMap;
+    public LinkedHashMap<Integer, Player> substituePositionMap;
 
     public LinkedHashMap<Integer, Player> playerMap = new LinkedHashMap<Integer, Player>();
     public LinkedHashMap<String, Player> ChestMap = new LinkedHashMap<String, Player>();
@@ -94,6 +97,7 @@ public class PanEvaluation extends javax.swing.JPanel {
         this.matchEvaluationTeamId = matchEvaluationTeamId;
         initialPositionMap = new LinkedHashMap<>();
         rallyPositionMap = new LinkedHashMap<>();
+        substituePositionMap = new LinkedHashMap<>();
 
         ms = matchDao.getMatchSet(setNum, matchEvaluationTeamId);
 
@@ -140,11 +144,22 @@ public class PanEvaluation extends javax.swing.JPanel {
             totalRallies = rallies.size();
             rallyNumNext = totalRallies;
             for (RallyEvaluation rally : rallies) {
-
                 cmbRallies.addItem(rally.getRallyNum());
                 currentRally++;
             }
             rallyPositionMap = rallyDao.getLatestRallyRotationOrder(matchEvaluationId, ms.getEvaluationTeamId());
+
+            substituePositionMap.putAll(initialPositionMap);
+
+            for (SetSubstitution s : ms.getSetSubstitutions()) {
+                String cNo = s.getSubstitutePlayerId() == 0 ? "" : playerMap.get(s.getSubstitutePlayerId()).getChestNo();
+                Player p = s.getSubstitutePlayerId() == 0 ? null : playerMap.get(s.getSubstitutePlayerId());
+                if (!cNo.equals("")) {
+                    if (s.getPoint2() == null) {
+                        substituePositionMap.put(s.getPosition(), p);
+                    }
+                }
+            }
 
         } else {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -156,13 +171,7 @@ public class PanEvaluation extends javax.swing.JPanel {
             String opponentName = Controller.panMatchEvaluationHome.getTeamsMap().get(opponentId);
             lblevaluationName.setText(evaluationName);
             lblopponentName.setText(opponentName);
-//            lblTimeOutEvalTeam.setText(evaluationName);
-//            lblTimeOutOppTeam.setText(opponentName);
-//            panNext.setVisible(false);
         }
-//        panRallyNew = new PanRallyNew();
-//        panRallyList.add(panRallyNew);
-//        setScore();
     }
 
     public void initializePlayer() {
@@ -179,7 +188,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     }
 
     private void registerLibrary() {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "H:\\vollyball\\PES-VB\\PES-VB\\VLC\\VLC64");
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\VLC\\VLC64");
         Native
                 .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
                 );
@@ -559,6 +568,11 @@ public class PanEvaluation extends javax.swing.JPanel {
 
         jPanel11.setBackground(new java.awt.Color(57, 74, 108));
         jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel11MouseClicked(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -977,10 +991,16 @@ public class PanEvaluation extends javax.swing.JPanel {
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         // TODO add your handling code here:
         dialogEvaluationSubstitute = new DialogEvaluationSubstitute();
-
         dialogEvaluationSubstitute.init(setNum, matchEvaluationTeamId);
         dialogEvaluationSubstitute.show();
     }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+        // TODO add your handling code here:
+        dialogEvaluationTimeout = new DialogEvaluationTimeout();
+        dialogEvaluationTimeout.init(setNum, matchEvaluationTeamId);
+        dialogEvaluationTimeout.show();
+    }//GEN-LAST:event_jPanel11MouseClicked
 
     public void setScore() {
         currentScore = homeScore + " - " + opponentScore;
@@ -1055,6 +1075,8 @@ public class PanEvaluation extends javax.swing.JPanel {
         pos4.setText(initialPositionMap.get(4).getChestNo());
         pos5.setText(initialPositionMap.get(5).getChestNo());
         pos6.setText(initialPositionMap.get(6).getChestNo());
+
+        substituePositionMap.putAll(initialPositionMap);
 //        libero.setText(initialPositionMap.get(7).getChestNo());
 
     }
