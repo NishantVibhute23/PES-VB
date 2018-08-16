@@ -2327,7 +2327,7 @@ public class PanMatchSet extends javax.swing.JPanel {
             obj.init();
             obj.show();
         } else {
-            matchDao.updateSubstitutionPoint2(score, 1, matchEvaluationId);
+//            matchDao.updateSubstitutionPoint2(score, 1, matchEvaluationId);
             rallyPositionMap.put(1, initialPositionMap.get(1));
 //            Controller.panMatchSet.pt21.setText(score);
         }
@@ -2343,7 +2343,7 @@ public class PanMatchSet extends javax.swing.JPanel {
             obj.init();
             obj.show();
         } else {
-            matchDao.updateSubstitutionPoint2(score, 2, matchEvaluationId);
+//            matchDao.updateSubstitutionPoint2(score, 2, matchEvaluationId);
             rallyPositionMap.put(2, initialPositionMap.get(2));
 //            Controller.panMatchSet.pt22.setText(score);
         }
@@ -2359,7 +2359,7 @@ public class PanMatchSet extends javax.swing.JPanel {
             obj.init();
             obj.show();
         } else {
-            matchDao.updateSubstitutionPoint2(score, 3, matchEvaluationId);
+//            matchDao.updateSubstitutionPoint2(score, 3, matchEvaluationId);
             rallyPositionMap.put(3, initialPositionMap.get(3));
 //            Controller.panMatchSet.pt23.setText(score);
         }
@@ -2375,7 +2375,7 @@ public class PanMatchSet extends javax.swing.JPanel {
             obj.init();
             obj.show();
         } else {
-            matchDao.updateSubstitutionPoint2(score, 4, matchEvaluationId);
+//            matchDao.updateSubstitutionPoint2(score, 4, matchEvaluationId);
             rallyPositionMap.put(4, initialPositionMap.get(4));
 //            Controller.panMatchSet.pt24.setText(score);
         }
@@ -2392,7 +2392,7 @@ public class PanMatchSet extends javax.swing.JPanel {
             obj.init();
             obj.show();
         } else {
-            matchDao.updateSubstitutionPoint2(score, 5, matchEvaluationId);
+//            matchDao.updateSubstitutionPoint2(score, 5, matchEvaluationId);
             rallyPositionMap.put(5, initialPositionMap.get(5));
 //            Controller.panMatchSet.pt25.setText(score);
         }
@@ -2408,7 +2408,7 @@ public class PanMatchSet extends javax.swing.JPanel {
             obj.init();
             obj.show();
         } else {
-            matchDao.updateSubstitutionPoint2(score, 6, matchEvaluationId);
+//            matchDao.updateSubstitutionPoint2(score, 6, matchEvaluationId);
             rallyPositionMap.put(6, initialPositionMap.get(6));
 //            Controller.panMatchSet.pt26.setText(score);
         }

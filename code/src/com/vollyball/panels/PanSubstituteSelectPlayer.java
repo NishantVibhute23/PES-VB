@@ -333,44 +333,44 @@ public class PanSubstituteSelectPlayer extends javax.swing.JPanel {
 
         MatchDao matchDao = new MatchDao();
         Player p = chestMap.get(txtSubPlayer.getText());
-        int id = matchDao.updateSubstitution(p.getId(), score, position, matchEvaluationId);
-        if (id != 0) {
-            String cNo = txtSubPlayer.getText();
-            switch (position) {
-                case 1:
-//                    Controller.panMatchSet.su1.setText(cNo);
-//                    Controller.panMatchSet.pt11.setText(score);
-                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
-                    break;
-                case 2:
-//                    Controller.panMatchSet.su2.setText(cNo);
-//                    Controller.panMatchSet.pt12.setText(score);
-                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
-                    break;
-                case 3:
-//                    Controller.panMatchSet.su3.setText(cNo);
-//                    Controller.panMatchSet.pt13.setText(score);
-                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
-                    break;
-                case 4:
-//                    Controller.panMatchSet.su4.setText(cNo);
-//                    Controller.panMatchSet.pt14.setText(score);
-                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
-                    break;
-                case 5:
-//                    Controller.panMatchSet.su5.setText(cNo);
-//                    Controller.panMatchSet.pt15.setText(score);
-                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
-                    break;
-                case 6:
-//                    Controller.panMatchSet.su6.setText(cNo);
-//                    Controller.panMatchSet.pt16.setText(score);
-                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
-                    break;
-
-            }
-
-        }
+//        int id = matchDao.updateSubstitution(p.getId(), score, position, matchEvaluationId);
+//        if (id != 0) {
+//            String cNo = txtSubPlayer.getText();
+//            switch (position) {
+//                case 1:
+////                    Controller.panMatchSet.su1.setText(cNo);
+////                    Controller.panMatchSet.pt11.setText(score);
+//                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+//                    break;
+//                case 2:
+////                    Controller.panMatchSet.su2.setText(cNo);
+////                    Controller.panMatchSet.pt12.setText(score);
+//                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+//                    break;
+//                case 3:
+////                    Controller.panMatchSet.su3.setText(cNo);
+////                    Controller.panMatchSet.pt13.setText(score);
+//                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+//                    break;
+//                case 4:
+////                    Controller.panMatchSet.su4.setText(cNo);
+////                    Controller.panMatchSet.pt14.setText(score);
+//                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+//                    break;
+//                case 5:
+////                    Controller.panMatchSet.su5.setText(cNo);
+////                    Controller.panMatchSet.pt15.setText(score);
+//                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+//                    break;
+//                case 6:
+////                    Controller.panMatchSet.su6.setText(cNo);
+////                    Controller.panMatchSet.pt16.setText(score);
+//                    Controller.panMatchSet.rallyPositionMap.put(position, chestMap.get(cNo));
+//                    break;
+//
+//            }
+//
+//        }
         s.close();
 
     }//GEN-LAST:event_jLabel3MouseClicked

@@ -1,5 +1,6 @@
 package com.vollyball.panels;
 
+import com.vollyball.bean.Player;
 import com.vollyball.bean.RallyEvaluation;
 import com.vollyball.bean.RallyEvaluationSkillScore;
 import com.vollyball.controller.Controller;
@@ -58,6 +59,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         panRallyList.add(panCompListValue, BorderLayout.CENTER);
         panCompListValue.add(true);
         lblRallyNum.setText("" + rallyNum);
+        setRotationForRally();
     }
 
     public PanEvaluationRally(RallyEvaluation rallyEvaluation) {
@@ -73,6 +75,30 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         lblResult.setText(rallyEvaluation.getHomeScore() + " : " + rallyEvaluation.getOpponentScore());
         panRallyList.add(panCompListValue, BorderLayout.CENTER);
         panCompListValue.addRallies(rallyEvaluation.getRallyEvaluationSkillScore());
+
+        if (rallyEvaluation.getRallyPositionMap().size() > 0) {
+
+            rallyPos1.setText(rallyEvaluation.getRallyPositionMap().get(1).getChestNo());
+            rallyPos2.setText(rallyEvaluation.getRallyPositionMap().get(2).getChestNo());
+            rallyPos3.setText(rallyEvaluation.getRallyPositionMap().get(3).getChestNo());
+            rallyPos4.setText(rallyEvaluation.getRallyPositionMap().get(4).getChestNo());
+            rallyPos5.setText(rallyEvaluation.getRallyPositionMap().get(5).getChestNo());
+            rallyPos6.setText(rallyEvaluation.getRallyPositionMap().get(6).getChestNo());
+        }
+    }
+
+    public void setRotationForRally() {
+        LinkedHashMap<Integer, Player> rallyPositionMap = rallyDao.getLatestMatchSetRotationOrder(Controller.panMatchSet.matchEvaluationId);
+
+        rallyPos1.setText(rallyPositionMap.get(1).getChestNo());
+        rallyPos2.setText(rallyPositionMap.get(2).getChestNo());
+        rallyPos3.setText(rallyPositionMap.get(3).getChestNo());
+        rallyPos4.setText(rallyPositionMap.get(4).getChestNo());
+        rallyPos5.setText(rallyPositionMap.get(5).getChestNo());
+        rallyPos6.setText(rallyPositionMap.get(6).getChestNo());
+
+        Controller.panMatchSet.rallyPositionMap.putAll(rallyPositionMap);
+
     }
 
     public void save() {
@@ -136,6 +162,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         int idInserted = rallyDao.insertRally(rallyInsert);
         if (idInserted != 0) {
             Controller.panMatchSet.next();
+            Controller.panMatchSet.currentRally++;
         } else {
             JOptionPane.showMessageDialog(this, "Failed to save Rally");
         }

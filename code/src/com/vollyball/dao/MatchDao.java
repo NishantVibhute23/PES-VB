@@ -367,10 +367,10 @@ public class MatchDao {
 
     }
 
-    public int updateSubstitution(int subPlayerId, String score, int position, int matchEvaluationId) {
+    public int updateSubstitution(int subPlayerId, String score, int position, int matchEvaluationId, int rallyId) {
         int id = 0;
         try {
-            int rallyId = getLatestRally(matchEvaluationId);
+//            int rallyId = getLatestRally(matchEvaluationId);
             this.con = db.getConnection();
             PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchset.substitution.point1"));
             ps1.setInt(1, subPlayerId);
@@ -387,10 +387,10 @@ public class MatchDao {
         return id;
     }
 
-    public int updateSubstitutionPoint2(String score, int position, int matchEvaluationId) {
+    public int updateSubstitutionPoint2(String score, int position, int matchEvaluationId, int rallyId) {
         int id = 0;
         try {
-            int rallyId = getLatestRally(matchEvaluationId);
+//            int rallyId = getLatestRally(matchEvaluationId);
             this.con = db.getConnection();
             PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchset.substitution.point2"));
             ps1.setString(1, score);

@@ -5,7 +5,6 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.bean.MatchSet;
 import com.vollyball.panels.PanEvaluationSubstitute;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -23,12 +22,12 @@ public class DialogEvaluationSubstitute {
 
     private JFrame parentFrame;
     private JDialog dialog;
-    MatchSet ms;
+    int setNum, matchEvaluationTeamId;
 
-    public void init(MatchSet ms) {
+    public void init(int setNum, int matchEvaluationTeamId) {
         try {
-            this.ms = ms;
-
+            this.setNum = setNum;
+            this.matchEvaluationTeamId = matchEvaluationTeamId;
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             this.dialog = new JDialog(this.parentFrame, "New Match", true);
 
@@ -47,19 +46,19 @@ public class DialogEvaluationSubstitute {
     }
 
     protected Container createPane() {
-        PanEvaluationSubstitute panMatch = new PanEvaluationSubstitute(ms);
+        PanEvaluationSubstitute panMatch = new PanEvaluationSubstitute(setNum, matchEvaluationTeamId);
 
         return panMatch;
     }
 
     public void show() {
         if (this.dialog == null) {
-            init(ms);
+            init(setNum, matchEvaluationTeamId);
         }
         this.dialog.setVisible(true);
     }
 
-    protected void close() {
+    public void close() {
         this.dialog.dispose();
         this.dialog.setVisible(false);
     }

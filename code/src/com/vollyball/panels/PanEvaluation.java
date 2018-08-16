@@ -179,7 +179,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     }
 
     private void registerLibrary() {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\VLC\\VLC64");
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "H:\\vollyball\\PES-VB\\PES-VB\\VLC\\VLC64");
         Native
                 .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
                 );
@@ -978,7 +978,7 @@ public class PanEvaluation extends javax.swing.JPanel {
         // TODO add your handling code here:
         dialogEvaluationSubstitute = new DialogEvaluationSubstitute();
 
-        dialogEvaluationSubstitute.init(ms);
+        dialogEvaluationSubstitute.init(setNum, matchEvaluationTeamId);
         dialogEvaluationSubstitute.show();
     }//GEN-LAST:event_jLabel9MouseClicked
 
