@@ -5,12 +5,10 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.panels.PanNewCompetition;
 import com.vollyball.panels.PanNewPlayer;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;

@@ -6,9 +6,7 @@
 package com.vollyball.training.panel;
 
 import com.vollyball.controller.Controller;
-import com.vollyball.training.bean.TrainingBatch;
 import com.vollyball.training.dialog.CreateBatchDialog;
-import java.util.List;
 
 /**
  *
@@ -16,14 +14,13 @@ import java.util.List;
  */
 public class PanTrainingBestScorer extends javax.swing.JPanel {
 
-    List<TrainingBatch> batchList;
 
     /**
      * Creates new form PanTrainingBestScorer
      */
     public PanTrainingBestScorer() {
         initComponents();
-
+   
     }
 
     /**

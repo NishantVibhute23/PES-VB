@@ -35,6 +35,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -42,6 +43,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -58,6 +61,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
     ReportDao reportDao = new ReportDao();
     List<Team> teamList;
     CompetitionBean cb;
+    TableRowSorter<TableModel> sorter;
 
     /**
      * Creates new form PanTeamBestScorer
@@ -67,12 +71,11 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         createTable();
         this.teamList = teamList;
         this.cb = cb;
-        cmbPlayer.addItem("All");
-        playerTeamMap.put("All", null);
+//        cmbPlayer.addItem("All");
+//        playerTeamMap.put("All", null);
         for (Team t : teamList) {
-
             playerTeamMap.put(t.getName(), t);
-            cmbPlayer.addItem(t.getName());
+//            cmbPlayer.addItem(t.getName());
 
         }
         setRow(null);
@@ -88,27 +91,26 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
 
                     int selectedRow = tbReport.getSelectedRow();
                     int selectedCol = tbReport.getSelectedColumn();
-                    tbReport.clearSelection();
-                    for (int i = 0; i <= selectedRow; i++) {
-
-                        selectedName = (String) tbReport.getValueAt(selectedRow, 1);
-
-                    }
-                    if (selectedName != null) {
-                        if (selectedCol == 10) {
-                            DialogTamDetail createDialogPanMatchWiseReport = new DialogTamDetail();
-                            createDialogPanMatchWiseReport.init(cb.getId(), playerTeamMap.get(selectedName).getId());
+                    if (selectedRow >= 0) {
+                        for (int i = 0; i <= selectedRow; i++) {
+                            selectedName = (String) tbReport.getValueAt(selectedRow, 1);
+                        }
+                        if (selectedName != null) {
+                            if (selectedCol == 10) {
+                                DialogTamDetail createDialogPanMatchWiseReport = new DialogTamDetail();
+                                createDialogPanMatchWiseReport.init(cb.getId(), playerTeamMap.get(selectedName).getId());
+                                tbReport.clearSelection();
+                                createDialogPanMatchWiseReport.show();
+                            }
+                            if (selectedCol == 11) {
+                                Controller.teamDialog = new CreateTeamDialog();
+                                Controller.teamDialog.setValues(cb.getId(), playerTeamMap.get(selectedName).getId());
+                                Controller.teamDialog.init();
+                                Controller.teamDialog.show();
+                            }
                             tbReport.clearSelection();
-                            createDialogPanMatchWiseReport.show();
-                        }
-                        if (selectedCol == 11) {
-                            CreateTeamDialog createTeamDialog = new CreateTeamDialog();
-                            createTeamDialog.setValues(cb.getId(), playerTeamMap.get(selectedName).getId());
-                            createTeamDialog.init();
-                            createTeamDialog.show();
                         }
                     }
-
                 }
             }
         });
@@ -178,6 +180,9 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
                 return new GroupableTableHeader(columnModel);
             }
         };
+
+        sorter = new TableRowSorter<TableModel>(tbReport.getModel());
+        tbReport.setRowSorter(sorter);
 
         tbReport.setFont(new java.awt.Font("Times New Roman", 0, 14));
         TableColumnModel cm = tbReport.getColumnModel();
@@ -262,7 +267,18 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
             column.setPreferredWidth(pWidth);
         }
     }
-    
+
+    private void newFilter() {
+        RowFilter<TableModel, Object> rf = null;
+        //If current expression doesn't parse, don't update.
+        try {
+            rf = RowFilter.regexFilter(txtFilter.getText(), 1);
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+        sorter.setRowFilter(rf);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -275,11 +291,9 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         panSkillReports = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         lblReportHeading = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        lblSearch = new javax.swing.JLabel();
-        cmbPlayer = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         lblNewTeam = new javax.swing.JLabel();
+        txtFilter = new javax.swing.JTextField();
         panReport = new javax.swing.JPanel();
 
         panSkillReports.setBackground(new java.awt.Color(255, 255, 255));
@@ -289,34 +303,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         lblReportHeading.setBackground(new java.awt.Color(255, 255, 255));
         lblReportHeading.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblReportHeading.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblReportHeading.setText("TEAM SCORES");
-
-        jPanel1.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblSearch.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblSearch.setForeground(new java.awt.Color(255, 255, 255));
-        lblSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSearch.setText("SEARCH");
-        lblSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSearchMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-        );
-
-        cmbPlayer.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblReportHeading.setText("TEAM SEARCH");
 
         jPanel2.setBackground(new java.awt.Color(57, 74, 108));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -343,6 +330,12 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
             .addComponent(lblNewTeam, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
         );
 
+        txtFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFilterKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -350,12 +343,10 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 397, Short.MAX_VALUE)
                 .addComponent(lblReportHeading)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(cmbPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
         jPanel11Layout.setVerticalGroup(
@@ -364,11 +355,10 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
+                        .addGap(4, 4, 4)
                         .addComponent(lblReportHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbPlayer))
+                    .addComponent(txtFilter))
                 .addContainerGap())
         );
 
@@ -411,11 +401,6 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchMouseClicked
-        // TODO add your handling code here:
-        setRow(playerTeamMap.get(cmbPlayer.getSelectedItem()));
-    }//GEN-LAST:event_lblSearchMouseClicked
-
     private void lblNewTeamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewTeamMouseClicked
         // TODO add your handling code here:
         Controller.teamDialog = new CreateTeamDialog();
@@ -424,15 +409,18 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         setRow(null);
     }//GEN-LAST:event_lblNewTeamMouseClicked
 
+    private void txtFilterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterKeyTyped
+        // TODO add your handling code here:
+        newFilter();
+    }//GEN-LAST:event_txtFilterKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox cmbPlayer;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblNewTeam;
     public javax.swing.JLabel lblReportHeading;
-    private javax.swing.JLabel lblSearch;
     private javax.swing.JPanel panReport;
     private javax.swing.JPanel panSkillReports;
+    private javax.swing.JTextField txtFilter;
     // End of variables declaration//GEN-END:variables
 }
