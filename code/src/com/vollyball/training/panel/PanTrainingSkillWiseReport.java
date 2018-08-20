@@ -6,8 +6,6 @@
 package com.vollyball.training.panel;
 
 import com.vollyball.controller.Controller;
-import com.vollyball.panels.*;
-import com.vollyball.training.dao.TrainingDao;
 import java.awt.BorderLayout;
 
 /**
@@ -16,7 +14,6 @@ import java.awt.BorderLayout;
  */
 public class PanTrainingSkillWiseReport extends javax.swing.JPanel {
 
-    TrainingDao td=new TrainingDao();
     /**
      * Creates new form PanTrainingSkillWiseReport
      */

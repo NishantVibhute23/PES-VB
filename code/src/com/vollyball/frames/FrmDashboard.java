@@ -257,18 +257,18 @@ public class FrmDashboard extends javax.swing.JFrame {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
-        CreateUserDialog createUserDialog = new CreateUserDialog();
-        createUserDialog.setValues(Controller.userBean.getId());
-        createUserDialog.init();
-        createUserDialog.show();
+        Controller.createUserDialog = new CreateUserDialog();
+        Controller.createUserDialog .setValues(Controller.userBean.getId());
+        Controller.createUserDialog .init();
+        Controller.createUserDialog .show();
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
-        CreateUserDialog createUserDialog = new CreateUserDialog();
-        createUserDialog.setValues(Controller.userBean.getId());
-        createUserDialog.init();
-        createUserDialog.show();
+        Controller.createUserDialog = new CreateUserDialog();
+        Controller.createUserDialog.setValues(Controller.userBean.getId());
+        Controller.createUserDialog.init();
+        Controller.createUserDialog.show();
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked

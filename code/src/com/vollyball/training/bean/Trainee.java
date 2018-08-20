@@ -13,10 +13,9 @@ public class Trainee {
     
     int id;
     String name;
-    String chestNo;
-    int traineeBatchId;
-    int position;
-    String batchName;
+    int batchId;
+//    String batchName;
+     int isDeleted;
 
     public int getId() {
         return id;
@@ -34,36 +33,29 @@ public class Trainee {
         this.name = name;
     }
 
-    public String getChestNo() {
-        return chestNo;
+    public int getBatchId() {
+        return batchId;
     }
 
-    public void setChestNo(String chestNo) {
-        this.chestNo = chestNo;
+    public void setBatchId(int batchId) {
+        this.batchId = batchId;
+    }
+    
+
+//    public String getBatchName() {
+//        return batchName;
+//    }
+//
+//    public void setBatchName(String batchName) {
+//        this.batchName = batchName;
+//    }
+
+    public int getIsDeleted() {
+        return isDeleted;
     }
 
-    public int getTraineeBatchId() {
-        return traineeBatchId;
-    }
-
-    public void setTraineeBatchId(int traineeBatchId) {
-        this.traineeBatchId = traineeBatchId;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public String getBatchName() {
-        return batchName;
-    }
-
-    public void setBatchName(String batchName) {
-        this.batchName = batchName;
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
     }
     
     

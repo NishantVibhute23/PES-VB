@@ -99,6 +99,30 @@ public class TeamDao {
         }
         return teamList;
     }
+    
+     public int updateTeam(Team team) {
+        int count = 0;
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.team"));
+            ps.setString(1, team.getName());
+            ps.setString(2, team.getCoach());
+            ps.setString(3, team.getAsstCoach());
+            ps.setString(4, team.getTrainer());
+            ps.setString(5, team.getMedicalOffice());
+            ps.setString(6, team.getAnalyzer());
+            ps.setInt(7, team.getCompId());
+            ps.setString(8, team.getShortCode());
+            ps.setInt(9, team.getId());
+            count = ps.executeUpdate();
+
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return count;
+
+    }
 
     public List<Player> getTeamPlayers(int id) {
         List<Player> playerList = new ArrayList<>();

@@ -12,14 +12,20 @@ import java.util.List;
  *
  * @author #dabbu
  */
-public class TrainingBatch {
+public class Batch {
+
     int id;
     String name;
-    String shortCode;
     String trainer;
     String medicalOffice;
     String analyzer;
     List<Trainee> traineeList = new ArrayList<>();
+    int isDeleted;
+    
+    String venue;
+    String startDate;
+    String EndDate;
+    String ageGroup;
 
     public int getId() {
         return id;
@@ -36,15 +42,6 @@ public class TrainingBatch {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getShortCode() {
-        return shortCode;
-    }
-
-    public void setShortCode(String shortCode) {
-        this.shortCode = shortCode;
-    }
-
 
     public String getTrainer() {
         return trainer;
@@ -77,7 +74,13 @@ public class TrainingBatch {
     public void setTraineeList(List<Trainee> traineeList) {
         this.traineeList = traineeList;
     }
-    
-    
-    
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
 }

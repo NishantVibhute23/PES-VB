@@ -5,8 +5,13 @@
  */
 package com.vollyball.panels;
 
+import com.vollyball.bean.Team;
+import com.vollyball.controller.Controller;
+import com.vollyball.dao.TeamDao;
+import com.vollyball.dialog.CreateTeamDialog;
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -15,11 +20,27 @@ import javax.swing.JTextField;
  */
 public class PanEditTeam extends javax.swing.JPanel {
 
+    TeamDao td = new TeamDao();
+    int compId;
+    int teamId;
+    CreateTeamDialog createTeamDialog = new CreateTeamDialog();
+
     /**
      * Creates new form PanEditTeam
      */
-    public PanEditTeam() {
+    public PanEditTeam(int compId, int teamId) {
         initComponents();
+        this.compId = compId;
+        this.teamId = teamId;
+        Team team = td.getteamDetail(teamId);
+        txtTeamName.setText(team.getName());
+        txtShortCode.setText(team.getShortCode());
+        txtCoachName.setText(team.getCoach());
+        txtAsstCoachName.setText(team.getAsstCoach());
+        txtrainerName.setText(team.getTrainer());
+        txtanalyzerName.setText(team.getAnalyzer());
+        txtmedicalOfficerName.setText(team.getMedicalOffice());
+
     }
 
     /**
@@ -40,20 +61,25 @@ public class PanEditTeam extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtCoachName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtAsstCoachName3 = new javax.swing.JTextField();
+        txtAsstCoachName = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         txtrainerName = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtAnalyzerName = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtMedOffName = new javax.swing.JTextField();
+        txtanalyzerName = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtmedicalOfficerName = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        lblSave = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        lblCancel = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(57, 74, 108));
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("New Match");
+        jLabel12.setText("Team Info");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,11 +135,11 @@ public class PanEditTeam extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(45, 62, 79));
         jLabel4.setText("Asst. Coach Name ");
 
-        txtAsstCoachName3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtAsstCoachName3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtAsstCoachName3.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtAsstCoachName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtAsstCoachName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtAsstCoachName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtAsstCoachName3KeyTyped(evt);
+                txtAsstCoachNameKeyTyped(evt);
             }
         });
 
@@ -133,91 +159,172 @@ public class PanEditTeam extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(45, 62, 79));
         jLabel7.setText("Analyzer  Name");
 
-        txtAnalyzerName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtAnalyzerName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtAnalyzerName.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtanalyzerName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtanalyzerName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtanalyzerName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtAnalyzerNameKeyTyped(evt);
+                txtanalyzerNameKeyTyped(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(45, 62, 79));
-        jLabel6.setText("Medical Officer Name");
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(45, 62, 79));
+        jLabel8.setText("Medical Officer Name");
 
-        txtMedOffName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txtMedOffName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtMedOffName.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtmedicalOfficerName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtmedicalOfficerName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtmedicalOfficerName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtMedOffNameKeyTyped(evt);
+                txtmedicalOfficerNameKeyTyped(evt);
             }
         });
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel10.setBackground(new java.awt.Color(57, 74, 108));
+        jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblSave.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblSave.setForeground(new java.awt.Color(255, 255, 255));
+        lblSave.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSave.setText("SAVE");
+        lblSave.setToolTipText("");
+        lblSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSaveMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblSave, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel11.setBackground(new java.awt.Color(57, 74, 108));
+        jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblCancel.setBackground(new java.awt.Color(57, 74, 108));
+        lblCancel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblCancel.setForeground(new java.awt.Color(255, 255, 255));
+        lblCancel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCancel.setText("CANCEL");
+        lblCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCancelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtrainerName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTeamName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtShortCode, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMedOffName)
-                            .addComponent(txtAnalyzerName)
-                            .addComponent(txtrainerName)
-                            .addComponent(txtTeamName)
+                            .addComponent(txtCoachName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtCoachName, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtShortCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAsstCoachName3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(16, 16, 16))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtAsstCoachName))))
+                    .addComponent(txtanalyzerName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtmedicalOfficerName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtShortCode, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCoachName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAsstCoachName3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel18)
+                    .addComponent(txtAsstCoachName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtrainerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAnalyzerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addComponent(txtanalyzerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMedOffName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtmedicalOfficerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -233,22 +340,84 @@ public class PanEditTeam extends javax.swing.JPanel {
         checkCharacter(evt);
     }//GEN-LAST:event_txtCoachNameKeyTyped
 
-    private void txtAsstCoachName3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAsstCoachName3KeyTyped
+    private void txtAsstCoachNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAsstCoachNameKeyTyped
         checkCharacter(evt);
-    }//GEN-LAST:event_txtAsstCoachName3KeyTyped
+    }//GEN-LAST:event_txtAsstCoachNameKeyTyped
 
     private void txtrainerNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrainerNameKeyTyped
 
         checkCharacter(evt);
     }//GEN-LAST:event_txtrainerNameKeyTyped
 
-    private void txtAnalyzerNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnalyzerNameKeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtAnalyzerNameKeyTyped
+    private void txtanalyzerNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtanalyzerNameKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtanalyzerNameKeyTyped
 
-    private void txtMedOffNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedOffNameKeyTyped
-        checkCharacter(evt);
-    }//GEN-LAST:event_txtMedOffNameKeyTyped
+    private void txtmedicalOfficerNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmedicalOfficerNameKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmedicalOfficerNameKeyTyped
+
+    private void lblSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaveMouseClicked
+
+        String msg = validateFields();
+
+        if (!msg.isEmpty()) {
+            JOptionPane.showMessageDialog(this, msg);
+        } else {
+            Team team = new Team();
+            team.setId(teamId);
+            team.setCompId(compId);
+            team.setName(txtTeamName.getText());
+            team.setShortCode(txtShortCode.getText());
+            team.setCoach(txtCoachName.getText());
+            team.setAsstCoach(txtAsstCoachName.getText());
+            team.setTrainer(txtrainerName.getText());
+            team.setAnalyzer(txtanalyzerName.getText());
+            team.setMedicalOffice(txtmedicalOfficerName.getText());
+
+            int id = td.updateTeam(team);
+            if (id != 0) {
+                 Controller.teamDialog.close();
+                Controller.panTeamBestScorer.setRow(null);
+                JOptionPane.showMessageDialog(this, "Team Updated Successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to add team");
+            }
+        }
+
+    }//GEN-LAST:event_lblSaveMouseClicked
+
+    private void lblCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseClicked
+        createTeamDialog.close();
+    }//GEN-LAST:event_lblCancelMouseClicked
+
+    public String validateFields() {
+        String msg = "";
+        if (txtTeamName.getText().equals("")) {
+            msg = msg + "Team Name cannot be Blank\n";
+        }
+        if (txtShortCode.getText().equals("")) {
+            msg = msg + "Short Code cannot be Blank\n";
+        }
+        if (txtCoachName.getText().equals("")) {
+            msg = msg + "Coach cannot be Blank\n";
+        }
+        if (txtAsstCoachName.getText().equals("")) {
+            msg = msg + "Assistant coach cannot be Blank\n";
+        }
+        if (txtrainerName.getText().equals("")) {
+            msg = msg + "Trainer Name cannot be Blank\n";
+        }
+        if (txtanalyzerName.getText().equals("")) {
+            msg = msg + "Analyzer Name cannot be Blank\n";
+        }
+        if (txtmedicalOfficerName.getText().equals("")) {
+            msg = msg + "Medical Officer Name cannot be Blank\n";
+        }
+//      
+        return msg;
+
+    }
 
     public void checkCharacter(java.awt.event.KeyEvent evt) {
 
@@ -260,7 +429,6 @@ public class PanEditTeam extends javax.swing.JPanel {
             }
         }
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel18;
@@ -268,18 +436,20 @@ public class PanEditTeam extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtAnalyzerName;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JLabel lblCancel;
+    private javax.swing.JLabel lblSave;
     private javax.swing.JTextField txtAsstCoachName;
-    private javax.swing.JTextField txtAsstCoachName1;
-    private javax.swing.JTextField txtAsstCoachName2;
-    private javax.swing.JTextField txtAsstCoachName3;
     private javax.swing.JTextField txtCoachName;
-    private javax.swing.JTextField txtMedOffName;
     private javax.swing.JTextField txtShortCode;
     private javax.swing.JTextField txtTeamName;
+    private javax.swing.JTextField txtanalyzerName;
+    private javax.swing.JTextField txtmedicalOfficerName;
     private javax.swing.JTextField txtrainerName;
     // End of variables declaration//GEN-END:variables
 }
