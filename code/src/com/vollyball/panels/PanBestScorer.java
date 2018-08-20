@@ -233,7 +233,7 @@ public class PanBestScorer extends javax.swing.JPanel {
         tbReport.getColumnModel().getColumn(12).setCellRenderer(editButtonRenderer);
 
         DeleteButtonRenderer deleteButtonRenderer = new DeleteButtonRenderer();
-        tbReport.getColumnModel().getColumn(13).setCellRenderer(deleteButtonRenderer);
+        tbReport.getColumnModel().getColumn(13).setCellRenderer(editButtonRenderer);
 
         Color ivory = new Color(255, 255, 255);
         tbReport.setOpaque(true);

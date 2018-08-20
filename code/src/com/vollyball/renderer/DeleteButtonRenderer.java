@@ -8,7 +8,6 @@ package com.vollyball.renderer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Cursor;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -21,6 +20,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author #dabbu
  */
 public class DeleteButtonRenderer extends DefaultTableCellRenderer {
+
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
             boolean hasFocus, int row, int column) {
@@ -28,7 +28,7 @@ public class DeleteButtonRenderer extends DefaultTableCellRenderer {
         if (value instanceof JPanel) {
             //This time return only the JLabel without icon
             JLabel l = new JLabel("DELETE");
-            l.setForeground(Color.WHITE);
+            l.setForeground(Color.BLACK);
             l.setHorizontalAlignment(CENTER);
             l.setFont(new java.awt.Font("Times New Roman", 0, 12));
             JPanel p = (JPanel) value;

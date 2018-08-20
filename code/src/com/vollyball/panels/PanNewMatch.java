@@ -534,7 +534,7 @@ public class PanNewMatch extends javax.swing.JPanel {
                 mb.setMatchNumber(Integer.parseInt(txtMatchNum.getText()));
                 mb.setDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedStartDate));
                 mb.setTime(cmbHH.getSelectedItem() + ":" + (cmbMm.getSelectedItem()));
-                phase = cmbPhase.getSelectedItem() + "-" + (cmbSubPhase.getSelectedItem() == null ? "" : cmbSubPhase.getSelectedItem());
+                phase = cmbPhase.getSelectedItem() + "" + (cmbSubPhase.getSelectedItem() == null ? "" : "-" + cmbSubPhase.getSelectedItem());
                 mb.setPhase(phase);
                 mb.setPlace(txtCity.getText());
                 mb.setCompId(Controller.competitionId);
@@ -553,7 +553,6 @@ public class PanNewMatch extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, msg);
         }
-
     }//GEN-LAST:event_jLabel11MouseClicked
 
     public String validateFields() {

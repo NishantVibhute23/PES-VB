@@ -1570,6 +1570,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
 class ImagePanel extends JPanel {
 
+    Graphics g;
     private Image img;
     int x1 = 0;
     int y1 = 0;
@@ -1782,7 +1783,7 @@ class ImagePanel extends JPanel {
         this.y1 = (int) (p1.getParent().getLocation().getY() + (p1.getHeight() / 2));
         this.x2 = (int) (p2.getParent().getLocation().getX() + (p2.getWidth() / 2));
         this.y2 = (int) (p2.getParent().getLocation().getY() + (p2.getHeight() / 2));
-        repaint();
+        paint(g);
     }
 
     public void drawImage(int x1, int y1, int x2, int y2) {
@@ -1797,12 +1798,14 @@ class ImagePanel extends JPanel {
 //        setMaximumSize(size);
 //        setSize(size);
 //        setLayout(null);
-        repaint();
+        paint(g);
     }
 
-    public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, null);
-
+    public void paint(Graphics g) {
+        if (g != null) {
+            g.drawImage(img, 0, 0, null);
+            this.g = g;
+        }
         if (x1 != 0 && y1 != 0 && x2 != 0 && y2 != 0) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setStroke(new BasicStroke(3));

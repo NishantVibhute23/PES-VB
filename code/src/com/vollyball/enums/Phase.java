@@ -10,14 +10,14 @@ package com.vollyball.enums;
  * @author Supriya
  */
 public enum Phase {
-    
+
     FINAL(1, "Final"),
-    THIRDPLACE(2, "Third PlACE"),
+    THIRDPLACE(2, "Third Place"),
     SEMIFINAL(3, "Semi Final"),
     QUARTERFINAL(4, "Quarter Final"),
     PREQUARTERFINAL(5, "PreQuarter Final"),
     POOL(6, "Pool");
-    
+
     int id;
     String name;
 
@@ -40,8 +40,7 @@ public enum Phase {
 
     public void setName(String name) {
         this.name = name;
-   }
-
+    }
 
     public static Phase getIdByName(String name) {
         for (Phase e : values()) {
