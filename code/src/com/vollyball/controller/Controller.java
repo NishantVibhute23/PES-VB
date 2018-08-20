@@ -28,7 +28,7 @@ import com.vollyball.panels.PanTeams;
 import com.vollyball.panels.PanUserDetails;
 import com.vollyball.panels.panLoading;
 import com.vollyball.training.dialog.CreateBatchDialog;
-import com.vollyball.training.panel.PanTrainingBestScorer;
+import com.vollyball.training.panel.PanBatchList;
 import com.vollyball.util.CommonUtil;
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -63,7 +63,7 @@ public class Controller {
     public static PanTeamBestScorer panTeamBestScorer;
     public static CreateCompetitionDialog createCompetitionDialog;
     public static CreateUserDialog createUserDialog;
-    public static PanTrainingBestScorer panTrainingBestScorer;
+    public static PanBatchList panBatchList;
     public static CreateBatchDialog batchDialog;
     public static CreatePlayerDialog createPlayerDialog;
     
