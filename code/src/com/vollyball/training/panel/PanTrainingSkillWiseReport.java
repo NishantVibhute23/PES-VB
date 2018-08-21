@@ -19,9 +19,9 @@ public class PanTrainingSkillWiseReport extends javax.swing.JPanel {
      */
     public PanTrainingSkillWiseReport() {
         initComponents();
-        Controller.panTrainingBestScorer = new PanTrainingBestScorer();
+        Controller.panBatchList = new PanBatchList();
 
-        panSkillReports.add(Controller.panTrainingBestScorer, BorderLayout.CENTER);
+        panSkillReports.add(Controller.panBatchList, BorderLayout.CENTER);
     }
 
     /**

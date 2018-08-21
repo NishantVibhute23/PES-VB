@@ -12,7 +12,7 @@ import com.vollyball.dialog.CreateCompetitionDialog;
 import com.vollyball.renderer.EditButtonRenderer;
 import com.vollyball.renderer.TableHeaderRenderer;
 import com.vollyball.renderer.ViewButtonRenderer;
-import com.vollyball.training.panel.PanTrainingBestScorer;
+import com.vollyball.training.panel.PanBatchList;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -544,12 +544,12 @@ public class PanCompetitionList extends javax.swing.JPanel {
 
     private void trainingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trainingLabelMouseClicked
         // TODO add your handling code here:
-        Controller.panTrainingBestScorer = new PanTrainingBestScorer();
+        Controller.panBatchList = new PanBatchList();
 //        PanTrainingSkillWiseReport panTrainingSkillWiseReport = new PanTrainingSkillWiseReport();
 //        Dimension dim = Controller.frmDashBoard.panContent.getSize();
         Controller.panCompetitionList.setVisible(false);
         Controller.frmDashBoard.panContent.removeAll();
-        Controller.frmDashBoard.panContent.add(Controller.panTrainingBestScorer, BorderLayout.CENTER);
+        Controller.frmDashBoard.panContent.add(Controller.panBatchList, BorderLayout.CENTER);
     }//GEN-LAST:event_trainingLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
