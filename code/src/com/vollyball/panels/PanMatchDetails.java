@@ -319,7 +319,7 @@ public class PanMatchDetails extends javax.swing.JPanel {
         panSetter = new javax.swing.JPanel();
         lblSetter = new javax.swing.JLabel();
         jPanel33 = new javax.swing.JPanel();
-        cmbTeams = new javax.swing.JComboBox<String>();
+        cmbTeams = new javax.swing.JComboBox<>();
         panScorer = new javax.swing.JPanel();
         lblScorer = new javax.swing.JLabel();
         jPanel34 = new javax.swing.JPanel();
@@ -416,7 +416,7 @@ public class PanMatchDetails extends javax.swing.JPanel {
         lblCosolidated.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCosolidated.setForeground(new java.awt.Color(51, 51, 51));
         lblCosolidated.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCosolidated.setText("COnsolidated");
+        lblCosolidated.setText("Consolidated");
         lblCosolidated.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCosolidatedMouseClicked(evt);
@@ -1290,7 +1290,7 @@ public class PanMatchDetails extends javax.swing.JPanel {
 
         cmbTeams.setBackground(new java.awt.Color(0, 0, 0));
         cmbTeams.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        cmbTeams.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BOTH" }));
+        cmbTeams.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOTH" }));
         cmbTeams.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbTeamsItemStateChanged(evt);
@@ -1536,6 +1536,7 @@ public class PanMatchDetails extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         DialogPanMatchReportConsolidated createDialogPanMatchWiseReport = new DialogPanMatchReportConsolidated();
+        createDialogPanMatchWiseReport.setValues(cb,matchId);
         createDialogPanMatchWiseReport.init();
         createDialogPanMatchWiseReport.show();
 

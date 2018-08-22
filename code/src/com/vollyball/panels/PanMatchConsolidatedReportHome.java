@@ -21,13 +21,15 @@ import java.awt.print.PrinterJob;
  */
 public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
 
-    PanMatchReportConsolidated panC = new PanMatchReportConsolidated();
+    PanMatchReportConsolidated panC;
+
 
     /**
      * Creates new form PanMatchConsolidatedReportHome
      */
-    public PanMatchConsolidatedReportHome() {
+    public PanMatchConsolidatedReportHome(int cb, int matchId) {
         initComponents();
+        panC = new PanMatchReportConsolidated(cb,matchId);
         panReport.add(panC, BorderLayout.CENTER);
     }
 
