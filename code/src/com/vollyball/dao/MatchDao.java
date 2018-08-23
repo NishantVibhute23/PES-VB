@@ -781,7 +781,8 @@ public class MatchDao {
 
     public int updateMatch(MatchBean mb) {
         int count = 0;
-        int id = 0;
+        int i = 0;
+        int[] evId=new int[2];
         try {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.match"));
@@ -799,17 +800,23 @@ public class MatchDao {
             count = ps.executeUpdate();
 
             if (count != 0) {
-
+                PreparedStatement psev = this.con.prepareStatement(CommonUtil.getResourceProperty("get.evaluationIdbymatchId"));
+                psev.setInt(1, mb.getId());
+                ResultSet rs = psev.executeQuery();
+                while(rs.next()){
+                    evId[i]=rs.getInt(1);
+                    i++;
+                }
                 PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchsetevaluationteam"));
                 ps2.setInt(1, mb.getTeam1());
                 ps2.setInt(2, mb.getTeam2());
-                ps2.setInt(3, mb.getId());
+                ps2.setInt(3, evId[0]);
                 count = ps2.executeUpdate();
 
                 PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchsetevaluationteam"));
                 ps3.setInt(1, mb.getTeam2());
                 ps3.setInt(2, mb.getTeam1());
-                ps3.setInt(3, mb.getId());
+                ps3.setInt(3, evId[1]);
                 count = ps3.executeUpdate();
             }
 

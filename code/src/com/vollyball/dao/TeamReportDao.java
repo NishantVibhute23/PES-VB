@@ -5,13 +5,18 @@
  */
 package com.vollyball.dao;
 
+import com.vollyball.bean.PlayerSkillScore;
 import com.vollyball.bean.TeamScores;
+import com.vollyball.bean.TeamSkillScore;
 import com.vollyball.db.DbUtil;
 import com.vollyball.util.CommonUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -200,6 +205,36 @@ public class TeamReportDao {
         }
         return t;
 
+    }
+     
+     public TeamSkillScore getTeamSkillWiseScoreReport(int compId, int skillId, int matchId, int teamId) {
+        TeamSkillScore skill = new TeamSkillScore();
+        try {
+            PreparedStatement ps;
+            this.con = db.getConnection();
+                ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.team.skillwisescore.ofmatch"));
+                ps.setInt(1, compId);
+                ps.setInt(2, teamId);
+                ps.setInt(3, matchId);
+                ps.setInt(4, skillId);
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                skill.setTeamId(rs.getInt(1));
+                skill.setTeamName(rs.getString(2));
+                skill.setTotalAttempt(rs.getInt(3));
+                skill.setOne(rs.getInt(4));
+                skill.setTwo(rs.getInt(5));
+                skill.setThree(rs.getInt(6));
+                skill.setFour(rs.getInt(7));
+                skill.setFive(rs.getInt(8));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return skill;
     }
     
 }
