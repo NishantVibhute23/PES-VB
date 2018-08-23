@@ -35,7 +35,6 @@ public class CompetitionDao {
             ps.setString(4, cb.getEndDate());
             ps.setString(5, cb.getAgeGroup());
             count = ps.executeUpdate();
-
             db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -48,9 +47,7 @@ public class CompetitionDao {
         try {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.competitionlist"));
-
             ResultSet rs = ps.executeQuery();
-
             while (rs.next()) {
                 CompetitionBean cb = new CompetitionBean();
                 cb.setId(rs.getInt(1));
@@ -62,12 +59,10 @@ public class CompetitionDao {
                 cb.setIsDeleted(rs.getInt(7));
                 competitionList.add(cb);
             }
-
             db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         return competitionList;
     }
 
@@ -78,7 +73,6 @@ public class CompetitionDao {
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.competitionlistbyId"));
             ps.setInt(1, compId);
             ResultSet rs = ps.executeQuery();
-
             while (rs.next()) {
                 cb.setId(rs.getInt(1));
                 cb.setName(rs.getString(2));
@@ -87,12 +81,10 @@ public class CompetitionDao {
                 cb.setEndDate(rs.getString(5));
                 cb.setAgeGroup(rs.getString(6));
             }
-
             db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         return cb;
     }
 
@@ -108,12 +100,10 @@ public class CompetitionDao {
             ps.setString(5, cb.getAgeGroup());
             ps.setInt(6, cb.getId());
             count = ps.executeUpdate();
-
             db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return count;
     }
-
 }

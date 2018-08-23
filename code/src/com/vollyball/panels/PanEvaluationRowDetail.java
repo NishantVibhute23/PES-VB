@@ -347,7 +347,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         p.currentPanRow.txtRate.setText(lblScore.getText());
         score = Integer.parseInt(lblScore.getText());
         for (Map.Entry<JLabel, JPanel> entry : mapScoreComponent.entrySet()) {
-
             if (lblScore == entry.getKey()) {
                 if (lblScore == lblRate1) {
                     mapScoreComponent.get(entry.getKey()).setBackground(new Color(255, 11, 0));
@@ -364,11 +363,8 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             } else {
                 mapScoreComponent.get(entry.getKey()).setBackground(Color.WHITE);
             }
-
         }
-
         save();
-
     }
 
     public void selectSkill(JLabel j) {
@@ -1251,7 +1247,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 220, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -1264,7 +1260,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 99, Short.MAX_VALUE)
+            .addGap(0, 171, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1288,11 +1284,12 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -1300,6 +1297,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                         .addGap(0, 0, 0)
                         .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panCourt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1322,15 +1320,14 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDig, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(txtDig)
         );
 
@@ -1352,122 +1349,120 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
     private void lblDefenceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDefenceMouseClicked
         // TODO add your handling code here:
         selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblDefenceMouseClicked
-
     private void lblServiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblServiceMouseClicked
         // TODO add your handling code here:
         selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblServiceMouseClicked
-
     private void lblTFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTFMouseClicked
         // TODO add your handling code here:
         selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblTFMouseClicked
-
     private void lblOpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpMouseClicked
         // TODO add your handling code here:
         selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblOpMouseClicked
-
     private void lblAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAttackMouseClicked
         // TODO add your handling code here:
         selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblAttackMouseClicked
-
     private void lblBlockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBlockMouseClicked
         // TODO add your handling code here:
         selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblBlockMouseClicked
-
     private void lblReceptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReceptionMouseClicked
         // TODO add your handling code here:
         selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblReceptionMouseClicked
-
     private void lblSetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSetMouseClicked
         // TODO add your handling code here:
         selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblSetMouseClicked
-
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
         char c = evt.getKeyChar();
+        String a = String.valueOf(c).toUpperCase();
 
-        switch (c) {
-            case 's':
+        switch (a) {
+            case "Q":
                 selectSkill(lblService);
                 command = "";
                 break;
-            case 'a':
+            case "W":
                 selectSkill(lblAttack);
                 command = "";
                 break;
-            case 'b':
+            case "E":
                 selectSkill(lblBlock);
                 command = "";
                 break;
-            case 'd':
+            case "R":
                 selectSkill(lblDefence);
                 command = "";
                 break;
-            case 'r':
+            case "T":
                 selectSkill(lblReception);
                 command = "";
                 break;
-            case 'e':
+            case "Y":
                 selectSkill(lblSet);
                 command = "";
                 break;
-            case '-':
+            case "U":
+                selectSkill(lblSet);
+                command = "";
+                break;
+            case "I":
+                selectSkill(lblSet);
+                command = "";
+                break;
+            case "Z":
                 checkPrev(command);
                 selectScore(lblRate1);
                 command = "";
                 break;
-            case '/':
+            case "X":
                 checkPrev(command);
                 selectScore(lblRate2);
                 command = "";
                 break;
-            case '.':
+            case "C":
                 checkPrev(command);
                 selectScore(lblRate3);
                 command = "";
                 break;
-            case '*':
+            case "V":
                 checkPrev(command);
                 selectScore(lblRate4);
                 command = "";
                 break;
-            case '+':
+            case "B":
                 checkPrev(command);
                 selectScore(lblRate5);
                 command = "";
                 break;
-            case 'h':
+            case "H":
                 checkPrev(command);
                 command = "";
-                command = command + "" + c;
+                command = command + "" + a;
                 break;
-            case 'o':
+            case "O":
                 checkPrev(command);
                 command = "";
-                command = command + "" + c;
+                command = command + "" + a;
                 break;
             default:
-                command = command + "" + c;
+                command = command + "" + a;
                 break;
         }
 
     }//GEN-LAST:event_jTextField1KeyPressed
-
     private void txtDigFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDigFocusLost
         // TODO add your handling code here:
         String val = txtDig.getText();
-
         String p[] = val.split("-");
         panel.dig(p[0], p[1]);
 
@@ -1475,9 +1470,9 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
     public void checkPrev(String command) {
 
-        if (command.startsWith("h")) {
+        if (command.startsWith("H")) {
             fromPlace = command;
-        } else if (command.startsWith("o")) {
+        } else if (command.startsWith("O")) {
             toPlace = command;
             panel.dig(fromPlace, toPlace);
         } else {
@@ -1490,7 +1485,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             }
         }
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
@@ -1565,7 +1559,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     private javax.swing.JPanel panTF;
     private javax.swing.JTextField txtDig;
     // End of variables declaration//GEN-END:variables
-
 }
 
 class ImagePanel extends JPanel {
@@ -1783,7 +1776,7 @@ class ImagePanel extends JPanel {
         this.y1 = (int) (p1.getParent().getLocation().getY() + (p1.getHeight() / 2));
         this.x2 = (int) (p2.getParent().getLocation().getX() + (p2.getWidth() / 2));
         this.y2 = (int) (p2.getParent().getLocation().getY() + (p2.getHeight() / 2));
-        paint(g);
+        repaint();
     }
 
     public void drawImage(int x1, int y1, int x2, int y2) {
@@ -1798,14 +1791,13 @@ class ImagePanel extends JPanel {
 //        setMaximumSize(size);
 //        setSize(size);
 //        setLayout(null);
-        paint(g);
+        repaint();
     }
 
-    public void paint(Graphics g) {
-        if (g != null) {
-            g.drawImage(img, 0, 0, null);
-            this.g = g;
-        }
+    public void paintComponent(Graphics g) {
+
+        g.drawImage(img, 0, 0, null);
+
         if (x1 != 0 && y1 != 0 && x2 != 0 && y2 != 0) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setStroke(new BasicStroke(3));
