@@ -1798,17 +1798,58 @@ class ImagePanel extends JPanel {
 
         g.drawImage(img, 0, 0, null);
 
-        if (x1 != 0 && y1 != 0 && x2 != 0 && y2 != 0) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setStroke(new BasicStroke(3));
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
-            Point sw = new Point(x1, y1);
-            Point ne = new Point(x2, y2);
-            g2.setPaint(Color.GREEN);
-            g2.draw(new Line2D.Double(sw, ne));
+//        if (x1 != 0 && y1 != 0 && x2 != 0 && y2 != 0) {
+        Graphics2D g2 = (Graphics2D) g;
+        int x1 = 100;
+        int y1 = 100;
+        int x2 = 200;
+        int y2 = 200;
+        double slope;
 
-        }
+        Point p1 = new Point(x1, y1);
+        Point p2 = new Point(x2, y2);
+
+        g2.setStroke(new BasicStroke(3));
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+        Line2D line = new Line2D.Double(x1, y1, x2, y2);
+
+        slope = ((double) (p2.getY() - p1.getY()) / (double) (p2.getX() - p1.getX()));
+
+        slope = -1 / slope;
+
+        int X = (int) (p1.getX() + p2.getX()) / 2;
+        int Y = (int) (p1.getY() + p2.getY()) / 2;
+
+        Point midpoint = new Point(X, Y);
+        Point p3 = new Point(X, Y);
+
+        double b = -slope * X + Y;
+
+        int xp = X + 8;
+        int yp = (int) (slope * (xp + 8) + b);
+
+        Point p4 = new Point(xp, yp);
+
+        Line2D line1 = new Line2D.Double(p3, p4);
+
+//        Path2D p = new GeneralPath();
+//        p.moveTo(x1, y1);
+//        p.curveTo(x1, y1,
+//                s.getBounds().getMaxX(), s.getBounds().getMaxY(),
+//                x2, y2);
+        g2.draw(line);
+        g2.draw(line1);
+
+//        Path2D p1 = new GeneralPath();
+//        p1.moveTo(x11, y11);
+//        p1.curveTo(x11, y11,
+//                s1.getBounds().getMaxX(), s1.getBounds().getMaxY(),
+//                x12, y12);
+//        g2.draw(p1);
+//
+//        }
     }
 
 }
