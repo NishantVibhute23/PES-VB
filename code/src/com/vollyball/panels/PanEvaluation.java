@@ -85,8 +85,6 @@ public class PanEvaluation extends javax.swing.JPanel {
     public PanEvaluation(int setNum, int matchId, int teamEvaluateId, int opponentId, int evaluationType, int matchEvaluationTeamId) {
         initComponents();
         initializePlayer();
-//        Setup s1 = new Setup();
-//        s1.creatematchevaluationsetlatestrotation(100);
         playerList = teamDao.getTeamPlayers(teamEvaluateId);
 //        panRallyList.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setNum = setNum;

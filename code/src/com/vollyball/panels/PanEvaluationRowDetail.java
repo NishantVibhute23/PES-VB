@@ -13,11 +13,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
+import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1569,6 +1571,8 @@ class ImagePanel extends JPanel {
     int y1 = 0;
     int x2 = 0;
     int y2 = 0;
+    int midX = 0;
+    int midY = 0;
     LinkedHashMap<String, JPanel> panGrid = new LinkedHashMap<String, JPanel>();
 
     public ImagePanel(String img) {
@@ -1776,7 +1780,39 @@ class ImagePanel extends JPanel {
         this.y1 = (int) (p1.getParent().getLocation().getY() + (p1.getHeight() / 2));
         this.x2 = (int) (p2.getParent().getLocation().getX() + (p2.getWidth() / 2));
         this.y2 = (int) (p2.getParent().getLocation().getY() + (p2.getHeight() / 2));
+        setCurve();
         repaint();
+    }
+
+    public void setCurve() {
+
+        int val = 60;
+        Shape s = new Line2D.Double(x1, y1, x2, y2);
+
+        int xlinecenter = (int) s.getBounds().getCenterX();
+        int ylinecenter = (int) s.getBounds().getCenterY();
+
+        if ((x2 - x1) == 0) {
+            midX = x1 < 150 ? (x1 + val) : (x1 - val);
+            midY = ylinecenter;
+        } else {
+            double slope = (double) (y2 - y1) / (x2 - x1);
+            slope = Math.abs(slope);
+            if (slope == 0) {
+                midX = xlinecenter;
+                midY = y1 - val;
+            } else {
+                slope = Math.round(slope);
+                int yval = (int) ((int) val / slope);
+//                if (x1 < 150) {
+//
+//                }
+
+                midX = xlinecenter < 150 ? (xlinecenter + val) : (xlinecenter + val);
+
+                midY = ylinecenter - yval;
+            }
+        }
     }
 
     public void drawImage(int x1, int y1, int x2, int y2) {
@@ -1800,56 +1836,18 @@ class ImagePanel extends JPanel {
 
 //        if (x1 != 0 && y1 != 0 && x2 != 0 && y2 != 0) {
         Graphics2D g2 = (Graphics2D) g;
-        int x1 = 100;
-        int y1 = 100;
-        int x2 = 200;
-        int y2 = 200;
-        double slope;
-
-        Point p1 = new Point(x1, y1);
-        Point p2 = new Point(x2, y2);
 
         g2.setStroke(new BasicStroke(3));
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        Line2D line = new Line2D.Double(x1, y1, x2, y2);
+        Path2D p = new GeneralPath();
+        p.moveTo(x1, y1);
+        p.curveTo(x1, y1,
+                midX, midY,
+                x2, y2);
+        g2.draw(p);
 
-        slope = ((double) (p2.getY() - p1.getY()) / (double) (p2.getX() - p1.getX()));
-
-        slope = -1 / slope;
-
-        int X = (int) (p1.getX() + p2.getX()) / 2;
-        int Y = (int) (p1.getY() + p2.getY()) / 2;
-
-        Point midpoint = new Point(X, Y);
-        Point p3 = new Point(X, Y);
-
-        double b = -slope * X + Y;
-
-        int xp = X + 8;
-        int yp = (int) (slope * (xp + 8) + b);
-
-        Point p4 = new Point(xp, yp);
-
-        Line2D line1 = new Line2D.Double(p3, p4);
-
-//        Path2D p = new GeneralPath();
-//        p.moveTo(x1, y1);
-//        p.curveTo(x1, y1,
-//                s.getBounds().getMaxX(), s.getBounds().getMaxY(),
-//                x2, y2);
-        g2.draw(line);
-        g2.draw(line1);
-
-//        Path2D p1 = new GeneralPath();
-//        p1.moveTo(x11, y11);
-//        p1.curveTo(x11, y11,
-//                s1.getBounds().getMaxX(), s1.getBounds().getMaxY(),
-//                x12, y12);
-//        g2.draw(p1);
-//
-//        }
     }
 
 }

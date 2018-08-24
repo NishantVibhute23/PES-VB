@@ -22,6 +22,7 @@ public class LoginDao {
     Connection con;
 
     public int checkLogin(String name, String password) {
+
         int count = 0;
         try {
             this.con = db.getConnection();
@@ -41,8 +42,9 @@ public class LoginDao {
         return count;
 
     }
-      public UserBean getUserDetails(String name) {
-           UserBean ub=new UserBean();
+
+    public UserBean getUserDetails(String name) {
+        UserBean ub = new UserBean();
         try {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.userDetails"));

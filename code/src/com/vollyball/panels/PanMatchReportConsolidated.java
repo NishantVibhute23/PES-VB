@@ -17,17 +17,13 @@ import com.vollyball.dao.ReportDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.dao.TeamReportDao;
 import com.vollyball.renderer.TableHeaderRenderer;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -55,7 +51,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     int team1wonBy = 0, team2wonBy = 0;
     TeamReportDao trd = new TeamReportDao();
     Map<String, Player> playerNameMap = new HashMap<String, Player>();
-    JTable team1PlayerTable;
+//    JTable team1PlayerTable2;
 //    JTable team2PlayerTable;
 
     /**
@@ -77,9 +73,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team1id = team.getTeam1();
         team2id = team.getTeam2();
-        team1PlayerCreateTable();
         setRowTeam1(team1id);
-        team2PlayerCreateTable();
         setRowTeam2(team2id);
         setTeamSSDataSkillWise();
         setTeamNSSDataSkillWise();
@@ -201,6 +195,36 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbTeam2Loss.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
         tbTeam2Loss.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
         tbTeam2Loss.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
+
+        JTableHeader header5 = team1PlayerTable.getTableHeader();
+        header5.setDefaultRenderer(new TableHeaderRenderer(team1PlayerTable));
+        team1PlayerTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+//        team1PlayerTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        team1PlayerTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        team1PlayerTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        team1PlayerTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        team1PlayerTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        team1PlayerTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+
+        Color ivory = new Color(255, 255, 255);
+        team1PlayerTable.setOpaque(true);
+        team1PlayerTable.setFillsViewportHeight(true);
+        team1PlayerTable.setBackground(ivory);
+
+        JTableHeader header6 = team2PlayerTable.getTableHeader();
+        header6.setDefaultRenderer(new TableHeaderRenderer(team2PlayerTable));
+        team2PlayerTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+//        team2PlayerTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        team2PlayerTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        team2PlayerTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        team2PlayerTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        team2PlayerTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        team2PlayerTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+
+        team2PlayerTable.setOpaque(true);
+        team2PlayerTable.setFillsViewportHeight(true);
+        team2PlayerTable.setBackground(ivory);
+
     }
 
     public void showScoreBoard(List<MatchSet> lstMatchSetTeam, int team) {
@@ -297,39 +321,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
     DefaultTableModel team1Playermodel;
 
-    public void team1PlayerCreateTable() {
-        team1Playermodel = new DefaultTableModel();
-        team1Playermodel.setDataVector(new Object[][]{},
-                new Object[]{"SNo.", "Player Name","Set 1","Set 2","Set 3","Set 4","set 5"});
-
-        team1PlayerTable = new JTable(team1Playermodel);
-        Color heading = new Color(204, 204, 204);
-        team1Playermodel = (DefaultTableModel) team1PlayerTable.getModel();
-        JTableHeader tbheader = team1PlayerTable.getTableHeader();
-        JScrollPane scroll = new JScrollPane(team1PlayerTable);
-        tbheader.setOpaque(false);
-        tbheader.setPreferredSize(new Dimension(525, 280));
-//        tbheader.setDefaultRenderer(new TableHeaderRenderer(team1PlayerTable));
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        team1PlayerTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        team1PlayerTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-        team1PlayerTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-        team1PlayerTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
-        team1PlayerTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
-        team1PlayerTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
-        team1PlayerTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
-        Color ivory = new Color(255, 255, 255);
-//        team1PlayerTable.setOpaque(true);
-//        team1PlayerTable.setFillsViewportHeight(true);
-        team1PlayerTable.setBackground(ivory);
-        team1PlayerTable.setVisible(true);
-        team1PlayerTable.setRowHeight(25);
-        team1playerDetailsPan.add(scroll, BorderLayout.CENTER);
-        resizeColumns();
-
-    }
     public void setRowTeam1(int teamId) {
+        resizeColumns();
+        team1Playermodel = (DefaultTableModel) team1PlayerTable.getModel();
         List<Player> playerList = new ArrayList<>();
         for (int i = team1Playermodel.getRowCount() - 1; i >= 0; i--) {
             team1Playermodel.removeRow(i);
@@ -339,13 +333,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         int i = 0;
         for (Player p : playerList) {
             playerNameMap.put(p.getName(), p);
-            Object[] row = {i + 1, p.getName(),"0","0","0","0","0"};
+            Object[] row = {i + 1, p.getName(), "0", "0", "0", "0", "0"};
             team1Playermodel.addRow(row);
             i++;
         }
 
     }
-    float[] columnWidthPercentage = {5.0f, 5.0f,5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
+    float[] columnWidthPercentage = {5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
 
     private void resizeColumns() {
         int tW = team1PlayerTable.getPreferredSize().width;
@@ -360,39 +354,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     }
 
     DefaultTableModel team2Playermodel;
-    public void team2PlayerCreateTable() {
-        team2Playermodel = new DefaultTableModel();
-        team2Playermodel.setDataVector(new Object[][]{},
-                new Object[]{"SNo.", "Player Name","Set 1","Set 2","Set 3","Set 4","set 5"});
 
-        team2PlayerTable = new JTable(team2Playermodel);
-        Color heading = new Color(204, 204, 204);
-        team2Playermodel = (DefaultTableModel) team2PlayerTable.getModel();
-        JTableHeader tbheader = team2PlayerTable.getTableHeader();
-        JScrollPane scroll = new JScrollPane(team2PlayerTable);
-        tbheader.setOpaque(false);
-        tbheader.setPreferredSize(new Dimension(525, 280));
-//        tbheader.setDefaultRenderer(new TableHeaderRenderer(team1PlayerTable));
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        team2PlayerTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        team2PlayerTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-        team2PlayerTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-        team2PlayerTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
-        team2PlayerTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
-        team2PlayerTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
-        team2PlayerTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
-        Color ivory = new Color(255, 255, 255);
-//        team2PlayerTable.setOpaque(true);
-//        team2PlayerTable.setFillsViewportHeight(true);
-        team2PlayerTable.setBackground(ivory);
-        team2PlayerTable.setVisible(true);
-        team2PlayerTable.setRowHeight(25);
-        resizeColumns1();
-
-    }
-
-    float[] columnWidthPercentage1 = {5.0f, 5.0f,5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
+    float[] columnWidthPercentage1 = {5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
 
     private void resizeColumns1() {
         int tW = team2PlayerTable.getPreferredSize().width;
@@ -407,6 +370,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     }
 
     public void setRowTeam2(int teamId) {
+        resizeColumns1();
+        team2Playermodel = (DefaultTableModel) team2PlayerTable.getModel();
         List<Player> playerList = new ArrayList<>();
         for (int i = team2Playermodel.getRowCount() - 1; i >= 0; i--) {
             team2Playermodel.removeRow(i);
@@ -416,7 +381,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         int i = 0;
         for (Player p : playerList) {
             playerNameMap.put(p.getName(), p);
-            Object[] row = {i + 1, p.getName(),"0","0","0","0","0"};
+            Object[] row = {i + 1, p.getName(), "0", "0", "0", "0", "0"};
             team2Playermodel.addRow(row);
             i++;
         }
@@ -792,6 +757,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jScrollPane7 = new javax.swing.JScrollPane();
         tbTeam1Loss = new javax.swing.JTable();
         team1playerDetailsPan = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        team1PlayerTable = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
         jPanel25 = new javax.swing.JPanel();
         jPanel42 = new javax.swing.JPanel();
@@ -1393,9 +1360,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTextField62)
                         .addComponent(jTextField63))
-                    .addGroup(jPanel45Layout.createSequentialGroup()
-                        .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)))
+                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField69)
                     .addComponent(t1ssr1Attk, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
@@ -3403,15 +3368,52 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team1playerDetailsPan.setBackground(new java.awt.Color(255, 255, 255));
 
+        team1PlayerTable.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        team1PlayerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"01 L", "Player 1", null, null, null, null, null},
+                {"02", "Player 2", null, null, null, null, null},
+                {"03", "Player 3", null, null, null, null, null},
+                {"04", "Player 4", null, null, null, null, null},
+                {"05", "Player 5", null, null, null, null, null},
+                {"06", "Player 6", null, null, null, null, null},
+                {"07", "Player 7", null, null, null, null, null},
+                {"08 L", "Player 8", null, null, null, null, null},
+                {"09", "Player 9", null, null, null, null, null},
+                {"10", "Player 10", null, null, null, null, null},
+                {"11", "Player 11", null, null, null, null, null},
+                {"12", "Player 12", null, null, null, null, null},
+                {"13", "Player 13", null, null, null, null, null},
+                {"14", "Player 14", null, null, null, null, null}
+            },
+            new String [] {
+                "C. No", "Player", "Set 1", "Set 2", "Set 3", "Set 4", "Set 5"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        team1PlayerTable.setRowHeight(20);
+        team1PlayerTable.setShowHorizontalLines(false);
+        team1PlayerTable.setShowVerticalLines(false);
+        jScrollPane5.setViewportView(team1PlayerTable);
+
         javax.swing.GroupLayout team1playerDetailsPanLayout = new javax.swing.GroupLayout(team1playerDetailsPan);
         team1playerDetailsPan.setLayout(team1playerDetailsPanLayout);
         team1playerDetailsPanLayout.setHorizontalGroup(
             team1playerDetailsPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addComponent(jScrollPane5)
         );
         team1playerDetailsPanLayout.setVerticalGroup(
             team1playerDetailsPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 319, Short.MAX_VALUE)
+            .addGroup(team1playerDetailsPanLayout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -3448,7 +3450,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addGroup(jPanel21Layout.createSequentialGroup()
                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(team1playerDetailsPan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(team1playerDetailsPan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(11, 11, 11))
         );
 
         jPanel25.setBackground(new java.awt.Color(255, 255, 255));
@@ -4060,6 +4063,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
@@ -4253,6 +4257,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTable tbTeam2Loss;
     private javax.swing.JTable tbTeam2Win;
     private javax.swing.JTextField team1NSSName;
+    private javax.swing.JTable team1PlayerTable;
     private javax.swing.JTextField team1SSName;
     private javax.swing.JTextField team1Sum;
     private javax.swing.JTextField team1SumAttackError;

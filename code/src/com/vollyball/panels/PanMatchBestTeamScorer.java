@@ -136,7 +136,7 @@ public class PanMatchBestTeamScorer extends javax.swing.JPanel {
 
             int i = 0;
             for (PlayerScores p : playerScoresList) {
-                Object[] row = {i + 1, p.getPlayerName(), p.getTeamName(), p.getServiceRatePerc(), p.getAttackRatePerc(), p.getBlockRatePerc(), p.getSetRatePerc(), p.getReceptionRatePerc(), p.getDefenceRatePerc(), p.getAttemptRatePerc()};
+                Object[] row = {p.getChestNo(), p.getPlayerName(), p.getTeamName(), "", "", p.getServiceRatePerc(), "", "", p.getAttackRatePerc(), "", "", p.getBlockRatePerc(), "", "", p.getSetRatePerc(), "", "", p.getReceptionRatePerc(), "", "", p.getDefenceRatePerc(), p.getAttemptRatePerc()};
                 dm.addRow(row);
                 i++;
             }
@@ -147,7 +147,7 @@ public class PanMatchBestTeamScorer extends javax.swing.JPanel {
 
             int i = 0;
             for (PlayerScores p : playerScoresList) {
-                Object[] row = {i + 1, p.getPlayerName(), p.getTeamName(), p.getServiceRatePerc(), p.getAttackRatePerc(), p.getBlockRatePerc(), p.getSetRatePerc(), p.getReceptionRatePerc(), p.getDefenceRatePerc(), p.getAttemptRatePerc()};
+                Object[] row = {p.getChestNo(), p.getPlayerName(), p.getTeamName(), "", "", p.getServiceRatePerc(), "", "", p.getAttackRatePerc(), "", "", p.getBlockRatePerc(), "", "", p.getSetRatePerc(), "", "", p.getReceptionRatePerc(), "", "", p.getDefenceRatePerc(), p.getAttemptRatePerc()};
                 dm.addRow(row);
                 i++;
             }
@@ -159,7 +159,7 @@ public class PanMatchBestTeamScorer extends javax.swing.JPanel {
         dm = new DefaultTableModel();
 
         dm.setDataVector(new Object[][]{},
-                new Object[]{"SNo.", "Player Name", "<html>Team<br> Name</html>", "Service", "Attack", "Block", "Set", "Reception", "Defend", "Total"});
+                new Object[]{"Chest No", "Player Name", "<html>Team<br> Name</html>", "Tot", "+", "%", "Tot", "+", "%", "Tot", "+", "%", "Tot", "+", "%", "Tot", "+", "%", "Tot", "+", "%", "Total"});
 
         tbReport = new JTable(dm) {
             protected JTableHeader createDefaultTableHeader() {
@@ -169,14 +169,46 @@ public class PanMatchBestTeamScorer extends javax.swing.JPanel {
 
         tbReport.setFont(new java.awt.Font("Times New Roman", 0, 12));
         TableColumnModel cm = tbReport.getColumnModel();
+
+        ColumnGroup g_nameService = new ColumnGroup("Service");
+        g_nameService.add(cm.getColumn(3));
+        g_nameService.add(cm.getColumn(4));
+        g_nameService.add(cm.getColumn(5));
+
+        ColumnGroup g_nameAttack = new ColumnGroup("Attack");
+        g_nameAttack.add(cm.getColumn(6));
+        g_nameAttack.add(cm.getColumn(7));
+        g_nameAttack.add(cm.getColumn(8));
+
+        ColumnGroup g_nameBlock = new ColumnGroup("Block");
+        g_nameBlock.add(cm.getColumn(9));
+        g_nameBlock.add(cm.getColumn(10));
+        g_nameBlock.add(cm.getColumn(11));
+
+        ColumnGroup g_nameSet = new ColumnGroup("Set");
+        g_nameSet.add(cm.getColumn(12));
+        g_nameSet.add(cm.getColumn(13));
+        g_nameSet.add(cm.getColumn(14));
+
+        ColumnGroup g_nameReception = new ColumnGroup("Reception");
+        g_nameReception.add(cm.getColumn(15));
+        g_nameReception.add(cm.getColumn(16));
+        g_nameReception.add(cm.getColumn(17));
+
+        ColumnGroup g_nameDefence = new ColumnGroup("Defence");
+        g_nameDefence.add(cm.getColumn(18));
+        g_nameDefence.add(cm.getColumn(19));
+        g_nameDefence.add(cm.getColumn(20));
+
         ColumnGroup g_name = new ColumnGroup("SuccessRate");
-        g_name.add(cm.getColumn(3));
-        g_name.add(cm.getColumn(4));
-        g_name.add(cm.getColumn(5));
-        g_name.add(cm.getColumn(6));
-        g_name.add(cm.getColumn(7));
-        g_name.add(cm.getColumn(8));
-        g_name.add(cm.getColumn(9));
+        g_name.add(g_nameService);
+        g_name.add(g_nameAttack);
+        g_name.add(g_nameBlock);
+        g_name.add(g_nameSet);
+        g_name.add(g_nameReception);
+        g_name.add(g_nameDefence);
+
+        g_name.add(cm.getColumn(21));
 
         GroupableTableHeader header = (GroupableTableHeader) tbReport.getTableHeader();
         header.addColumnGroup(g_name);
@@ -188,7 +220,7 @@ public class PanMatchBestTeamScorer extends javax.swing.JPanel {
         JTableHeader tbheader = tbReport.getTableHeader();
 
         tbheader.setOpaque(false);
-        tbheader.setPreferredSize(new Dimension(100, 45));
+        tbheader.setPreferredSize(new Dimension(100, 75));
         tbheader.setDefaultRenderer(new TableHeaderRenderer(tbReport));
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -214,7 +246,7 @@ public class PanMatchBestTeamScorer extends javax.swing.JPanel {
         resizeColumns();
         panReport.add(scroll, BorderLayout.CENTER);
     }
-    float[] columnWidthPercentage = {5.0f, 23.0f, 9.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f};
+    float[] columnWidthPercentage = {5.0f, 23.0f, 9.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f};
 
     private void resizeColumns() {
         int tW = tbReport.getPreferredSize().width;

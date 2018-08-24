@@ -228,6 +228,11 @@ public class ReportDao {
 
                 p.setTeamName(rs.getString(16));
 
+                if (rs.getInt(18) == 2) {
+                    p.setChestNo(rs.getString(17) + "L");
+                } else {
+                    p.setChestNo(rs.getString(17));
+                }
             }
             if (p.getId() == 0) {
                 p.setId(player.getId());
@@ -252,6 +257,13 @@ public class ReportDao {
                 p.setBestDefence(0);
 
                 p.setTeamName(player.getTeamName());
+
+                if (player.getPosition() == 2) {
+                    p.setChestNo(player.getChestNo() + "L");
+                } else {
+                    p.setChestNo(player.getChestNo());
+                }
+
             }
             p.setServiceRate(p.getTotalService() == 0 ? 0 : (double) p.getBestService() / (double) p.getTotalService());
             p.setServiceRatePerc(p.getServiceRate() == 0 ? "0%" : df.format(p.getServiceRate()));

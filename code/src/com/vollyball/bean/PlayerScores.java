@@ -12,6 +12,7 @@ package com.vollyball.bean;
 public class PlayerScores {
 
     int id;
+    String chestNo;
     String playerName;
     String matchPhase;
     int matchesPlayed;
@@ -312,6 +313,14 @@ public class PlayerScores {
 
     public void setAttemptRatePerc(String attemptRatePerc) {
         this.attemptRatePerc = attemptRatePerc;
+    }
+
+    public String getChestNo() {
+        return chestNo;
+    }
+
+    public void setChestNo(String chestNo) {
+        this.chestNo = chestNo;
     }
 
 }
