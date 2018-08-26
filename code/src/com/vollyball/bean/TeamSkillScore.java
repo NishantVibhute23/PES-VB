@@ -10,6 +10,7 @@ package com.vollyball.bean;
  * @author #dabbu
  */
 public class TeamSkillScore {
+
     int teamId;
     String teamName;
     int matchId;
@@ -22,6 +23,8 @@ public class TeamSkillScore {
     int three;
     int four;
     int five;
+    int op;
+    int tf;
 
     public int getTeamId() {
         return teamId;
@@ -118,9 +121,23 @@ public class TeamSkillScore {
     public void setFive(int five) {
         this.five = five;
     }
+
+    public int getOp() {
+        return op;
+    }
+
+    public void setOp(int op) {
+        this.op = op;
+    }
+
+    public int getTf() {
+        return tf;
+    }
+
+    public void setTf(int tf) {
+        this.tf = tf;
+    }
     
     
-    
-    
-    
+
 }

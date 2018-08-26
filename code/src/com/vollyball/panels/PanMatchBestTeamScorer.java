@@ -136,7 +136,7 @@ public class PanMatchBestTeamScorer extends javax.swing.JPanel {
 
             int i = 0;
             for (PlayerScores p : playerScoresList) {
-                Object[] row = {p.getChestNo(), p.getPlayerName(), p.getTeamName(), "", "", p.getServiceRatePerc(), "", "", p.getAttackRatePerc(), "", "", p.getBlockRatePerc(), "", "", p.getSetRatePerc(), "", "", p.getReceptionRatePerc(), "", "", p.getDefenceRatePerc(), p.getAttemptRatePerc()};
+                Object[] row = {p.getChestNo(), p.getPlayerName(), p.getTeamName(), p.getTotalService(), p.getBestService(), p.getServiceRatePerc(), p.getTotalAttack(), p.getBestAttack(), p.getAttackRatePerc(), p.getTotalBlock(), p.getBestBlock(), p.getBlockRatePerc(), p.getTotalSet(), p.getBestSet(), p.getSetRatePerc(), p.getTotalReception(), p.getBestReception(), p.getReceptionRatePerc(), p.getTotalDefence(), p.getBestDefence(), p.getDefenceRatePerc(), p.getAttemptRatePerc()};
                 dm.addRow(row);
                 i++;
             }
@@ -147,7 +147,7 @@ public class PanMatchBestTeamScorer extends javax.swing.JPanel {
 
             int i = 0;
             for (PlayerScores p : playerScoresList) {
-                Object[] row = {p.getChestNo(), p.getPlayerName(), p.getTeamName(), "", "", p.getServiceRatePerc(), "", "", p.getAttackRatePerc(), "", "", p.getBlockRatePerc(), "", "", p.getSetRatePerc(), "", "", p.getReceptionRatePerc(), "", "", p.getDefenceRatePerc(), p.getAttemptRatePerc()};
+                Object[] row = {p.getChestNo(), p.getPlayerName(), p.getTeamName(), p.getTotalService(), p.getBestService(), p.getServiceRatePerc(), p.getTotalAttack(), p.getBestAttack(), p.getAttackRatePerc(), p.getTotalBlock(), p.getBestBlock(), p.getBlockRatePerc(), p.getTotalSet(), p.getBestSet(), p.getSetRatePerc(), p.getTotalReception(), p.getBestReception(), p.getReceptionRatePerc(), p.getTotalDefence(), p.getBestDefence(), p.getDefenceRatePerc(), p.getAttemptRatePerc()};
                 dm.addRow(row);
                 i++;
             }

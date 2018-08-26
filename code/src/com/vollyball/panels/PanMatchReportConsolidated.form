@@ -300,8 +300,8 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField20" alignment="0" pref="50" max="32767" attributes="0"/>
-                                  <Component id="jTextField21" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField22" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t1sstotalSer" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2sstotalSer" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -333,14 +333,14 @@
                                   <Component id="jTextField58" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField61" max="32767" attributes="0"/>
+                                  <Component id="t2ssSuccessSerRate" max="32767" attributes="0"/>
                                   <Component id="jTextField30" alignment="1" pref="51" max="32767" attributes="0"/>
-                                  <Component id="jTextField29" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="t1ssSuccessSerRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField123" max="32767" attributes="0"/>
+                                  <Component id="t1ssErrorSerRate" max="32767" attributes="0"/>
                                   <Component id="jTextField122" pref="43" max="32767" attributes="0"/>
-                                  <Component id="jTextField124" max="32767" attributes="0"/>
+                                  <Component id="t2ssErrorSerRate" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
@@ -355,9 +355,9 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jTextField20" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField21" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t1sstotalSer" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField22" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t2sstotalSer" min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jTextField25" min="-2" pref="25" max="-2" attributes="0"/>
@@ -388,8 +388,8 @@
                                                   <Component id="t1ssr3Ser" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1ssr4Ser" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1ssr5Ser" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField29" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField123" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1ssSuccessSerRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1ssErrorSerRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                               <Component id="t2ssr3Ser" min="-2" pref="25" max="-2" attributes="0"/>
@@ -397,10 +397,10 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jTextField124" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2ssErrorSerRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2ssr4Ser" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2ssr5Ser" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField61" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2ssSuccessSerRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -445,7 +445,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField20ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField21">
+                    <Component class="javax.swing.JTextField" name="t1sstotalSer">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -457,7 +457,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField22">
+                    <Component class="javax.swing.JTextField" name="t2sstotalSer">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -550,7 +550,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField29">
+                    <Component class="javax.swing.JTextField" name="t1ssSuccessSerRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -634,7 +634,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField123">
+                    <Component class="javax.swing.JTextField" name="t1ssErrorSerRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -646,7 +646,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField124">
+                    <Component class="javax.swing.JTextField" name="t2ssErrorSerRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -736,7 +736,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField61">
+                    <Component class="javax.swing.JTextField" name="t2ssSuccessSerRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -764,8 +764,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jTextField7" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextField65" alignment="0" pref="55" max="32767" attributes="0"/>
-                          <Component id="t1ssrOp" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextField67" alignment="0" max="32767" attributes="0"/>
+                          <Component id="t1ssOP" alignment="1" max="32767" attributes="0"/>
+                          <Component id="t2ssOP" alignment="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -775,9 +775,9 @@
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="jTextField65" min="-2" pref="25" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                              <Component id="t1ssrOp" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="t1ssOP" min="-2" pref="25" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                              <Component id="jTextField67" max="32767" attributes="0"/>
+                              <Component id="t2ssOP" max="32767" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -814,7 +814,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="t1ssrOp">
+                    <Component class="javax.swing.JTextField" name="t1ssOP">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -826,7 +826,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField67">
+                    <Component class="javax.swing.JTextField" name="t2ssOP">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -929,8 +929,8 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jTextField62" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextField63" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="t1sstotalAttk" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="t2sstotalAttk" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jTextField31" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -963,14 +963,14 @@
                                   <Component id="jTextField84" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField87" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2ssSuccessAttkRate" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField77" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jTextField73" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="t1ssSuccessAttkRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField243" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t1ssErrorAttkRate" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField242" alignment="0" pref="47" max="32767" attributes="0"/>
-                                  <Component id="jTextField244" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2ssErrorAttkRate" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jTextField8" alignment="0" max="32767" attributes="0"/>
@@ -985,9 +985,9 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField31" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField62" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t1sstotalAttk" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField63" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t2sstotalAttk" min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField69" min="-2" pref="25" max="-2" attributes="0"/>
@@ -1018,8 +1018,8 @@
                                                   <Component id="t1ssr3Attk" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1ssr4Attk" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1ssr5Attk" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField73" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField243" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1ssSuccessAttkRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1ssErrorAttkRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                               <Component id="t2ssr3Attk" min="-2" pref="25" max="-2" attributes="0"/>
@@ -1027,10 +1027,10 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jTextField244" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2ssErrorAttkRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2ssr4Attk" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2ssr5Attk" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField87" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2ssSuccessAttkRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -1075,7 +1075,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField31ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField62">
+                    <Component class="javax.swing.JTextField" name="t1sstotalAttk">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1087,7 +1087,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField63">
+                    <Component class="javax.swing.JTextField" name="t2sstotalAttk">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1180,7 +1180,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField73">
+                    <Component class="javax.swing.JTextField" name="t1ssSuccessAttkRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1264,7 +1264,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField243">
+                    <Component class="javax.swing.JTextField" name="t1ssErrorAttkRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1276,7 +1276,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField244">
+                    <Component class="javax.swing.JTextField" name="t2ssErrorAttkRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1366,7 +1366,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField87">
+                    <Component class="javax.swing.JTextField" name="t2ssSuccessAttkRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1395,8 +1395,8 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField88" alignment="0" pref="50" max="32767" attributes="0"/>
-                                  <Component id="jTextField89" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField90" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t1sstotalBlk" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2sstotalBlk" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -1428,14 +1428,14 @@
                                   <Component id="jTextField105" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField108" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2ssSuccessBlkRate" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField98" alignment="1" pref="51" max="32767" attributes="0"/>
-                                  <Component id="jTextField97" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="t1ssSuccessBlkRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField246" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t1ssErrorBlkRate" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField245" alignment="0" pref="43" max="32767" attributes="0"/>
-                                  <Component id="jTextField247" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2ssErrorBlkRate" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jTextField9" alignment="0" max="32767" attributes="0"/>
@@ -1450,9 +1450,9 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField88" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField89" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t1sstotalBlk" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField90" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t2sstotalBlk" min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField93" min="-2" pref="25" max="-2" attributes="0"/>
@@ -1483,8 +1483,8 @@
                                                   <Component id="t1ssr3Blk" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1ssr4Blk" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1ssr5Blk" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField97" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField246" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1ssSuccessBlkRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1ssErrorBlkRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                               <Component id="t2ssr3Blk" min="-2" pref="25" max="-2" attributes="0"/>
@@ -1492,10 +1492,10 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jTextField247" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2ssErrorBlkRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2ssr4Blk" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2ssr5Blk" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField108" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2ssSuccessBlkRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -1540,7 +1540,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField88ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField89">
+                    <Component class="javax.swing.JTextField" name="t1sstotalBlk">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1552,7 +1552,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField90">
+                    <Component class="javax.swing.JTextField" name="t2sstotalBlk">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1645,7 +1645,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField97">
+                    <Component class="javax.swing.JTextField" name="t1ssSuccessBlkRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1729,7 +1729,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField246">
+                    <Component class="javax.swing.JTextField" name="t1ssErrorBlkRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1741,7 +1741,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField247">
+                    <Component class="javax.swing.JTextField" name="t2ssErrorBlkRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1831,7 +1831,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField108">
+                    <Component class="javax.swing.JTextField" name="t2ssSuccessBlkRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -1998,8 +1998,8 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField109" alignment="0" pref="50" max="32767" attributes="0"/>
-                                  <Component id="jTextField110" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField111" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t1nsstotalRep" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2nsstotalRep" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -2031,14 +2031,14 @@
                                   <Component id="jTextField255" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField258" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2nssSuccessRepRate" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField119" alignment="1" pref="51" max="32767" attributes="0"/>
-                                  <Component id="jTextField118" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="t1nssSuccessRepRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField250" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t1nssErrorRepRate" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField249" alignment="0" pref="43" max="32767" attributes="0"/>
-                                  <Component id="jTextField251" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2nssErrorRepRate" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jTextField10" alignment="0" max="32767" attributes="0"/>
@@ -2053,9 +2053,9 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField109" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField110" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t1nsstotalRep" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField111" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t2nsstotalRep" min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField114" min="-2" pref="25" max="-2" attributes="0"/>
@@ -2086,8 +2086,8 @@
                                                   <Component id="t1nssr3Rep" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1nssr4Rep" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1nssr5Rep" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField118" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField250" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1nssSuccessRepRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1nssErrorRepRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                               <Component id="t2nssr3Rep" min="-2" pref="25" max="-2" attributes="0"/>
@@ -2095,10 +2095,10 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jTextField251" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2nssErrorRepRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2nssr4Rep" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2nssr5Rep" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField258" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2nssSuccessRepRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -2144,7 +2144,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField109ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField110">
+                    <Component class="javax.swing.JTextField" name="t1nsstotalRep">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2156,7 +2156,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField111">
+                    <Component class="javax.swing.JTextField" name="t2nsstotalRep">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2249,7 +2249,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField118">
+                    <Component class="javax.swing.JTextField" name="t1nssSuccessRepRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2333,7 +2333,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField250">
+                    <Component class="javax.swing.JTextField" name="t1nssErrorRepRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2345,7 +2345,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField251">
+                    <Component class="javax.swing.JTextField" name="t2nssErrorRepRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2435,7 +2435,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField258">
+                    <Component class="javax.swing.JTextField" name="t2nssSuccessRepRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2463,8 +2463,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jTextField11" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextField259" alignment="0" pref="55" max="32767" attributes="0"/>
-                          <Component id="jTextField260" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextField261" alignment="0" max="32767" attributes="0"/>
+                          <Component id="t1nssTF" alignment="1" max="32767" attributes="0"/>
+                          <Component id="t2nssTF" alignment="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -2474,9 +2474,9 @@
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="jTextField259" min="-2" pref="25" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                              <Component id="jTextField260" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="t1nssTF" min="-2" pref="25" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                              <Component id="jTextField261" max="32767" attributes="0"/>
+                              <Component id="t2nssTF" max="32767" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -2513,7 +2513,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField260">
+                    <Component class="javax.swing.JTextField" name="t1nssTF">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2525,7 +2525,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField261">
+                    <Component class="javax.swing.JTextField" name="t2nssTF">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2628,8 +2628,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField263" alignment="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField264" alignment="0" pref="26" max="32767" attributes="0"/>
-                                  <Component id="jTextField265" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t1nsstotalSet" alignment="0" pref="26" max="32767" attributes="0"/>
+                                  <Component id="t2nsstotalSet" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -2661,14 +2661,14 @@
                                   <Component id="jTextField283" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField286" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2nssSuccessSetRate" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField273" alignment="1" pref="42" max="32767" attributes="0"/>
-                                  <Component id="jTextField272" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="t1nssSuccessSetRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField278" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t1nssErrorSetRate" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField277" alignment="0" pref="48" max="32767" attributes="0"/>
-                                  <Component id="jTextField279" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2nssErrorSetRate" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jTextField262" alignment="0" max="32767" attributes="0"/>
@@ -2683,9 +2683,9 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField263" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField264" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t1nsstotalSet" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField265" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t2nsstotalSet" min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField268" min="-2" pref="25" max="-2" attributes="0"/>
@@ -2716,8 +2716,8 @@
                                                   <Component id="t1nssr3Set" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1nssr4Set" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1nssr5Set" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField272" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField278" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1nssSuccessSetRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1nssErrorSetRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                               <Component id="t2nssr3Set" min="-2" pref="25" max="-2" attributes="0"/>
@@ -2725,10 +2725,10 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jTextField279" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2nssErrorSetRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2nssr4Set" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2nssr5Set" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField286" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2nssSuccessSetRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -2773,7 +2773,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField263ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField264">
+                    <Component class="javax.swing.JTextField" name="t1nsstotalSet">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2785,7 +2785,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField265">
+                    <Component class="javax.swing.JTextField" name="t2nsstotalSet">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2878,7 +2878,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField272">
+                    <Component class="javax.swing.JTextField" name="t1nssSuccessSetRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2962,7 +2962,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField278">
+                    <Component class="javax.swing.JTextField" name="t1nssErrorSetRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -2974,7 +2974,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField279">
+                    <Component class="javax.swing.JTextField" name="t2nssErrorSetRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -3064,7 +3064,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField286">
+                    <Component class="javax.swing.JTextField" name="t2nssSuccessSetRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -3093,8 +3093,8 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField288" alignment="0" pref="50" max="32767" attributes="0"/>
-                                  <Component id="jTextField289" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField290" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t1nsstotalDef" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2nsstotalDef" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -3126,14 +3126,14 @@
                                   <Component id="jTextField308" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField311" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2nssSuccessDefRate" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField298" alignment="1" pref="51" max="32767" attributes="0"/>
-                                  <Component id="jTextField297" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="t1nssSuccessDefRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField303" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t1nssErrorDefRate" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField302" alignment="0" pref="43" max="32767" attributes="0"/>
-                                  <Component id="jTextField304" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2nssErrorDefRate" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jTextField287" alignment="0" max="32767" attributes="0"/>
@@ -3148,9 +3148,9 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField288" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField289" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t1nsstotalDef" min="-2" pref="25" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="jTextField290" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="t2nsstotalDef" min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField293" min="-2" pref="25" max="-2" attributes="0"/>
@@ -3181,8 +3181,8 @@
                                                   <Component id="t1nssr3Def" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1nssr4Def" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t1nssr5Def" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField297" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField303" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1nssSuccessDefRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t1nssErrorDefRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                               <Component id="t2nssr3Def" min="-2" pref="25" max="-2" attributes="0"/>
@@ -3190,10 +3190,10 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jTextField304" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2nssErrorDefRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2nssr4Def" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                                   <Component id="t2nssr5Def" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="jTextField311" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <Component id="t2nssSuccessDefRate" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -3238,7 +3238,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField288ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField289">
+                    <Component class="javax.swing.JTextField" name="t1nsstotalDef">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -3250,7 +3250,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField290">
+                    <Component class="javax.swing.JTextField" name="t2nsstotalDef">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -3343,7 +3343,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField297">
+                    <Component class="javax.swing.JTextField" name="t1nssSuccessDefRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -3427,7 +3427,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField303">
+                    <Component class="javax.swing.JTextField" name="t1nssErrorDefRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -3439,7 +3439,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField304">
+                    <Component class="javax.swing.JTextField" name="t2nssErrorDefRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>
@@ -3529,7 +3529,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField311">
+                    <Component class="javax.swing.JTextField" name="t2nssSuccessDefRate">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="12" style="0"/>

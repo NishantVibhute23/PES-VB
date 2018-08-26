@@ -162,7 +162,7 @@ public class PanBestScorer extends javax.swing.JPanel {
 
             int i = 0;
             for (PlayerScores p : playerScoresList) {
-                Object[] row = {i + 1, p.getPlayerName(), p.getTeamName(), p.getMatchesPlayed(), p.getServiceRatePerc(), p.getAttackRatePerc(), p.getBlockRatePerc(), p.getSetRatePerc(), p.getReceptionRatePerc(), p.getDefenceRatePerc(), p.getAttemptRatePerc(), new JPanel(), new JPanel(), new JPanel()};
+                Object[] row = {p.getChestNo(), p.getPlayerName(), p.getTeamName(), p.getMatchesPlayed(), p.getServiceRatePerc(), p.getAttackRatePerc(), p.getBlockRatePerc(), p.getSetRatePerc(), p.getReceptionRatePerc(), p.getDefenceRatePerc(), p.getAttemptRatePerc(), new JPanel(), new JPanel(), new JPanel()};
                 dm.addRow(row);
                 i++;
             }
@@ -173,7 +173,7 @@ public class PanBestScorer extends javax.swing.JPanel {
 
             int i = 0;
             for (PlayerScores p : playerScoresList) {
-                Object[] row = {i + 1, p.getPlayerName(), p.getTeamName(), p.getMatchesPlayed(), p.getServiceRatePerc(), p.getAttackRatePerc(), p.getBlockRatePerc(), p.getSetRatePerc(), p.getReceptionRatePerc(), p.getDefenceRatePerc(), p.getAttemptRatePerc(), new JPanel(), new JPanel(), new JPanel()};
+                Object[] row = {p.getChestNo(), p.getPlayerName(), p.getTeamName(), p.getMatchesPlayed(), p.getServiceRatePerc(), p.getAttackRatePerc(), p.getBlockRatePerc(), p.getSetRatePerc(), p.getReceptionRatePerc(), p.getDefenceRatePerc(), p.getAttemptRatePerc(), new JPanel(), new JPanel(), new JPanel()};
                 dm.addRow(row);
                 i++;
             }
@@ -191,7 +191,7 @@ public class PanBestScorer extends javax.swing.JPanel {
         };
 
         dm.setDataVector(new Object[][]{},
-                new Object[]{"SNo.", "Player Name", "<html>Team<br> Name</html>", "<html>Matches<br> Played</html>", "Service", "Attack", "Block", "Set", "Reception", "Defend", "Total", "View", "Edit", "Delete"});
+                new Object[]{"<html>Chest<br> No.</html>", "Player Name", "<html>Team<br> Name</html>", "<html>Matches<br> Played</html>", "Service", "Attack", "Block", "Set", "Reception", "Defend", "Total", "View", "Edit", "Delete"});
 
         tbReport = new JTable(dm) {
             protected JTableHeader createDefaultTableHeader() {
@@ -252,7 +252,7 @@ public class PanBestScorer extends javax.swing.JPanel {
         tbReport.getColumnModel().getColumn(12).setCellRenderer(editButtonRenderer);
 
         DeleteButtonRenderer deleteButtonRenderer = new DeleteButtonRenderer();
-        tbReport.getColumnModel().getColumn(13).setCellRenderer(editButtonRenderer);
+        tbReport.getColumnModel().getColumn(13).setCellRenderer(deleteButtonRenderer);
 
         Color ivory = new Color(255, 255, 255);
         tbReport.setOpaque(true);

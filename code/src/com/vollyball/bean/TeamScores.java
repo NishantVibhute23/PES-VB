@@ -10,7 +10,7 @@ package com.vollyball.bean;
  * @author #dabbu
  */
 public class TeamScores {
-    
+
     int id;
     String matchPhase;
     int matchesId;
@@ -49,6 +49,10 @@ public class TeamScores {
     int bestAttempt;
     double attemptRate;
     String attemptRatePerc;
+
+    String setno;
+    int op;
+    int tf;
 
     public int getId() {
         return id;
@@ -313,8 +317,33 @@ public class TeamScores {
     public void setAttemptRatePerc(String attemptRatePerc) {
         this.attemptRatePerc = attemptRatePerc;
     }
+
+    public String getSetno() {
+        return setno;
+    }
+
+    public void setSetno(String setno) {
+        this.setno = setno;
+    }
+
+    
+
+    public int getOp() {
+        return op;
+    }
+
+    public void setOp(int op) {
+        this.op = op;
+    }
+
+    public int getTf() {
+        return tf;
+    }
+
+    public void setTf(int tf) {
+        this.tf = tf;
+    }
     
     
-    
-    
+
 }

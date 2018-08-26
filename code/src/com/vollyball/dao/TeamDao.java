@@ -137,8 +137,13 @@ public class TeamDao {
                 Player t = new Player();
                 t.setId(rs.getInt(1));
                 t.setName(rs.getString(2));
-                t.setChestNo(rs.getString(3));
-                t.setPosition(rs.getInt(4));
+                if (rs.getInt(4) == 2) {
+                    t.setChestNo(rs.getString(3) + "L");
+                } else {
+                    t.setChestNo(rs.getString(3));
+                }
+//                t.setChestNo(rs.getString(3));
+//                t.setPosition(rs.getInt(4));
                 t.setTeamName(rs.getString(5));
                 t.setCaptain(rs.getInt(6) == 0 ? false : true);
                 t.setTeamId(id);

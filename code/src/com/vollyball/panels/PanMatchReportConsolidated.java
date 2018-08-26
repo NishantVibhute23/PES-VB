@@ -20,6 +20,7 @@ import com.vollyball.renderer.TableHeaderRenderer;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,15 +74,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team1id = team.getTeam1();
         team2id = team.getTeam2();
-        setRowTeam1(team1id);
-        setRowTeam2(team2id);
-        setTeamSSDataSkillWise();
-        setTeamNSSDataSkillWise();
+
         evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
         evalId.put(team.getTeam1(), evaluationteamId);
         evaluationteamId2 = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
         evalId.put(team.getTeam2(), evaluationteamId2);
-
+        setRowTeam1(team1id);
+        setRowTeam2(team2id);
+        setTeamSSDataSkillWise();
+        setTeamNSSDataSkillWise();
+        teamsWin();
+        teamsLoss();
         for (int i = 1; i <= 5; i++) {
             MatchSet ms1 = matchDao.getMatchSet(i, evaluationteamId);
             if (ms1.getId() != 0) {
@@ -111,6 +114,14 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team1SumSetSuccess.setText(team1SuccessScores.getSetRatePerc());
         team1SumDefSuccess.setText(team1SuccessScores.getDefenceRatePerc());
 
+        //team 1 scoring and non scoring success data
+        t1ssSuccessSerRate.setText(team1SuccessScores.getServiceRatePerc());
+        t1ssSuccessAttkRate.setText(team1SuccessScores.getAttackRatePerc());
+        t1ssSuccessBlkRate.setText(team1SuccessScores.getBlockRatePerc());
+        t1nssSuccessDefRate.setText(team1SuccessScores.getDefenceRatePerc());
+        t1nssSuccessSetRate.setText(team1SuccessScores.getSetRatePerc());
+        t1nssSuccessRepRate.setText(team1SuccessScores.getReceptionRatePerc());
+
         team1SumSerError.setText(team1ErrorScores.getServiceRatePerc());
         team1SumAttackError.setText(team1ErrorScores.getAttackRatePerc());
         team1SumBlkError.setText(team1ErrorScores.getBlockRatePerc());
@@ -118,8 +129,16 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team1SumSetError.setText(team1ErrorScores.getSetRatePerc());
         team1SumDefError.setText(team1ErrorScores.getDefenceRatePerc());
 
+        //team 1 scoring and non scoring error data
+        t1ssErrorSerRate.setText(team1ErrorScores.getServiceRatePerc());
+        t1ssErrorAttkRate.setText(team1ErrorScores.getAttackRatePerc());
+        t1ssErrorBlkRate.setText(team1ErrorScores.getBlockRatePerc());
+        t1nssErrorRepRate.setText(team1ErrorScores.getReceptionRatePerc());
+        t1nssErrorSetRate.setText(team1ErrorScores.getSetRatePerc());
+        t1nssErrorDefRate.setText(team1ErrorScores.getDefenceRatePerc());
+
         TeamScores team2SuccessScores = trd.getTeamSuccessReportSkillwise(cb, matchId, team2id);
-        TeamScores team2ErrorScores = trd.getTeamErrorReportSkillwise(cb, matchId, team1id);
+        TeamScores team2ErrorScores = trd.getTeamErrorReportSkillwise(cb, matchId, team2id);
 
         team2Sum.setText(team2SuccessScores.getTeamName());
         team2SumSerSuccess.setText(team2SuccessScores.getServiceRatePerc());
@@ -129,12 +148,28 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team2SumSetSuccess.setText(team2SuccessScores.getSetRatePerc());
         team2SumDefSuccess.setText(team2SuccessScores.getDefenceRatePerc());
 
+        //team2 scoring and non scoring success data
+        t2ssSuccessSerRate.setText(team2SuccessScores.getServiceRatePerc());
+        t2ssSuccessAttkRate.setText(team2SuccessScores.getAttackRatePerc());
+        t2ssSuccessBlkRate.setText(team2SuccessScores.getBlockRatePerc());
+        t2nssSuccessDefRate.setText(team2SuccessScores.getDefenceRatePerc());
+        t2nssSuccessSetRate.setText(team2SuccessScores.getSetRatePerc());
+        t2nssSuccessRepRate.setText(team2SuccessScores.getReceptionRatePerc());
+
         team2SumSerError.setText(team2ErrorScores.getServiceRatePerc());
         team2SumAttackError.setText(team2ErrorScores.getAttackRatePerc());
         team2SumBlkError.setText(team2ErrorScores.getBlockRatePerc());
         team2SumRcpError.setText(team2ErrorScores.getReceptionRatePerc());
         team2SumSetError.setText(team2ErrorScores.getSetRatePerc());
         team2SumDefError.setText(team2ErrorScores.getDefenceRatePerc());
+
+        //team 2 scoring and non scoring error data
+        t2ssErrorSerRate.setText(team2ErrorScores.getServiceRatePerc());
+        t2ssErrorAttkRate.setText(team2ErrorScores.getAttackRatePerc());
+        t2ssErrorBlkRate.setText(team2ErrorScores.getBlockRatePerc());
+        t2nssErrorRepRate.setText(team2ErrorScores.getReceptionRatePerc());
+        t2nssErrorSetRate.setText(team2ErrorScores.getSetRatePerc());
+        t2nssErrorDefRate.setText(team2ErrorScores.getDefenceRatePerc());
 
         team1SSName.setText(team.getTeam1name());
         team2SSName.setText(team.getTeam2name());
@@ -333,7 +368,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         int i = 0;
         for (Player p : playerList) {
             playerNameMap.put(p.getName(), p);
-            Object[] row = {i + 1, p.getName(), "0", "0", "0", "0", "0"};
+            Object[] row = {p.getChestNo(), p.getName(), "0", "0", "0", "0", "0"};
             team1Playermodel.addRow(row);
             i++;
         }
@@ -381,7 +416,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         int i = 0;
         for (Player p : playerList) {
             playerNameMap.put(p.getName(), p);
-            Object[] row = {i + 1, p.getName(), "0", "0", "0", "0", "0"};
+            Object[] row = {p.getChestNo(), p.getName(), "0", "0", "0", "0", "0"};
             team2Playermodel.addRow(row);
             i++;
         }
@@ -394,50 +429,61 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         List<TeamSkillScore> skillSSData;
         skillSSData = new ArrayList<>();
         for (int i = 1; i < 4; i++) {
-            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team1id);
+            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team1id,evaluationteamId);
             skillSSData.add(tss);
         }
+        t1sstotalSer.setText("" + skillSSData.get(0).getTotalAttempt());
         t1ssr1Ser.setText("" + skillSSData.get(0).getOne());
         t1ssr2Ser.setText("" + skillSSData.get(0).getTwo());
         t1ssr3Ser.setText("" + skillSSData.get(0).getThree());
         t1ssr4Ser.setText("" + skillSSData.get(0).getFour());
         t1ssr5Ser.setText("" + skillSSData.get(0).getFive());
 
+        t1sstotalAttk.setText("" + skillSSData.get(1).getTotalAttempt());
         t1ssr1Attk.setText("" + skillSSData.get(1).getOne());
         t1ssr2Attk.setText("" + skillSSData.get(1).getTwo());
         t1ssr3Attk.setText("" + skillSSData.get(1).getThree());
         t1ssr4Attk.setText("" + skillSSData.get(1).getFour());
         t1ssr5Attk.setText("" + skillSSData.get(1).getFive());
 
+        t1sstotalBlk.setText("" + skillSSData.get(2).getTotalAttempt());
         t1ssr1Blk.setText("" + skillSSData.get(2).getOne());
         t1ssr2Blk.setText("" + skillSSData.get(2).getTwo());
         t1ssr3Blk.setText("" + skillSSData.get(2).getThree());
         t1ssr4Blk.setText("" + skillSSData.get(2).getFour());
         t1ssr5Blk.setText("" + skillSSData.get(2).getFive());
+        
+        t1ssOP.setText(""+skillSSData.get(0).getOp());
 
 //        t1ssrOp.setText(""+skillData.get(7));
         skillSSData = new ArrayList<>();
         for (int i = 1; i < 4; i++) {
-            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team2id);
+            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team2id,evaluationteamId2);
             skillSSData.add(tss);
         }
+        t2sstotalSer.setText("" + skillSSData.get(0).getTotalAttempt());
         t2ssr1Ser.setText("" + skillSSData.get(0).getOne());
         t2ssr2Ser.setText("" + skillSSData.get(0).getTwo());
         t2ssr3Ser.setText("" + skillSSData.get(0).getThree());
         t2ssr4Ser.setText("" + skillSSData.get(0).getFour());
         t2ssr5Ser.setText("" + skillSSData.get(0).getFive());
 
+        t2sstotalAttk.setText("" + skillSSData.get(1).getTotalAttempt());
         t2ssr1Attk.setText("" + skillSSData.get(1).getOne());
         t2ssr2Attk.setText("" + skillSSData.get(1).getTwo());
         t2ssr3Attk.setText("" + skillSSData.get(1).getThree());
         t2ssr4Attk.setText("" + skillSSData.get(1).getFour());
         t2ssr5Attk.setText("" + skillSSData.get(1).getFive());
 
+        t2sstotalBlk.setText("" + skillSSData.get(2).getTotalAttempt());
         t2ssr1Blk.setText("" + skillSSData.get(2).getOne());
         t2ssr2Blk.setText("" + skillSSData.get(2).getTwo());
         t2ssr3Blk.setText("" + skillSSData.get(2).getThree());
         t2ssr4Blk.setText("" + skillSSData.get(2).getFour());
         t2ssr5Blk.setText("" + skillSSData.get(2).getFive());
+        
+        t2ssOP.setText(""+skillSSData.get(0).getOp());
+        
 
     }
 
@@ -445,49 +491,217 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         List<TeamSkillScore> skillNSSData;
         skillNSSData = new ArrayList<>();
         for (int i = 4; i < 7; i++) {
-            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team1id);
+            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team1id,evaluationteamId);
             skillNSSData.add(tss);
         }
+        t1nsstotalSet.setText("" + skillNSSData.get(0).getTotalAttempt());
         t1nssr1Set.setText("" + skillNSSData.get(0).getOne());
         t1nssr2Set.setText("" + skillNSSData.get(0).getTwo());
         t1nssr3Set.setText("" + skillNSSData.get(0).getThree());
         t1nssr4Set.setText("" + skillNSSData.get(0).getFour());
         t1nssr5Set.setText("" + skillNSSData.get(0).getFive());
 
+        t1nsstotalRep.setText("" + skillNSSData.get(1).getTotalAttempt());
         t1nssr1Rep.setText("" + skillNSSData.get(1).getOne());
         t1nssr2Rep.setText("" + skillNSSData.get(1).getTwo());
         t1nssr3Rep.setText("" + skillNSSData.get(1).getThree());
         t1nssr4Rep.setText("" + skillNSSData.get(1).getFour());
         t1nssr5Rep.setText("" + skillNSSData.get(1).getFive());
 
+        t1nsstotalDef.setText("" + skillNSSData.get(2).getTotalAttempt());
         t1nssr1Def.setText("" + skillNSSData.get(2).getOne());
         t1nssr2Def.setText("" + skillNSSData.get(2).getTwo());
         t1nssr3Def.setText("" + skillNSSData.get(2).getThree());
         t1nssr4Def.setText("" + skillNSSData.get(2).getFour());
         t1nssr5Def.setText("" + skillNSSData.get(2).getFive());
+        
+        t1nssTF.setText(""+skillNSSData.get(0).getTf());
         skillNSSData = new ArrayList<>();
         for (int i = 4; i < 7; i++) {
-            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team2id);
+            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team2id,evaluationteamId2);
             skillNSSData.add(tss);
         }
+        t2nsstotalSet.setText("" + skillNSSData.get(0).getTotalAttempt());
         t2nssr1Set.setText("" + skillNSSData.get(0).getOne());
         t2nssr2Set.setText("" + skillNSSData.get(0).getTwo());
         t2nssr3Set.setText("" + skillNSSData.get(0).getThree());
         t2nssr4Set.setText("" + skillNSSData.get(0).getFour());
         t2nssr5Set.setText("" + skillNSSData.get(0).getFive());
 
+        t2nsstotalRep.setText("" + skillNSSData.get(1).getTotalAttempt());
         t2nssr1Rep.setText("" + skillNSSData.get(1).getOne());
         t2nssr2Rep.setText("" + skillNSSData.get(1).getTwo());
         t2nssr3Rep.setText("" + skillNSSData.get(1).getThree());
         t2nssr4Rep.setText("" + skillNSSData.get(1).getFour());
         t2nssr5Rep.setText("" + skillNSSData.get(1).getFive());
 
+        t2nsstotalDef.setText("" + skillNSSData.get(2).getTotalAttempt());
         t2nssr1Def.setText("" + skillNSSData.get(2).getOne());
         t2nssr2Def.setText("" + skillNSSData.get(2).getTwo());
         t2nssr3Def.setText("" + skillNSSData.get(2).getThree());
         t2nssr4Def.setText("" + skillNSSData.get(2).getFour());
         t2nssr5Def.setText("" + skillNSSData.get(2).getFive());
+        
+        t2nssTF.setText(""+skillNSSData.get(0).getTf());
 
+    }
+
+    DefaultTableModel team1WinTablemodel;
+    DefaultTableModel team2WinTablemodel;
+
+    public void teamsWin() {
+        Map<String, List<TeamScores>> team1Map = new HashMap<>();
+        List<Map<String, List<TeamScores>>> team1Win = new ArrayList<>();
+        Map<String, List<TeamScores>> team2Map = new HashMap<>();
+        List<Map<String, List<TeamScores>>> team2Win = new ArrayList<>();
+
+        for (int i = 1; i <= 5; i++) {
+            team1Map = trd.getTeamSetWiseScoreReport(cb, i, matchId, team1id);
+            team1Win.add(team1Map);
+        }
+        resizeColumnsTeam1Win();
+        team1WinTablemodel = (DefaultTableModel) tbTeam1Win.getModel();
+        for (int i = team1WinTablemodel.getRowCount() - 1; i >= 0; i--) {
+            team1WinTablemodel.removeRow(i);
+        }
+
+        for (Map<String, List<TeamScores>> map : team1Win) {
+            for (Map.Entry<String, List<TeamScores>> entry : map.entrySet()) {
+                int total = entry.getValue().get(0).getTotalAttempt() + entry.getValue().get(1).getTotalAttempt() + entry.getValue().get(2).getTotalAttempt();
+                Object[] row = {entry.getKey().toString(), total, entry.getValue().get(0).getTotalAttempt(), entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt(), "OP"};
+                team1WinTablemodel.addRow(row);
+
+            }
+
+        }
+
+        for (int i = 1; i <= 5; i++) {
+            team2Map = trd.getTeamSetWiseScoreReport(cb, i, matchId, team2id);
+            team2Win.add(team2Map);
+        }
+        resizeColumnsTeam2Win();
+        team2WinTablemodel = (DefaultTableModel) tbTeam2Win.getModel();
+        for (int i = team2WinTablemodel.getRowCount() - 1; i >= 0; i--) {
+            team2WinTablemodel.removeRow(i);
+        }
+
+        for (Map<String, List<TeamScores>> map : team2Win) {
+            for (Map.Entry<String, List<TeamScores>> entry : map.entrySet()) {
+                int total = entry.getValue().get(0).getTotalAttempt() + entry.getValue().get(1).getTotalAttempt() + entry.getValue().get(2).getTotalAttempt();
+                Object[] row = {entry.getKey().toString(), total, entry.getValue().get(0).getTotalAttempt(), entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt(), "OP"};
+                team2WinTablemodel.addRow(row);
+
+            }
+
+        }
+
+    }
+    float[] ColumnsTeam1WinWidthPercentage1 = {5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
+
+    private void resizeColumnsTeam1Win() {
+        int tW = tbTeam1Win.getPreferredSize().width;
+        TableColumn column;
+        TableColumnModel jTableColumnModel = tbTeam1Win.getColumnModel();
+        int cantCols = jTableColumnModel.getColumnCount();
+        for (int i = 0; i < cantCols; i++) {
+            column = jTableColumnModel.getColumn(i);
+            int pWidth = Math.round(ColumnsTeam1WinWidthPercentage1[i] * tW);
+            column.setPreferredWidth(pWidth);
+        }
+    }
+    float[] ColumnsTeam2WinWidthPercentage1 = {5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
+
+    private void resizeColumnsTeam2Win() {
+        int tW = tbTeam2Win.getPreferredSize().width;
+        TableColumn column;
+        TableColumnModel jTableColumnModel = tbTeam2Win.getColumnModel();
+        int cantCols = jTableColumnModel.getColumnCount();
+        for (int i = 0; i < cantCols; i++) {
+            column = jTableColumnModel.getColumn(i);
+            int pWidth = Math.round(ColumnsTeam1WinWidthPercentage1[i] * tW);
+            column.setPreferredWidth(pWidth);
+        }
+    }
+
+    DefaultTableModel team1LossTablemodel;
+    DefaultTableModel team2LossTablemodel;
+
+    public void teamsLoss() {
+        Map<String, List<TeamScores>> team1Map = new HashMap<>();
+        List<Map<String, List<TeamScores>>> team1Loss = new ArrayList<>();
+        Map<String, List<TeamScores>> team2Map = new HashMap<>();
+        List<Map<String, List<TeamScores>>> team2Loss = new ArrayList<>();
+
+        for (int i = 1; i <= 5; i++) {
+            team1Map = trd.getTeamSetWiseScoreReportLoss(cb, i, matchId, team1id);
+            team1Loss.add(team1Map);
+        }
+        resizeColumnsTeam1Loss();
+        team1LossTablemodel = (DefaultTableModel) tbTeam1Loss.getModel();
+        for (int i = team1LossTablemodel.getRowCount() - 1; i >= 0; i--) {
+            team1LossTablemodel.removeRow(i);
+        }
+
+        for (Map<String, List<TeamScores>> map : team1Loss) {
+            for (Map.Entry<String, List<TeamScores>> entry : map.entrySet()) {
+                int total = entry.getValue().get(0).getTotalAttempt() + entry.getValue().get(1).getTotalAttempt() + entry.getValue().get(2).getTotalAttempt();
+                Object[] row = {entry.getKey().toString(), total, entry.getValue().get(0).getTotalAttempt(), entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt(), entry.getValue().get(4).getTotalAttempt(), entry.getValue().get(3).getTotalAttempt(), entry.getValue().get(5).getTotalAttempt(), "TF"};
+                team1LossTablemodel.addRow(row);
+
+            }
+
+        }
+
+        for (int i = 1; i <= 5; i++) {
+            team2Map = trd.getTeamSetWiseScoreReportLoss(cb, i, matchId, team2id);
+            team2Loss.add(team2Map);
+        }
+        resizeColumnsTeam2Loss();
+        team2LossTablemodel = (DefaultTableModel) tbTeam2Loss.getModel();
+        for (int i = team2LossTablemodel.getRowCount() - 1; i >= 0; i--) {
+            team2LossTablemodel.removeRow(i);
+        }
+
+        for (Map<String, List<TeamScores>> map : team2Loss) {
+            for (Map.Entry<String, List<TeamScores>> entry : map.entrySet()) {
+                int total = entry.getValue().get(0).getTotalAttempt() + entry.getValue().get(1).getTotalAttempt() + entry.getValue().get(2).getTotalAttempt();
+                Object[] row = {entry.getKey().toString(), total, entry.getValue().get(0).getTotalAttempt(), entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt(), entry.getValue().get(4).getTotalAttempt(), entry.getValue().get(3).getTotalAttempt(), entry.getValue().get(5).getTotalAttempt(), "TF"};
+                team2LossTablemodel.addRow(row);
+
+            }
+
+        }
+
+    }
+    float[] ColumnsTeam1LossWidthPercentage1 = {5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
+
+    private void resizeColumnsTeam1Loss() {
+        int tW = tbTeam1Loss.getPreferredSize().width;
+        TableColumn column;
+        TableColumnModel jTableColumnModel = tbTeam1Loss.getColumnModel();
+        int cantCols = jTableColumnModel.getColumnCount();
+        for (int i = 0; i < cantCols; i++) {
+            column = jTableColumnModel.getColumn(i);
+            int pWidth = Math.round(ColumnsTeam1LossWidthPercentage1[i] * tW);
+            column.setPreferredWidth(pWidth);
+        }
+    }
+    float[] ColumnsTeam2LossWidthPercentage1 = {5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
+
+    private void resizeColumnsTeam2Loss() {
+        int tW = tbTeam2Loss.getPreferredSize().width;
+        TableColumn column;
+        TableColumnModel jTableColumnModel = tbTeam2Loss.getColumnModel();
+        int cantCols = jTableColumnModel.getColumnCount();
+        for (int i = 0; i < cantCols; i++) {
+            column = jTableColumnModel.getColumn(i);
+            int pWidth = Math.round(ColumnsTeam2LossWidthPercentage1[i] * tW);
+            column.setPreferredWidth(pWidth);
+        }
     }
 
     /**
@@ -512,34 +726,34 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel16 = new javax.swing.JPanel();
         jTextField4 = new javax.swing.JTextField();
         jTextField20 = new javax.swing.JTextField();
-        jTextField21 = new javax.swing.JTextField();
-        jTextField22 = new javax.swing.JTextField();
+        t1sstotalSer = new javax.swing.JTextField();
+        t2sstotalSer = new javax.swing.JTextField();
         t2ssr1Ser = new javax.swing.JTextField();
         t1ssr1Ser = new javax.swing.JTextField();
         jTextField25 = new javax.swing.JTextField();
         t1ssr2Ser = new javax.swing.JTextField();
         jTextField27 = new javax.swing.JTextField();
         t2ssr2Ser = new javax.swing.JTextField();
-        jTextField29 = new javax.swing.JTextField();
+        t1ssSuccessSerRate = new javax.swing.JTextField();
         jTextField30 = new javax.swing.JTextField();
         t1ssr3Ser = new javax.swing.JTextField();
         jTextField33 = new javax.swing.JTextField();
         t2ssr3Ser = new javax.swing.JTextField();
         jTextField122 = new javax.swing.JTextField();
-        jTextField123 = new javax.swing.JTextField();
-        jTextField124 = new javax.swing.JTextField();
+        t1ssErrorSerRate = new javax.swing.JTextField();
+        t2ssErrorSerRate = new javax.swing.JTextField();
         t2ssr4Ser = new javax.swing.JTextField();
         t1ssr4Ser = new javax.swing.JTextField();
         jTextField57 = new javax.swing.JTextField();
         jTextField58 = new javax.swing.JTextField();
         t1ssr5Ser = new javax.swing.JTextField();
         t2ssr5Ser = new javax.swing.JTextField();
-        jTextField61 = new javax.swing.JTextField();
+        t2ssSuccessSerRate = new javax.swing.JTextField();
         jPanel19 = new javax.swing.JPanel();
         jTextField7 = new javax.swing.JTextField();
         jTextField65 = new javax.swing.JTextField();
-        t1ssrOp = new javax.swing.JTextField();
-        jTextField67 = new javax.swing.JTextField();
+        t1ssOP = new javax.swing.JTextField();
+        t2ssOP = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         team1SSName = new javax.swing.JTextField();
         team2SSName = new javax.swing.JTextField();
@@ -547,55 +761,55 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel45 = new javax.swing.JPanel();
         jTextField8 = new javax.swing.JTextField();
         jTextField31 = new javax.swing.JTextField();
-        jTextField62 = new javax.swing.JTextField();
-        jTextField63 = new javax.swing.JTextField();
+        t1sstotalAttk = new javax.swing.JTextField();
+        t2sstotalAttk = new javax.swing.JTextField();
         t2ssr1Attk = new javax.swing.JTextField();
         t1ssr1Attk = new javax.swing.JTextField();
         jTextField69 = new javax.swing.JTextField();
         t1ssr2Attk = new javax.swing.JTextField();
         jTextField71 = new javax.swing.JTextField();
         t2ssr2Attk = new javax.swing.JTextField();
-        jTextField73 = new javax.swing.JTextField();
+        t1ssSuccessAttkRate = new javax.swing.JTextField();
         jTextField77 = new javax.swing.JTextField();
         t1ssr3Attk = new javax.swing.JTextField();
         jTextField79 = new javax.swing.JTextField();
         t2ssr3Attk = new javax.swing.JTextField();
         jTextField242 = new javax.swing.JTextField();
-        jTextField243 = new javax.swing.JTextField();
-        jTextField244 = new javax.swing.JTextField();
+        t1ssErrorAttkRate = new javax.swing.JTextField();
+        t2ssErrorAttkRate = new javax.swing.JTextField();
         t2ssr4Attk = new javax.swing.JTextField();
         t1ssr4Attk = new javax.swing.JTextField();
         jTextField83 = new javax.swing.JTextField();
         jTextField84 = new javax.swing.JTextField();
         t1ssr5Attk = new javax.swing.JTextField();
         t2ssr5Attk = new javax.swing.JTextField();
-        jTextField87 = new javax.swing.JTextField();
+        t2ssSuccessAttkRate = new javax.swing.JTextField();
         jPanel46 = new javax.swing.JPanel();
         jTextField9 = new javax.swing.JTextField();
         jTextField88 = new javax.swing.JTextField();
-        jTextField89 = new javax.swing.JTextField();
-        jTextField90 = new javax.swing.JTextField();
+        t1sstotalBlk = new javax.swing.JTextField();
+        t2sstotalBlk = new javax.swing.JTextField();
         t2ssr1Blk = new javax.swing.JTextField();
         t1ssr1Blk = new javax.swing.JTextField();
         jTextField93 = new javax.swing.JTextField();
         t1ssr2Blk = new javax.swing.JTextField();
         jTextField95 = new javax.swing.JTextField();
         t2ssr2Blk = new javax.swing.JTextField();
-        jTextField97 = new javax.swing.JTextField();
+        t1ssSuccessBlkRate = new javax.swing.JTextField();
         jTextField98 = new javax.swing.JTextField();
         t1ssr3Blk = new javax.swing.JTextField();
         jTextField100 = new javax.swing.JTextField();
         t2ssr3Blk = new javax.swing.JTextField();
         jTextField245 = new javax.swing.JTextField();
-        jTextField246 = new javax.swing.JTextField();
-        jTextField247 = new javax.swing.JTextField();
+        t1ssErrorBlkRate = new javax.swing.JTextField();
+        t2ssErrorBlkRate = new javax.swing.JTextField();
         t2ssr4Blk = new javax.swing.JTextField();
         t1ssr4Blk = new javax.swing.JTextField();
         jTextField104 = new javax.swing.JTextField();
         jTextField105 = new javax.swing.JTextField();
         t1ssr5Blk = new javax.swing.JTextField();
         t2ssr5Blk = new javax.swing.JTextField();
-        jTextField108 = new javax.swing.JTextField();
+        t2ssSuccessBlkRate = new javax.swing.JTextField();
         jPanel17 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel41 = new javax.swing.JPanel();
@@ -604,34 +818,34 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel47 = new javax.swing.JPanel();
         jTextField10 = new javax.swing.JTextField();
         jTextField109 = new javax.swing.JTextField();
-        jTextField110 = new javax.swing.JTextField();
-        jTextField111 = new javax.swing.JTextField();
+        t1nsstotalRep = new javax.swing.JTextField();
+        t2nsstotalRep = new javax.swing.JTextField();
         t2nssr1Rep = new javax.swing.JTextField();
         t1nssr1Rep = new javax.swing.JTextField();
         jTextField114 = new javax.swing.JTextField();
         t1nssr2Rep = new javax.swing.JTextField();
         jTextField116 = new javax.swing.JTextField();
         t2nssr2Rep = new javax.swing.JTextField();
-        jTextField118 = new javax.swing.JTextField();
+        t1nssSuccessRepRate = new javax.swing.JTextField();
         jTextField119 = new javax.swing.JTextField();
         t1nssr3Rep = new javax.swing.JTextField();
         jTextField121 = new javax.swing.JTextField();
         t2nssr3Rep = new javax.swing.JTextField();
         jTextField249 = new javax.swing.JTextField();
-        jTextField250 = new javax.swing.JTextField();
-        jTextField251 = new javax.swing.JTextField();
+        t1nssErrorRepRate = new javax.swing.JTextField();
+        t2nssErrorRepRate = new javax.swing.JTextField();
         t2nssr4Rep = new javax.swing.JTextField();
         t1nssr4Rep = new javax.swing.JTextField();
         jTextField254 = new javax.swing.JTextField();
         jTextField255 = new javax.swing.JTextField();
         t1nssr5Rep = new javax.swing.JTextField();
         t2nssr5Rep = new javax.swing.JTextField();
-        jTextField258 = new javax.swing.JTextField();
+        t2nssSuccessRepRate = new javax.swing.JTextField();
         jPanel48 = new javax.swing.JPanel();
         jTextField11 = new javax.swing.JTextField();
         jTextField259 = new javax.swing.JTextField();
-        jTextField260 = new javax.swing.JTextField();
-        jTextField261 = new javax.swing.JTextField();
+        t1nssTF = new javax.swing.JTextField();
+        t2nssTF = new javax.swing.JTextField();
         jPanel12 = new javax.swing.JPanel();
         team1NSSName = new javax.swing.JTextField();
         team2NSSName = new javax.swing.JTextField();
@@ -639,55 +853,55 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel49 = new javax.swing.JPanel();
         jTextField262 = new javax.swing.JTextField();
         jTextField263 = new javax.swing.JTextField();
-        jTextField264 = new javax.swing.JTextField();
-        jTextField265 = new javax.swing.JTextField();
+        t1nsstotalSet = new javax.swing.JTextField();
+        t2nsstotalSet = new javax.swing.JTextField();
         t2nssr1Set = new javax.swing.JTextField();
         t1nssr1Set = new javax.swing.JTextField();
         jTextField268 = new javax.swing.JTextField();
         t1nssr2Set = new javax.swing.JTextField();
         jTextField270 = new javax.swing.JTextField();
         t2nssr2Set = new javax.swing.JTextField();
-        jTextField272 = new javax.swing.JTextField();
+        t1nssSuccessSetRate = new javax.swing.JTextField();
         jTextField273 = new javax.swing.JTextField();
         t1nssr3Set = new javax.swing.JTextField();
         jTextField275 = new javax.swing.JTextField();
         t2nssr3Set = new javax.swing.JTextField();
         jTextField277 = new javax.swing.JTextField();
-        jTextField278 = new javax.swing.JTextField();
-        jTextField279 = new javax.swing.JTextField();
+        t1nssErrorSetRate = new javax.swing.JTextField();
+        t2nssErrorSetRate = new javax.swing.JTextField();
         t2nssr4Set = new javax.swing.JTextField();
         t1nssr4Set = new javax.swing.JTextField();
         jTextField282 = new javax.swing.JTextField();
         jTextField283 = new javax.swing.JTextField();
         t1nssr5Set = new javax.swing.JTextField();
         t2nssr5Set = new javax.swing.JTextField();
-        jTextField286 = new javax.swing.JTextField();
+        t2nssSuccessSetRate = new javax.swing.JTextField();
         jPanel50 = new javax.swing.JPanel();
         jTextField287 = new javax.swing.JTextField();
         jTextField288 = new javax.swing.JTextField();
-        jTextField289 = new javax.swing.JTextField();
-        jTextField290 = new javax.swing.JTextField();
+        t1nsstotalDef = new javax.swing.JTextField();
+        t2nsstotalDef = new javax.swing.JTextField();
         t2nssr1Def = new javax.swing.JTextField();
         t1nssr1Def = new javax.swing.JTextField();
         jTextField293 = new javax.swing.JTextField();
         t1nssr2Def = new javax.swing.JTextField();
         jTextField295 = new javax.swing.JTextField();
         t2nssr2Def = new javax.swing.JTextField();
-        jTextField297 = new javax.swing.JTextField();
+        t1nssSuccessDefRate = new javax.swing.JTextField();
         jTextField298 = new javax.swing.JTextField();
         t1nssr3Def = new javax.swing.JTextField();
         jTextField300 = new javax.swing.JTextField();
         t2nssr3Def = new javax.swing.JTextField();
         jTextField302 = new javax.swing.JTextField();
-        jTextField303 = new javax.swing.JTextField();
-        jTextField304 = new javax.swing.JTextField();
+        t1nssErrorDefRate = new javax.swing.JTextField();
+        t2nssErrorDefRate = new javax.swing.JTextField();
         t2nssr4Def = new javax.swing.JTextField();
         t1nssr4Def = new javax.swing.JTextField();
         jTextField307 = new javax.swing.JTextField();
         jTextField308 = new javax.swing.JTextField();
         t1nssr5Def = new javax.swing.JTextField();
         t2nssr5Def = new javax.swing.JTextField();
-        jTextField311 = new javax.swing.JTextField();
+        t2nssSuccessDefRate = new javax.swing.JTextField();
         jPanel26 = new javax.swing.JPanel();
         jPanel27 = new javax.swing.JPanel();
         jTextField15 = new javax.swing.JTextField();
@@ -889,15 +1103,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             }
         });
 
-        jTextField21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField21.setText("4");
-        jTextField21.setBorder(null);
+        t1sstotalSer.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1sstotalSer.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1sstotalSer.setText("4");
+        t1sstotalSer.setBorder(null);
 
-        jTextField22.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField22.setText("4");
-        jTextField22.setBorder(null);
+        t2sstotalSer.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2sstotalSer.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2sstotalSer.setText("4");
+        t2sstotalSer.setBorder(null);
 
         t2ssr1Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr1Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -936,10 +1150,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2ssr2Ser.setText("4");
         t2ssr2Ser.setBorder(null);
 
-        jTextField29.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField29.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField29.setText("40%");
-        jTextField29.setBorder(null);
+        t1ssSuccessSerRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1ssSuccessSerRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1ssSuccessSerRate.setText("40%");
+        t1ssSuccessSerRate.setBorder(null);
 
         jTextField30.setBackground(new java.awt.Color(204, 204, 204));
         jTextField30.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -974,15 +1188,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField122.setText("Err %");
         jTextField122.setBorder(null);
 
-        jTextField123.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField123.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField123.setText("40%");
-        jTextField123.setBorder(null);
+        t1ssErrorSerRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1ssErrorSerRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1ssErrorSerRate.setText("40%");
+        t1ssErrorSerRate.setBorder(null);
 
-        jTextField124.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField124.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField124.setText("40%");
-        jTextField124.setBorder(null);
+        t2ssErrorSerRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2ssErrorSerRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2ssErrorSerRate.setText("40%");
+        t2ssErrorSerRate.setBorder(null);
 
         t2ssr4Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr4Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1016,10 +1230,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2ssr5Ser.setText("4");
         t2ssr5Ser.setBorder(null);
 
-        jTextField61.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField61.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField61.setText("40%");
-        jTextField61.setBorder(null);
+        t2ssSuccessSerRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2ssSuccessSerRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2ssSuccessSerRate.setText("40%");
+        t2ssSuccessSerRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -1028,8 +1242,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField20, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(jTextField21)
-                    .addComponent(jTextField22))
+                    .addComponent(t1sstotalSer)
+                    .addComponent(t2sstotalSer))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField25)
@@ -1055,13 +1269,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(t1ssr5Ser)
                     .addComponent(jTextField58))
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField61)
+                    .addComponent(t2ssSuccessSerRate)
                     .addComponent(jTextField30, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                    .addComponent(jTextField29, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(t1ssSuccessSerRate, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField123)
+                    .addComponent(t1ssErrorSerRate)
                     .addComponent(jTextField122, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(jTextField124)))
+                    .addComponent(t2ssErrorSerRate)))
             .addComponent(jTextField4)
         );
         jPanel16Layout.setVerticalGroup(
@@ -1073,9 +1287,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(t1sstotalSer, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(t2sstotalSer, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -1102,17 +1316,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                                     .addComponent(t1ssr3Ser, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1ssr4Ser, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1ssr5Ser, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField123, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(t1ssSuccessSerRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t1ssErrorSerRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, 0)
                                 .addComponent(t2ssr3Ser, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel16Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField124, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t2ssErrorSerRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2ssr4Ser, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2ssr5Ser, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField61, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(t2ssSuccessSerRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, 0))
         );
 
@@ -1130,15 +1344,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField65.setText("Tot Pt.");
         jTextField65.setBorder(null);
 
-        t1ssrOp.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        t1ssrOp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssrOp.setText("10");
-        t1ssrOp.setBorder(null);
+        t1ssOP.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1ssOP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1ssOP.setText("10");
+        t1ssOP.setBorder(null);
 
-        jTextField67.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField67.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField67.setText("5");
-        jTextField67.setBorder(null);
+        t2ssOP.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2ssOP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2ssOP.setText("5");
+        t2ssOP.setBorder(null);
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -1146,8 +1360,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTextField7)
             .addComponent(jTextField65, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-            .addComponent(t1ssrOp, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jTextField67)
+            .addComponent(t1ssOP, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(t2ssOP)
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1156,9 +1370,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jTextField65, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(t1ssrOp, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(t1ssOP, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jTextField67)
+                .addComponent(t2ssOP)
                 .addGap(0, 0, 0))
         );
 
@@ -1219,15 +1433,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             }
         });
 
-        jTextField62.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField62.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField62.setText("4");
-        jTextField62.setBorder(null);
+        t1sstotalAttk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1sstotalAttk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1sstotalAttk.setText("4");
+        t1sstotalAttk.setBorder(null);
 
-        jTextField63.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField63.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField63.setText("4");
-        jTextField63.setBorder(null);
+        t2sstotalAttk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2sstotalAttk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2sstotalAttk.setText("4");
+        t2sstotalAttk.setBorder(null);
 
         t2ssr1Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr1Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1266,10 +1480,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2ssr2Attk.setText("4");
         t2ssr2Attk.setBorder(null);
 
-        jTextField73.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField73.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField73.setText("40%");
-        jTextField73.setBorder(null);
+        t1ssSuccessAttkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1ssSuccessAttkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1ssSuccessAttkRate.setText("40%");
+        t1ssSuccessAttkRate.setBorder(null);
 
         jTextField77.setBackground(new java.awt.Color(204, 204, 204));
         jTextField77.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1304,15 +1518,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField242.setText("Err %");
         jTextField242.setBorder(null);
 
-        jTextField243.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField243.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField243.setText("40%");
-        jTextField243.setBorder(null);
+        t1ssErrorAttkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1ssErrorAttkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1ssErrorAttkRate.setText("40%");
+        t1ssErrorAttkRate.setBorder(null);
 
-        jTextField244.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField244.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField244.setText("40%");
-        jTextField244.setBorder(null);
+        t2ssErrorAttkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2ssErrorAttkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2ssErrorAttkRate.setText("40%");
+        t2ssErrorAttkRate.setBorder(null);
 
         t2ssr4Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr4Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1346,10 +1560,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2ssr5Attk.setText("4");
         t2ssr5Attk.setBorder(null);
 
-        jTextField87.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField87.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField87.setText("40%");
-        jTextField87.setBorder(null);
+        t2ssSuccessAttkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2ssSuccessAttkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2ssSuccessAttkRate.setText("40%");
+        t2ssSuccessAttkRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel45Layout = new javax.swing.GroupLayout(jPanel45);
         jPanel45.setLayout(jPanel45Layout);
@@ -1358,8 +1572,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addGroup(jPanel45Layout.createSequentialGroup()
                 .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTextField62)
-                        .addComponent(jTextField63))
+                        .addComponent(t1sstotalAttk)
+                        .addComponent(t2sstotalAttk))
                     .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField69)
@@ -1385,13 +1599,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(t1ssr5Attk)
                     .addComponent(jTextField84))
                 .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField87)
+                    .addComponent(t2ssSuccessAttkRate)
                     .addComponent(jTextField77, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField73, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(t1ssSuccessAttkRate, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField243)
+                    .addComponent(t1ssErrorAttkRate)
                     .addComponent(jTextField242, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                    .addComponent(jTextField244)))
+                    .addComponent(t2ssErrorAttkRate)))
             .addComponent(jTextField8)
         );
         jPanel45Layout.setVerticalGroup(
@@ -1403,9 +1617,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addGroup(jPanel45Layout.createSequentialGroup()
                         .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField62, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(t1sstotalAttk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField63, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(t2sstotalAttk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel45Layout.createSequentialGroup()
                         .addComponent(jTextField69, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -1432,17 +1646,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                                     .addComponent(t1ssr3Attk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1ssr4Attk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1ssr5Attk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField73, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField243, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(t1ssSuccessAttkRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t1ssErrorAttkRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, 0)
                                 .addComponent(t2ssr3Attk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel45Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField244, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t2ssErrorAttkRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2ssr4Attk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2ssr5Attk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField87, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(t2ssSuccessAttkRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, 0))
         );
 
@@ -1465,15 +1679,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             }
         });
 
-        jTextField89.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField89.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField89.setText("4");
-        jTextField89.setBorder(null);
+        t1sstotalBlk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1sstotalBlk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1sstotalBlk.setText("4");
+        t1sstotalBlk.setBorder(null);
 
-        jTextField90.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField90.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField90.setText("4");
-        jTextField90.setBorder(null);
+        t2sstotalBlk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2sstotalBlk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2sstotalBlk.setText("4");
+        t2sstotalBlk.setBorder(null);
 
         t2ssr1Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr1Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1512,10 +1726,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2ssr2Blk.setText("4");
         t2ssr2Blk.setBorder(null);
 
-        jTextField97.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField97.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField97.setText("40%");
-        jTextField97.setBorder(null);
+        t1ssSuccessBlkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1ssSuccessBlkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1ssSuccessBlkRate.setText("40%");
+        t1ssSuccessBlkRate.setBorder(null);
 
         jTextField98.setBackground(new java.awt.Color(204, 204, 204));
         jTextField98.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1550,15 +1764,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField245.setText("Err %");
         jTextField245.setBorder(null);
 
-        jTextField246.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField246.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField246.setText("40%");
-        jTextField246.setBorder(null);
+        t1ssErrorBlkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1ssErrorBlkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1ssErrorBlkRate.setText("40%");
+        t1ssErrorBlkRate.setBorder(null);
 
-        jTextField247.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField247.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField247.setText("40%");
-        jTextField247.setBorder(null);
+        t2ssErrorBlkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2ssErrorBlkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2ssErrorBlkRate.setText("40%");
+        t2ssErrorBlkRate.setBorder(null);
 
         t2ssr4Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr4Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1592,10 +1806,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2ssr5Blk.setText("4");
         t2ssr5Blk.setBorder(null);
 
-        jTextField108.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField108.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField108.setText("40%");
-        jTextField108.setBorder(null);
+        t2ssSuccessBlkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2ssSuccessBlkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2ssSuccessBlkRate.setText("40%");
+        t2ssSuccessBlkRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel46Layout = new javax.swing.GroupLayout(jPanel46);
         jPanel46.setLayout(jPanel46Layout);
@@ -1604,8 +1818,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel46Layout.createSequentialGroup()
                 .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField88, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(jTextField89)
-                    .addComponent(jTextField90))
+                    .addComponent(t1sstotalBlk)
+                    .addComponent(t2sstotalBlk))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField93)
@@ -1631,13 +1845,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(t1ssr5Blk)
                     .addComponent(jTextField105))
                 .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField108)
+                    .addComponent(t2ssSuccessBlkRate)
                     .addComponent(jTextField98, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                    .addComponent(jTextField97, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(t1ssSuccessBlkRate, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField246)
+                    .addComponent(t1ssErrorBlkRate)
                     .addComponent(jTextField245, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(jTextField247)))
+                    .addComponent(t2ssErrorBlkRate)))
             .addComponent(jTextField9)
         );
         jPanel46Layout.setVerticalGroup(
@@ -1649,9 +1863,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addGroup(jPanel46Layout.createSequentialGroup()
                         .addComponent(jTextField88, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField89, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(t1sstotalBlk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField90, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(t2sstotalBlk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel46Layout.createSequentialGroup()
                         .addComponent(jTextField93, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -1678,17 +1892,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                                     .addComponent(t1ssr3Blk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1ssr4Blk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1ssr5Blk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField97, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField246, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(t1ssSuccessBlkRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t1ssErrorBlkRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, 0)
                                 .addComponent(t2ssr3Blk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel46Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField247, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t2ssErrorBlkRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2ssr4Blk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2ssr5Blk, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField108, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(t2ssSuccessBlkRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, 0))
         );
 
@@ -1787,15 +2001,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             }
         });
 
-        jTextField110.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField110.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField110.setText("4");
-        jTextField110.setBorder(null);
+        t1nsstotalRep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1nsstotalRep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1nsstotalRep.setText("4");
+        t1nsstotalRep.setBorder(null);
 
-        jTextField111.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField111.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField111.setText("4");
-        jTextField111.setBorder(null);
+        t2nsstotalRep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2nsstotalRep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2nsstotalRep.setText("4");
+        t2nsstotalRep.setBorder(null);
 
         t2nssr1Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr1Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1834,10 +2048,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2nssr2Rep.setText("4");
         t2nssr2Rep.setBorder(null);
 
-        jTextField118.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField118.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField118.setText("40%");
-        jTextField118.setBorder(null);
+        t1nssSuccessRepRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1nssSuccessRepRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1nssSuccessRepRate.setText("40%");
+        t1nssSuccessRepRate.setBorder(null);
 
         jTextField119.setBackground(new java.awt.Color(204, 204, 204));
         jTextField119.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -1872,15 +2086,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField249.setText("Err %");
         jTextField249.setBorder(null);
 
-        jTextField250.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField250.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField250.setText("40%");
-        jTextField250.setBorder(null);
+        t1nssErrorRepRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1nssErrorRepRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1nssErrorRepRate.setText("40%");
+        t1nssErrorRepRate.setBorder(null);
 
-        jTextField251.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField251.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField251.setText("40%");
-        jTextField251.setBorder(null);
+        t2nssErrorRepRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2nssErrorRepRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2nssErrorRepRate.setText("40%");
+        t2nssErrorRepRate.setBorder(null);
 
         t2nssr4Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr4Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1914,10 +2128,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2nssr5Rep.setText("4");
         t2nssr5Rep.setBorder(null);
 
-        jTextField258.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField258.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField258.setText("40%");
-        jTextField258.setBorder(null);
+        t2nssSuccessRepRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2nssSuccessRepRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2nssSuccessRepRate.setText("40%");
+        t2nssSuccessRepRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel47Layout = new javax.swing.GroupLayout(jPanel47);
         jPanel47.setLayout(jPanel47Layout);
@@ -1926,8 +2140,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel47Layout.createSequentialGroup()
                 .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField109, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(jTextField110)
-                    .addComponent(jTextField111))
+                    .addComponent(t1nsstotalRep)
+                    .addComponent(t2nsstotalRep))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField114)
@@ -1953,13 +2167,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(t1nssr5Rep)
                     .addComponent(jTextField255))
                 .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField258)
+                    .addComponent(t2nssSuccessRepRate)
                     .addComponent(jTextField119, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                    .addComponent(jTextField118, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(t1nssSuccessRepRate, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField250)
+                    .addComponent(t1nssErrorRepRate)
                     .addComponent(jTextField249, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(jTextField251)))
+                    .addComponent(t2nssErrorRepRate)))
             .addComponent(jTextField10)
         );
         jPanel47Layout.setVerticalGroup(
@@ -1971,9 +2185,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addGroup(jPanel47Layout.createSequentialGroup()
                         .addComponent(jTextField109, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField110, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(t1nsstotalRep, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField111, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(t2nsstotalRep, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel47Layout.createSequentialGroup()
                         .addComponent(jTextField114, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -2000,17 +2214,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                                     .addComponent(t1nssr3Rep, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1nssr4Rep, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1nssr5Rep, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField118, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField250, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(t1nssSuccessRepRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t1nssErrorRepRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, 0)
                                 .addComponent(t2nssr3Rep, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel47Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField251, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t2nssErrorRepRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2nssr4Rep, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2nssr5Rep, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField258, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(t2nssSuccessRepRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, 0))
         );
 
@@ -2028,15 +2242,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField259.setText("Tot Pt.");
         jTextField259.setBorder(null);
 
-        jTextField260.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField260.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField260.setText("10");
-        jTextField260.setBorder(null);
+        t1nssTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1nssTF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1nssTF.setText("10");
+        t1nssTF.setBorder(null);
 
-        jTextField261.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField261.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField261.setText("5");
-        jTextField261.setBorder(null);
+        t2nssTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2nssTF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2nssTF.setText("5");
+        t2nssTF.setBorder(null);
 
         javax.swing.GroupLayout jPanel48Layout = new javax.swing.GroupLayout(jPanel48);
         jPanel48.setLayout(jPanel48Layout);
@@ -2044,8 +2258,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTextField11)
             .addComponent(jTextField259, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-            .addComponent(jTextField260, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jTextField261)
+            .addComponent(t1nssTF, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(t2nssTF)
         );
         jPanel48Layout.setVerticalGroup(
             jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2054,9 +2268,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jTextField259, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jTextField260, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(t1nssTF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jTextField261)
+                .addComponent(t2nssTF)
                 .addGap(0, 0, 0))
         );
 
@@ -2117,15 +2331,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             }
         });
 
-        jTextField264.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField264.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField264.setText("4");
-        jTextField264.setBorder(null);
+        t1nsstotalSet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1nsstotalSet.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1nsstotalSet.setText("4");
+        t1nsstotalSet.setBorder(null);
 
-        jTextField265.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField265.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField265.setText("4");
-        jTextField265.setBorder(null);
+        t2nsstotalSet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2nsstotalSet.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2nsstotalSet.setText("4");
+        t2nsstotalSet.setBorder(null);
 
         t2nssr1Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr1Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -2164,10 +2378,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2nssr2Set.setText("4");
         t2nssr2Set.setBorder(null);
 
-        jTextField272.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField272.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField272.setText("40%");
-        jTextField272.setBorder(null);
+        t1nssSuccessSetRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1nssSuccessSetRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1nssSuccessSetRate.setText("40%");
+        t1nssSuccessSetRate.setBorder(null);
 
         jTextField273.setBackground(new java.awt.Color(204, 204, 204));
         jTextField273.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -2202,15 +2416,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField277.setText("Err %");
         jTextField277.setBorder(null);
 
-        jTextField278.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField278.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField278.setText("40%");
-        jTextField278.setBorder(null);
+        t1nssErrorSetRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1nssErrorSetRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1nssErrorSetRate.setText("40%");
+        t1nssErrorSetRate.setBorder(null);
 
-        jTextField279.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField279.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField279.setText("40%");
-        jTextField279.setBorder(null);
+        t2nssErrorSetRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2nssErrorSetRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2nssErrorSetRate.setText("40%");
+        t2nssErrorSetRate.setBorder(null);
 
         t2nssr4Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr4Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -2244,10 +2458,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2nssr5Set.setText("4");
         t2nssr5Set.setBorder(null);
 
-        jTextField286.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField286.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField286.setText("40%");
-        jTextField286.setBorder(null);
+        t2nssSuccessSetRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2nssSuccessSetRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2nssSuccessSetRate.setText("40%");
+        t2nssSuccessSetRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel49Layout = new javax.swing.GroupLayout(jPanel49);
         jPanel49.setLayout(jPanel49Layout);
@@ -2256,8 +2470,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addGroup(jPanel49Layout.createSequentialGroup()
                 .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField263, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jTextField264, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(jTextField265))
+                    .addComponent(t1nsstotalSet, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(t2nsstotalSet))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField268)
@@ -2283,13 +2497,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(t1nssr5Set)
                     .addComponent(jTextField283))
                 .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField286)
+                    .addComponent(t2nssSuccessSetRate)
                     .addComponent(jTextField273, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(jTextField272, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(t1nssSuccessSetRate, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField278)
+                    .addComponent(t1nssErrorSetRate)
                     .addComponent(jTextField277, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(jTextField279)))
+                    .addComponent(t2nssErrorSetRate)))
             .addComponent(jTextField262)
         );
         jPanel49Layout.setVerticalGroup(
@@ -2301,9 +2515,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addGroup(jPanel49Layout.createSequentialGroup()
                         .addComponent(jTextField263, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField264, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(t1nsstotalSet, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField265, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(t2nsstotalSet, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel49Layout.createSequentialGroup()
                         .addComponent(jTextField268, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -2330,17 +2544,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                                     .addComponent(t1nssr3Set, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1nssr4Set, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1nssr5Set, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField272, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField278, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(t1nssSuccessSetRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t1nssErrorSetRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, 0)
                                 .addComponent(t2nssr3Set, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel49Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField279, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t2nssErrorSetRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2nssr4Set, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2nssr5Set, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField286, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(t2nssSuccessSetRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, 0))
         );
 
@@ -2363,15 +2577,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             }
         });
 
-        jTextField289.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField289.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField289.setText("4");
-        jTextField289.setBorder(null);
+        t1nsstotalDef.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1nsstotalDef.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1nsstotalDef.setText("4");
+        t1nsstotalDef.setBorder(null);
 
-        jTextField290.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField290.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField290.setText("4");
-        jTextField290.setBorder(null);
+        t2nsstotalDef.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2nsstotalDef.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2nsstotalDef.setText("4");
+        t2nsstotalDef.setBorder(null);
 
         t2nssr1Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr1Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -2410,10 +2624,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2nssr2Def.setText("4");
         t2nssr2Def.setBorder(null);
 
-        jTextField297.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField297.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField297.setText("40%");
-        jTextField297.setBorder(null);
+        t1nssSuccessDefRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1nssSuccessDefRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1nssSuccessDefRate.setText("40%");
+        t1nssSuccessDefRate.setBorder(null);
 
         jTextField298.setBackground(new java.awt.Color(204, 204, 204));
         jTextField298.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -2448,15 +2662,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField302.setText("Err %");
         jTextField302.setBorder(null);
 
-        jTextField303.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField303.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField303.setText("40%");
-        jTextField303.setBorder(null);
+        t1nssErrorDefRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t1nssErrorDefRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t1nssErrorDefRate.setText("40%");
+        t1nssErrorDefRate.setBorder(null);
 
-        jTextField304.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField304.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField304.setText("40%");
-        jTextField304.setBorder(null);
+        t2nssErrorDefRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2nssErrorDefRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2nssErrorDefRate.setText("40%");
+        t2nssErrorDefRate.setBorder(null);
 
         t2nssr4Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr4Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -2490,10 +2704,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2nssr5Def.setText("4");
         t2nssr5Def.setBorder(null);
 
-        jTextField311.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField311.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField311.setText("40%");
-        jTextField311.setBorder(null);
+        t2nssSuccessDefRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        t2nssSuccessDefRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t2nssSuccessDefRate.setText("40%");
+        t2nssSuccessDefRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel50Layout = new javax.swing.GroupLayout(jPanel50);
         jPanel50.setLayout(jPanel50Layout);
@@ -2502,8 +2716,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel50Layout.createSequentialGroup()
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField288, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(jTextField289)
-                    .addComponent(jTextField290))
+                    .addComponent(t1nsstotalDef)
+                    .addComponent(t2nsstotalDef))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField293)
@@ -2529,13 +2743,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(t1nssr5Def)
                     .addComponent(jTextField308))
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField311)
+                    .addComponent(t2nssSuccessDefRate)
                     .addComponent(jTextField298, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                    .addComponent(jTextField297, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(t1nssSuccessDefRate, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField303)
+                    .addComponent(t1nssErrorDefRate)
                     .addComponent(jTextField302, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(jTextField304)))
+                    .addComponent(t2nssErrorDefRate)))
             .addComponent(jTextField287)
         );
         jPanel50Layout.setVerticalGroup(
@@ -2547,9 +2761,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addGroup(jPanel50Layout.createSequentialGroup()
                         .addComponent(jTextField288, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField289, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(t1nsstotalDef, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField290, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(t2nsstotalDef, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel50Layout.createSequentialGroup()
                         .addComponent(jTextField293, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -2576,17 +2790,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                                     .addComponent(t1nssr3Def, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1nssr4Def, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t1nssr5Def, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField297, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField303, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(t1nssSuccessDefRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t1nssErrorDefRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, 0)
                                 .addComponent(t2nssr3Def, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel50Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField304, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(t2nssErrorDefRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2nssr4Def, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(t2nssr5Def, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField311, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(t2nssSuccessDefRate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, 0))
         );
 
@@ -4073,19 +4287,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField100;
     private javax.swing.JTextField jTextField104;
     private javax.swing.JTextField jTextField105;
-    private javax.swing.JTextField jTextField108;
     private javax.swing.JTextField jTextField109;
     private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField110;
-    private javax.swing.JTextField jTextField111;
     private javax.swing.JTextField jTextField114;
     private javax.swing.JTextField jTextField116;
-    private javax.swing.JTextField jTextField118;
     private javax.swing.JTextField jTextField119;
     private javax.swing.JTextField jTextField121;
     private javax.swing.JTextField jTextField122;
-    private javax.swing.JTextField jTextField123;
-    private javax.swing.JTextField jTextField124;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField168;
@@ -4107,89 +4315,63 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField203;
     private javax.swing.JTextField jTextField204;
     private javax.swing.JTextField jTextField208;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField242;
-    private javax.swing.JTextField jTextField243;
-    private javax.swing.JTextField jTextField244;
     private javax.swing.JTextField jTextField245;
-    private javax.swing.JTextField jTextField246;
-    private javax.swing.JTextField jTextField247;
     private javax.swing.JTextField jTextField249;
     private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField250;
-    private javax.swing.JTextField jTextField251;
     private javax.swing.JTextField jTextField254;
     private javax.swing.JTextField jTextField255;
-    private javax.swing.JTextField jTextField258;
     private javax.swing.JTextField jTextField259;
-    private javax.swing.JTextField jTextField260;
-    private javax.swing.JTextField jTextField261;
     private javax.swing.JTextField jTextField262;
     private javax.swing.JTextField jTextField263;
-    private javax.swing.JTextField jTextField264;
-    private javax.swing.JTextField jTextField265;
     private javax.swing.JTextField jTextField268;
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField270;
-    private javax.swing.JTextField jTextField272;
     private javax.swing.JTextField jTextField273;
     private javax.swing.JTextField jTextField275;
     private javax.swing.JTextField jTextField277;
-    private javax.swing.JTextField jTextField278;
-    private javax.swing.JTextField jTextField279;
     private javax.swing.JTextField jTextField282;
     private javax.swing.JTextField jTextField283;
-    private javax.swing.JTextField jTextField286;
     private javax.swing.JTextField jTextField287;
     private javax.swing.JTextField jTextField288;
-    private javax.swing.JTextField jTextField289;
-    private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField290;
     private javax.swing.JTextField jTextField293;
     private javax.swing.JTextField jTextField295;
-    private javax.swing.JTextField jTextField297;
     private javax.swing.JTextField jTextField298;
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField300;
     private javax.swing.JTextField jTextField302;
-    private javax.swing.JTextField jTextField303;
-    private javax.swing.JTextField jTextField304;
     private javax.swing.JTextField jTextField307;
     private javax.swing.JTextField jTextField308;
     private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField311;
     private javax.swing.JTextField jTextField33;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField57;
     private javax.swing.JTextField jTextField58;
-    private javax.swing.JTextField jTextField61;
-    private javax.swing.JTextField jTextField62;
-    private javax.swing.JTextField jTextField63;
     private javax.swing.JTextField jTextField65;
-    private javax.swing.JTextField jTextField67;
     private javax.swing.JTextField jTextField69;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField71;
-    private javax.swing.JTextField jTextField73;
     private javax.swing.JTextField jTextField77;
     private javax.swing.JTextField jTextField79;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField83;
     private javax.swing.JTextField jTextField84;
-    private javax.swing.JTextField jTextField87;
     private javax.swing.JTextField jTextField88;
-    private javax.swing.JTextField jTextField89;
     private javax.swing.JTextField jTextField9;
-    private javax.swing.JTextField jTextField90;
     private javax.swing.JTextField jTextField93;
     private javax.swing.JTextField jTextField95;
-    private javax.swing.JTextField jTextField97;
     private javax.swing.JTextField jTextField98;
     private javax.swing.JLabel match;
     private javax.swing.JLabel matchDate;
     private javax.swing.JPanel panMatchReport1;
     private javax.swing.JLabel phase;
+    private javax.swing.JTextField t1nssErrorDefRate;
+    private javax.swing.JTextField t1nssErrorRepRate;
+    private javax.swing.JTextField t1nssErrorSetRate;
+    private javax.swing.JTextField t1nssSuccessDefRate;
+    private javax.swing.JTextField t1nssSuccessRepRate;
+    private javax.swing.JTextField t1nssSuccessSetRate;
+    private javax.swing.JTextField t1nssTF;
     private javax.swing.JTextField t1nssr1Def;
     private javax.swing.JTextField t1nssr1Rep;
     private javax.swing.JTextField t1nssr1Set;
@@ -4205,6 +4387,16 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTextField t1nssr5Def;
     private javax.swing.JTextField t1nssr5Rep;
     private javax.swing.JTextField t1nssr5Set;
+    private javax.swing.JTextField t1nsstotalDef;
+    private javax.swing.JTextField t1nsstotalRep;
+    private javax.swing.JTextField t1nsstotalSet;
+    private javax.swing.JTextField t1ssErrorAttkRate;
+    private javax.swing.JTextField t1ssErrorBlkRate;
+    private javax.swing.JTextField t1ssErrorSerRate;
+    private javax.swing.JTextField t1ssOP;
+    private javax.swing.JTextField t1ssSuccessAttkRate;
+    private javax.swing.JTextField t1ssSuccessBlkRate;
+    private javax.swing.JTextField t1ssSuccessSerRate;
     private javax.swing.JTextField t1ssr1Attk;
     private javax.swing.JTextField t1ssr1Blk;
     private javax.swing.JTextField t1ssr1Ser;
@@ -4220,7 +4412,16 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTextField t1ssr5Attk;
     private javax.swing.JTextField t1ssr5Blk;
     private javax.swing.JTextField t1ssr5Ser;
-    private javax.swing.JTextField t1ssrOp;
+    private javax.swing.JTextField t1sstotalAttk;
+    private javax.swing.JTextField t1sstotalBlk;
+    private javax.swing.JTextField t1sstotalSer;
+    private javax.swing.JTextField t2nssErrorDefRate;
+    private javax.swing.JTextField t2nssErrorRepRate;
+    private javax.swing.JTextField t2nssErrorSetRate;
+    private javax.swing.JTextField t2nssSuccessDefRate;
+    private javax.swing.JTextField t2nssSuccessRepRate;
+    private javax.swing.JTextField t2nssSuccessSetRate;
+    private javax.swing.JTextField t2nssTF;
     private javax.swing.JTextField t2nssr1Def;
     private javax.swing.JTextField t2nssr1Rep;
     private javax.swing.JTextField t2nssr1Set;
@@ -4236,6 +4437,16 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTextField t2nssr5Def;
     private javax.swing.JTextField t2nssr5Rep;
     private javax.swing.JTextField t2nssr5Set;
+    private javax.swing.JTextField t2nsstotalDef;
+    private javax.swing.JTextField t2nsstotalRep;
+    private javax.swing.JTextField t2nsstotalSet;
+    private javax.swing.JTextField t2ssErrorAttkRate;
+    private javax.swing.JTextField t2ssErrorBlkRate;
+    private javax.swing.JTextField t2ssErrorSerRate;
+    private javax.swing.JTextField t2ssOP;
+    private javax.swing.JTextField t2ssSuccessAttkRate;
+    private javax.swing.JTextField t2ssSuccessBlkRate;
+    private javax.swing.JTextField t2ssSuccessSerRate;
     private javax.swing.JTextField t2ssr1Attk;
     private javax.swing.JTextField t2ssr1Blk;
     private javax.swing.JTextField t2ssr1Ser;
@@ -4251,6 +4462,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JTextField t2ssr5Attk;
     private javax.swing.JTextField t2ssr5Blk;
     private javax.swing.JTextField t2ssr5Ser;
+    private javax.swing.JTextField t2sstotalAttk;
+    private javax.swing.JTextField t2sstotalBlk;
+    private javax.swing.JTextField t2sstotalSer;
     private javax.swing.JTable tbSetDetails;
     private javax.swing.JTable tbTeam1Loss;
     private javax.swing.JTable tbTeam1Win;
