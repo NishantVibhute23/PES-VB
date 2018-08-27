@@ -16,6 +16,7 @@ import java.util.Map;
 public class PanEvaluationRallyRowText extends javax.swing.JPanel {
 
     PanEvaluationRally p;
+    boolean isAddClicked = false;
 
     /**
      * Creates new form PanEvaluationRallyRowText
@@ -58,8 +59,18 @@ public class PanEvaluationRallyRowText extends javax.swing.JPanel {
         });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/icons8-plus-20.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/icons8-minus-20.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         txtSkill.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         txtSkill.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -158,6 +169,18 @@ public class PanEvaluationRallyRowText extends javax.swing.JPanel {
         // TODO add your handling code here:
         show();
     }//GEN-LAST:event_txtRateMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        isAddClicked = true;
+        p.addToPosition();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        isAddClicked = true;
+        p.removePosition();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

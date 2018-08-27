@@ -5,29 +5,20 @@ import com.vollyball.bean.RallyEvaluationSkillScore;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.enums.Skill;
-import java.awt.BasicStroke;
+import com.vollyball.enums.SkillDescCriteriaPoint;
+import com.vollyball.util.ShortKeysUtil;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
-import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -72,6 +63,10 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     String command = "";
     List<JLabel> playerLabelList;
     String fromPlace, toPlace;
+    List<String> skillKeys;
+    List<String> scoreKeys;
+    List<String> diagramKeys;
+    List<String> diagramPoints = new ArrayList<>();
 
     RallyEvaluationSkillScore rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
 
@@ -125,6 +120,10 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         mapScoreLabel.put(3, lblRate3);
         mapScoreLabel.put(4, lblRate4);
         mapScoreLabel.put(5, lblRate5);
+
+        skillKeys = ShortKeysUtil.skillKeys();
+        scoreKeys = ShortKeysUtil.scoreKeys();
+        diagramKeys = ShortKeysUtil.diagramKeys();
 
         panel = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage());
         panCourt.add(panel, BorderLayout.CENTER);
@@ -253,7 +252,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         }
 
         if (skill.equalsIgnoreCase("op+") || skill.equalsIgnoreCase("tf-")) {
-
             if (skill.equalsIgnoreCase("tf-")) {
                 mapScoreComponent.get(lblRate1).setBackground(new Color(255, 11, 0));
                 score = 1;
@@ -261,12 +259,24 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 mapScoreComponent.get(lblRate5).setBackground(new Color(255, 11, 0));
                 score = 5;
             }
-
             rallyEvaluationSkillScore.setSkill(skill);
             rallyEvaluationSkillScore.setSkillId(Skill.getIdByName(skill).getId());
             rallyEvaluationSkillScore.setScore(score);
             rallyEvaluationSkillScore.setChestNo("0");
             rallyEvaluationSkillScore.setPlayerId(0);
+            rallyEvaluationSkillScore.setCode(txtInput.getText());
+            if (diagramPoints.size() > 0) {
+                String points = "";
+                for (String point : diagramPoints) {
+                    points = points + "-" + point;
+                }
+
+                int id = getDigramId(skill);
+
+                rallyEvaluationSkillScore.getDetailsValues().put(id, points);
+
+            }
+
             isSelected = true;
 
         } else if (!skill.equals("") && !chestNo.equals("") && score != 0) {
@@ -275,6 +285,16 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             rallyEvaluationSkillScore.setScore(score);
             rallyEvaluationSkillScore.setChestNo(chestNo);
             rallyEvaluationSkillScore.setPlayerId(Controller.panMatchSet.ChestMap.get(chestNo).getId());
+            rallyEvaluationSkillScore.setCode(txtInput.getText());
+            if (diagramPoints.size() > 0) {
+                String points = "";
+                for (String point : diagramPoints) {
+                    points = points + point + "-";
+                }
+                int id = getDigramId(skill);
+                rallyEvaluationSkillScore.getDetailsValues().put(id, points);
+
+            }
             isSelected = true;
         }
 
@@ -314,6 +334,25 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         }
     }
 
+    public int getDigramId(String skill) {
+        int id = 0;
+        if (skill.equals(Skill.Service.getType())) {
+            id = SkillDescCriteriaPoint.ServiceDig.getId();
+        } else if (skill.equals(Skill.Attack.getType())) {
+            id = SkillDescCriteriaPoint.AttackDig.getId();
+        } else if (skill.equals(Skill.Block.getType())) {
+            id = SkillDescCriteriaPoint.BlockDig.getId();
+        } else if (skill.equals(Skill.Set.getType())) {
+            id = SkillDescCriteriaPoint.SetDig.getId();
+        } else if (skill.equals(Skill.Defence.getType())) {
+            id = SkillDescCriteriaPoint.DefenceDig.getId();
+        } else if (skill.equals(Skill.Reception.getType())) {
+            id = SkillDescCriteriaPoint.ReceptionDig.getId();
+        }
+        return id;
+
+    }
+
     public void setValues(RallyEvaluationSkillScore rallyEvaluationSkillScore1) {
         skill = Skill.getNameById(rallyEvaluationSkillScore1.getSkillId()).getType();
         chestNo = rallyEvaluationSkillScore1.getPlayerId() == 0 ? "" : Controller.panMatchSet.playerMap.get(rallyEvaluationSkillScore1.getPlayerId()).getChestNo();
@@ -321,6 +360,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         p.currentPanRow.txtSkill.setText(skill);
         p.currentPanRow.txtPlayer.setText(chestNo);
         score = rallyEvaluationSkillScore1.getScore();
+        txtInput.setText(rallyEvaluationSkillScore1.getCode());
         JLabel lblScore = mapScoreLabel.get(score);
         if (lblScore == lblRate1) {
             mapScoreComponent.get(lblScore).setBackground(new Color(255, 11, 0));
@@ -338,10 +378,16 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         if (!chestNo.equals("")) {
             mapPlayerComponent.get(mapPlayerLabel.get(chestNo)).setBackground(Color.ORANGE);
         }
-    }
 
-    public void dig(String txt1, String txt2) {
-        panel.dig(txt1, txt2);
+        if (rallyEvaluationSkillScore1.getDetailsValues().size() > 0) {
+            int id = getDigramId(skill);
+            String digPoints = rallyEvaluationSkillScore1.getDetailsValues().get(id);
+            if (digPoints != null || !digPoints.isEmpty()) {
+                String arr[] = digPoints.split("-");
+                diagramPoints = new ArrayList<String>(Arrays.asList(arr));
+                panel.dig(skill, diagramPoints);
+            }
+        }
     }
 
     public void selectScore(JLabel j) {
@@ -489,8 +535,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        txtDig = new javax.swing.JTextField();
+        txtInput = new javax.swing.JTextField();
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1262,7 +1307,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 171, Short.MAX_VALUE)
+            .addGap(0, 151, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1303,17 +1348,12 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(57, 74, 108));
 
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
-            }
-        });
-
-        txtDig.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtDigFocusLost(evt);
+                txtInputKeyPressed(evt);
             }
         });
 
@@ -1322,15 +1362,16 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDig, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGap(5, 5, 5)
+                .addComponent(txtInput)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(txtDig)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(txtInput, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1383,110 +1424,82 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         // TODO add your handling code here:
         selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblSetMouseClicked
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+    private void txtInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInputKeyPressed
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        String a = String.valueOf(c).toUpperCase();
+        if (c == '-') {
+            String val = txtInput.getText();
+            int valIndex = val.lastIndexOf("-") == -1 ? 0 : val.lastIndexOf("-") + 1;
+            command = val.substring(valIndex);
+            System.out.println(command);
 
-        switch (a) {
-            case "Q":
-                selectSkill(lblService);
-                command = "";
-                break;
-            case "W":
-                selectSkill(lblAttack);
-                command = "";
-                break;
-            case "E":
-                selectSkill(lblBlock);
-                command = "";
-                break;
-            case "R":
-                selectSkill(lblDefence);
-                command = "";
-                break;
-            case "T":
-                selectSkill(lblReception);
-                command = "";
-                break;
-            case "Y":
-                selectSkill(lblSet);
-                command = "";
-                break;
-            case "U":
-                selectSkill(lblSet);
-                command = "";
-                break;
-            case "I":
-                selectSkill(lblSet);
-                command = "";
-                break;
-            case "Z":
-                checkPrev(command);
-                selectScore(lblRate1);
-                command = "";
-                break;
-            case "X":
-                checkPrev(command);
-                selectScore(lblRate2);
-                command = "";
-                break;
-            case "C":
-                checkPrev(command);
-                selectScore(lblRate3);
-                command = "";
-                break;
-            case "V":
-                checkPrev(command);
-                selectScore(lblRate4);
-                command = "";
-                break;
-            case "B":
-                checkPrev(command);
-                selectScore(lblRate5);
-                command = "";
-                break;
-            case "H":
-                checkPrev(command);
-                command = "";
-                command = command + "" + a;
-                break;
-            case "O":
-                checkPrev(command);
-                command = "";
-                command = command + "" + a;
-                break;
-            default:
-                command = command + "" + a;
-                break;
-        }
+            String a = String.valueOf(command).toUpperCase();
 
-    }//GEN-LAST:event_jTextField1KeyPressed
-    private void txtDigFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDigFocusLost
-        // TODO add your handling code here:
-        String val = txtDig.getText();
-        String p[] = val.split("-");
-        panel.dig(p[0], p[1]);
-
-    }//GEN-LAST:event_txtDigFocusLost
-
-    public void checkPrev(String command) {
-
-        if (command.startsWith("H")) {
-            fromPlace = command;
-        } else if (command.startsWith("O")) {
-            toPlace = command;
-            panel.dig(fromPlace, toPlace);
-        } else {
-            int i = 0;
-            for (Player pl : Controller.panMatchSet.playerList) {
-                if (pl.getChestNo().equals(command)) {
-                    selectPlayer(playerLabelList.get(i));
+            if (skillKeys.contains(a)) {
+                switch (a) {
+                    case "Q":
+                        selectSkill(lblService);
+                        break;
+                    case "W":
+                        selectSkill(lblAttack);
+                        break;
+                    case "E":
+                        selectSkill(lblBlock);
+                        break;
+                    case "R":
+                        selectSkill(lblDefence);
+                        break;
+                    case "T":
+                        selectSkill(lblReception);
+                        break;
+                    case "Y":
+                        selectSkill(lblSet);
+                        break;
+                    case "U":
+                        selectSkill(lblOp);
+                        break;
+                    case "I":
+                        selectSkill(lblTF);
+                        break;
                 }
-                i++;
+            } else if (scoreKeys.contains(a)) {
+                switch (a) {
+                    case "Z":
+                        selectScore(lblRate1);
+                        break;
+                    case "X":
+                        selectScore(lblRate2);
+                        break;
+                    case "C":
+                        selectScore(lblRate3);
+                        break;
+                    case "V":
+                        selectScore(lblRate4);
+                        break;
+                    case "B":
+                        selectScore(lblRate5);
+                        break;
+                }
+            } else if (diagramKeys.contains(a)) {
+                diagramPoints.add(a);
+
+                if (diagramPoints.size() > 1) {
+                    panel.dig(skill, diagramPoints);
+                }
+
+            } else {
+                int i = 0;
+                for (Player pl : Controller.panMatchSet.playerList) {
+                    if (pl.getChestNo().equals(command)) {
+                        selectPlayer(playerLabelList.get(i));
+                    }
+                    i++;
+                }
             }
         }
-    }
+
+    }//GEN-LAST:event_txtInputKeyPressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
@@ -1501,7 +1514,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl10;
     private javax.swing.JLabel lbl11;
@@ -1559,295 +1571,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     private javax.swing.JPanel panService;
     private javax.swing.JPanel panSet;
     private javax.swing.JPanel panTF;
-    private javax.swing.JTextField txtDig;
+    private javax.swing.JTextField txtInput;
     // End of variables declaration//GEN-END:variables
-}
-
-class ImagePanel extends JPanel {
-
-    Graphics g;
-    private Image img;
-    int x1 = 0;
-    int y1 = 0;
-    int x2 = 0;
-    int y2 = 0;
-    int midX = 0;
-    int midY = 0;
-    LinkedHashMap<String, JPanel> panGrid = new LinkedHashMap<String, JPanel>();
-
-    public ImagePanel(String img) {
-        this(new ImageIcon(img).getImage());
-
-    }
-
-    public ImagePanel(Image img) {
-        this.img = img;
-        Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-        setPreferredSize(size);
-        setMinimumSize(size);
-        setMaximumSize(size);
-        setSize(size);
-        this.setLayout(new GridLayout(8, 5));
-
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 5; j++) {
-            }
-        }
-
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 5; j++) {
-
-                if (i == 1) {
-                    String panCode = "OB";
-                    if (j == 1) {
-                        panCode = panCode + "1";
-                    } else if (j == 2) {
-                        panCode = panCode + "2";
-                    } else if (j == 3) {
-                        panCode = panCode + "3";
-                    } else if (j == 4) {
-                        panCode = panCode + "4";
-                    } else if (j == 5) {
-                        panCode = panCode + "5";
-                    }
-                    addPanel(panCode);
-                }
-
-                if (i == 2) {
-                    String panCode = "O";
-                    if (j == 1) {
-                        panCode = panCode + "L3";
-                    } else if (j == 2) {
-                        panCode = panCode + "7";
-                    } else if (j == 3) {
-                        panCode = panCode + "8";
-                    } else if (j == 4) {
-                        panCode = panCode + "9";
-                    } else if (j == 5) {
-                        panCode = panCode + "R3";
-                    }
-                    addPanel(panCode);
-                }
-
-                if (i == 3) {
-                    String panCode = "O";
-                    if (j == 1) {
-                        panCode = panCode + "L2";
-                    } else if (j == 2) {
-                        panCode = panCode + "4";
-                    } else if (j == 3) {
-                        panCode = panCode + "5";
-                    } else if (j == 4) {
-                        panCode = panCode + "6";
-                    } else if (j == 5) {
-                        panCode = panCode + "R2";
-                    }
-                    addPanel(panCode);
-                }
-
-                if (i == 4) {
-                    String panCode = "O";
-                    if (j == 1) {
-                        panCode = panCode + "L1";
-                    } else if (j == 2) {
-                        panCode = panCode + "1";
-                    } else if (j == 3) {
-                        panCode = panCode + "2";
-                    } else if (j == 4) {
-                        panCode = panCode + "3";
-                    } else if (j == 5) {
-                        panCode = panCode + "R1";
-                    }
-                    addPanel(panCode);
-                }
-
-                if (i == 5) {
-                    String panCode = "H";
-                    if (j == 1) {
-                        panCode = panCode + "L1";
-                    } else if (j == 2) {
-                        panCode = panCode + "1";
-                    } else if (j == 3) {
-                        panCode = panCode + "2";
-                    } else if (j == 4) {
-                        panCode = panCode + "3";
-                    } else if (j == 5) {
-                        panCode = panCode + "R1";
-                    }
-                    addPanel(panCode);
-                }
-
-                if (i == 6) {
-                    String panCode = "H";
-                    if (j == 1) {
-                        panCode = panCode + "L2";
-                    } else if (j == 2) {
-                        panCode = panCode + "4";
-                    } else if (j == 3) {
-                        panCode = panCode + "5";
-                    } else if (j == 4) {
-                        panCode = panCode + "6";
-                    } else if (j == 5) {
-                        panCode = panCode + "R2";
-                    }
-                    addPanel(panCode);
-                }
-
-                if (i == 7) {
-                    String panCode = "H";
-                    if (j == 1) {
-                        panCode = panCode + "L3";
-                    } else if (j == 2) {
-                        panCode = panCode + "7";
-                    } else if (j == 3) {
-                        panCode = panCode + "8";
-                    } else if (j == 4) {
-                        panCode = panCode + "9";
-                    } else if (j == 5) {
-                        panCode = panCode + "R3";
-                    }
-                    addPanel(panCode);
-
-                }
-
-                if (i == 8) {
-                    String panCode = "HB";
-                    if (j == 1) {
-                        panCode = panCode + "1";
-                    } else if (j == 2) {
-                        panCode = panCode + "2";
-                    } else if (j == 3) {
-                        panCode = panCode + "3";
-                    } else if (j == 4) {
-                        panCode = panCode + "4";
-                    } else if (j == 5) {
-                        panCode = panCode + "5";
-                    }
-                    addPanel(panCode);
-                }
-
-            }
-        }
-        for (Map.Entry<String, JPanel> entry : panGrid.entrySet()) {
-            String string = entry.getKey();
-            System.out.println(string);
-
-        }
-    }
-
-    public void addPanel(String panCode) {
-        JPanel p = new JPanel();
-        p.setSize(66, 66);
-        p.setLayout(new GridLayout(2, 2));
-        p.setOpaque(false);
-        p.setBorder(BorderFactory.createDashedBorder(Color.pink));
-        String code = panCode;
-        for (int k = 1; k <= 2; k++) {
-            for (int l = 1; l <= 2; l++) {
-
-                if (k == 1) {
-                    if (l == 1) {
-                        code = panCode + "A";
-                    } else {
-                        code = panCode + "B";
-                    }
-                }
-                if (k == 2) {
-                    if (l == 1) {
-                        code = panCode + "C";
-                    } else {
-                        code = panCode + "D";
-                    }
-                }
-
-                JPanel pin = new JPanel();
-                pin.setSize(33, 33);
-                pin.setBorder(BorderFactory.createDashedBorder(Color.LIGHT_GRAY));
-                pin.setOpaque(false);
-                p.add(pin);
-                panGrid.put(code, pin);
-
-            }
-        }
-        this.add(p);
-    }
-
-    public void dig(String txt1, String txt2) {
-        JPanel p1 = panGrid.get(txt1);
-        JPanel p2 = panGrid.get(txt2);
-
-        this.x1 = (int) (p1.getParent().getLocation().getX() + (p1.getWidth() / 2));
-        this.y1 = (int) (p1.getParent().getLocation().getY() + (p1.getHeight() / 2));
-        this.x2 = (int) (p2.getParent().getLocation().getX() + (p2.getWidth() / 2));
-        this.y2 = (int) (p2.getParent().getLocation().getY() + (p2.getHeight() / 2));
-        setCurve();
-        repaint();
-    }
-
-    public void setCurve() {
-
-        int val = 60;
-        Shape s = new Line2D.Double(x1, y1, x2, y2);
-
-        int xlinecenter = (int) s.getBounds().getCenterX();
-        int ylinecenter = (int) s.getBounds().getCenterY();
-
-        if ((x2 - x1) == 0) {
-            midX = x1 < 150 ? (x1 + val) : (x1 - val);
-            midY = ylinecenter;
-        } else {
-            double slope = (double) (y2 - y1) / (x2 - x1);
-            slope = Math.abs(slope);
-            if (slope == 0) {
-                midX = xlinecenter;
-                midY = y1 - val;
-            } else {
-                slope = Math.round(slope);
-                int yval = (int) ((int) val / slope);
-//                if (x1 < 150) {
-//
-//                }
-
-                midX = xlinecenter < 150 ? (xlinecenter + val) : (xlinecenter + val);
-
-                midY = ylinecenter - yval;
-            }
-        }
-    }
-
-    public void drawImage(int x1, int y1, int x2, int y2) {
-        this.img = img;
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
-//        Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-//        setPreferredSize(size);
-//        setMinimumSize(size);
-//        setMaximumSize(size);
-//        setSize(size);
-//        setLayout(null);
-        repaint();
-    }
-
-    public void paintComponent(Graphics g) {
-
-        g.drawImage(img, 0, 0, null);
-
-//        if (x1 != 0 && y1 != 0 && x2 != 0 && y2 != 0) {
-        Graphics2D g2 = (Graphics2D) g;
-
-        g2.setStroke(new BasicStroke(3));
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-
-        Path2D p = new GeneralPath();
-        p.moveTo(x1, y1);
-        p.curveTo(x1, y1,
-                midX, midY,
-                x2, y2);
-        g2.draw(p);
-
-    }
-
 }

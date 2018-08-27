@@ -23,6 +23,15 @@ public class RallyEvaluationSkillScore {
     boolean isDetailed;
     LinkedHashMap<Integer, String> detailsValues = new LinkedHashMap<Integer, String>();
     int orderNum;
+    String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public int getRallyId() {
         return rallyId;

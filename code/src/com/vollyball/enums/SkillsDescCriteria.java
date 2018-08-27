@@ -96,7 +96,13 @@ public enum SkillsDescCriteria {
     DefenceN(80, " Setter position", 6),
     DefenceO(81, " Type of set", 6),
     DefenceP(82, " Set Tempo", 6),
-    DefenceQ(83, " Score at time of Defence", 6);
+    DefenceQ(83, " Score at time of Defence", 6),
+    ServiceDig(84, "Diagram Points", 1),
+    AttackDig(85, "Diagram Points", 2),
+    BlockDig(86, "Diagram Points", 3),
+    SetDig(87, "Diagram Points", 4),
+    ReceptionDig(88, "Diagram Points", 5),
+    DefenceDig(89, "Diagram Points", 6);
 
     int id;
     String type;

@@ -103,6 +103,7 @@ public class RallyDao {
                     ps1.setInt(3, ress.getScore());
                     ps1.setInt(4, rid);
                     ps1.setInt(5, ress.getOrderNum());
+                    ps1.setString(6, ress.getCode());
                     id = ps1.executeUpdate();
 
                     if (ress.isIsDetailed()) {
@@ -440,14 +441,12 @@ public class RallyDao {
                             playerMap.put(p.getId(), p);
 
                         }
-
                         re.rallyPositionMap.put(1, playerMap.get(rs2.getInt(1)));
                         re.rallyPositionMap.put(2, playerMap.get(rs2.getInt(2)));
                         re.rallyPositionMap.put(3, playerMap.get(rs2.getInt(3)));
                         re.rallyPositionMap.put(4, playerMap.get(rs2.getInt(4)));
                         re.rallyPositionMap.put(5, playerMap.get(rs2.getInt(5)));
                         re.rallyPositionMap.put(6, playerMap.get(rs2.getInt(6)));
-
                     }
                 }
 
@@ -462,6 +461,7 @@ public class RallyDao {
                     ress.setPlayerId(rs1.getInt(3));
                     ress.setScore(rs1.getInt(4));
                     ress.setRallyId(rs1.getInt(5));
+                    ress.setCode(rs1.getString(6));
 
                     PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.rallydetails.criteria"));
                     ps3.setInt(1, ress.getId());

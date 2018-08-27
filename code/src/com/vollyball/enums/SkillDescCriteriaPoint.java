@@ -384,7 +384,13 @@ public enum SkillDescCriteriaPoint {
     DefenceP1(371, "", "HIGH", 82),
     DefenceP2(372, "", "MEDIUM", 82),
     DefenceP3(373, "", "LOW", 82),
-    DefenceQ1(374, "", "00:00", 83);
+    DefenceQ1(374, "", "00:00", 83),
+    ServiceDig(375, "", "", 84),
+    AttackDig(376, "", "", 85),
+    BlockDig(377, "", "", 86),
+    SetDig(378, "", "", 87),
+    ReceptionDig(379, "", "", 88),
+    DefenceDig(380, "", "", 89);
 
     int id;
     String type;
