@@ -55,6 +55,11 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     List<JTextField> rallyPos = new ArrayList<>();
     MatchDao matchDao = new MatchDao();
     public List<PanEvaluationRallyRowText> panListRow = new ArrayList<>();
+    int id;
+    int oldRallyEndScore = 0;
+    int oldSkillid = 0;
+    int homeScore, opponentScore;
+    boolean isInserted = false;
 
     /**
      * Creates new form PanEvaluationRallyRow
@@ -74,6 +79,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         panCompListValue.add(true);
         lblRallyNum.setText("" + rallyNum);
         setRotationForRally();
+        lblAction.setText("SAVE");
     }
 
     public void addToPosition() {
@@ -86,17 +92,26 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 
     public PanEvaluationRally(RallyEvaluation rallyEvaluation) {
         initComponents();
-//        this.rallyNum = rallyNum;
-//        this.teamEvaluateId = teamEvaluateId;
+        lblAction.setText("UPDATE");
+        isInserted = true;
+        this.rallyEvaluation = rallyEvaluation;
+        this.rallyNum = rallyEvaluation.getRallyNum();
+//        this.teamEvaluateId = rallyEvaluation.get;
 //        this.opponentId = opponentId;
+        this.id = rallyEvaluation.getId();
 //        panRallyList.add(panCompListValue, BorderLayout.CENTER);
 //        panCompListValue.add(true);
+        homeScore = rallyEvaluation.getHomeScore();
+        opponentScore = rallyEvaluation.getOpponentScore();
         lblRallyNum.setText("" + rallyEvaluation.getRallyNum());
         lblRallyStartTime.setText("" + rallyEvaluation.getStartTime());
         lblRallyEndTime.setText("" + rallyEvaluation.getEndTime());
         lblResult.setText(rallyEvaluation.getHomeScore() + " : " + rallyEvaluation.getOpponentScore());
         panRallyList.add(panCompListValue, BorderLayout.CENTER);
         panCompListValue.addRallies(rallyEvaluation.getRallyEvaluationSkillScore());
+
+        oldRallyEndScore = rallyEvaluation.getRallyEvaluationSkillScore().get(rallyEvaluation.getRallyEvaluationSkillScore().size() - 1).getScore();
+        oldSkillid = rallyEvaluation.getRallyEvaluationSkillScore().get(rallyEvaluation.getRallyEvaluationSkillScore().size() - 1).getSkillId();
 
         if (rallyEvaluation.getRallyPositionMap().size() > 0) {
 
@@ -178,6 +193,150 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 
     }
 
+    public void update() {
+        List<Integer> updated = new ArrayList<>();
+        RallyEvaluation rallyUpdate = new RallyEvaluation();
+        rallyUpdate.setId(id);
+        rallyUpdate.setRallyNum(rallyNum);
+//                rallyUpdate.setHomeScore();
+        rallyUpdate.setMatchEvaluationId(rallyEvaluation.getMatchEvaluationId());
+        rallyUpdate.setRallyPositionMap(rallyEvaluation.getRallyPositionMap());
+
+        if (panListRow.size() > 0) {
+
+            for (PanEvaluationRallyRowText panRowText : panListRow) {
+
+                PanEvaluationRowDetail pan = panRallyRow.get(panRowText);
+                RallyEvaluationSkillScore rallyEvaluationSkillScore = pan.getRallyEvaluationSkillScore();
+                try {
+
+                    RallyEvaluationSkillScore rs = rallyEvaluationSkillScore;
+                    updated.add(rallyEvaluationSkillScore.getId());
+                    rs.setId(rallyEvaluationSkillScore.getId());
+                    rs.setSkill(rallyEvaluationSkillScore.getSkill());
+
+                    if (rallyEvaluationSkillScore.getSkill().equals(Skill.OP.getType())) {
+                        Controller.panMatchSet.op++;
+                        Controller.panMatchSet.lblOp.setText("" + Controller.panMatchSet.op);
+
+                    } else if (rallyEvaluationSkillScore.getSkill().equals(Skill.TF.getType())) {
+                        Controller.panMatchSet.tf++;
+                        Controller.panMatchSet.lblTf.setText("" + Controller.panMatchSet.tf);
+
+                    }
+                    rs.setChestNo(rallyEvaluationSkillScore.getChestNo());
+                    rs.setPlayerId(rallyEvaluationSkillScore.getPlayerId());
+                    rallyUpdate.setOp(Controller.panMatchSet.op);
+                    rallyUpdate.setTf(Controller.panMatchSet.tf);
+                    rs.setSkillId(rallyEvaluationSkillScore.getSkillId());
+                    rs.setOrderNum(i + 1);
+                    rs.setScore(rallyEvaluationSkillScore.getScore());
+
+                    if (rallyEvaluationSkillScore.getDetailsValues().size() > 0) {
+                        rs.setIsDetailed(true);
+                        rs.setDetailsValues(rallyEvaluationSkillScore.getDetailsValues());
+                    }
+                    rallyUpdate.getRallyEvaluationSkillScore().add(rs);
+                } catch (Exception ex) {
+                    Logger.getLogger(PanRallyLiveEvaluation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            RallyEvaluationSkillScore panRallyEvaluationRowStart = panRallyRow.get(panListRow.get(0)).getRallyEvaluationSkillScore();
+            RallyEvaluationSkillScore panRallyEvaluationRowEnd = panRallyRow.get(panListRow.get(panListRow.size() - 1)).getRallyEvaluationSkillScore();
+
+            if (panRallyEvaluationRowStart.getSkill().equals(Skill.Service.getType())) {
+                rallyUpdate.setStartby(HomeOpponent.HOME.getId());
+            } else {
+                rallyUpdate.setStartby(HomeOpponent.OPPONENT.getId());
+            }
+
+            if (Integer.parseInt(String.valueOf(panRallyEvaluationRowEnd.getScore())) == 5) {
+                rallyUpdate.setWonby(HomeOpponent.HOME.getId());
+            } else {
+                rallyUpdate.setWonby(HomeOpponent.OPPONENT.getId());
+            }
+
+            int updatedScore = panRallyRow.get(panListRow.get(panListRow.size() - 1)).getRallyEvaluationSkillScore().getScore();
+            String updatedSkill = panRallyRow.get(panListRow.get(panListRow.size() - 1)).getRallyEvaluationSkillScore().getSkill();
+
+            int updatedSkillid = panRallyRow.get(panListRow.get(panListRow.size() - 1)).getRallyEvaluationSkillScore().getSkillId();
+            if (oldSkillid == Skill.OP.getId() || oldSkillid == Skill.TF.getId()) {
+                if (oldSkillid == Skill.OP.getId() && updatedSkillid != Skill.OP.getId()) {
+                    if (updatedSkillid == Skill.TF.getId()) {
+                        Controller.panMatchSet.tf++;
+                    }
+                    Controller.panMatchSet.op--;
+                }
+
+                if (oldSkillid == Skill.TF.getId() && updatedSkillid != Skill.TF.getId()) {
+                    if (updatedSkillid == Skill.OP.getId()) {
+                        Controller.panMatchSet.op++;
+                    }
+                    Controller.panMatchSet.tf--;
+                }
+            } else {
+                if (updatedSkillid == Skill.TF.getId()) {
+                    Controller.panMatchSet.tf++;
+                }
+                if (updatedSkillid == Skill.OP.getId()) {
+                    Controller.panMatchSet.op++;
+                }
+            }
+
+            if (oldRallyEndScore != updatedScore) {
+
+                switch (updatedScore) {
+
+                    case 1:
+
+                        if (homeScore != 0) {
+                            homeScore--;
+                        }
+                        opponentScore++;
+                        rallyUpdate.setScoreSubtracted("Home");
+
+                        break;
+                    case 5:
+                        if (updatedSkill.equals(Skill.Service.getType()) || updatedSkill.equals(Skill.Attack.getType()) || updatedSkill.equals(Skill.Block.getType()) || updatedSkill.equals(Skill.OP.getType())) {
+                            homeScore++;
+                            if (opponentScore != 0) {
+                                opponentScore--;
+                            }
+                            rallyUpdate.setScoreSubtracted("Opponent");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Rally Not End");
+                        }
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(this, "Rally Not End");
+                        break;
+                }
+                rallyUpdate.setHomeScore(this.homeScore);
+                rallyUpdate.setOpponentScore(this.opponentScore);
+                rallyUpdate.setOp(Controller.panMatchSet.op);
+                rallyUpdate.setTf(Controller.panMatchSet.tf);
+
+//                    JOptionPane.showMessageDialog(panRallyCurrent, "New score of rally : \nHome Score = " + panRallyCurrent.homeScore + "\nOpp Score =" + panRallyCurrent.opponentScore);
+            } else {
+//                    JOptionPane.showMessageDialog(panRallyCurrent, "Same Score");
+                rallyUpdate.setHomeScore(homeScore);
+                rallyUpdate.setOpponentScore(opponentScore);
+                rallyUpdate.setScoreSubtracted("None");
+                rallyUpdate.setOp(Controller.panMatchSet.op);
+                rallyUpdate.setTf(Controller.panMatchSet.tf);
+            }
+
+            int id = rallyDao.updateRally(rallyUpdate, updated);
+            if (id != 0) {
+                JOptionPane.showMessageDialog(this, "Updated Successfully");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to save Rally");
+            }
+        }
+    }
+
     public void save() {
         RallyEvaluation rallyInsert = new RallyEvaluation();
         rallyInsert.setRallyNum(rallyNum);
@@ -216,8 +375,10 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                     rs.setDetailsValues(rallyEvaluationSkillScore.getDetailsValues());
                 }
                 rallyInsert.getRallyEvaluationSkillScore().add(rs);
+
             } catch (Exception ex) {
-                Logger.getLogger(PanRallyLiveEvaluation.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PanRallyLiveEvaluation.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
         RallyEvaluationSkillScore panRallyEvaluationRowStart = rallyEvaluation.getRallyEvaluationSkillScore().get(0);
@@ -240,6 +401,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             Controller.panMatchSet.currentRally++;
         } else {
             JOptionPane.showMessageDialog(this, "Failed to save Rally");
+
         }
 
     }
@@ -277,6 +439,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                 if (p.isAddClicked) {
                     p.isAddClicked = false;
                     panListRow.remove(i);
+                    panRallyRow.remove(p);
                     break;
                 }
                 i++;
@@ -292,6 +455,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             currentPanRow = panel;
             panEvalDetail.removeAll();
             PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(PanEvaluationRally.this, false);
+            panRallyRow.put(panel, panEvaluationRowDetail);
             panEvalDetail.add(panEvaluationRowDetail, BorderLayout.CENTER);
             panEvalDetail.validate();
             panEvalDetail.repaint();
@@ -429,7 +593,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        lblAction = new javax.swing.JLabel();
 
         panRallyList.setBackground(new java.awt.Color(57, 74, 108));
         panRallyList.setLayout(new java.awt.BorderLayout());
@@ -637,20 +801,25 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("SAVE");
+        lblAction.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblAction.setForeground(new java.awt.Color(255, 255, 255));
+        lblAction.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAction.setText("SAVE");
+        lblAction.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblActionMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(lblAction, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -694,6 +863,17 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void lblActionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblActionMouseClicked
+        // TODO add your handling code here:
+
+        if (lblAction.getText().equals("SAVE")) {
+            save();
+        } else {
+            update();
+        }
+
+    }//GEN-LAST:event_lblActionMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -703,12 +883,12 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel43;
+    private javax.swing.JLabel lblAction;
     public javax.swing.JLabel lblRallyEndTime;
     private javax.swing.JLabel lblRallyNum;
     public javax.swing.JLabel lblRallyStartTime;

@@ -13,6 +13,7 @@ import com.vollyball.bean.SetTimeout;
 import com.vollyball.bean.VollyCourtCoordinateBean;
 import com.vollyball.controller.Controller;
 import com.vollyball.db.DbUtil;
+import com.vollyball.enums.Skill;
 import com.vollyball.util.CommonUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -458,6 +459,7 @@ public class RallyDao {
                     LinkedHashMap<Integer, String> detailsMap = new LinkedHashMap<>();
                     ress.setId(rs1.getInt(1));
                     ress.setSkillId(rs1.getInt(2));
+                    ress.setSkill(Skill.getNameById(rs1.getInt(2)).getType());
                     ress.setPlayerId(rs1.getInt(3));
                     ress.setScore(rs1.getInt(4));
                     ress.setRallyId(rs1.getInt(5));

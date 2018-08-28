@@ -9,6 +9,7 @@ import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.util.ShortKeysUtil;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.HierarchyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -20,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -307,7 +309,9 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     Date time = new Date();
                     p.endTime = formatterTime.format(time);
                     p.lblRallyEndTime.setText(p.endTime);
-                    p.save();
+                    if (!p.isInserted) {
+                        p.save();
+                    }
                     break;
                 case 5:
                     if (skill.equals(Skill.Service.getType()) || skill.equals(Skill.Attack.getType()) || skill.equals(Skill.Block.getType()) || skill.equals(Skill.OP.getType())) {
@@ -316,18 +320,24 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                         Date time1 = new Date();
                         p.endTime = formatterTime.format(time1);
                         p.lblRallyEndTime.setText(p.endTime);
-                        p.save();
+                        if (!p.isInserted) {
+                            p.save();
+                        }
                     } else {
                         if (isNew || isLast) {
                             isLast = false;
-                            p.panCompListValue.add(false);
+                            if (!p.isInserted) {
+                                p.panCompListValue.add(false);
+                            }
                         }
                     }
                     break;
                 default:
                     if (isNew || isLast) {
                         isLast = false;
-                        p.panCompListValue.add(false);
+                        if (!p.isInserted) {
+                            p.panCompListValue.add(false);
+                        }
                     }
                     break;
             }
@@ -354,6 +364,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     }
 
     public void setValues(RallyEvaluationSkillScore rallyEvaluationSkillScore1) {
+        this.rallyEvaluationSkillScore = rallyEvaluationSkillScore1;
         skill = Skill.getNameById(rallyEvaluationSkillScore1.getSkillId()).getType();
         chestNo = rallyEvaluationSkillScore1.getPlayerId() == 0 ? "" : Controller.panMatchSet.playerMap.get(rallyEvaluationSkillScore1.getPlayerId()).getChestNo();
         p.currentPanRow.txtRate.setText("" + rallyEvaluationSkillScore1.getScore());
@@ -386,7 +397,18 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 String arr[] = digPoints.split("-");
                 diagramPoints = new ArrayList<String>(Arrays.asList(arr));
                 panel.dig(skill, diagramPoints);
+
             }
+        }
+    }
+
+    public void hierarchyChanged(HierarchyEvent e) {
+        JComponent component = (JComponent) e.getSource();
+
+        if ((HierarchyEvent.SHOWING_CHANGED & e.getChangeFlags()) != 0
+                && component.isShowing()) {
+            // add code here
+
         }
     }
 
@@ -1499,6 +1521,14 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_txtInputKeyPressed
+
+    public RallyEvaluationSkillScore getRallyEvaluationSkillScore() {
+        return rallyEvaluationSkillScore;
+    }
+
+    public void setRallyEvaluationSkillScore(RallyEvaluationSkillScore rallyEvaluationSkillScore) {
+        this.rallyEvaluationSkillScore = rallyEvaluationSkillScore;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
