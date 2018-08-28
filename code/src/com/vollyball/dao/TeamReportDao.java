@@ -5,6 +5,8 @@
  */
 package com.vollyball.dao;
 
+import com.vollyball.bean.Player;
+import com.vollyball.bean.PlayerScores;
 import com.vollyball.bean.PlayerSkillScore;
 import com.vollyball.bean.TeamScores;
 import com.vollyball.bean.TeamSkillScore;
@@ -207,10 +209,10 @@ public class TeamReportDao {
 
     }
 
-    public TeamSkillScore getTeamSkillWiseScoreReport(int compId, int skillId, int matchId, int teamId,int evId) {
+    public TeamSkillScore getTeamSkillWiseScoreReport(int compId, int skillId, int matchId, int teamId, int evId) {
         TeamSkillScore skill = new TeamSkillScore();
         try {
-            PreparedStatement ps,ps1;
+            PreparedStatement ps, ps1, ps2;
             this.con = db.getConnection();
             ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.team.skillwisescore.ofmatch"));
             ps.setInt(1, compId);
@@ -231,44 +233,49 @@ public class TeamReportDao {
                 skill.setFive(rs.getInt(8));
 
             }
-            
-            ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchset.plusminus"));
-            ps1.setInt(1, evId);
-                        ResultSet rs1 = ps1.executeQuery();
 
-            while(rs1.next()){
-                skill.setOp(rs1.getInt(1));
-                skill.setTf(rs1.getInt(2));
+            ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("team.ss.opdata.score"));
+            ps1.setInt(1, 7);
+            ps1.setInt(2, evId);
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()) {
+                skill.setOp(rs1.getInt(2));
             }
-            
+            ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("team.nss.tfdata.score"));
+            ps2.setInt(1, 8);
+            ps2.setInt(2, evId);
+            ResultSet rs2 = ps2.executeQuery();
+
+            while (rs2.next()) {
+                skill.setTf(rs2.getInt(2));
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return skill;
     }
 
-    public Map<String, List<TeamScores>> getTeamSetWiseScoreReport(int compId, int setId, int matchId, int teamId) {
+    public Map<String, List<TeamScores>> getTeamSetWiseScoreReport(int setId, int evId) {
         Map<String, List<TeamScores>> tsMap = new HashMap<>();
         List<TeamScores> tsl = new ArrayList<>();
 
         try {
-            PreparedStatement ps, ps1;
+            PreparedStatement ps;
             this.con = db.getConnection();
-            for (int skillId = 1; skillId < 6; skillId++) {
+            for (int skillId = 1; skillId <= 8; skillId++) {
                 ps = this.con.prepareStatement(CommonUtil.getResourceProperty("team.setwise.win.score"));
-                ps.setInt(1, compId);
-                ps.setInt(2, teamId);
-                ps.setInt(3, matchId);
-                ps.setInt(4, skillId);
-                ps.setInt(5, setId);
+                ps.setInt(1, skillId);
+                ps.setInt(2, evId);
+                ps.setInt(3, setId);
 
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
                     TeamScores teamScores = new TeamScores();
-                    teamScores.setTeamName(rs.getString(2));
-                    teamScores.setTotalAttempt(rs.getInt(5));
-                    teamScores.setSetno(rs.getString(3));
+                    teamScores.setSetno(rs.getString(1));
+                    teamScores.setTotalAttempt(rs.getInt(3));
                     tsl.add(teamScores);
                 }
 
@@ -279,29 +286,26 @@ public class TeamReportDao {
         }
         return tsMap;
     }
-    
-    public Map<String, List<TeamScores>> getTeamSetWiseScoreReportLoss(int compId, int setId, int matchId, int teamId) {
+
+    public Map<String, List<TeamScores>> getTeamSetWiseScoreReportLoss(int setId, int evId) {
         Map<String, List<TeamScores>> tsMap = new HashMap<>();
         List<TeamScores> tsl = new ArrayList<>();
 
         try {
-            PreparedStatement ps, ps1;
+            PreparedStatement ps;
             this.con = db.getConnection();
-            for (int skillId = 1; skillId <= 6; skillId++) {
+            for (int skillId = 1; skillId <= 8; skillId++) {
                 ps = this.con.prepareStatement(CommonUtil.getResourceProperty("team.setwise.loss.score"));
-                ps.setInt(1, compId);
-                ps.setInt(2, teamId);
-                ps.setInt(3, matchId);
-                ps.setInt(4, skillId);
-                ps.setInt(5, setId);
+                ps.setInt(1, skillId);
+                ps.setInt(2, evId);
+                ps.setInt(3, setId);
 
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
                     TeamScores teamScores = new TeamScores();
-                    teamScores.setTeamName(rs.getString(2));
-                    teamScores.setTotalAttempt(rs.getInt(5));
-                    teamScores.setSetno(rs.getString(3));
+                    teamScores.setSetno(rs.getString(1));
+                    teamScores.setTotalAttempt(rs.getInt(3));
                     tsl.add(teamScores);
                 }
 
@@ -311,6 +315,48 @@ public class TeamReportDao {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return tsMap;
+    }
+
+    public Map<PlayerScores, List<Integer>> getTeamPlayers(int id) {
+        Map<PlayerScores, List<Integer>> playerMap = new HashMap<>();
+        List<Integer> setList;
+        try {
+
+            this.con = db.getConnection();
+            PreparedStatement ps, ps1;
+            ResultSet rs, rs1;
+            ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.players"));
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                PlayerScores p = new PlayerScores();
+                setList = new ArrayList<>();
+                p.setId(rs.getInt(1));
+                p.setPlayerName(rs.getString(2));
+                if (rs.getInt(4) == 2) {
+                    p.setChestNo(rs.getString(3) + "L");
+                } else {
+                    p.setChestNo(rs.getString(3));
+                }
+                p.setTeamName(rs.getString(5));
+
+                for (int i = 1; i <= 5; i++) {
+                    ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("player.setwise.data"));
+                    ps1.setInt(1, rs.getInt(1));
+                    ps1.setInt(2, i);
+                    rs1 = ps1.executeQuery();
+                    while (rs1.next()) {
+                        setList.add(rs1.getInt(3));
+                    }
+                }
+                playerMap.put(p, setList);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return playerMap;
     }
 
 }

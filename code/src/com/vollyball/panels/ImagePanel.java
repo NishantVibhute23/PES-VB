@@ -289,15 +289,21 @@ class ImagePanel extends JPanel {
                 int yval = (int) ((int) val / slope);
                 int xval = (int) ((int) val / slope);
 
-                int direction = x2 - x1;
+                midX = xlinecenter + val;
+                midY = ylinecenter - yval;
 
-                if (direction < 0) {
-                    midX = xlinecenter - (val / 2);
-                    midY = ylinecenter + (val / 2);
-                } else {
-                    midX = xlinecenter;
+                int xdirection = x2 - x1;
+                int ydirection = y2 - y1;
+
+                if (xdirection < 0 && ydirection > 0) {
+                    midX = xlinecenter + xval;
                     midY = ylinecenter + val;
-
+                } else if (xdirection > 0 && ydirection < 0) {
+                    midX = xlinecenter - val;
+                    midY = ylinecenter - val;
+                } else if (xdirection < 0 && ydirection < 0) {
+                    midX = xlinecenter + val;
+                    midY = ylinecenter - yval;
                 }
             }
         }
