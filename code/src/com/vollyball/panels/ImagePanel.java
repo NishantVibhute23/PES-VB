@@ -288,14 +288,17 @@ class ImagePanel extends JPanel {
                 slope = Math.ceil(slope);
                 int yval = (int) ((int) val / slope);
                 int xval = (int) ((int) val / slope);
-//                if (xlinecenter < 150) {
-                midX = xlinecenter + val;
-                midY = ylinecenter - yval;
-//                } else {
-//                    midX = xlinecenter - val;
-//                    midY = ylinecenter - yval;
-//                }
 
+                int direction = x2 - x1;
+
+                if (direction < 0) {
+                    midX = xlinecenter - (val / 2);
+                    midY = ylinecenter + (val / 2);
+                } else {
+                    midX = xlinecenter;
+                    midY = ylinecenter + val;
+
+                }
             }
         }
         p.setLocation(midX, midY);
