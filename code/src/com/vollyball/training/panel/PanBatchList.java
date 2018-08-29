@@ -5,12 +5,7 @@
  */
 package com.vollyball.training.panel;
 
-import com.vollyball.bean.CompetitionBean;
 import com.vollyball.controller.Controller;
-import com.vollyball.dao.CompetitionDao;
-import com.vollyball.dialog.CreateCompetitionDialog;
-import static com.vollyball.enums.SetupEnum.Batch;
-import com.vollyball.panels.PanCompetitionReportHome;
 import com.vollyball.renderer.EditButtonRenderer;
 import com.vollyball.renderer.TableHeaderRenderer;
 import com.vollyball.renderer.ViewButtonRenderer;
@@ -135,15 +130,16 @@ public class PanBatchList extends javax.swing.JPanel {
             }
         });
         resizeColumns();
-        
-         List<Batch> batchList = batchDao.getBatchList();
+
+        List<Batch> batchList = batchDao.getBatchList();
         int i = 0;
         for (Batch batch : batchList) {
             i++;
             batchMap.put(batch.getName(), batch);
-            Object[] row = {i, batch.getName(), batch.getVenue(), batch.getStartDate(), batch.getEndDate(), batch.getAgeGroup(), new JPanel(), new JPanel()};
+            Object[] row = {i, batch.getName(), batch.getVenue(), batch.getVenue(), batch.getStartDate(), batch.getEndDate(), batch.getAgeGroup(), new JPanel(), new JPanel()};
             model.addRow(row);
         }
+
         panListContent.add(scroll, BorderLayout.CENTER);
 
     }
@@ -197,18 +193,9 @@ public class PanBatchList extends javax.swing.JPanel {
         cmbPlayer = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         lblNewTeam = new javax.swing.JLabel();
-        panReport = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout panListContentLayout = new javax.swing.GroupLayout(panListContent);
-        panListContent.setLayout(panListContentLayout);
-        panListContentLayout.setHorizontalGroup(
-            panListContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 883, Short.MAX_VALUE)
-        );
-        panListContentLayout.setVerticalGroup(
-            panListContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
-        );
+        panListContent.setBackground(new java.awt.Color(255, 255, 255));
+        panListContent.setLayout(new java.awt.BorderLayout());
 
         panSkillReports.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -241,7 +228,7 @@ public class PanBatchList extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addComponent(lblSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         cmbPlayer.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -268,7 +255,7 @@ public class PanBatchList extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblNewTeam, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addComponent(lblNewTeam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -278,9 +265,9 @@ public class PanBatchList extends javax.swing.JPanel {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
                 .addComponent(lblReportHeading)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(cmbPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,50 +283,34 @@ public class PanBatchList extends javax.swing.JPanel {
                         .addComponent(lblReportHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbPlayer))
+                    .addComponent(cmbPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
                 .addContainerGap())
         );
-
-        panReport.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout panSkillReportsLayout = new javax.swing.GroupLayout(panSkillReports);
         panSkillReports.setLayout(panSkillReportsLayout);
         panSkillReportsLayout.setHorizontalGroup(
             panSkillReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panSkillReportsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panReport, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
-                .addContainerGap())
         );
         panSkillReportsLayout.setVerticalGroup(
             panSkillReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panSkillReportsLayout.createSequentialGroup()
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panReport, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panSkillReports, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panListContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(panSkillReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panListContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panSkillReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(59, Short.MAX_VALUE)
-                    .addComponent(panListContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panSkillReports, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(panListContent, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -365,7 +336,6 @@ public class PanBatchList extends javax.swing.JPanel {
     public javax.swing.JLabel lblReportHeading;
     private javax.swing.JLabel lblSearch;
     private javax.swing.JPanel panListContent;
-    private javax.swing.JPanel panReport;
     private javax.swing.JPanel panSkillReports;
     // End of variables declaration//GEN-END:variables
 }

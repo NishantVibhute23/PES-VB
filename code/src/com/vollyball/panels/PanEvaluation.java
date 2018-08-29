@@ -1005,6 +1005,17 @@ public class PanEvaluation extends javax.swing.JPanel {
         lblScore.setText(currentScore);
     }
 
+    public void setScoreAfterUpdate() {
+        MatchSet ms = matchDao.getMatchSet(setNum, matchEvaluationTeamId);
+        lblScore.setText(ms.getHomeScore() + " - " + ms.getOpponentScore());
+        homeScore = ms.getHomeScore();
+        opponentScore = ms.getOpponentScore();
+        op = ms.getOp();
+        tf = ms.getTf();
+        lblOp.setText("" + op);
+        lblTf.setText("" + tf);
+    }
+
     public void next() {
 
         cmbRallies.addItem(rallyNumNext);

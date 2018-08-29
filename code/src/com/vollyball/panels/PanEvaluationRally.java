@@ -82,8 +82,8 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         lblAction.setText("SAVE");
     }
 
-    public void addToPosition() {
-        panCompListValue.addToPosition();
+    public void addToPosition(boolean first) {
+        panCompListValue.addToPosition(first);
     }
 
     public void removePosition() {
@@ -201,7 +201,8 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 //                rallyUpdate.setHomeScore();
         rallyUpdate.setMatchEvaluationId(rallyEvaluation.getMatchEvaluationId());
         rallyUpdate.setRallyPositionMap(rallyEvaluation.getRallyPositionMap());
-
+        int i = 0;
+        boolean performUpdate = true;
         if (panListRow.size() > 0) {
 
             for (PanEvaluationRallyRowText panRowText : panListRow) {
@@ -215,21 +216,22 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                     rs.setId(rallyEvaluationSkillScore.getId());
                     rs.setSkill(rallyEvaluationSkillScore.getSkill());
 
-                    if (rallyEvaluationSkillScore.getSkill().equals(Skill.OP.getType())) {
-                        Controller.panMatchSet.op++;
-                        Controller.panMatchSet.lblOp.setText("" + Controller.panMatchSet.op);
-
-                    } else if (rallyEvaluationSkillScore.getSkill().equals(Skill.TF.getType())) {
-                        Controller.panMatchSet.tf++;
-                        Controller.panMatchSet.lblTf.setText("" + Controller.panMatchSet.tf);
-
-                    }
+//                    if (rallyEvaluationSkillScore.getSkill().equals(Skill.OP.getType())) {
+//                        Controller.panMatchSet.op++;
+//                        Controller.panMatchSet.lblOp.setText("" + Controller.panMatchSet.op);
+//
+//                    } else if (rallyEvaluationSkillScore.getSkill().equals(Skill.TF.getType())) {
+//                        Controller.panMatchSet.tf++;
+//                        Controller.panMatchSet.lblTf.setText("" + Controller.panMatchSet.tf);
+//
+//                    }
                     rs.setChestNo(rallyEvaluationSkillScore.getChestNo());
                     rs.setPlayerId(rallyEvaluationSkillScore.getPlayerId());
                     rallyUpdate.setOp(Controller.panMatchSet.op);
                     rallyUpdate.setTf(Controller.panMatchSet.tf);
                     rs.setSkillId(rallyEvaluationSkillScore.getSkillId());
                     rs.setOrderNum(i + 1);
+                    i++;
                     rs.setScore(rallyEvaluationSkillScore.getScore());
 
                     if (rallyEvaluationSkillScore.getDetailsValues().size() > 0) {
@@ -305,10 +307,12 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                             }
                             rallyUpdate.setScoreSubtracted("Opponent");
                         } else {
+                            performUpdate = false;
                             JOptionPane.showMessageDialog(this, "Rally Not End");
                         }
                         break;
                     default:
+                        performUpdate = false;
                         JOptionPane.showMessageDialog(this, "Rally Not End");
                         break;
                 }
@@ -326,14 +330,18 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                 rallyUpdate.setOp(Controller.panMatchSet.op);
                 rallyUpdate.setTf(Controller.panMatchSet.tf);
             }
+            int id = 0;
+            if (performUpdate) {
+                id = rallyDao.updateRally(rallyUpdate, updated);
+                if (id != 0) {
+                    Controller.panMatchSet.setScoreAfterUpdate();
+                    JOptionPane.showMessageDialog(this, "Updated Successfully");
 
-            int id = rallyDao.updateRally(rallyUpdate, updated);
-            if (id != 0) {
-                JOptionPane.showMessageDialog(this, "Updated Successfully");
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to save Rally");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to save Rally");
+                }
             }
+
         }
     }
 
@@ -449,7 +457,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             repaint();
         }
 
-        public void addToPosition() {
+        public void addToPosition(boolean first) {
             int atRow = 0;
             PanEvaluationRallyRowText panel = new PanEvaluationRallyRowText(PanEvaluationRally.this);
             currentPanRow = panel;
@@ -467,7 +475,9 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             int i = 0;
             for (PanEvaluationRallyRowText p : panListRow) {
                 if (p.isAddClicked) {
-                    atRow = i + 1;
+                    if (!first) {
+                        atRow = i + 1;
+                    }
                     p.isAddClicked = false;
                     panListRow.add(atRow, panel);
                     break;
@@ -589,8 +599,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        addToFirst = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblAction = new javax.swing.JLabel();
@@ -765,14 +774,12 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(57, 74, 108));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/icons8-plus-20.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        addToFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/icons8-plus-20.png"))); // NOI18N
+        addToFirst.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                addToFirstMouseClicked(evt);
             }
         });
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/icons8-minus-20.png"))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -787,15 +794,12 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(0, 0, 0)
-                .addComponent(jLabel3)
-                .addGap(0, 0, 0))
+                .addComponent(addToFirst)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(addToFirst, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -859,9 +863,11 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         dialogReplaceLibero.show();
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void addToFirstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addToFirstMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseClicked
+
+        addToPosition(true);
+    }//GEN-LAST:event_addToFirstMouseClicked
 
     private void lblActionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblActionMouseClicked
         // TODO add your handling code here:
@@ -875,13 +881,12 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     }//GEN-LAST:event_lblActionMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addToFirst;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

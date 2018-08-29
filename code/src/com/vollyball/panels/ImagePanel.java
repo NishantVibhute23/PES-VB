@@ -265,7 +265,7 @@ class ImagePanel extends JPanel {
 
     public Point setCurve(DigPoints dp) {
         Point p = new Point();
-        int val = 60;
+        int val = 90;
         int x1 = dp.getX1();
         int y1 = dp.getY1();
         int x2 = dp.getX2();

@@ -5,14 +5,12 @@
  */
 package com.vollyball.dao;
 
-import com.vollyball.bean.Player;
 import com.vollyball.bean.PlayerScores;
-import com.vollyball.bean.PlayerSkillScore;
 import com.vollyball.bean.TeamScores;
 import com.vollyball.bean.TeamSkillScore;
 import com.vollyball.db.DbUtil;
+import com.vollyball.enums.Skill;
 import com.vollyball.util.CommonUtil;
-import java.awt.RenderingHints;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -317,7 +315,7 @@ public class TeamReportDao {
         return tsMap;
     }
 
-    public Map<PlayerScores, List<Integer>> getTeamPlayers(int id) {
+    public Map<PlayerScores, List<Integer>> getTeamPlayers(int id, int matchEvaluationTeamId) {
         Map<PlayerScores, List<Integer>> playerMap = new HashMap<>();
         List<Integer> setList;
         try {
@@ -345,6 +343,11 @@ public class TeamReportDao {
                     ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("player.setwise.data"));
                     ps1.setInt(1, rs.getInt(1));
                     ps1.setInt(2, i);
+                    ps1.setInt(3, matchEvaluationTeamId);
+                    ps1.setInt(4, Skill.Service.getId());
+                    ps1.setInt(5, Skill.Block.getId());
+                    ps1.setInt(6, Skill.Attack.getId());
+                    ps1.setInt(7, Skill.OP.getId());
                     rs1 = ps1.executeQuery();
                     while (rs1.next()) {
                         setList.add(rs1.getInt(3));

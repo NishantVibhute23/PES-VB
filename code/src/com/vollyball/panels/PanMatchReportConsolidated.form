@@ -4663,32 +4663,32 @@
                       <Data value="V"/>
                     </Column>
                     <Column editable="false" title="DURATION" type="java.lang.Object">
-                      <Data value="10:00"/>
-                      <Data value="10:00"/>
-                      <Data value="10:00"/>
-                      <Data value="10:00"/>
-                      <Data value="10:00"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
                     </Column>
                     <Column editable="false" title="TOTAL RALLIES" type="java.lang.Object">
-                      <Data value="43"/>
-                      <Data value="43"/>
-                      <Data value="43"/>
-                      <Data value="43"/>
-                      <Data value="43"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
                     </Column>
                     <Column editable="false" title="TOTAL TIMEOUT" type="java.lang.Object">
-                      <Data value="4"/>
-                      <Data value="4"/>
-                      <Data value="4"/>
-                      <Data value="4"/>
-                      <Data value="4"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
                     </Column>
                     <Column editable="false" title="SCORE" type="java.lang.Object">
-                      <Data value="25 : 23"/>
-                      <Data value="25 : 23"/>
-                      <Data value="25 : 23"/>
-                      <Data value="25 : 23"/>
-                      <Data value="25 : 23"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
+                      <Data value="-"/>
                     </Column>
                   </Table>
                 </Property>

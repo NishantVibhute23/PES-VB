@@ -21,7 +21,6 @@ import com.vollyball.renderer.TableHeaderRenderer;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,7 @@ import javax.swing.table.TableColumnModel;
  */
 public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
-     int cb;
+    int cb;
     int matchId;
     MatchDao matchDao = new MatchDao();
     TeamDao td = new TeamDao();
@@ -278,11 +277,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             }
 
             int countRally = rd.getRallyCountByEvaluationId(ms.getId());
+            int timeoutCount = matchDao.getTimeOutCount(ms.getId());
 
-            if (i == 1) {
+            if (ms.getSetNo() == 1) {
                 tbSetDetails.setValueAt(countRally, 0, 2);
-
+                tbSetDetails.setValueAt(timeoutCount, 0, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 0, 4);
+
                 String start_time[] = ms.getStart_time().split(":");
                 String end_time[] = ms.getEnd_time().split(":");
                 int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
@@ -293,8 +294,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 } else if (ms.getWon_by() == team2id) {
                     team2wonBy++;
                 }
-            } else if (i == 2) {
+            } else if (ms.getSetNo() == 2) {
                 tbSetDetails.setValueAt(countRally, 1, 2);
+                tbSetDetails.setValueAt(timeoutCount, 1, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 1, 4);
                 String start_time[] = ms.getStart_time().split(":");
                 String end_time[] = ms.getEnd_time().split(":");
@@ -307,8 +309,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 } else if (ms.getWon_by() == team2id) {
                     team2wonBy++;
                 }
-            } else if (i == 3) {
+            } else if (ms.getSetNo() == 3) {
                 tbSetDetails.setValueAt(countRally, 2, 2);
+                tbSetDetails.setValueAt(timeoutCount, 2, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 2, 4);
                 String start_time[] = ms.getStart_time().split(":");
                 String end_time[] = ms.getEnd_time().split(":");
@@ -321,8 +324,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 } else if (ms.getWon_by() == team2id) {
                     team2wonBy++;
                 }
-            } else if (i == 4) {
+            } else if (ms.getSetNo() == 4) {
                 tbSetDetails.setValueAt(countRally, 3, 2);
+                tbSetDetails.setValueAt(timeoutCount, 3, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 3, 4);
                 String start_time[] = ms.getStart_time().split(":");
                 String end_time[] = ms.getEnd_time().split(":");
@@ -335,9 +339,11 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 } else if (ms.getWon_by() == team2id) {
                     team2wonBy++;
                 }
-            } else if (i == 5) {
+            } else if (ms.getSetNo() == 5) {
                 tbSetDetails.setValueAt(countRally, 4, 2);
+                tbSetDetails.setValueAt(timeoutCount, 4, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 4, 4);
+
                 String start_time[] = ms.getStart_time().split(":");
                 String end_time[] = ms.getEnd_time().split(":");
                 int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
@@ -365,21 +371,20 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             team1Playermodel.removeRow(i);
         }
 
-        playerSetDetails = trd.getTeamPlayers(teamId);
+        playerSetDetails = trd.getTeamPlayers(teamId, evaluationteamId);
         for (Map.Entry<PlayerScores, List<Integer>> entry : playerSetDetails.entrySet()) {
             PlayerScores key = entry.getKey();
             List<Integer> value = entry.getValue();
             Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0), value.get(1), value.get(2), value.get(3), value.get(4)};
             team1Playermodel.addRow(row);
         }
-        
+
 //        for (Player p : playerList) {
 //            playerNameMap.put(p.getName(), p);
 //            Object[] row = {p.getChestNo(), p.getName(), "0", "0", "0", "0", "0"};
 //            team1Playermodel.addRow(row);
 //            i++;
 //        }
-
     }
     float[] columnWidthPercentage = {5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
 
@@ -414,26 +419,25 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     public void setRowTeam2(int teamId) {
         resizeColumns1();
         team2Playermodel = (DefaultTableModel) team2PlayerTable.getModel();
-         Map<PlayerScores, List<Integer>> playerSetDetails = new HashMap<>();
+        Map<PlayerScores, List<Integer>> playerSetDetails = new HashMap<>();
         for (int i = team2Playermodel.getRowCount() - 1; i >= 0; i--) {
             team2Playermodel.removeRow(i);
         }
 
-        playerSetDetails = trd.getTeamPlayers(teamId);
+        playerSetDetails = trd.getTeamPlayers(teamId, evaluationteamId2);
         for (Map.Entry<PlayerScores, List<Integer>> entry : playerSetDetails.entrySet()) {
             PlayerScores key = entry.getKey();
             List<Integer> value = entry.getValue();
             Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0), value.get(1), value.get(2), value.get(3), value.get(4)};
             team2Playermodel.addRow(row);
         }
-        
+
 //        for (Player p : playerList) {
 //            playerNameMap.put(p.getName(), p);
 //            Object[] row = {p.getChestNo(), p.getName(), "0", "0", "0", "0", "0"};
 //            team2Playermodel.addRow(row);
 //            i++;
 //        }
-
     }
 
     TeamSkillScore tss = new TeamSkillScore();
@@ -442,7 +446,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         List<TeamSkillScore> skillSSData;
         skillSSData = new ArrayList<>();
         for (int i = 1; i < 4; i++) {
-            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team1id,evaluationteamId);
+            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team1id, evaluationteamId);
             skillSSData.add(tss);
         }
         t1sstotalSer.setText("" + skillSSData.get(0).getTotalAttempt());
@@ -465,13 +469,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t1ssr3Blk.setText("" + skillSSData.get(2).getThree());
         t1ssr4Blk.setText("" + skillSSData.get(2).getFour());
         t1ssr5Blk.setText("" + skillSSData.get(2).getFive());
-        
-        t1ssOP.setText(""+skillSSData.get(0).getOp());
+
+        t1ssOP.setText("" + skillSSData.get(0).getOp());
 
 //        t1ssrOp.setText(""+skillData.get(7));
         skillSSData = new ArrayList<>();
         for (int i = 1; i < 4; i++) {
-            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team2id,evaluationteamId2);
+            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team2id, evaluationteamId2);
             skillSSData.add(tss);
         }
         t2sstotalSer.setText("" + skillSSData.get(0).getTotalAttempt());
@@ -494,9 +498,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2ssr3Blk.setText("" + skillSSData.get(2).getThree());
         t2ssr4Blk.setText("" + skillSSData.get(2).getFour());
         t2ssr5Blk.setText("" + skillSSData.get(2).getFive());
-        
-        t2ssOP.setText(""+skillSSData.get(0).getOp());
-        
+
+        t2ssOP.setText("" + skillSSData.get(0).getOp());
 
     }
 
@@ -504,7 +507,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         List<TeamSkillScore> skillNSSData;
         skillNSSData = new ArrayList<>();
         for (int i = 4; i < 7; i++) {
-            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team1id,evaluationteamId);
+            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team1id, evaluationteamId);
             skillNSSData.add(tss);
         }
         t1nsstotalSet.setText("" + skillNSSData.get(0).getTotalAttempt());
@@ -527,11 +530,11 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t1nssr3Def.setText("" + skillNSSData.get(2).getThree());
         t1nssr4Def.setText("" + skillNSSData.get(2).getFour());
         t1nssr5Def.setText("" + skillNSSData.get(2).getFive());
-        
-        t1nssTF.setText(""+skillNSSData.get(0).getTf());
+
+        t1nssTF.setText("" + skillNSSData.get(0).getTf());
         skillNSSData = new ArrayList<>();
         for (int i = 4; i < 7; i++) {
-            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team2id,evaluationteamId2);
+            tss = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team2id, evaluationteamId2);
             skillNSSData.add(tss);
         }
         t2nsstotalSet.setText("" + skillNSSData.get(0).getTotalAttempt());
@@ -554,8 +557,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         t2nssr3Def.setText("" + skillNSSData.get(2).getThree());
         t2nssr4Def.setText("" + skillNSSData.get(2).getFour());
         t2nssr5Def.setText("" + skillNSSData.get(2).getFive());
-        
-        t2nssTF.setText(""+skillNSSData.get(0).getTf());
+
+        t2nssTF.setText("" + skillNSSData.get(0).getTf());
 
     }
 
@@ -569,7 +572,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         List<Map<String, List<TeamScores>>> team2Win = new ArrayList<>();
 
         for (int i = 1; i <= 5; i++) {
-            team1Map = trd.getTeamSetWiseScoreReport(i,evaluationteamId);
+            team1Map = trd.getTeamSetWiseScoreReport(i, evaluationteamId);
             team1Win.add(team1Map);
         }
         resizeColumnsTeam1Win();
@@ -580,14 +583,14 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         for (Map<String, List<TeamScores>> map : team1Win) {
             for (Map.Entry<String, List<TeamScores>> entry : map.entrySet()) {
-                int total = entry.getValue().get(0).getTotalAttempt() + 
-                        entry.getValue().get(1).getTotalAttempt() + 
-                        entry.getValue().get(2).getTotalAttempt()+
-                        entry.getValue().get(6).getTotalAttempt();
-                Object[] row = {entry.getKey().toString(), total, 
-                    entry.getValue().get(0).getTotalAttempt(), 
+                int total = entry.getValue().get(0).getTotalAttempt()
+                        + entry.getValue().get(1).getTotalAttempt()
+                        + entry.getValue().get(2).getTotalAttempt()
+                        + entry.getValue().get(6).getTotalAttempt();
+                Object[] row = {entry.getKey().toString(), total,
+                    entry.getValue().get(0).getTotalAttempt(),
                     entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt(), 
+                    entry.getValue().get(1).getTotalAttempt(),
                     entry.getValue().get(6).getTotalAttempt()};
                 team1WinTablemodel.addRow(row);
 
@@ -596,7 +599,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         }
 
         for (int i = 1; i <= 5; i++) {
-            team2Map = trd.getTeamSetWiseScoreReport(i,evaluationteamId2);
+            team2Map = trd.getTeamSetWiseScoreReport(i, evaluationteamId2);
             team2Win.add(team2Map);
         }
         resizeColumnsTeam2Win();
@@ -607,14 +610,14 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         for (Map<String, List<TeamScores>> map : team2Win) {
             for (Map.Entry<String, List<TeamScores>> entry : map.entrySet()) {
-                int total = entry.getValue().get(0).getTotalAttempt() + 
-                        entry.getValue().get(1).getTotalAttempt() + 
-                        entry.getValue().get(2).getTotalAttempt()+ 
-                        entry.getValue().get(6).getTotalAttempt();
-                Object[] row = {entry.getKey().toString(), total, 
-                    entry.getValue().get(0).getTotalAttempt(), 
+                int total = entry.getValue().get(0).getTotalAttempt()
+                        + entry.getValue().get(1).getTotalAttempt()
+                        + entry.getValue().get(2).getTotalAttempt()
+                        + entry.getValue().get(6).getTotalAttempt();
+                Object[] row = {entry.getKey().toString(), total,
+                    entry.getValue().get(0).getTotalAttempt(),
                     entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt(), 
+                    entry.getValue().get(1).getTotalAttempt(),
                     entry.getValue().get(6).getTotalAttempt()};
                 team2WinTablemodel.addRow(row);
 
@@ -660,7 +663,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         List<Map<String, List<TeamScores>>> team2Loss = new ArrayList<>();
 
         for (int i = 1; i <= 5; i++) {
-            team1Map = trd.getTeamSetWiseScoreReportLoss(i,evaluationteamId);
+            team1Map = trd.getTeamSetWiseScoreReportLoss(i, evaluationteamId);
             team1Loss.add(team1Map);
         }
         resizeColumnsTeam1Loss();
@@ -671,20 +674,20 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         for (Map<String, List<TeamScores>> map : team1Loss) {
             for (Map.Entry<String, List<TeamScores>> entry : map.entrySet()) {
-                int total = entry.getValue().get(0).getTotalAttempt() + 
-                        entry.getValue().get(1).getTotalAttempt() + 
-                        entry.getValue().get(2).getTotalAttempt()+
-                        entry.getValue().get(4).getTotalAttempt()+
-                        entry.getValue().get(3).getTotalAttempt()+
-                        entry.getValue().get(5).getTotalAttempt()+
-                        entry.getValue().get(7).getTotalAttempt();
-                Object[] row = {entry.getKey().toString(), 
-                    total, entry.getValue().get(0).getTotalAttempt(), 
+                int total = entry.getValue().get(0).getTotalAttempt()
+                        + entry.getValue().get(1).getTotalAttempt()
+                        + entry.getValue().get(2).getTotalAttempt()
+                        + entry.getValue().get(4).getTotalAttempt()
+                        + entry.getValue().get(3).getTotalAttempt()
+                        + entry.getValue().get(5).getTotalAttempt()
+                        + entry.getValue().get(7).getTotalAttempt();
+                Object[] row = {entry.getKey().toString(),
+                    total, entry.getValue().get(0).getTotalAttempt(),
                     entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt(), 
-                    entry.getValue().get(4).getTotalAttempt(), 
-                    entry.getValue().get(3).getTotalAttempt(), 
-                    entry.getValue().get(5).getTotalAttempt(), 
+                    entry.getValue().get(1).getTotalAttempt(),
+                    entry.getValue().get(4).getTotalAttempt(),
+                    entry.getValue().get(3).getTotalAttempt(),
+                    entry.getValue().get(5).getTotalAttempt(),
                     entry.getValue().get(7).getTotalAttempt()};
                 team1LossTablemodel.addRow(row);
 
@@ -693,7 +696,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         }
 
         for (int i = 1; i <= 5; i++) {
-            team2Map = trd.getTeamSetWiseScoreReportLoss(i,evaluationteamId2);
+            team2Map = trd.getTeamSetWiseScoreReportLoss(i, evaluationteamId2);
             team2Loss.add(team2Map);
         }
         resizeColumnsTeam2Loss();
@@ -704,19 +707,19 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         for (Map<String, List<TeamScores>> map : team2Loss) {
             for (Map.Entry<String, List<TeamScores>> entry : map.entrySet()) {
-                int total = entry.getValue().get(0).getTotalAttempt() + 
-                        entry.getValue().get(1).getTotalAttempt() + 
-                        entry.getValue().get(2).getTotalAttempt()+
-                        entry.getValue().get(3).getTotalAttempt()+
-                        entry.getValue().get(4).getTotalAttempt()+
-                        entry.getValue().get(5).getTotalAttempt()+
-                        entry.getValue().get(7).getTotalAttempt();
-                Object[] row = {entry.getKey().toString(), total, entry.getValue().get(0).getTotalAttempt(), 
+                int total = entry.getValue().get(0).getTotalAttempt()
+                        + entry.getValue().get(1).getTotalAttempt()
+                        + entry.getValue().get(2).getTotalAttempt()
+                        + entry.getValue().get(3).getTotalAttempt()
+                        + entry.getValue().get(4).getTotalAttempt()
+                        + entry.getValue().get(5).getTotalAttempt()
+                        + entry.getValue().get(7).getTotalAttempt();
+                Object[] row = {entry.getKey().toString(), total, entry.getValue().get(0).getTotalAttempt(),
                     entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt(), 
+                    entry.getValue().get(1).getTotalAttempt(),
                     entry.getValue().get(4).getTotalAttempt(),
-                    entry.getValue().get(3).getTotalAttempt(), 
-                    entry.getValue().get(5).getTotalAttempt(), 
+                    entry.getValue().get(3).getTotalAttempt(),
+                    entry.getValue().get(5).getTotalAttempt(),
                     entry.getValue().get(7).getTotalAttempt()};
                 team2LossTablemodel.addRow(row);
 
@@ -3486,11 +3489,11 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbSetDetails.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbSetDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"I", "10:00", "43", "4", "25 : 23"},
-                {"II", "10:00", "43", "4", "25 : 23"},
-                {"III", "10:00", "43", "4", "25 : 23"},
-                {"IV", "10:00", "43", "4", "25 : 23"},
-                {"V", "10:00", "43", "4", "25 : 23"}
+                {"I", "-", "-", "-", "-"},
+                {"II", "-", "-", "-", "-"},
+                {"III", "-", "-", "-", "-"},
+                {"IV", "-", "-", "-", "-"},
+                {"V", "-", "-", "-", "-"}
             },
             new String [] {
                 "SET", "DURATION", "TOTAL RALLIES", "TOTAL TIMEOUT", "SCORE"

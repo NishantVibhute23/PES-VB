@@ -304,8 +304,10 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             p.rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
             switch (score) {
                 case 1:
-                    Controller.panMatchSet.opponentScore++;
-                    p.lblResult.setText(Controller.panMatchSet.homeScore + " : " + Controller.panMatchSet.opponentScore);
+                    if (!p.isInserted) {
+                        Controller.panMatchSet.opponentScore++;
+                        p.lblResult.setText(Controller.panMatchSet.homeScore + " : " + Controller.panMatchSet.opponentScore);
+                    }
                     Date time = new Date();
                     p.endTime = formatterTime.format(time);
                     p.lblRallyEndTime.setText(p.endTime);
@@ -315,8 +317,10 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     break;
                 case 5:
                     if (skill.equals(Skill.Service.getType()) || skill.equals(Skill.Attack.getType()) || skill.equals(Skill.Block.getType()) || skill.equals(Skill.OP.getType())) {
-                        Controller.panMatchSet.homeScore++;
-                        p.lblResult.setText(Controller.panMatchSet.homeScore + " : " + Controller.panMatchSet.opponentScore);
+                        if (!p.isInserted) {
+                            Controller.panMatchSet.homeScore++;
+                            p.lblResult.setText(Controller.panMatchSet.homeScore + " : " + Controller.panMatchSet.opponentScore);
+                        }
                         Date time1 = new Date();
                         p.endTime = formatterTime.format(time1);
                         p.lblRallyEndTime.setText(p.endTime);
