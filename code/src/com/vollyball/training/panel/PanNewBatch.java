@@ -20,6 +20,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -59,13 +60,17 @@ public class PanNewBatch extends javax.swing.JPanel {
      */
     public PanNewBatch() {
         initComponents();
-
         datePickerStart.setBounds(0, 0, 319, 28);
-        datePickerStart.setBackground(Color.WHITE);
+        JFormattedTextField textField = datePickerStart.getJFormattedTextField();
+        textField.setBackground(Color.WHITE);
+        datePickerStart.setButtonFocusable(false);
+        textField.setBorder(null);
         panStartDate.add(datePickerStart);
 
         datePickerEnd.setBounds(0, 0, 319, 28);
-        datePickerEnd.setBackground(Color.WHITE);
+        JFormattedTextField textField1 = datePickerEnd.getJFormattedTextField();
+        textField1.setBackground(Color.WHITE);
+        textField1.setBorder(null);
         panEndDate.add(datePickerEnd);
 
         lblMinusList.add(lblSub);
@@ -401,7 +406,7 @@ public class PanNewBatch extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -429,8 +434,8 @@ public class PanNewBatch extends javax.swing.JPanel {
                             .addComponent(panStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))))
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtMedOffName, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
@@ -1358,9 +1363,10 @@ public class PanNewBatch extends javax.swing.JPanel {
             if (id != 0) {
                 Controller.batchDialog.close();
 //                Controller.panBatchBestScorer.setRow(null);
-                JOptionPane.showMessageDialog(this, "Team '" + txtBatchName.getText() + "' Created Successfully");
+                Controller.panBatchList.refresh();
+                JOptionPane.showMessageDialog(this, "Batch '" + txtBatchName.getText() + "' Created Successfully");
             } else {
-                JOptionPane.showMessageDialog(this, "Failed to add team");
+                JOptionPane.showMessageDialog(this, "Failed to add Batch");
             }
 
         }
@@ -1429,7 +1435,7 @@ public class PanNewBatch extends javax.swing.JPanel {
 //        }
 
         for (BatchRowBean tr : batchRow) {
-            if (k <= m) {
+            if (k <= 1) {
                 if (!validate(tr.getName()).isEmpty()) {
                     msg = msg + "Trainee Name " + k + " :" + message + "\n";
                     tr.getName().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
@@ -1445,7 +1451,7 @@ public class PanNewBatch extends javax.swing.JPanel {
     }
 
     private void lblCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseClicked
-        Controller.teamDialog.close();
+        Controller.batchDialog.close();
     }//GEN-LAST:event_lblCancelMouseClicked
 
     private void txtBatchNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBatchNameKeyTyped

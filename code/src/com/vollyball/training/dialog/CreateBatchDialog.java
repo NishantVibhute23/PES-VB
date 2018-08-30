@@ -7,6 +7,7 @@ package com.vollyball.training.dialog;
 
 import com.vollyball.dialog.CreateMatchDialog;
 import com.vollyball.panels.PanNewTeam;
+import com.vollyball.training.panel.PanEditBatch;
 import com.vollyball.training.panel.PanNewBatch;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -24,6 +25,7 @@ public class CreateBatchDialog {
 
     private JFrame parentFrame;
     private JDialog dialog;
+    int batchId;
 
     public void init() {
         try {
@@ -34,7 +36,11 @@ public class CreateBatchDialog {
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());
             this.dialog.pack();
-            this.dialog.setSize(642, 814);
+            if (batchId == 0) {
+                this.dialog.setSize(642, 814);
+            } else {
+                this.dialog.setSize(374, 553);
+            }
 
             Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
             this.dialog.setLocation(new Double((Size.getWidth() / 2) - (dialog.getWidth() / 2)).intValue(), new Double((Size.getHeight() / 2) - (dialog.getHeight() / 2)).intValue());
@@ -45,9 +51,14 @@ public class CreateBatchDialog {
     }
 
     protected Container createPane() {
-        PanNewBatch panBatch = new PanNewBatch();
 
-        return panBatch;
+        if (batchId == 0) {
+            PanNewBatch panBatch = new PanNewBatch();
+            return panBatch;
+        } else {
+            PanEditBatch panBatch = new PanEditBatch(batchId);
+            return panBatch;
+        }
 
     }
 
@@ -65,5 +76,9 @@ public class CreateBatchDialog {
 
     public void setFrame(JFrame frame) {
         parentFrame = (JFrame) frame;
+    }
+
+    public void setValues(int id) {
+        this.batchId = id;
     }
 }

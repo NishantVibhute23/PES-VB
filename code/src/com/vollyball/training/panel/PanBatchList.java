@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -29,6 +30,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -40,6 +43,7 @@ public class PanBatchList extends javax.swing.JPanel {
     DefaultTableModel model;
     BatchDao batchDao = new BatchDao();
     LinkedHashMap<String, Batch> batchMap = new LinkedHashMap<String, Batch>();
+    TableRowSorter<TableModel> sorter;
 
     /**
      * Creates new form PanTrainingBestScorer
@@ -59,6 +63,8 @@ public class PanBatchList extends javax.swing.JPanel {
                 new Object[]{"SR No.", "Batch Name ", "Trainer", "Venue", "Start Date", "End Date", "Age Group", "View", "Action"});
 
         tbBatch = new JTable(model);
+        sorter = new TableRowSorter<TableModel>(tbBatch.getModel());
+        tbBatch.setRowSorter(sorter);
         tbBatch.setFont(new java.awt.Font("Times New Roman", 0, 13));
 
         JScrollPane scroll = new JScrollPane(tbBatch);
@@ -104,26 +110,23 @@ public class PanBatchList extends javax.swing.JPanel {
                     int id = 0;
                     int selectedRow = tbBatch.getSelectedRow();
                     int selectedCol = tbBatch.getSelectedColumn();
-                    tbBatch.clearSelection();
+//                    tbBatch.clearSelection();
                     if (selectedRow >= 0) {
-                        if (selectedCol == 6) {
-//                            Batch batch = batchMap.get(tbBatch.getValueAt(selectedRow, 1));
-//
-//                            Controller.panCompetitionReportHome = new PanCompetitionReportHome(batch);
-//                            Controller.competitionId = batch.getId();
-//                            Dimension dim = Controller.frmDashBoard.panContent.getSize();
-//                            Controller.panCompetitionList.setVisible(false);
-//                            Controller.frmDashBoard.panContent.removeAll();
-////        Controller.panComptitionHome.setBounds(0, 0, 800, 686);
-//                            Controller.frmDashBoard.panContent.add(Controller.panCompetitionReportHome, BorderLayout.CENTER);
-                        } else if (selectedCol == 7) {
+                        if (selectedCol == 7) {
                             id = (int) tbBatch.getValueAt(selectedRow, 0);
-//                            Controller.createCompetitionDialog = new CreateCompetitionDialog();
-//
-//                            Controller.createCompetitionDialog.setValues(id);
-//                            Controller.createCompetitionDialog.init();
-//                            Controller.createCompetitionDialog.show();
+                            Controller.panBatchList.setVisible(false);
+                            Controller.frmDashBoard.panContent.removeAll();
+                            Dimension dim = Controller.frmDashBoard.panContent.getSize();
+                            Controller.panBatchTraineeList = new PanBatchTraineeList(id);
+                            Controller.frmDashBoard.panContent.add(Controller.panBatchTraineeList, BorderLayout.CENTER);
+                        } else if (selectedCol == 8) {
+                            id = (int) tbBatch.getValueAt(selectedRow, 0);
+                            Controller.batchDialog = new CreateBatchDialog();
+                            Controller.batchDialog.setValues(id);
+                            Controller.batchDialog.init();
+                            Controller.batchDialog.show();
                         }
+                        tbBatch.clearSelection();
 
                     }
                 }
@@ -136,7 +139,7 @@ public class PanBatchList extends javax.swing.JPanel {
         for (Batch batch : batchList) {
             i++;
             batchMap.put(batch.getName(), batch);
-            Object[] row = {i, batch.getName(), batch.getVenue(), batch.getVenue(), batch.getStartDate(), batch.getEndDate(), batch.getAgeGroup(), new JPanel(), new JPanel()};
+            Object[] row = {i, batch.getName(), batch.getTrainer(), batch.getVenue(), batch.getStartDate(), batch.getEndDate(), batch.getAgeGroup(), new JPanel(), new JPanel()};
             model.addRow(row);
         }
 
@@ -164,15 +167,26 @@ public class PanBatchList extends javax.swing.JPanel {
         }
         List<Batch> batchList = batchDao.getBatchList();
         int i = 0;
-        for (Batch comp : batchList) {
+        for (Batch batch : batchList) {
             i++;
-            batchMap.put(comp.getName(), comp);
-            Object[] row = {i, comp.getName(), comp.getVenue(), comp.getStartDate(), comp.getEndDate(), comp.getAgeGroup(), new JPanel(), new JPanel()};
+            batchMap.put(batch.getName(), batch);
+            Object[] row = {i, batch.getName(), batch.getTrainer(), batch.getVenue(), batch.getStartDate(), batch.getEndDate(), batch.getAgeGroup(), new JPanel(), new JPanel()};
             model.addRow(row);
         }
 
         validate();
         repaint();
+    }
+
+    private void newFilter() {
+        RowFilter<TableModel, Object> rf = null;
+        //If current expression doesn't parse, don't update.
+        try {
+            rf = RowFilter.regexFilter(txtFilter.getText(), 1);
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+        sorter.setRowFilter(rf);
     }
 
     /**
@@ -188,11 +202,9 @@ public class PanBatchList extends javax.swing.JPanel {
         panSkillReports = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         lblReportHeading = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        lblSearch = new javax.swing.JLabel();
-        cmbPlayer = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         lblNewTeam = new javax.swing.JLabel();
+        txtFilter = new javax.swing.JTextField();
 
         panListContent.setBackground(new java.awt.Color(255, 255, 255));
         panListContent.setLayout(new java.awt.BorderLayout());
@@ -205,33 +217,6 @@ public class PanBatchList extends javax.swing.JPanel {
         lblReportHeading.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblReportHeading.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblReportHeading.setText("BATCH SCORES");
-
-        jPanel2.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblSearch.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblSearch.setForeground(new java.awt.Color(255, 255, 255));
-        lblSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSearch.setText("SEARCH");
-        lblSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSearchMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        cmbPlayer.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(57, 74, 108));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -258,6 +243,12 @@ public class PanBatchList extends javax.swing.JPanel {
             .addComponent(lblNewTeam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        txtFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFilterKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -265,13 +256,11 @@ public class PanBatchList extends javax.swing.JPanel {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 458, Short.MAX_VALUE)
                 .addComponent(lblReportHeading)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addComponent(cmbPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,12 +268,15 @@ public class PanBatchList extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(lblReportHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(txtFilter)
+                        .addContainerGap())
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(lblReportHeading, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(10, 10, 10))))
         );
 
         javax.swing.GroupLayout panSkillReportsLayout = new javax.swing.GroupLayout(panSkillReports);
@@ -295,7 +287,9 @@ public class PanBatchList extends javax.swing.JPanel {
         );
         panSkillReportsLayout.setVerticalGroup(
             panSkillReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panSkillReportsLayout.createSequentialGroup()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -310,14 +304,9 @@ public class PanBatchList extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panSkillReports, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panListContent, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
+                .addComponent(panListContent, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void lblSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_lblSearchMouseClicked
 
     private void lblNewTeamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewTeamMouseClicked
         // TODO add your handling code here:
@@ -327,15 +316,18 @@ public class PanBatchList extends javax.swing.JPanel {
 
     }//GEN-LAST:event_lblNewTeamMouseClicked
 
+    private void txtFilterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterKeyTyped
+        // TODO add your handling code here:
+        newFilter();
+    }//GEN-LAST:event_txtFilterKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox cmbPlayer;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblNewTeam;
-    public javax.swing.JLabel lblReportHeading;
-    private javax.swing.JLabel lblSearch;
+    private javax.swing.JLabel lblReportHeading;
     private javax.swing.JPanel panListContent;
     private javax.swing.JPanel panSkillReports;
+    private javax.swing.JTextField txtFilter;
     // End of variables declaration//GEN-END:variables
 }

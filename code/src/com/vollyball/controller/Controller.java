@@ -29,6 +29,7 @@ import com.vollyball.panels.PanUserDetails;
 import com.vollyball.panels.panLoading;
 import com.vollyball.training.dialog.CreateBatchDialog;
 import com.vollyball.training.panel.PanBatchList;
+import com.vollyball.training.panel.PanBatchTraineeList;
 import com.vollyball.util.CommonUtil;
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -66,6 +67,7 @@ public class Controller {
     public static PanBatchList panBatchList;
     public static CreateBatchDialog batchDialog;
     public static CreatePlayerDialog createPlayerDialog;
+    public static PanBatchTraineeList panBatchTraineeList;
     
     public static void main(String args[]) {
 

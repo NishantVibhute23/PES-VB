@@ -1081,19 +1081,19 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jLabel1.setText("Match : ");
 
         match.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        match.setText("Maharashtra vs Andhra Pradesh");
+        match.setText("-");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Phase  : ");
 
         phase.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        phase.setText("Semi Final");
+        phase.setText("-");
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Date    :");
 
         matchDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        matchDate.setText("22/08/2018");
+        matchDate.setText("-");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -1156,22 +1156,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1sstotalSer.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1sstotalSer.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1sstotalSer.setText("4");
+        t1sstotalSer.setText("0");
         t1sstotalSer.setBorder(null);
 
         t2sstotalSer.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2sstotalSer.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2sstotalSer.setText("4");
+        t2sstotalSer.setText("0");
         t2sstotalSer.setBorder(null);
 
         t2ssr1Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr1Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr1Ser.setText("4");
+        t2ssr1Ser.setText("0");
         t2ssr1Ser.setBorder(null);
 
         t1ssr1Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr1Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr1Ser.setText("4");
+        t1ssr1Ser.setText("0");
         t1ssr1Ser.setBorder(null);
         t1ssr1Ser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1187,7 +1187,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssr2Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr2Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr2Ser.setText("4");
+        t1ssr2Ser.setText("0");
         t1ssr2Ser.setBorder(null);
 
         jTextField27.setBackground(new java.awt.Color(204, 204, 204));
@@ -1198,12 +1198,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2ssr2Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr2Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr2Ser.setText("4");
+        t2ssr2Ser.setText("0");
         t2ssr2Ser.setBorder(null);
 
         t1ssSuccessSerRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssSuccessSerRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssSuccessSerRate.setText("40%");
+        t1ssSuccessSerRate.setText("0%");
         t1ssSuccessSerRate.setBorder(null);
 
         jTextField30.setBackground(new java.awt.Color(204, 204, 204));
@@ -1214,7 +1214,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssr3Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr3Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr3Ser.setText("4");
+        t1ssr3Ser.setText("0");
         t1ssr3Ser.setBorder(null);
         t1ssr3Ser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1230,7 +1230,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2ssr3Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr3Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr3Ser.setText("4");
+        t2ssr3Ser.setText("0");
         t2ssr3Ser.setBorder(null);
 
         jTextField122.setBackground(new java.awt.Color(204, 204, 204));
@@ -1241,22 +1241,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssErrorSerRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssErrorSerRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssErrorSerRate.setText("40%");
+        t1ssErrorSerRate.setText("0%");
         t1ssErrorSerRate.setBorder(null);
 
         t2ssErrorSerRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssErrorSerRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssErrorSerRate.setText("40%");
+        t2ssErrorSerRate.setText("0%");
         t2ssErrorSerRate.setBorder(null);
 
         t2ssr4Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr4Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr4Ser.setText("4");
+        t2ssr4Ser.setText("0");
         t2ssr4Ser.setBorder(null);
 
         t1ssr4Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr4Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr4Ser.setText("4");
+        t1ssr4Ser.setText("0");
         t1ssr4Ser.setBorder(null);
 
         jTextField57.setBackground(new java.awt.Color(204, 204, 204));
@@ -1273,17 +1273,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssr5Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr5Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr5Ser.setText("4");
+        t1ssr5Ser.setText("0");
         t1ssr5Ser.setBorder(null);
 
         t2ssr5Ser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr5Ser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr5Ser.setText("4");
+        t2ssr5Ser.setText("0");
         t2ssr5Ser.setBorder(null);
 
         t2ssSuccessSerRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssSuccessSerRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssSuccessSerRate.setText("40%");
+        t2ssSuccessSerRate.setText("0%");
         t2ssSuccessSerRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
@@ -1397,12 +1397,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssOP.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssOP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssOP.setText("10");
+        t1ssOP.setText("0");
         t1ssOP.setBorder(null);
 
         t2ssOP.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssOP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssOP.setText("5");
+        t2ssOP.setText("0");
         t2ssOP.setBorder(null);
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
@@ -1486,22 +1486,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1sstotalAttk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1sstotalAttk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1sstotalAttk.setText("4");
+        t1sstotalAttk.setText("0");
         t1sstotalAttk.setBorder(null);
 
         t2sstotalAttk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2sstotalAttk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2sstotalAttk.setText("4");
+        t2sstotalAttk.setText("0");
         t2sstotalAttk.setBorder(null);
 
         t2ssr1Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr1Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr1Attk.setText("4");
+        t2ssr1Attk.setText("0");
         t2ssr1Attk.setBorder(null);
 
         t1ssr1Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr1Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr1Attk.setText("4");
+        t1ssr1Attk.setText("0");
         t1ssr1Attk.setBorder(null);
         t1ssr1Attk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1517,7 +1517,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssr2Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr2Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr2Attk.setText("4");
+        t1ssr2Attk.setText("0");
         t1ssr2Attk.setBorder(null);
 
         jTextField71.setBackground(new java.awt.Color(204, 204, 204));
@@ -1528,12 +1528,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2ssr2Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr2Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr2Attk.setText("4");
+        t2ssr2Attk.setText("0");
         t2ssr2Attk.setBorder(null);
 
         t1ssSuccessAttkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssSuccessAttkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssSuccessAttkRate.setText("40%");
+        t1ssSuccessAttkRate.setText("0%");
         t1ssSuccessAttkRate.setBorder(null);
 
         jTextField77.setBackground(new java.awt.Color(204, 204, 204));
@@ -1544,7 +1544,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssr3Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr3Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr3Attk.setText("4");
+        t1ssr3Attk.setText("0");
         t1ssr3Attk.setBorder(null);
         t1ssr3Attk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1560,7 +1560,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2ssr3Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr3Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr3Attk.setText("4");
+        t2ssr3Attk.setText("0");
         t2ssr3Attk.setBorder(null);
 
         jTextField242.setBackground(new java.awt.Color(204, 204, 204));
@@ -1571,22 +1571,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssErrorAttkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssErrorAttkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssErrorAttkRate.setText("40%");
+        t1ssErrorAttkRate.setText("0%");
         t1ssErrorAttkRate.setBorder(null);
 
         t2ssErrorAttkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssErrorAttkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssErrorAttkRate.setText("40%");
+        t2ssErrorAttkRate.setText("0%");
         t2ssErrorAttkRate.setBorder(null);
 
         t2ssr4Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr4Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr4Attk.setText("4");
+        t2ssr4Attk.setText("0");
         t2ssr4Attk.setBorder(null);
 
         t1ssr4Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr4Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr4Attk.setText("4");
+        t1ssr4Attk.setText("0");
         t1ssr4Attk.setBorder(null);
 
         jTextField83.setBackground(new java.awt.Color(204, 204, 204));
@@ -1603,17 +1603,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssr5Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr5Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr5Attk.setText("4");
+        t1ssr5Attk.setText("0");
         t1ssr5Attk.setBorder(null);
 
         t2ssr5Attk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr5Attk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr5Attk.setText("4");
+        t2ssr5Attk.setText("0");
         t2ssr5Attk.setBorder(null);
 
         t2ssSuccessAttkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssSuccessAttkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssSuccessAttkRate.setText("40%");
+        t2ssSuccessAttkRate.setText("0%");
         t2ssSuccessAttkRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel45Layout = new javax.swing.GroupLayout(jPanel45);
@@ -1732,22 +1732,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1sstotalBlk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1sstotalBlk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1sstotalBlk.setText("4");
+        t1sstotalBlk.setText("0");
         t1sstotalBlk.setBorder(null);
 
         t2sstotalBlk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2sstotalBlk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2sstotalBlk.setText("4");
+        t2sstotalBlk.setText("0");
         t2sstotalBlk.setBorder(null);
 
         t2ssr1Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr1Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr1Blk.setText("4");
+        t2ssr1Blk.setText("0");
         t2ssr1Blk.setBorder(null);
 
         t1ssr1Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr1Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr1Blk.setText("4");
+        t1ssr1Blk.setText("0");
         t1ssr1Blk.setBorder(null);
         t1ssr1Blk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1763,7 +1763,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssr2Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr2Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr2Blk.setText("4");
+        t1ssr2Blk.setText("0");
         t1ssr2Blk.setBorder(null);
 
         jTextField95.setBackground(new java.awt.Color(204, 204, 204));
@@ -1774,12 +1774,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2ssr2Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr2Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr2Blk.setText("4");
+        t2ssr2Blk.setText("0");
         t2ssr2Blk.setBorder(null);
 
         t1ssSuccessBlkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssSuccessBlkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssSuccessBlkRate.setText("40%");
+        t1ssSuccessBlkRate.setText("0%");
         t1ssSuccessBlkRate.setBorder(null);
 
         jTextField98.setBackground(new java.awt.Color(204, 204, 204));
@@ -1790,7 +1790,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssr3Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr3Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr3Blk.setText("4");
+        t1ssr3Blk.setText("0");
         t1ssr3Blk.setBorder(null);
         t1ssr3Blk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1806,7 +1806,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2ssr3Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr3Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr3Blk.setText("4");
+        t2ssr3Blk.setText("0");
         t2ssr3Blk.setBorder(null);
 
         jTextField245.setBackground(new java.awt.Color(204, 204, 204));
@@ -1817,22 +1817,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssErrorBlkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssErrorBlkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssErrorBlkRate.setText("40%");
+        t1ssErrorBlkRate.setText("0%");
         t1ssErrorBlkRate.setBorder(null);
 
         t2ssErrorBlkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssErrorBlkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssErrorBlkRate.setText("40%");
+        t2ssErrorBlkRate.setText("0%");
         t2ssErrorBlkRate.setBorder(null);
 
         t2ssr4Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr4Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr4Blk.setText("4");
+        t2ssr4Blk.setText("0");
         t2ssr4Blk.setBorder(null);
 
         t1ssr4Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr4Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr4Blk.setText("4");
+        t1ssr4Blk.setText("0");
         t1ssr4Blk.setBorder(null);
 
         jTextField104.setBackground(new java.awt.Color(204, 204, 204));
@@ -1849,17 +1849,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1ssr5Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1ssr5Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1ssr5Blk.setText("4");
+        t1ssr5Blk.setText("0");
         t1ssr5Blk.setBorder(null);
 
         t2ssr5Blk.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssr5Blk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssr5Blk.setText("4");
+        t2ssr5Blk.setText("0");
         t2ssr5Blk.setBorder(null);
 
         t2ssSuccessBlkRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2ssSuccessBlkRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2ssSuccessBlkRate.setText("40%");
+        t2ssSuccessBlkRate.setText("0%");
         t2ssSuccessBlkRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel46Layout = new javax.swing.GroupLayout(jPanel46);
@@ -2054,22 +2054,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nsstotalRep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nsstotalRep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nsstotalRep.setText("4");
+        t1nsstotalRep.setText("0");
         t1nsstotalRep.setBorder(null);
 
         t2nsstotalRep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nsstotalRep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nsstotalRep.setText("4");
+        t2nsstotalRep.setText("0");
         t2nsstotalRep.setBorder(null);
 
         t2nssr1Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr1Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr1Rep.setText("4");
+        t2nssr1Rep.setText("0");
         t2nssr1Rep.setBorder(null);
 
         t1nssr1Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr1Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr1Rep.setText("4");
+        t1nssr1Rep.setText("0");
         t1nssr1Rep.setBorder(null);
         t1nssr1Rep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2085,7 +2085,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssr2Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr2Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr2Rep.setText("4");
+        t1nssr2Rep.setText("0");
         t1nssr2Rep.setBorder(null);
 
         jTextField116.setBackground(new java.awt.Color(204, 204, 204));
@@ -2096,12 +2096,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2nssr2Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr2Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr2Rep.setText("4");
+        t2nssr2Rep.setText("0");
         t2nssr2Rep.setBorder(null);
 
         t1nssSuccessRepRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssSuccessRepRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssSuccessRepRate.setText("40%");
+        t1nssSuccessRepRate.setText("0%");
         t1nssSuccessRepRate.setBorder(null);
 
         jTextField119.setBackground(new java.awt.Color(204, 204, 204));
@@ -2112,7 +2112,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssr3Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr3Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr3Rep.setText("4");
+        t1nssr3Rep.setText("0");
         t1nssr3Rep.setBorder(null);
         t1nssr3Rep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2128,7 +2128,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2nssr3Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr3Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr3Rep.setText("4");
+        t2nssr3Rep.setText("0");
         t2nssr3Rep.setBorder(null);
 
         jTextField249.setBackground(new java.awt.Color(204, 204, 204));
@@ -2139,22 +2139,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssErrorRepRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssErrorRepRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssErrorRepRate.setText("40%");
+        t1nssErrorRepRate.setText("0%");
         t1nssErrorRepRate.setBorder(null);
 
         t2nssErrorRepRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssErrorRepRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssErrorRepRate.setText("40%");
+        t2nssErrorRepRate.setText("0%");
         t2nssErrorRepRate.setBorder(null);
 
         t2nssr4Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr4Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr4Rep.setText("4");
+        t2nssr4Rep.setText("0");
         t2nssr4Rep.setBorder(null);
 
         t1nssr4Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr4Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr4Rep.setText("4");
+        t1nssr4Rep.setText("0");
         t1nssr4Rep.setBorder(null);
 
         jTextField254.setBackground(new java.awt.Color(204, 204, 204));
@@ -2171,17 +2171,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssr5Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr5Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr5Rep.setText("4");
+        t1nssr5Rep.setText("0");
         t1nssr5Rep.setBorder(null);
 
         t2nssr5Rep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr5Rep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr5Rep.setText("4");
+        t2nssr5Rep.setText("0");
         t2nssr5Rep.setBorder(null);
 
         t2nssSuccessRepRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssSuccessRepRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssSuccessRepRate.setText("40%");
+        t2nssSuccessRepRate.setText("0%");
         t2nssSuccessRepRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel47Layout = new javax.swing.GroupLayout(jPanel47);
@@ -2295,12 +2295,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssTF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssTF.setText("10");
+        t1nssTF.setText("0");
         t1nssTF.setBorder(null);
 
         t2nssTF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssTF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssTF.setText("5");
+        t2nssTF.setText("0");
         t2nssTF.setBorder(null);
 
         javax.swing.GroupLayout jPanel48Layout = new javax.swing.GroupLayout(jPanel48);
@@ -2384,22 +2384,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nsstotalSet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nsstotalSet.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nsstotalSet.setText("4");
+        t1nsstotalSet.setText("0");
         t1nsstotalSet.setBorder(null);
 
         t2nsstotalSet.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nsstotalSet.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nsstotalSet.setText("4");
+        t2nsstotalSet.setText("0");
         t2nsstotalSet.setBorder(null);
 
         t2nssr1Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr1Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr1Set.setText("4");
+        t2nssr1Set.setText("0");
         t2nssr1Set.setBorder(null);
 
         t1nssr1Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr1Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr1Set.setText("4");
+        t1nssr1Set.setText("0");
         t1nssr1Set.setBorder(null);
         t1nssr1Set.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2415,7 +2415,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssr2Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr2Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr2Set.setText("4");
+        t1nssr2Set.setText("0");
         t1nssr2Set.setBorder(null);
 
         jTextField270.setBackground(new java.awt.Color(204, 204, 204));
@@ -2426,12 +2426,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2nssr2Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr2Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr2Set.setText("4");
+        t2nssr2Set.setText("0");
         t2nssr2Set.setBorder(null);
 
         t1nssSuccessSetRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssSuccessSetRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssSuccessSetRate.setText("40%");
+        t1nssSuccessSetRate.setText("0%");
         t1nssSuccessSetRate.setBorder(null);
 
         jTextField273.setBackground(new java.awt.Color(204, 204, 204));
@@ -2442,7 +2442,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssr3Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr3Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr3Set.setText("4");
+        t1nssr3Set.setText("0");
         t1nssr3Set.setBorder(null);
         t1nssr3Set.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2458,7 +2458,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2nssr3Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr3Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr3Set.setText("4");
+        t2nssr3Set.setText("0");
         t2nssr3Set.setBorder(null);
 
         jTextField277.setBackground(new java.awt.Color(204, 204, 204));
@@ -2469,22 +2469,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssErrorSetRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssErrorSetRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssErrorSetRate.setText("40%");
+        t1nssErrorSetRate.setText("0%");
         t1nssErrorSetRate.setBorder(null);
 
         t2nssErrorSetRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssErrorSetRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssErrorSetRate.setText("40%");
+        t2nssErrorSetRate.setText("0%");
         t2nssErrorSetRate.setBorder(null);
 
         t2nssr4Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr4Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr4Set.setText("4");
+        t2nssr4Set.setText("0");
         t2nssr4Set.setBorder(null);
 
         t1nssr4Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr4Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr4Set.setText("4");
+        t1nssr4Set.setText("0");
         t1nssr4Set.setBorder(null);
 
         jTextField282.setBackground(new java.awt.Color(204, 204, 204));
@@ -2501,17 +2501,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssr5Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr5Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr5Set.setText("4");
+        t1nssr5Set.setText("0");
         t1nssr5Set.setBorder(null);
 
         t2nssr5Set.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr5Set.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr5Set.setText("4");
+        t2nssr5Set.setText("0");
         t2nssr5Set.setBorder(null);
 
         t2nssSuccessSetRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssSuccessSetRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssSuccessSetRate.setText("40%");
+        t2nssSuccessSetRate.setText("0%");
         t2nssSuccessSetRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel49Layout = new javax.swing.GroupLayout(jPanel49);
@@ -2630,22 +2630,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nsstotalDef.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nsstotalDef.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nsstotalDef.setText("4");
+        t1nsstotalDef.setText("0");
         t1nsstotalDef.setBorder(null);
 
         t2nsstotalDef.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nsstotalDef.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nsstotalDef.setText("4");
+        t2nsstotalDef.setText("0");
         t2nsstotalDef.setBorder(null);
 
         t2nssr1Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr1Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr1Def.setText("4");
+        t2nssr1Def.setText("0");
         t2nssr1Def.setBorder(null);
 
         t1nssr1Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr1Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr1Def.setText("4");
+        t1nssr1Def.setText("0");
         t1nssr1Def.setBorder(null);
         t1nssr1Def.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2661,7 +2661,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssr2Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr2Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr2Def.setText("4");
+        t1nssr2Def.setText("0");
         t1nssr2Def.setBorder(null);
 
         jTextField295.setBackground(new java.awt.Color(204, 204, 204));
@@ -2672,12 +2672,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2nssr2Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr2Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr2Def.setText("4");
+        t2nssr2Def.setText("0");
         t2nssr2Def.setBorder(null);
 
         t1nssSuccessDefRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssSuccessDefRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssSuccessDefRate.setText("40%");
+        t1nssSuccessDefRate.setText("0%");
         t1nssSuccessDefRate.setBorder(null);
 
         jTextField298.setBackground(new java.awt.Color(204, 204, 204));
@@ -2688,7 +2688,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssr3Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr3Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr3Def.setText("4");
+        t1nssr3Def.setText("0");
         t1nssr3Def.setBorder(null);
         t1nssr3Def.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2704,7 +2704,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t2nssr3Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr3Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr3Def.setText("4");
+        t2nssr3Def.setText("0");
         t2nssr3Def.setBorder(null);
 
         jTextField302.setBackground(new java.awt.Color(204, 204, 204));
@@ -2715,22 +2715,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssErrorDefRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssErrorDefRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssErrorDefRate.setText("40%");
+        t1nssErrorDefRate.setText("0%");
         t1nssErrorDefRate.setBorder(null);
 
         t2nssErrorDefRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssErrorDefRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssErrorDefRate.setText("40%");
+        t2nssErrorDefRate.setText("0%");
         t2nssErrorDefRate.setBorder(null);
 
         t2nssr4Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr4Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr4Def.setText("4");
+        t2nssr4Def.setText("0");
         t2nssr4Def.setBorder(null);
 
         t1nssr4Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr4Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr4Def.setText("4");
+        t1nssr4Def.setText("0");
         t1nssr4Def.setBorder(null);
 
         jTextField307.setBackground(new java.awt.Color(204, 204, 204));
@@ -2747,17 +2747,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         t1nssr5Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t1nssr5Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t1nssr5Def.setText("4");
+        t1nssr5Def.setText("0");
         t1nssr5Def.setBorder(null);
 
         t2nssr5Def.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssr5Def.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssr5Def.setText("4");
+        t2nssr5Def.setText("0");
         t2nssr5Def.setBorder(null);
 
         t2nssSuccessDefRate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         t2nssSuccessDefRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t2nssSuccessDefRate.setText("40%");
+        t2nssSuccessDefRate.setText("0%");
         t2nssSuccessDefRate.setBorder(null);
 
         javax.swing.GroupLayout jPanel50Layout = new javax.swing.GroupLayout(jPanel50);
@@ -2944,18 +2944,23 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team1SumSerSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumSerSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumSerSuccess.setText("20%");
+        team1SumSerSuccess.setText("0%");
         team1SumSerSuccess.setBorder(null);
 
         team2SumSerSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumSerSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumSerSuccess.setText("20%");
+        team2SumSerSuccess.setText("0%");
         team2SumSerSuccess.setBorder(null);
 
         team1SumSerError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumSerError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumSerError.setText("20%");
+        team1SumSerError.setText("0%");
         team1SumSerError.setBorder(null);
+        team1SumSerError.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                team1SumSerErrorActionPerformed(evt);
+            }
+        });
 
         jTextField173.setBackground(new java.awt.Color(204, 204, 204));
         jTextField173.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -2965,7 +2970,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team2SumSerError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumSerError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumSerError.setText("20%");
+        team2SumSerError.setText("0%");
         team2SumSerError.setBorder(null);
 
         javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
@@ -3020,17 +3025,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team1SumAttackSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumAttackSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumAttackSuccess.setText("20%");
+        team1SumAttackSuccess.setText("0%");
         team1SumAttackSuccess.setBorder(null);
 
         team2SumAttackSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumAttackSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumAttackSuccess.setText("20%");
+        team2SumAttackSuccess.setText("0%");
         team2SumAttackSuccess.setBorder(null);
 
         team1SumAttackError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumAttackError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumAttackError.setText("20%");
+        team1SumAttackError.setText("0%");
         team1SumAttackError.setBorder(null);
 
         jTextField180.setBackground(new java.awt.Color(204, 204, 204));
@@ -3041,7 +3046,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team2SumAttackError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumAttackError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumAttackError.setText("20%");
+        team2SumAttackError.setText("0%");
         team2SumAttackError.setBorder(null);
 
         javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
@@ -3098,17 +3103,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team1SumBlkSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumBlkSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumBlkSuccess.setText("20%");
+        team1SumBlkSuccess.setText("0%");
         team1SumBlkSuccess.setBorder(null);
 
         team2SumBlkSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumBlkSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumBlkSuccess.setText("20%");
+        team2SumBlkSuccess.setText("0%");
         team2SumBlkSuccess.setBorder(null);
 
         team1SumBlkError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumBlkError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumBlkError.setText("20%");
+        team1SumBlkError.setText("0%");
         team1SumBlkError.setBorder(null);
 
         jTextField187.setBackground(new java.awt.Color(204, 204, 204));
@@ -3124,7 +3129,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team2SumBlkError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumBlkError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumBlkError.setText("20%");
+        team2SumBlkError.setText("0%");
         team2SumBlkError.setBorder(null);
 
         javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
@@ -3182,17 +3187,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team1SumRcpSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumRcpSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumRcpSuccess.setText("20%");
+        team1SumRcpSuccess.setText("0%");
         team1SumRcpSuccess.setBorder(null);
 
         team2SumRcpSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumRcpSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumRcpSuccess.setText("20%");
+        team2SumRcpSuccess.setText("0%");
         team2SumRcpSuccess.setBorder(null);
 
         team1SumRcpError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumRcpError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumRcpError.setText("20%");
+        team1SumRcpError.setText("0%");
         team1SumRcpError.setBorder(null);
 
         jTextField194.setBackground(new java.awt.Color(204, 204, 204));
@@ -3203,7 +3208,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team2SumRcpError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumRcpError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumRcpError.setText("20%");
+        team2SumRcpError.setText("0%");
         team2SumRcpError.setBorder(null);
 
         javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
@@ -3261,17 +3266,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team1SumSetSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumSetSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumSetSuccess.setText("20%");
+        team1SumSetSuccess.setText("0%");
         team1SumSetSuccess.setBorder(null);
 
         team2SumSetSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumSetSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumSetSuccess.setText("20%");
+        team2SumSetSuccess.setText("0%");
         team2SumSetSuccess.setBorder(null);
 
         team1SumSetError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumSetError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumSetError.setText("20%");
+        team1SumSetError.setText("0%");
         team1SumSetError.setBorder(null);
 
         jTextField201.setBackground(new java.awt.Color(204, 204, 204));
@@ -3282,7 +3287,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team2SumSetError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumSetError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumSetError.setText("20%");
+        team2SumSetError.setText("0%");
         team2SumSetError.setBorder(null);
 
         javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
@@ -3341,17 +3346,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team1SumDefSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumDefSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumDefSuccess.setText("20%");
+        team1SumDefSuccess.setText("0%");
         team1SumDefSuccess.setBorder(null);
 
         team2SumDefSuccess.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumDefSuccess.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumDefSuccess.setText("20%");
+        team2SumDefSuccess.setText("0%");
         team2SumDefSuccess.setBorder(null);
 
         team1SumDefError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1SumDefError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team1SumDefError.setText("20%");
+        team1SumDefError.setText("0%");
         team1SumDefError.setBorder(null);
 
         jTextField208.setBackground(new java.awt.Color(204, 204, 204));
@@ -3362,7 +3367,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team2SumDefError.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2SumDefError.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        team2SumDefError.setText("20%");
+        team2SumDefError.setText("0%");
         team2SumDefError.setBorder(null);
 
         javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
@@ -3546,18 +3551,18 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbTeam1Win.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbTeam1Win.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"I", "25", "8", "8", "8", "8"},
-                {"II", "25", "8", "8", "8", "8"},
-                {"III", "25", "8", "8", "8", "8"},
-                {"IV", "25", "8", "8", "8", "8"},
-                {"V", "25", "8", "8", "8", "8"}
+                {"I", "0", "0", "0", "0", "0"},
+                {"II", "0", "0", "0", "0", "0"},
+                {"III", "0", "0", "0", "0", "0"},
+                {"IV", "0", "0", "0", "0", "0"},
+                {"V", "0", "8", "0", "0", "0"}
             },
             new String [] {
                 "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "OP +"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -3597,11 +3602,11 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbTeam1Loss.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbTeam1Loss.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"I", "25", "8", "8", "8", "8", "8", "8", "8"},
-                {"II", "25", "8", "8", "8", "8", "8", "8", "8"},
-                {"III", "25", "8", "8", "8", "8", "8", "8", "8"},
-                {"IV", "25", "8", "8", "8", "8", "8", "8", "8"},
-                {"V", "25", "8", "8", "8", "8", "8", "8", "8"}
+                {"I", "0", "0", "0", "0", "0", "0", "0", "0"},
+                {"II", "0", "0", "0", "0", "0", "0", "0", "0"},
+                {"III", "0", "0", "0", "0", "0", "0", "0", "0"},
+                {"IV", "0", "0", "0", "0", "0", "0", "0", "0"},
+                {"V", "0", "0", "0", "0", "0", "0", "0", "8"}
             },
             new String [] {
                 "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "REC", "SET", "DEF", "TF -"
@@ -3636,20 +3641,20 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team1PlayerTable.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team1PlayerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"01 L", "Player 1", null, null, null, null, null},
-                {"02", "Player 2", null, null, null, null, null},
-                {"03", "Player 3", null, null, null, null, null},
-                {"04", "Player 4", null, null, null, null, null},
-                {"05", "Player 5", null, null, null, null, null},
-                {"06", "Player 6", null, null, null, null, null},
-                {"07", "Player 7", null, null, null, null, null},
-                {"08 L", "Player 8", null, null, null, null, null},
-                {"09", "Player 9", null, null, null, null, null},
-                {"10", "Player 10", null, null, null, null, null},
-                {"11", "Player 11", null, null, null, null, null},
-                {"12", "Player 12", null, null, null, null, null},
-                {"13", "Player 13", null, null, null, null, null},
-                {"14", "Player 14", null, null, null, null, null}
+                {"-", "- ", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "- ", "-", "-", "-", "-", "-"},
+                {"-", "- ", "-", "-", "-", "-", "-"},
+                {"-", "- ", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "- ", "-", "-", "-", "-", "-"},
+                {"-", "- ", "-", "-", "-", "-", "-"},
+                {"-", "- ", "-", "-", "-", "-", "-"},
+                {"-", "- ", "-", "-", "-", "-", "-"},
+                {"-", "- ", "-", "-", "-", "-", "-"},
+                {"-", "- ", "-", "-", "-", "-", "-"},
+                {"-", "- ", "-", "-", "-", "-", null}
             },
             new String [] {
                 "C. No", "Player", "Set 1", "Set 2", "Set 3", "Set 4", "Set 5"
@@ -3754,18 +3759,18 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbTeam2Win.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbTeam2Win.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"I", "25", "8", "8", "8", "8"},
-                {"II", "25", "8", "8", "8", "8"},
-                {"III", "25", "8", "8", "8", "8"},
-                {"IV", "25", "8", "8", "8", "8"},
-                {"V", "25", "8", "8", "8", "8"}
+                {"I", "0", "0", "0", "0", "0"},
+                {"II", "0", "0", "0", "0", "0"},
+                {"III", "0", "0", "0", "0", "0"},
+                {"IV", "0", "0", "0", "0", "0"},
+                {"V", "0", "0", "0", "0", "8"}
             },
             new String [] {
                 "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "OP +"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false
+                false, true, true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -3805,11 +3810,11 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbTeam2Loss.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbTeam2Loss.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"I", "25", "8", "8", "8", "8", "8", "8", "8"},
-                {"II", "25", "8", "8", "8", "8", "8", "8", "8"},
-                {"III", "25", "8", "8", "8", "8", "8", "8", "8"},
-                {"IV", "25", "8", "8", "8", "8", "8", "8", "8"},
-                {"V", "25", "8", "8", "8", "8", "8", "8", "8"}
+                {"I", "0", "0", "0", "0", "0", "0", "0", "0"},
+                {"II", "0", "0", "0", "0", "0", "0", "0", "0"},
+                {"III", "0", "0", "0", "0", "0", "0", "0", "0"},
+                {"IV", "0", "0", "0", "0", "0", "0", "0", "0"},
+                {"V", "0", "0", "0", "0", "0", "0", "0", "8"}
             },
             new String [] {
                 "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "REC", "SET", "DEF", "TF -"
@@ -3842,20 +3847,20 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team2PlayerTable.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         team2PlayerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"01 L", "Player 1", null, null, null, null, null},
-                {"02", "Player 2", null, null, null, null, null},
-                {"03", "Player 3", null, null, null, null, null},
-                {"04", "Player 4", null, null, null, null, null},
-                {"05", "Player 5", null, null, null, null, null},
-                {"06", "Player 6", null, null, null, null, null},
-                {"07", "Player 7", null, null, null, null, null},
-                {"08 L", "Player 8", null, null, null, null, null},
-                {"09", "Player 9", null, null, null, null, null},
-                {"10", "Player 10", null, null, null, null, null},
-                {"11", "Player 11", null, null, null, null, null},
-                {"12", "Player 12", null, null, null, null, null},
-                {"13", "Player 13", null, null, null, null, null},
-                {"14", "Player 14", null, null, null, null, null}
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-", "-", "-", "-", "-", null}
             },
             new String [] {
                 "C. No", "Player", "Set 1", "Set 2", "Set 3", "Set 4", "Set 5"
@@ -3932,14 +3937,14 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         team1WonPointsLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         team1WonPointsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        team1WonPointsLabel.setText("3");
+        team1WonPointsLabel.setText("-");
 
         team2label.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         team2label.setText("Andhra Pradesh");
 
         team2WonPointLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         team2WonPointLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        team2WonPointLabel.setText("2");
+        team2WonPointLabel.setText("-");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -4254,6 +4259,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private void t1nssr3DefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t1nssr3DefActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_t1nssr3DefActionPerformed
+
+    private void team1SumSerErrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_team1SumSerErrorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_team1SumSerErrorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
