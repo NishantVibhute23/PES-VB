@@ -109,12 +109,9 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         lblResult.setText(rallyEvaluation.getHomeScore() + " : " + rallyEvaluation.getOpponentScore());
         panRallyList.add(panCompListValue, BorderLayout.CENTER);
         panCompListValue.addRallies(rallyEvaluation.getRallyEvaluationSkillScore());
-
         oldRallyEndScore = rallyEvaluation.getRallyEvaluationSkillScore().get(rallyEvaluation.getRallyEvaluationSkillScore().size() - 1).getScore();
         oldSkillid = rallyEvaluation.getRallyEvaluationSkillScore().get(rallyEvaluation.getRallyEvaluationSkillScore().size() - 1).getSkillId();
-
         if (rallyEvaluation.getRallyPositionMap().size() > 0) {
-
             rallyPos1.setText(rallyEvaluation.getRallyPositionMap().get(1).getChestNo());
             rallyPos2.setText(rallyEvaluation.getRallyPositionMap().get(2).getChestNo());
             rallyPos3.setText(rallyEvaluation.getRallyPositionMap().get(3).getChestNo());
@@ -126,9 +123,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 
     public void setRotationForRally() {
         LinkedHashMap<Integer, Player> latestPositionMap = rallyDao.getLatestMatchSetRotationOrder(Controller.panMatchSet.matchEvaluationId);
-
         RallyEvaluation re = matchDao.getLatestRallyDetails(Controller.panMatchSet.matchEvaluationId);
-
         if (re.getStartby() != HomeOpponent.HOME.getId() && re.getWonby() == HomeOpponent.HOME.getId()) {
             Player temp = latestPositionMap.get(1);
             latestPositionMap.put(1, latestPositionMap.get(2));
@@ -163,7 +158,6 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             latestPositionMap.put(5, latestPositionMap.get(6));
             latestPositionMap.put(6, temp);
         }
-
         int i = 0;
         for (Map.Entry<Integer, Player> entry : latestPositionMap.entrySet()) {
             rallyPos.get(i).setText("" + entry.getValue().getChestNo());
@@ -174,9 +168,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             }
             i++;
         }
-
         Controller.panMatchSet.rallyPositionMap.putAll(latestPositionMap);
-
     }
 
     public void setRotation() {

@@ -5,26 +5,30 @@
  */
 package com.vollyball.enums;
 
+import java.awt.Color;
+
 /**
  *
  * @author nishant.vibhute
  */
 public enum PlayerPosition {
 
-    SELECT(0, "Select"),
-    SERVER(1, "Server"),
-    LIBERO(2, "Libero"),
-    UNIVERSAL(3, "Universal"),
-    OUTSIDEHITTER(4, "Outside Hitter"),
-    MIDDLEBLOCKER(5, "Middle Blocker"),
-    SETTER(6, "Setter");
+    SELECT(0, "Select", Color.WHITE),
+    SERVER(1, "Server", Color.ORANGE),
+    LIBERO(2, "Libero", Color.BLACK),
+    UNIVERSAL(3, "Universal", Color.CYAN),
+    OUTSIDEHITTER(4, "Outside Hitter", Color.BLUE),
+    MIDDLEBLOCKER(5, "Middle Blocker", Color.GREEN),
+    SETTER(6, "Setter", Color.RED);
 
     int id;
     String name;
+    Color color;
 
-    private PlayerPosition(int id, String name) {
+    private PlayerPosition(int id, String name, Color color) {
         this.id = id;
         this.name = name;
+        this.color = color;
     }
 
     public int getId() {
@@ -41,6 +45,14 @@ public enum PlayerPosition {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public static PlayerPosition getIdByName(String name) {

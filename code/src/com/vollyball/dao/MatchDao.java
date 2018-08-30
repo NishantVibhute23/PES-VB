@@ -222,14 +222,6 @@ public class MatchDao {
                     mid = rs.getInt(1);
                 }
 
-                for (SetRotationOrder s : ms.getRotationOrder()) {
-                    PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.matchset.rotationorder"));
-                    ps1.setInt(1, s.getPosition());
-                    ps1.setInt(2, s.getPlayerId());
-                    ps1.setInt(3, mid);
-                    ps1.executeUpdate();
-                }
-
                 for (SetSubstitution s : ms.getSetSubstitutions()) {
                     if (s.getPosition() != 7) {
                         PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.matchset.substitution"));
@@ -779,10 +771,28 @@ public class MatchDao {
         return matchList;
     }
 
+    public void insertMatchSetRotationOrder(List<SetRotationOrder> rotationOrderHome, List<SetRotationOrder> rotationOrderOpp) {
+
+//        try {
+//            this.con = db.getConnection();
+//            for (SetRotationOrder s : rotationOrderHome) {
+//                PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.matchset.rotationorder"));
+//                ps1.setInt(1, s.getPosition());
+//                ps1.setInt(2, s.getPlayerId());
+//                ps1.setInt(3, mid);
+//                ps1.executeUpdate();
+//
+//            }
+//            db.closeConnection(con);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
+
     public int updateMatch(MatchBean mb) {
         int count = 0;
         int i = 0;
-        int[] evId=new int[2];
+        int[] evId = new int[2];
         try {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.match"));
@@ -803,8 +813,8 @@ public class MatchDao {
                 PreparedStatement psev = this.con.prepareStatement(CommonUtil.getResourceProperty("get.evaluationIdbymatchId"));
                 psev.setInt(1, mb.getId());
                 ResultSet rs = psev.executeQuery();
-                while(rs.next()){
-                    evId[i]=rs.getInt(1);
+                while (rs.next()) {
+                    evId[i] = rs.getInt(1);
                     i++;
                 }
                 PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchsetevaluationteam"));

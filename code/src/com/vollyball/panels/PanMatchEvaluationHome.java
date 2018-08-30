@@ -11,6 +11,7 @@ import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.dialog.DialogPanEvaluation;
+import com.vollyball.dialog.DialogPanEvaluationRotationOrder;
 import com.vollyball.dialog.SelectTeamPlayerDialog;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
     int matchId, matchEvaluationTeamId;
     List<Integer> selectedPlayers;
     DialogPanEvaluation obj;
+    DialogPanEvaluationRotationOrder objRotationOrder;
 
     /**
      * Creates new form MatchEvaluationHome
@@ -453,11 +455,14 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
 
     public void showPanMatchSet(int set) {
 
-        obj = new DialogPanEvaluation();
-        obj.setSetFields(set, this.matchId, this.teamId, this.oppId, evaluationType, matchEvaluationTeamId);
-        obj.init();
-        obj.show();
+        objRotationOrder = new DialogPanEvaluationRotationOrder();
+        objRotationOrder.init(this.teamId, this.oppId, this.matchId, this.homeTeam, this.oppteam);
+        objRotationOrder.show();
 
+//        obj = new DialogPanEvaluation();
+//        obj.setSetFields(set, this.matchId, this.teamId, this.oppId, evaluationType, matchEvaluationTeamId);
+//        obj.init();
+//        obj.show();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
