@@ -196,15 +196,28 @@ public class MatchDao {
         return id;
     }
 
-    public int saveMatchSet(MatchSet ms) {
-        int id = 0;
+    public int getMatchSetId(int evaluationTeamId, int setnum) {
         int mid = 0;
+        try {
+            PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.latest.matchset.id"));
+            ps3.setInt(1, evaluationTeamId);
+            ps3.setInt(2, setnum);
+            ResultSet rs = ps3.executeQuery();
+            while (rs.next()) {
+                mid = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mid;
+    }
 
+    public int insertMatchSet(MatchSet ms) {
+        int id = 0, mid = 0;
         try {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.matchset"));
             ps.setInt(1, ms.getMatchEvaluationTeamId());
-
             ps.setInt(2, ms.getSetNo());
             ps.setInt(3, ms.getWon_by());
             ps.setString(4, ms.getStart_time());
@@ -216,11 +229,83 @@ public class MatchDao {
             if (id != 0) {
 
                 PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.latest.matchset.id"));
+                ps3.setInt(1, ms.getMatchEvaluationTeamId());
+                ps3.setInt(2, ms.getSetNo());
                 ResultSet rs = ps3.executeQuery();
-
                 while (rs.next()) {
                     mid = rs.getInt(1);
                 }
+
+                if (mid != 0) {
+                    for (SetRotationOrder s : ms.getRotationOrder()) {
+                        PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.matchset.rotationorder"));
+                        ps1.setInt(1, s.getPosition());
+                        ps1.setInt(2, s.getPlayerId());
+                        ps1.setInt(3, mid);
+                        ps1.setInt(4, 1);
+                        ps1.executeUpdate();
+                    }
+
+                    for (SetRotationOrder s : ms.getRotationOrderOpp()) {
+                        PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.matchset.rotationorder"));
+                        ps1.setInt(1, s.getPosition());
+                        ps1.setInt(2, s.getPlayerId());
+                        ps1.setInt(3, mid);
+                        ps1.setInt(4, 2);
+                        ps1.executeUpdate();
+                    }
+
+                    PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.setLatestorder"));
+                    ps1.setInt(1, ms.getRotationOrder().get(0).getPlayerId());
+                    ps1.setInt(2, ms.getRotationOrder().get(1).getPlayerId());
+                    ps1.setInt(3, ms.getRotationOrder().get(2).getPlayerId());
+                    ps1.setInt(4, ms.getRotationOrder().get(3).getPlayerId());
+                    ps1.setInt(5, ms.getRotationOrder().get(4).getPlayerId());
+                    ps1.setInt(6, ms.getRotationOrder().get(5).getPlayerId());
+                    ps1.setInt(7, mid);
+                    ps1.setInt(8, ms.getRotationOrderOpp().get(0).getPlayerId());
+                    ps1.setInt(9, ms.getRotationOrderOpp().get(1).getPlayerId());
+                    ps1.setInt(10, ms.getRotationOrderOpp().get(2).getPlayerId());
+                    ps1.setInt(11, ms.getRotationOrderOpp().get(3).getPlayerId());
+                    ps1.setInt(12, ms.getRotationOrderOpp().get(4).getPlayerId());
+                    ps1.setInt(13, ms.getRotationOrderOpp().get(5).getPlayerId());
+
+                    ps1.executeUpdate();
+                }
+            }
+            db.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
+    public int saveMatchSet(MatchSet ms) {
+        int id = 0;
+        int mid = 0;
+
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.latest.matchset.id"));
+            ps3.setInt(1, ms.getEvaluationTeamId());
+            ps3.setInt(2, ms.getSetNo());
+            ResultSet rs = ps3.executeQuery();
+            while (rs.next()) {
+                mid = rs.getInt(1);
+            }
+
+            if (mid == 0) {
+                mid = insertMatchSet(ms);
+            } else {
+                this.con = db.getConnection();
+                PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchset.startdata"));
+                ps.setInt(1, ms.getWon_by());
+                ps.setString(2, ms.getStart_time());
+                ps.setString(3, ms.getEnd_time());
+                ps.setString(4, ms.getEvaluator());
+                ps.setString(5, ms.getDate());
+                ps.setInt(6, mid);
+                id = ps.executeUpdate();
 
                 for (SetSubstitution s : ms.getSetSubstitutions()) {
                     if (s.getPosition() != 7) {
@@ -237,16 +322,6 @@ public class MatchDao {
                 ps5.setInt(2, 0);
                 ps5.setInt(3, mid);
                 ps5.executeUpdate();
-
-                PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.setLatestorder"));
-                ps1.setInt(1, ms.getRotationOrder().get(0).getPlayerId());
-                ps1.setInt(2, ms.getRotationOrder().get(1).getPlayerId());
-                ps1.setInt(3, ms.getRotationOrder().get(2).getPlayerId());
-                ps1.setInt(4, ms.getRotationOrder().get(3).getPlayerId());
-                ps1.setInt(5, ms.getRotationOrder().get(4).getPlayerId());
-                ps1.setInt(6, ms.getRotationOrder().get(5).getPlayerId());
-                ps1.setInt(7, mid);
-                ps1.executeUpdate();
 
             }
 
@@ -288,9 +363,11 @@ public class MatchDao {
 
             if (ms.getId() != 0) {
                 List<SetRotationOrder> rotationOrder = new ArrayList<>();
+                List<SetRotationOrder> rotationOrderOpp = new ArrayList<>();
 
                 PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchset.rotationorder"));
                 ps1.setInt(1, ms.getId());
+                ps1.setInt(2, 1);
                 ResultSet rs1 = ps1.executeQuery();
 
                 while (rs1.next()) {
@@ -303,6 +380,23 @@ public class MatchDao {
 
                 }
                 ms.setRotationOrder(rotationOrder);
+
+                PreparedStatement ps4 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchset.rotationorder"));
+                ps4.setInt(1, ms.getId());
+                ps4.setInt(2, 2);
+                ResultSet rs4 = ps4.executeQuery();
+
+                while (rs4.next()) {
+                    SetRotationOrder s = new SetRotationOrder();
+                    s.setId(rs4.getInt(1));
+                    s.setPosition(rs4.getInt(2));
+                    s.setPlayerId(rs4.getInt(3));
+                    s.setMatch_evaluation_id(rs4.getInt(4));
+                    rotationOrderOpp.add(s);
+
+                }
+                ms.setRotationOrderOpp(rotationOrderOpp);
+
                 List<SetSubstitution> setSubstitutions = new ArrayList<>();
                 PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchset.substitution"));
                 ps2.setInt(1, ms.getId());

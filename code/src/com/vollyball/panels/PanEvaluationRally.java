@@ -123,6 +123,8 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 
     public void setRotationForRally() {
         LinkedHashMap<Integer, Player> latestPositionMap = rallyDao.getLatestMatchSetRotationOrder(Controller.panMatchSet.matchEvaluationId);
+        LinkedHashMap<Integer, Player> latestPositionMapOpp = rallyDao.getLatestMatchSetRotationOrderOpp(Controller.panMatchSet.matchEvaluationId);
+
         RallyEvaluation re = matchDao.getLatestRallyDetails(Controller.panMatchSet.matchEvaluationId);
         if (re.getStartby() != HomeOpponent.HOME.getId() && re.getWonby() == HomeOpponent.HOME.getId()) {
             Player temp = latestPositionMap.get(1);
@@ -169,6 +171,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             i++;
         }
         Controller.panMatchSet.rallyPositionMap.putAll(latestPositionMap);
+        Controller.panMatchSet.rallyPositionMapOpp.putAll(latestPositionMapOpp);
     }
 
     public void setRotation() {

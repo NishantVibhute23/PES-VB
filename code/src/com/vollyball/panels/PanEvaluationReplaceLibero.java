@@ -137,11 +137,9 @@ public class PanEvaluationReplaceLibero extends javax.swing.JPanel {
         } else if (t.equals(rallyPos6)) {
             Controller.panMatchSet.rallyPositionMap.put(6, Controller.panMatchSet.ChestMap.get(lblLibero.getText()));
         }
-
 //        rallyDao.updateLatestOrder(Controller.panMatchSet.rallyPositionMap, ms.getId());
         this.panEvaluationRally.setRotation();
         this.panEvaluationRally.dialogReplaceLibero.close();
-
     }
 
     /**

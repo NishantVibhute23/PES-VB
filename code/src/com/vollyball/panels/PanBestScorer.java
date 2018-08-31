@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JLabel;
@@ -60,6 +61,7 @@ public class PanBestScorer extends javax.swing.JPanel {
     List<Player> playerList;
     CompetitionBean cb;
     TableRowSorter<TableModel> sorter;
+    LinkedHashMap<String, Integer> teamchestPlayerMap = new LinkedHashMap<>();
 
     /**
      * Creates new form PanBestScorer
@@ -111,14 +113,16 @@ public class PanBestScorer extends javax.swing.JPanel {
                                 createDialogPanMatchWiseReport.show();
                             }
                         } else if (selectedCol == 12) {
-                            id = (int) tbReport.getValueAt(selectedRow, 0);
+                            String key = tbReport.getValueAt(selectedRow, 2) + "-" + tbReport.getValueAt(selectedRow, 0);
+                            id = teamchestPlayerMap.get(key);
                             Controller.createPlayerDialog = new CreatePlayerDialog();
                             Controller.createPlayerDialog.setValues(id);
                             Controller.createPlayerDialog.init();
                             Controller.createPlayerDialog.show();
 
                         } else if (selectedCol == 13) {
-                            id = (int) tbReport.getValueAt(selectedRow, 0);
+                            String key = tbReport.getValueAt(selectedRow, 2) + "-" + tbReport.getValueAt(selectedRow, 0);
+                            id = teamchestPlayerMap.get(key);
                             int dialogButton = JOptionPane.YES_NO_OPTION;
                             int dialogResult = JOptionPane.showConfirmDialog(null, "Are You Sure ?", "Warning", dialogButton);
                             if (dialogResult == JOptionPane.YES_OPTION) {
@@ -162,6 +166,7 @@ public class PanBestScorer extends javax.swing.JPanel {
 
             int i = 0;
             for (PlayerScores p : playerScoresList) {
+                teamchestPlayerMap.put(p.getTeamName() + "-" + p.getChestNo(), p.getId());
                 Object[] row = {p.getChestNo(), p.getPlayerName(), p.getTeamName(), p.getMatchesPlayed(), p.getServiceRatePerc(), p.getAttackRatePerc(), p.getBlockRatePerc(), p.getSetRatePerc(), p.getReceptionRatePerc(), p.getDefenceRatePerc(), p.getAttemptRatePerc(), new JPanel(), new JPanel(), new JPanel()};
                 dm.addRow(row);
                 i++;

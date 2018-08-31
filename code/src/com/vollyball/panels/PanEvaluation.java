@@ -13,7 +13,7 @@ import com.vollyball.dao.RallyDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.dialog.DialogEvaluationSubstitute;
 import com.vollyball.dialog.DialogEvaluationTimeout;
-import com.vollyball.dialog.SetRotationDialog;
+import com.vollyball.dialog.DialogPanEvaluationRotationOrder;
 import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
@@ -54,15 +54,19 @@ public class PanEvaluation extends javax.swing.JPanel {
     public int opponentId;
     public int matchEvaluationId = 0;
     public int rallyNumNext = 0, totalRallies = 0;
-    public SetRotationDialog setRotationDialog;
+    public DialogPanEvaluationRotationOrder setRotationDialog;
     public DialogEvaluationSubstitute dialogEvaluationSubstitute;
     public DialogEvaluationTimeout dialogEvaluationTimeout;
     public LinkedHashMap<Integer, RallyEvaluation> rallyMap = new LinkedHashMap<Integer, RallyEvaluation>();
     public LinkedHashMap<Integer, PanRallyLiveEvaluation> panRallyMap = new LinkedHashMap<Integer, PanRallyLiveEvaluation>();
     public LinkedHashMap<Integer, Player> initialPositionMap;
+    public LinkedHashMap<Integer, Player> initialPositionMapOpp;
     public LinkedHashMap<Integer, Player> rallyPositionMap;
+    public LinkedHashMap<Integer, Player> rallyPositionMapOpp;
     public LinkedHashMap<Integer, Player> substituePositionMap;
 
+    public LinkedHashMap<Integer, Player> playerMapOpp = new LinkedHashMap<Integer, Player>();
+    public LinkedHashMap<String, Player> ChestMapOpp = new LinkedHashMap<String, Player>();
     public LinkedHashMap<Integer, Player> playerMap = new LinkedHashMap<Integer, Player>();
     public LinkedHashMap<String, Player> ChestMap = new LinkedHashMap<String, Player>();
     MatchDao matchDao = new MatchDao();
@@ -71,13 +75,15 @@ public class PanEvaluation extends javax.swing.JPanel {
     PanRallyLiveEvaluation panRallyCurrent;
     int totalRally = 0;
 
-    List<Player> playerList;
+    List<Player> playerList, playerListOpp;
     public int homeScore = 0, opponentScore = 0;
     String currentScore;
     String startTime, endTime;
     int op = 0, tf = 0;
     int evaluationType, matchEvaluationTeamId;
     MatchSet ms;
+    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
 
     /**
      * Creates new form PanEvaluation
@@ -86,6 +92,7 @@ public class PanEvaluation extends javax.swing.JPanel {
         initComponents();
         initializePlayer();
         playerList = teamDao.getTeamPlayers(teamEvaluateId);
+        playerListOpp = teamDao.getTeamPlayers(opponentId);
 //        panRallyList.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setNum = setNum;
         this.matchId = matchId;
@@ -95,6 +102,8 @@ public class PanEvaluation extends javax.swing.JPanel {
         this.matchEvaluationTeamId = matchEvaluationTeamId;
         initialPositionMap = new LinkedHashMap<>();
         rallyPositionMap = new LinkedHashMap<>();
+        initialPositionMapOpp = new LinkedHashMap<>();
+        rallyPositionMapOpp = new LinkedHashMap<>();
         substituePositionMap = new LinkedHashMap<>();
 
         ms = matchDao.getMatchSet(setNum, matchEvaluationTeamId);
@@ -105,10 +114,16 @@ public class PanEvaluation extends javax.swing.JPanel {
             ChestMap.put(p.getChestNo(), p);
         }
 
+        for (Player p : playerListOpp) {
+            playerMapOpp.put(p.getId(), p);
+            ChestMapOpp.put(p.getChestNo(), p);
+        }
+
         if (ms.getId() != 0) {
+            Date date = new Date();
             this.matchEvaluationId = ms.getId();
-            lblDate.setText(CommonUtil.ConvertDateFromDbToNormal(ms.getDate()));
-            lblTime.setText(ms.getStart_time());
+            lblDate.setText(!ms.getDate().equals("") ? CommonUtil.ConvertDateFromDbToNormal(ms.getDate()) : formatter.format(date));
+            lblTime.setText(!ms.getStart_time().equals("00:00") ? ms.getStart_time() : formatterTime.format(date));
             String evaluationName = Controller.panMatchEvaluationHome.getTeamsMap().get(ms.getEvaluationTeamId());
             String opponentName = Controller.panMatchEvaluationHome.getTeamsMap().get(ms.getOpponentTeamId());
             lblevaluationName.setText(evaluationName);
@@ -129,13 +144,19 @@ public class PanEvaluation extends javax.swing.JPanel {
                 initialPositionMap.put(s.getPosition(), playerMap.get(s.getPlayerId()));
             }
 
-            pos1.setText(initialPositionMap.get(1).getChestNo());
-            pos2.setText(initialPositionMap.get(2).getChestNo());
-            pos3.setText(initialPositionMap.get(3).getChestNo());
-            pos4.setText(initialPositionMap.get(4).getChestNo());
-            pos5.setText(initialPositionMap.get(5).getChestNo());
-            pos6.setText(initialPositionMap.get(6).getChestNo());
+            if (initialPositionMap.size() > 6) {
+                pos1.setText(initialPositionMap.get(1).getChestNo());
+                pos2.setText(initialPositionMap.get(2).getChestNo());
+                pos3.setText(initialPositionMap.get(3).getChestNo());
+                pos4.setText(initialPositionMap.get(4).getChestNo());
+                pos5.setText(initialPositionMap.get(5).getChestNo());
+                pos6.setText(initialPositionMap.get(6).getChestNo());
 //            libero.setText(initialPositionMap.get(7).getChestNo());
+            }
+
+            for (SetRotationOrder s : ms.getRotationOrderOpp()) {
+                initialPositionMapOpp.put(s.getPosition(), playerMapOpp.get(s.getPlayerId()));
+            }
 
             List<RallyEvaluation> rallies = rallyDao.getRalliesList(matchEvaluationId);
 
@@ -146,6 +167,7 @@ public class PanEvaluation extends javax.swing.JPanel {
                 currentRally++;
             }
             rallyPositionMap = rallyDao.getLatestRallyRotationOrder(matchEvaluationId, ms.getEvaluationTeamId());
+            rallyPositionMapOpp = rallyDao.getLatestRallyRotationOrderOpp(matchEvaluationId, ms.getOpponentTeamId());
 
             substituePositionMap.putAll(initialPositionMap);
 
@@ -160,8 +182,7 @@ public class PanEvaluation extends javax.swing.JPanel {
             }
 
         } else {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
+
             Date date = new Date();
             lblDate.setText(formatter.format(date));
             lblTime.setText(formatterTime.format(date));
@@ -555,9 +576,7 @@ public class PanEvaluation extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -872,10 +891,8 @@ public class PanEvaluation extends javax.swing.JPanel {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
-        setRotationDialog = new SetRotationDialog();
-        setRotationDialog.setMatchId(this.matchId);
-        setRotationDialog.setTeamEvaluteId(this.teamEvaluateId);
-        setRotationDialog.init();
+        setRotationDialog = new DialogPanEvaluationRotationOrder();
+        setRotationDialog.init(this.teamEvaluateId, this.opponentId, this.matchId, lblevaluationName.getText(), lblopponentName.getText(), setNum, this.matchEvaluationTeamId);
         setRotationDialog.show();
     }//GEN-LAST:event_jLabel7MouseClicked
 

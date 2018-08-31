@@ -10,6 +10,7 @@ import com.vollyball.bean.Team;
 import com.vollyball.bean.TeamRowBean;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.TeamDao;
+import com.vollyball.enums.PlayerPosition;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
@@ -55,6 +56,10 @@ public class PanNewPlayer extends javax.swing.JPanel {
             teamsMap.put(team.getName(), team.getId());
             team1combo1.addItem(team.getName());
         }
+
+        for (PlayerPosition pp : PlayerPosition.values()) {
+            team1position.addItem(pp.getName());
+        }
     }
 
     public PanNewPlayer(int playerId) {
@@ -69,10 +74,14 @@ public class PanNewPlayer extends javax.swing.JPanel {
             team1combo1.addItem(team.getName());
 
         }
+        for (PlayerPosition pp : PlayerPosition.values()) {
+            team1position.addItem(pp.getName());
+        }
 
         team1combo1.setSelectedItem(player.getTeamId());
         txtPlayerName.setText(player.getName());
         txtPlayerChestNo.setText(player.getChestNo());
+        team1position.setSelectedIndex(player.getPosition());
         if (player.isCaptain()) {
             captain1.setSelected(true);
         }
@@ -102,6 +111,8 @@ public class PanNewPlayer extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtPlayerChestNo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        team1position = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -222,6 +233,16 @@ public class PanNewPlayer extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("Chest No.");
 
+        team1position.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        team1position.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                team1positionItemStateChanged(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel6.setText("Position");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -235,22 +256,28 @@ public class PanNewPlayer extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(team1combo1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPlayerName, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addGap(189, 189, 189)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addGap(151, 288, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(txtPlayerChestNo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(20, 20, 20))))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(team1combo1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtPlayerName, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3))
+                                        .addGap(189, 189, 189)))
+                                .addComponent(jLabel5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                .addComponent(txtPlayerChestNo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(team1position, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,9 +293,13 @@ public class PanNewPlayer extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jLabel5)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPlayerChestNo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPlayerChestNo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(team1position, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -309,8 +340,8 @@ public class PanNewPlayer extends javax.swing.JPanel {
 
         //        lblHeading.setText(txtPlayerName.getText());
         //        if (txtPlayerName.getText().equals("")) {
-            //            lblHeading.setText("New Player");
-            //        }
+        //            lblHeading.setText("New Player");
+        //        }
     }//GEN-LAST:event_txtPlayerNameKeyReleased
 
     private void txtPlayerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlayerNameActionPerformed
@@ -340,6 +371,7 @@ public class PanNewPlayer extends javax.swing.JPanel {
                     p.setChestNo(txtPlayerChestNo.getText());
                     p.setName(txtPlayerName.getText());
                     p.setCaptain(captain1.isSelected());
+                    p.setPosition(team1position.getSelectedIndex());
                     playerList.add(p);
                     team.setPlayerList(playerList);
 
@@ -361,33 +393,34 @@ public class PanNewPlayer extends javax.swing.JPanel {
             } else {
                 //                msg = checkDuplicateChestNum();
                 //                if (!msg.isEmpty()) {
-                    //                    JOptionPane.showMessageDialog(this, msg);
-                    //                } else {
-                    playerList = new ArrayList<>();
+                //                    JOptionPane.showMessageDialog(this, msg);
+                //                } else {
+                playerList = new ArrayList<>();
 
-                    Team team = new Team();
-                    team.setId(teamsMap.get(team1combo1.getSelectedItem()));
-                    team.setName((String) team1combo1.getSelectedItem());
-                    team.setCompId(Controller.competitionId);
+                Team team = new Team();
+                team.setId(teamsMap.get(team1combo1.getSelectedItem()));
+                team.setName((String) team1combo1.getSelectedItem());
+                team.setCompId(Controller.competitionId);
 
-                    Player p = new Player();
-                    p.setId(playerId);
-                    p.setChestNo(txtPlayerChestNo.getText());
-                    p.setName(txtPlayerName.getText());
-                    p.setCaptain(captain1.isSelected());
-                    playerList.add(p);
-                    team.setPlayerList(playerList);
+                Player p = new Player();
+                p.setId(playerId);
+                p.setChestNo(txtPlayerChestNo.getText());
+                p.setName(txtPlayerName.getText());
+                p.setCaptain(captain1.isSelected());
+                p.setPosition(team1position.getSelectedIndex());
+                playerList.add(p);
+                team.setPlayerList(playerList);
 
-                    int id = td.updatePlayer(team);
+                int id = td.updatePlayer(team);
 
-                    if (id != 0) {
-                        Controller.createPlayerDialog.close();
-                       
-                        JOptionPane.showMessageDialog(this, "Player '" + txtPlayerName.getText() + "' Updated Successfully");
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Failed to Update Player");
-                    }
-                    //                }
+                if (id != 0) {
+                    Controller.createPlayerDialog.close();
+
+                    JOptionPane.showMessageDialog(this, "Player '" + txtPlayerName.getText() + "' Updated Successfully");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to Update Player");
+                }
+                //                }
             }
 
         }
@@ -396,6 +429,10 @@ public class PanNewPlayer extends javax.swing.JPanel {
     private void team1combo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_team1combo1ItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_team1combo1ItemStateChanged
+
+    private void team1positionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_team1positionItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_team1positionItemStateChanged
 
     public void enabledDisabledCheckBox(java.awt.event.ItemEvent evt) {
         captain1.setForeground(Color.BLACK);
@@ -456,7 +493,7 @@ public class PanNewPlayer extends javax.swing.JPanel {
             List<Player> capList = new ArrayList<>();
             capList = td.getTeamPlayers(teamsMap.get(team1combo1.getSelectedItem()));
             for (Player player : capList) {
-                if (player.isCaptain() && player.getId()!=playerId) {
+                if (player.isCaptain() && player.getId() != playerId) {
                     msg = "Team Already have captain";
                     captain1.setForeground(Color.red);
                 }
@@ -507,12 +544,14 @@ public class PanNewPlayer extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel savePlayerLabel;
-    private javax.swing.JComboBox team1combo1;
+    public javax.swing.JComboBox team1combo1;
+    public javax.swing.JComboBox team1position;
     private javax.swing.JTextField txtPlayerChestNo;
     private javax.swing.JTextField txtPlayerName;
     // End of variables declaration//GEN-END:variables

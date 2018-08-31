@@ -559,16 +559,52 @@ public class RallyDao {
             PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.rally.ratationorder"));
             ps1.setInt(1, rallyId);
             ResultSet rs1 = ps1.executeQuery();
-
             while (rs1.next()) {
-
                 rallyPositionMap.put(1, playerMap.get(rs1.getInt(1)));
                 rallyPositionMap.put(2, playerMap.get(rs1.getInt(2)));
                 rallyPositionMap.put(3, playerMap.get(rs1.getInt(3)));
                 rallyPositionMap.put(4, playerMap.get(rs1.getInt(4)));
                 rallyPositionMap.put(5, playerMap.get(rs1.getInt(5)));
                 rallyPositionMap.put(6, playerMap.get(rs1.getInt(6)));
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(RallyDao.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return rallyPositionMap;
+    }
+
+    public LinkedHashMap<Integer, Player> getLatestRallyRotationOrderOpp(int matchevaluationId, int oppTeamId) {
+        LinkedHashMap<Integer, Player> rallyPositionMap = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Player> playerMap = new LinkedHashMap<Integer, Player>();
+        TeamDao teamDao = new TeamDao();
+        int rallyId = 0;
+        try {
+            List<Player> playerListL = teamDao.getTeamPlayers(oppTeamId);
+            for (Player p : playerListL) {
+                playerMap.put(p.getId(), p);
+            }
+
+            this.con = db.getConnection();
+
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.latestrally"));
+            ps.setInt(1, matchevaluationId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                rallyId = rs.getInt(1);
+            }
+
+            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.rally.ratationorder"));
+            ps1.setInt(1, rallyId);
+            ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
+                rallyPositionMap.put(1, playerMap.get(rs1.getInt(7)));
+                rallyPositionMap.put(2, playerMap.get(rs1.getInt(8)));
+                rallyPositionMap.put(3, playerMap.get(rs1.getInt(9)));
+                rallyPositionMap.put(4, playerMap.get(rs1.getInt(10)));
+                rallyPositionMap.put(5, playerMap.get(rs1.getInt(11)));
+                rallyPositionMap.put(6, playerMap.get(rs1.getInt(12)));
             }
 
         } catch (SQLException ex) {
@@ -600,6 +636,30 @@ public class RallyDao {
 
             }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(RallyDao.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return rallyPositionMap;
+    }
+
+    public LinkedHashMap<Integer, Player> getLatestMatchSetRotationOrderOpp(int matchevaluationId) {
+        LinkedHashMap<Integer, Player> rallyPositionMap = new LinkedHashMap<>();
+
+        int rallyId = 0;
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchset.latestorder"));
+            ps1.setInt(1, matchevaluationId);
+            ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
+                rallyPositionMap.put(1, Controller.panMatchSet.playerMapOpp.get(rs1.getInt(7)));
+                rallyPositionMap.put(2, Controller.panMatchSet.playerMapOpp.get(rs1.getInt(8)));
+                rallyPositionMap.put(3, Controller.panMatchSet.playerMapOpp.get(rs1.getInt(9)));
+                rallyPositionMap.put(4, Controller.panMatchSet.playerMapOpp.get(rs1.getInt(10)));
+                rallyPositionMap.put(5, Controller.panMatchSet.playerMapOpp.get(rs1.getInt(11)));
+                rallyPositionMap.put(6, Controller.panMatchSet.playerMapOpp.get(rs1.getInt(12)));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class
                     .getName()).log(Level.SEVERE, null, ex);

@@ -23,6 +23,7 @@ import com.vollyball.panels.PanMatchEvaluationHome;
 import com.vollyball.panels.PanMatchReport;
 import com.vollyball.panels.PanMatches;
 import com.vollyball.panels.PanNewCompetition;
+import com.vollyball.panels.PanPESVBHome;
 import com.vollyball.panels.PanTeamBestScorer;
 import com.vollyball.panels.PanTeams;
 import com.vollyball.panels.PanUserDetails;
@@ -68,7 +69,8 @@ public class Controller {
     public static CreateBatchDialog batchDialog;
     public static CreatePlayerDialog createPlayerDialog;
     public static PanBatchTraineeList panBatchTraineeList;
-    
+    public static PanPESVBHome panPESVBHome;
+
     public static void main(String args[]) {
 
         new CommonUtil();

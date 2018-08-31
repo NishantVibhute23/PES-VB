@@ -6,9 +6,13 @@
 package com.vollyball.panels;
 
 import com.vollyball.bean.DigPoints;
+import com.vollyball.bean.Player;
+import com.vollyball.controller.Controller;
+import com.vollyball.enums.PlayerPosition;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -42,6 +46,9 @@ class ImagePanel extends JPanel {
     int midX = 0;
     int midY = 0;
     LinkedHashMap<String, JPanel> panGrid = new LinkedHashMap<String, JPanel>();
+
+    LinkedHashMap<Integer, Point> homeChestNumShow = new LinkedHashMap<Integer, Point>();
+    LinkedHashMap<Integer, Point> oppChestNumShow = new LinkedHashMap<Integer, Point>();
 
     List<DigPoints> shapes = new ArrayList<>();
 
@@ -193,10 +200,7 @@ class ImagePanel extends JPanel {
 
             }
         }
-        for (Map.Entry<String, JPanel> entry : panGrid.entrySet()) {
-            String string = entry.getKey();
-            System.out.println(string);
-        }
+
     }
 
     public void addPanel(String panCode) {
@@ -204,7 +208,7 @@ class ImagePanel extends JPanel {
         p.setSize(66, 66);
         p.setLayout(new GridLayout(2, 2));
         p.setOpaque(false);
-        p.setBorder(BorderFactory.createDashedBorder(Color.pink));
+        p.setBorder(BorderFactory.createDashedBorder(new Color(150, 222, 235), 1, 5));
         String code = panCode;
         for (int k = 1; k <= 2; k++) {
             for (int l = 1; l <= 2; l++) {
@@ -226,13 +230,39 @@ class ImagePanel extends JPanel {
 
                 JPanel pin = new JPanel();
                 pin.setSize(33, 33);
-                pin.setBorder(BorderFactory.createDashedBorder(Color.LIGHT_GRAY));
+                pin.setBorder(BorderFactory.createDashedBorder(new Color(150, 222, 235), 1, 5));
                 pin.setOpaque(false);
                 p.add(pin);
                 panGrid.put(code, pin);
             }
         }
         this.add(p);
+    }
+
+    public void showPlayerChestNum() {
+
+        homeChestNumShow.put(1, getPoint("H9A"));
+        homeChestNumShow.put(2, getPoint("H3A"));
+        homeChestNumShow.put(3, getPoint("H2A"));
+        homeChestNumShow.put(4, getPoint("H1A"));
+        homeChestNumShow.put(5, getPoint("H7A"));
+        homeChestNumShow.put(6, getPoint("H8A"));
+
+        oppChestNumShow.put(1, getPoint("O9A"));
+        oppChestNumShow.put(2, getPoint("O3A"));
+        oppChestNumShow.put(3, getPoint("O2A"));
+        oppChestNumShow.put(4, getPoint("O1A"));
+        oppChestNumShow.put(5, getPoint("O7A"));
+        oppChestNumShow.put(6, getPoint("O8A"));
+
+    }
+
+    public Point getPoint(String pan) {
+        JPanel p1 = panGrid.get(pan);
+        int x = (int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2));
+        int y = (int) ((p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight())) + 8);
+        Point p = new Point(x, y);
+        return p;
     }
 
     public void dig(String skill, List<String> panels) {
@@ -321,11 +351,30 @@ class ImagePanel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
-
+        showPlayerChestNum();
         g.drawImage(img, 0, 0, null);
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(3));
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMap.entrySet()) {
+            Point p = homeChestNumShow.get(entry.getKey());
+            Player player = entry.getValue();
+            Font font = new Font("Serif", Font.BOLD, 22);
+            g2.setFont(font);
+            g2.setColor(PlayerPosition.getNameById(player.getPosition()).getColor());
+            g2.drawString(player.getChestNo(), (int) p.getX(), (int) p.getY());
+        }
+
+        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMapOpp.entrySet()) {
+            Point p = oppChestNumShow.get(entry.getKey());
+            Player player = entry.getValue();
+            Font font = new Font("Serif", Font.BOLD, 22);
+            g2.setFont(font);
+            g2.setColor(PlayerPosition.getNameById(player.getPosition()).getColor());
+            g2.drawString(player.getChestNo(), (int) p.getX(), (int) p.getY());
+        }
+
         for (DigPoints dp : shapes) {
             Path2D p = new GeneralPath();
             p.moveTo(dp.getX1(), dp.getY1());

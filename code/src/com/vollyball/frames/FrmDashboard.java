@@ -7,9 +7,8 @@ package com.vollyball.frames;
 
 import com.vollyball.controller.Controller;
 import com.vollyball.dialog.CreateUserDialog;
-import com.vollyball.panels.PanCompetitionList;
+import com.vollyball.panels.PanPESVBHome;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -30,12 +29,9 @@ public class FrmDashboard extends javax.swing.JFrame {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ex) {
         }
-        panContent.removeAll();
-        Dimension dim = panContent.getSize();
-        Controller.panCompetitionList = new PanCompetitionList();
-
         panMyProfile.setVisible(false);
-        panContent.add(Controller.panCompetitionList, BorderLayout.CENTER);
+        Controller.panPESVBHome = new PanPESVBHome();
+        panContent.add(Controller.panPESVBHome, BorderLayout.CENTER);
         this.validate();
         this.repaint();
     }
@@ -238,16 +234,13 @@ public class FrmDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
         panContent.removeAll();
-        Controller.panCompetitionList = new PanCompetitionList();
-        panContent.add(Controller.panCompetitionList, BorderLayout.CENTER);
+        panContent.add(Controller.panPESVBHome, BorderLayout.CENTER);
         this.validate();
         this.repaint();
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void lblNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNameMouseClicked
-        // TODO add your handling code here:
         if (panMyProfile.isVisible()) {
             panMyProfile.setVisible(false);
         } else {
@@ -256,15 +249,13 @@ public class FrmDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_lblNameMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        // TODO add your handling code here:
         Controller.createUserDialog = new CreateUserDialog();
-        Controller.createUserDialog .setValues(Controller.userBean.getId());
-        Controller.createUserDialog .init();
-        Controller.createUserDialog .show();
+        Controller.createUserDialog.setValues(Controller.userBean.getId());
+        Controller.createUserDialog.init();
+        Controller.createUserDialog.show();
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO add your handling code here:
         Controller.createUserDialog = new CreateUserDialog();
         Controller.createUserDialog.setValues(Controller.userBean.getId());
         Controller.createUserDialog.init();
@@ -272,8 +263,7 @@ public class FrmDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        // TODO add your handling code here:
-         System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jLabel5MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -287,6 +277,6 @@ public class FrmDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     public javax.swing.JLabel lblName;
     public javax.swing.JPanel panContent;
-    private javax.swing.JPanel panMyProfile;
+    public javax.swing.JPanel panMyProfile;
     // End of variables declaration//GEN-END:variables
 }

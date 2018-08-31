@@ -455,14 +455,17 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
 
     public void showPanMatchSet(int set) {
 
-        objRotationOrder = new DialogPanEvaluationRotationOrder();
-        objRotationOrder.init(this.teamId, this.oppId, this.matchId, this.homeTeam, this.oppteam);
-        objRotationOrder.show();
+        int id = matchDao.getMatchSetId(this.matchEvaluationTeamId, set);
+        if (id == 0) {
+            objRotationOrder = new DialogPanEvaluationRotationOrder();
+            objRotationOrder.init(this.teamId, this.oppId, this.matchId, this.homeTeam, this.oppteam, set, this.matchEvaluationTeamId);
+            objRotationOrder.show();
+        }
 
-//        obj = new DialogPanEvaluation();
-//        obj.setSetFields(set, this.matchId, this.teamId, this.oppId, evaluationType, matchEvaluationTeamId);
-//        obj.init();
-//        obj.show();
+        obj = new DialogPanEvaluation();
+        obj.setSetFields(set, this.matchId, this.teamId, this.oppId, evaluationType, matchEvaluationTeamId);
+        obj.init();
+        obj.show();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

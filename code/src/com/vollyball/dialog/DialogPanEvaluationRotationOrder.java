@@ -23,17 +23,19 @@ public class DialogPanEvaluationRotationOrder {
     private JFrame parentFrame;
     private JDialog dialog;
 
-    int homeTeamId, oppTeamId, matchId;
+    int homeTeamId, oppTeamId, matchId, set, matchEvaluationId;
     String homeTeam;
     String oppteam;
 
-    public void init(int homeTeamId, int oppTeamId, int matchId, String homeTeam, String oppteam) {
+    public void init(int homeTeamId, int oppTeamId, int matchId, String homeTeam, String oppteam, int set, int matchEvaluationId) {
         try {
             this.homeTeamId = homeTeamId;
             this.oppTeamId = oppTeamId;
             this.matchId = matchId;
             this.homeTeam = homeTeam;
             this.oppteam = oppteam;
+            this.set = set;
+            this.matchEvaluationId = matchEvaluationId;
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             this.dialog = new JDialog(this.parentFrame, "Player Rotation", true);
 
@@ -52,14 +54,14 @@ public class DialogPanEvaluationRotationOrder {
     }
 
     protected Container createPane() {
-        PanEvaluationRotation panRallyRotation = new PanEvaluationRotation(homeTeamId, oppTeamId, matchId, homeTeam, oppteam);
+        PanEvaluationRotation panRallyRotation = new PanEvaluationRotation(homeTeamId, oppTeamId, matchId, homeTeam, oppteam, set, matchEvaluationId);
 
         return panRallyRotation;
     }
 
     public void show() {
         if (this.dialog == null) {
-            init(homeTeamId, oppTeamId, matchId, homeTeam, oppteam);
+            init(homeTeamId, oppTeamId, matchId, homeTeam, oppteam, set, matchEvaluationId);
         }
         this.dialog.setVisible(true);
     }

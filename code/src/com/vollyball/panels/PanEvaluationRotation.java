@@ -5,13 +5,19 @@
  */
 package com.vollyball.panels;
 
+import com.vollyball.bean.MatchSet;
 import com.vollyball.bean.Player;
+import com.vollyball.bean.SetRotationOrder;
+import com.vollyball.controller.Controller;
+import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.enums.PlayerPosition;
 import java.awt.Color;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -31,16 +37,23 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     int focusOnOpp;
     Color cG = Color.ORANGE;
     Color cL = Color.ORANGE;
+    int set, matchEvaluationTeamId;
+    public LinkedHashMap<Integer, Player> initialHomePositionMap;
+    public LinkedHashMap<Integer, Player> initialOppPositionMap;
+    MatchDao matchDao = new MatchDao();
 
     /**
      * Creates new form PanEvaluationRotation
      */
-    public PanEvaluationRotation(int homeTeamId, int oppTeamId, int matchId, String homeTeam, String oppteam) {
+    public PanEvaluationRotation(int homeTeamId, int oppTeamId, int matchId, String homeTeam, String oppteam, int set, int matchEvaluationTeamId) {
         initComponents();
+        this.set = set;
+        this.matchEvaluationTeamId = matchEvaluationTeamId;
         lblHome.setText(homeTeam);
         lblOpp.setText(oppteam);
         setHomePlayers(homeTeamId, matchId);
         setOppPlayers(oppTeamId, matchId);
+
     }
 
     public void setHomePlayers(int homeTeamId, int matchId) {
@@ -53,19 +66,31 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
             if (selectedPlayersHome.contains(player.getId())) {
                 Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
                 modelSelectedPlayerHome.addRow(row);
-//                if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
-//                    for (int i = 1; i <= 7; i++) {
-//                        if (Controller.panMatchSet.initialPositionMap.get(i).getChestNo().equals(player.getChestNo())) {
-//                            for (int k = 0; k < tbPlayersHome.getRowCount(); k++) {
-//                                if (player.getChestNo().equals((String) tbPlayersHome.getValueAt(k, 1))) {
-//                                    modelSelectedPlayerHome.removeRow(k);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
+                if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
+                    for (int i = 1; i <= 7; i++) {
+                        if (Controller.panMatchSet.initialPositionMap.get(i).getChestNo().equals(player.getChestNo())) {
+                            for (int k = 0; k < tbPlayersHome.getRowCount(); k++) {
+                                if (player.getChestNo().equals((String) tbPlayersHome.getValueAt(k, 1))) {
+                                    modelSelectedPlayerHome.removeRow(k);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
+
+            pos1Home.setText(Controller.panMatchSet.initialPositionMap.get(1).getChestNo());
+            pos2Home.setText(Controller.panMatchSet.initialPositionMap.get(2).getChestNo());
+            pos3Home.setText(Controller.panMatchSet.initialPositionMap.get(3).getChestNo());
+            pos4Home.setText(Controller.panMatchSet.initialPositionMap.get(4).getChestNo());
+            pos5Home.setText(Controller.panMatchSet.initialPositionMap.get(5).getChestNo());
+            pos6Home.setText(Controller.panMatchSet.initialPositionMap.get(6).getChestNo());
+            liberoHome.setText(Controller.panMatchSet.initialPositionMap.get(7).getChestNo());
+        }
+
         tbPlayersHome.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -152,19 +177,30 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
             if (selectedPlayersOpp.contains(player.getId())) {
                 Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
                 modelSelectedPlayerOpp.addRow(row);
-//                if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
-//                    for (int i = 1; i <= 7; i++) {
-//                        if (Controller.panMatchSet.initialPositionMap.get(i).getChestNo().equals(player.getChestNo())) {
-//                            for (int k = 0; k < tbPlayersOpp.getRowCount(); k++) {
-//                                if (player.getChestNo().equals((String) tbPlayersOpp.getValueAt(k, 1))) {
-//                                    modelSelectedPlayerOpp.removeRow(k);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
+                if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
+                    for (int i = 1; i <= 7; i++) {
+                        if (Controller.panMatchSet.initialPositionMapOpp.get(i).getChestNo().equals(player.getChestNo())) {
+                            for (int k = 0; k < tbPlayersOpp.getRowCount(); k++) {
+                                if (player.getChestNo().equals((String) tbPlayersOpp.getValueAt(k, 1))) {
+                                    modelSelectedPlayerOpp.removeRow(k);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
+            pos1Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(1).getChestNo());
+            pos2Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(2).getChestNo());
+            pos3Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(3).getChestNo());
+            pos4Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(4).getChestNo());
+            pos5Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(5).getChestNo());
+            pos6Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(6).getChestNo());
+            liberoOpp.setText(Controller.panMatchSet.initialPositionMapOpp.get(7).getChestNo());
+        }
+
         tbPlayersOpp.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -294,6 +330,15 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 liberoHome = new javax.swing.JTextField();
                 lblHome = new javax.swing.JLabel();
                 jPanel11 = new javax.swing.JPanel();
+                jLabel7 = new javax.swing.JLabel();
+                jPanel12 = new javax.swing.JPanel();
+                jLabel5 = new javax.swing.JLabel();
+                txtEvaluatorName = new javax.swing.JTextField();
+                jPanel13 = new javax.swing.JPanel();
+                jPanel14 = new javax.swing.JPanel();
+                jLabel6 = new javax.swing.JLabel();
+                jPanel15 = new javax.swing.JPanel();
+                jLabel8 = new javax.swing.JLabel();
 
                 setBackground(new java.awt.Color(0, 0, 0));
 
@@ -852,86 +897,191 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(60, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
 
                 jPanel11.setBackground(new java.awt.Color(57, 74, 108));
+
+                jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+                jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+                jLabel7.setText("Set Rotation Order");
 
                 javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
                 jPanel11.setLayout(jPanel11Layout);
                 jPanel11Layout.setHorizontalGroup(
                     jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
                 jPanel11Layout.setVerticalGroup(
                     jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGap(0, 47, Short.MAX_VALUE)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                        .addContainerGap())
+                );
+
+                jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+                jLabel5.setText("Name Of the Evaluator : ");
+
+                javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+                jPanel12.setLayout(jPanel12Layout);
+                jPanel12Layout.setHorizontalGroup(
+                    jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEvaluatorName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
+                jPanel12Layout.setVerticalGroup(
+                    jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEvaluatorName, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                        .addContainerGap())
+                );
+
+                jPanel14.setBackground(new java.awt.Color(57, 74, 108));
+                jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+                jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+                jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+                jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                jLabel6.setText("SAVE");
+                jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        jLabel6MouseClicked(evt);
+                    }
+                });
+
+                javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+                jPanel14.setLayout(jPanel14Layout);
+                jPanel14Layout.setHorizontalGroup(
+                    jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                );
+                jPanel14Layout.setVerticalGroup(
+                    jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                        .addGap(0, 0, 0))
+                );
+
+                jPanel15.setBackground(new java.awt.Color(57, 74, 108));
+                jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+                jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+                jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+                jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                jLabel8.setText("CANCEL");
+                jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        jLabel8MouseClicked(evt);
+                    }
+                });
+
+                javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+                jPanel15.setLayout(jPanel15Layout);
+                jPanel15Layout.setHorizontalGroup(
+                    jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                );
+                jPanel15Layout.setVerticalGroup(
+                    jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                );
+
+                javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+                jPanel13.setLayout(jPanel13Layout);
+                jPanel13Layout.setHorizontalGroup(
+                    jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(337, 337, 337)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
+                jPanel13Layout.setVerticalGroup(
+                    jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13))
                 );
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
                     layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                 );
                 layout.setVerticalGroup(
                     layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                 );
             }// </editor-fold>//GEN-END:initComponents
 
     private void pos4OppFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos4OppFocusGained
-
         focusOnOpp = 4;
         pos4Opp.setBorder(BorderFactory.createLineBorder(cG));
     }//GEN-LAST:event_pos4OppFocusGained
 
     private void pos4OppFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos4OppFocusLost
-
         pos4Opp.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }//GEN-LAST:event_pos4OppFocusLost
 
     private void pos3OppFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos3OppFocusGained
-
         focusOnOpp = 3;
         pos3Opp.setBorder(BorderFactory.createLineBorder(cG));
     }//GEN-LAST:event_pos3OppFocusGained
 
     private void pos3OppFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos3OppFocusLost
-
         pos3Opp.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }//GEN-LAST:event_pos3OppFocusLost
 
     private void pos2OppFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos2OppFocusGained
-
         focusOnOpp = 2;
         pos2Opp.setBorder(BorderFactory.createLineBorder(cG));
     }//GEN-LAST:event_pos2OppFocusGained
 
     private void pos2OppFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos2OppFocusLost
-
         pos2Opp.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }//GEN-LAST:event_pos2OppFocusLost
 
     private void pos5OppFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos5OppFocusGained
-
         focusOnOpp = 5;
         pos5Opp.setBorder(BorderFactory.createLineBorder(cG));
     }//GEN-LAST:event_pos5OppFocusGained
 
     private void pos5OppFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos5OppFocusLost
-
         pos5Opp.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }//GEN-LAST:event_pos5OppFocusLost
 
@@ -954,13 +1104,11 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     }//GEN-LAST:event_pos1OppFocusLost
 
     private void liberoOppFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_liberoOppFocusGained
-
         focusOnOpp = 7;
         liberoOpp.setBorder(BorderFactory.createLineBorder(cG));
     }//GEN-LAST:event_liberoOppFocusGained
 
     private void liberoOppFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_liberoOppFocusLost
-
         liberoOpp.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }//GEN-LAST:event_liberoOppFocusLost
 
@@ -983,7 +1131,6 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     }//GEN-LAST:event_pos3HomeFocusLost
 
     private void pos2HomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos2HomeFocusGained
-
         focusOnHome = 2;
         pos2Home.setBorder(BorderFactory.createLineBorder(cG));
     }//GEN-LAST:event_pos2HomeFocusGained
@@ -1011,13 +1158,11 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     }//GEN-LAST:event_pos6HomeFocusLost
 
     private void pos1HomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos1HomeFocusGained
-
         focusOnHome = 1;
         pos1Home.setBorder(BorderFactory.createLineBorder(cG));
     }//GEN-LAST:event_pos1HomeFocusGained
 
     private void pos1HomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pos1HomeFocusLost
-
         pos1Home.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }//GEN-LAST:event_pos1HomeFocusLost
 
@@ -1051,84 +1196,134 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     }//GEN-LAST:event_liberoHomeFocusLost
 
     private void pos1HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos1HomeMouseClicked
-
         removeHomePlayerFromPosition(evt);
-
     }//GEN-LAST:event_pos1HomeMouseClicked
 
     private void pos2HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos2HomeMouseClicked
-
         removeHomePlayerFromPosition(evt);
     }//GEN-LAST:event_pos2HomeMouseClicked
 
     private void pos3HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos3HomeMouseClicked
-
         removeHomePlayerFromPosition(evt);
     }//GEN-LAST:event_pos3HomeMouseClicked
 
     private void pos4HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos4HomeMouseClicked
-
         removeHomePlayerFromPosition(evt);
     }//GEN-LAST:event_pos4HomeMouseClicked
 
     private void pos5HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos5HomeMouseClicked
-
         removeHomePlayerFromPosition(evt);
     }//GEN-LAST:event_pos5HomeMouseClicked
 
     private void pos6HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos6HomeMouseClicked
-
         removeHomePlayerFromPosition(evt);
     }//GEN-LAST:event_pos6HomeMouseClicked
 
     private void liberoHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liberoHomeMouseClicked
-
         removeHomePlayerFromPosition(evt);
     }//GEN-LAST:event_liberoHomeMouseClicked
 
     private void pos1OppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos1OppMouseClicked
-
         removeOppPlayerFromPosition(evt);
     }//GEN-LAST:event_pos1OppMouseClicked
 
     private void pos2OppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos2OppMouseClicked
-
         removeOppPlayerFromPosition(evt);
     }//GEN-LAST:event_pos2OppMouseClicked
 
     private void pos3OppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos3OppMouseClicked
-
         removeOppPlayerFromPosition(evt);
     }//GEN-LAST:event_pos3OppMouseClicked
 
     private void pos4OppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos4OppMouseClicked
-
         removeOppPlayerFromPosition(evt);
     }//GEN-LAST:event_pos4OppMouseClicked
 
     private void pos5OppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos5OppMouseClicked
-
         removeOppPlayerFromPosition(evt);
     }//GEN-LAST:event_pos5OppMouseClicked
 
     private void pos6OppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pos6OppMouseClicked
-
         removeOppPlayerFromPosition(evt);
     }//GEN-LAST:event_pos6OppMouseClicked
 
     private void liberoOppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liberoOppMouseClicked
-
         removeOppPlayerFromPosition(evt);
     }//GEN-LAST:event_liberoOppMouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        initialHomePositionMap = new LinkedHashMap<>();
+        initialHomePositionMap.put(1, playerMapHome.get(pos1Home.getText()));
+        initialHomePositionMap.put(2, playerMapHome.get(pos2Home.getText()));
+        initialHomePositionMap.put(3, playerMapHome.get(pos3Home.getText()));
+        initialHomePositionMap.put(4, playerMapHome.get(pos4Home.getText()));
+        initialHomePositionMap.put(5, playerMapHome.get(pos5Home.getText()));
+        initialHomePositionMap.put(6, playerMapHome.get(pos6Home.getText()));
+        initialHomePositionMap.put(7, playerMapHome.get(liberoHome.getText()));
+
+        initialOppPositionMap = new LinkedHashMap<>();
+        initialOppPositionMap.put(1, playerMapOpp.get(pos1Opp.getText()));
+        initialOppPositionMap.put(2, playerMapOpp.get(pos2Opp.getText()));
+        initialOppPositionMap.put(3, playerMapOpp.get(pos3Opp.getText()));
+        initialOppPositionMap.put(4, playerMapOpp.get(pos4Opp.getText()));
+        initialOppPositionMap.put(5, playerMapOpp.get(pos5Opp.getText()));
+        initialOppPositionMap.put(6, playerMapOpp.get(pos6Opp.getText()));
+        initialOppPositionMap.put(7, playerMapOpp.get(liberoOpp.getText()));
+
+        MatchSet ms = new MatchSet();
+        ms.setMatchEvaluationTeamId(matchEvaluationTeamId);
+        ms.setSetNo(set);
+        for (Map.Entry<Integer, Player> entry : initialHomePositionMap.entrySet()) {
+            SetRotationOrder sro = new SetRotationOrder();
+            sro.setPosition(entry.getKey());
+            sro.setPlayerId(entry.getValue().getId());
+            ms.getRotationOrder().add(sro);
+        }
+
+        for (Map.Entry<Integer, Player> entry : initialOppPositionMap.entrySet()) {
+            SetRotationOrder sro = new SetRotationOrder();
+            sro.setPosition(entry.getKey());
+            sro.setPlayerId(entry.getValue().getId());
+            ms.getRotationOrderOpp().add(sro);
+        }
+
+        ms.setEvaluator(txtEvaluatorName.getText());
+        ms.setStart_time("00:00");
+        ms.setEnd_time("00:00");
+        ms.setDate("");
+
+        int id = matchDao.insertMatchSet(ms);
+
+        if (id == 0) {
+            JOptionPane.showMessageDialog(this, "Failed to Save");
+        } else {
+            Controller.panMatchEvaluationHome.objRotationOrder.close();
+        }
+
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        Controller.panMatchEvaluationHome.objRotationOrder.close();
+    }//GEN-LAST:event_jLabel8MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1157,5 +1352,6 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     private javax.swing.JTextField pos6Opp;
     private javax.swing.JTable tbPlayersHome;
     private javax.swing.JTable tbPlayersOpp;
+    private javax.swing.JTextField txtEvaluatorName;
     // End of variables declaration//GEN-END:variables
 }
