@@ -126,7 +126,44 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         LinkedHashMap<Integer, Player> latestPositionMapOpp = rallyDao.getLatestMatchSetRotationOrderOpp(Controller.panMatchSet.matchEvaluationId);
 
         RallyEvaluation re = matchDao.getLatestRallyDetails(Controller.panMatchSet.matchEvaluationId);
-        if (re.getStartby() != HomeOpponent.HOME.getId() && re.getWonby() == HomeOpponent.HOME.getId()) {
+
+        if (re.getStartby() == HomeOpponent.HOME.getId() && re.getWonby() == HomeOpponent.OPPONENT.getId()) {
+
+            Player temp = latestPositionMapOpp.get(1);
+            latestPositionMapOpp.put(1, latestPositionMapOpp.get(2));
+            latestPositionMapOpp.put(2, latestPositionMapOpp.get(3));
+            latestPositionMapOpp.put(3, latestPositionMapOpp.get(4));
+//            Player playerP = null;
+//            int i = 0;
+//            if (latestPositionMap.get(5).getChestNo().equals(Controller.panMatchSet.initialPositionMap.get(7).getChestNo())) {
+//                for (Map.Entry<Integer, Player> entrySub : Controller.panMatchSet.substituePositionMap.entrySet()) {
+//                    boolean found = false;
+//                    Integer integer = entrySub.getKey();
+//                    Player player = entrySub.getValue();
+//                    if (integer != 7) {
+//                        for (Map.Entry<Integer, Player> entryRally : latestPositionMap.entrySet()) {
+//                            if (player.getChestNo().equals(entryRally.getValue().getChestNo())) {
+//                                found = true;
+//                                break;
+//                            }
+//                        }
+//                        if (!found) {
+//                            playerP = player;
+//                        }
+//                    }
+//                    i++;
+//                }
+//                if (playerP != null) {
+//                    latestPositionMap.put(4, playerP);
+//                }
+//            } else {
+//                latestPositionMap.put(4, latestPositionMap.get(5));
+//            }
+            latestPositionMapOpp.put(4, latestPositionMapOpp.get(5));
+            latestPositionMapOpp.put(5, latestPositionMapOpp.get(6));
+            latestPositionMapOpp.put(6, temp);
+
+        } else if (re.getStartby() == HomeOpponent.OPPONENT.getId() && re.getWonby() == HomeOpponent.HOME.getId()) {
             Player temp = latestPositionMap.get(1);
             latestPositionMap.put(1, latestPositionMap.get(2));
             latestPositionMap.put(2, latestPositionMap.get(3));
@@ -160,6 +197,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             latestPositionMap.put(5, latestPositionMap.get(6));
             latestPositionMap.put(6, temp);
         }
+
         int i = 0;
         for (Map.Entry<Integer, Player> entry : latestPositionMap.entrySet()) {
             rallyPos.get(i).setText("" + entry.getValue().getChestNo());

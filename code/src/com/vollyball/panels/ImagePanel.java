@@ -13,6 +13,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -20,6 +22,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
@@ -259,8 +262,8 @@ class ImagePanel extends JPanel {
 
     public Point getPoint(String pan) {
         JPanel p1 = panGrid.get(pan);
-        int x = (int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2));
-        int y = (int) ((p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight())) + 8);
+        int x = (int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth()));
+        int y = (int) ((p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight())));
         Point p = new Point(x, y);
         return p;
     }
@@ -358,21 +361,57 @@ class ImagePanel extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMap.entrySet()) {
+//            Point p = homeChestNumShow.get(entry.getKey());
+//            Player player = entry.getValue();
+//            Font font = new Font("Serif", Font.BOLD, 22);
+//            g2.setFont(font);
+//            g2.setColor(PlayerPosition.getNameById(player.getPosition()).getColor());
+//            g2.drawString(player.getChestNo(), (int) p.getX(), (int) p.getY());
+
             Point p = homeChestNumShow.get(entry.getKey());
             Player player = entry.getValue();
-            Font font = new Font("Serif", Font.BOLD, 22);
+            String text = player.getChestNo();
+            int centerX = (int) p.getX(), centerY = (int) p.getY();
+            int ovalWidth = 30, ovalHeight = 30;
+
+            // Draw oval
+            GradientPaint redtowhite = new GradientPaint(centerX - ovalWidth / 2, centerY - ovalHeight / 2, PlayerPosition.getNameById(player.getPosition()).getColor(), centerX - ovalWidth / 2 + 60, centerY - ovalHeight / 2, Color.white);
+            g2.setPaint(redtowhite);
+            g2.fill(new Ellipse2D.Double(centerX - ovalWidth / 2, centerY - ovalHeight / 2, 30, 30));
+            g2.setPaint(Color.black);
+
+            Font font = new Font("Serif", Font.BOLD, 20);
             g2.setFont(font);
-            g2.setColor(PlayerPosition.getNameById(player.getPosition()).getColor());
-            g2.drawString(player.getChestNo(), (int) p.getX(), (int) p.getY());
+            // Draw centered text
+            FontMetrics fm = g.getFontMetrics();
+            double textWidth = fm.getStringBounds(text, g).getWidth();
+
+            g.setColor(Color.WHITE);
+            g.drawString(text, (int) (centerX - textWidth / 2),
+                    (int) (centerY + fm.getMaxAscent() / 3));
         }
 
         for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMapOpp.entrySet()) {
             Point p = oppChestNumShow.get(entry.getKey());
             Player player = entry.getValue();
-            Font font = new Font("Serif", Font.BOLD, 22);
+            String text = player.getChestNo();
+            int centerX = (int) p.getX(), centerY = (int) p.getY();
+            int ovalWidth = 30, ovalHeight = 30;
+
+            // Draw oval
+            GradientPaint redtowhite = new GradientPaint(centerX - ovalWidth / 2, centerY - ovalHeight / 2, PlayerPosition.getNameById(player.getPosition()).getColor(), centerX - ovalWidth / 2 + 60, centerY - ovalHeight / 2, Color.white);
+            g2.setPaint(redtowhite);
+            g2.fill(new Ellipse2D.Double(centerX - ovalWidth / 2, centerY - ovalHeight / 2, 30, 30));
+            g2.setPaint(Color.black);
+
+            // Draw centered text
+            FontMetrics fm = g.getFontMetrics();
+            double textWidth = fm.getStringBounds(text, g).getWidth();
+            Font font = new Font("Serif", Font.BOLD, 20);
             g2.setFont(font);
-            g2.setColor(PlayerPosition.getNameById(player.getPosition()).getColor());
-            g2.drawString(player.getChestNo(), (int) p.getX(), (int) p.getY());
+            g.setColor(Color.WHITE);
+            g.drawString(text, (int) (centerX - textWidth / 2),
+                    (int) (centerY + fm.getMaxAscent() / 3));
         }
 
         for (DigPoints dp : shapes) {
