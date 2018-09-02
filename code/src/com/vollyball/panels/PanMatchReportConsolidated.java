@@ -106,7 +106,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         TeamScores team1SuccessScores = trd.getTeamSuccessReportSkillwise(cb, matchId, team1id);
         TeamScores team1ErrorScores = trd.getTeamErrorReportSkillwise(cb, matchId, team1id);
-        team1Sum.setText(team1SuccessScores.getTeamName());
+        team1Sum.setText(team.getTeam1name());
         team1SumSerSuccess.setText(team1SuccessScores.getServiceRatePerc());
         team1SumAttackSuccess.setText(team1SuccessScores.getAttackRatePerc());
         team1SumBlkSuccess.setText(team1SuccessScores.getBlockRatePerc());
@@ -140,7 +140,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         TeamScores team2SuccessScores = trd.getTeamSuccessReportSkillwise(cb, matchId, team2id);
         TeamScores team2ErrorScores = trd.getTeamErrorReportSkillwise(cb, matchId, team2id);
 
-        team2Sum.setText(team2SuccessScores.getTeamName());
+        team2Sum.setText(team.getTeam2name());
         team2SumSerSuccess.setText(team2SuccessScores.getServiceRatePerc());
         team2SumAttackSuccess.setText(team2SuccessScores.getAttackRatePerc());
         team2SumBlkSuccess.setText(team2SuccessScores.getBlockRatePerc());

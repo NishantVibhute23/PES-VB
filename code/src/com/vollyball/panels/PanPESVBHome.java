@@ -8,6 +8,8 @@ package com.vollyball.panels;
 import com.vollyball.controller.Controller;
 import com.vollyball.training.panel.PanBatchList;
 import java.awt.BorderLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,6 +22,10 @@ public class PanPESVBHome extends javax.swing.JPanel {
      */
     public PanPESVBHome() {
         initComponents();
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("src\\com\\vollyball\\images\\volley-comp.jpg").getImage().getScaledInstance(306, 320, Image.SCALE_SMOOTH));
+        jLabel1.setIcon(imageIcon);
+        ImageIcon iconcomp = new ImageIcon(new ImageIcon("src\\com\\vollyball\\images\\volley-train.jpg").getImage().getScaledInstance(306, 320, Image.SCALE_SMOOTH));
+        jLabel2.setIcon(iconcomp);
     }
 
     /**
@@ -46,6 +52,11 @@ public class PanPESVBHome extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(57, 74, 108), 3));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(57, 74, 108));
 
@@ -74,7 +85,7 @@ public class PanPESVBHome extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -86,6 +97,11 @@ public class PanPESVBHome extends javax.swing.JPanel {
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(57, 74, 108), 3));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(57, 74, 108));
 
@@ -114,7 +130,7 @@ public class PanPESVBHome extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -211,6 +227,26 @@ public class PanPESVBHome extends javax.swing.JPanel {
         Controller.frmDashBoard.validate();
         Controller.frmDashBoard.repaint();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        // TODO add your handling code here:
+        Controller.panCompetitionList = new PanCompetitionList();
+        Controller.frmDashBoard.panContent.removeAll();
+        Controller.frmDashBoard.panMyProfile.setVisible(false);
+        Controller.frmDashBoard.panContent.add(Controller.panCompetitionList, BorderLayout.CENTER);
+        Controller.frmDashBoard.validate();
+        Controller.frmDashBoard.repaint();
+    }//GEN-LAST:event_jPanel2MouseClicked
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        // TODO add your handling code here:
+         Controller.panBatchList = new PanBatchList();
+        Controller.frmDashBoard.panContent.removeAll();
+        Controller.frmDashBoard.panMyProfile.setVisible(false);
+        Controller.frmDashBoard.panContent.add(Controller.panBatchList, BorderLayout.CENTER);
+        Controller.frmDashBoard.validate();
+        Controller.frmDashBoard.repaint();
+    }//GEN-LAST:event_jPanel1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

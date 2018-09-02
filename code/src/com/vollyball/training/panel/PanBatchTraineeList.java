@@ -5,25 +5,19 @@
  */
 package com.vollyball.training.panel;
 
-import com.vollyball.renderer.ColumnGroup;
-import com.vollyball.renderer.EditButtonRenderer;
 import com.vollyball.renderer.GroupableTableHeader;
-import com.vollyball.renderer.ReportButtonRenderer;
 import com.vollyball.renderer.TableHeaderRenderer;
 import com.vollyball.training.bean.Trainee;
 import com.vollyball.training.dao.BatchDao;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -72,13 +66,7 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
                 return false;//This causes all cells to be not editable
             }
         };
-//        model = new DefaultTableModel() {
-//            @Override
-//            public boolean isCellEditable(int row, int column) {
-//                //all cells false
-//                return false;
-//            }
-//        };
+
 
         model.setDataVector(new Object[][]{},
                 new Object[]{"SR No.", "Trainee Name"});
@@ -134,6 +122,17 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
             int pWidth = Math.round(columnWidthPercentage[i] * tW);
             column.setPreferredWidth(pWidth);
         }
+    }
+    
+    private void newFilter() {
+        RowFilter<TableModel, Object> rf = null;
+        //If current expression doesn't parse, don't update.
+        try {
+            rf = RowFilter.regexFilter(txtFilter.getText(), 1);
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+        sorter.setRowFilter(rf);
     }
 
     /**
@@ -244,6 +243,7 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
 
     private void txtFilterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterKeyTyped
         // TODO add your handling code here:
+         newFilter();
     }//GEN-LAST:event_txtFilterKeyTyped
 
 
