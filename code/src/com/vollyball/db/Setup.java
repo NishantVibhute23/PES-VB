@@ -64,6 +64,7 @@ public class Setup extends Thread {
             insertVollyCoordinate(100);
             createBatchTable(70);
             createTraineeTable(75);
+            createSettingTable(80);
 
             FrmRegister.lblStatus.setText("Done");
             FrmRegister.lblFinish.setVisible(true);
@@ -181,6 +182,9 @@ public class Setup extends Thread {
     }
     public void createTraineeTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.trainee"), SetupEnum.Trainee, status);
+    }
+    public void createSettingTable(int status) {
+        executeQuery(CommonUtil.getResourceProperty("create.settings"), SetupEnum.Setting, status);
     }
 
     public void insertRatings(int status) {

@@ -151,5 +151,17 @@ public enum ShortCutEnum {
         }
         return list;
     }
+    
+     public static String getLongFormById(int id){
+        int id1;
+        String lg = null;
+        for (ShortCutEnum dir : ShortCutEnum.values()) {
+           id1=dir.getShortCutId();
+           if(id1==id){
+               lg=dir.getLongForm();
+           }
+        }
+        return lg;
+    }
 
 }

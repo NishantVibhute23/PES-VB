@@ -42,7 +42,8 @@ public enum SetupEnum {
     VollyCoordinate(29, "Volly Coordinate"),
     InsertVollyCoordinate(30, "Insert Volly Coordinate"),
     Batch(31,"Batch"),
-    Trainee(32,"Trainee");
+    Trainee(32,"Trainee"),
+    Setting(33,"Setting");
 
     int step;
 
