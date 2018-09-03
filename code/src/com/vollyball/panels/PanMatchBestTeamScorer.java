@@ -237,6 +237,19 @@ public class PanMatchBestTeamScorer extends javax.swing.JPanel {
         tbReport.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
         tbReport.getColumnModel().getColumn(9).setCellRenderer(centerRenderer);
 
+        tbReport.getColumnModel().getColumn(10).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(11).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(12).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(13).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(14).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(15).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(16).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(17).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(18).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(19).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(20).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(21).setCellRenderer(centerRenderer);
+
         Color ivory = new Color(255, 255, 255);
         tbReport.setOpaque(true);
         tbReport.setFillsViewportHeight(true);

@@ -6,6 +6,7 @@
 package com.vollyball.frames;
 
 import com.vollyball.controller.Controller;
+import com.vollyball.dialog.CreateSettingDialog;
 import com.vollyball.dialog.CreateUserDialog;
 import com.vollyball.panels.PanPESVBHome;
 import java.awt.BorderLayout;
@@ -256,10 +257,9 @@ public class FrmDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        Controller.createUserDialog = new CreateUserDialog();
-        Controller.createUserDialog.setValues(Controller.userBean.getId());
-        Controller.createUserDialog.init();
-        Controller.createUserDialog.show();
+        Controller.createSettingDialog = new CreateSettingDialog();
+        Controller.createSettingDialog.init();
+        Controller.createSettingDialog.show();
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked

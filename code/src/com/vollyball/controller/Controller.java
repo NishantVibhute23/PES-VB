@@ -9,6 +9,7 @@ import com.vollyball.bean.UserBean;
 import com.vollyball.dialog.CreateCompetitionDialog;
 import com.vollyball.dialog.CreateMatchDialog;
 import com.vollyball.dialog.CreatePlayerDialog;
+import com.vollyball.dialog.CreateSettingDialog;
 import com.vollyball.dialog.CreateTeamDialog;
 import com.vollyball.dialog.CreateUserDialog;
 import com.vollyball.frames.FrmDashboard;
@@ -65,6 +66,7 @@ public class Controller {
     public static PanTeamBestScorer panTeamBestScorer;
     public static CreateCompetitionDialog createCompetitionDialog;
     public static CreateUserDialog createUserDialog;
+    public static CreateSettingDialog createSettingDialog;
     public static PanBatchList panBatchList;
     public static CreateBatchDialog batchDialog;
     public static CreatePlayerDialog createPlayerDialog;
