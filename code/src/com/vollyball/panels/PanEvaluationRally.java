@@ -6,7 +6,6 @@ import com.vollyball.bean.RallyEvaluationSkillScore;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.RallyDao;
-import com.vollyball.dialog.DialogReplaceLibero;
 import com.vollyball.enums.HomeOpponent;
 import com.vollyball.enums.Skill;
 import java.awt.BorderLayout;
@@ -51,7 +50,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     RallyEvaluation rallyEvaluation = new RallyEvaluation();
     String startTime, endTime;
     int rallyNum;
-    public DialogReplaceLibero dialogReplaceLibero;
+
     List<JTextField> rallyPos = new ArrayList<>();
     MatchDao matchDao = new MatchDao();
     public List<PanEvaluationRallyRowText> panListRow = new ArrayList<>();
@@ -891,9 +890,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-        dialogReplaceLibero = new DialogReplaceLibero();
-        dialogReplaceLibero.init(this);
-        dialogReplaceLibero.show();
+
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void addToFirstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addToFirstMouseClicked

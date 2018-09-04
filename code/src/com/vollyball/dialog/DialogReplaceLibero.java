@@ -5,8 +5,9 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.panels.PanEvaluationRally;
-import com.vollyball.panels.PanEvaluationReplaceLibero;
+import com.vollyball.panels.PanEvaluationReplaceLiberoHome;
+import com.vollyball.panels.PanEvaluationReplaceLiberoOpp;
+import com.vollyball.panels.PanEvaluationRowDetail;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -23,11 +24,13 @@ public class DialogReplaceLibero {
 
     private JFrame parentFrame;
     private JDialog dialog;
-    PanEvaluationRally p;
+    PanEvaluationRowDetail p;
+    int type;
 
-    public void init(PanEvaluationRally p) {
+    public void init(PanEvaluationRowDetail p, int type) {
         try {
             this.p = p;
+            this.type = type;
             this.dialog = new JDialog(this.parentFrame, "New Match", true);
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());
@@ -40,13 +43,18 @@ public class DialogReplaceLibero {
     }
 
     protected Container createPane() {
-        PanEvaluationReplaceLibero panMatch = new PanEvaluationReplaceLibero(p);
-        return panMatch;
+        if (type == 1) {
+            PanEvaluationReplaceLiberoHome panMatch = new PanEvaluationReplaceLiberoHome(p);
+            return panMatch;
+        } else {
+            PanEvaluationReplaceLiberoOpp panMatch = new PanEvaluationReplaceLiberoOpp(p);
+            return panMatch;
+        }
     }
 
     public void show() {
         if (this.dialog == null) {
-            init(p);
+            init(p, type);
         }
         this.dialog.setVisible(true);
     }

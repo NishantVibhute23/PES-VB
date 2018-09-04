@@ -33,6 +33,7 @@ public class MatchSet {
     List<SetRotationOrder> rotationOrder = new ArrayList<>();
     List<SetRotationOrder> rotationOrderOpp = new ArrayList<>();
     List<SetSubstitution> setSubstitutions = new ArrayList<>();
+    List<SetSubstitution> setSubstitutionsOpp = new ArrayList<>();
     List<SetTimeout> setTimeout = new ArrayList<>();
 
     public int getId() {
@@ -185,6 +186,14 @@ public class MatchSet {
 
     public void setRallyCount(int rallyCount) {
         this.rallyCount = rallyCount;
+    }
+
+    public List<SetSubstitution> getSetSubstitutionsOpp() {
+        return setSubstitutionsOpp;
+    }
+
+    public void setSetSubstitutionsOpp(List<SetSubstitution> setSubstitutionsOpp) {
+        this.setSubstitutionsOpp = setSubstitutionsOpp;
     }
 
 }

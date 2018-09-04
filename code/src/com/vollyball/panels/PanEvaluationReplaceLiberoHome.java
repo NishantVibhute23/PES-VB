@@ -21,16 +21,16 @@ import javax.swing.JTextField;
  *
  * @author Supriya
  */
-public class PanEvaluationReplaceLibero extends javax.swing.JPanel {
+public class PanEvaluationReplaceLiberoHome extends javax.swing.JPanel {
 
     List<JTextField> rallyPos = new ArrayList<>();
-    PanEvaluationRally panEvaluationRally;
+    PanEvaluationRowDetail panEvaluationRally;
     RallyDao rallyDao = new RallyDao();
 
     /**
      * Creates new form PanEvaluationReplaceLibero
      */
-    public PanEvaluationReplaceLibero(PanEvaluationRally panEvaluationRally) {
+    public PanEvaluationReplaceLiberoHome(PanEvaluationRowDetail panEvaluationRally) {
 
         initComponents();
         this.panEvaluationRally = panEvaluationRally;
@@ -138,7 +138,7 @@ public class PanEvaluationReplaceLibero extends javax.swing.JPanel {
             Controller.panMatchSet.rallyPositionMap.put(6, Controller.panMatchSet.ChestMap.get(lblLibero.getText()));
         }
 //        rallyDao.updateLatestOrder(Controller.panMatchSet.rallyPositionMap, ms.getId());
-        this.panEvaluationRally.setRotation();
+        this.panEvaluationRally.refresh();
         this.panEvaluationRally.dialogReplaceLibero.close();
     }
 

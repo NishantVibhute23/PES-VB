@@ -64,6 +64,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     public LinkedHashMap<Integer, Player> rallyPositionMap;
     public LinkedHashMap<Integer, Player> rallyPositionMapOpp;
     public LinkedHashMap<Integer, Player> substituePositionMap;
+    public LinkedHashMap<Integer, Player> substituePositionMapOpp;
 
     public LinkedHashMap<Integer, Player> playerMapOpp = new LinkedHashMap<Integer, Player>();
     public LinkedHashMap<String, Player> ChestMapOpp = new LinkedHashMap<String, Player>();
@@ -107,6 +108,7 @@ public class PanEvaluation extends javax.swing.JPanel {
         initialPositionMapOpp = new LinkedHashMap<>();
         rallyPositionMapOpp = new LinkedHashMap<>();
         substituePositionMap = new LinkedHashMap<>();
+        substituePositionMapOpp = new LinkedHashMap<>();
 
         ms = matchDao.getMatchSet(setNum, matchEvaluationTeamId);
 
@@ -172,6 +174,7 @@ public class PanEvaluation extends javax.swing.JPanel {
             rallyPositionMapOpp = rallyDao.getLatestRallyRotationOrderOpp(matchEvaluationId, ms.getOpponentTeamId());
 
             substituePositionMap.putAll(initialPositionMap);
+            substituePositionMapOpp.putAll(initialPositionMapOpp);
 
             for (SetSubstitution s : ms.getSetSubstitutions()) {
                 String cNo = s.getSubstitutePlayerId() == 0 ? "" : playerMap.get(s.getSubstitutePlayerId()).getChestNo();
@@ -179,6 +182,16 @@ public class PanEvaluation extends javax.swing.JPanel {
                 if (!cNo.equals("")) {
                     if (s.getPoint2() == null) {
                         substituePositionMap.put(s.getPosition(), p);
+                    }
+                }
+            }
+
+            for (SetSubstitution s : ms.getSetSubstitutionsOpp()) {
+                String cNo = s.getSubstitutePlayerId() == 0 ? "" : playerMapOpp.get(s.getSubstitutePlayerId()).getChestNo();
+                Player p = s.getSubstitutePlayerId() == 0 ? null : playerMapOpp.get(s.getSubstitutePlayerId());
+                if (!cNo.equals("")) {
+                    if (s.getPoint2() == null) {
+                        substituePositionMapOpp.put(s.getPosition(), p);
                     }
                 }
             }
