@@ -6,6 +6,7 @@
 package com.vollyball.panels;
 
 import com.vollyball.bean.Settings;
+import com.vollyball.controller.Controller;
 import com.vollyball.dao.SettingDao;
 import com.vollyball.enums.HeadingEnum;
 import com.vollyball.enums.ShortCutEnum;
@@ -85,39 +86,6 @@ public class PanSettings extends javax.swing.JPanel {
 
             }
 
-//            for (HeadingEnum dir : HeadingEnum.values()) {
-//                List<Settings> settingList=new ArrayList<>();
-//                PanSettingHead panel = new PanSettingHead(dir.getLongForm());
-//                GridBagConstraints gbcRow = new GridBagConstraints();
-//                gbcRow.gridwidth = GridBagConstraints.REMAINDER;
-//                gbcRow.weightx = 1;
-//                gbcRow.gridheight = 2;
-//                gbcRow.fill = GridBagConstraints.HORIZONTAL;
-//                mainList.add(panel, gbcRow, k);
-//                k++;
-//                List<ShortCutEnum> list = ShortCutEnum.getByHeadingId(dir.getId());
-//                int i = 1;
-//                for (ShortCutEnum sce : list) {
-//                    PanSettingsRow panelShortcut = new PanSettingsRow(i, sce.getLongForm(), sce.getAbbr(), sce.getCode());
-//                    Settings set=new Settings();
-//                    set.setHeadingId(sce.getHeadingId());
-//                    set.setShortCutId(sce.getShortCutId());
-//                    set.setCode(sce.getCode());
-//                    set.setAbbr(sce.getAbbr());
-//                    settingList.add(set);
-//                    GridBagConstraints gbcRowShortcut = new GridBagConstraints();
-//                    gbcRowShortcut.gridwidth = GridBagConstraints.REMAINDER;
-//                    gbcRowShortcut.weightx = 1;
-//                    gbcRowShortcut.gridheight = 2;
-//                    gbcRowShortcut.fill = GridBagConstraints.HORIZONTAL;
-//                    mainList.add(panelShortcut, gbcRowShortcut, k);
-//                    i++;
-//                    k++;
-//                }
-//                settingMap.put(dir.getId(), settingList);
-//
-//            }
-//            int id=sd.insertSettings(settingMap);
         }
 
     }
@@ -306,19 +274,32 @@ public class PanSettings extends javax.swing.JPanel {
             listSetting.add(set);
 //            panSettingsRow.getCode();
         }
+        List<Settings> listSettingtemp = new ArrayList<>();
+        int i = 0;
+        int size = 0;
         for (Map.Entry<Integer, List<Settings>> entry : settingMap.entrySet()) {
             List<Settings> value = entry.getValue();
-            int i = 0;
+            size = size + value.size();
             for (Settings settings : value) {
                 if (settings.getCode().equals(listSetting.get(i).getCode())) {
-                    status = true;
+                    listSettingtemp.add(settings);
                 }
                 i++;
             }
 
         }
+        if (size == listSettingtemp.size()) {
+            status = true;
+        }
         if (!status) {
-            sd.updateSettings(listSetting);
+            int val = sd.updateSettings(listSetting);
+            if (val != 0) {
+                Controller.createSettingDialog.close();
+                JOptionPane.showMessageDialog(this, "Code Shortcut Updated");
+            } else {
+                JOptionPane.showMessageDialog(this, "Code Shortcut Failed To Update");
+            }
+
         } else {
 
             JOptionPane.showMessageDialog(this, "Code Shortcut Cannot be Same");

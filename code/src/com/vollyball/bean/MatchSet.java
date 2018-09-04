@@ -195,5 +195,5 @@ public class MatchSet {
     public void setSetSubstitutionsOpp(List<SetSubstitution> setSubstitutionsOpp) {
         this.setSubstitutionsOpp = setSubstitutionsOpp;
     }
-
+    
 }

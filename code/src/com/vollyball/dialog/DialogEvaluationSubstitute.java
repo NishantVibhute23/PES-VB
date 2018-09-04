@@ -6,6 +6,7 @@
 package com.vollyball.dialog;
 
 import com.vollyball.panels.PanEvaluationSubstitute;
+import com.vollyball.panels.PanEvaluationSubstitutes;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -46,7 +47,8 @@ public class DialogEvaluationSubstitute {
     }
 
     protected Container createPane() {
-        PanEvaluationSubstitute panMatch = new PanEvaluationSubstitute(setNum, matchEvaluationTeamId);
+//        PanEvaluationSubstitute panMatch = new PanEvaluationSubstitute(setNum, matchEvaluationTeamId);
+        PanEvaluationSubstitutes panMatch = new PanEvaluationSubstitutes(setNum, matchEvaluationTeamId);
 
         return panMatch;
     }

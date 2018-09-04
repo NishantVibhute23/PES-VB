@@ -313,7 +313,18 @@ public class MatchDao {
                         ps1.setInt(1, s.getPosition());
                         ps1.setInt(2, s.getRotation_player_id());
                         ps1.setInt(3, mid);
+                        ps1.setInt(4, 1);
                         ps1.executeUpdate();
+                    }
+                }
+                for (SetSubstitution s : ms.getSetSubstitutionsOpp()) {
+                    if (s.getPosition() != 7) {
+                        PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.matchset.substitution"));
+                        ps2.setInt(1, s.getPosition());
+                        ps2.setInt(2, s.getRotation_player_id());
+                        ps2.setInt(3, mid);
+                        ps2.setInt(4, 2);
+                        ps2.executeUpdate();
                     }
                 }
 
@@ -398,8 +409,11 @@ public class MatchDao {
                 ms.setRotationOrderOpp(rotationOrderOpp);
 
                 List<SetSubstitution> setSubstitutions = new ArrayList<>();
+                List<SetSubstitution> setSubstitutionsOpp = new ArrayList<>();
+
                 PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchset.substitution"));
                 ps2.setInt(1, ms.getId());
+                ps2.setInt(2, 1);
                 ResultSet rs2 = ps2.executeQuery();
 
                 while (rs2.next()) {
@@ -415,6 +429,25 @@ public class MatchDao {
 
                 }
                 ms.setSetSubstitutions(setSubstitutions);
+                
+                PreparedStatement ps5 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchset.substitution"));
+                ps5.setInt(1, ms.getId());
+                ps5.setInt(2, 2);
+                ResultSet rs5 = ps5.executeQuery();
+
+                while (rs5.next()) {
+                    SetSubstitution s = new SetSubstitution();
+                    s.setId(rs5.getInt(1));
+                    s.setPosition(rs5.getInt(2));
+                    s.setRotation_player_id(rs5.getInt(3));
+                    s.setMatch_evaluation_id(rs5.getInt(4));
+                    s.setSubstitutePlayerId(rs5.getInt(5));
+                    s.setPoint1(rs5.getString(6));
+                    s.setPoint2(rs5.getString(7));
+                    setSubstitutionsOpp.add(s);
+
+                }
+                ms.setSetSubstitutionsOpp(setSubstitutionsOpp);
 
                 PreparedStatement ps6 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchset.plusminus"));
                 ps6.setInt(1, ms.getId());

@@ -11,6 +11,7 @@ import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.RallyDao;
 import com.vollyball.dao.TeamDao;
+import com.vollyball.db.Setup;
 import com.vollyball.dialog.DialogEvaluationSubstitute;
 import com.vollyball.dialog.DialogEvaluationTimeout;
 import com.vollyball.dialog.DialogPanEvaluationRotationOrder;
@@ -92,7 +93,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     public PanEvaluation(int setNum, int matchId, int teamEvaluateId, int opponentId, int evaluationType, int matchEvaluationTeamId) {
 
         initComponents();
-
+ 
         initializePlayer();
         playerList = teamDao.getTeamPlayers(teamEvaluateId);
         playerListOpp = teamDao.getTeamPlayers(opponentId);
@@ -930,12 +931,24 @@ public class PanEvaluation extends javax.swing.JPanel {
                 sro.setPlayerId(entry.getValue().getId());
                 ms.getRotationOrder().add(sro);
             }
+            for (Map.Entry<Integer, Player> entry : initialPositionMapOpp.entrySet()) {
+                SetRotationOrder sro = new SetRotationOrder();
+                sro.setPosition(entry.getKey());
+                sro.setPlayerId(entry.getValue().getId());
+                ms.getRotationOrderOpp().add(sro);
+            }
 
             for (Map.Entry<Integer, Player> entry : initialPositionMap.entrySet()) {
                 SetSubstitution sro = new SetSubstitution();
                 sro.setPosition(entry.getKey());
                 sro.setRotation_player_id(entry.getValue().getId());
                 ms.getSetSubstitutions().add(sro);
+            }
+            for (Map.Entry<Integer, Player> entry : initialPositionMapOpp.entrySet()) {
+                SetSubstitution sro = new SetSubstitution();
+                sro.setPosition(entry.getKey());
+                sro.setRotation_player_id(entry.getValue().getId());
+                ms.getSetSubstitutionsOpp().add(sro);
             }
 
             matchEvaluationId = matchDao.saveMatchSet(ms);
