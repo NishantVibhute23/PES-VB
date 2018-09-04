@@ -12,9 +12,11 @@ import com.vollyball.enums.ShortCutEnum;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -25,8 +27,9 @@ import javax.swing.JScrollPane;
 public class PanSettings extends javax.swing.JPanel {
 
     PanSettingListValue panSettingListValue;
-    Map<Integer,List<Settings>> settingMap=new HashMap<>();
-    
+    Map<Integer, List<Settings>> settingMap = new HashMap<>();
+    List<PanSettingsRow> listSettingsRow = new ArrayList<>();
+    SettingDao sd = new SettingDao();
 
     /**
      * Creates new form PanSettings
@@ -43,8 +46,8 @@ public class PanSettings extends javax.swing.JPanel {
         private JPanel mainList;
 
         public PanSettingListValue() {
-            SettingDao sd=new SettingDao();
-            settingMap=sd.getSettings();
+
+            settingMap = sd.getSettings();
             setLayout(new BorderLayout());
             mainList = new JPanel(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
@@ -54,7 +57,7 @@ public class PanSettings extends javax.swing.JPanel {
             mainList.add(new JPanel(), gbc);
             add(new JScrollPane(mainList));
             int k = 0;
-            
+
             for (Map.Entry<Integer, List<Settings>> entry : settingMap.entrySet()) {
                 Integer key = entry.getKey();
                 List<Settings> value = entry.getValue();
@@ -66,22 +69,22 @@ public class PanSettings extends javax.swing.JPanel {
                 gbcRow.fill = GridBagConstraints.HORIZONTAL;
                 mainList.add(panel, gbcRow, k);
                 k++;
-                 int i = 1;
+                int i = 1;
                 for (Settings settings : value) {
-                    PanSettingsRow panelShortcut = new PanSettingsRow(i, ShortCutEnum.getLongFormById(settings.getShortCutId()), settings.getAbbr(), settings.getCode());
+                    PanSettingsRow panelShortcut = new PanSettingsRow(i, ShortCutEnum.getLongFormById(settings.getShortCutId()), settings.getAbbr(), settings.getCode(), settings.getShortCutId());
                     GridBagConstraints gbcRowShortcut = new GridBagConstraints();
                     gbcRowShortcut.gridwidth = GridBagConstraints.REMAINDER;
                     gbcRowShortcut.weightx = 1;
                     gbcRowShortcut.gridheight = 2;
                     gbcRowShortcut.fill = GridBagConstraints.HORIZONTAL;
                     mainList.add(panelShortcut, gbcRowShortcut, k);
+                    listSettingsRow.add(panelShortcut);
                     i++;
                     k++;
                 }
-                
+
             }
-            
-            
+
 //            for (HeadingEnum dir : HeadingEnum.values()) {
 //                List<Settings> settingList=new ArrayList<>();
 //                PanSettingHead panel = new PanSettingHead(dir.getLongForm());
@@ -114,15 +117,11 @@ public class PanSettings extends javax.swing.JPanel {
 //                settingMap.put(dir.getId(), settingList);
 //
 //            }
-            
 //            int id=sd.insertSettings(settingMap);
-
-            
-
         }
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -298,9 +297,35 @@ public class PanSettings extends javax.swing.JPanel {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
 
+        boolean status = false;
+        List<Settings> listSetting = new ArrayList<>();
+        for (PanSettingsRow panSettingsRow : listSettingsRow) {
+            Settings set = new Settings();
+            set.setShortCutId(panSettingsRow.getShortcutId());
+            set.setCode(panSettingsRow.getCode());
+            listSetting.add(set);
+//            panSettingsRow.getCode();
+        }
+        for (Map.Entry<Integer, List<Settings>> entry : settingMap.entrySet()) {
+            List<Settings> value = entry.getValue();
+            int i = 0;
+            for (Settings settings : value) {
+                if (settings.getCode().equals(listSetting.get(i).getCode())) {
+                    status = true;
+                }
+                i++;
+            }
+
+        }
+        if (!status) {
+            sd.updateSettings(listSetting);
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Code Shortcut Cannot be Same");
+        }
+
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

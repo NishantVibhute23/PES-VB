@@ -138,6 +138,14 @@ public enum SkillsDescCriteria {
         this.skillId = skillId;
     }
 
+    public int getView() {
+        return view;
+    }
+
+    public void setView(int view) {
+        this.view = view;
+    }
+
     public static List<SkillsDescCriteria> getTypeBySkill(int skillId) {
         List<SkillsDescCriteria> list = new ArrayList<>();
         for (SkillsDescCriteria e : values()) {
@@ -158,10 +166,10 @@ public enum SkillsDescCriteria {
         return null;
     }
 
-    public static List<SkillsDescCriteria> getSkillDescCriteriaBySkillandView(int skillId, int view) {
+    public static List<SkillsDescCriteria> getSkillDescCriteriaBySkillandView(int skillId) {
         List<SkillsDescCriteria> list = new ArrayList<>();
         for (SkillsDescCriteria e : values()) {
-            if (e.skillId == skillId && e.view == view) {
+            if (e.skillId == skillId) {
                 list.add(e);
             }
         }

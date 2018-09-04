@@ -89,7 +89,9 @@ public class PanEvaluation extends javax.swing.JPanel {
      * Creates new form PanEvaluation
      */
     public PanEvaluation(int setNum, int matchId, int teamEvaluateId, int opponentId, int evaluationType, int matchEvaluationTeamId) {
+
         initComponents();
+
         initializePlayer();
         playerList = teamDao.getTeamPlayers(teamEvaluateId);
         playerListOpp = teamDao.getTeamPlayers(opponentId);

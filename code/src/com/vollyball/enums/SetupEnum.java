@@ -41,9 +41,10 @@ public enum SetupEnum {
     MatchPlayers(28, "Match Player"),
     VollyCoordinate(29, "Volly Coordinate"),
     InsertVollyCoordinate(30, "Insert Volly Coordinate"),
-    Batch(31,"Batch"),
-    Trainee(32,"Trainee"),
-    Setting(33,"Setting");
+    Batch(31, "Batch"),
+    Trainee(32, "Trainee"),
+    Setting(33, "Setting"),
+    InsertSettings(34, "Insert Setting");
 
     int step;
 

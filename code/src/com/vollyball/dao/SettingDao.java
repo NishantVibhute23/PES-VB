@@ -5,7 +5,6 @@
  */
 package com.vollyball.dao;
 
-import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.Settings;
 import com.vollyball.db.DbUtil;
 import com.vollyball.util.CommonUtil;
@@ -108,4 +107,42 @@ public class SettingDao {
         return count;
     }
 
+    public Settings getCodeForId(int shortCutId) {
+        Settings set = new Settings();
+
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps;
+            ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.code.for.shortCutId"));
+            ps.setInt(1, shortCutId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                set.setShortCutId(rs.getInt(1));
+                set.setCode(rs.getString(2));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return set;
+    }
+
+    public int updateSettings(List<Settings> settingList) {
+        int count = 0;
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps;
+
+            for (Settings settings : settingList) {
+                ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.setting"));
+                ps.setString(1, settings.getCode());
+                ps.setInt(2, settings.getShortCutId());
+                count = ps.executeUpdate();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
 }

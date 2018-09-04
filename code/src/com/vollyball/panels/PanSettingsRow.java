@@ -11,22 +11,31 @@ package com.vollyball.panels;
  */
 public class PanSettingsRow extends javax.swing.JPanel {
 
+    int shortcutId;
+
     /**
      * Creates new form PanSttingsRow
      */
-    public PanSettingsRow(int srNo, String longForm, String abbr, String Code) {
-
+    public PanSettingsRow(int srNo, String longForm, String abbr, String Code, int shortcutId) {
         initComponents();
         lblSRNo.setText("" + srNo);
         lblLongForm.setText(longForm);
         lblAbbr.setText(abbr);
         txtCode.setText(Code);
+        this.shortcutId = shortcutId;
+    }
+
+    public int getShortcutId() {
+        return shortcutId;
+    }
+
+    public String getCode() {
+        return txtCode.getText();
     }
 
     public PanSettingsRow() {
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

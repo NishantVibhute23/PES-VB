@@ -5,10 +5,14 @@
  */
 package com.vollyball.db;
 
+import com.vollyball.bean.Settings;
 import com.vollyball.bean.UserBean;
 import com.vollyball.controller.Controller;
+import com.vollyball.dao.SettingDao;
+import com.vollyball.enums.HeadingEnum;
 import com.vollyball.enums.Rating;
 import com.vollyball.enums.SetupEnum;
+import com.vollyball.enums.ShortCutEnum;
 import com.vollyball.enums.Skill;
 import com.vollyball.enums.SkillDetails;
 import com.vollyball.enums.VollyCourtCoordinate;
@@ -18,6 +22,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,6 +73,7 @@ public class Setup extends Thread {
             createBatchTable(70);
             createTraineeTable(75);
             createSettingTable(80);
+            insertDefaultSettings(80);
 
             FrmRegister.lblStatus.setText("Done");
             FrmRegister.lblFinish.setVisible(true);
@@ -176,13 +185,15 @@ public class Setup extends Thread {
     public void creatematchevaluationsetlatestrotation(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.matchevaluationsetlatestrotation"), SetupEnum.VollyCoordinate, status);
     }
-    
+
     public void createBatchTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.batch"), SetupEnum.Batch, status);
     }
+
     public void createTraineeTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.trainee"), SetupEnum.Trainee, status);
     }
+
     public void createSettingTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.settings"), SetupEnum.Setting, status);
     }
@@ -333,6 +344,31 @@ public class Setup extends Thread {
 
         if (resp != 0) {
             Controller.stepCompleted.put(SetupEnum.InsertVollyCoordinate.getStep(), SetupEnum.InsertVollyCoordinate.getValue());
+            FrmRegister.pgrStatus.setValue(status);
+        }
+    }
+
+    public void insertDefaultSettings(int status) {
+        SettingDao sd = new SettingDao();
+        Map<Integer, List<Settings>> settingMap = new LinkedHashMap<>();
+        for (HeadingEnum dir : HeadingEnum.values()) {
+            List<Settings> settingList = new ArrayList<>();
+            List<ShortCutEnum> list = ShortCutEnum.getByHeadingId(dir.getId());
+            for (ShortCutEnum sce : list) {
+                Settings set = new Settings();
+                set.setHeadingId(sce.getHeadingId());
+                set.setShortCutId(sce.getShortCutId());
+                set.setCode(sce.getCode());
+                set.setAbbr(sce.getAbbr());
+                settingList.add(set);
+
+            }
+            settingMap.put(dir.getId(), settingList);
+
+        }
+        int id = sd.insertSettings(settingMap);
+        if (id != 0) {
+            Controller.stepCompleted.put(SetupEnum.InsertSettings.getStep(), SetupEnum.InsertSettings.getValue());
             FrmRegister.pgrStatus.setValue(status);
         }
     }

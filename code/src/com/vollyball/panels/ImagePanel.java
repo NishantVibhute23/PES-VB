@@ -38,7 +38,7 @@ import javax.swing.JPanel;
  *
  * @author nishant.vibhute
  */
-class ImagePanel extends JPanel {
+public class ImagePanel extends JPanel {
 
     Graphics g;
     private Image img;
@@ -48,7 +48,7 @@ class ImagePanel extends JPanel {
     int y2 = 0;
     int midX = 0;
     int midY = 0;
-    LinkedHashMap<String, JPanel> panGrid = new LinkedHashMap<String, JPanel>();
+    static LinkedHashMap<String, JPanel> panGrid = new LinkedHashMap<String, JPanel>();
 
     LinkedHashMap<Integer, Point> homeChestNumShow = new LinkedHashMap<Integer, Point>();
     LinkedHashMap<Integer, Point> oppChestNumShow = new LinkedHashMap<Integer, Point>();
@@ -73,17 +73,17 @@ class ImagePanel extends JPanel {
             for (int j = 1; j <= 5; j++) {
 
                 if (i == 1) {
-                    String panCode = "OB";
+                    String panCode = "O";
                     if (j == 1) {
-                        panCode = panCode + "1";
+                        panCode = panCode + "R4";
                     } else if (j == 2) {
-                        panCode = panCode + "2";
+                        panCode = panCode + "12";
                     } else if (j == 3) {
-                        panCode = panCode + "3";
+                        panCode = panCode + "62";
                     } else if (j == 4) {
-                        panCode = panCode + "4";
+                        panCode = panCode + "52";
                     } else if (j == 5) {
-                        panCode = panCode + "5";
+                        panCode = panCode + "L4";
                     }
                     addPanel(panCode);
                 }
@@ -91,15 +91,15 @@ class ImagePanel extends JPanel {
                 if (i == 2) {
                     String panCode = "O";
                     if (j == 1) {
-                        panCode = panCode + "L3";
-                    } else if (j == 2) {
-                        panCode = panCode + "7";
-                    } else if (j == 3) {
-                        panCode = panCode + "8";
-                    } else if (j == 4) {
-                        panCode = panCode + "9";
-                    } else if (j == 5) {
                         panCode = panCode + "R3";
+                    } else if (j == 2) {
+                        panCode = panCode + "1";
+                    } else if (j == 3) {
+                        panCode = panCode + "6";
+                    } else if (j == 4) {
+                        panCode = panCode + "5";
+                    } else if (j == 5) {
+                        panCode = panCode + "L3";
                     }
                     addPanel(panCode);
                 }
@@ -107,15 +107,15 @@ class ImagePanel extends JPanel {
                 if (i == 3) {
                     String panCode = "O";
                     if (j == 1) {
-                        panCode = panCode + "L2";
-                    } else if (j == 2) {
-                        panCode = panCode + "4";
-                    } else if (j == 3) {
-                        panCode = panCode + "5";
-                    } else if (j == 4) {
-                        panCode = panCode + "6";
-                    } else if (j == 5) {
                         panCode = panCode + "R2";
+                    } else if (j == 2) {
+                        panCode = panCode + "11";
+                    } else if (j == 3) {
+                        panCode = panCode + "61";
+                    } else if (j == 4) {
+                        panCode = panCode + "51";
+                    } else if (j == 5) {
+                        panCode = panCode + "L2";
                     }
                     addPanel(panCode);
                 }
@@ -123,15 +123,15 @@ class ImagePanel extends JPanel {
                 if (i == 4) {
                     String panCode = "O";
                     if (j == 1) {
-                        panCode = panCode + "L1";
-                    } else if (j == 2) {
-                        panCode = panCode + "1";
-                    } else if (j == 3) {
-                        panCode = panCode + "2";
-                    } else if (j == 4) {
-                        panCode = panCode + "3";
-                    } else if (j == 5) {
                         panCode = panCode + "R1";
+                    } else if (j == 2) {
+                        panCode = panCode + "2";
+                    } else if (j == 3) {
+                        panCode = panCode + "3";
+                    } else if (j == 4) {
+                        panCode = panCode + "4";
+                    } else if (j == 5) {
+                        panCode = panCode + "L1";
                     }
                     addPanel(panCode);
                 }
@@ -141,11 +141,11 @@ class ImagePanel extends JPanel {
                     if (j == 1) {
                         panCode = panCode + "L1";
                     } else if (j == 2) {
-                        panCode = panCode + "1";
+                        panCode = panCode + "4";
                     } else if (j == 3) {
-                        panCode = panCode + "2";
-                    } else if (j == 4) {
                         panCode = panCode + "3";
+                    } else if (j == 4) {
+                        panCode = panCode + "2";
                     } else if (j == 5) {
                         panCode = panCode + "R1";
                     }
@@ -157,11 +157,11 @@ class ImagePanel extends JPanel {
                     if (j == 1) {
                         panCode = panCode + "L2";
                     } else if (j == 2) {
-                        panCode = panCode + "4";
+                        panCode = panCode + "51";
                     } else if (j == 3) {
-                        panCode = panCode + "5";
+                        panCode = panCode + "61";
                     } else if (j == 4) {
-                        panCode = panCode + "6";
+                        panCode = panCode + "11";
                     } else if (j == 5) {
                         panCode = panCode + "R2";
                     }
@@ -173,11 +173,11 @@ class ImagePanel extends JPanel {
                     if (j == 1) {
                         panCode = panCode + "L3";
                     } else if (j == 2) {
-                        panCode = panCode + "7";
+                        panCode = panCode + "5";
                     } else if (j == 3) {
-                        panCode = panCode + "8";
+                        panCode = panCode + "6";
                     } else if (j == 4) {
-                        panCode = panCode + "9";
+                        panCode = panCode + "1";
                     } else if (j == 5) {
                         panCode = panCode + "R3";
                     }
@@ -186,17 +186,17 @@ class ImagePanel extends JPanel {
                 }
 
                 if (i == 8) {
-                    String panCode = "HB";
+                    String panCode = "H";
                     if (j == 1) {
-                        panCode = panCode + "1";
+                        panCode = panCode + "L4";
                     } else if (j == 2) {
-                        panCode = panCode + "2";
+                        panCode = panCode + "52";
                     } else if (j == 3) {
-                        panCode = panCode + "3";
+                        panCode = panCode + "62";
                     } else if (j == 4) {
-                        panCode = panCode + "4";
+                        panCode = panCode + "12";
                     } else if (j == 5) {
-                        panCode = panCode + "5";
+                        panCode = panCode + "R4";
                     }
                     addPanel(panCode);
                 }
@@ -208,7 +208,7 @@ class ImagePanel extends JPanel {
 
     public void addPanel(String panCode) {
         JPanel p = new JPanel();
-        p.setSize(66, 66);
+        p.setSize(50, 50);
         p.setLayout(new GridLayout(2, 2));
         p.setOpaque(false);
         p.setBorder(BorderFactory.createDashedBorder(new Color(150, 222, 235), 1, 5));
@@ -232,7 +232,7 @@ class ImagePanel extends JPanel {
                 }
 
                 JPanel pin = new JPanel();
-                pin.setSize(33, 33);
+                pin.setSize(25, 25);
                 pin.setBorder(BorderFactory.createDashedBorder(new Color(150, 222, 235), 1, 5));
                 pin.setOpaque(false);
                 p.add(pin);
@@ -244,20 +244,31 @@ class ImagePanel extends JPanel {
 
     public void showPlayerChestNum() {
 
-        homeChestNumShow.put(1, getPoint("H9A"));
-        homeChestNumShow.put(2, getPoint("H3A"));
-        homeChestNumShow.put(3, getPoint("H2A"));
-        homeChestNumShow.put(4, getPoint("H1A"));
-        homeChestNumShow.put(5, getPoint("H7A"));
-        homeChestNumShow.put(6, getPoint("H8A"));
+        homeChestNumShow.put(1, getPoint("H1A"));
+        homeChestNumShow.put(2, getPoint("H2A"));
+        homeChestNumShow.put(3, getPoint("H3A"));
+        homeChestNumShow.put(4, getPoint("H4A"));
+        homeChestNumShow.put(5, getPoint("H5A"));
+        homeChestNumShow.put(6, getPoint("H6A"));
 
-        oppChestNumShow.put(1, getPoint("O9A"));
-        oppChestNumShow.put(2, getPoint("O3A"));
-        oppChestNumShow.put(3, getPoint("O2A"));
-        oppChestNumShow.put(4, getPoint("O1A"));
-        oppChestNumShow.put(5, getPoint("O7A"));
-        oppChestNumShow.put(6, getPoint("O8A"));
+        oppChestNumShow.put(1, getPoint("O1A"));
+        oppChestNumShow.put(2, getPoint("O2A"));
+        oppChestNumShow.put(3, getPoint("O3A"));
+        oppChestNumShow.put(4, getPoint("O4A"));
+        oppChestNumShow.put(5, getPoint("O5A"));
+        oppChestNumShow.put(6, getPoint("O6A"));
 
+    }
+
+    public static DigPoints getPoints(String pan1, String pan2) {
+        DigPoints dp = new DigPoints();
+        JPanel p1 = panGrid.get(pan1);
+        JPanel p2 = panGrid.get(pan2);
+        dp.setX1((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+        dp.setY1((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+        dp.setX2((int) (p2.getParent().getLocation().getX() + p2.getLocation().getX() + (p2.getWidth() / 2)));
+        dp.setY2((int) (p2.getParent().getLocation().getY() + p2.getLocation().getY() + (p2.getHeight() / 2)));
+        return dp;
     }
 
     public Point getPoint(String pan) {
@@ -342,6 +353,10 @@ class ImagePanel extends JPanel {
         }
         p.setLocation(midX, midY);
         return p;
+    }
+
+    public void refresh() {
+        repaint();
     }
 
     public void drawImage(int x1, int y1, int x2, int y2) {
