@@ -15,8 +15,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -167,6 +169,11 @@ public class PanSettings extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("CANCEL");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -274,23 +281,27 @@ public class PanSettings extends javax.swing.JPanel {
             listSetting.add(set);
 //            panSettingsRow.getCode();
         }
-        List<Settings> listSettingtemp = new ArrayList<>();
-        int i = 0;
-        int size = 0;
-        for (Map.Entry<Integer, List<Settings>> entry : settingMap.entrySet()) {
-            List<Settings> value = entry.getValue();
-            size = size + value.size();
-            for (Settings settings : value) {
-                if (settings.getCode().equals(listSetting.get(i).getCode())) {
-                    listSettingtemp.add(settings);
-                }
-                i++;
+        Object[] a = listSetting.toArray();
+        Set<String> set = new HashSet<String>();
+        for (int k = 0; k < a.length - 1; k++) {
+            Settings s = (Settings) a[k];
+            if(set.add(s.getCode()) == false)
+            {
+                status=true;
+                System.out.println("Duplicate: " + s.getCode());
             }
+//            for (int l = 1; l < a.length - 1; l++) {
+//                Settings s2 = (Settings) a[l];
+//                if (s.getCode().equals(s2.getCode())) {
+//                    status=true;
+//                    break;
+//                }
+//            }
+        }
 
-        }
-        if (size == listSettingtemp.size()) {
-            status = true;
-        }
+//        if(count>1){
+//            status=true;
+//        }
         if (!status) {
             int val = sd.updateSettings(listSetting);
             if (val != 0) {
@@ -306,6 +317,11 @@ public class PanSettings extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        Controller.createSettingDialog.close();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

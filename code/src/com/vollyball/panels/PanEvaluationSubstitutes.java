@@ -31,8 +31,8 @@ public class PanEvaluationSubstitutes extends javax.swing.JPanel {
     public void homeSubstitute() {
         substituteHome.setBackground(new Color(57, 74, 108));
         substituteOpp.setBackground(new Color(255, 255, 255));
-        lblhomeSub.setForeground(Color.WHITE);
-        lblOppSub.setForeground(new Color(57, 74, 108));
+        lblHome.setForeground(Color.WHITE);
+        lblOpponent.setForeground(new Color(57, 74, 108));
         PanEvaluationSubstituteHome panEvaluationSubstitute = new PanEvaluationSubstituteHome(setNum, matchEvaluationTeamId);
         substitutePanel.removeAll();
         substitutePanel.add(panEvaluationSubstitute, BorderLayout.CENTER);
@@ -52,23 +52,21 @@ public class PanEvaluationSubstitutes extends javax.swing.JPanel {
     private void initComponents() {
 
         substituteHome = new javax.swing.JPanel();
-        lblhomeSub = new javax.swing.JTextField();
+        lblHome = new javax.swing.JLabel();
         substituteOpp = new javax.swing.JPanel();
-        lblOppSub = new javax.swing.JTextField();
+        lblOpponent = new javax.swing.JLabel();
         substitutePanel = new javax.swing.JPanel();
 
         substituteHome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         substituteHome.setForeground(new java.awt.Color(0, 0, 204));
 
-        lblhomeSub.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblhomeSub.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        lblhomeSub.setText("Home Substitute");
-        lblhomeSub.setBorder(null);
-        lblhomeSub.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblhomeSub.setOpaque(false);
-        lblhomeSub.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblHome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHome.setText("Home Substitute");
+        lblHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblhomeSubMouseClicked(evt);
+                lblHomeMouseClicked(evt);
             }
         });
 
@@ -77,26 +75,24 @@ public class PanEvaluationSubstitutes extends javax.swing.JPanel {
         substituteHomeLayout.setHorizontalGroup(
             substituteHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(substituteHomeLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(lblhomeSub, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lblHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         substituteHomeLayout.setVerticalGroup(
             substituteHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblhomeSub, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lblHome, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
         );
 
         substituteOpp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblOppSub.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblOppSub.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        lblOppSub.setText("Opponent Substitute");
-        lblOppSub.setBorder(null);
-        lblOppSub.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblOppSub.setOpaque(false);
-        lblOppSub.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblOpponent.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblOpponent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblOpponent.setText("Opponent Substitute");
+        lblOpponent.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblOpponent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblOppSubMouseClicked(evt);
+                lblOpponentMouseClicked(evt);
             }
         });
 
@@ -105,15 +101,13 @@ public class PanEvaluationSubstitutes extends javax.swing.JPanel {
         substituteOppLayout.setHorizontalGroup(
             substituteOppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, substituteOppLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(lblOppSub, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addContainerGap()
+                .addComponent(lblOpponent, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addContainerGap())
         );
         substituteOppLayout.setVerticalGroup(
             substituteOppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(substituteOppLayout.createSequentialGroup()
-                .addComponent(lblOppSub, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(lblOpponent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         substitutePanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -125,46 +119,45 @@ public class PanEvaluationSubstitutes extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(substituteHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(substituteHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(substituteOpp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(substitutePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(substituteOpp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(substitutePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(substituteOpp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(substituteHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(substituteHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(substituteOpp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
                 .addComponent(substitutePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblhomeSubMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblhomeSubMouseClicked
-        // TODO add your handling code here:
-        homeSubstitute();
-    }//GEN-LAST:event_lblhomeSubMouseClicked
-
-    private void lblOppSubMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOppSubMouseClicked
+    private void lblOpponentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpponentMouseClicked
         // TODO add your handling code here:
         substituteHome.setBackground(new Color(255, 255, 255));
-        substituteOpp.setBackground(new Color(57, 74, 108));
-        lblhomeSub.setForeground(new Color(57, 74, 108));
-        lblOppSub.setForeground(Color.WHITE);
-        PanEvaluationSubstituteOpponent panEvaluationOpponent = new PanEvaluationSubstituteOpponent(setNum, matchEvaluationTeamId);
+        substituteOpp.setBackground(new Color(57, 74, 108 ));
+        lblHome.setForeground(new Color(57, 74, 108));
+        lblOpponent.setForeground(Color.WHITE);
+        PanEvaluationSubstituteOpponent panEvaluationopp = new PanEvaluationSubstituteOpponent(setNum, matchEvaluationTeamId);
         substitutePanel.removeAll();
-        substitutePanel.add(panEvaluationOpponent, BorderLayout.CENTER);
+        substitutePanel.add(panEvaluationopp, BorderLayout.CENTER);
         validate();
         repaint();
         substitutePanel.setVisible(true);
-    }//GEN-LAST:event_lblOppSubMouseClicked
+    }//GEN-LAST:event_lblOpponentMouseClicked
+
+    private void lblHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHomeMouseClicked
+        // TODO add your handling code here:
+         homeSubstitute();
+    }//GEN-LAST:event_lblHomeMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField lblOppSub;
-    private javax.swing.JTextField lblhomeSub;
+    private javax.swing.JLabel lblHome;
+    private javax.swing.JLabel lblOpponent;
     private javax.swing.JPanel substituteHome;
     private javax.swing.JPanel substituteOpp;
     private javax.swing.JPanel substitutePanel;

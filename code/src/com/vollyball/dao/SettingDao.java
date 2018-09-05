@@ -132,9 +132,8 @@ public class SettingDao {
         try {
             this.con = db.getConnection();
             PreparedStatement ps;
-
+            ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.setting"));
             for (Settings settings : settingList) {
-                ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.setting"));
                 ps.setString(1, settings.getCode());
                 ps.setInt(2, settings.getShortCutId());
                 count = ps.executeUpdate();
