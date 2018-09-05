@@ -29,9 +29,9 @@ public enum ShortCutEnum {
     ShortCutEnum13(13, "44", "4C", "Four Man Attack Combination", 4),
     ShortCutEnum14(14, "33", "3C", "Three Man Attack Combination", 4),
     ShortCutEnum15(15, "22", "2C", "Two Man Attack Combination", 4),
-    ShortCutEnum16(16, "T1", "T1", "Tempo 1", 5),
-    ShortCutEnum17(17, "T2", "T2", "Tempo 2", 5),
-    ShortCutEnum18(18, "T3", "T3", "Tempo 3", 5),
+    ShortCutEnum16(16, "T1", "Low", "Low", 5),
+    ShortCutEnum17(17, "T2", "Medium", "Medium", 5),
+    ShortCutEnum18(18, "T3", "High", "High", 5),
     ShortCutEnum19(19, "Q1", "K1", "Complex 1 phase of the game", 6),
     ShortCutEnum20(20, "Q2", "K2", "Complex 2 phase of the game", 6),
     ShortCutEnum21(21, "Q3", "TP", "Transition phase of the game", 6),
@@ -47,8 +47,8 @@ public enum ShortCutEnum {
     ShortCutEnum31(31, "D2", "ODF", "2-1-2", 9),
     ShortCutEnum32(32, "D22", "ODF", "2-0-4", 9),
     ShortCutEnum33(33, "D3", "ODF", "3-1-3", 9),
-    ShortCutEnum34(34, "D33", "ODF", "3-0-3 ", 9),
-    ShortCutEnum35(35, "D333", "ODF", "3-2-1   ", 9),
+    ShortCutEnum34(34, "D33", "ODF", "3-0-3", 9),
+    ShortCutEnum35(35, "D333", "ODF", "3-2-1", 9),
     ShortCutEnum36(36, "A1", "IN", "Inward Attack", 10),
     ShortCutEnum37(37, "A2", "OT", "Outward Attack", 10),
     ShortCutEnum38(38, "A3", "BT", "Body Turn Attack", 10),
@@ -80,7 +80,9 @@ public enum ShortCutEnum {
     ShortCutEnum64(64, "K", "Kill", "Aggressive Block Score direct point", 17),
     ShortCutEnum65(65, "D", "SF", "Soft/Defensive Block", 17),
     ShortCutEnum66(66, "LI", "LI", "Line to Inward block", 17),
-    ShortCutEnum67(67, "CB", "CB", "Crosscourt Block", 17);
+    ShortCutEnum67(67, "CB", "CB", "Crosscourt Block", 17),
+    ShortCutEnum68(68, "W6", "BS", "Back Set", 14),
+    ShortCutEnum69(69, "W7", "FS", "Front Set", 14);
 
     int shortCutId, headingId;
     String code, abbr, longForm;
@@ -151,15 +153,15 @@ public enum ShortCutEnum {
         }
         return list;
     }
-    
-     public static String getLongFormById(int id){
+
+    public static String getLongFormById(int id) {
         int id1;
         String lg = null;
         for (ShortCutEnum dir : ShortCutEnum.values()) {
-           id1=dir.getShortCutId();
-           if(id1==id){
-               lg=dir.getLongForm();
-           }
+            id1 = dir.getShortCutId();
+            if (id1 == id) {
+                lg = dir.getLongForm();
+            }
         }
         return lg;
     }

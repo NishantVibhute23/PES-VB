@@ -102,4 +102,13 @@ public class CommonUtil {
         return color;
     }
 
+    public static boolean isNumeric(String str) {
+        try {
+            double d = Integer.parseInt(str);
+        } catch (Exception nfe) {
+            return false;
+        }
+        return true;
+    }
+
 }

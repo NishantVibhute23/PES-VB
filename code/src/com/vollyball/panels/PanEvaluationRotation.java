@@ -66,31 +66,30 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
             if (selectedPlayersHome.contains(player.getId())) {
                 Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
                 modelSelectedPlayerHome.addRow(row);
-                if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
-                    for (int i = 1; i <= 7; i++) {
-                        if (Controller.panMatchSet.initialPositionMap.get(i).getChestNo().equals(player.getChestNo())) {
-                            for (int k = 0; k < tbPlayersHome.getRowCount(); k++) {
-                                if (player.getChestNo().equals((String) tbPlayersHome.getValueAt(k, 1))) {
-                                    modelSelectedPlayerHome.removeRow(k);
-                                }
-                            }
-                        }
-                    }
-                }
+//                if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
+//                    for (int i = 1; i <= 7; i++) {
+//                        if (Controller.panMatchSet.initialPositionMap.get(i).getChestNo().equals(player.getChestNo())) {
+//                            for (int k = 0; k < tbPlayersHome.getRowCount(); k++) {
+//                                if (player.getChestNo().equals((String) tbPlayersHome.getValueAt(k, 1))) {
+//                                    modelSelectedPlayerHome.removeRow(k);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
             }
         }
 
-        if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
-
-            pos1Home.setText(Controller.panMatchSet.initialPositionMap.get(1).getChestNo());
-            pos2Home.setText(Controller.panMatchSet.initialPositionMap.get(2).getChestNo());
-            pos3Home.setText(Controller.panMatchSet.initialPositionMap.get(3).getChestNo());
-            pos4Home.setText(Controller.panMatchSet.initialPositionMap.get(4).getChestNo());
-            pos5Home.setText(Controller.panMatchSet.initialPositionMap.get(5).getChestNo());
-            pos6Home.setText(Controller.panMatchSet.initialPositionMap.get(6).getChestNo());
-            liberoHome.setText(Controller.panMatchSet.initialPositionMap.get(7).getChestNo());
-        }
-
+//        if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
+//
+//            pos1Home.setText(Controller.panMatchSet.initialPositionMap.get(1).getChestNo());
+//            pos2Home.setText(Controller.panMatchSet.initialPositionMap.get(2).getChestNo());
+//            pos3Home.setText(Controller.panMatchSet.initialPositionMap.get(3).getChestNo());
+//            pos4Home.setText(Controller.panMatchSet.initialPositionMap.get(4).getChestNo());
+//            pos5Home.setText(Controller.panMatchSet.initialPositionMap.get(5).getChestNo());
+//            pos6Home.setText(Controller.panMatchSet.initialPositionMap.get(6).getChestNo());
+//            liberoHome.setText(Controller.panMatchSet.initialPositionMap.get(7).getChestNo());
+//        }
         tbPlayersHome.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -177,30 +176,29 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
             if (selectedPlayersOpp.contains(player.getId())) {
                 Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
                 modelSelectedPlayerOpp.addRow(row);
-                if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
-                    for (int i = 1; i <= 7; i++) {
-                        if (Controller.panMatchSet.initialPositionMapOpp.get(i).getChestNo().equals(player.getChestNo())) {
-                            for (int k = 0; k < tbPlayersOpp.getRowCount(); k++) {
-                                if (player.getChestNo().equals((String) tbPlayersOpp.getValueAt(k, 1))) {
-                                    modelSelectedPlayerOpp.removeRow(k);
-                                }
-                            }
-                        }
-                    }
-                }
+//                if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
+//                    for (int i = 1; i <= 7; i++) {
+//                        if (Controller.panMatchSet.initialPositionMapOpp.get(i).getChestNo().equals(player.getChestNo())) {
+//                            for (int k = 0; k < tbPlayersOpp.getRowCount(); k++) {
+//                                if (player.getChestNo().equals((String) tbPlayersOpp.getValueAt(k, 1))) {
+//                                    modelSelectedPlayerOpp.removeRow(k);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
             }
         }
 
-        if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
-            pos1Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(1).getChestNo());
-            pos2Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(2).getChestNo());
-            pos3Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(3).getChestNo());
-            pos4Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(4).getChestNo());
-            pos5Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(5).getChestNo());
-            pos6Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(6).getChestNo());
-            liberoOpp.setText(Controller.panMatchSet.initialPositionMapOpp.get(7).getChestNo());
-        }
-
+//        if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
+//            pos1Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(1).getChestNo());
+//            pos2Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(2).getChestNo());
+//            pos3Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(3).getChestNo());
+//            pos4Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(4).getChestNo());
+//            pos5Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(5).getChestNo());
+//            pos6Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(6).getChestNo());
+//            liberoOpp.setText(Controller.panMatchSet.initialPositionMapOpp.get(7).getChestNo());
+//        }
         tbPlayersOpp.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {

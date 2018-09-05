@@ -33,11 +33,11 @@ public class PanEvaluationSubstitutes extends javax.swing.JPanel {
         substituteOpp.setBackground(new Color(255, 255, 255));
         lblhomeSub.setForeground(Color.WHITE);
         lblOppSub.setForeground(new Color(57, 74, 108));
-        PanEvaluationSubstitute panEvaluationSubstitute = new PanEvaluationSubstitute(setNum, matchEvaluationTeamId);
+        PanEvaluationSubstituteHome panEvaluationSubstitute = new PanEvaluationSubstituteHome(setNum, matchEvaluationTeamId);
         substitutePanel.removeAll();
         substitutePanel.add(panEvaluationSubstitute, BorderLayout.CENTER);
-        substitutePanel.validate();
-        substitutePanel.repaint();
+        validate();
+        repaint();
         substitutePanel.setVisible(true);
 
     }
@@ -117,17 +117,8 @@ public class PanEvaluationSubstitutes extends javax.swing.JPanel {
         );
 
         substitutePanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout substitutePanelLayout = new javax.swing.GroupLayout(substitutePanel);
-        substitutePanel.setLayout(substitutePanelLayout);
-        substitutePanelLayout.setHorizontalGroup(
-            substitutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        substitutePanelLayout.setVerticalGroup(
-            substitutePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 593, Short.MAX_VALUE)
-        );
+        substitutePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        substitutePanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -166,11 +157,10 @@ public class PanEvaluationSubstitutes extends javax.swing.JPanel {
         PanEvaluationSubstituteOpponent panEvaluationOpponent = new PanEvaluationSubstituteOpponent(setNum, matchEvaluationTeamId);
         substitutePanel.removeAll();
         substitutePanel.add(panEvaluationOpponent, BorderLayout.CENTER);
-        substitutePanel.validate();
-        substitutePanel.repaint();
+        validate();
+        repaint();
         substitutePanel.setVisible(true);
     }//GEN-LAST:event_lblOppSubMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField lblOppSub;

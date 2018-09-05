@@ -10,6 +10,8 @@ import com.vollyball.dialog.DialogReplaceLibero;
 import com.vollyball.enums.Skill;
 import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.enums.SkillsDescCriteria;
+import com.vollyball.enums.TempoEnum;
+import com.vollyball.util.CommonUtil;
 import com.vollyball.util.DetailUtils;
 import com.vollyball.util.ShortKeysUtil;
 import java.awt.BorderLayout;
@@ -257,6 +259,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
             });
         }
+        txtInput.requestFocus();
     }
 
     public void save() {
@@ -425,14 +428,18 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             if (digPoints != null || !digPoints.isEmpty()) {
                 String arr[] = digPoints.split("-");
                 diagramPoints = new ArrayList<String>(Arrays.asList(arr));
-                panel.dig(skill, diagramPoints);
+                if (skill.equals(Skill.Set.getType())) {
+                    panel.dig(skill, diagramPoints, TempoEnum.getTempoByName(skillDescIdPanMap.get(43).lblOption.getText()));
+                } else {
+                    panel.dig(skill, diagramPoints, 0);
+                }
             }
         }
-        viewComponents(skill);
-
-        for (Map.Entry<Integer, String> entry : rallyEvaluationSkillScore.getDetailsValues().entrySet()) {
-
-            skillDescIdPanMap.get(entry.getKey()).lblOption.setText(entry.getValue());
+        if (!skill.equalsIgnoreCase(Skill.OP.getType()) && !skill.equalsIgnoreCase(Skill.TF.getType())) {
+            viewComponents(skill);
+            for (Map.Entry<Integer, String> entry : rallyEvaluationSkillScore.getDetailsValues().entrySet()) {
+                skillDescIdPanMap.get(entry.getKey()).lblOption.setText(entry.getValue());
+            }
         }
 
     }
@@ -478,30 +485,96 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             skillDescIdPanMap.get(8).lblOption.setText(DetailUtils.getScore(Controller.panMatchSet.currentRally, Controller.panMatchSet.matchEvaluationId));
             skillDescIdPanMap.get(9).lblOption.setText(DetailUtils.getServeInSituation(Controller.panMatchSet.currentRally, Controller.panMatchSet.matchEvaluationId, Controller.panMatchSet.teamEvaluateId));
             skillDescIdPanMap.get(10).lblOption.setText(DetailUtils.getOpponentSetterPosition());
+        } else if (skill.equals(Skill.Attack.getType())) {
+            skillDescIdPanMap.get(23).lblOption.setText(DetailUtils.getScore(Controller.panMatchSet.currentRally, Controller.panMatchSet.matchEvaluationId));
+            skillDescIdPanMap.get(24).lblOption.setText(DetailUtils.getHomeSetterPosition());
+        } else if (skill.equals(Skill.Reception.getType())) {
+            skillDescIdPanMap.get(63).lblOption.setText(DetailUtils.getScore(Controller.panMatchSet.currentRally, Controller.panMatchSet.matchEvaluationId));
+            skillDescIdPanMap.get(64).lblOption.setText(DetailUtils.getHomeSetterPosition());
+        } else if (skill.equals(Skill.Defence.getType())) {
+            skillDescIdPanMap.get(80).lblOption.setText(DetailUtils.getScore(Controller.panMatchSet.currentRally, Controller.panMatchSet.matchEvaluationId));
+            skillDescIdPanMap.get(78).lblOption.setText(DetailUtils.getHomeSetterPosition());
+        } else if (skill.equals(Skill.Set.getType())) {
+            skillDescIdPanMap.get(53).lblOption.setText(DetailUtils.getScore(Controller.panMatchSet.currentRally, Controller.panMatchSet.matchEvaluationId));
+        } else if (skill.equals(Skill.Block.getType())) {
+            skillDescIdPanMap.get(40).lblOption.setText(DetailUtils.getScore(Controller.panMatchSet.currentRally, Controller.panMatchSet.matchEvaluationId));
+            skillDescIdPanMap.get(41).lblOption.setText(DetailUtils.getOpponentSetterPosition());
         }
+
     }
 
-    public void setDetailValuesByDiagram(String skill, List<String> diagramPoints) {
+    public void setDetailValuesByDiagram(String skill, List<String> diagramPoints, int k) {
+
+        String pan1 = diagramPoints.get(k);
+        String pan2 = diagramPoints.get(k + 1);
 
         if (skill.equals(Skill.Service.getType())) {
-            String pan1 = diagramPoints.get(0);
-            String pan2 = diagramPoints.get(1);
 
             skillDescIdPanMap.get(2).lblOption.setText(DetailUtils.getServeTactics(pan1, pan2));
             skillDescIdPanMap.get(3).lblOption.setText(DetailUtils.getDirection(pan1, pan2));
             skillDescIdPanMap.get(4).lblOption.setText(DetailUtils.getFromZone(pan1));
             skillDescIdPanMap.get(5).lblOption.setText(DetailUtils.getToZone(pan2));
             skillDescIdPanMap.get(7).lblOption.setText(DetailUtils.getReceiverPosition(pan2));
+        } else if (skill.equals(Skill.Attack.getType())) {
+
+            skillDescIdPanMap.get(13).lblOption.setText(DetailUtils.getAttackingTactics(pan1, pan2));
+            skillDescIdPanMap.get(25).lblOption.setText(DetailUtils.getDirection(pan1, pan2));
+            skillDescIdPanMap.get(15).lblOption.setText(DetailUtils.getFromZone(pan1));
+            skillDescIdPanMap.get(16).lblOption.setText(DetailUtils.getToZone(pan2));
+            skillDescIdPanMap.get(21).lblOption.setText(DetailUtils.getToZone(pan2));
+            skillDescIdPanMap.get(22).lblOption.setText(DetailUtils.getReceiverPosition(pan2));
+        } else if (skill.equals(Skill.Reception.getType())) {
+
+            skillDescIdPanMap.get(56).lblOption.setText(DetailUtils.getFromZone(pan2));
+            skillDescIdPanMap.get(57).lblOption.setText(DetailUtils.getToZone(pan1));
+        } else if (skill.equals(Skill.Defence.getType())) {
+
+            skillDescIdPanMap.get(68).lblOption.setText(DetailUtils.getFromZone(pan1));
+            skillDescIdPanMap.get(72).lblOption.setText(DetailUtils.getFromZone(pan1));
+            skillDescIdPanMap.get(73).lblOption.setText(DetailUtils.getToZone(pan2));
+            skillDescIdPanMap.get(74).lblOption.setText(DetailUtils.getReceiverPosition(pan2));
+        } else if (skill.equals(Skill.Set.getType())) {
+
+            skillDescIdPanMap.get(47).lblOption.setText(DetailUtils.getFromZone(pan1));
+            skillDescIdPanMap.get(48).lblOption.setText(DetailUtils.getToZone(pan2));
+            skillDescIdPanMap.get(52).lblOption.setText(DetailUtils.getReceiverPosition(pan2));
+
+        } else if (skill.equals(Skill.Block.getType())) {
+
+            if (diagramPoints.size() == 2) {
+                skillDescIdPanMap.get(32).lblOption.setText(DetailUtils.getFromZone(pan1));
+                skillDescIdPanMap.get(33).lblOption.setText(DetailUtils.getToZone(pan2));
+                skillDescIdPanMap.get(36).lblOption.setText(DetailUtils.getReceiverPosition(pan2));
+            } else {
+
+                String pan3 = diagramPoints.get(k + 2);
+                skillDescIdPanMap.get(34).lblOption.setText(DetailUtils.getToZone(pan3));
+                skillDescIdPanMap.get(39).lblOption.setText(DetailUtils.getBlockDefendedCourt(pan3));
+            }
 
         }
+
+        if (diagramPoints.size() > 0) {
+            String points = "";
+            for (String point : diagramPoints) {
+                points = points + "-" + point;
+            }
+
+            int id = getDigramId(skill);
+
+            skillDescIdPanMap.get(id).lblOption.setText(points);
+        }
+
     }
 
     public void selectSkill(JLabel j) {
         JLabel lblSkill = j;
         p.currentPanRow.txtSkill.setText(lblSkill.getText());
         skill = lblSkill.getText();
-        viewComponents(skill);
-        setInitialDetailValues(skill);
+        if (!skill.equalsIgnoreCase(Skill.OP.getType()) && !skill.equalsIgnoreCase(Skill.TF.getType())) {
+            viewComponents(skill);
+            setInitialDetailValues(skill);
+        }
         for (Map.Entry<JLabel, JPanel> entry : mapSkillComponent.entrySet()) {
 
             if (lblSkill == entry.getKey()) {
@@ -528,9 +601,13 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         panDesc2.setLayout(new GridLayout(8, 1));
         int i = 0;
         for (SkillsDescCriteria sdc : lst) {
+            i++;
             List<String> pointList = new ArrayList<>();
             PanSkillDescCriteria pan = new PanSkillDescCriteria();
             pan.lblHeading.setText("<HTML>" + sdc.getType() + "</HTML>");
+            if (sdc.getView() == 1) {
+                pan.lblHeading.setForeground(Color.red);
+            }
             List<SkillDescCriteriaPoint> lstPoints = SkillDescCriteriaPoint.getTypeBySkillDescId(sdc.getId());
             pan.setId(sdc.getId());
             skillDescIdPanMap.put(sdc.getId(), pan);
@@ -543,23 +620,21 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     detailsShortcutKeys.add(shortcut);
                     pointsShortcut.put(shortcut, sdcp.getAbbreviation());
                     pointsMap.put(sdcp.getAbbreviation(), sdcp.getId());
-                    pointList.add(sdcp.getAbbreviation());
+                    pointList.add(shortcut);
                 }
-
             }
-            if (i < 8) {
+            if (i <= 8) {
                 panDesc1.add(pan);
-            } else {
+            } else if (i <= 16) {
                 panDesc2.add(pan);
             }
             pan.setPointsMap(pointsMap);
             panPoints.put(pan, pointList);
-            i++;
         }
 
         for (int j = i; j < 16; j++) {
             PanSkillDescCriteria pan = new PanSkillDescCriteria();
-            if (j < 8) {
+            if (j <= 8) {
                 panDesc1.add(pan);
             } else {
                 panDesc2.add(pan);
@@ -574,6 +649,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         JLabel txtPlayer = j;
         p.currentPanRow.txtPlayer.setText(txtPlayer.getText());
         chestNo = txtPlayer.getText();
+        diagramPoints.add(chestNo);
         for (Map.Entry<JLabel, JPanel> entry : mapPlayerComponent.entrySet()) {
 
             if (txtPlayer == entry.getKey()) {
@@ -609,9 +685,11 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         panOppRL = new javax.swing.JPanel();
         panRLOpp = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         panHomeRL = new javax.swing.JPanel();
         panRLHome = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         panRate1 = new javax.swing.JPanel();
         lblRate1 = new javax.swing.JLabel();
@@ -717,6 +795,8 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
         );
 
+        jLabel4.setText(" ");
+
         javax.swing.GroupLayout panOppRLLayout = new javax.swing.GroupLayout(panOppRL);
         panOppRL.setLayout(panOppRLLayout);
         panOppRLLayout.setHorizontalGroup(
@@ -724,14 +804,17 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             .addGroup(panOppRLLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(panRLOpp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         panOppRLLayout.setVerticalGroup(
             panOppRLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panOppRLLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(panRLOpp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panHomeRL.setBackground(new java.awt.Color(255, 255, 255));
@@ -761,6 +844,8 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
         );
 
+        jLabel5.setText(" ");
+
         javax.swing.GroupLayout panHomeRLLayout = new javax.swing.GroupLayout(panHomeRL);
         panHomeRL.setLayout(panHomeRLLayout);
         panHomeRLLayout.setHorizontalGroup(
@@ -768,14 +853,17 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panHomeRLLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(panRLHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         panHomeRLLayout.setVerticalGroup(
             panHomeRLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panHomeRLLayout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panRLHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(11, 11, 11)
+                .addComponent(jLabel5)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panCourt1Layout = new javax.swing.GroupLayout(panCourt1);
@@ -786,17 +874,17 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 .addComponent(panCourt, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(panCourt1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panOppRL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panHomeRL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panOppRL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panHomeRL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0))
         );
         panCourt1Layout.setVerticalGroup(
             panCourt1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panCourt, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(panCourt1Layout.createSequentialGroup()
-                .addComponent(panOppRL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panOppRL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(panHomeRL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panHomeRL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -1766,14 +1854,28 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             } else if (diagramKeys.contains(a)) {
                 diagramPoints.add(a);
                 if (diagramPoints.size() > 1) {
-                    panel.dig(skill, diagramPoints);
-                    setDetailValuesByDiagram(skill, diagramPoints);
+
+                    if (skill.equals(Skill.Set.getType())) {
+                        panel.dig(skill, diagramPoints, TempoEnum.getTempoByName(skillDescIdPanMap.get(43).lblOption.getText()));
+                    } else {
+                        panel.dig(skill, diagramPoints, 0);
+                    }
+
+                    if (CommonUtil.isNumeric(diagramPoints.get(0))) {
+                        if (diagramPoints.size() > 2) {
+                            setDetailValuesByDiagram(skill, diagramPoints, 1);
+                        }
+                    } else {
+                        setDetailValuesByDiagram(skill, diagramPoints, 0);
+                    }
+
                 }
             } else if (detailsShortcutKeys.contains(a)) {
-                String point = pointsShortcut.get(a);
+
                 for (Map.Entry<PanSkillDescCriteria, List<String>> entry : panPoints.entrySet()) {
-                    if (entry.getValue().contains(point)) {
+                    if (entry.getValue().contains(a)) {
                         PanSkillDescCriteria p = entry.getKey();
+                        String point = pointsShortcut.get(a);
                         p.lblOption.setText(point);
                         break;
                     }
@@ -1824,6 +1926,8 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;

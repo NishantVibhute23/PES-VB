@@ -798,4 +798,26 @@ public class RallyDao {
         return id;
     }
 
+    public int updateLatestOrderOpp(LinkedHashMap<Integer, Player> latestPositionMap, int mid) {
+        int id = 0;
+        try {
+            this.con = db.getConnection();
+
+            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.setLatestorder.opp"));
+
+            for (Map.Entry<Integer, Player> entry : latestPositionMap.entrySet()) {
+                Integer key = entry.getKey();
+                Player value = entry.getValue();
+
+                ps1.setInt(key, value.getId());
+            }
+
+            ps1.setInt(7, mid);
+            id = ps1.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RallyDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
 }

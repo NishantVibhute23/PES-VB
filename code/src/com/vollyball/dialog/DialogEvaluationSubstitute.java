@@ -5,7 +5,7 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.panels.PanEvaluationSubstitute;
+import com.vollyball.panels.PanEvaluationSubstituteHome;
 import com.vollyball.panels.PanEvaluationSubstitutes;
 import java.awt.Container;
 import java.awt.Dimension;

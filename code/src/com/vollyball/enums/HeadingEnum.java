@@ -52,15 +52,15 @@ public enum HeadingEnum {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public static String getLongFormById(int id){
+
+    public static String getLongFormById(int id) {
         int id1;
         String lg = null;
         for (HeadingEnum dir : HeadingEnum.values()) {
-           id1=dir.getId();
-           if(id1==id){
-               lg=dir.getLongForm();
-           }
+            id1 = dir.getId();
+            if (id1 == id) {
+                lg = dir.getLongForm();
+            }
         }
         return lg;
     }

@@ -11,7 +11,6 @@ import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.RallyDao;
 import com.vollyball.dao.TeamDao;
-import com.vollyball.db.Setup;
 import com.vollyball.dialog.DialogEvaluationSubstitute;
 import com.vollyball.dialog.DialogEvaluationTimeout;
 import com.vollyball.dialog.DialogPanEvaluationRotationOrder;
@@ -93,7 +92,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     public PanEvaluation(int setNum, int matchId, int teamEvaluateId, int opponentId, int evaluationType, int matchEvaluationTeamId) {
 
         initComponents();
- 
+
         initializePlayer();
         playerList = teamDao.getTeamPlayers(teamEvaluateId);
         playerListOpp = teamDao.getTeamPlayers(opponentId);
@@ -914,7 +913,7 @@ public class PanEvaluation extends javax.swing.JPanel {
 
     private void lblStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStartMouseClicked
         // TODO add your handling code here:
-        if (this.matchEvaluationId == 0) {
+        if (this.ms.getStart_time().equals("00:00")) {
             MatchSet ms = new MatchSet();
             ms.setMatchEvaluationTeamId(matchEvaluationTeamId);
             ms.setEvaluationTeamId(teamEvaluateId);

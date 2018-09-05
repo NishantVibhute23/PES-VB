@@ -9,6 +9,7 @@ import com.vollyball.bean.DigPoints;
 import com.vollyball.bean.Player;
 import com.vollyball.controller.Controller;
 import com.vollyball.enums.PlayerPosition;
+import com.vollyball.util.CommonUtil;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -50,8 +51,8 @@ public class ImagePanel extends JPanel {
     int midY = 0;
     static LinkedHashMap<String, JPanel> panGrid = new LinkedHashMap<String, JPanel>();
 
-    LinkedHashMap<Integer, Point> homeChestNumShow = new LinkedHashMap<Integer, Point>();
-    LinkedHashMap<Integer, Point> oppChestNumShow = new LinkedHashMap<Integer, Point>();
+    static LinkedHashMap<Integer, Point> homeChestNumShow = new LinkedHashMap<Integer, Point>();
+    static LinkedHashMap<Integer, Point> oppChestNumShow = new LinkedHashMap<Integer, Point>();
 
     List<DigPoints> shapes = new ArrayList<>();
 
@@ -211,7 +212,7 @@ public class ImagePanel extends JPanel {
         p.setSize(50, 50);
         p.setLayout(new GridLayout(2, 2));
         p.setOpaque(false);
-        p.setBorder(BorderFactory.createDashedBorder(new Color(150, 222, 235), 1, 5));
+        p.setBorder(BorderFactory.createDashedBorder(new Color(150, 222, 235), 1, 10));
         String code = panCode;
         for (int k = 1; k <= 2; k++) {
             for (int l = 1; l <= 2; l++) {
@@ -225,15 +226,15 @@ public class ImagePanel extends JPanel {
                 }
                 if (k == 2) {
                     if (l == 1) {
-                        code = panCode + "C";
-                    } else {
                         code = panCode + "D";
+                    } else {
+                        code = panCode + "C";
                     }
                 }
 
                 JPanel pin = new JPanel();
                 pin.setSize(25, 25);
-                pin.setBorder(BorderFactory.createDashedBorder(new Color(150, 222, 235), 1, 5));
+                pin.setBorder(BorderFactory.createDashedBorder(new Color(150, 222, 235), 1, 10));
                 pin.setOpaque(false);
                 p.add(pin);
                 panGrid.put(code, pin);
@@ -271,6 +272,25 @@ public class ImagePanel extends JPanel {
         return dp;
     }
 
+    public static Point getPlayerPoints(String chestNo) {
+
+        Point p = null;
+        int centerX, centerY;
+
+        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMap.entrySet()) {
+            Player player = entry.getValue();
+            String text = player.getChestNo();
+            if (text.equals(chestNo)) {
+                Point p1 = homeChestNumShow.get(entry.getKey());
+                centerX = (int) p1.getX();
+                centerY = (int) p1.getY();
+                p = new Point(centerX, centerY);
+            }
+        }
+
+        return p;
+    }
+
     public Point getPoint(String pan) {
         JPanel p1 = panGrid.get(pan);
         int x = (int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth()));
@@ -279,23 +299,35 @@ public class ImagePanel extends JPanel {
         return p;
     }
 
-    public void dig(String skill, List<String> panels) {
+    public void dig(String skill, List<String> panels, int tempo) {
         repaint();
-        JPanel p1 = panGrid.get(panels.get(0));
-        for (int i = 1; i < panels.size(); i++) {
+        int k = 0;
+        if (CommonUtil.isNumeric(panels.get(0))) {
+            Point p = getPlayerPoints(panels.get(0));
+            DigPoints dp = new DigPoints();
+            dp.setX1((int) p.getX());
+            dp.setY1((int) p.getY());
+            dp.setMidx(dp.getX1());
+            dp.setMidy(dp.getY1());
+            JPanel p1 = panGrid.get(panels.get(1));
+            dp.setX2((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+            dp.setY2((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+            shapes.add(dp);
+            k++;
+        }
+
+        JPanel p1 = panGrid.get(panels.get(k));
+        for (int i = k + 1; i < panels.size(); i++) {
             DigPoints dp = new DigPoints();
             JPanel p2 = panGrid.get(panels.get(i));
-
             dp.setX1((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
             dp.setY1((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
             dp.setX2((int) (p2.getParent().getLocation().getX() + p2.getLocation().getX() + (p2.getWidth() / 2)));
             dp.setY2((int) (p2.getParent().getLocation().getY() + p2.getLocation().getY() + (p2.getHeight() / 2)));
-
             if (skill.equalsIgnoreCase("Set")) {
-                Point p = setCurve(dp);
+                Point p = setCurve(dp, tempo);
                 dp.setMidx((int) p.getX());
                 dp.setMidy((int) p.getY());
-
             } else {
                 dp.setMidx(dp.getX1());
                 dp.setMidy(dp.getY1());
@@ -303,13 +335,12 @@ public class ImagePanel extends JPanel {
             shapes.add(dp);
             p1 = panGrid.get(panels.get(i));
         }
-
         repaint();
     }
 
-    public Point setCurve(DigPoints dp) {
+    public Point setCurve(DigPoints dp, int tempo) {
         Point p = new Point();
-        int val = 90;
+        int val = tempo;
         int x1 = dp.getX1();
         int y1 = dp.getY1();
         int x2 = dp.getX2();
@@ -376,12 +407,6 @@ public class ImagePanel extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMap.entrySet()) {
-//            Point p = homeChestNumShow.get(entry.getKey());
-//            Player player = entry.getValue();
-//            Font font = new Font("Serif", Font.BOLD, 22);
-//            g2.setFont(font);
-//            g2.setColor(PlayerPosition.getNameById(player.getPosition()).getColor());
-//            g2.drawString(player.getChestNo(), (int) p.getX(), (int) p.getY());
 
             Point p = homeChestNumShow.get(entry.getKey());
             Player player = entry.getValue();

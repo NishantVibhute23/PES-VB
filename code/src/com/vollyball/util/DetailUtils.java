@@ -60,15 +60,76 @@ public class DetailUtils {
         return tactics;
     }
 
-    public static String getFromZone(String pan1) {
+    public static String getAttackingTactics(String pan1, String pan2) {
+        String tactics = "";
+        List<String> corners = new ArrayList<>();
+        List<String> nel = new ArrayList<>();
+        List<String> nsl = new ArrayList<>();
+        corners.add("O1A");
+        corners.add("O1B");
+        corners.add("O1D");
+        corners.add("O2A");
+        corners.add("O2C");
+        corners.add("O2D");
+        corners.add("O4B");
+        corners.add("O4C");
+        corners.add("O4D");
+        corners.add("O5A");
+        corners.add("O5B");
+        corners.add("O5C");
+
+        nel.add("O1A");
+        nel.add("O1B");
+        nel.add("O6A");
+        nel.add("O6B");
+        nel.add("O5A");
+        nel.add("O5B");
+
+        nsl.add("O2A");
+        nsl.add("O2D");
+        nsl.add("O11A");
+        nsl.add("O11D");
+        nsl.add("O1D");
+        nsl.add("O4B");
+        nsl.add("O4C");
+        nsl.add("O51B");
+        nsl.add("O51C");
+        nsl.add("O5C");
+
+        if (corners.contains(pan2)) {
+            tactics = "DC";
+        } else if (nel.contains(pan2)) {
+            tactics = "NEL";
+        } else if (nsl.contains(pan2)) {
+            tactics = "NSL";
+        }
+        return tactics;
+    }
+
+    public static String getToZone(String pan) {
         String zone = "";
-        zone = pan1.substring(1, 2);
+        zone = pan.substring(1, 3);
+        List<String> backList = new ArrayList<>();
+        backList.add("12");
+        backList.add("52");
+        backList.add("62");
+        if (backList.contains(zone)) {
+            zone = "BOC";
+        } else {
+            zone = pan.substring(1, 2);
+
+            if (zone.equalsIgnoreCase("L")) {
+                zone = "LOC";
+            } else if (zone.equalsIgnoreCase("R")) {
+                zone = "ROC";
+            }
+        }
         return zone;
     }
 
-    public static String getToZone(String pan2) {
+    public static String getFromZone(String pan) {
         String zone = "";
-        zone = pan2.substring(1, 2);
+        zone = pan.substring(1, 2);
         return zone;
     }
 
@@ -157,6 +218,52 @@ public class DetailUtils {
 
         }
         return position;
+    }
+
+    public static String getHomeSetterPosition() {
+        String position = "";
+        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMap.entrySet()) {
+            Player p = entry.getValue();
+            int pos = 0;
+            if (p.getPosition() == PlayerPosition.SETTER.getId()) {
+                pos = entry.getKey();
+            }
+            switch (pos) {
+                case 1:
+                    position = "RR";
+                    break;
+                case 2:
+                    position = "FR";
+                    break;
+                case 3:
+                    position = "FM";
+                    break;
+                case 4:
+                    position = "FL";
+                    break;
+                case 5:
+                    position = "RL";
+                    break;
+                case 6:
+                    position = "RM";
+                    break;
+            }
+
+        }
+        return position;
+    }
+
+    public static String getBlockDefendedCourt(String pan) {
+        String court;
+        court = pan.substring(0, 1);
+
+        if (court.equalsIgnoreCase("H")) {
+            court = "H";
+        } else if (court.equalsIgnoreCase("O")) {
+            court = "Opp";
+        }
+        return court;
+
     }
 
 }

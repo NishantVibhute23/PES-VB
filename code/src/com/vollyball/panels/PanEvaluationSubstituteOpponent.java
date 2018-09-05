@@ -29,7 +29,8 @@ import javax.swing.JPanel;
  * @author #dabbu
  */
 public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
-public LinkedHashMap<Integer, Player> initialPositionMap;
+
+    public LinkedHashMap<Integer, Player> initialPositionMap;
     public LinkedHashMap<Integer, Player> substituePositionMap;
     LinkedHashMap<JLabel, JPanel> mapPlayerLabel = new LinkedHashMap<JLabel, JPanel>();
 
@@ -45,17 +46,18 @@ public LinkedHashMap<Integer, Player> initialPositionMap;
     String focus = "out";
     LinkedHashMap<Integer, Player> latestPositionMap;
     RallyEvaluation re;
+
     /**
      * Creates new form PanEvaluationOpponent
      */
-    public PanEvaluationSubstituteOpponent(int setNum,int matchEvaluationTeamId) {
+    public PanEvaluationSubstituteOpponent(int setNum, int matchEvaluationTeamId) {
         initComponents();
         initialPositionMap = new LinkedHashMap<>();
         substituePositionMap = new LinkedHashMap<>();
         lblOut.requestFocus();
 
         this.ms = matchDao.getMatchSet(setNum, matchEvaluationTeamId);;
-        latestPositionMap = rallyDao.getLatestMatchSetRotationOrder(ms.getId());
+        latestPositionMap = rallyDao.getLatestMatchSetRotationOrderOpp(ms.getId());
 
         playerLable.add(lbl1);
         playerLable.add(lbl2);
@@ -93,7 +95,7 @@ public LinkedHashMap<Integer, Player> initialPositionMap;
 
         re = rallyDao.getRally(Integer.parseInt(lblRallyNum.getText()), ms.getId(), 0);
 
-        lblScore.setText(re.getHomeScore() + " : " + re.getOpponentScore());
+        lblScore.setText(re.getOpponentScore() + " : " + re.getHomeScore());
 
         for (Map.Entry<JLabel, JPanel> entry : mapPlayerLabel.entrySet()) {
             entry.getKey().addMouseListener(new MouseListener() {
@@ -125,11 +127,11 @@ public LinkedHashMap<Integer, Player> initialPositionMap;
             entry.getValue().setVisible(false);
         }
 
-        for (SetRotationOrder s : ms.getRotationOrder()) {
+        for (SetRotationOrder s : ms.getRotationOrderOpp()) {
             initialPositionMap.put(s.getPosition(), Controller.panMatchSet.playerMapOpp.get(s.getPlayerId()));
         }
         substituePositionMap.putAll(initialPositionMap);
-        for (SetSubstitution s : ms.getSetSubstitutions()) {
+        for (SetSubstitution s : ms.getSetSubstitutionsOpp()) {
             String cNo = s.getSubstitutePlayerId() == 0 ? "" : Controller.panMatchSet.playerMapOpp.get(s.getSubstitutePlayerId()).getChestNo();
             Player p = s.getSubstitutePlayerId() == 0 ? null : Controller.panMatchSet.playerMapOpp.get(s.getSubstitutePlayerId());
             if (!cNo.equals("")) {
@@ -195,6 +197,7 @@ public LinkedHashMap<Integer, Player> initialPositionMap;
 
         }
     }
+
     public void selectPlayer(MouseEvent me) {
         JLabel lbl = (JLabel) me.getSource();
 
@@ -1392,14 +1395,14 @@ public LinkedHashMap<Integer, Player> initialPositionMap;
             i++;
         }
 
-        SetSubstitution s = ms.getSetSubstitutions().get(i);
+        SetSubstitution s = ms.getSetSubstitutionsOpp().get(i);
         int id = 0;
         if (s.getPoint1() == null) {
 
-            id = matchDao.updateSubstitution(pIn.getId(), lblScore.getText(), position, ms.getId(), re.getId());
+            id = matchDao.updateSubstitution(pIn.getId(), lblScore.getText(), position, ms.getId(), re.getId(), 2);
         } else {
 
-            id = matchDao.updateSubstitutionPoint2(lblScore.getText(), position, ms.getId(), re.getId());
+            id = matchDao.updateSubstitutionPoint2(lblScore.getText(), position, ms.getId(), re.getId(), 2);
         }
 
         if (id != 0) {
@@ -1415,13 +1418,12 @@ public LinkedHashMap<Integer, Player> initialPositionMap;
                 }
             }
 
-            rallyDao.updateLatestOrder(latestPositionMap, ms.getId());
+            rallyDao.updateLatestOrderOpp(latestPositionMap, ms.getId());
             Controller.panMatchSet.rallyPositionMapOpp.putAll(latestPositionMap);
             Controller.panMatchSet.dialogEvaluationSubstitute.close();
 
         }
     }//GEN-LAST:event_jLabel6MouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel but1;

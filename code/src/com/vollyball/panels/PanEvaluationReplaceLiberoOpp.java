@@ -153,78 +153,77 @@ public class PanEvaluationReplaceLiberoOpp extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel43 = new javax.swing.JPanel();
-        rallyPos4 = new javax.swing.JTextField();
-        rallyPos3 = new javax.swing.JTextField();
-        rallyPos2 = new javax.swing.JTextField();
         rallyPos5 = new javax.swing.JTextField();
-        rallyPos6 = new javax.swing.JTextField();
         rallyPos1 = new javax.swing.JTextField();
+        rallyPos2 = new javax.swing.JTextField();
+        rallyPos3 = new javax.swing.JTextField();
+        rallyPos4 = new javax.swing.JTextField();
+        rallyPos6 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblLibero = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
 
         jPanel43.setBackground(new java.awt.Color(255, 255, 255));
         jPanel43.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
-
-        rallyPos4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        rallyPos4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        rallyPos4.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-
-        rallyPos3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        rallyPos3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        rallyPos3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-
-        rallyPos2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        rallyPos2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        rallyPos2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         rallyPos5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         rallyPos5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos5.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
-        rallyPos6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        rallyPos6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        rallyPos6.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-
         rallyPos1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         rallyPos1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         rallyPos1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        rallyPos2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        rallyPos2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        rallyPos2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        rallyPos3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        rallyPos3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        rallyPos3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        rallyPos4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        rallyPos4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        rallyPos4.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        rallyPos6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        rallyPos6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        rallyPos6.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel43Layout = new javax.swing.GroupLayout(jPanel43);
         jPanel43.setLayout(jPanel43Layout);
         jPanel43Layout.setHorizontalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel43Layout.createSequentialGroup()
-                .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel43Layout.createSequentialGroup()
-                        .addComponent(rallyPos4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(rallyPos3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel43Layout.createSequentialGroup()
-                        .addComponent(rallyPos5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(rallyPos6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(rallyPos1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                    .addComponent(rallyPos2)))
+                .addComponent(rallyPos1)
+                .addGap(0, 0, 0)
+                .addComponent(rallyPos6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(rallyPos5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel43Layout.createSequentialGroup()
+                .addComponent(rallyPos2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(rallyPos3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(rallyPos4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel43Layout.setVerticalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel43Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rallyPos4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rallyPos3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rallyPos2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rallyPos1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rallyPos5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rallyPos6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(rallyPos5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rallyPos6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rallyPos2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rallyPos3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rallyPos4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel2.setBackground(new java.awt.Color(57, 74, 108));
@@ -273,16 +272,35 @@ public class PanEvaluationReplaceLiberoOpp extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setText("LIBERO");
 
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel4.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 285, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(133, 133, 133)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,9 +319,12 @@ public class PanEvaluationReplaceLiberoOpp extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -327,6 +348,7 @@ public class PanEvaluationReplaceLiberoOpp extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel43;
     private javax.swing.JLabel lblLibero;
     private javax.swing.JTextField rallyPos1;

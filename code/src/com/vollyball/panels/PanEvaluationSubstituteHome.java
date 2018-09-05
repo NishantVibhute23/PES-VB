@@ -28,7 +28,7 @@ import javax.swing.JPanel;
  *
  * @author nishant.vibhute
  */
-public class PanEvaluationSubstitute extends javax.swing.JPanel {
+public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
 
     public LinkedHashMap<Integer, Player> initialPositionMap;
     public LinkedHashMap<Integer, Player> substituePositionMap;
@@ -50,7 +50,7 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
     /**
      * Creates new form PanEvaluationSubstitute
      */
-    public PanEvaluationSubstitute(int setNum, int matchEvaluationTeamId) {
+    public PanEvaluationSubstituteHome(int setNum, int matchEvaluationTeamId) {
         initComponents();
         initialPositionMap = new LinkedHashMap<>();
         substituePositionMap = new LinkedHashMap<>();
@@ -1377,10 +1377,10 @@ public class PanEvaluationSubstitute extends javax.swing.JPanel {
         int id = 0;
         if (s.getPoint1() == null) {
 
-            id = matchDao.updateSubstitution(pIn.getId(), lblScore.getText(), position, ms.getId(), re.getId());
+            id = matchDao.updateSubstitution(pIn.getId(), lblScore.getText(), position, ms.getId(), re.getId(), 1);
         } else {
 
-            id = matchDao.updateSubstitutionPoint2(lblScore.getText(), position, ms.getId(), re.getId());
+            id = matchDao.updateSubstitutionPoint2(lblScore.getText(), position, ms.getId(), re.getId(), 1);
         }
 
         if (id != 0) {

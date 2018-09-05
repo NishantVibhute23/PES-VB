@@ -277,7 +277,7 @@ public class MatchDao {
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return id;
+        return mid;
     }
 
     public int saveMatchSet(MatchSet ms) {
@@ -287,7 +287,7 @@ public class MatchDao {
         try {
             this.con = db.getConnection();
             PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.latest.matchset.id"));
-            ps3.setInt(1, ms.getEvaluationTeamId());
+            ps3.setInt(1, ms.getMatchEvaluationTeamId());
             ps3.setInt(2, ms.getSetNo());
             ResultSet rs = ps3.executeQuery();
             while (rs.next()) {
@@ -429,7 +429,7 @@ public class MatchDao {
 
                 }
                 ms.setSetSubstitutions(setSubstitutions);
-                
+
                 PreparedStatement ps5 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchset.substitution"));
                 ps5.setInt(1, ms.getId());
                 ps5.setInt(2, 2);
@@ -486,7 +486,7 @@ public class MatchDao {
 
     }
 
-    public int updateSubstitution(int subPlayerId, String score, int position, int matchEvaluationId, int rallyId) {
+    public int updateSubstitution(int subPlayerId, String score, int position, int matchEvaluationId, int rallyId, int type) {
         int id = 0;
         try {
 //            int rallyId = getLatestRally(matchEvaluationId);
@@ -497,6 +497,7 @@ public class MatchDao {
             ps1.setInt(3, rallyId);
             ps1.setInt(4, position);
             ps1.setInt(5, matchEvaluationId);
+            ps1.setInt(6, type);
 
             id = ps1.executeUpdate();
             this.db.closeConnection(con);
@@ -506,7 +507,7 @@ public class MatchDao {
         return id;
     }
 
-    public int updateSubstitutionPoint2(String score, int position, int matchEvaluationId, int rallyId) {
+    public int updateSubstitutionPoint2(String score, int position, int matchEvaluationId, int rallyId, int type) {
         int id = 0;
         try {
 //            int rallyId = getLatestRally(matchEvaluationId);
@@ -516,6 +517,7 @@ public class MatchDao {
             ps1.setInt(2, rallyId);
             ps1.setInt(3, position);
             ps1.setInt(4, matchEvaluationId);
+            ps1.setInt(5, type);
 
             id = ps1.executeUpdate();
             this.db.closeConnection(con);
