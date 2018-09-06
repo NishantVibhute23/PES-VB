@@ -29,13 +29,13 @@ import javax.swing.JPanel;
  * @author nishant.vibhute
  */
 public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
-
+    
     public LinkedHashMap<Integer, Player> initialPositionMap;
     public LinkedHashMap<Integer, Player> substituePositionMap;
     LinkedHashMap<JLabel, JPanel> mapPlayerLabel = new LinkedHashMap<JLabel, JPanel>();
-
+    
     public List<JLabel> playerLable = new ArrayList<>();
-
+    
     RallyDao rallyDao = new RallyDao();
     MatchDao matchDao = new MatchDao();
     String su1ChestNo, su2ChestNo, su3ChestNo, su4ChestNo, su5ChestNo, su6ChestNo;
@@ -52,13 +52,14 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
      */
     public PanEvaluationSubstituteHome(int setNum, int matchEvaluationTeamId) {
         initComponents();
+        selectPanel.setVisible(false);
         initialPositionMap = new LinkedHashMap<>();
         substituePositionMap = new LinkedHashMap<>();
         lblOut.requestFocus();
-
+        
         this.ms = matchDao.getMatchSet(setNum, matchEvaluationTeamId);;
         latestPositionMap = rallyDao.getLatestMatchSetRotationOrder(ms.getId());
-
+        
         playerLable.add(lbl1);
         playerLable.add(lbl2);
         playerLable.add(lbl3);
@@ -74,7 +75,7 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         playerLable.add(lbl13);
         playerLable.add(lbl14);
         playerLable.add(lbl15);
-
+        
         mapPlayerLabel.put(lbl1, pan1);
         mapPlayerLabel.put(lbl2, pan2);
         mapPlayerLabel.put(lbl3, pan3);
@@ -90,43 +91,43 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         mapPlayerLabel.put(lbl13, pan13);
         mapPlayerLabel.put(lbl14, pan14);
         mapPlayerLabel.put(lbl15, pan15);
-
+        
         lblRallyNum.setText("" + Controller.panMatchSet.currentRally);
-
+        
         re = rallyDao.getRally(Integer.parseInt(lblRallyNum.getText()), ms.getId(), 0);
-
+        
         lblScore.setText(re.getHomeScore() + " : " + re.getOpponentScore());
-
+        
         for (Map.Entry<JLabel, JPanel> entry : mapPlayerLabel.entrySet()) {
             entry.getKey().addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent me) {
                     selectPlayer(me);
                 }
-
+                
                 @Override
                 public void mousePressed(MouseEvent me) {
-
+                    
                 }
-
+                
                 @Override
                 public void mouseReleased(MouseEvent me) {
-
+                    
                 }
-
+                
                 @Override
                 public void mouseEntered(MouseEvent me) {
-
+                    
                 }
-
+                
                 @Override
                 public void mouseExited(MouseEvent me) {
-
+                    
                 }
             });
             entry.getValue().setVisible(false);
         }
-
+        
         for (SetRotationOrder s : ms.getRotationOrder()) {
             initialPositionMap.put(s.getPosition(), Controller.panMatchSet.playerMap.get(s.getPlayerId()));
         }
@@ -180,34 +181,34 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
                     break;
             }
         }
-
+        
         ro1.setText(initialPositionMap.get(1).getChestNo());
         ro2.setText(initialPositionMap.get(2).getChestNo());
         ro3.setText(initialPositionMap.get(3).getChestNo());
         ro4.setText(initialPositionMap.get(4).getChestNo());
         ro5.setText(initialPositionMap.get(5).getChestNo());
         ro6.setText(initialPositionMap.get(6).getChestNo());
-
+        
         int in = 0, out = 0;
-
+        
         for (Player player : Controller.panMatchSet.playerList) {
             playerLable.get(out).setText(player.getChestNo());
             mapPlayerLabel.get(playerLable.get(out)).setVisible(true);
             out++;
-
+            
         }
     }
-
+    
     public void selectPlayer(MouseEvent me) {
         JLabel lbl = (JLabel) me.getSource();
-
+        
         if (focus.equalsIgnoreCase("OUT")) {
             lblOut.setText(lbl.getText());
             lblIn.requestFocus();
         } else if (focus.equalsIgnoreCase("IN")) {
             lblIn.setText(lbl.getText());
         }
-
+        
     }
 
     /**
@@ -266,6 +267,23 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         but5 = new javax.swing.JLabel();
         jPanel33 = new javax.swing.JPanel();
         but6 = new javax.swing.JLabel();
+        selectPanel = new javax.swing.JPanel();
+        jTextField13 = new javax.swing.JTextField();
+        selectRO = new javax.swing.JTextField();
+        jTextField23 = new javax.swing.JTextField();
+        selectRally = new javax.swing.JTextField();
+        selectScore = new javax.swing.JTextField();
+        jTextField24 = new javax.swing.JTextField();
+        selectSu1 = new javax.swing.JTextField();
+        selectSu2 = new javax.swing.JTextField();
+        jTextField30 = new javax.swing.JTextField();
+        jTextField31 = new javax.swing.JTextField();
+        selectPoint1old = new javax.swing.JTextField();
+        selectPoint2old = new javax.swing.JTextField();
+        selectSubmit = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        selectPoint1New = new javax.swing.JTextField();
+        selectPoint2New = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         pan1 = new javax.swing.JPanel();
@@ -551,6 +569,11 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         but1.setForeground(new java.awt.Color(255, 255, 255));
         but1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         but1.setText("Select");
+        but1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                but1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -570,6 +593,11 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         but2.setForeground(new java.awt.Color(255, 255, 255));
         but2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         but2.setText("Select");
+        but2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                but2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
@@ -589,6 +617,11 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         but3.setForeground(new java.awt.Color(255, 255, 255));
         but3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         but3.setText("Select");
+        but3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                but3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -608,6 +641,11 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setText("Select");
+        jLabel28.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel28MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
@@ -627,6 +665,11 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         but5.setForeground(new java.awt.Color(255, 255, 255));
         but5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         but5.setText("Select");
+        but5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                but5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout but4Layout = new javax.swing.GroupLayout(but4);
         but4.setLayout(but4Layout);
@@ -646,6 +689,11 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         but6.setForeground(new java.awt.Color(255, 255, 255));
         but6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         but6.setText("Select");
+        but6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                but6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
         jPanel33.setLayout(jPanel33Layout);
@@ -791,6 +839,197 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
+        selectPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTextField13.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField13.setText("RO");
+        jTextField13.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextField13.setEnabled(false);
+        jTextField13.setOpaque(false);
+
+        selectRO.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        selectRO.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        selectRO.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        selectRO.setEnabled(false);
+        selectRO.setOpaque(false);
+
+        jTextField23.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jTextField23.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField23.setText("RALLY NO.");
+        jTextField23.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextField23.setEnabled(false);
+        jTextField23.setOpaque(false);
+
+        selectRally.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        selectRally.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        selectRally.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        selectRally.setEnabled(false);
+        selectRally.setOpaque(false);
+        selectRally.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                selectRallyFocusLost(evt);
+            }
+        });
+
+        selectScore.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        selectScore.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        selectScore.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        selectScore.setEnabled(false);
+        selectScore.setOpaque(false);
+
+        jTextField24.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jTextField24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField24.setText("SU");
+        jTextField24.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextField24.setEnabled(false);
+        jTextField24.setOpaque(false);
+
+        selectSu1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        selectSu1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        selectSu1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        selectSu1.setEnabled(false);
+        selectSu1.setOpaque(false);
+
+        selectSu2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        selectSu2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        selectSu2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        selectSu2.setEnabled(false);
+        selectSu2.setOpaque(false);
+
+        jTextField30.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jTextField30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField30.setText("PT");
+        jTextField30.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextField30.setEnabled(false);
+        jTextField30.setOpaque(false);
+
+        jTextField31.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jTextField31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField31.setText("PT");
+        jTextField31.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextField31.setEnabled(false);
+        jTextField31.setOpaque(false);
+
+        selectPoint1old.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        selectPoint1old.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        selectPoint1old.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        selectPoint1old.setEnabled(false);
+        selectPoint1old.setOpaque(false);
+
+        selectPoint2old.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        selectPoint2old.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        selectPoint2old.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        selectPoint2old.setEnabled(false);
+        selectPoint2old.setOpaque(false);
+
+        selectSubmit.setBackground(new java.awt.Color(57, 74, 108));
+        selectSubmit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("SUBMIT");
+        jLabel7.setToolTipText("");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout selectSubmitLayout = new javax.swing.GroupLayout(selectSubmit);
+        selectSubmit.setLayout(selectSubmitLayout);
+        selectSubmitLayout.setHorizontalGroup(
+            selectSubmitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+        );
+        selectSubmitLayout.setVerticalGroup(
+            selectSubmitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+        );
+
+        selectPoint1New.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        selectPoint1New.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        selectPoint1New.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        selectPoint1New.setEnabled(false);
+        selectPoint1New.setOpaque(false);
+
+        selectPoint2New.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        selectPoint2New.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        selectPoint2New.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        selectPoint2New.setEnabled(false);
+        selectPoint2New.setOpaque(false);
+
+        javax.swing.GroupLayout selectPanelLayout = new javax.swing.GroupLayout(selectPanel);
+        selectPanel.setLayout(selectPanelLayout);
+        selectPanelLayout.setHorizontalGroup(
+            selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selectPanelLayout.createSequentialGroup()
+                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(selectPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(selectPanelLayout.createSequentialGroup()
+                                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(selectRO, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(selectPanelLayout.createSequentialGroup()
+                                        .addComponent(selectRally, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(selectScore, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(selectPanelLayout.createSequentialGroup()
+                                        .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(selectPoint1old, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(selectSu1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(selectPoint2old, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(selectSu2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(selectPoint1New, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(selectPoint2New, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(selectPanelLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(selectSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        selectPanelLayout.setVerticalGroup(
+            selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectRO, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectRally, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectScore, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectSu1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectSu2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectPoint1old, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectPoint1New, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectPoint2old, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectPoint2New, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(selectSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -798,14 +1037,21 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(selectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(selectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1304,7 +1550,7 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1319,10 +1565,10 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1361,7 +1607,7 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
 
         Player pOut = Controller.panMatchSet.ChestMap.get(lblOut.getText());
         Player pIn = Controller.panMatchSet.ChestMap.get(lblIn.getText());
-
+        
         int position = 0, i = 0;
         for (Map.Entry<Integer, Player> entry : substituePositionMap.entrySet()) {
             Integer key = entry.getKey();
@@ -1372,36 +1618,130 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
             }
             i++;
         }
-
+        
         SetSubstitution s = ms.getSetSubstitutions().get(i);
         int id = 0;
         if (s.getPoint1() == null) {
-
+            
             id = matchDao.updateSubstitution(pIn.getId(), lblScore.getText(), position, ms.getId(), re.getId(), 1);
         } else {
-
+            
             id = matchDao.updateSubstitutionPoint2(lblScore.getText(), position, ms.getId(), re.getId(), 1);
         }
-
+        
         if (id != 0) {
             Controller.panMatchSet.substituePositionMap.put(position, pIn);
 //            latestPositionMap
             for (Map.Entry<Integer, Player> entry : latestPositionMap.entrySet()) {
                 Integer key = entry.getKey();
                 Player value = entry.getValue();
-
+                
                 if (pOut.getChestNo().equals(value.getChestNo())) {
                     latestPositionMap.put(key, pIn);
                     break;
                 }
             }
-
+            
             rallyDao.updateLatestOrder(latestPositionMap, ms.getId());
             Controller.panMatchSet.rallyPositionMap.putAll(latestPositionMap);
             Controller.panMatchSet.dialogEvaluationSubstitute.close();
-
+            
         }
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+                        
+//        SetSubstitution s = ms.getSetSubstitutions().get(0);
+//        int id = 0;
+//        if (s.getPoint1() == null) {
+//            
+//            id = matchDao.updateSubstitution(initialPositionMap.get(1).getId(), selectScore.getText(), position, ms.getId(), re.getId(), 1);
+//        } else {
+//            
+//            id = matchDao.updateSubstitutionPoint2(selectScore.getText(), position, ms.getId(), re.getId(), 1);
+//        }
+        
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    public void enableProperty(){
+        selectPanel.setVisible(true);
+        selectRally.setEnabled(true);
+        selectRally.setEditable(true);
+        selectSu2.setEnabled(true);
+        selectSu2.setEditable(true);
+        selectPoint1New.setEnabled(true);
+        selectPoint1New.setEditable(true);
+        selectPoint2New.setEnabled(true);
+        selectPoint2New.setEditable(true);
+        selectSubmit.setEnabled(true);
+    }
+    private void but1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but1MouseClicked
+        // TODO add your handling code here:
+        enableProperty();
+        selectRO.setText(initialPositionMap.get(1).getChestNo());
+        selectSu1.setText(su1ChestNo == null ? "" : su1ChestNo);
+        selectPoint1old.setText(pt11.getText());
+        selectPoint2old.setText(pt21.getText());
+        System.out.println("ro" + selectRO.getText());
+
+    }//GEN-LAST:event_but1MouseClicked
+
+    private void selectRallyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectRallyFocusLost
+        // TODO add your handling code here:
+        re = rallyDao.getRally(Integer.parseInt(selectRally.getText()), ms.getId(), 0);
+        selectScore.setText(re.getHomeScore() + " : " + re.getOpponentScore());
+    }//GEN-LAST:event_selectRallyFocusLost
+
+    private void but2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but2MouseClicked
+        // TODO add your handling code here:
+        enableProperty();
+        selectRO.setText(initialPositionMap.get(2).getChestNo());
+        selectSu1.setText(su2ChestNo == null ? "" : su2ChestNo);
+        selectPoint1old.setText(pt12.getText());
+        selectPoint2old.setText(pt22.getText());
+        System.out.println("ro" + selectRO.getText());
+    }//GEN-LAST:event_but2MouseClicked
+
+    private void but3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but3MouseClicked
+        // TODO add your handling code here:
+        enableProperty();
+        selectRO.setText(initialPositionMap.get(3).getChestNo());
+        selectSu1.setText(su3ChestNo == null ? "" : su3ChestNo);
+        selectPoint1old.setText(pt13.getText());
+        selectPoint2old.setText(pt23.getText());
+        System.out.println("ro" + selectRO.getText());
+    }//GEN-LAST:event_but3MouseClicked
+
+    private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
+        // TODO add your handling code here:
+        enableProperty();
+        selectRO.setText(initialPositionMap.get(4).getChestNo());
+        selectSu1.setText(su4ChestNo == null ? "" : su4ChestNo);
+        selectPoint1old.setText(pt14.getText());
+        selectPoint2old.setText(pt24.getText());
+        System.out.println("ro" + selectRO.getText());
+    }//GEN-LAST:event_jLabel28MouseClicked
+
+    private void but5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but5MouseClicked
+        // TODO add your handling code here:
+        enableProperty();
+        selectRO.setText(initialPositionMap.get(5).getChestNo());
+        selectSu1.setText(su5ChestNo == null ? "" : su5ChestNo);
+        selectPoint1old.setText(pt15.getText());
+        selectPoint2old.setText(pt25.getText());
+        System.out.println("ro" + selectRO.getText());
+    }//GEN-LAST:event_but5MouseClicked
+
+    private void but6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but6MouseClicked
+        // TODO add your handling code here:
+        enableProperty();
+        selectRO.setText(initialPositionMap.get(6).getChestNo());
+        selectSu1.setText(su6ChestNo == null ? "" : su6ChestNo);
+        selectPoint1old.setText(pt16.getText());
+        selectPoint2old.setText(pt26.getText());
+        System.out.println("ro" + selectRO.getText());
+    }//GEN-LAST:event_but6MouseClicked
 
 //    public void setInPlyerHighlight(JLabel lbl) {
     //        for (Map.Entry<JLabel, JPanel> entry : mapInPlayerLabel.entrySet()) {
@@ -1443,6 +1783,7 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
@@ -1458,8 +1799,13 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField22;
+    private javax.swing.JTextField jTextField23;
+    private javax.swing.JTextField jTextField24;
     private javax.swing.JTextField jTextField29;
+    private javax.swing.JTextField jTextField30;
+    private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField36;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl10;
@@ -1514,6 +1860,17 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
     private javax.swing.JTextField ro4;
     private javax.swing.JTextField ro5;
     private javax.swing.JTextField ro6;
+    private javax.swing.JPanel selectPanel;
+    private javax.swing.JTextField selectPoint1New;
+    private javax.swing.JTextField selectPoint1old;
+    private javax.swing.JTextField selectPoint2New;
+    private javax.swing.JTextField selectPoint2old;
+    private javax.swing.JTextField selectRO;
+    private javax.swing.JTextField selectRally;
+    public javax.swing.JTextField selectScore;
+    private javax.swing.JTextField selectSu1;
+    public javax.swing.JTextField selectSu2;
+    private javax.swing.JPanel selectSubmit;
     public javax.swing.JTextField su1;
     public javax.swing.JTextField su2;
     public javax.swing.JTextField su3;
