@@ -17,19 +17,19 @@ import java.awt.print.PrinterJob;
 
 /**
  *
- * @author Supriya
+ * @author nishant.vibhute
  */
-public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
+public class PanZoneWiseReport extends javax.swing.JPanel {
 
-    PanMatchReportConsolidated panC;
+    PanZoneSkillwiseMain panC;
 
     /**
-     * Creates new form PanMatchConsolidatedReportHome
+     * Creates new form PanZoneWiseReport
      */
-    public PanMatchConsolidatedReportHome(int cb, int matchId) {
+    public PanZoneWiseReport() {
         initComponents();
-        panC = new PanMatchReportConsolidated(cb, matchId);
-        panReport.add(panC, BorderLayout.CENTER);
+        panC = new PanZoneSkillwiseMain();
+        panContent.add(panC, BorderLayout.CENTER);
     }
 
     /**
@@ -44,8 +44,8 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         panPrint1 = new javax.swing.JPanel();
         lblPrint1 = new javax.swing.JLabel();
-        scrPan = new javax.swing.JScrollPane();
-        panReport = new javax.swing.JPanel();
+        srcPan = new javax.swing.JScrollPane();
+        panContent = new javax.swing.JPanel();
 
         panPrint1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -95,22 +95,22 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
                     .addContainerGap()))
         );
 
-        panReport.setLayout(new java.awt.BorderLayout());
-        scrPan.setViewportView(panReport);
+        panContent.setLayout(new java.awt.BorderLayout());
+        srcPan.setViewportView(panContent);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(scrPan)
+            .addComponent(srcPan)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrPan, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(srcPan, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -120,7 +120,6 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
 
         printComponenet(panC);
         panPrint1.setVisible(true);
-
     }//GEN-LAST:event_lblPrint1MouseClicked
 
     public void printComponenet(final Component comp) {
@@ -175,8 +174,8 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblPrint1;
+    private javax.swing.JPanel panContent;
     private javax.swing.JPanel panPrint1;
-    private javax.swing.JPanel panReport;
-    private javax.swing.JScrollPane scrPan;
+    private javax.swing.JScrollPane srcPan;
     // End of variables declaration//GEN-END:variables
 }

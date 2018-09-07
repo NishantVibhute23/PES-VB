@@ -1080,7 +1080,7 @@ public class PanEvaluation extends javax.swing.JPanel {
                 }
                 setScore();
                 JOptionPane.showMessageDialog(Controller.panMatchSet, "Set Won By : " + lblWonBy.getText() + "\n Score is := " + homeScore + " : " + opponentScore);
-                List<Integer> wonBy = matchDao.getSetNadWonBy(matchId);
+                List<Integer> wonBy = matchDao.getSetNadWonBy(matchEvaluationId);
 
                 int team1WonBy = Collections.frequency(wonBy, teamEvaluateId);
                 int team2wonBy = Collections.frequency(wonBy, opponentId);

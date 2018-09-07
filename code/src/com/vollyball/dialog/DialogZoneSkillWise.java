@@ -5,7 +5,7 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.panels.PanTeamDetail;
+import com.vollyball.panels.PanZoneWiseReport;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -18,25 +18,17 @@ import javax.swing.JFrame;
  *
  * @author nishant.vibhute
  */
-public class DialogTamDetail {
+public class DialogZoneSkillWise {
 
     private JFrame parentFrame;
     private JDialog dialog;
-    int compId, teamId;
 
-    public void init(int compId, int playerId) {
+    public void init() {
         try {
-            this.compId = compId;
-            this.teamId = playerId;
-
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             this.dialog = new JDialog(this.parentFrame, "New Match", true);
-
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());
             this.dialog.pack();
-//            this.dialog.setSize(418, 505);//
-
             Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
             this.dialog.setLocation(new Double((Size.getWidth() / 2) - (dialog.getWidth() / 2)).intValue(), new Double((Size.getHeight() / 2) - (dialog.getHeight() / 2)).intValue());
         } catch (Exception ex) {
@@ -45,13 +37,13 @@ public class DialogTamDetail {
     }
 
     protected Container createPane() {
-        PanTeamDetail panMatch = new PanTeamDetail(compId, teamId);
+        PanZoneWiseReport panMatch = new PanZoneWiseReport();
         return panMatch;
     }
 
     public void show() {
         if (this.dialog == null) {
-            init(compId, teamId);
+            init();
         }
         this.dialog.setVisible(true);
     }

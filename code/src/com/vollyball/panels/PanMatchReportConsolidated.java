@@ -255,7 +255,6 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team2PlayerTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
         team2PlayerTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
         team2PlayerTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
-
         team2PlayerTable.setOpaque(true);
         team2PlayerTable.setFillsViewportHeight(true);
         team2PlayerTable.setBackground(ivory);

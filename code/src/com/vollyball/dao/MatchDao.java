@@ -810,11 +810,8 @@ public class MatchDao {
             this.con = db.getConnection();
             PreparedStatement ps7 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.setandwonbymatch"));
             ps7.setInt(1, matchId);
-
             ResultSet rs7 = ps7.executeQuery();
-
             while (rs7.next()) {
-
                 setWonBy.add(rs7.getInt(1));
             }
 
