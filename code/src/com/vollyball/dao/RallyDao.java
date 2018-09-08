@@ -853,4 +853,53 @@ public class RallyDao {
         return id;
     }
 
+    public SetSubstitution getSubstitutes(int position, int evlId, int type) {
+        SetSubstitution ss = new SetSubstitution();
+        try {
+            this.con = db.getConnection();
+
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.substitues.forSelect"));
+            ps.setInt(1, position);
+            ps.setInt(2, evlId);
+            ps.setInt(3, type);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ss.setId(rs.getInt(1));
+                ss.setPosition(rs.getInt(2));
+                ss.setRotation_player_id(rs.getInt(3));
+                ss.setSubstitutePlayerId(rs.getInt(4));
+                ss.setPoint1(rs.getString(5));
+                ss.setPoint2(rs.getString(6));
+                ss.setRallyIdAtPoin1(rs.getInt(7));
+                ss.setRallyIdAtPoint2(rs.getInt(8));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RallyDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ss;
+    }
+
+    public void updateSubstitutes(SetSubstitution setsub) {
+        int count = 0;
+        try {
+            this.con = db.getConnection();
+
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("set.substitues.forSelect"));
+            ps.setInt(1, setsub.getRotation_player_id());
+            ps.setInt(2, setsub.getSubstitutePlayerId());
+            ps.setString(3, setsub.getPoint1());
+            ps.setString(4, setsub.getPoint2());
+            ps.setInt(5, setsub.getRallyIdAtPoin1());
+            ps.setInt(6, setsub.getRallyIdAtPoint2());
+            ps.setInt(7, setsub.getId());
+
+            count = ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RallyDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

@@ -18,6 +18,8 @@ public class SetSubstitution {
     String point1;
     String point2;
     int match_evaluation_id;
+    int rallyIdAtPoin1;
+    int rallyIdAtPoint2;
 
     public int getPosition() {
         return position;
@@ -73,6 +75,22 @@ public class SetSubstitution {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getRallyIdAtPoin1() {
+        return rallyIdAtPoin1;
+    }
+
+    public void setRallyIdAtPoin1(int rallyIdAtPoin1) {
+        this.rallyIdAtPoin1 = rallyIdAtPoin1;
+    }
+
+    public int getRallyIdAtPoint2() {
+        return rallyIdAtPoint2;
+    }
+
+    public void setRallyIdAtPoint2(int rallyIdAtPoint2) {
+        this.rallyIdAtPoint2 = rallyIdAtPoint2;
     }
 
 }
