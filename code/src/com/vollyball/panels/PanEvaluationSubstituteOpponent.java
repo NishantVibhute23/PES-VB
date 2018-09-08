@@ -46,6 +46,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
     String focus = "out";
     LinkedHashMap<Integer, Player> latestPositionMap;
     RallyEvaluation re;
+    int point1rallyId, point2rallyId;
 
     /**
      * Creates new form PanEvaluationOpponent
@@ -281,6 +282,8 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         selectPoint1Score = new javax.swing.JTextField();
         selectPoint2Score = new javax.swing.JTextField();
         lblsubstitute = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         pan1 = new javax.swing.JPanel();
@@ -841,12 +844,14 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         jTextField13.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField13.setText("RO");
+        jTextField13.setBorder(null);
         jTextField13.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField13.setEnabled(false);
         jTextField13.setOpaque(false);
 
         selectRO.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         selectRO.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        selectRO.setBorder(null);
         selectRO.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         selectRO.setEnabled(false);
         selectRO.setOpaque(false);
@@ -854,6 +859,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         jTextField24.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jTextField24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField24.setText("SU");
+        jTextField24.setBorder(null);
         jTextField24.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField24.setEnabled(false);
         jTextField24.setOpaque(false);
@@ -861,6 +867,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         jTextField30.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jTextField30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField30.setText("PT");
+        jTextField30.setBorder(null);
         jTextField30.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField30.setEnabled(false);
         jTextField30.setOpaque(false);
@@ -868,6 +875,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         jTextField31.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jTextField31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField31.setText("PT");
+        jTextField31.setBorder(null);
         jTextField31.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextField31.setEnabled(false);
         jTextField31.setOpaque(false);
@@ -912,7 +920,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         selectSubmit.setLayout(selectSubmitLayout);
         selectSubmitLayout.setHorizontalGroup(
             selectSubmitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
         );
         selectSubmitLayout.setVerticalGroup(
             selectSubmitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -933,44 +941,58 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
 
         lblsubstitute.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lblsubstitute.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lblsubstitute.setBorder(null);
         lblsubstitute.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         lblsubstitute.setEnabled(false);
         lblsubstitute.setOpaque(false);
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Rally");
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Score");
 
         javax.swing.GroupLayout selectPanelLayout = new javax.swing.GroupLayout(selectPanel);
         selectPanel.setLayout(selectPanelLayout);
         selectPanelLayout.setHorizontalGroup(
             selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(selectPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(13, 13, 13)
                 .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(selectPanelLayout.createSequentialGroup()
-                            .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(selectPanelLayout.createSequentialGroup()
-                                    .addComponent(selectSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(5, 5, 5))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, selectPanelLayout.createSequentialGroup()
-                                    .addGap(9, 9, 9)
-                                    .addComponent(selectPoint2RallyNo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(86, 86, 86))
-                        .addGroup(selectPanelLayout.createSequentialGroup()
-                            .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(30, 30, 30)
-                            .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(selectRO, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblsubstitute, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(selectPanelLayout.createSequentialGroup()
-                                    .addComponent(selectPoint1RallyNo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(selectPoint2Score, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(selectPoint1Score, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(selectPanelLayout.createSequentialGroup()
+                        .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField30))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(selectPanelLayout.createSequentialGroup()
+                                .addComponent(selectRO)
+                                .addGap(63, 63, 63))
+                            .addGroup(selectPanelLayout.createSequentialGroup()
+                                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(selectPoint1RallyNo, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                                    .addComponent(selectPoint2RallyNo)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(selectPanelLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(selectPoint1Score, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                                            .addComponent(selectPoint2Score)))
+                                    .addGroup(selectPanelLayout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addComponent(jLabel9))))
+                            .addGroup(selectPanelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(selectSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(selectPanelLayout.createSequentialGroup()
+                        .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblsubstitute, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         selectPanelLayout.setVerticalGroup(
             selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -985,17 +1007,24 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
                     .addComponent(lblsubstitute, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectPoint1RallyNo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectPoint1Score, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectPoint2RallyNo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectPoint2Score, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(selectPanelLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(selectPoint2RallyNo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(selectPoint2Score, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(selectPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(selectPoint1RallyNo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(selectPoint1Score, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(selectSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1005,9 +1034,9 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(48, 48, 48)
                 .addComponent(selectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1019,7 +1048,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(selectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1552,7 +1581,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1639,7 +1668,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel6MouseClicked
     SetSubstitution ss;
 
-    public void enableProperty() {
+    public void enableProperty(SetSubstitution s) {
         selectPanel.setVisible(true);
         lblsubstitute.setEnabled(true);
         lblsubstitute.setEditable(true);
@@ -1648,59 +1677,54 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         selectPoint1RallyNo.setEnabled(true);
         selectPoint2RallyNo.setEditable(true);
         selectPoint2RallyNo.setEnabled(true);
+        selectRO.setText(Controller.panMatchSet.playerMapOpp.get(s.getRotation_player_id()).getChestNo());
+        lblsubstitute.setText("" + (s.getSubstitutePlayerId() == 0 ? "" : Controller.panMatchSet.playerMapOpp.get(s.getSubstitutePlayerId()).getChestNo()));
+        selectPoint1RallyNo.setText("" + (s.getRallyIdAtPoin1() == 0 ? "" : s.getRallyIdAtPoin1()));
+        selectPoint2RallyNo.setText("" + (s.getRallyIdAtPoint2() == 0 ? "" : s.getRallyIdAtPoint2()));
+        selectPoint1Score.setText(s.getPoint1() == null ? "" : s.getPoint1());
+        selectPoint2Score.setText(s.getPoint2() == null ? "" : s.getPoint2());
+
     }
     private void but1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but1MouseClicked
         // TODO add your handling code here:
-        enableProperty();
-        enableProperty();
+
         ss = rallyDao.getSubstitutes(1, ms.getId(), 2);
-        selectRO.setText("" + initialPositionMap.get(1).getChestNo());
-        lblsubstitute.setText("" + su1ChestNo);
+        enableProperty(ss);
         position = 1;
     }//GEN-LAST:event_but1MouseClicked
 
     private void but2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but2MouseClicked
         // TODO add your handling code here:
-        enableProperty();
         ss = rallyDao.getSubstitutes(2, ms.getId(), 2);
-        selectRO.setText("" + initialPositionMap.get(2).getChestNo());
-        lblsubstitute.setText("" + su2ChestNo);
+        enableProperty(ss);
         position = 2;
     }//GEN-LAST:event_but2MouseClicked
 
     private void but3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but3MouseClicked
         // TODO add your handling code here:
-        enableProperty();
         ss = rallyDao.getSubstitutes(3, ms.getId(), 2);
-        selectRO.setText("" + initialPositionMap.get(3).getChestNo());
-        lblsubstitute.setText("" + su3ChestNo);
+        enableProperty(ss);
         position = 3;
     }//GEN-LAST:event_but3MouseClicked
 
     private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
         // TODO add your handling code here:
-        enableProperty();
         ss = rallyDao.getSubstitutes(4, ms.getId(), 2);
-        selectRO.setText("" + initialPositionMap.get(4).getChestNo());
-        lblsubstitute.setText("" + su4ChestNo);
+        enableProperty(ss);
         position = 4;
     }//GEN-LAST:event_jLabel28MouseClicked
 
     private void but5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but5MouseClicked
         // TODO add your handling code here:
-        enableProperty();
         ss = rallyDao.getSubstitutes(5, ms.getId(), 2);
-        selectRO.setText("" + initialPositionMap.get(5).getChestNo());
-        lblsubstitute.setText("" + su5ChestNo);
+        enableProperty(ss);
         position = 5;
     }//GEN-LAST:event_but5MouseClicked
 
     private void but6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but6MouseClicked
         // TODO add your handling code here:
-        enableProperty();
         ss = rallyDao.getSubstitutes(6, ms.getId(), 2);
-        selectRO.setText("" + initialPositionMap.get(6).getChestNo());
-        lblsubstitute.setText("" + su6ChestNo);
+        enableProperty(ss);
         position = 6;
     }//GEN-LAST:event_but6MouseClicked
 
@@ -1708,6 +1732,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         // TODO add your handling code here:
         selectPoint1RallyNo.getText();
         re = rallyDao.getRally(Integer.parseInt(selectPoint1RallyNo.getText()), ms.getId(), 0);
+        point1rallyId = re.getId();
         selectPoint1Score.setText(re.getHomeScore() + " : " + re.getOpponentScore());
     }//GEN-LAST:event_selectPoint1RallyNoFocusLost
 
@@ -1715,6 +1740,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         // TODO add your handling code here:
         selectPoint2RallyNo.getText();
         re = rallyDao.getRally(Integer.parseInt(selectPoint2RallyNo.getText()), ms.getId(), 0);
+        point2rallyId = re.getId();
         selectPoint2Score.setText(re.getHomeScore() + " : " + re.getOpponentScore());
     }//GEN-LAST:event_selectPoint2RallyNoFocusLost
 
@@ -1722,16 +1748,21 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         SetSubstitution setsub = new SetSubstitution();
         setsub.setId(ss.getId());
         setsub.setPosition(position);
-        setsub.setRotation_player_id(Integer.parseInt(selectRO.getText()));
-        setsub.setSubstitutePlayerId(Integer.parseInt(lblsubstitute.getText()));
+        setsub.setRotation_player_id(Controller.panMatchSet.ChestMapOpp.get(selectRO.getText()).getId());
+        setsub.setSubstitutePlayerId(Controller.panMatchSet.ChestMapOpp.get(lblsubstitute.getText()).getId());
         setsub.setPoint1(selectPoint1Score.getText());
-        setsub.setPoint2(selectPoint2Score.getText());
-        setsub.setRallyIdAtPoin1(Integer.parseInt(selectPoint1RallyNo.getText()));
-        setsub.setRallyIdAtPoint2(Integer.parseInt(selectPoint2RallyNo.getText()));
+        setsub.setPoint2(selectPoint2Score.getText().equals("") ? null : selectPoint2Score.getText());
+        setsub.setRallyIdAtPoin1(point1rallyId);
+        setsub.setRallyIdAtPoint2(point2rallyId);
         lblsubstitute.getText();
         selectPoint1RallyNo.getText();
         selectPoint2RallyNo.getText();
         rallyDao.updateSubstitutes(setsub);
+
+        latestPositionMap.put(position, Controller.panMatchSet.ChestMapOpp.get(lblsubstitute.getText()));
+        rallyDao.updateLatestOrderOpp(latestPositionMap, ms.getId());
+        Controller.panMatchSet.rallyPositionMapOpp.putAll(latestPositionMap);
+        Controller.panMatchSet.dialogEvaluationSubstitute.close();
     }//GEN-LAST:event_jLabel7MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1750,6 +1781,8 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
