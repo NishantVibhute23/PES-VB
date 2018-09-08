@@ -82,7 +82,14 @@ public class RallyDao {
                         i++;
                     }
                 }
-                ps6.setInt(7, rid);
+                for (Map.Entry<Integer, Player> entry : re.rallyPositionMapOpp.entrySet()) {
+                    if (entry.getKey() != 7) {
+                        Player pl = entry.getValue();
+                        ps6.setInt(i, pl.getId());
+                        i++;
+                    }
+                }
+                ps6.setInt(13, rid);
                 ps6.executeUpdate();
 
                 PreparedStatement ps10 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.setLatestorder"));
@@ -96,6 +103,17 @@ public class RallyDao {
 
                 ps10.setInt(7, re.getMatchEvaluationId());
                 ps10.executeUpdate();
+
+                PreparedStatement ps11 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.setLatestorder.opp"));
+
+                for (Map.Entry<Integer, Player> entry : re.rallyPositionMapOpp.entrySet()) {
+                    Integer key = entry.getKey();
+                    Player value = entry.getValue();
+                    ps11.setInt(key, value.getId());
+                }
+
+                ps11.setInt(7, re.getMatchEvaluationId());
+                ps11.executeUpdate();
 
                 for (RallyEvaluationSkillScore ress : re.getRallyEvaluationSkillScore()) {
                     PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.rallydetails"));
@@ -436,6 +454,14 @@ public class RallyDao {
                         re.rallyPositionMap.put(4, Controller.panMatchSet.playerMap.get(rs2.getInt(4)));
                         re.rallyPositionMap.put(5, Controller.panMatchSet.playerMap.get(rs2.getInt(5)));
                         re.rallyPositionMap.put(6, Controller.panMatchSet.playerMap.get(rs2.getInt(6)));
+
+                        re.rallyPositionMapOpp.put(1, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(7)));
+                        re.rallyPositionMapOpp.put(2, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(8)));
+                        re.rallyPositionMapOpp.put(3, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(9)));
+                        re.rallyPositionMapOpp.put(4, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(10)));
+                        re.rallyPositionMapOpp.put(5, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(11)));
+                        re.rallyPositionMapOpp.put(6, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(12)));
+
                     } else {
                         playerList = teamDao.getTeamPlayers(teamId);
                         for (Player p : playerList) {
@@ -448,6 +474,13 @@ public class RallyDao {
                         re.rallyPositionMap.put(4, playerMap.get(rs2.getInt(4)));
                         re.rallyPositionMap.put(5, playerMap.get(rs2.getInt(5)));
                         re.rallyPositionMap.put(6, playerMap.get(rs2.getInt(6)));
+
+                        re.rallyPositionMapOpp.put(1, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(7)));
+                        re.rallyPositionMapOpp.put(2, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(8)));
+                        re.rallyPositionMapOpp.put(3, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(9)));
+                        re.rallyPositionMapOpp.put(4, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(10)));
+                        re.rallyPositionMapOpp.put(5, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(11)));
+                        re.rallyPositionMapOpp.put(6, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(12)));
                     }
                 }
 

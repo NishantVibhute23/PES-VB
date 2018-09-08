@@ -60,6 +60,9 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     int homeScore, opponentScore;
     boolean isInserted = false;
 
+    public LinkedHashMap<Integer, Player> rallyPositionMap = new LinkedHashMap<Integer, Player>();
+    public LinkedHashMap<Integer, Player> rallyPositionMapOpp = new LinkedHashMap<Integer, Player>();
+
     /**
      * Creates new form PanEvaluationRallyRow
      */
@@ -74,10 +77,11 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         this.rallyNum = rallyNum;
         this.teamEvaluateId = teamEvaluateId;
         this.opponentId = opponentId;
+        setRotationForRally();
         panRallyList.add(panCompListValue, BorderLayout.CENTER);
         panCompListValue.add(true);
         lblRallyNum.setText("" + rallyNum);
-        setRotationForRally();
+
         lblAction.setText("SAVE");
     }
 
@@ -95,11 +99,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         isInserted = true;
         this.rallyEvaluation = rallyEvaluation;
         this.rallyNum = rallyEvaluation.getRallyNum();
-//        this.teamEvaluateId = rallyEvaluation.get;
-//        this.opponentId = opponentId;
         this.id = rallyEvaluation.getId();
-//        panRallyList.add(panCompListValue, BorderLayout.CENTER);
-//        panCompListValue.add(true);
         homeScore = rallyEvaluation.getHomeScore();
         opponentScore = rallyEvaluation.getOpponentScore();
         lblRallyNum.setText("" + rallyEvaluation.getRallyNum());
@@ -107,7 +107,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         lblRallyEndTime.setText("" + rallyEvaluation.getEndTime());
         lblResult.setText(rallyEvaluation.getHomeScore() + " : " + rallyEvaluation.getOpponentScore());
         panRallyList.add(panCompListValue, BorderLayout.CENTER);
-        panCompListValue.addRallies(rallyEvaluation.getRallyEvaluationSkillScore());
+
         oldRallyEndScore = rallyEvaluation.getRallyEvaluationSkillScore().get(rallyEvaluation.getRallyEvaluationSkillScore().size() - 1).getScore();
         oldSkillid = rallyEvaluation.getRallyEvaluationSkillScore().get(rallyEvaluation.getRallyEvaluationSkillScore().size() - 1).getSkillId();
         if (rallyEvaluation.getRallyPositionMap().size() > 0) {
@@ -118,6 +118,11 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             rallyPos5.setText(rallyEvaluation.getRallyPositionMap().get(5).getChestNo());
             rallyPos6.setText(rallyEvaluation.getRallyPositionMap().get(6).getChestNo());
         }
+
+        this.rallyPositionMap.putAll(rallyEvaluation.getRallyPositionMap());
+        this.rallyPositionMapOpp.putAll(rallyEvaluation.getRallyPositionMapOpp());
+        panCompListValue.addRallies(rallyEvaluation.getRallyEvaluationSkillScore());
+
     }
 
     public void setRotationForRally() {
@@ -197,18 +202,20 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             latestPositionMap.put(6, temp);
         }
 
-        int i = 0;
-        for (Map.Entry<Integer, Player> entry : latestPositionMap.entrySet()) {
-            rallyPos.get(i).setText("" + entry.getValue().getChestNo());
-            if (Controller.panMatchSet.initialPositionMap.get(7).getChestNo().equals(entry.getValue().getChestNo())) {
-                rallyPos.get(i).setForeground(Color.red);
-            } else {
-                rallyPos.get(i).setForeground(Color.BLACK);
-            }
-            i++;
-        }
+//        int i = 0;
+//        for (Map.Entry<Integer, Player> entry : latestPositionMap.entrySet()) {
+//            rallyPos.get(i).setText("" + entry.getValue().getChestNo());
+//            if (Controller.panMatchSet.initialPositionMap.get(7).getChestNo().equals(entry.getValue().getChestNo())) {
+//                rallyPos.get(i).setForeground(Color.red);
+//            } else {
+//                rallyPos.get(i).setForeground(Color.BLACK);
+//            }
+//            i++;
+//        }
         Controller.panMatchSet.rallyPositionMap.putAll(latestPositionMap);
         Controller.panMatchSet.rallyPositionMapOpp.putAll(latestPositionMapOpp);
+        this.rallyPositionMap.putAll(latestPositionMap);
+        this.rallyPositionMapOpp.putAll(latestPositionMapOpp);
     }
 
     public void setRotation() {
@@ -386,7 +393,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         rallyInsert.setEndTime(endTime);
         rallyInsert.setMatchEvaluationId(Controller.panMatchSet.matchEvaluationId);
         rallyInsert.setRallyPositionMap(Controller.panMatchSet.rallyPositionMap);
-
+        rallyInsert.setRallyPositionMapOpp(Controller.panMatchSet.rallyPositionMapOpp);
         for (RallyEvaluationSkillScore rallyEvaluationSkillScore : rallyEvaluation.getRallyEvaluationSkillScore()) {
             try {
 

@@ -54,14 +54,17 @@ public class ImagePanel extends JPanel {
     static LinkedHashMap<Integer, Point> homeChestNumShow = new LinkedHashMap<Integer, Point>();
     static LinkedHashMap<Integer, Point> oppChestNumShow = new LinkedHashMap<Integer, Point>();
 
+    public LinkedHashMap<Integer, Player> rallyPositionMap = new LinkedHashMap<Integer, Player>();
+    public LinkedHashMap<Integer, Player> rallyPositionMapOpp = new LinkedHashMap<Integer, Player>();
+
     List<DigPoints> shapes = new ArrayList<>();
 
-    public ImagePanel(String img) {
-        this(new ImageIcon(img).getImage());
+    public ImagePanel(String img, PanEvaluationRally p) {
+        this(new ImageIcon(img).getImage(), p);
 
     }
 
-    public ImagePanel(Image img) {
+    public ImagePanel(Image img, PanEvaluationRally p) {
         this.img = img;
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
         setPreferredSize(size);
@@ -69,6 +72,9 @@ public class ImagePanel extends JPanel {
         setMaximumSize(size);
         setSize(size);
         this.setLayout(new GridLayout(8, 5));
+
+        rallyPositionMap.putAll(p.rallyPositionMap);
+        rallyPositionMapOpp.putAll(p.rallyPositionMapOpp);
 
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 5; j++) {
@@ -390,6 +396,12 @@ public class ImagePanel extends JPanel {
         repaint();
     }
 
+    public void setPlayerPosition(LinkedHashMap<Integer, Player> rallyPositionMap, LinkedHashMap<Integer, Player> rallyPositionMapOpp) {
+        this.rallyPositionMap = rallyPositionMap;
+        this.rallyPositionMapOpp = rallyPositionMapOpp;
+        repaint();
+    }
+
     public void drawImage(int x1, int y1, int x2, int y2) {
         this.img = img;
         this.x1 = x1;
@@ -406,7 +418,7 @@ public class ImagePanel extends JPanel {
         g2.setStroke(new BasicStroke(3));
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMap.entrySet()) {
+        for (Map.Entry<Integer, Player> entry : rallyPositionMap.entrySet()) {
 
             Point p = homeChestNumShow.get(entry.getKey());
             Player player = entry.getValue();
@@ -431,7 +443,7 @@ public class ImagePanel extends JPanel {
                     (int) (centerY + fm.getMaxAscent() / 3));
         }
 
-        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMapOpp.entrySet()) {
+        for (Map.Entry<Integer, Player> entry : rallyPositionMapOpp.entrySet()) {
             Point p = oppChestNumShow.get(entry.getKey());
             Player player = entry.getValue();
             String text = player.getChestNo();

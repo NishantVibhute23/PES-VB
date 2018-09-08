@@ -32,6 +32,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -143,7 +144,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         scoreKeys = ShortKeysUtil.scoreKeys();
         diagramKeys = ShortKeysUtil.diagramKeys();
 
-        panel = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage());
+        panel = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), p);
         panCourt.add(panel, BorderLayout.CENTER);
 
         playerLabelList = new ArrayList<JLabel>(mapPlayerComponent.keySet());
@@ -259,7 +260,12 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
             });
         }
-        txtInput.requestFocus();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                txtInput.requestFocus();
+            }
+        });
+//        txtInput.requestFocus();
     }
 
     public void save() {
@@ -441,6 +447,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 skillDescIdPanMap.get(entry.getKey()).lblOption.setText(entry.getValue());
             }
         }
+        panel.refresh();
 
     }
 
@@ -1894,7 +1901,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     }//GEN-LAST:event_txtInputKeyPressed
 
     public void refresh() {
-        panel.refresh();
+        panel.setPlayerPosition(p.rallyPositionMap, p.rallyPositionMapOpp);
     }
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked

@@ -29,6 +29,7 @@ public class RallyEvaluation {
     int wonby = 0;
     List<RallyEvaluationSkillScore> rallyEvaluationSkillScore = new ArrayList<>();
     public LinkedHashMap<Integer, Player> rallyPositionMap = new LinkedHashMap<Integer, Player>();
+    public LinkedHashMap<Integer, Player> rallyPositionMapOpp = new LinkedHashMap<Integer, Player>();
 
     public int getId() {
         return id;
@@ -140,6 +141,14 @@ public class RallyEvaluation {
 
     public void setWonby(int wonby) {
         this.wonby = wonby;
+    }
+
+    public LinkedHashMap<Integer, Player> getRallyPositionMapOpp() {
+        return rallyPositionMapOpp;
+    }
+
+    public void setRallyPositionMapOpp(LinkedHashMap<Integer, Player> rallyPositionMapOpp) {
+        this.rallyPositionMapOpp = rallyPositionMapOpp;
     }
 
 }

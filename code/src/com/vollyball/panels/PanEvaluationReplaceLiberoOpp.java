@@ -112,7 +112,7 @@ public class PanEvaluationReplaceLiberoOpp extends javax.swing.JPanel {
 
     public void replace(MouseEvent me) {
         PanEvaluationPlayerReplace t = (PanEvaluationPlayerReplace) me.getSource();
-        Controller.panMatchSet.rallyPositionMapOpp.put(t.getPlayerEval(), Controller.panMatchSet.ChestMapOpp.get(panLiberoNo.getChestNo()));
+        panEvaluationRally.p.rallyPositionMapOpp.put(t.getPlayerEval(), Controller.panMatchSet.ChestMapOpp.get(panLiberoNo.getChestNo()));
         this.panEvaluationRally.refresh();
         this.panEvaluationRally.dialogReplaceLibero.close();
     }
