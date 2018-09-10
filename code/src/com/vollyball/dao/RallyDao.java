@@ -235,7 +235,7 @@ public class RallyDao {
                                     ps8.setInt(1, key);
                                     ps8.setString(2, value);
                                     ps8.setInt(3, rallyDetailsId);
-                                    ps8.executeQuery();
+                                    ps8.executeUpdate();
 
                                 }
 
@@ -415,6 +415,34 @@ public class RallyDao {
             }
         }
 
+    }
+
+    public RallyEvaluation getRallyScore(int rallyNum, int evaluationId) {
+        RallyEvaluation re = new RallyEvaluation();
+        try {
+
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.rally"));
+            ps.setInt(1, rallyNum);
+            ps.setInt(2, evaluationId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                re.setId(rs.getInt(1));
+                re.setRallyNum(rs.getInt(2));
+                re.setHomeScore(rs.getInt(3));
+                re.setOpponentScore(rs.getInt(4));
+                re.setStartTime(rs.getString(5));
+                re.setEndTime(rs.getString(6));
+                re.setMatchEvaluationId(rs.getInt(7));
+                re.setStartby(rs.getInt(8));
+                re.setWonby(rs.getInt(9));
+            }
+
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return re;
     }
 
     public RallyEvaluation getRally(int rallyNum, int evaluationId, int teamId) {

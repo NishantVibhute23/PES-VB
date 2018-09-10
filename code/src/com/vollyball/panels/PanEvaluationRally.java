@@ -81,8 +81,18 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         panRallyList.add(panCompListValue, BorderLayout.CENTER);
         panCompListValue.add(true);
         lblRallyNum.setText("" + rallyNum);
-
         lblAction.setText("SAVE");
+
+        rallyPositionMap = rallyDao.getLatestMatchSetRotationOrder(Controller.panMatchSet.matchEvaluationId);
+        rallyPositionMapOpp = rallyDao.getLatestMatchSetRotationOrderOpp(Controller.panMatchSet.matchEvaluationId);
+
+        if (rallyPositionMap.isEmpty()) {
+            rallyPositionMap.putAll(Controller.panMatchSet.initialPositionMap);
+        }
+        if (rallyPositionMapOpp.isEmpty()) {
+            rallyPositionMapOpp.putAll(Controller.panMatchSet.initialPositionMapOpp);
+        }
+
     }
 
     public void addToPosition(boolean first) {
@@ -212,24 +222,10 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 //            }
 //            i++;
 //        }
-        Controller.panMatchSet.rallyPositionMap.putAll(latestPositionMap);
-        Controller.panMatchSet.rallyPositionMapOpp.putAll(latestPositionMapOpp);
+        rallyPositionMap.putAll(latestPositionMap);
+        rallyPositionMapOpp.putAll(latestPositionMapOpp);
         this.rallyPositionMap.putAll(latestPositionMap);
         this.rallyPositionMapOpp.putAll(latestPositionMapOpp);
-    }
-
-    public void setRotation() {
-        int i = 0;
-        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMap.entrySet()) {
-            rallyPos.get(i).setText("" + entry.getValue().getChestNo());
-            if (Controller.panMatchSet.initialPositionMap.get(7).getChestNo().equals(entry.getValue().getChestNo())) {
-                rallyPos.get(i).setForeground(Color.red);
-            } else {
-                rallyPos.get(i).setForeground(Color.BLACK);
-            }
-            i++;
-        }
-
     }
 
     public void update() {
@@ -279,7 +275,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                     }
                     rallyUpdate.getRallyEvaluationSkillScore().add(rs);
                 } catch (Exception ex) {
-                    Logger.getLogger(PanRallyLiveEvaluation.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(this.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
@@ -392,8 +388,8 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         rallyInsert.setStartTime(startTime);
         rallyInsert.setEndTime(endTime);
         rallyInsert.setMatchEvaluationId(Controller.panMatchSet.matchEvaluationId);
-        rallyInsert.setRallyPositionMap(Controller.panMatchSet.rallyPositionMap);
-        rallyInsert.setRallyPositionMapOpp(Controller.panMatchSet.rallyPositionMapOpp);
+        rallyInsert.setRallyPositionMap(rallyPositionMap);
+        rallyInsert.setRallyPositionMapOpp(rallyPositionMapOpp);
         for (RallyEvaluationSkillScore rallyEvaluationSkillScore : rallyEvaluation.getRallyEvaluationSkillScore()) {
             try {
 
@@ -424,7 +420,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                 rallyInsert.getRallyEvaluationSkillScore().add(rs);
 
             } catch (Exception ex) {
-                Logger.getLogger(PanRallyLiveEvaluation.class
+                Logger.getLogger(this
                         .getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -512,17 +508,18 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             gbcRow.gridheight = 2;
             gbcRow.fill = GridBagConstraints.HORIZONTAL;
             int i = 0;
-            for (PanEvaluationRallyRowText p : panListRow) {
-                if (p.isAddClicked) {
-                    if (!first) {
+            if (!first) {
+                for (PanEvaluationRallyRowText p : panListRow) {
+                    if (p.isAddClicked) {
                         atRow = i + 1;
+                        p.isAddClicked = false;
+                        panListRow.add(atRow, panel);
+                        break;
                     }
-                    p.isAddClicked = false;
-                    panListRow.add(atRow, panel);
-                    break;
-
+                    i++;
                 }
-                i++;
+            } else {
+                panListRow.add(atRow, panel);
             }
             mainList.add(panel, gbcRow, atRow);
             validate();

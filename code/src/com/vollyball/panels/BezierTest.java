@@ -16,8 +16,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -149,7 +147,7 @@ public class BezierTest {
         try {
             image = ImageIO.read(new File("src\\com\\vollyball\\images\\vollycorntgreenNEW.png"));
         } catch (IOException ex) {
-            Logger.getLogger(PanVolleyCourt.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(this.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

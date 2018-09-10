@@ -20,6 +20,7 @@ import com.vollyball.panels.PanCompetitionList;
 import com.vollyball.panels.PanCompetitionReportHome;
 import com.vollyball.panels.PanComptitionHome;
 import com.vollyball.panels.PanEvaluation;
+import com.vollyball.panels.PanEvaluationRally;
 import com.vollyball.panels.PanMatchEvaluationHome;
 import com.vollyball.panels.PanMatchReport;
 import com.vollyball.panels.PanMatches;
@@ -72,6 +73,7 @@ public class Controller {
     public static CreatePlayerDialog createPlayerDialog;
     public static PanBatchTraineeList panBatchTraineeList;
     public static PanPESVBHome panPESVBHome;
+    public static PanEvaluationRally panEvaluationRally;
 
     public static void main(String args[]) {
 

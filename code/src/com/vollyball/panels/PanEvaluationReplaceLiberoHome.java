@@ -9,7 +9,6 @@ import com.vollyball.bean.Player;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.RallyDao;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JTextField;
 
 /**
  *
@@ -26,20 +24,22 @@ import javax.swing.JTextField;
 public class PanEvaluationReplaceLiberoHome extends javax.swing.JPanel {
 
     List<PanEvaluationPlayerReplace> rallyPos = new ArrayList<>();
-    PanEvaluationRowDetail panEvaluationRally;
+    PanEvaluationRowDetail panEvaluationRowDetail;
     RallyDao rallyDao = new RallyDao();
     PanEvaluationPlayerReplace panLiberoNo;
 
     /**
      * Creates new form PanEvaluationReplaceLibero
+     *
+     * @param panEvaluationRowDetail
      */
-    public PanEvaluationReplaceLiberoHome(PanEvaluationRowDetail panEvaluationRally) {
+    public PanEvaluationReplaceLiberoHome(PanEvaluationRowDetail panEvaluationRowDetail) {
 
         initComponents();
-        this.panEvaluationRally = panEvaluationRally;
+        this.panEvaluationRowDetail = panEvaluationRowDetail;
 
         LinkedHashMap<Integer, Player> subStitutePositionMap = Controller.panMatchSet.substituePositionMap;
-        LinkedHashMap<Integer, Player> rallyPositionMap = Controller.panMatchSet.rallyPositionMap;
+        LinkedHashMap<Integer, Player> rallyPositionMap = Controller.panEvaluationRally.rallyPositionMap;
         int i = 0;
 
         Player playerP = null;
@@ -114,9 +114,9 @@ public class PanEvaluationReplaceLiberoHome extends javax.swing.JPanel {
 
     public void replace(MouseEvent me) {
         PanEvaluationPlayerReplace t = (PanEvaluationPlayerReplace) me.getSource();
-        Controller.panMatchSet.rallyPositionMap.put(t.getPlayerEval(), Controller.panMatchSet.ChestMap.get(panLiberoNo.getChestNo()));
-        this.panEvaluationRally.refresh();
-        this.panEvaluationRally.dialogReplaceLibero.close();
+        Controller.panEvaluationRally.rallyPositionMap.put(t.getPlayerEval(), Controller.panMatchSet.ChestMap.get(panLiberoNo.getChestNo()));
+        this.panEvaluationRowDetail.refresh();
+        this.panEvaluationRowDetail.dialogReplaceLibero.close();
     }
 
     /**

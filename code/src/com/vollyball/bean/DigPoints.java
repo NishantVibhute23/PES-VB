@@ -17,6 +17,7 @@ public class DigPoints {
     int y2;
     int midx;
     int midy;
+    int playerMoved = 0;
 
     public int getX1() {
         return x1;
@@ -64,6 +65,14 @@ public class DigPoints {
 
     public void setMidy(int midy) {
         this.midy = midy;
+    }
+
+    public int getPlayerMoved() {
+        return playerMoved;
+    }
+
+    public void setPlayerMoved(int playerMoved) {
+        this.playerMoved = playerMoved;
     }
 
 }

@@ -151,9 +151,9 @@ public class PanCourtAllScoresPlayer extends javax.swing.JPanel {
                         listCCB.add(v);
                         v.setChestNum(chestNum);
                     }
-                    PanVolleyCourt panMatch = new PanVolleyCourt();
-                    panMatch.setValues(listCCB, "Report");
-                    panGraph.add(panMatch, BorderLayout.CENTER);
+//                    PanVolleyCourt panMatch = new PanVolleyCourt();
+//                    panMatch.setValues(listCCB, "Report");
+//                    panGraph.add(panMatch, BorderLayout.CENTER);
                 } else {
                     panGraph.add(lblNoData, BorderLayout.CENTER);
                 }

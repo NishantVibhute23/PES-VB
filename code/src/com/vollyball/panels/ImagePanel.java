@@ -23,6 +23,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
@@ -49,6 +50,7 @@ public class ImagePanel extends JPanel {
     int y2 = 0;
     int midX = 0;
     int midY = 0;
+    private Image imgHand;
     static LinkedHashMap<String, JPanel> panGrid = new LinkedHashMap<String, JPanel>();
 
     static LinkedHashMap<Integer, Point> homeChestNumShow = new LinkedHashMap<Integer, Point>();
@@ -283,7 +285,7 @@ public class ImagePanel extends JPanel {
         Point p = null;
         int centerX, centerY;
 
-        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMap.entrySet()) {
+        for (Map.Entry<Integer, Player> entry : Controller.panEvaluationRally.rallyPositionMap.entrySet()) {
             Player player = entry.getValue();
             String text = player.getChestNo();
             if (text.equals(chestNo)) {
@@ -300,47 +302,85 @@ public class ImagePanel extends JPanel {
     public Point getPoint(String pan) {
         JPanel p1 = panGrid.get(pan);
         int x = (int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth()));
-        int y = (int) ((p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight())));
+        int y = (int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight()));
         Point p = new Point(x, y);
         return p;
     }
 
-    public void dig(String skill, List<String> panels, int tempo) {
+    public void dig(String skill, List<String> panel, int tempo) {
         repaint();
         int k = 0;
-        if (CommonUtil.isNumeric(panels.get(0))) {
-            Point p = getPlayerPoints(panels.get(0));
+        List<String> panels = new ArrayList<>(panel);
+//        if (CommonUtil.isNumeric(panels.get(0))) {
+//            Point p = getPlayerPoints(panels.get(0));
+//            DigPoints dp = new DigPoints();
+//            dp.setX1((int) p.getX());
+//            dp.setY1((int) p.getY());
+//            dp.setMidx(dp.getX1());
+//            dp.setMidy(dp.getY1());
+//            JPanel p1 = panGrid.get(panels.get(1));
+//            dp.setX2((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+//            dp.setY2((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+//            shapes.add(dp);
+//            k++;
+//        }
+        String playerNum = "";
+        int playerPos = -1;
+        String homeCourt = "";
+        boolean isHomeFound = false;
+        for (int i = 0; i < panels.size(); i++) {
+            if (CommonUtil.isNumeric(panels.get(i))) {
+                playerNum = panels.get(i);
+                playerPos = i;
+            } else {
+                if (panels.get(i).startsWith("H") && !isHomeFound) {
+                    homeCourt = panels.get(i);
+                    isHomeFound = true;
+                }
+            }
+
+        }
+
+        if (playerPos != -1) {
+            panels.remove(playerPos);
+        }
+
+        if (panels.size() > 1) {
+            JPanel p1 = panGrid.get(panels.get(0));
+            for (int i = 1; i < panels.size(); i++) {
+                DigPoints dp = new DigPoints();
+                JPanel p2 = panGrid.get(panels.get(i));
+                dp.setX1((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+                dp.setY1((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+                dp.setX2((int) (p2.getParent().getLocation().getX() + p2.getLocation().getX() + (p2.getWidth() / 2)));
+                dp.setY2((int) (p2.getParent().getLocation().getY() + p2.getLocation().getY() + (p2.getHeight() / 2)));
+                if (skill.equalsIgnoreCase("Set")) {
+                    Point p = setCurve(dp, tempo);
+                    dp.setMidx((int) p.getX());
+                    dp.setMidy((int) p.getY());
+                } else {
+                    dp.setMidx(dp.getX2());
+                    dp.setMidy(dp.getY2());
+                }
+                shapes.add(dp);
+                p1 = panGrid.get(panels.get(i));
+            }
+        }
+
+        if (!playerNum.isEmpty() && isHomeFound) {
+            Point p = getPlayerPoints(playerNum);
             DigPoints dp = new DigPoints();
             dp.setX1((int) p.getX());
             dp.setY1((int) p.getY());
             dp.setMidx(dp.getX1());
             dp.setMidy(dp.getY1());
-            JPanel p1 = panGrid.get(panels.get(1));
+            JPanel p1 = panGrid.get(homeCourt);
+            dp.setPlayerMoved(1);
             dp.setX2((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
             dp.setY2((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
             shapes.add(dp);
-            k++;
         }
 
-        JPanel p1 = panGrid.get(panels.get(k));
-        for (int i = k + 1; i < panels.size(); i++) {
-            DigPoints dp = new DigPoints();
-            JPanel p2 = panGrid.get(panels.get(i));
-            dp.setX1((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
-            dp.setY1((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
-            dp.setX2((int) (p2.getParent().getLocation().getX() + p2.getLocation().getX() + (p2.getWidth() / 2)));
-            dp.setY2((int) (p2.getParent().getLocation().getY() + p2.getLocation().getY() + (p2.getHeight() / 2)));
-            if (skill.equalsIgnoreCase("Set")) {
-                Point p = setCurve(dp, tempo);
-                dp.setMidx((int) p.getX());
-                dp.setMidy((int) p.getY());
-            } else {
-                dp.setMidx(dp.getX1());
-                dp.setMidy(dp.getY1());
-            }
-            shapes.add(dp);
-            p1 = panGrid.get(panels.get(i));
-        }
         repaint();
     }
 
@@ -470,9 +510,47 @@ public class ImagePanel extends JPanel {
             Path2D p = new GeneralPath();
             p.moveTo(dp.getX1(), dp.getY1());
             p.curveTo(dp.getX1(), dp.getY1(), dp.getMidx(), dp.getMidy(), dp.getX2(), dp.getY2());
+
+            if (dp.getPlayerMoved() == 1) {
+                Stroke dashed = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 0, new float[]{10}, 5);
+                g2.setColor(Color.blue);
+                g2.setStroke(dashed);
+                imgHand = new ImageIcon("src\\com\\vollyball\\images\\153657649317869378.png").getImage();
+                g.drawImage(imgHand, dp.getX2() - 15, dp.getY2() - 15, null);
+//                imgHand = new ImageIcon("src\\com\\vollyball\\images\\153657649317869378 (1).png").getImage();
+//                g.drawImage(imgHand, dp.getX1() - 15, dp.getY1() - 15, null);
+            } else {
+                g2.setColor(Color.WHITE);
+                g2.setStroke(new BasicStroke(3));
+
+                Point sw = new Point(dp.getMidx(), dp.getMidy());
+                Point ne = new Point(dp.getX1(), dp.getY1());
+
+                drawArrowHead(g2, sw, ne, Color.WHITE);
+            }
             g2.draw(p);
         }
 
+    }
+
+    private void drawArrowHead(Graphics2D g2, Point tip, Point tail, Color color) {
+        double phi;
+        int barb;
+        phi = Math.toRadians(40);
+        barb = 20;
+        g2.setPaint(color);
+        double dy = tip.y - tail.y;
+        double dx = tip.x - tail.x;
+        double theta = Math.atan2(dy, dx);
+        //System.out.println("theta = " + Math.toDegrees(theta));
+        double x, y, rho = theta + phi;
+        for (int j = 0; j < 2; j++) {
+            x = tip.x - barb * Math.cos(rho);
+            y = tip.y - barb * Math.sin(rho);
+            g2.draw(new Line2D.Double(tip.x, tip.y, x, y));
+            g2.setStroke(new BasicStroke(3));
+            rho = theta - phi;
+        }
     }
 
 }

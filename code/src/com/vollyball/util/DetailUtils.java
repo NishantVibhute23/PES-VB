@@ -137,7 +137,7 @@ public class DetailUtils {
         int zone;
         String pos = "";
         zone = Integer.parseInt(pan2.substring(1, 2));
-        Player player = Controller.panMatchSet.rallyPositionMapOpp.get(zone);
+        Player player = Controller.panEvaluationRally.rallyPositionMapOpp.get(zone);
 
         switch (player.getPosition()) {
             case 1:
@@ -166,7 +166,7 @@ public class DetailUtils {
 
         String score = "0 : 0";
         RallyDao rallyDao = new RallyDao();
-        RallyEvaluation re = rallyDao.getRally(rallyNum, evaluationId, 0);
+        RallyEvaluation re = rallyDao.getRallyScore(rallyNum, evaluationId);
         if (re.getId() != 0) {
             score = re.getHomeScore() + " : " + re.getOpponentScore();
         }
@@ -176,7 +176,7 @@ public class DetailUtils {
     public static String getServeInSituation(int rallyId, int evaluationId, int evaluationTeamId) {
         String situation = "RC";
         RallyDao rallyDao = new RallyDao();
-        RallyEvaluation re = rallyDao.getRally(rallyId, evaluationId, 0);
+        RallyEvaluation re = rallyDao.getRallyScore(rallyId, evaluationId);
         if (re.getId() != 0) {
             if (re.getStartby() == evaluationTeamId) {
                 situation = "RC";
@@ -189,7 +189,7 @@ public class DetailUtils {
 
     public static String getOpponentSetterPosition() {
         String position = "";
-        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMapOpp.entrySet()) {
+        for (Map.Entry<Integer, Player> entry : Controller.panEvaluationRally.rallyPositionMapOpp.entrySet()) {
             Player p = entry.getValue();
             int pos = 0;
             if (p.getPosition() == PlayerPosition.SETTER.getId()) {
@@ -222,7 +222,7 @@ public class DetailUtils {
 
     public static String getHomeSetterPosition() {
         String position = "";
-        for (Map.Entry<Integer, Player> entry : Controller.panMatchSet.rallyPositionMap.entrySet()) {
+        for (Map.Entry<Integer, Player> entry : Controller.panEvaluationRally.rallyPositionMap.entrySet()) {
             Player p = entry.getValue();
             int pos = 0;
             if (p.getPosition() == PlayerPosition.SETTER.getId()) {

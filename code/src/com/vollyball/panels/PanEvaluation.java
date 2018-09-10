@@ -45,8 +45,6 @@ import uk.co.caprica.vlcj.runtime.x.LibXUtil;
  */
 public class PanEvaluation extends javax.swing.JPanel {
 
-    PanEvaluationRally pw;
-
     public int currentRally = 0;
     int setNum;
     int matchId;
@@ -58,7 +56,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     public DialogEvaluationSubstitute dialogEvaluationSubstitute;
     public DialogEvaluationTimeout dialogEvaluationTimeout;
     public LinkedHashMap<Integer, RallyEvaluation> rallyMap = new LinkedHashMap<Integer, RallyEvaluation>();
-    public LinkedHashMap<Integer, PanRallyLiveEvaluation> panRallyMap = new LinkedHashMap<Integer, PanRallyLiveEvaluation>();
+
     public LinkedHashMap<Integer, Player> initialPositionMap;
     public LinkedHashMap<Integer, Player> initialPositionMapOpp;
 //    public LinkedHashMap<Integer, Player> rallyPositionMap;
@@ -73,7 +71,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     MatchDao matchDao = new MatchDao();
     TeamDao teamDao = new TeamDao();
     RallyDao rallyDao = new RallyDao();
-    PanRallyLiveEvaluation panRallyCurrent;
+
     int totalRally = 0;
 
     List<Player> playerList, playerListOpp;
@@ -222,7 +220,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     }
 
     private void registerLibrary() {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "D:\\NbPro\\PES\\PES-VB\\VLC\\VLC64");
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\old data\\Personal\\Madhuri sadgir\\PES-VB\\PES-VB\\VLC\\VLC64");
         Native
                 .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
                 );
@@ -956,8 +954,8 @@ public class PanEvaluation extends javax.swing.JPanel {
         rallyNumNext++;
         panEvalRallyRow.removeAll();
         lblCurrentRally.setText("RALLY : " + rallyNumNext);
-        pw = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
-        panEvalRallyRow.add(pw, BorderLayout.CENTER);
+        Controller.panEvaluationRally = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
+        panEvalRallyRow.add(Controller.panEvaluationRally, BorderLayout.CENTER);
         validate();
         repaint();
     }//GEN-LAST:event_lblStartMouseClicked
@@ -971,8 +969,8 @@ public class PanEvaluation extends javax.swing.JPanel {
                 panEvalRallyRow.removeAll();
                 rallyNumNext = re.getRallyNum();
                 lblCurrentRally.setText("RALLY : " + re.getRallyNum());
-                pw = new PanEvaluationRally(re);
-                panEvalRallyRow.add(pw, BorderLayout.CENTER);
+                Controller.panEvaluationRally = new PanEvaluationRally(re);
+                panEvalRallyRow.add(Controller.panEvaluationRally, BorderLayout.CENTER);
                 validate();
                 repaint();
             }
@@ -986,8 +984,8 @@ public class PanEvaluation extends javax.swing.JPanel {
         cmbRallies.setSelectedItem("Select");
         lblCurrentRally.setText("RALLY : " + rallyNumNext);
         panEvalRallyRow.removeAll();
-        pw = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
-        panEvalRallyRow.add(pw, BorderLayout.CENTER);
+        Controller.panEvaluationRally = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
+        panEvalRallyRow.add(Controller.panEvaluationRally, BorderLayout.CENTER);
         validate();
         repaint();
     }//GEN-LAST:event_jLabel2MouseClicked
@@ -1001,13 +999,13 @@ public class PanEvaluation extends javax.swing.JPanel {
             panEvalRallyRow.removeAll();
             rallyNumNext = re.getRallyNum();
             lblCurrentRally.setText("RALLY : " + re.getRallyNum());
-            pw = new PanEvaluationRally(re);
-            panEvalRallyRow.add(pw, BorderLayout.CENTER);
+            Controller.panEvaluationRally = new PanEvaluationRally(re);
+            panEvalRallyRow.add(Controller.panEvaluationRally, BorderLayout.CENTER);
             validate();
             repaint();
         } else {
             rallyNumNext++;
-            JOptionPane.showMessageDialog(panRallyCurrent, "Start Of the Rally");
+            JOptionPane.showMessageDialog(this, "Start Of the Rally");
         }
     }//GEN-LAST:event_jLabel18MouseClicked
 
@@ -1020,13 +1018,13 @@ public class PanEvaluation extends javax.swing.JPanel {
             panEvalRallyRow.removeAll();
             rallyNumNext = re.getRallyNum();
             lblCurrentRally.setText("RALLY : " + re.getRallyNum());
-            pw = new PanEvaluationRally(re);
-            panEvalRallyRow.add(pw, BorderLayout.CENTER);
+            Controller.panEvaluationRally = new PanEvaluationRally(re);
+            panEvalRallyRow.add(Controller.panEvaluationRally, BorderLayout.CENTER);
             validate();
             repaint();
         } else {
             rallyNumNext--;
-            JOptionPane.showMessageDialog(panRallyCurrent, "End Of the Rally");
+            JOptionPane.showMessageDialog(this, "End Of the Rally");
         }
     }//GEN-LAST:event_jLabel20MouseClicked
 
@@ -1112,9 +1110,9 @@ public class PanEvaluation extends javax.swing.JPanel {
             // TODO add your handling code here:
             panEvalRallyRow.removeAll();
 //        ph = new PanEvaluationRallyHead(rallyNumNext, matchEvaluationId, rallyPositionMap, evaluationType);
-            pw = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
+            Controller.panEvaluationRally = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
 //        panRallyEvalHead.add(ph, BorderLayout.CENTER);
-            panEvalRallyRow.add(pw, BorderLayout.CENTER);
+            panEvalRallyRow.add(Controller.panEvaluationRally, BorderLayout.CENTER);
             validate();
             repaint();
         }

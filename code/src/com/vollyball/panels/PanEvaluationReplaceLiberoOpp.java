@@ -36,7 +36,7 @@ public class PanEvaluationReplaceLiberoOpp extends javax.swing.JPanel {
         initComponents();
         this.panEvaluationRally = panEvaluationRally;
         LinkedHashMap<Integer, Player> subStitutePositionMap = Controller.panMatchSet.substituePositionMapOpp;
-        LinkedHashMap<Integer, Player> rallyPositionMap = Controller.panMatchSet.rallyPositionMapOpp;
+        LinkedHashMap<Integer, Player> rallyPositionMap = Controller.panEvaluationRally.rallyPositionMapOpp;
         int i = 0;
 
         Player playerP = null;
@@ -112,7 +112,7 @@ public class PanEvaluationReplaceLiberoOpp extends javax.swing.JPanel {
 
     public void replace(MouseEvent me) {
         PanEvaluationPlayerReplace t = (PanEvaluationPlayerReplace) me.getSource();
-        panEvaluationRally.p.rallyPositionMapOpp.put(t.getPlayerEval(), Controller.panMatchSet.ChestMapOpp.get(panLiberoNo.getChestNo()));
+        Controller.panEvaluationRally.rallyPositionMapOpp.put(t.getPlayerEval(), Controller.panMatchSet.ChestMapOpp.get(panLiberoNo.getChestNo()));
         this.panEvaluationRally.refresh();
         this.panEvaluationRally.dialogReplaceLibero.close();
     }

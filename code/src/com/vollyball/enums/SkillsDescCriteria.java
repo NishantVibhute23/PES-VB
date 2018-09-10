@@ -168,13 +168,18 @@ public enum SkillsDescCriteria {
     }
 
     public static List<SkillsDescCriteria> getSkillDescCriteriaBySkillandView(int skillId) {
-        List<SkillsDescCriteria> list = new ArrayList<>();
+        List<SkillsDescCriteria> list1 = new ArrayList<>();
+        List<SkillsDescCriteria> list2 = new ArrayList<>();
         for (SkillsDescCriteria e : values()) {
-            if (e.skillId == skillId) {
-                list.add(e);
+            if (e.skillId == skillId && e.view == 1) {
+                list1.add(e);
+            }
+            if (e.skillId == skillId && e.view == 0) {
+                list2.add(e);
             }
         }
-        return list;
+        list1.addAll(list2);
+        return list1;
     }
 
 }

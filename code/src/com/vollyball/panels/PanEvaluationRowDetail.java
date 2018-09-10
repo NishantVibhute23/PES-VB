@@ -434,10 +434,12 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             if (digPoints != null || !digPoints.isEmpty()) {
                 String arr[] = digPoints.split("-");
                 diagramPoints = new ArrayList<String>(Arrays.asList(arr));
-                if (skill.equals(Skill.Set.getType())) {
-                    panel.dig(skill, diagramPoints, TempoEnum.getTempoByName(skillDescIdPanMap.get(43).lblOption.getText()));
-                } else {
-                    panel.dig(skill, diagramPoints, 0);
+                if (diagramPoints.size() > 2) {
+                    if (skill.equals(Skill.Set.getType())) {
+                        panel.dig(skill, diagramPoints, TempoEnum.getTempoByName(skillDescIdPanMap.get(43).lblOption.getText()));
+                    } else {
+                        panel.dig(skill, diagramPoints, 0);
+                    }
                 }
             }
         }
@@ -613,7 +615,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             PanSkillDescCriteria pan = new PanSkillDescCriteria();
             pan.lblHeading.setText("<HTML>" + sdc.getType() + "</HTML>");
             if (sdc.getView() == 1) {
-                pan.lblHeading.setForeground(Color.red);
+                pan.lblHeading.setForeground(Color.BLUE);
             }
             List<SkillDescCriteriaPoint> lstPoints = SkillDescCriteriaPoint.getTypeBySkillDescId(sdc.getId());
             pan.setId(sdc.getId());
@@ -1657,7 +1659,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         panDesc1.setLayout(panDesc1Layout);
         panDesc1Layout.setHorizontalGroup(
             panDesc1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 219, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panDesc1Layout.setVerticalGroup(
             panDesc1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1670,7 +1672,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         panDesc2.setLayout(panDesc2Layout);
         panDesc2Layout.setHorizontalGroup(
             panDesc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 206, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panDesc2Layout.setVerticalGroup(
             panDesc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1682,13 +1684,13 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(panDesc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panDesc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(panDesc2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panDesc2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panDesc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panDesc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panDesc2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
