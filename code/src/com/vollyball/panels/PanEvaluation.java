@@ -61,8 +61,8 @@ public class PanEvaluation extends javax.swing.JPanel {
     public LinkedHashMap<Integer, PanRallyLiveEvaluation> panRallyMap = new LinkedHashMap<Integer, PanRallyLiveEvaluation>();
     public LinkedHashMap<Integer, Player> initialPositionMap;
     public LinkedHashMap<Integer, Player> initialPositionMapOpp;
-    public LinkedHashMap<Integer, Player> rallyPositionMap;
-    public LinkedHashMap<Integer, Player> rallyPositionMapOpp;
+//    public LinkedHashMap<Integer, Player> rallyPositionMap;
+//    public LinkedHashMap<Integer, Player> rallyPositionMapOpp;
     public LinkedHashMap<Integer, Player> substituePositionMap;
     public LinkedHashMap<Integer, Player> substituePositionMapOpp;
 
@@ -104,9 +104,9 @@ public class PanEvaluation extends javax.swing.JPanel {
         this.evaluationType = evaluationType;
         this.matchEvaluationTeamId = matchEvaluationTeamId;
         initialPositionMap = new LinkedHashMap<>();
-        rallyPositionMap = new LinkedHashMap<>();
+//        rallyPositionMap = new LinkedHashMap<>();
         initialPositionMapOpp = new LinkedHashMap<>();
-        rallyPositionMapOpp = new LinkedHashMap<>();
+//        rallyPositionMapOpp = new LinkedHashMap<>();
         substituePositionMap = new LinkedHashMap<>();
         substituePositionMapOpp = new LinkedHashMap<>();
 
@@ -170,8 +170,8 @@ public class PanEvaluation extends javax.swing.JPanel {
                 cmbRallies.addItem(rally.getRallyNum());
                 currentRally++;
             }
-            rallyPositionMap = rallyDao.getLatestRallyRotationOrder(matchEvaluationId, ms.getEvaluationTeamId());
-            rallyPositionMapOpp = rallyDao.getLatestRallyRotationOrderOpp(matchEvaluationId, ms.getOpponentTeamId());
+//            rallyPositionMap = rallyDao.getLatestRallyRotationOrder(matchEvaluationId, ms.getEvaluationTeamId());
+//            rallyPositionMapOpp = rallyDao.getLatestRallyRotationOrderOpp(matchEvaluationId, ms.getOpponentTeamId());
 
             substituePositionMap.putAll(initialPositionMap);
             substituePositionMapOpp.putAll(initialPositionMapOpp);
