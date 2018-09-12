@@ -12,6 +12,7 @@ import com.vollyball.bean.PlayerScores;
 import com.vollyball.bean.PlayerSkillScore;
 import com.vollyball.bean.Team;
 import com.vollyball.db.DbUtil;
+import com.vollyball.enums.SkillZoneWiseReport;
 import com.vollyball.util.CommonUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -789,4 +790,27 @@ public class ReportDao {
 
     }
 
+    public List<SkillZoneWiseReport> getZoneDetails(int skill, int descId, int matchEvaluationId) {
+        List<SkillZoneWiseReport> listZoneDetails = new ArrayList<>();
+        try {
+            PreparedStatement ps;
+            this.con = db.getConnection();
+            ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.zone.details"));
+            ps.setInt(1, skill);
+            ps.setInt(2, descId);
+            ps.setInt(3, matchEvaluationId);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SkillZoneWiseReport skillZoneWiseReport = new SkillZoneWiseReport();
+                skillZoneWiseReport.setValue(rs.getString(1));
+                skillZoneWiseReport.setRating(rs.getInt(2));
+                listZoneDetails.add(skillZoneWiseReport);
+            }
+            db.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listZoneDetails;
+    }
 }

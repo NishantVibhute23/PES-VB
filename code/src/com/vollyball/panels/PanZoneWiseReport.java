@@ -28,7 +28,7 @@ public class PanZoneWiseReport extends javax.swing.JPanel {
      */
     public PanZoneWiseReport() {
         initComponents();
-        panC = new PanZoneSkillwiseMain();
+//        panC = new PanZoneSkillwiseMain();
         panContent.add(panC, BorderLayout.CENTER);
     }
 

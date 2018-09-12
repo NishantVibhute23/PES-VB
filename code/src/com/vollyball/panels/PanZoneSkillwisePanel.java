@@ -5,6 +5,7 @@
  */
 package com.vollyball.panels;
 
+import com.vollyball.bean.ZoneHitCount;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -19,45 +20,54 @@ import java.awt.Polygon;
  */
 public class PanZoneSkillwisePanel extends javax.swing.JPanel {
 
-    int zone;
+    ZoneHitCount zhc;
 
     /**
      * Creates new form PanZoneSkillwiseReport
      */
-    public PanZoneSkillwisePanel(int zone) {
+    public PanZoneSkillwisePanel() {
         initComponents();
-        this.zone = zone;
+
+        repaint();
+    }
+
+    public void setValues(ZoneHitCount zhc) {
+        this.zhc = zhc;
         repaint();
     }
 
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        Polygon poly = new Polygon(new int[]{0, 60, 60, 0}, new int[]{0, 0, 20, 40}, 4);
-        g2.setColor(new Color(34, 177, 76));
-        g2.fill(poly);
 
-        Polygon poly2 = new Polygon(new int[]{0, 60, 60, 0}, new int[]{40, 20, 60, 60}, 4);
-        g2.setColor(new Color(182, 14, 22));
-        g2.fill(poly2);
+        if (zhc.isIsMaxSuccess()) {
+            Polygon poly = new Polygon(new int[]{0, 50, 50, 0}, new int[]{0, 0, 10, 40}, 4);
+            g2.setColor(new Color(34, 177, 76));
+            g2.fill(poly);
+        }
 
-        g2.setStroke(new BasicStroke(3));
-        g2.setColor(Color.WHITE);
-        g2.drawLine(0, 40, 60, 20);
+        if (zhc.isIsMaxFail()) {
+            Polygon poly2 = new Polygon(new int[]{0, 50, 50, 0}, new int[]{40, 10, 50, 50}, 4);
+            g2.setColor(new Color(182, 14, 22));
+            g2.fill(poly2);
+        }
+        g2.setStroke(new BasicStroke(1));
+        g2.setColor(Color.BLACK);
+        g2.drawLine(0, 40, 50, 10);
 
         FontMetrics fm = g.getFontMetrics();
-        int centerX = 10, centerY = 20;
+        int centerX = 5, centerY = 15;
         double textWidth = fm.getStringBounds("1%", g).getWidth();
-        Font font = new Font("Serif", Font.BOLD, 13);
+        Font font = new Font("Serif", Font.BOLD, 11);
         g2.setFont(font);
-        g.setColor(Color.WHITE);
-        g.drawString("100%", centerX, centerY);
+        g.setColor(Color.BLACK);
+        g.drawString("S:" + zhc.getSuccessPerc() + "%", centerX, centerY);
 
         centerX = 20;
-        centerY = 53;
-        textWidth = fm.getStringBounds("%" + zone, g).getWidth();
+        centerY = 43;
+//        textWidth = fm.getStringBounds("%" + zone, g).getWidth();
         g2.setFont(font);
-        g.setColor(Color.WHITE);
-        g.drawString("100%", centerX, centerY);
+        g.setColor(Color.BLACK);
+        g.drawString("F:" + zhc.getFailPerc() + "%", centerX, centerY);
     }
 
     /**
@@ -75,11 +85,11 @@ public class PanZoneSkillwisePanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
+            .addGap(0, 41, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
+            .addGap(0, 41, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

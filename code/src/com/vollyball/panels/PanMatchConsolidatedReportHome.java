@@ -22,15 +22,16 @@ import java.awt.print.PrinterJob;
 public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
 
     PanMatchReportConsolidated panC;
-    int cb,matchId;
+    PanZoneSkillwiseMain panZ;
+    int cb, matchId;
 
     /**
      * Creates new form PanMatchConsolidatedReportHome
      */
     public PanMatchConsolidatedReportHome(int cb, int matchId) {
         initComponents();
-        this.cb=cb;
-        this.matchId=matchId;
+        this.cb = cb;
+        this.matchId = matchId;
         PanMatchReportConsolidated panC = new PanMatchReportConsolidated(cb, matchId);
         panReport.add(panC, BorderLayout.CENTER);
     }
@@ -182,20 +183,26 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
+        panReport.removeAll();
         panC = new PanMatchReportConsolidated(cb, matchId);
         panReport.add(panC, BorderLayout.CENTER);
-        
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
+        panReport.removeAll();
         panC = new PanMatchReportConsolidated(cb, matchId);
         panReport.add(panC, BorderLayout.CENTER);
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-        System.out.println("this");
+        panReport.removeAll();
+        panZ = new PanZoneSkillwiseMain(cb, matchId);
+        panReport.add(panZ, BorderLayout.CENTER);
+        validate();
+        repaint();
     }//GEN-LAST:event_jLabel1MouseClicked
 
     public void printComponenet(final Component comp) {

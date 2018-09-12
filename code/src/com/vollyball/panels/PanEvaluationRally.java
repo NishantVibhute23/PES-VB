@@ -68,6 +68,16 @@ public class PanEvaluationRally extends javax.swing.JPanel {
      */
     public PanEvaluationRally(int teamEvaluateId, int opponentId, int rallyNum) {
         initComponents();
+
+        rallyPositionMap = rallyDao.getLatestMatchSetRotationOrder(Controller.panMatchSet.matchEvaluationId);
+        rallyPositionMapOpp = rallyDao.getLatestMatchSetRotationOrderOpp(Controller.panMatchSet.matchEvaluationId);
+
+        if (rallyPositionMap.isEmpty()) {
+            rallyPositionMap.putAll(Controller.panMatchSet.initialPositionMap);
+        }
+        if (rallyPositionMapOpp.isEmpty()) {
+            rallyPositionMapOpp.putAll(Controller.panMatchSet.initialPositionMapOpp);
+        }
         rallyPos.add(rallyPos1);
         rallyPos.add(rallyPos2);
         rallyPos.add(rallyPos3);
@@ -82,16 +92,6 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         panCompListValue.add(true);
         lblRallyNum.setText("" + rallyNum);
         lblAction.setText("SAVE");
-
-        rallyPositionMap = rallyDao.getLatestMatchSetRotationOrder(Controller.panMatchSet.matchEvaluationId);
-        rallyPositionMapOpp = rallyDao.getLatestMatchSetRotationOrderOpp(Controller.panMatchSet.matchEvaluationId);
-
-        if (rallyPositionMap.isEmpty()) {
-            rallyPositionMap.putAll(Controller.panMatchSet.initialPositionMap);
-        }
-        if (rallyPositionMapOpp.isEmpty()) {
-            rallyPositionMapOpp.putAll(Controller.panMatchSet.initialPositionMapOpp);
-        }
 
     }
 
