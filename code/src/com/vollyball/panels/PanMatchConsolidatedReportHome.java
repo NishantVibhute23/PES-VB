@@ -32,10 +32,10 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         initComponents();
         this.cb = cb;
         this.matchId = matchId;
-        PanMatchReportConsolidated panC = new PanMatchReportConsolidated(cb, matchId);
+         panC = new PanMatchReportConsolidated(cb, matchId);
         panReport.add(panC, BorderLayout.CENTER);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -186,6 +186,8 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         panReport.removeAll();
         panC = new PanMatchReportConsolidated(cb, matchId);
         panReport.add(panC, BorderLayout.CENTER);
+        validate();
+        repaint();
 
     }//GEN-LAST:event_jLabel2MouseClicked
 
@@ -194,6 +196,8 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         panReport.removeAll();
         panC = new PanMatchReportConsolidated(cb, matchId);
         panReport.add(panC, BorderLayout.CENTER);
+        validate();
+        repaint();
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked

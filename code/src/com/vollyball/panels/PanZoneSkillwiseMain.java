@@ -59,6 +59,9 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         MatchBean team = matchDao.getMatchesById(Controller.competitionId, matchId);
         team1id = team.getTeam1();
         team2id = team.getTeam2();
+        
+        lblHomeTeamName.setText(team.getTeam1name());
+        lblOppTeamName.setText(team.getTeam2name());
 
         evaluationteamIdHome = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
         evaluationteamIdOpp = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
@@ -69,8 +72,37 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         listZoneDetails = reportDao.getZoneDetails(Skill.Attack.getId(), SkillsDescCriteria.AttackDig.getId(), evaluationteamIdHome);
         setData(listZoneDetails, digHomeAttack, tblHomeAttack);
 
-        listZoneDetails = reportDao.getZoneDetails(Skill.Attack.getId(), SkillsDescCriteria.AttackDig.getId(), evaluationteamIdHome);
-        setData(listZoneDetails, digHomeAttack, tblHomeAttack);
+        listZoneDetails = reportDao.getZoneDetails(Skill.Block.getId(), SkillsDescCriteria.BlockDig.getId(), evaluationteamIdHome);
+        setData(listZoneDetails, digHomeBlock, tblHomeBlock);
+        
+        listZoneDetails = reportDao.getZoneDetails(Skill.Reception.getId(), SkillsDescCriteria.ReceptionDig.getId(), evaluationteamIdHome);
+        setData(listZoneDetails, digHomeReception, tblHomeReception);
+        
+        listZoneDetails = reportDao.getZoneDetails(Skill.Set.getId(), SkillsDescCriteria.SetDig.getId(), evaluationteamIdHome);
+        setData(listZoneDetails, digHomeSet, tblHomeSet);
+        
+        listZoneDetails = reportDao.getZoneDetails(Skill.Defence.getId(), SkillsDescCriteria.DefenceDig.getId(), evaluationteamIdHome);
+        setData(listZoneDetails, digHomeDefence, tblHomeDefence);
+        
+        //  opponent
+        listZoneDetails = reportDao.getZoneDetails(Skill.Service.getId(), SkillsDescCriteria.ServiceDig.getId(), evaluationteamIdOpp);
+        setDataOpp(listZoneDetails, digOppService, tblOppService);
+
+        listZoneDetails = reportDao.getZoneDetails(Skill.Attack.getId(), SkillsDescCriteria.AttackDig.getId(), evaluationteamIdOpp);
+        setDataOpp(listZoneDetails, digOppAttack, tblOppAttack);
+
+        listZoneDetails = reportDao.getZoneDetails(Skill.Block.getId(), SkillsDescCriteria.BlockDig.getId(), evaluationteamIdOpp);
+        setDataOpp(listZoneDetails, digOppBlock, tblOppBlock);
+        
+        listZoneDetails = reportDao.getZoneDetails(Skill.Reception.getId(), SkillsDescCriteria.ReceptionDig.getId(), evaluationteamIdOpp);
+        setDataOpp(listZoneDetails, digOppReception, tblOppReception);
+        
+        listZoneDetails = reportDao.getZoneDetails(Skill.Set.getId(), SkillsDescCriteria.SetDig.getId(), evaluationteamIdOpp);
+        setDataOpp(listZoneDetails, digOppSet, tblOppSet);
+        
+        listZoneDetails = reportDao.getZoneDetails(Skill.Defence.getId(), SkillsDescCriteria.DefenceDig.getId(), evaluationteamIdOpp);
+        setDataOpp(listZoneDetails, digOppDefence, tblOppDefence);
+        
 
     }
 
@@ -154,6 +186,86 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 
     }
 
+        public void setDataOpp(List<SkillZoneWiseReport> listZoneDetails, JPanel panel, JTable table) {
+        zoneCountMap.put(1, new ZoneHitCount());
+        zoneCountMap.put(2, new ZoneHitCount());
+        zoneCountMap.put(3, new ZoneHitCount());
+        zoneCountMap.put(4, new ZoneHitCount());
+        zoneCountMap.put(5, new ZoneHitCount());
+        zoneCountMap.put(6, new ZoneHitCount());
+
+        JTableHeader header = table.getTableHeader();
+        header.setDefaultRenderer(new TableHeaderRenderer(table));
+        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        table.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+
+        DefaultTableModel tablemodel = (DefaultTableModel) table.getModel();
+        for (int i = tablemodel.getRowCount() - 1; i >= 0; i--) {
+            tablemodel.removeRow(i);
+        }
+
+        for (SkillZoneWiseReport skillZoneWiseReport : listZoneDetails) {
+            String[] pan = skillZoneWiseReport.getValue().split("-");
+            int index = 0;
+            for (int i = 0; i < pan.length; i++) {
+                if (pan[i].startsWith("O")) {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (pan[index].startsWith("O1")) {
+                countHit(skillZoneWiseReport, 1);
+            } else if (pan[index].startsWith("O2")) {
+                countHit(skillZoneWiseReport, 2);
+            } else if (pan[index].startsWith("O3")) {
+                countHit(skillZoneWiseReport, 3);
+            } else if (pan[index].startsWith("O4")) {
+                countHit(skillZoneWiseReport, 4);
+            } else if (pan[index].startsWith("O5")) {
+                countHit(skillZoneWiseReport, 5);
+            } else if (pan[index].startsWith("O6")) {
+                countHit(skillZoneWiseReport, 6);
+            }
+        }
+
+        panel.setLayout(new GridLayout(2, 3));
+
+        int[] positions = {1, 6, 5, 2, 3, 4};
+
+        for (int pos : positions) {
+            ZoneHitCount zhc = zoneCountMap.get(pos);
+            if (pos == successZone) {
+                zhc.setIsMaxSuccess(true);
+            }
+
+            if (pos == failedZone) {
+                zhc.setIsMaxFail(true);
+            }
+            JPanel pan = new JPanel(new BorderLayout());
+            pan.setBorder(new LineBorder(new Color(153, 153, 153), 1));
+            PanZoneSkillwisePanel p = new PanZoneSkillwisePanel();
+            p.setValues(zhc);
+            pan.add(p, BorderLayout.CENTER);
+            panel.add(pan);
+
+        }
+        maxSuccPerc = 0;
+        maxFailPerc = 0;
+        successZone = 0;
+        failedZone = 0;
+
+        for (int i = 1; i <= 6; i++) {
+            ZoneHitCount zhc = zoneCountMap.get(i);
+            Object[] row = {i, zhc.getTotal(), zhc.getSuccess(), zhc.getFailure()
+            };
+            tablemodel.addRow(row);
+        }
+
+    }
+    
     public void countHit(SkillZoneWiseReport skillZoneWiseReport, int pos) {
         ZoneHitCount z = zoneCountMap.get(pos);
         z.setTotal(z.getTotal() + 1);
@@ -201,67 +313,67 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        panService2 = new javax.swing.JPanel();
+        digHomeBlock = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblHomeBlock = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        panService3 = new javax.swing.JPanel();
+        digHomeReception = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tblHomeReception = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        panService4 = new javax.swing.JPanel();
+        digHomeSet = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tblHomeSet = new javax.swing.JTable();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        panService5 = new javax.swing.JPanel();
+        digHomeDefence = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        tblHomeDefence = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblHomeTeamName = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        panService6 = new javax.swing.JPanel();
+        digOppDefence = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
+        tblOppDefence = new javax.swing.JTable();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        panService7 = new javax.swing.JPanel();
+        digOppSet = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+        tblOppSet = new javax.swing.JTable();
         jPanel17 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        panService8 = new javax.swing.JPanel();
+        digOppService = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable9 = new javax.swing.JTable();
+        tblOppService = new javax.swing.JTable();
         jPanel19 = new javax.swing.JPanel();
         jPanel20 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        panService9 = new javax.swing.JPanel();
+        digOppReception = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTable10 = new javax.swing.JTable();
+        tblOppReception = new javax.swing.JTable();
         jPanel21 = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        panService10 = new javax.swing.JPanel();
+        digOppAttack = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTable11 = new javax.swing.JTable();
+        tblOppAttack = new javax.swing.JTable();
         jPanel23 = new javax.swing.JPanel();
         jPanel24 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        panService11 = new javax.swing.JPanel();
+        digOppBlock = new javax.swing.JPanel();
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTable12 = new javax.swing.JTable();
+        tblOppBlock = new javax.swing.JTable();
         jPanel25 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblOppTeamName = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -449,22 +561,22 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel11.setText("Block");
 
-        panService2.setBackground(new java.awt.Color(255, 255, 255));
-        panService2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        digHomeBlock.setBackground(new java.awt.Color(255, 255, 255));
+        digHomeBlock.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        javax.swing.GroupLayout panService2Layout = new javax.swing.GroupLayout(panService2);
-        panService2.setLayout(panService2Layout);
-        panService2Layout.setHorizontalGroup(
-            panService2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout digHomeBlockLayout = new javax.swing.GroupLayout(digHomeBlock);
+        digHomeBlock.setLayout(digHomeBlockLayout);
+        digHomeBlockLayout.setHorizontalGroup(
+            digHomeBlockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        panService2Layout.setVerticalGroup(
-            panService2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        digHomeBlockLayout.setVerticalGroup(
+            digHomeBlockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jTable3.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblHomeBlock.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tblHomeBlock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null, null},
                 {"2", null, null, null},
@@ -477,10 +589,10 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 "Zone", "Tot", "+", "-"
             }
         ));
-        jTable3.setRowSelectionAllowed(false);
-        jTable3.setShowHorizontalLines(false);
-        jTable3.setShowVerticalLines(false);
-        jScrollPane3.setViewportView(jTable3);
+        tblHomeBlock.setRowSelectionAllowed(false);
+        tblHomeBlock.setShowHorizontalLines(false);
+        tblHomeBlock.setShowVerticalLines(false);
+        jScrollPane3.setViewportView(tblHomeBlock);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -500,18 +612,14 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(panService2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11)))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(digHomeBlock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -521,7 +629,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jLabel11)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panService2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(digHomeBlock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -534,22 +642,22 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel12.setText("Reception");
 
-        panService3.setBackground(new java.awt.Color(255, 255, 255));
-        panService3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        digHomeReception.setBackground(new java.awt.Color(255, 255, 255));
+        digHomeReception.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        javax.swing.GroupLayout panService3Layout = new javax.swing.GroupLayout(panService3);
-        panService3.setLayout(panService3Layout);
-        panService3Layout.setHorizontalGroup(
-            panService3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout digHomeReceptionLayout = new javax.swing.GroupLayout(digHomeReception);
+        digHomeReception.setLayout(digHomeReceptionLayout);
+        digHomeReceptionLayout.setHorizontalGroup(
+            digHomeReceptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        panService3Layout.setVerticalGroup(
-            panService3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        digHomeReceptionLayout.setVerticalGroup(
+            digHomeReceptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jTable4.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tblHomeReception.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tblHomeReception.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null, null},
                 {"2", null, null, null},
@@ -562,10 +670,10 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 "Zone", "Tot", "+", "-"
             }
         ));
-        jTable4.setRowSelectionAllowed(false);
-        jTable4.setShowHorizontalLines(false);
-        jTable4.setShowVerticalLines(false);
-        jScrollPane4.setViewportView(jTable4);
+        tblHomeReception.setRowSelectionAllowed(false);
+        tblHomeReception.setShowHorizontalLines(false);
+        tblHomeReception.setShowVerticalLines(false);
+        jScrollPane4.setViewportView(tblHomeReception);
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -585,18 +693,14 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(panService3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel12)))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(digHomeReception, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel12))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -606,7 +710,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jLabel12)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panService3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(digHomeReception, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -619,22 +723,22 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel13.setText("Set");
 
-        panService4.setBackground(new java.awt.Color(255, 255, 255));
-        panService4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        digHomeSet.setBackground(new java.awt.Color(255, 255, 255));
+        digHomeSet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        javax.swing.GroupLayout panService4Layout = new javax.swing.GroupLayout(panService4);
-        panService4.setLayout(panService4Layout);
-        panService4Layout.setHorizontalGroup(
-            panService4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout digHomeSetLayout = new javax.swing.GroupLayout(digHomeSet);
+        digHomeSet.setLayout(digHomeSetLayout);
+        digHomeSetLayout.setHorizontalGroup(
+            digHomeSetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        panService4Layout.setVerticalGroup(
-            panService4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        digHomeSetLayout.setVerticalGroup(
+            digHomeSetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jTable5.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tblHomeSet.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tblHomeSet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null, null},
                 {"2", null, null, null},
@@ -647,10 +751,10 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 "Zone", "Tot", "+", "-"
             }
         ));
-        jTable5.setRowSelectionAllowed(false);
-        jTable5.setShowHorizontalLines(false);
-        jTable5.setShowVerticalLines(false);
-        jScrollPane5.setViewportView(jTable5);
+        tblHomeSet.setRowSelectionAllowed(false);
+        tblHomeSet.setShowHorizontalLines(false);
+        tblHomeSet.setShowVerticalLines(false);
+        jScrollPane5.setViewportView(tblHomeSet);
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -670,18 +774,14 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(panService4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel13)))
+                    .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(digHomeSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -691,7 +791,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jLabel13)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panService4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(digHomeSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -704,22 +804,22 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel14.setText("Defence");
 
-        panService5.setBackground(new java.awt.Color(255, 255, 255));
-        panService5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        digHomeDefence.setBackground(new java.awt.Color(255, 255, 255));
+        digHomeDefence.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        javax.swing.GroupLayout panService5Layout = new javax.swing.GroupLayout(panService5);
-        panService5.setLayout(panService5Layout);
-        panService5Layout.setHorizontalGroup(
-            panService5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout digHomeDefenceLayout = new javax.swing.GroupLayout(digHomeDefence);
+        digHomeDefence.setLayout(digHomeDefenceLayout);
+        digHomeDefenceLayout.setHorizontalGroup(
+            digHomeDefenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        panService5Layout.setVerticalGroup(
-            panService5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        digHomeDefenceLayout.setVerticalGroup(
+            digHomeDefenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jTable6.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        tblHomeDefence.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tblHomeDefence.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null, null},
                 {"2", null, null, null},
@@ -732,10 +832,10 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 "Zone", "Tot", "+", "-"
             }
         ));
-        jTable6.setRowSelectionAllowed(false);
-        jTable6.setShowHorizontalLines(false);
-        jTable6.setShowVerticalLines(false);
-        jScrollPane6.setViewportView(jTable6);
+        tblHomeDefence.setRowSelectionAllowed(false);
+        tblHomeDefence.setShowHorizontalLines(false);
+        tblHomeDefence.setShowVerticalLines(false);
+        jScrollPane6.setViewportView(tblHomeDefence);
 
         jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -755,18 +855,14 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(panService5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel14)))
+                    .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(digHomeDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -776,15 +872,15 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jLabel14)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panService5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(digHomeDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(179, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel1.setText("MUMBAI");
+        lblHomeTeamName.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblHomeTeamName.setText("MUMBAI");
 
         jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -803,24 +899,24 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel15.setText("Service");
+        jLabel15.setText("Defence");
 
-        panService6.setBackground(new java.awt.Color(255, 255, 255));
-        panService6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        digOppDefence.setBackground(new java.awt.Color(255, 255, 255));
+        digOppDefence.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        javax.swing.GroupLayout panService6Layout = new javax.swing.GroupLayout(panService6);
-        panService6.setLayout(panService6Layout);
-        panService6Layout.setHorizontalGroup(
-            panService6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout digOppDefenceLayout = new javax.swing.GroupLayout(digOppDefence);
+        digOppDefence.setLayout(digOppDefenceLayout);
+        digOppDefenceLayout.setHorizontalGroup(
+            digOppDefenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        panService6Layout.setVerticalGroup(
-            panService6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        digOppDefenceLayout.setVerticalGroup(
+            digOppDefenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jTable7.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
+        tblOppDefence.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tblOppDefence.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null, null},
                 {"2", null, null, null},
@@ -833,10 +929,10 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 "Zone", "Tot", "+", "-"
             }
         ));
-        jTable7.setRowSelectionAllowed(false);
-        jTable7.setShowHorizontalLines(false);
-        jTable7.setShowVerticalLines(false);
-        jScrollPane7.setViewportView(jTable7);
+        tblOppDefence.setRowSelectionAllowed(false);
+        tblOppDefence.setShowHorizontalLines(false);
+        tblOppDefence.setShowVerticalLines(false);
+        jScrollPane7.setViewportView(tblOppDefence);
 
         jPanel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -862,7 +958,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panService6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(digOppDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel15))
                 .addContainerGap())
         );
@@ -873,7 +969,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jLabel15)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panService6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(digOppDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -884,24 +980,24 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel16.setText("Service");
+        jLabel16.setText("Set");
 
-        panService7.setBackground(new java.awt.Color(255, 255, 255));
-        panService7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        digOppSet.setBackground(new java.awt.Color(255, 255, 255));
+        digOppSet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        javax.swing.GroupLayout panService7Layout = new javax.swing.GroupLayout(panService7);
-        panService7.setLayout(panService7Layout);
-        panService7Layout.setHorizontalGroup(
-            panService7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout digOppSetLayout = new javax.swing.GroupLayout(digOppSet);
+        digOppSet.setLayout(digOppSetLayout);
+        digOppSetLayout.setHorizontalGroup(
+            digOppSetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        panService7Layout.setVerticalGroup(
-            panService7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        digOppSetLayout.setVerticalGroup(
+            digOppSetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jTable8.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        tblOppSet.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tblOppSet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null, null},
                 {"2", null, null, null},
@@ -914,10 +1010,10 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 "Zone", "Tot", "+", "-"
             }
         ));
-        jTable8.setRowSelectionAllowed(false);
-        jTable8.setShowHorizontalLines(false);
-        jTable8.setShowVerticalLines(false);
-        jScrollPane8.setViewportView(jTable8);
+        tblOppSet.setRowSelectionAllowed(false);
+        tblOppSet.setShowHorizontalLines(false);
+        tblOppSet.setShowVerticalLines(false);
+        jScrollPane8.setViewportView(tblOppSet);
 
         jPanel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -943,7 +1039,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panService7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(digOppSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel16))
                 .addContainerGap())
         );
@@ -954,7 +1050,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jLabel16)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panService7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(digOppSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -967,22 +1063,22 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel17.setText("Service");
 
-        panService8.setBackground(new java.awt.Color(255, 255, 255));
-        panService8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        digOppService.setBackground(new java.awt.Color(255, 255, 255));
+        digOppService.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        javax.swing.GroupLayout panService8Layout = new javax.swing.GroupLayout(panService8);
-        panService8.setLayout(panService8Layout);
-        panService8Layout.setHorizontalGroup(
-            panService8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout digOppServiceLayout = new javax.swing.GroupLayout(digOppService);
+        digOppService.setLayout(digOppServiceLayout);
+        digOppServiceLayout.setHorizontalGroup(
+            digOppServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        panService8Layout.setVerticalGroup(
-            panService8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        digOppServiceLayout.setVerticalGroup(
+            digOppServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jTable9.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jTable9.setModel(new javax.swing.table.DefaultTableModel(
+        tblOppService.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tblOppService.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null, null},
                 {"2", null, null, null},
@@ -995,10 +1091,10 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 "Zone", "Tot", "+", "-"
             }
         ));
-        jTable9.setRowSelectionAllowed(false);
-        jTable9.setShowHorizontalLines(false);
-        jTable9.setShowVerticalLines(false);
-        jScrollPane9.setViewportView(jTable9);
+        tblOppService.setRowSelectionAllowed(false);
+        tblOppService.setShowHorizontalLines(false);
+        tblOppService.setShowVerticalLines(false);
+        jScrollPane9.setViewportView(tblOppService);
 
         jPanel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -1026,7 +1122,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
                                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(panService8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(digOppService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel17)))
@@ -1039,7 +1135,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jLabel17)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panService8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(digOppService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1050,24 +1146,24 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jPanel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jLabel18.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel18.setText("Service");
+        jLabel18.setText("Reception");
 
-        panService9.setBackground(new java.awt.Color(255, 255, 255));
-        panService9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        digOppReception.setBackground(new java.awt.Color(255, 255, 255));
+        digOppReception.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        javax.swing.GroupLayout panService9Layout = new javax.swing.GroupLayout(panService9);
-        panService9.setLayout(panService9Layout);
-        panService9Layout.setHorizontalGroup(
-            panService9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout digOppReceptionLayout = new javax.swing.GroupLayout(digOppReception);
+        digOppReception.setLayout(digOppReceptionLayout);
+        digOppReceptionLayout.setHorizontalGroup(
+            digOppReceptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        panService9Layout.setVerticalGroup(
-            panService9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        digOppReceptionLayout.setVerticalGroup(
+            digOppReceptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jTable10.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jTable10.setModel(new javax.swing.table.DefaultTableModel(
+        tblOppReception.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tblOppReception.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null, null},
                 {"2", null, null, null},
@@ -1080,10 +1176,10 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 "Zone", "Tot", "+", "-"
             }
         ));
-        jTable10.setRowSelectionAllowed(false);
-        jTable10.setShowHorizontalLines(false);
-        jTable10.setShowVerticalLines(false);
-        jScrollPane10.setViewportView(jTable10);
+        tblOppReception.setRowSelectionAllowed(false);
+        tblOppReception.setShowHorizontalLines(false);
+        tblOppReception.setShowVerticalLines(false);
+        jScrollPane10.setViewportView(tblOppReception);
 
         jPanel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -1109,7 +1205,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
                         .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panService9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(digOppReception, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel18))
                 .addContainerGap())
         );
@@ -1120,7 +1216,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jLabel18)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panService9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(digOppReception, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1131,24 +1227,24 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jPanel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jLabel19.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel19.setText("Service");
+        jLabel19.setText("Attack");
 
-        panService10.setBackground(new java.awt.Color(255, 255, 255));
-        panService10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        digOppAttack.setBackground(new java.awt.Color(255, 255, 255));
+        digOppAttack.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        javax.swing.GroupLayout panService10Layout = new javax.swing.GroupLayout(panService10);
-        panService10.setLayout(panService10Layout);
-        panService10Layout.setHorizontalGroup(
-            panService10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout digOppAttackLayout = new javax.swing.GroupLayout(digOppAttack);
+        digOppAttack.setLayout(digOppAttackLayout);
+        digOppAttackLayout.setHorizontalGroup(
+            digOppAttackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        panService10Layout.setVerticalGroup(
-            panService10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        digOppAttackLayout.setVerticalGroup(
+            digOppAttackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jTable11.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jTable11.setModel(new javax.swing.table.DefaultTableModel(
+        tblOppAttack.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tblOppAttack.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null, null},
                 {"2", null, null, null},
@@ -1161,10 +1257,10 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 "Zone", "Tot", "+", "-"
             }
         ));
-        jTable11.setRowSelectionAllowed(false);
-        jTable11.setShowHorizontalLines(false);
-        jTable11.setShowVerticalLines(false);
-        jScrollPane11.setViewportView(jTable11);
+        tblOppAttack.setRowSelectionAllowed(false);
+        tblOppAttack.setShowHorizontalLines(false);
+        tblOppAttack.setShowVerticalLines(false);
+        jScrollPane11.setViewportView(tblOppAttack);
 
         jPanel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -1192,7 +1288,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
                                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(panService10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(digOppAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel22Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jLabel19)))
@@ -1205,7 +1301,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jLabel19)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panService10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(digOppAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1216,24 +1312,24 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jPanel24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jLabel20.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel20.setText("Service");
+        jLabel20.setText("Block");
 
-        panService11.setBackground(new java.awt.Color(255, 255, 255));
-        panService11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        digOppBlock.setBackground(new java.awt.Color(255, 255, 255));
+        digOppBlock.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        javax.swing.GroupLayout panService11Layout = new javax.swing.GroupLayout(panService11);
-        panService11.setLayout(panService11Layout);
-        panService11Layout.setHorizontalGroup(
-            panService11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout digOppBlockLayout = new javax.swing.GroupLayout(digOppBlock);
+        digOppBlock.setLayout(digOppBlockLayout);
+        digOppBlockLayout.setHorizontalGroup(
+            digOppBlockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        panService11Layout.setVerticalGroup(
-            panService11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        digOppBlockLayout.setVerticalGroup(
+            digOppBlockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jTable12.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jTable12.setModel(new javax.swing.table.DefaultTableModel(
+        tblOppBlock.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tblOppBlock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"1", null, null, null},
                 {"2", null, null, null},
@@ -1246,10 +1342,10 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 "Zone", "Tot", "+", "-"
             }
         ));
-        jTable12.setRowSelectionAllowed(false);
-        jTable12.setShowHorizontalLines(false);
-        jTable12.setShowVerticalLines(false);
-        jScrollPane12.setViewportView(jTable12);
+        tblOppBlock.setRowSelectionAllowed(false);
+        tblOppBlock.setShowHorizontalLines(false);
+        tblOppBlock.setShowVerticalLines(false);
+        jScrollPane12.setViewportView(tblOppBlock);
 
         jPanel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -1275,7 +1371,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
                         .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panService11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(digOppBlock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel20))
                 .addContainerGap())
         );
@@ -1286,15 +1382,15 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jLabel20)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panService11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(digOppBlock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(179, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel2.setText("DELHI");
+        lblOppTeamName.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblOppTeamName.setText("DELHI");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -1319,20 +1415,20 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel1)
+            .addComponent(lblHomeTeamName)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel2)
+            .addComponent(lblOppTeamName)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHomeTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1346,7 +1442,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblOppTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1363,8 +1459,17 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel digHomeAttack;
+    private javax.swing.JPanel digHomeBlock;
+    private javax.swing.JPanel digHomeDefence;
+    private javax.swing.JPanel digHomeReception;
     private javax.swing.JPanel digHomeService;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel digHomeSet;
+    private javax.swing.JPanel digOppAttack;
+    private javax.swing.JPanel digOppBlock;
+    private javax.swing.JPanel digOppDefence;
+    private javax.swing.JPanel digOppReception;
+    private javax.swing.JPanel digOppService;
+    private javax.swing.JPanel digOppSet;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1375,7 +1480,6 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1415,27 +1519,19 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTable jTable10;
-    private javax.swing.JTable jTable11;
-    private javax.swing.JTable jTable12;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
-    private javax.swing.JTable jTable8;
-    private javax.swing.JTable jTable9;
-    private javax.swing.JPanel panService10;
-    private javax.swing.JPanel panService11;
-    private javax.swing.JPanel panService2;
-    private javax.swing.JPanel panService3;
-    private javax.swing.JPanel panService4;
-    private javax.swing.JPanel panService5;
-    private javax.swing.JPanel panService6;
-    private javax.swing.JPanel panService7;
-    private javax.swing.JPanel panService8;
-    private javax.swing.JPanel panService9;
+    private javax.swing.JLabel lblHomeTeamName;
+    private javax.swing.JLabel lblOppTeamName;
     private javax.swing.JTable tblHomeAttack;
+    private javax.swing.JTable tblHomeBlock;
+    private javax.swing.JTable tblHomeDefence;
+    private javax.swing.JTable tblHomeReception;
     private javax.swing.JTable tblHomeService;
+    private javax.swing.JTable tblHomeSet;
+    private javax.swing.JTable tblOppAttack;
+    private javax.swing.JTable tblOppBlock;
+    private javax.swing.JTable tblOppDefence;
+    private javax.swing.JTable tblOppReception;
+    private javax.swing.JTable tblOppService;
+    private javax.swing.JTable tblOppSet;
     // End of variables declaration//GEN-END:variables
 }

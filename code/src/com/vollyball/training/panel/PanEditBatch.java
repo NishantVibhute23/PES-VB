@@ -8,11 +8,20 @@ package com.vollyball.training.panel;
 import com.vollyball.controller.Controller;
 import com.vollyball.training.bean.Batch;
 import com.vollyball.training.dao.BatchDao;
+import com.vollyball.util.DateLabelFormatter;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.BorderFactory;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 /**
  *
@@ -22,30 +31,69 @@ public class PanEditBatch extends javax.swing.JPanel {
 
     String ageGroup;
     int batchId;
-    BatchDao bd=new BatchDao();
+    BatchDao bd = new BatchDao();
+
+    UtilDateModel modelStart = new UtilDateModel();
+    JDatePanelImpl datePanelStart = new JDatePanelImpl(modelStart);
+    UtilDateModel modelEnd = new UtilDateModel();
+    JDatePanelImpl datePanelEnd = new JDatePanelImpl(modelEnd);
+    JDatePickerImpl datePickerStart = new JDatePickerImpl(datePanelStart, new DateLabelFormatter());
+    JDatePickerImpl datePickerEnd = new JDatePickerImpl(datePanelEnd, new DateLabelFormatter());
 
     /**
      * Creates new form PanEditBatch
      */
-    public PanEditBatch(int batchId) {
+    public PanEditBatch(int batchId) throws ParseException {
         initComponents();
         this.batchId = batchId;
-        Batch b=bd.getBatchDetails(batchId);
-        
+
+        datePickerStart.setBounds(0, 0, 319, 28);
+        JFormattedTextField textField = datePickerStart.getJFormattedTextField();
+        textField.setBackground(Color.WHITE);
+        datePickerStart.setButtonFocusable(false);
+        textField.setBorder(null);
+        panStartDate.add(datePickerStart);
+
+        datePickerEnd.setBounds(0, 0, 319, 28);
+        JFormattedTextField textField1 = datePickerEnd.getJFormattedTextField();
+        textField1.setBackground(Color.WHITE);
+        textField1.setBorder(null);
+        panEndDate.add(datePickerEnd);
+        Batch b = bd.getBatchDetails(batchId);
+
         txtBatchName.setText(b.getName());
         txtTrainerName.setText(b.getTrainer());
         txtMedOfficerName.setText(b.getMedicalOffice());
         txtAnalyzerName.setText(b.getAnalyzer());
         txtVenue.setText(b.getVenue());
-        String age[]=b.getAgeGroup().split(" ");
+        String age[] = b.getAgeGroup().split(" ");
         cbAgeGroup.setSelectedItem(age[0]);
-        if(age.length==2){
+        if (age.length == 2) {
             cbAgeGroup1.setSelectedItem(age[1]);
         }
-        startDate.setText(b.getStartDate());
-        toDate.setText(b.getEndDate());
-        
-        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        int year;
+        int month;
+        int day;
+        Date date;
+        Calendar calendar = Calendar.getInstance();
+        date = sdf.parse(b.getStartDate());
+        calendar.setTime(date);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        modelStart.setDate(year, month, day);
+        modelStart.setSelected(true);
+
+        date = sdf.parse(b.getEndDate());
+        calendar.setTime(date);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        modelEnd.setDate(year, month, day);
+        modelEnd.setSelected(true);
+
     }
 
     /**
@@ -77,11 +125,11 @@ public class PanEditBatch extends javax.swing.JPanel {
         txtVenue = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        startDate = new javax.swing.JTextField();
-        toDate = new javax.swing.JTextField();
         cbAgeGroup = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
         cbAgeGroup1 = new javax.swing.JComboBox();
+        panStartDate = new javax.swing.JPanel();
+        panEndDate = new javax.swing.JPanel();
 
         jPanel2.setBackground(new java.awt.Color(57, 74, 108));
 
@@ -247,17 +295,6 @@ public class PanEditBatch extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(45, 62, 79));
         jLabel11.setText("To");
 
-        startDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        startDate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        startDate.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                startDateKeyTyped(evt);
-            }
-        });
-
-        toDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        toDate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         cbAgeGroup.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cbAgeGroup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Open", "Under" }));
         cbAgeGroup.addItemListener(new java.awt.event.ItemListener() {
@@ -282,6 +319,16 @@ public class PanEditBatch extends javax.swing.JPanel {
                 cbAgeGroup1ItemStateChanged(evt);
             }
         });
+
+        panStartDate.setBackground(new java.awt.Color(255, 255, 255));
+        panStartDate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panStartDate.setPreferredSize(new java.awt.Dimension(0, 28));
+        panStartDate.setLayout(new java.awt.BorderLayout());
+
+        panEndDate.setBackground(new java.awt.Color(255, 255, 255));
+        panEndDate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panEndDate.setPreferredSize(new java.awt.Dimension(0, 28));
+        panEndDate.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -312,16 +359,16 @@ public class PanEditBatch extends javax.swing.JPanel {
                                     .addComponent(jLabel11))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(toDate))
+                        .addComponent(cbAgeGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbAgeGroup1, 0, 96, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbAgeGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbAgeGroup1, 0, 96, Short.MAX_VALUE)))
+                        .addComponent(panStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panEndDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -353,10 +400,10 @@ public class PanEditBatch extends javax.swing.JPanel {
                     .addComponent(jLabel10)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(toDate, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -405,7 +452,9 @@ public class PanEditBatch extends javax.swing.JPanel {
         if (!msg.isEmpty()) {
             JOptionPane.showMessageDialog(this, msg);
         } else {
-            Batch batch=new Batch();
+            Date selectedStartDate = (Date) datePickerStart.getModel().getValue();
+            Date selectedEndDate = (Date) datePickerEnd.getModel().getValue();
+            Batch batch = new Batch();
             batch.setId(batchId);
             batch.setName(txtBatchName.getText());
             batch.setTrainer(txtTrainerName.getText());
@@ -413,8 +462,8 @@ public class PanEditBatch extends javax.swing.JPanel {
             batch.setAnalyzer(txtAnalyzerName.getText());
             batch.setVenue(txtVenue.getText());
             batch.setAgeGroup(ageGroup);
-            batch.setStartDate(startDate.getText());
-            batch.setEndDate(toDate.getText());
+            batch.setStartDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedStartDate));
+            batch.setEndDate(new SimpleDateFormat("yyyy-MM-dd").format(selectedEndDate));
             int id = bd.updateBatch(batch);
             if (id != 0) {
                 Controller.batchDialog.close();
@@ -446,14 +495,12 @@ public class PanEditBatch extends javax.swing.JPanel {
         if (cbAgeGroup.getSelectedItem().equals("select")) {
             msg = msg + "Select Age Group\n";
         }
-        
-        
+
         return msg;
 
     }
-    
-    
-    
+
+
     private void lblCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseClicked
         Controller.batchDialog.close();
     }//GEN-LAST:event_lblCancelMouseClicked
@@ -461,10 +508,6 @@ public class PanEditBatch extends javax.swing.JPanel {
     private void txtVenueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVenueKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtVenueKeyTyped
-
-    private void startDateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_startDateKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startDateKeyTyped
 
     private void cbAgeGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAgeGroupItemStateChanged
         // TODO add your handling code here:
@@ -529,8 +572,8 @@ public class PanEditBatch extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel lblCancel;
     private javax.swing.JLabel lblSave;
-    private javax.swing.JTextField startDate;
-    private javax.swing.JTextField toDate;
+    private javax.swing.JPanel panEndDate;
+    private javax.swing.JPanel panStartDate;
     private javax.swing.JTextField txtAnalyzerName;
     private javax.swing.JTextField txtBatchName;
     private javax.swing.JTextField txtMedOfficerName;

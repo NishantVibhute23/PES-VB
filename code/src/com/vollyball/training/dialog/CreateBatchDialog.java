@@ -12,6 +12,7 @@ import com.vollyball.training.panel.PanNewBatch;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -50,7 +51,7 @@ public class CreateBatchDialog {
         }
     }
 
-    protected Container createPane() {
+    protected Container createPane() throws ParseException {
 
         if (batchId == 0) {
             PanNewBatch panBatch = new PanNewBatch();
