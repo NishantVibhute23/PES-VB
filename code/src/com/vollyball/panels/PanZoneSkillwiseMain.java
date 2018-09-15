@@ -86,22 +86,22 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         
         //  opponent
         listZoneDetails = reportDao.getZoneDetails(Skill.Service.getId(), SkillsDescCriteria.ServiceDig.getId(), evaluationteamIdOpp);
-        setDataOpp(listZoneDetails, digOppService, tblOppService);
+        setData(listZoneDetails, digOppService, tblOppService);
 
         listZoneDetails = reportDao.getZoneDetails(Skill.Attack.getId(), SkillsDescCriteria.AttackDig.getId(), evaluationteamIdOpp);
-        setDataOpp(listZoneDetails, digOppAttack, tblOppAttack);
+        setData(listZoneDetails, digOppAttack, tblOppAttack);
 
         listZoneDetails = reportDao.getZoneDetails(Skill.Block.getId(), SkillsDescCriteria.BlockDig.getId(), evaluationteamIdOpp);
-        setDataOpp(listZoneDetails, digOppBlock, tblOppBlock);
+        setData(listZoneDetails, digOppBlock, tblOppBlock);
         
         listZoneDetails = reportDao.getZoneDetails(Skill.Reception.getId(), SkillsDescCriteria.ReceptionDig.getId(), evaluationteamIdOpp);
-        setDataOpp(listZoneDetails, digOppReception, tblOppReception);
+        setData(listZoneDetails, digOppReception, tblOppReception);
         
         listZoneDetails = reportDao.getZoneDetails(Skill.Set.getId(), SkillsDescCriteria.SetDig.getId(), evaluationteamIdOpp);
-        setDataOpp(listZoneDetails, digOppSet, tblOppSet);
+        setData(listZoneDetails, digOppSet, tblOppSet);
         
         listZoneDetails = reportDao.getZoneDetails(Skill.Defence.getId(), SkillsDescCriteria.DefenceDig.getId(), evaluationteamIdOpp);
-        setDataOpp(listZoneDetails, digOppDefence, tblOppDefence);
+        setData(listZoneDetails, digOppDefence, tblOppDefence);
         
 
     }
@@ -184,87 +184,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
             tablemodel.addRow(row);
         }
 
-    }
-
-        public void setDataOpp(List<SkillZoneWiseReport> listZoneDetails, JPanel panel, JTable table) {
-        zoneCountMap.put(1, new ZoneHitCount());
-        zoneCountMap.put(2, new ZoneHitCount());
-        zoneCountMap.put(3, new ZoneHitCount());
-        zoneCountMap.put(4, new ZoneHitCount());
-        zoneCountMap.put(5, new ZoneHitCount());
-        zoneCountMap.put(6, new ZoneHitCount());
-
-        JTableHeader header = table.getTableHeader();
-        header.setDefaultRenderer(new TableHeaderRenderer(table));
-        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-        table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-        table.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
-
-        DefaultTableModel tablemodel = (DefaultTableModel) table.getModel();
-        for (int i = tablemodel.getRowCount() - 1; i >= 0; i--) {
-            tablemodel.removeRow(i);
-        }
-
-        for (SkillZoneWiseReport skillZoneWiseReport : listZoneDetails) {
-            String[] pan = skillZoneWiseReport.getValue().split("-");
-            int index = 0;
-            for (int i = 0; i < pan.length; i++) {
-                if (pan[i].startsWith("O")) {
-                    index = i;
-                    break;
-                }
-            }
-
-            if (pan[index].startsWith("O1")) {
-                countHit(skillZoneWiseReport, 1);
-            } else if (pan[index].startsWith("O2")) {
-                countHit(skillZoneWiseReport, 2);
-            } else if (pan[index].startsWith("O3")) {
-                countHit(skillZoneWiseReport, 3);
-            } else if (pan[index].startsWith("O4")) {
-                countHit(skillZoneWiseReport, 4);
-            } else if (pan[index].startsWith("O5")) {
-                countHit(skillZoneWiseReport, 5);
-            } else if (pan[index].startsWith("O6")) {
-                countHit(skillZoneWiseReport, 6);
-            }
-        }
-
-        panel.setLayout(new GridLayout(2, 3));
-
-        int[] positions = {1, 6, 5, 2, 3, 4};
-
-        for (int pos : positions) {
-            ZoneHitCount zhc = zoneCountMap.get(pos);
-            if (pos == successZone) {
-                zhc.setIsMaxSuccess(true);
-            }
-
-            if (pos == failedZone) {
-                zhc.setIsMaxFail(true);
-            }
-            JPanel pan = new JPanel(new BorderLayout());
-            pan.setBorder(new LineBorder(new Color(153, 153, 153), 1));
-            PanZoneSkillwisePanel p = new PanZoneSkillwisePanel();
-            p.setValues(zhc);
-            pan.add(p, BorderLayout.CENTER);
-            panel.add(pan);
-
-        }
-        maxSuccPerc = 0;
-        maxFailPerc = 0;
-        successZone = 0;
-        failedZone = 0;
-
-        for (int i = 1; i <= 6; i++) {
-            ZoneHitCount zhc = zoneCountMap.get(i);
-            Object[] row = {i, zhc.getTotal(), zhc.getSuccess(), zhc.getFailure()
-            };
-            tablemodel.addRow(row);
-        }
-
-    }
+    }               
     
     public void countHit(SkillZoneWiseReport skillZoneWiseReport, int pos) {
         ZoneHitCount z = zoneCountMap.get(pos);
