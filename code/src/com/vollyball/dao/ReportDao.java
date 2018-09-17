@@ -7,6 +7,7 @@ package com.vollyball.dao;
 
 import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.Player;
+import com.vollyball.bean.PlayerPositionBean;
 import com.vollyball.bean.PlayerReportBean;
 import com.vollyball.bean.PlayerScores;
 import com.vollyball.bean.PlayerSkillScore;
@@ -20,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -812,5 +814,32 @@ public class ReportDao {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listZoneDetails;
+    }
+
+    public List<PlayerPositionBean> getRotationOrders(int matchevaluationId, int setNo, LinkedHashMap<Integer, Player> playerMap) {
+        List<PlayerPositionBean> list = new ArrayList<>();
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.setwise.rotation"));
+            ps1.setInt(1, matchevaluationId);
+            ps1.setInt(2, setNo);
+            ResultSet rs1 = ps1.executeQuery();
+            while (rs1.next()) {
+                PlayerPositionBean ppb = new PlayerPositionBean();
+                ppb.pos.put(1, playerMap.get(rs1.getInt(1)));
+                ppb.pos.put(2, playerMap.get(rs1.getInt(2)));
+                ppb.pos.put(3, playerMap.get(rs1.getInt(3)));
+                ppb.pos.put(4, playerMap.get(rs1.getInt(4)));
+                ppb.pos.put(5, playerMap.get(rs1.getInt(5)));
+                ppb.pos.put(6, playerMap.get(rs1.getInt(6)));
+                ppb.setWonby(rs1.getInt(7));
+                list.add(ppb);
+            }
+            db.closeConnection(con);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 }

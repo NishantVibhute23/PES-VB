@@ -78,7 +78,7 @@ public class PanNewPlayer extends javax.swing.JPanel {
             team1position.addItem(pp.getName());
         }
 
-        team1combo1.setSelectedItem(player.getTeamId());
+        team1combo1.setSelectedItem(player.getTeam());
         txtPlayerName.setText(player.getName());
         txtPlayerChestNo.setText(player.getChestNo());
         team1position.setSelectedIndex(player.getPosition());
