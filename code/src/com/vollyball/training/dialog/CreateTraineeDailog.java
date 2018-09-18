@@ -5,8 +5,11 @@
  */
 package com.vollyball.training.dialog;
 
-import com.vollyball.dialog.*;
+import com.vollyball.dialog.CreateCompetitionDialog;
+import com.vollyball.dialog.CreateMatchDialog;
 import com.vollyball.panels.PanNewCompetition;
+import com.vollyball.training.bean.Trainee;
+import com.vollyball.training.panel.PanNewTrainee;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -20,20 +23,27 @@ import javax.swing.JFrame;
  *
  * @author #dabbu
  */
-public class CreateTrainingDialog {
+public class CreateTraineeDailog {
+
     private JFrame parentFrame;
     private JDialog dialog;
-    int compId;
+    int batchId;
+    Trainee trainee;
 
-    
-     public void setValues(int compId) {
-        this.compId = compId;
+    public void setValues(int batchId) {
+        this.batchId = batchId;
     }
+
+    public void setTrainee(Trainee trainee) {
+        this.trainee = trainee;
+        this.batchId = batchId;
+    }
+
     public void init() {
         try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-            this.dialog = new JDialog(this.parentFrame, "New Competition", true);
+            this.dialog = new JDialog(this.parentFrame, "New Trainee", true);
 
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());
@@ -50,18 +60,15 @@ public class CreateTrainingDialog {
     }
 
     protected Container createPane() {
-        PanNewCompetition panComp = null;
-        if (compId == 0) {
-            panComp = new PanNewCompetition();
+        PanNewTrainee pnt;
+        if (batchId != 0) {
+            pnt = new PanNewTrainee(batchId);
+        } else if (trainee != null) {
+            pnt = new PanNewTrainee(trainee);
         } else {
-            try {
-                panComp = new PanNewCompetition(compId);
-            } catch (ParseException ex) {
-                Logger.getLogger(CreateCompetitionDialog.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            pnt = new PanNewTrainee();
         }
-        return panComp;
-
+        return pnt;
     }
 
     public void show() {
@@ -80,5 +87,4 @@ public class CreateTrainingDialog {
         parentFrame = (JFrame) frame;
     }
 
-    
 }

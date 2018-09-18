@@ -52,9 +52,9 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         scrPan = new javax.swing.JScrollPane();
         panReport = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblmatchReport = new javax.swing.JLabel();
+        lblRotationReport = new javax.swing.JLabel();
+        lblSkilReport = new javax.swing.JLabel();
 
         panPrint1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -105,30 +105,30 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Match");
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblmatchReport.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblmatchReport.setText("Match");
+        lblmatchReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblmatchReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                lblmatchReportMouseClicked(evt);
             }
         });
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Rotation");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblRotationReport.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRotationReport.setText("Rotation");
+        lblRotationReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblRotationReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                lblRotationReportMouseClicked(evt);
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Skill");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblSkilReport.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSkilReport.setText("Skill");
+        lblSkilReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblSkilReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                lblSkilReportMouseClicked(evt);
             }
         });
 
@@ -138,20 +138,20 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblRotationReport, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblSkilReport, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblmatchReport, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 687, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblRotationReport, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addComponent(lblSkilReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                .addComponent(lblmatchReport, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -176,13 +176,12 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
     private void lblPrint1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrint1MouseClicked
         // TODO add your handling code here:
         panPrint1.setVisible(false);
-
         printComponenet(panC);
         panPrint1.setVisible(true);
 
     }//GEN-LAST:event_lblPrint1MouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void lblmatchReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblmatchReportMouseClicked
         // TODO add your handling code here:
         panReport.removeAll();
         panC = new PanMatchReportConsolidated(cb, matchId);
@@ -190,25 +189,25 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         validate();
         repaint();
 
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_lblmatchReportMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void lblRotationReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRotationReportMouseClicked
         // TODO add your handling code here:
         panReport.removeAll();
         panR = new PanZoneRotationMain(cb, matchId);
         panReport.add(panR, BorderLayout.CENTER);
         validate();
         repaint();
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_lblRotationReportMouseClicked
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void lblSkilReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSkilReportMouseClicked
         // TODO add your handling code here:
         panReport.removeAll();
         panZ = new PanZoneSkillwiseMain(cb, matchId);
         panReport.add(panZ, BorderLayout.CENTER);
         validate();
         repaint();
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_lblSkilReportMouseClicked
 
     public void printComponenet(final Component comp) {
 
@@ -260,12 +259,12 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblPrint1;
+    private javax.swing.JLabel lblRotationReport;
+    private javax.swing.JLabel lblSkilReport;
+    private javax.swing.JLabel lblmatchReport;
     private javax.swing.JPanel panPrint1;
     private javax.swing.JPanel panReport;
     private javax.swing.JScrollPane scrPan;

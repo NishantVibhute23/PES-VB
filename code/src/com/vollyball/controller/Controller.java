@@ -31,6 +31,7 @@ import com.vollyball.panels.PanTeams;
 import com.vollyball.panels.PanUserDetails;
 import com.vollyball.panels.panLoading;
 import com.vollyball.training.dialog.CreateBatchDialog;
+import com.vollyball.training.dialog.CreateTraineeDailog;
 import com.vollyball.training.panel.PanBatchList;
 import com.vollyball.training.panel.PanBatchTraineeList;
 import com.vollyball.util.CommonUtil;
@@ -74,6 +75,7 @@ public class Controller {
     public static PanBatchTraineeList panBatchTraineeList;
     public static PanPESVBHome panPESVBHome;
     public static PanEvaluationRally panEvaluationRally;
+    public static CreateTraineeDailog createTraineeDailog;
 
     public static void main(String args[]) {
 
