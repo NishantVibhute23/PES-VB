@@ -11,7 +11,9 @@ import com.vollyball.bean.PlayerPositionBean;
 import com.vollyball.bean.PlayerReportBean;
 import com.vollyball.bean.PlayerScores;
 import com.vollyball.bean.PlayerSkillScore;
+import com.vollyball.bean.SuccessFailure;
 import com.vollyball.bean.Team;
+import com.vollyball.bean.Tempo;
 import com.vollyball.db.DbUtil;
 import com.vollyball.enums.SkillZoneWiseReport;
 import com.vollyball.util.CommonUtil;
@@ -841,5 +843,35 @@ public class ReportDao {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public Tempo getReportTempoWise(int matchevaluationId, int skillDescCriteriaId) {
+        Tempo tempo = new Tempo();
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.tempowise.successFailure"));
+            ps.setInt(1, matchevaluationId);
+            ps.setInt(2, skillDescCriteriaId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SuccessFailure sf = new SuccessFailure();
+                sf.setSuccess(rs.getInt(1));
+                sf.setFailure(rs.getInt(2));
+                tempo.setHigh(sf);
+                SuccessFailure sf1 = new SuccessFailure();
+                sf.setSuccess(rs.getInt(3));
+                sf.setFailure(rs.getInt(4));
+                tempo.setMedium(sf1);
+                SuccessFailure sf2 = new SuccessFailure();
+                sf.setSuccess(rs.getInt(5));
+                sf.setFailure(rs.getInt(6));
+                tempo.setLow(sf2);
+            }
+            db.closeConnection(con);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tempo;
     }
 }
