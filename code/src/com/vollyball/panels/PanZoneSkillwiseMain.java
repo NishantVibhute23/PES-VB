@@ -130,6 +130,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         createAttackTable(tbOppAttackTable, panOppAttackTable, defaultOppAttackModel = new DefaultTableModel());
         createBlockTable(tbOppBlockTable, panOppBlockTable, defaultOppBlockModel = new DefaultTableModel());
         setAttackRow(defaultHomeAttackModel, evaluationteamIdHome, 14);
+        setAttackRow(defaultOppAttackModel, evaluationteamIdOpp, 14);
+        setBlockRow(defaultHomeBlockModel, evaluationteamIdHome, 37);
+        setBlockRow(defaultOppBlockModel, evaluationteamIdOpp, 37);
+        setServiceRow(defaultHomeServiceModel, evaluationteamIdHome, 1);
+        setServiceRow(defaultOppServiceModel, evaluationteamIdOpp, 1);
+
     }
 
     public void createServiceTable(JTable tbTable, JPanel panTable, DefaultTableModel defaultModel) {
@@ -156,7 +162,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         ColumnGroup g_nameSf = new ColumnGroup("SF");
         g_nameSf.add(cm.getColumn(4));
         g_nameSf.add(cm.getColumn(5));
-        ColumnGroup g_nameSs = new ColumnGroup("Ss");
+        ColumnGroup g_nameSs = new ColumnGroup("SS");
         g_nameSs.add(cm.getColumn(6));
         g_nameSs.add(cm.getColumn(7));
 
@@ -276,7 +282,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         ColumnGroup g_nameNb = new ColumnGroup("NB");
         g_nameNb.add(cm.getColumn(0));
         g_nameNb.add(cm.getColumn(1));
-        ColumnGroup g_namesbl = new ColumnGroup("SBL");
+        ColumnGroup g_namesbl = new ColumnGroup("SGL");
         g_namesbl.add(cm.getColumn(2));
         g_namesbl.add(cm.getColumn(3));
         ColumnGroup g_namedbl = new ColumnGroup("DBL");
@@ -355,8 +361,26 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         for (int i = defaultModel.getRowCount() - 1; i >= 0; i--) {
             defaultModel.removeRow(i);
         }
-        Tempo tempo = reportDao.getReportTempoWise(evlId, skilDescId);
+        Tempo tempo = reportDao.getAttackReportTempoWise(evlId, skilDescId);
         Object[] row = {tempo.getHigh().getSuccess(), tempo.getHigh().getFailure(), tempo.getMedium().getSuccess(), tempo.getMedium().getFailure(), tempo.getLow().getSuccess(), tempo.getLow().getFailure()};
+        defaultModel.addRow(row);
+    }
+
+    public void setBlockRow(DefaultTableModel defaultModel, int evlId, int skilDescId) {
+        for (int i = defaultModel.getRowCount() - 1; i >= 0; i--) {
+            defaultModel.removeRow(i);
+        }
+        Tempo tempo = reportDao.getBlockReportSkilDescWise(evlId, skilDescId);
+        Object[] row = {tempo.getNb().getSuccess(), tempo.getNb().getFailure(), tempo.getSgl().getSuccess(), tempo.getSgl().getFailure(), tempo.getDbl().getSuccess(), tempo.getDbl().getFailure(), tempo.getTpl().getSuccess(), tempo.getTpl().getFailure()};
+        defaultModel.addRow(row);
+    }
+
+    public void setServiceRow(DefaultTableModel defaultModel, int evlId, int skilDescId) {
+        for (int i = defaultModel.getRowCount() - 1; i >= 0; i--) {
+            defaultModel.removeRow(i);
+        }
+        Tempo tempo = reportDao.getServiceReportSkilDescWise(evlId, skilDescId);
+        Object[] row = {tempo.getJf().getSuccess(), tempo.getJf().getFailure(), tempo.getJp().getSuccess(), tempo.getJp().getFailure(), tempo.getSf().getSuccess(), tempo.getSf().getFailure(), tempo.getSs().getSuccess(), tempo.getSs().getFailure()};
         defaultModel.addRow(row);
     }
 

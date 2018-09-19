@@ -845,11 +845,11 @@ public class ReportDao {
         return list;
     }
 
-    public Tempo getReportTempoWise(int matchevaluationId, int skillDescCriteriaId) {
+    public Tempo getAttackReportTempoWise(int matchevaluationId, int skillDescCriteriaId) {
         Tempo tempo = new Tempo();
         try {
             this.con = db.getConnection();
-            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.tempowise.successFailure"));
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.attack.tempowise.successFailure"));
             ps.setInt(1, matchevaluationId);
             ps.setInt(2, skillDescCriteriaId);
             ResultSet rs = ps.executeQuery();
@@ -866,6 +866,74 @@ public class ReportDao {
                 sf.setSuccess(rs.getInt(5));
                 sf.setFailure(rs.getInt(6));
                 tempo.setLow(sf2);
+            }
+            db.closeConnection(con);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tempo;
+    }
+
+    public Tempo getBlockReportSkilDescWise(int matchevaluationId, int skillDescCriteriaId) {
+        Tempo tempo = new Tempo();
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.block.descwise.successFailure"));
+            ps.setInt(1, matchevaluationId);
+            ps.setInt(2, skillDescCriteriaId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SuccessFailure sf = new SuccessFailure();
+                sf.setSuccess(rs.getInt(1));
+                sf.setFailure(rs.getInt(2));
+                tempo.setNb(sf);
+                SuccessFailure sf1 = new SuccessFailure();
+                sf.setSuccess(rs.getInt(3));
+                sf.setFailure(rs.getInt(4));
+                tempo.setSgl(sf1);
+                SuccessFailure sf2 = new SuccessFailure();
+                sf.setSuccess(rs.getInt(5));
+                sf.setFailure(rs.getInt(6));
+                tempo.setDbl(sf2);
+                SuccessFailure sf3 = new SuccessFailure();
+                sf.setSuccess(rs.getInt(7));
+                sf.setFailure(rs.getInt(8));
+                tempo.setTpl(sf3);
+            }
+            db.closeConnection(con);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tempo;
+    }
+
+    public Tempo getServiceReportSkilDescWise(int matchevaluationId, int skillDescCriteriaId) {
+        Tempo tempo = new Tempo();
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.service.descwise.successfailure"));
+            ps.setInt(1, matchevaluationId);
+            ps.setInt(2, skillDescCriteriaId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SuccessFailure sf = new SuccessFailure();
+                sf.setSuccess(rs.getInt(1));
+                sf.setFailure(rs.getInt(2));
+                tempo.setJf(sf);
+                SuccessFailure sf1 = new SuccessFailure();
+                sf.setSuccess(rs.getInt(3));
+                sf.setFailure(rs.getInt(4));
+                tempo.setJp(sf1);
+                SuccessFailure sf2 = new SuccessFailure();
+                sf.setSuccess(rs.getInt(5));
+                sf.setFailure(rs.getInt(6));
+                tempo.setSf(sf2);
+                SuccessFailure sf3 = new SuccessFailure();
+                sf.setSuccess(rs.getInt(7));
+                sf.setFailure(rs.getInt(8));
+                tempo.setSs(sf3);
             }
             db.closeConnection(con);
 
