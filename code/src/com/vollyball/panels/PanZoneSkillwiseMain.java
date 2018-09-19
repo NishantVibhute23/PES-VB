@@ -123,17 +123,17 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         listZoneDetails = reportDao.getZoneDetails(Skill.Defence.getId(), SkillsDescCriteria.DefenceDig.getId(), evaluationteamIdOpp);
         setData(listZoneDetails, digOppDefence, tblOppDefence);
 
-        createBlockTable(tbHomeBlockTable, panHomeBlockTable, defaultHomeBlockModel);
-        createServiceTable(tbHomeServiceTable, panHomeServiceTable, defaultHomeServiceModel);
-        createAttackTable(tbHomeAttackTable, panHomeAttackTable, defaultHomeAttackModel);
-        createServiceTable(tbOppServiceTable, panOppServiceTable, defaultOppServiceModel);
-        createAttackTable(tbOppAttackTable, panOppAttackTable, defaultOppAttackModel);
-        createBlockTable(tbOppBlockTable, panOppBlockTable, defaultOppBlockModel);
-//        setAttackRow(defaultHomeAttackModel, evaluationteamIdHome, 14);
+        createBlockTable(tbHomeBlockTable, panHomeBlockTable, defaultHomeBlockModel = new DefaultTableModel());
+        createServiceTable(tbHomeServiceTable, panHomeServiceTable, defaultHomeServiceModel = new DefaultTableModel());
+        createAttackTable(tbHomeAttackTable, panHomeAttackTable, defaultHomeAttackModel = new DefaultTableModel());
+        createServiceTable(tbOppServiceTable, panOppServiceTable, defaultOppServiceModel = new DefaultTableModel());
+        createAttackTable(tbOppAttackTable, panOppAttackTable, defaultOppAttackModel = new DefaultTableModel());
+        createBlockTable(tbOppBlockTable, panOppBlockTable, defaultOppBlockModel = new DefaultTableModel());
+        setAttackRow(defaultHomeAttackModel, evaluationteamIdHome, 14);
     }
 
     public void createServiceTable(JTable tbTable, JPanel panTable, DefaultTableModel defaultModel) {
-        defaultModel = new DefaultTableModel();
+//        defaultModel = new DefaultTableModel();
 
         defaultModel.setDataVector(new Object[][]{},
                 new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
@@ -199,7 +199,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
     }
 
     public void createAttackTable(JTable tbTable, JPanel panTable, DefaultTableModel defaultModel) {
-        defaultModel = new DefaultTableModel();
+//        defaultModel = new DefaultTableModel();
 
         defaultModel.setDataVector(new Object[][]{},
                 new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
@@ -259,7 +259,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
     }
 
     public void createBlockTable(JTable tbTable, JPanel panTable, DefaultTableModel defaultModel) {
-        defaultModel = new DefaultTableModel();
+//        defaultModel = new DefaultTableModel();
 
         defaultModel.setDataVector(new Object[][]{},
                 new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
