@@ -14,22 +14,15 @@ import com.vollyball.dao.ReportDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.enums.HomeOpponent;
 import com.vollyball.renderer.TableHeaderRenderer;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.TreeMap;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -85,16 +78,13 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         team2Name = team.getTeam2name();
         evaluationteamIdHome = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
         evaluationteamIdOpp = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
-
         playerList = teamDao.getTeamPlayers(team1id);
         playerListOpp = teamDao.getTeamPlayers(team2id);
-
         panelHome.add(panHome1);
         panelHome.add(panHome2);
         panelHome.add(panHome3);
         panelHome.add(panHome4);
         panelHome.add(panHome5);
-
         panelOpp.add(panOpp1);
         panelOpp.add(panOpp2);
         panelOpp.add(panOpp3);
@@ -110,7 +100,6 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
             playerMapOpp.put(p.getId(), p);
             ChestMapOpp.put(p.getChestNo(), p);
         }
-        panRotatonRows.add(new PanRotationListValue(), BorderLayout.CENTER);
 
         lblHome1.setText(team1Name);
         lblOpp1.setText(team2Name);
@@ -128,15 +117,11 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
             LinkedHashMap<Integer, PlayerPositionBean> rallyRotationMapHome = new LinkedHashMap<>();
             rallyRotationMapHome.putAll(setMap(evaluationteamIdHome, i + 1, playerMap, HomeOpponent.HOME.getId()));
             rallyRotationMapOpp.putAll(setMap(evaluationteamIdOpp, i + 1, playerMapOpp, HomeOpponent.OPPONENT.getId()));
-
             if (!rallyRotationMapHome.isEmpty() || !rallyRotationMapOpp.isEmpty()) {
-
                 panelHome.get(i).setLayout(new GridLayout(1, 6));
                 panelHome.get(i).setBackground(Color.WHITE);
-
                 int homeRot = 0;
                 for (int pos : positions) {
-
                     if (rallyRotationMapHome.get(pos) != null) {
                         homeRot++;
                         PanZoneRotationBlock pan = new PanZoneRotationBlock(rallyRotationMapHome.get(pos), homeRot);
@@ -145,150 +130,36 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
                 }
                 for (int q = homeRot + 1; q <= 6; q++) {
                     JPanel pan = new JPanel();
-                    pan.setPreferredSize(new Dimension(330, 172));
+                    pan.setPreferredSize(new Dimension(276, 128));
                     panelHome.get(i).add(pan);
                 }
-
             }
-
             if (!rallyRotationMapOpp.isEmpty()) {
                 panelOpp.get(i).setLayout(new GridLayout(1, 6));
                 panelOpp.get(i).setBackground(Color.WHITE);
                 int oppRot = 0;
                 for (int pos : positions) {
-
                     if (rallyRotationMapOpp.get(pos) != null) {
                         oppRot++;
                         PanZoneRotationBlock pan = new PanZoneRotationBlock(rallyRotationMapOpp.get(pos), oppRot);
                         panelOpp.get(i).add(pan);
                     }
                 }
-
                 for (int q = oppRot + 1; q <= 6; q++) {
                     JPanel pan = new JPanel();
-                    pan.setPreferredSize(new Dimension(330, 172));
+                    pan.setPreferredSize(new Dimension(276, 128));
                     panelOpp.get(i).add(pan);
                 }
             }
         }
-
         DefaultTableModel model = (DefaultTableModel) tbOverall.getModel();
         model.addRow(new Object[]{team1Name, homeSuccessful.values().toArray().length > 1 ? homeSuccessful.values().toArray()[0] : "", homeWeakest.values().toArray().length > 1 ? homeWeakest.values().toArray()[0] : "", homeSuccessful.values().toArray().length > 2 ? homeSuccessful.values().toArray()[1] : "", homeWeakest.values().toArray().length > 1 ? homeWeakest.values().toArray()[1] : ""});
         model.addRow(new Object[]{team2Name, oppSuccessful.values().toArray().length > 1 ? oppSuccessful.values().toArray()[0] : "", oppWeakest.values().toArray().length > 1 ? oppWeakest.values().toArray()[0] : "", oppSuccessful.values().toArray().length > 2 ? oppSuccessful.values().toArray()[1] : "", oppWeakest.values().toArray().length > 1 ? oppWeakest.values().toArray()[1] : ""});
-
-    }
-
-    public class PanRotationListValue extends JPanel {
-
-        private JPanel mainList;
-
-        public PanRotationListValue() {
-            setLayout(new BorderLayout());
-            mainList = new JPanel(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridwidth = GridBagConstraints.REMAINDER;
-            gbc.weightx = 1;
-            gbc.weighty = 1;
-            mainList.add(new JPanel(), gbc);
-            add(new JScrollPane(mainList));
-            int k = -1;
-            for (int i = 1; i <= 5; i++) {
-
-                LinkedHashMap<Integer, PlayerPositionBean> rallyRotationMapOpp = new LinkedHashMap<>();
-                LinkedHashMap<Integer, PlayerPositionBean> rallyRotationMapHome = new LinkedHashMap<>();
-
-                rallyRotationMapHome.putAll(setMap(evaluationteamIdHome, i, playerMap, HomeOpponent.HOME.getId()));
-                rallyRotationMapOpp.putAll(setMap(evaluationteamIdOpp, i, playerMapOpp, HomeOpponent.OPPONENT.getId()));
-
-                if (!rallyRotationMapHome.isEmpty() || !rallyRotationMapOpp.isEmpty()) {
-
-                    GridBagConstraints gbcRow = new GridBagConstraints();
-                    gbcRow.gridwidth = GridBagConstraints.REMAINDER;
-                    gbcRow.weightx = 1;
-                    gbcRow.gridheight = 2;
-                    gbcRow.fill = GridBagConstraints.HORIZONTAL;
-                    JLabel lblSet = new JLabel("SET " + i);
-                    lblSet.setPreferredSize(new Dimension(996, 30));
-                    lblSet.setFont(new Font("Times New Roman", Font.BOLD, 12));
-                    mainList.add(lblSet, gbcRow, ++k);
-
-                    if (!rallyRotationMapHome.isEmpty()) {
-                        JLabel lblHome = new JLabel(team1Name);
-                        lblHome.setPreferredSize(new Dimension(996, 30));
-                        lblHome.setFont(new Font("Times New Roman", Font.BOLD, 12));
-                        mainList.add(lblHome, gbcRow, ++k);
-
-                        JPanel panelHome = new JPanel();
-                        panelHome.setLayout(new GridLayout(1, 6));
-                        panelHome.setBackground(Color.WHITE);
-
-                        int homeRot = 0;
-                        for (int pos : positions) {
-
-                            if (rallyRotationMapHome.get(pos) != null) {
-                                homeRot++;
-                                PanZoneRotationBlock pan = new PanZoneRotationBlock(rallyRotationMapHome.get(pos), homeRot);
-                                panelHome.add(pan);
-                            }
-                        }
-                        for (int q = homeRot + 1; q <= 6; q++) {
-                            JPanel pan = new JPanel();
-//                            pan.setLayout(new BorderLayout());
-//                            JLabel l = new JLabel("this");
-//                            pan.add(l, BorderLayout.CENTER);
-
-                            pan.setPreferredSize(new Dimension(166, 208));
-//                            pan.setBackground(Color.red);
-                            panelHome.add(pan);
-                        }
-                        mainList.add(panelHome, gbcRow, ++k);
-                    }
-
-                    if (!rallyRotationMapOpp.isEmpty()) {
-                        JLabel lblOpp = new JLabel(team2Name);
-                        lblOpp.setPreferredSize(new Dimension(996, 30));
-                        lblOpp.setFont(new Font("Times New Roman", Font.BOLD, 12));
-                        mainList.add(lblOpp, gbcRow, ++k);
-
-                        JPanel panelOpp = new JPanel();
-                        panelOpp.setLayout(new GridLayout(1, 6));
-                        panelOpp.setBackground(Color.WHITE);
-                        int oppRot = 0;
-                        for (int pos : positions) {
-
-                            if (rallyRotationMapOpp.get(pos) != null) {
-                                oppRot++;
-                                PanZoneRotationBlock pan = new PanZoneRotationBlock(rallyRotationMapOpp.get(pos), oppRot);
-                                panelOpp.add(pan);
-                            }
-                        }
-
-                        for (int q = oppRot + 1; q <= 6; q++) {
-                            JPanel pan = new JPanel();
-                            pan.setPreferredSize(new Dimension(166, 208));
-                            panelOpp.add(pan);
-                        }
-                        mainList.add(panelOpp, gbcRow, ++k);
-                    }
-                    JPanel panBlank = new JPanel();
-                    panBlank.setPreferredSize(new Dimension(640, 10));
-                    mainList.add(panBlank, gbcRow, ++k);
-                    JPanel panHr = new JPanel();
-                    panHr.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-                    panHr.setPreferredSize(new Dimension(640, 2));
-                    mainList.add(panHr, gbcRow, ++k);
-                    panBlank = new JPanel();
-                    panBlank.setPreferredSize(new Dimension(640, 10));
-                    mainList.add(panBlank, gbcRow, ++k);
-                }
-            }
-        }
     }
 
     public LinkedHashMap<Integer, PlayerPositionBean> setMap(int evaluationId, int setNum, LinkedHashMap<Integer, Player> playerMap, int team) {
         List<PlayerPositionBean> list = reportDao.getRotationOrders(evaluationId, setNum, playerMap);
         LinkedHashMap<Integer, PlayerPositionBean> rallyRotationMap = new LinkedHashMap<>();
-
         for (PlayerPositionBean p : list) {
             int pos = 1;
             if (p.pos.get(1).getPosition() == 6) {
@@ -304,9 +175,7 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
             } else if (p.pos.get(6).getPosition() == 6) {
                 pos = 6;
             }
-
             PlayerPositionBean pb = rallyRotationMap.get(pos);
-
             if (pb == null) {
                 p.setRotationCount(1);
                 if (p.getWonby() == 1) {
@@ -338,7 +207,6 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
                 } else {
                     oppSuccessful.put(success, "S-" + setNum + " R-" + i);
                 }
-
                 if (team == HomeOpponent.HOME.getId()) {
                     homeWeakest.put(loss, "S-" + setNum + " R-" + i);
                 } else {
@@ -348,7 +216,6 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
                 pb.setLossPerc(loss);
             }
         }
-
         return rallyRotationMap;
     }
 
@@ -398,15 +265,20 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         tbOverall = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         panRotatonRows.setBackground(new java.awt.Color(0, 0, 0));
 
         panSet1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("SET 1");
 
         lblHome1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblHome1.setText("HOME");
+
+        panHome1.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panHome1Layout = new javax.swing.GroupLayout(panHome1);
         panHome1.setLayout(panHome1Layout);
@@ -420,7 +292,9 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         );
 
         lblOpp1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        lblOpp1.setText("HOME");
+        lblOpp1.setText("OPPONENT");
+
+        panOpp1.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panOpp1Layout = new javax.swing.GroupLayout(panOpp1);
         panOpp1.setLayout(panOpp1Layout);
@@ -439,12 +313,12 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
             panSet1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panHome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panOpp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panSet1Layout.createSequentialGroup()
                 .addGroup(panSet1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(lblHome1)
-                    .addComponent(lblOpp1))
-                .addGap(0, 959, Short.MAX_VALUE))
+                    .addComponent(lblOpp1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panSet1Layout.setVerticalGroup(
             panSet1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,12 +339,13 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         panSet2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("SET 2");
 
         lblHome2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblHome2.setText("HOME");
 
-        panHome2.setBackground(new java.awt.Color(204, 204, 204));
+        panHome2.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panHome2Layout = new javax.swing.GroupLayout(panHome2);
         panHome2.setLayout(panHome2Layout);
@@ -484,7 +359,9 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         );
 
         lblOpp2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        lblOpp2.setText("HOME");
+        lblOpp2.setText("OPPONENT");
+
+        panOpp2.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panOpp2Layout = new javax.swing.GroupLayout(panOpp2);
         panOpp2.setLayout(panOpp2Layout);
@@ -503,12 +380,12 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
             panSet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panHome2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panOpp2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panSet2Layout.createSequentialGroup()
                 .addGroup(panSet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(lblHome2)
-                    .addComponent(lblOpp2))
-                .addGap(0, 0, 0))
+                    .addComponent(lblHome2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOpp2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panSet2Layout.setVerticalGroup(
             panSet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,10 +406,13 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         panSet3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("SET 3");
 
         lblHome3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblHome3.setText("HOME");
+
+        panHome3.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panHome3Layout = new javax.swing.GroupLayout(panHome3);
         panHome3.setLayout(panHome3Layout);
@@ -546,7 +426,9 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         );
 
         lblOpp3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        lblOpp3.setText("HOME");
+        lblOpp3.setText("OPPONENT");
+
+        panOpp3.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panOpp3Layout = new javax.swing.GroupLayout(panOpp3);
         panOpp3.setLayout(panOpp3Layout);
@@ -565,11 +447,11 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
             panSet3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panHome3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panOpp3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panSet3Layout.createSequentialGroup()
                 .addGroup(panSet3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(lblHome3)
-                    .addComponent(lblOpp3))
+                    .addComponent(lblHome3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOpp3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         panSet3Layout.setVerticalGroup(
@@ -591,10 +473,13 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         panSet4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("SET 4");
 
         lblHome4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblHome4.setText("HOME");
+
+        panHome4.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panHome4Layout = new javax.swing.GroupLayout(panHome4);
         panHome4.setLayout(panHome4Layout);
@@ -608,7 +493,9 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         );
 
         lblOpp4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        lblOpp4.setText("HOME");
+        lblOpp4.setText("OPPONENT");
+
+        panOpp4.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panOpp4Layout = new javax.swing.GroupLayout(panOpp4);
         panOpp4.setLayout(panOpp4Layout);
@@ -627,11 +514,11 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
             panSet4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panHome4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panOpp4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panSet4Layout.createSequentialGroup()
                 .addGroup(panSet4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(lblHome4)
-                    .addComponent(lblOpp4))
+                    .addComponent(lblOpp4, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHome4, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         panSet4Layout.setVerticalGroup(
@@ -653,10 +540,13 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         panSet5.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("SET 5");
 
         lblHome5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblHome5.setText("HOME");
+
+        panHome5.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panHome5Layout = new javax.swing.GroupLayout(panHome5);
         panHome5.setLayout(panHome5Layout);
@@ -670,7 +560,9 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         );
 
         lblOpp5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        lblOpp5.setText("HOME");
+        lblOpp5.setText("OPPONENT");
+
+        panOpp5.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panOpp5Layout = new javax.swing.GroupLayout(panOpp5);
         panOpp5.setLayout(panOpp5Layout);
@@ -689,19 +581,19 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
             panSet5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panHome5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panOpp5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panSet5Layout.createSequentialGroup()
                 .addGroup(panSet5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(lblHome5)
-                    .addComponent(lblOpp5))
+                    .addComponent(lblHome5, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOpp5, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         panSet5Layout.setVerticalGroup(
             panSet5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panSet5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(5, 5, 5)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
                 .addComponent(lblHome5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panHome5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -736,6 +628,8 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
                 .addComponent(panSet5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         tbOverall.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
