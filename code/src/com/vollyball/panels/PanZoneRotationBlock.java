@@ -129,10 +129,10 @@ public class PanZoneRotationBlock extends javax.swing.JPanel {
         lblRotationNo.setText("Rotation 1");
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel5.setText("Strong : ");
+        jLabel5.setText("Strong      : ");
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel6.setText("Weak   : ");
+        jLabel6.setText("Weak        : ");
 
         lblStrongPerc.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblStrongPerc.setText("0%");
@@ -141,7 +141,7 @@ public class PanZoneRotationBlock extends javax.swing.JPanel {
         lblFailurePerc1.setText("0%");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel7.setText("Count  : ");
+        jLabel7.setText("Repeated  : ");
 
         lblCount.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCount.setText("0");

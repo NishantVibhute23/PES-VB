@@ -199,7 +199,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Strong : "/>
+            <Property name="text" type="java.lang.String" value="Strong      : "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -207,7 +207,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Weak   : "/>
+            <Property name="text" type="java.lang.String" value="Weak        : "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblStrongPerc">
@@ -231,7 +231,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Count  : "/>
+            <Property name="text" type="java.lang.String" value="Repeated  : "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCount">
