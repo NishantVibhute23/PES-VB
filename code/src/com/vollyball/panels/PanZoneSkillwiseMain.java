@@ -69,9 +69,8 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         listZoneDetails = reportDao.getZoneDetails(Skill.Attack.getId(), SkillsDescCriteria.AttackDig.getId(), evaluationteamIdHome);
         setData(listZoneDetails, digHomeAttack, tblHomeAttack);
 
-        listZoneDetails = reportDao.getZoneDetails(Skill.Attack.getId(), SkillsDescCriteria.AttackDig.getId(), evaluationteamIdHome);
-        setData(listZoneDetails, digHomeAttack, tblHomeAttack);
-
+//        listZoneDetails = reportDao.getZoneDetails(Skill.Attack.getId(), SkillsDescCriteria.AttackDig.getId(), evaluationteamIdHome);
+//        setData(listZoneDetails, digHomeAttack, tblHomeAttack);
     }
 
     public void setData(List<SkillZoneWiseReport> listZoneDetails, JPanel panel, JTable table) {
