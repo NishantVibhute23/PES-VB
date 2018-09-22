@@ -90,6 +90,7 @@ public class TeamDao {
                 Team t = new Team();
                 t.setId(rs.getInt(1));
                 t.setName(rs.getString(2));
+                t.setShortCode(rs.getString(3));
                 teamList.add(t);
 
             }
@@ -243,6 +244,7 @@ public class TeamDao {
                 p.setChestNo(rs.getString(5));
                 p.setTeamId(rs.getInt(6));
                 p.setTeamName(rs.getString(7) + " (" + rs.getString(8) + ")");
+                p.setTeam(rs.getString(7));
             }
 
         } catch (SQLException ex) {

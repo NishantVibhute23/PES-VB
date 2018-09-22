@@ -5,17 +5,218 @@
  */
 package com.vollyball.panels;
 
+import com.vollyball.bean.MatchBean;
+import com.vollyball.bean.Player;
+import com.vollyball.bean.PlayerPositionBean;
+import com.vollyball.controller.Controller;
+import com.vollyball.dao.MatchDao;
+import com.vollyball.dao.ReportDao;
+import com.vollyball.dao.TeamDao;
+import com.vollyball.enums.HomeOpponent;
+import com.vollyball.renderer.TableHeaderRenderer;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.TreeMap;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
 /**
  *
  * @author nishant.vibhute
  */
 public class PanZoneRotationMain extends javax.swing.JPanel {
 
+//    public PanRotationListValue panRotationListValue;
+    public LinkedHashMap<Integer, Player> playerMapOpp = new LinkedHashMap<>();
+    public LinkedHashMap<String, Player> ChestMapOpp = new LinkedHashMap<>();
+    public LinkedHashMap<Integer, Player> playerMap = new LinkedHashMap<>();
+    public LinkedHashMap<String, Player> ChestMap = new LinkedHashMap<>();
+    List<Player> playerList, playerListOpp;
+    TeamDao teamDao = new TeamDao();
+    int evaluationteamIdHome, evaluationteamIdOpp;
+    int team1id, team2id;
+    ReportDao reportDao = new ReportDao();
+    MatchDao matchDao = new MatchDao();
+    int[] positions = {1, 6, 5, 4, 3, 2};
+    String team1Name = "", team2Name = "";
+
+    TreeMap<Integer, String> homeSuccessful = new TreeMap<>(Collections.reverseOrder());
+    TreeMap<Integer, String> oppSuccessful = new TreeMap<>(Collections.reverseOrder());
+    TreeMap<Integer, String> homeWeakest = new TreeMap<>(Collections.reverseOrder());
+    TreeMap<Integer, String> oppWeakest = new TreeMap<>(Collections.reverseOrder());
+    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+
+    List<JPanel> panelHome = new ArrayList<>();
+    List<JPanel> panelOpp = new ArrayList<>();
+
     /**
      * Creates new form PanZoneRotationMain
+     *
+     * @param cb
+     * @param matchId
      */
-    public PanZoneRotationMain() {
+    public PanZoneRotationMain(int cb, int matchId) {
         initComponents();
+        JTableHeader header = tbOverall.getTableHeader();
+        header.setDefaultRenderer(new TableHeaderRenderer(tbOverall));
+        tbOverall.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tbOverall.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tbOverall.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        tbOverall.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        tbOverall.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        MatchBean team = matchDao.getMatchesById(Controller.competitionId, matchId);
+        team1id = team.getTeam1();
+        team2id = team.getTeam2();
+        team1Name = team.getTeam1name();
+        team2Name = team.getTeam2name();
+        evaluationteamIdHome = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
+        evaluationteamIdOpp = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
+        playerList = teamDao.getTeamPlayers(team1id);
+        playerListOpp = teamDao.getTeamPlayers(team2id);
+        panelHome.add(panHome1);
+        panelHome.add(panHome2);
+        panelHome.add(panHome3);
+        panelHome.add(panHome4);
+        panelHome.add(panHome5);
+        panelOpp.add(panOpp1);
+        panelOpp.add(panOpp2);
+        panelOpp.add(panOpp3);
+        panelOpp.add(panOpp4);
+        panelOpp.add(panOpp5);
+
+        for (Player p : playerList) {
+            playerMap.put(p.getId(), p);
+            ChestMap.put(p.getChestNo(), p);
+        }
+
+        for (Player p : playerListOpp) {
+            playerMapOpp.put(p.getId(), p);
+            ChestMapOpp.put(p.getChestNo(), p);
+        }
+
+        lblHome1.setText(team1Name);
+        lblOpp1.setText(team2Name);
+        lblHome2.setText(team1Name);
+        lblOpp2.setText(team2Name);
+        lblHome3.setText(team1Name);
+        lblOpp3.setText(team2Name);
+        lblHome4.setText(team1Name);
+        lblOpp4.setText(team2Name);
+        lblHome5.setText(team1Name);
+        lblOpp5.setText(team2Name);
+
+        for (int i = 0; i <= 4; i++) {
+            LinkedHashMap<Integer, PlayerPositionBean> rallyRotationMapOpp = new LinkedHashMap<>();
+            LinkedHashMap<Integer, PlayerPositionBean> rallyRotationMapHome = new LinkedHashMap<>();
+            rallyRotationMapHome.putAll(setMap(evaluationteamIdHome, i + 1, playerMap, HomeOpponent.HOME.getId()));
+            rallyRotationMapOpp.putAll(setMap(evaluationteamIdOpp, i + 1, playerMapOpp, HomeOpponent.OPPONENT.getId()));
+            if (!rallyRotationMapHome.isEmpty() || !rallyRotationMapOpp.isEmpty()) {
+                panelHome.get(i).setLayout(new GridLayout(1, 6));
+                panelHome.get(i).setBackground(Color.WHITE);
+                int homeRot = 0;
+                for (int pos : positions) {
+                    if (rallyRotationMapHome.get(pos) != null) {
+                        homeRot++;
+                        PanZoneRotationBlock pan = new PanZoneRotationBlock(rallyRotationMapHome.get(pos), homeRot);
+                        panelHome.get(i).add(pan);
+                    }
+                }
+                for (int q = homeRot + 1; q <= 6; q++) {
+                    JPanel pan = new JPanel();
+                    pan.setPreferredSize(new Dimension(276, 128));
+                    panelHome.get(i).add(pan);
+                }
+            }
+            if (!rallyRotationMapOpp.isEmpty()) {
+                panelOpp.get(i).setLayout(new GridLayout(1, 6));
+                panelOpp.get(i).setBackground(Color.WHITE);
+                int oppRot = 0;
+                for (int pos : positions) {
+                    if (rallyRotationMapOpp.get(pos) != null) {
+                        oppRot++;
+                        PanZoneRotationBlock pan = new PanZoneRotationBlock(rallyRotationMapOpp.get(pos), oppRot);
+                        panelOpp.get(i).add(pan);
+                    }
+                }
+                for (int q = oppRot + 1; q <= 6; q++) {
+                    JPanel pan = new JPanel();
+                    pan.setPreferredSize(new Dimension(276, 128));
+                    panelOpp.get(i).add(pan);
+                }
+            }
+        }
+        DefaultTableModel model = (DefaultTableModel) tbOverall.getModel();
+        model.addRow(new Object[]{team1Name, homeSuccessful.values().toArray().length > 1 ? homeSuccessful.values().toArray()[0] : "", homeWeakest.values().toArray().length > 1 ? homeWeakest.values().toArray()[0] : "", homeSuccessful.values().toArray().length > 2 ? homeSuccessful.values().toArray()[1] : "", homeWeakest.values().toArray().length > 1 ? homeWeakest.values().toArray()[1] : ""});
+        model.addRow(new Object[]{team2Name, oppSuccessful.values().toArray().length > 1 ? oppSuccessful.values().toArray()[0] : "", oppWeakest.values().toArray().length > 1 ? oppWeakest.values().toArray()[0] : "", oppSuccessful.values().toArray().length > 2 ? oppSuccessful.values().toArray()[1] : "", oppWeakest.values().toArray().length > 1 ? oppWeakest.values().toArray()[1] : ""});
+    }
+
+    public LinkedHashMap<Integer, PlayerPositionBean> setMap(int evaluationId, int setNum, LinkedHashMap<Integer, Player> playerMap, int team) {
+        List<PlayerPositionBean> list = reportDao.getRotationOrders(evaluationId, setNum, playerMap);
+        LinkedHashMap<Integer, PlayerPositionBean> rallyRotationMap = new LinkedHashMap<>();
+        for (PlayerPositionBean p : list) {
+            int pos = 1;
+            if (p.pos.get(1).getPosition() == 6) {
+                pos = 1;
+            } else if (p.pos.get(2).getPosition() == 6) {
+                pos = 2;
+            } else if (p.pos.get(3).getPosition() == 6) {
+                pos = 3;
+            } else if (p.pos.get(4).getPosition() == 6) {
+                pos = 4;
+            } else if (p.pos.get(5).getPosition() == 6) {
+                pos = 5;
+            } else if (p.pos.get(6).getPosition() == 6) {
+                pos = 6;
+            }
+            PlayerPositionBean pb = rallyRotationMap.get(pos);
+            if (pb == null) {
+                p.setRotationCount(1);
+                if (p.getWonby() == 1) {
+                    p.setTotalSuccess(p.getTotalSuccess() + 1);
+                } else {
+                    p.setTotalLoss(p.getTotalLoss() + 1);
+                }
+                rallyRotationMap.put(pos, p);
+            } else {
+                if (p.getWonby() == 1) {
+                    pb.setTotalSuccess(pb.getTotalSuccess() + 1);
+                } else {
+                    pb.setTotalLoss(pb.getTotalLoss() + 1);
+                }
+                pb.setRotationCount(pb.getRotationCount() + 1);
+            }
+
+        }
+        int i = 0;
+        for (int pos : positions) {
+            PlayerPositionBean pb = rallyRotationMap.get(pos);
+            if (pb != null) {
+                i++;
+                int success = (int) (Math.round((double) pb.getTotalSuccess() / pb.getRotationCount() * 100));
+                int loss = (int) (Math.round((double) pb.getTotalLoss() / pb.getRotationCount() * 100));
+
+                if (team == HomeOpponent.HOME.getId()) {
+                    homeSuccessful.put(success, "S-" + setNum + " R-" + i);
+                } else {
+                    oppSuccessful.put(success, "S-" + setNum + " R-" + i);
+                }
+                if (team == HomeOpponent.HOME.getId()) {
+                    homeWeakest.put(loss, "S-" + setNum + " R-" + i);
+                } else {
+                    oppWeakest.put(loss, "S-" + setNum + " R-" + i);
+                }
+                pb.setSuccessPerc(success);
+                pb.setLossPerc(loss);
+            }
+        }
+        return rallyRotationMap;
     }
 
     /**
@@ -27,899 +228,495 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel5 = new javax.swing.JPanel();
-        panRotation1 = new javax.swing.JPanel();
-        rotation1 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        panRotatonRows = new javax.swing.JPanel();
+        panSet1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        lblHome1 = new javax.swing.JLabel();
+        panHome1 = new javax.swing.JPanel();
+        lblOpp1 = new javax.swing.JLabel();
+        panOpp1 = new javax.swing.JPanel();
+        panSet2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        lblHome2 = new javax.swing.JLabel();
+        panHome2 = new javax.swing.JPanel();
+        lblOpp2 = new javax.swing.JLabel();
+        panOpp2 = new javax.swing.JPanel();
+        panSet3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        lblHome3 = new javax.swing.JLabel();
+        panHome3 = new javax.swing.JPanel();
+        lblOpp3 = new javax.swing.JLabel();
+        panOpp3 = new javax.swing.JPanel();
+        panSet4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        lblHome4 = new javax.swing.JLabel();
+        panHome4 = new javax.swing.JPanel();
+        lblOpp4 = new javax.swing.JLabel();
+        panOpp4 = new javax.swing.JPanel();
+        panSet5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        lblStrongPerc1 = new javax.swing.JLabel();
-        lblFailurePerc1 = new javax.swing.JLabel();
-        panRotation7 = new javax.swing.JPanel();
-        rotation2 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        lblStrongPerc7 = new javax.swing.JLabel();
-        lblFailurePerc7 = new javax.swing.JLabel();
-        panRotation8 = new javax.swing.JPanel();
-        rotation3 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        jPanel19 = new javax.swing.JPanel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        lblStrongPerc8 = new javax.swing.JLabel();
-        lblFailurePerc8 = new javax.swing.JLabel();
-        panRotation9 = new javax.swing.JPanel();
-        rotation4 = new javax.swing.JPanel();
-        jPanel20 = new javax.swing.JPanel();
-        jPanel21 = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        lblStrongPerc9 = new javax.swing.JLabel();
-        lblFailurePerc9 = new javax.swing.JLabel();
-        panRotation10 = new javax.swing.JPanel();
-        rotation5 = new javax.swing.JPanel();
-        jPanel22 = new javax.swing.JPanel();
-        jPanel23 = new javax.swing.JPanel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        lblStrongPerc10 = new javax.swing.JLabel();
-        lblFailurePerc10 = new javax.swing.JLabel();
-        panRotation11 = new javax.swing.JPanel();
-        rotation6 = new javax.swing.JPanel();
-        jPanel24 = new javax.swing.JPanel();
-        jPanel25 = new javax.swing.JPanel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        lblStrongPerc11 = new javax.swing.JLabel();
-        lblFailurePerc11 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
+        lblHome5 = new javax.swing.JLabel();
+        panHome5 = new javax.swing.JPanel();
+        lblOpp5 = new javax.swing.JLabel();
+        panOpp5 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbOverall = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        panRotation1.setBackground(new java.awt.Color(255, 255, 255));
-        panRotation1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panRotatonRows.setBackground(new java.awt.Color(0, 0, 0));
 
-        rotation1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panSet1.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout rotation1Layout = new javax.swing.GroupLayout(rotation1);
-        rotation1.setLayout(rotation1Layout);
-        rotation1Layout.setHorizontalGroup(
-            rotation1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 152, Short.MAX_VALUE)
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("SET 1");
+
+        lblHome1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblHome1.setText("HOME");
+
+        panHome1.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panHome1Layout = new javax.swing.GroupLayout(panHome1);
+        panHome1.setLayout(panHome1Layout);
+        panHome1Layout.setHorizontalGroup(
+            panHome1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        rotation1Layout.setVerticalGroup(
-            rotation1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
+        panHome1Layout.setVerticalGroup(
+            panHome1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
         );
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        lblOpp1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblOpp1.setText("OPPONENT");
+
+        panOpp1.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panOpp1Layout = new javax.swing.GroupLayout(panOpp1);
+        panOpp1.setLayout(panOpp1Layout);
+        panOpp1Layout.setHorizontalGroup(
+            panOpp1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panOpp1Layout.setVerticalGroup(
+            panOpp1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panSet1Layout = new javax.swing.GroupLayout(panSet1);
+        panSet1.setLayout(panSet1Layout);
+        panSet1Layout.setHorizontalGroup(
+            panSet1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panHome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panOpp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panSet1Layout.createSequentialGroup()
+                .addGroup(panSet1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblOpp1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panSet1Layout.setVerticalGroup(
+            panSet1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet1Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel2)
+                .addGap(5, 5, 5)
+                .addComponent(lblHome1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panHome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblOpp1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panOpp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        panSet2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("SET 2");
+
+        lblHome2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblHome2.setText("HOME");
+
+        panHome2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panHome2Layout = new javax.swing.GroupLayout(panHome2);
+        panHome2.setLayout(panHome2Layout);
+        panHome2Layout.setHorizontalGroup(
+            panHome2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panHome2Layout.setVerticalGroup(
+            panHome2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+
+        lblOpp2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblOpp2.setText("OPPONENT");
+
+        panOpp2.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panOpp2Layout = new javax.swing.GroupLayout(panOpp2);
+        panOpp2.setLayout(panOpp2Layout);
+        panOpp2Layout.setHorizontalGroup(
+            panOpp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panOpp2Layout.setVerticalGroup(
+            panOpp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panSet2Layout = new javax.swing.GroupLayout(panSet2);
+        panSet2.setLayout(panSet2Layout);
+        panSet2Layout.setHorizontalGroup(
+            panSet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panHome2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panOpp2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panSet2Layout.createSequentialGroup()
+                .addGroup(panSet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHome2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOpp2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panSet2Layout.setVerticalGroup(
+            panSet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet2Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel3)
+                .addGap(5, 5, 5)
+                .addComponent(lblHome2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panHome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblOpp2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panOpp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        panSet3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("SET 3");
+
+        lblHome3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblHome3.setText("HOME");
+
+        panHome3.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panHome3Layout = new javax.swing.GroupLayout(panHome3);
+        panHome3.setLayout(panHome3Layout);
+        panHome3Layout.setHorizontalGroup(
+            panHome3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panHome3Layout.setVerticalGroup(
+            panHome3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+
+        lblOpp3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblOpp3.setText("OPPONENT");
+
+        panOpp3.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panOpp3Layout = new javax.swing.GroupLayout(panOpp3);
+        panOpp3.setLayout(panOpp3Layout);
+        panOpp3Layout.setHorizontalGroup(
+            panOpp3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panOpp3Layout.setVerticalGroup(
+            panOpp3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 129, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panSet3Layout = new javax.swing.GroupLayout(panSet3);
+        panSet3.setLayout(panSet3Layout);
+        panSet3Layout.setHorizontalGroup(
+            panSet3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panHome3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panOpp3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panSet3Layout.createSequentialGroup()
+                .addGroup(panSet3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHome3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOpp3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panSet3Layout.setVerticalGroup(
+            panSet3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet3Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel4)
+                .addGap(5, 5, 5)
+                .addComponent(lblHome3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panHome3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblOpp3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panOpp3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        panSet4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("SET 4");
+
+        lblHome4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblHome4.setText("HOME");
+
+        panHome4.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panHome4Layout = new javax.swing.GroupLayout(panHome4);
+        panHome4.setLayout(panHome4Layout);
+        panHome4Layout.setHorizontalGroup(
+            panHome4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panHome4Layout.setVerticalGroup(
+            panHome4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+
+        lblOpp4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblOpp4.setText("OPPONENT");
+
+        panOpp4.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panOpp4Layout = new javax.swing.GroupLayout(panOpp4);
+        panOpp4.setLayout(panOpp4Layout);
+        panOpp4Layout.setHorizontalGroup(
+            panOpp4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panOpp4Layout.setVerticalGroup(
+            panOpp4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panSet4Layout = new javax.swing.GroupLayout(panSet4);
+        panSet4.setLayout(panSet4Layout);
+        panSet4Layout.setHorizontalGroup(
+            panSet4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panHome4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panOpp4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panSet4Layout.createSequentialGroup()
+                .addGroup(panSet4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblOpp4, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHome4, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panSet4Layout.setVerticalGroup(
+            panSet4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet4Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel5)
+                .addGap(5, 5, 5)
+                .addComponent(lblHome4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panHome4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblOpp4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panOpp4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        panSet5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("SET 5");
+
+        lblHome5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblHome5.setText("HOME");
+
+        panHome5.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panHome5Layout = new javax.swing.GroupLayout(panHome5);
+        panHome5.setLayout(panHome5Layout);
+        panHome5Layout.setHorizontalGroup(
+            panHome5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panHome5Layout.setVerticalGroup(
+            panHome5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+
+        lblOpp5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblOpp5.setText("OPPONENT");
+
+        panOpp5.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panOpp5Layout = new javax.swing.GroupLayout(panOpp5);
+        panOpp5.setLayout(panOpp5Layout);
+        panOpp5Layout.setHorizontalGroup(
+            panOpp5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panOpp5Layout.setVerticalGroup(
+            panOpp5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panSet5Layout = new javax.swing.GroupLayout(panSet5);
+        panSet5.setLayout(panSet5Layout);
+        panSet5Layout.setHorizontalGroup(
+            panSet5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panHome5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panOpp5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panSet5Layout.createSequentialGroup()
+                .addGroup(panSet5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHome5, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOpp5, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panSet5Layout.setVerticalGroup(
+            panSet5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet5Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel6)
+                .addGap(5, 5, 5)
+                .addComponent(lblHome5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panHome5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblOpp5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panOpp5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        javax.swing.GroupLayout panRotatonRowsLayout = new javax.swing.GroupLayout(panRotatonRows);
+        panRotatonRows.setLayout(panRotatonRowsLayout);
+        panRotatonRowsLayout.setHorizontalGroup(
+            panRotatonRowsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panSet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panSet3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panSet2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panSet4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panSet5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panRotatonRowsLayout.setVerticalGroup(
+            panRotatonRowsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panRotatonRowsLayout.createSequentialGroup()
+                .addComponent(panSet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(panSet2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(panSet3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(panSet4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(panSet5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        tbOverall.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "TEAM", "STRONGEST", "WEAKEST", "FAVOURABLE", "NON FAVOURABLE"
+            }
+        ));
+        tbOverall.setRowHeight(30);
+        jScrollPane1.setViewportView(tbOverall);
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel1.setText("OVERALL");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel6.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel2.setText("Rotation 1");
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setText("Strong : ");
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setText("Weak  : ");
-
-        lblStrongPerc1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblStrongPerc1.setText("0%");
-
-        lblFailurePerc1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblFailurePerc1.setText("0%");
-
-        javax.swing.GroupLayout panRotation1Layout = new javax.swing.GroupLayout(panRotation1);
-        panRotation1.setLayout(panRotation1Layout);
-        panRotation1Layout.setHorizontalGroup(
-            panRotation1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(panRotation1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panRotation1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(panRotation1Layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(lblFailurePerc1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panRotation1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(lblStrongPerc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel2)
-                    .addComponent(rotation1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5))
-        );
-        panRotation1Layout.setVerticalGroup(
-            panRotation1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panRotation1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(lblStrongPerc1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panRotation1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(lblFailurePerc1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(rotation1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
-        );
-
-        panRotation7.setBackground(new java.awt.Color(153, 0, 51));
-        panRotation7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        rotation2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout rotation2Layout = new javax.swing.GroupLayout(rotation2);
-        rotation2.setLayout(rotation2Layout);
-        rotation2Layout.setHorizontalGroup(
-            rotation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 152, Short.MAX_VALUE)
-        );
-        rotation2Layout.setVerticalGroup(
-            rotation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
-        );
-
-        jPanel16.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel17.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel17.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jLabel22.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel22.setText("Rotation 2");
-
-        jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel23.setText("Strong : ");
-
-        jLabel24.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel24.setText("Weak  : ");
-
-        lblStrongPerc7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblStrongPerc7.setText("0%");
-
-        lblFailurePerc7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblFailurePerc7.setText("0%");
-
-        javax.swing.GroupLayout panRotation7Layout = new javax.swing.GroupLayout(panRotation7);
-        panRotation7.setLayout(panRotation7Layout);
-        panRotation7Layout.setHorizontalGroup(
-            panRotation7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation7Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(panRotation7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panRotation7Layout.createSequentialGroup()
-                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panRotation7Layout.createSequentialGroup()
-                        .addGroup(panRotation7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panRotation7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(panRotation7Layout.createSequentialGroup()
-                                    .addComponent(jLabel24)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblFailurePerc7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panRotation7Layout.createSequentialGroup()
-                                    .addComponent(jLabel23)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblStrongPerc7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jLabel22)
-                            .addComponent(rotation2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5))))
-        );
-        panRotation7Layout.setVerticalGroup(
-            panRotation7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation7Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panRotation7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(lblStrongPerc7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panRotation7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(lblFailurePerc7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(rotation2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
-        );
-
-        panRotation8.setBackground(new java.awt.Color(255, 255, 255));
-        panRotation8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        rotation3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout rotation3Layout = new javax.swing.GroupLayout(rotation3);
-        rotation3.setLayout(rotation3Layout);
-        rotation3Layout.setHorizontalGroup(
-            rotation3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 152, Short.MAX_VALUE)
-        );
-        rotation3Layout.setVerticalGroup(
-            rotation3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
-        );
-
-        jPanel18.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel19.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel19.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jLabel25.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel25.setText("Rotation 3");
-
-        jLabel26.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel26.setText("Strong : ");
-
-        jLabel27.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel27.setText("Weak  : ");
-
-        lblStrongPerc8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblStrongPerc8.setText("0%");
-
-        lblFailurePerc8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblFailurePerc8.setText("0%");
-
-        javax.swing.GroupLayout panRotation8Layout = new javax.swing.GroupLayout(panRotation8);
-        panRotation8.setLayout(panRotation8Layout);
-        panRotation8Layout.setHorizontalGroup(
-            panRotation8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation8Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(panRotation8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panRotation8Layout.createSequentialGroup()
-                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panRotation8Layout.createSequentialGroup()
-                        .addGroup(panRotation8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panRotation8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(panRotation8Layout.createSequentialGroup()
-                                    .addComponent(jLabel27)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblFailurePerc8, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panRotation8Layout.createSequentialGroup()
-                                    .addComponent(jLabel26)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblStrongPerc8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jLabel25)
-                            .addComponent(rotation3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5))))
-        );
-        panRotation8Layout.setVerticalGroup(
-            panRotation8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation8Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel25)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panRotation8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel26)
-                    .addComponent(lblStrongPerc8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panRotation8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27)
-                    .addComponent(lblFailurePerc8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(rotation3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
-        );
-
-        panRotation9.setBackground(new java.awt.Color(51, 153, 0));
-        panRotation9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        rotation4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout rotation4Layout = new javax.swing.GroupLayout(rotation4);
-        rotation4.setLayout(rotation4Layout);
-        rotation4Layout.setHorizontalGroup(
-            rotation4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 152, Short.MAX_VALUE)
-        );
-        rotation4Layout.setVerticalGroup(
-            rotation4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
-        );
-
-        jPanel20.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel21.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel21.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
-        jPanel21.setLayout(jPanel21Layout);
-        jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
-        );
-        jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jLabel28.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel28.setText("Rotation 4");
-
-        jLabel29.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel29.setText("Strong : ");
-
-        jLabel30.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel30.setText("Weak  : ");
-
-        lblStrongPerc9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblStrongPerc9.setText("0%");
-
-        lblFailurePerc9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblFailurePerc9.setText("0%");
-
-        javax.swing.GroupLayout panRotation9Layout = new javax.swing.GroupLayout(panRotation9);
-        panRotation9.setLayout(panRotation9Layout);
-        panRotation9Layout.setHorizontalGroup(
-            panRotation9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation9Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(panRotation9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panRotation9Layout.createSequentialGroup()
-                        .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panRotation9Layout.createSequentialGroup()
-                        .addGroup(panRotation9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panRotation9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(panRotation9Layout.createSequentialGroup()
-                                    .addComponent(jLabel30)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblFailurePerc9, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panRotation9Layout.createSequentialGroup()
-                                    .addComponent(jLabel29)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblStrongPerc9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jLabel28)
-                            .addComponent(rotation4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5))))
-        );
-        panRotation9Layout.setVerticalGroup(
-            panRotation9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation9Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel28)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panRotation9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
-                    .addComponent(lblStrongPerc9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panRotation9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel30)
-                    .addComponent(lblFailurePerc9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(rotation4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
-        );
-
-        panRotation10.setBackground(new java.awt.Color(255, 255, 255));
-        panRotation10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        rotation5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout rotation5Layout = new javax.swing.GroupLayout(rotation5);
-        rotation5.setLayout(rotation5Layout);
-        rotation5Layout.setHorizontalGroup(
-            rotation5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 152, Short.MAX_VALUE)
-        );
-        rotation5Layout.setVerticalGroup(
-            rotation5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
-        );
-
-        jPanel22.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-
-        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
-        jPanel22.setLayout(jPanel22Layout);
-        jPanel22Layout.setHorizontalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel22Layout.setVerticalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel23.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel23.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
-        jPanel23.setLayout(jPanel23Layout);
-        jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
-        );
-        jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jLabel31.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel31.setText("Rotation 5");
-
-        jLabel32.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel32.setText("Strong : ");
-
-        jLabel33.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel33.setText("Weak  : ");
-
-        lblStrongPerc10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblStrongPerc10.setText("0%");
-
-        lblFailurePerc10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblFailurePerc10.setText("0%");
-
-        javax.swing.GroupLayout panRotation10Layout = new javax.swing.GroupLayout(panRotation10);
-        panRotation10.setLayout(panRotation10Layout);
-        panRotation10Layout.setHorizontalGroup(
-            panRotation10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation10Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(panRotation10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panRotation10Layout.createSequentialGroup()
-                        .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panRotation10Layout.createSequentialGroup()
-                        .addGroup(panRotation10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panRotation10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(panRotation10Layout.createSequentialGroup()
-                                    .addComponent(jLabel33)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblFailurePerc10, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panRotation10Layout.createSequentialGroup()
-                                    .addComponent(jLabel32)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblStrongPerc10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jLabel31)
-                            .addComponent(rotation5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5))))
-        );
-        panRotation10Layout.setVerticalGroup(
-            panRotation10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation10Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel31)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panRotation10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(lblStrongPerc10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panRotation10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel33)
-                    .addComponent(lblFailurePerc10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(rotation5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
-        );
-
-        panRotation11.setBackground(new java.awt.Color(255, 255, 255));
-        panRotation11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        rotation6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout rotation6Layout = new javax.swing.GroupLayout(rotation6);
-        rotation6.setLayout(rotation6Layout);
-        rotation6Layout.setHorizontalGroup(
-            rotation6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 152, Short.MAX_VALUE)
-        );
-        rotation6Layout.setVerticalGroup(
-            rotation6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
-        );
-
-        jPanel24.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-
-        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
-        jPanel24.setLayout(jPanel24Layout);
-        jPanel24Layout.setHorizontalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel24Layout.setVerticalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel25.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel25.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
-        jPanel25.setLayout(jPanel25Layout);
-        jPanel25Layout.setHorizontalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
-        );
-        jPanel25Layout.setVerticalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jLabel34.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel34.setText("Rotation 6");
-
-        jLabel35.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel35.setText("Strong : ");
-
-        jLabel36.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel36.setText("Weak  : ");
-
-        lblStrongPerc11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblStrongPerc11.setText("0%");
-
-        lblFailurePerc11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblFailurePerc11.setText("0%");
-
-        javax.swing.GroupLayout panRotation11Layout = new javax.swing.GroupLayout(panRotation11);
-        panRotation11.setLayout(panRotation11Layout);
-        panRotation11Layout.setHorizontalGroup(
-            panRotation11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation11Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(panRotation11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panRotation11Layout.createSequentialGroup()
-                        .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panRotation11Layout.createSequentialGroup()
-                        .addGroup(panRotation11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panRotation11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(panRotation11Layout.createSequentialGroup()
-                                    .addComponent(jLabel36)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblFailurePerc11, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panRotation11Layout.createSequentialGroup()
-                                    .addComponent(jLabel35)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblStrongPerc11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jLabel34)
-                            .addComponent(rotation6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5))))
-        );
-        panRotation11Layout.setVerticalGroup(
-            panRotation11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRotation11Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel34)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panRotation11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(lblStrongPerc11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panRotation11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel36)
-                    .addComponent(lblFailurePerc11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(rotation6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
-        );
-
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel7.setText("Rotations");
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel8.setBackground(new java.awt.Color(51, 153, 0));
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        jPanel14.setBackground(new java.awt.Color(153, 0, 51));
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel1.setText("Strong Rotation");
-
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel8.setText("Weak Rotation");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(panRotation1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panRotation7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panRotation8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panRotation9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panRotation10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panRotation11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panRotation11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panRotation1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panRotation7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panRotation8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panRotation9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panRotation10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1016, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addComponent(panRotatonRows, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 738, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(384, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panRotatonRows, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JLabel lblFailurePerc1;
-    private javax.swing.JLabel lblFailurePerc10;
-    private javax.swing.JLabel lblFailurePerc11;
-    private javax.swing.JLabel lblFailurePerc7;
-    private javax.swing.JLabel lblFailurePerc8;
-    private javax.swing.JLabel lblFailurePerc9;
-    private javax.swing.JLabel lblStrongPerc1;
-    private javax.swing.JLabel lblStrongPerc10;
-    private javax.swing.JLabel lblStrongPerc11;
-    private javax.swing.JLabel lblStrongPerc7;
-    private javax.swing.JLabel lblStrongPerc8;
-    private javax.swing.JLabel lblStrongPerc9;
-    private javax.swing.JPanel panRotation1;
-    private javax.swing.JPanel panRotation10;
-    private javax.swing.JPanel panRotation11;
-    private javax.swing.JPanel panRotation7;
-    private javax.swing.JPanel panRotation8;
-    private javax.swing.JPanel panRotation9;
-    private javax.swing.JPanel rotation1;
-    private javax.swing.JPanel rotation2;
-    private javax.swing.JPanel rotation3;
-    private javax.swing.JPanel rotation4;
-    private javax.swing.JPanel rotation5;
-    private javax.swing.JPanel rotation6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblHome1;
+    private javax.swing.JLabel lblHome2;
+    private javax.swing.JLabel lblHome3;
+    private javax.swing.JLabel lblHome4;
+    private javax.swing.JLabel lblHome5;
+    private javax.swing.JLabel lblOpp1;
+    private javax.swing.JLabel lblOpp2;
+    private javax.swing.JLabel lblOpp3;
+    private javax.swing.JLabel lblOpp4;
+    private javax.swing.JLabel lblOpp5;
+    private javax.swing.JPanel panHome1;
+    private javax.swing.JPanel panHome2;
+    private javax.swing.JPanel panHome3;
+    private javax.swing.JPanel panHome4;
+    private javax.swing.JPanel panHome5;
+    private javax.swing.JPanel panOpp1;
+    private javax.swing.JPanel panOpp2;
+    private javax.swing.JPanel panOpp3;
+    private javax.swing.JPanel panOpp4;
+    private javax.swing.JPanel panOpp5;
+    private javax.swing.JPanel panRotatonRows;
+    private javax.swing.JPanel panSet1;
+    private javax.swing.JPanel panSet2;
+    private javax.swing.JPanel panSet3;
+    private javax.swing.JPanel panSet4;
+    private javax.swing.JPanel panSet5;
+    private javax.swing.JTable tbOverall;
     // End of variables declaration//GEN-END:variables
 }

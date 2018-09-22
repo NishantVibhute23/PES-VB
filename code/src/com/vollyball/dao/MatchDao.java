@@ -199,6 +199,7 @@ public class MatchDao {
     public int getMatchSetId(int evaluationTeamId, int setnum) {
         int mid = 0;
         try {
+            this.con = db.getConnection();
             PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.latest.matchset.id"));
             ps3.setInt(1, evaluationTeamId);
             ps3.setInt(2, setnum);

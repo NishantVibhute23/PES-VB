@@ -21,32 +21,32 @@ import java.awt.geom.Ellipse2D;
  */
 public class PanZoneRotationPanel extends javax.swing.JPanel {
 
-    int zone;
+    Player player;
 
     /**
      * Creates new form PanZoneSkillwiseReport
      */
-    public PanZoneRotationPanel(int zone) {
+    public PanZoneRotationPanel(Player player) {
         initComponents();
-        this.zone = zone;
+        this.player = player;
         repaint();
     }
 
+    @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         int centerX = 25, centerY = 25;
         int ovalWidth = 30, ovalHeight = 30;
 
-        Player player = new Player();
-        player.setChestNo("11");
-        player.setPosition(3);
-
+//        Player player = new Player();
+//        player.setChestNo("11");
+//        player.setPosition(3);
         String text = player.getChestNo();
         // Draw oval
         GradientPaint redtowhite = new GradientPaint(centerX - ovalWidth / 2, centerY - ovalHeight / 2, PlayerPosition.getNameById(player.getPosition()).getColor(), centerX - ovalWidth / 2 + 60, centerY - ovalHeight / 2, Color.white);
         g2.setPaint(redtowhite);
         g2.fill(new Ellipse2D.Double(centerX - ovalWidth / 2, centerY - ovalHeight / 2, 30, 30));
-        g2.setPaint(Color.black);
+        g2.setPaint(Color.WHITE);
 
         // Draw centered text
         FontMetrics fm = g.getFontMetrics();

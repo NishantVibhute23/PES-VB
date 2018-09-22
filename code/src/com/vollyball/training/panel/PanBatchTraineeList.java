@@ -5,19 +5,29 @@
  */
 package com.vollyball.training.panel;
 
+import com.vollyball.bean.CompetitionBean;
+import com.vollyball.controller.Controller;
+import com.vollyball.dialog.CreateCompetitionDialog;
+import com.vollyball.panels.PanCompetitionReportHome;
+import com.vollyball.renderer.EditButtonRenderer;
 import com.vollyball.renderer.GroupableTableHeader;
 import com.vollyball.renderer.TableHeaderRenderer;
 import com.vollyball.training.bean.Trainee;
 import com.vollyball.training.dao.BatchDao;
+import com.vollyball.training.dialog.CreateTraineeDailog;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -36,6 +46,7 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
     DefaultTableModel model;
     JTable tbReport;
     TableRowSorter<TableModel> sorter;
+    LinkedHashMap<String, Trainee> traineeMap = new LinkedHashMap<String, Trainee>();
 
     /**
      * Creates new form PanBatchTraineeListl
@@ -48,12 +59,16 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
     }
 
     public void setRow(int batchId) {
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
         List<Trainee> traineeList = new ArrayList<>();
         BatchDao bd = new BatchDao();
         traineeList = bd.getTraineeList(batchId);
         int i = 0;
         for (Trainee t : traineeList) {
-            Object[] row = {i + 1, t.getName()};
+            traineeMap.put(t.getName(), t);
+            Object[] row = {i + 1, t.getName(), new JPanel()};
             model.addRow(row);
             i++;
         }
@@ -67,9 +82,8 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
             }
         };
 
-
         model.setDataVector(new Object[][]{},
-                new Object[]{"SR No.", "Trainee Name"});
+                new Object[]{"SR No.", "Trainee Name", "Action"});
 
         tbReport = new JTable(model) {
             protected JTableHeader createDefaultTableHeader() {
@@ -94,14 +108,37 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         tbReport.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        tbReport.getColumnModel().getColumn(0).setWidth(2);
+        tbReport.getColumnModel().getColumn(0).setWidth(3);
 
         tbReport.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        EditButtonRenderer editButtonRenderer = new EditButtonRenderer();
+        tbReport.getColumnModel().getColumn(2).setCellRenderer(editButtonRenderer);
 
         Color ivory = new Color(255, 255, 255);
         tbReport.setOpaque(true);
         tbReport.setFillsViewportHeight(true);
         tbReport.setBackground(ivory);
+        tbReport.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = tbReport.getSelectedRow();
+                    int selectedCol = tbReport.getSelectedColumn();
+
+                    if (selectedRow >= 0) {
+                        if (selectedCol == 2) {
+                            Trainee trainee = traineeMap.get(tbReport.getValueAt(selectedRow, 1));
+                            Controller.createTraineeDailog = new CreateTraineeDailog();
+                            Controller.createTraineeDailog.setTrainee(trainee);
+                            Controller.createTraineeDailog.init();
+                            Controller.createTraineeDailog.show();
+                        }
+                    }
+                    tbReport.clearSelection();
+                }
+            }
+        });
 
         tbReport.setRowHeight(30);
         tbReport.setSelectionBackground(Color.WHITE);
@@ -110,7 +147,7 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
         resizeColumns();
         panReport.add(scroll, BorderLayout.CENTER);
     }
-    float[] columnWidthPercentage = {10.0f, 50.0f};
+    float[] columnWidthPercentage = {10.0f, 40.0f, 10.0f};
 
     private void resizeColumns() {
         int tW = tbReport.getPreferredSize().width;
@@ -123,7 +160,7 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
             column.setPreferredWidth(pWidth);
         }
     }
-    
+
     private void newFilter() {
         RowFilter<TableModel, Object> rf = null;
         //If current expression doesn't parse, don't update.
@@ -235,15 +272,17 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
 
     private void lblNewTeamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewTeamMouseClicked
         // TODO add your handling code here:
-//        Controller.teamDialog = new CreateTeamDialog();
-//        Controller.teamDialog.init();
-//        Controller.teamDialog.show();
+        Controller.createTraineeDailog = new CreateTraineeDailog();
+        Controller.createTraineeDailog.setValues(batchId);
+        Controller.createTraineeDailog.init();
+        Controller.createTraineeDailog.show();
+
 
     }//GEN-LAST:event_lblNewTeamMouseClicked
 
     private void txtFilterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterKeyTyped
         // TODO add your handling code here:
-         newFilter();
+        newFilter();
     }//GEN-LAST:event_txtFilterKeyTyped
 
 

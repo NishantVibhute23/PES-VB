@@ -1659,7 +1659,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         panDesc1.setLayout(panDesc1Layout);
         panDesc1Layout.setHorizontalGroup(
             panDesc1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 219, Short.MAX_VALUE)
         );
         panDesc1Layout.setVerticalGroup(
             panDesc1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1672,7 +1672,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         panDesc2.setLayout(panDesc2Layout);
         panDesc2Layout.setHorizontalGroup(
             panDesc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 220, Short.MAX_VALUE)
         );
         panDesc2Layout.setVerticalGroup(
             panDesc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1684,9 +1684,9 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(panDesc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panDesc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panDesc2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panDesc2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

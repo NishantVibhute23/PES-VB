@@ -18,6 +18,7 @@ public class Player {
     int teamId;
     int position;
     String teamName;
+    String team;
 
     public String getTeamName() {
         return teamName;
@@ -73,6 +74,14 @@ public class Player {
 
     public void setTeamId(int teamId) {
         this.teamId = teamId;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
     }
 
 }

@@ -24,13 +24,8 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="panMatchReport1" max="32767" attributes="0"/>
-                  <Component id="jPanel2" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="panMatchReport1" max="32767" attributes="0"/>
+          <Component id="jPanel2" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -64,9 +59,9 @@
                       <Component id="jPanel1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="483" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="481" max="32767" attributes="0"/>
               </Group>
-              <Component id="jPanel20" alignment="0" min="-2" pref="1000" max="-2" attributes="0"/>
+              <Component id="jPanel20" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -212,20 +207,15 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel41" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPanel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPanel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel17" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jPanel10" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jPanel11" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
@@ -258,9 +248,9 @@
                           <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                           <Component id="jPanel16" max="32767" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="jPanel45" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                          <Component id="jPanel45" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                           <Component id="jPanel46" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                           <Component id="jPanel19" min="-2" max="-2" attributes="0"/>
@@ -299,47 +289,47 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField20" alignment="0" pref="50" max="32767" attributes="0"/>
+                                  <Component id="jTextField20" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1sstotalSer" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2sstotalSer" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField25" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="t1ssr1Ser" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="t1ssr1Ser" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2ssr1Ser" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField27" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="jTextField27" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1ssr2Ser" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2ssr2Ser" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1ssr3Ser" max="32767" attributes="0"/>
-                                  <Component id="jTextField33" pref="26" max="32767" attributes="0"/>
+                                  <Component id="jTextField33" max="32767" attributes="0"/>
                                   <Component id="t2ssr3Ser" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2ssr4Ser" pref="21" max="32767" attributes="0"/>
+                                  <Component id="t2ssr4Ser" max="32767" attributes="0"/>
                                   <Component id="jTextField57" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1ssr4Ser" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2ssr5Ser" pref="24" max="32767" attributes="0"/>
+                                  <Component id="t2ssr5Ser" max="32767" attributes="0"/>
                                   <Component id="t1ssr5Ser" max="32767" attributes="0"/>
                                   <Component id="jTextField58" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t2ssSuccessSerRate" max="32767" attributes="0"/>
-                                  <Component id="jTextField30" alignment="1" pref="51" max="32767" attributes="0"/>
+                                  <Component id="jTextField30" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1ssSuccessSerRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1ssErrorSerRate" max="32767" attributes="0"/>
-                                  <Component id="jTextField122" pref="43" max="32767" attributes="0"/>
+                                  <Component id="jTextField122" max="32767" attributes="0"/>
                                   <Component id="t2ssErrorSerRate" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -852,11 +842,9 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="team1SSName" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="team2SSName" max="32767" attributes="0"/>
-                              <Component id="jTextField1" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="team1SSName" alignment="1" max="32767" attributes="0"/>
+                          <Component id="team2SSName" pref="170" max="32767" attributes="0"/>
+                          <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -928,37 +916,35 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="t1sstotalAttk" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="t2sstotalAttk" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="jTextField31" min="-2" max="-2" attributes="0"/>
+                                  <Component id="t1sstotalAttk" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="t2sstotalAttk" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextField31" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField69" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="t1ssr1Attk" alignment="0" pref="25" max="32767" attributes="0"/>
+                                  <Component id="t1ssr1Attk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2ssr1Attk" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField71" alignment="0" pref="25" max="32767" attributes="0"/>
+                                  <Component id="jTextField71" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1ssr2Attk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2ssr2Attk" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1ssr3Attk" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField79" alignment="0" pref="30" max="32767" attributes="0"/>
+                                  <Component id="jTextField79" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2ssr3Attk" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2ssr4Attk" alignment="0" pref="25" max="32767" attributes="0"/>
+                                  <Component id="t2ssr4Attk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField83" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1ssr4Attk" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2ssr5Attk" alignment="0" pref="30" max="32767" attributes="0"/>
+                                  <Component id="t2ssr5Attk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1ssr5Attk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField84" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -969,7 +955,7 @@
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1ssErrorAttkRate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField242" alignment="0" pref="47" max="32767" attributes="0"/>
+                                  <Component id="jTextField242" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2ssErrorAttkRate" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -1394,47 +1380,47 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField88" alignment="0" pref="50" max="32767" attributes="0"/>
+                                  <Component id="jTextField88" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1sstotalBlk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2sstotalBlk" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField93" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="t1ssr1Blk" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="t1ssr1Blk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2ssr1Blk" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField95" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="jTextField95" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1ssr2Blk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2ssr2Blk" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1ssr3Blk" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField100" alignment="0" pref="26" max="32767" attributes="0"/>
+                                  <Component id="jTextField100" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2ssr3Blk" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2ssr4Blk" alignment="0" pref="24" max="32767" attributes="0"/>
+                                  <Component id="t2ssr4Blk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField104" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1ssr4Blk" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2ssr5Blk" alignment="0" pref="22" max="32767" attributes="0"/>
+                                  <Component id="t2ssr5Blk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1ssr5Blk" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField105" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t2ssSuccessBlkRate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField98" alignment="1" pref="51" max="32767" attributes="0"/>
+                                  <Component id="jTextField98" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1ssSuccessBlkRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1ssErrorBlkRate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField245" alignment="0" pref="43" max="32767" attributes="0"/>
+                                  <Component id="jTextField245" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2ssErrorBlkRate" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -1866,9 +1852,9 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="jLabel13" pref="1445" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
+                          <Component id="jLabel13" min="-2" pref="824" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1954,9 +1940,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="jPanel47" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="jPanel49" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                           <Component id="jPanel50" max="32767" attributes="0"/>
@@ -1995,53 +1981,53 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField109" alignment="0" pref="50" max="32767" attributes="0"/>
+                                  <Component id="jTextField109" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1nsstotalRep" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nsstotalRep" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField114" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="t1nssr1Rep" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="t1nssr1Rep" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssr1Rep" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField116" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="jTextField116" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1nssr2Rep" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssr2Rep" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1nssr3Rep" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField121" alignment="0" pref="26" max="32767" attributes="0"/>
+                                  <Component id="jTextField121" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssr3Rep" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2nssr4Rep" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="t2nssr4Rep" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField254" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1nssr4Rep" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2nssr5Rep" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="t2nssr5Rep" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1nssr5Rep" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField255" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t2nssSuccessRepRate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField119" alignment="1" pref="51" max="32767" attributes="0"/>
+                                  <Component id="jTextField119" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1nssSuccessRepRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1nssErrorRepRate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField249" alignment="0" pref="43" max="32767" attributes="0"/>
+                                  <Component id="jTextField249" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssErrorRepRate" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jTextField10" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextField10" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -2461,10 +2447,10 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextField11" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextField259" alignment="0" pref="55" max="32767" attributes="0"/>
                           <Component id="t1nssTF" alignment="1" max="32767" attributes="0"/>
                           <Component id="t2nssTF" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextField11" alignment="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -2551,11 +2537,9 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="team1NSSName" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                              <Component id="team2NSSName" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextField14" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="team1NSSName" alignment="1" max="32767" attributes="0"/>
+                          <Component id="team2NSSName" alignment="0" pref="170" max="32767" attributes="0"/>
+                          <Component id="jTextField14" alignment="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -2628,46 +2612,46 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField263" alignment="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="t1nsstotalSet" alignment="0" pref="26" max="32767" attributes="0"/>
+                                  <Component id="t1nsstotalSet" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nsstotalSet" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField268" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="t1nssr1Set" alignment="0" pref="26" max="32767" attributes="0"/>
+                                  <Component id="t1nssr1Set" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssr1Set" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField270" alignment="0" pref="26" max="32767" attributes="0"/>
+                                  <Component id="jTextField270" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1nssr2Set" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssr2Set" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1nssr3Set" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField275" alignment="0" pref="31" max="32767" attributes="0"/>
+                                  <Component id="jTextField275" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssr3Set" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2nssr4Set" alignment="0" pref="26" max="32767" attributes="0"/>
+                                  <Component id="t2nssr4Set" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField282" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1nssr4Set" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2nssr5Set" alignment="0" pref="29" max="32767" attributes="0"/>
+                                  <Component id="t2nssr5Set" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1nssr5Set" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField283" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t2nssSuccessSetRate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField273" alignment="1" pref="42" max="32767" attributes="0"/>
+                                  <Component id="jTextField273" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1nssSuccessSetRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1nssErrorSetRate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField277" alignment="0" pref="48" max="32767" attributes="0"/>
+                                  <Component id="jTextField277" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssErrorSetRate" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -3092,47 +3076,47 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField288" alignment="0" pref="50" max="32767" attributes="0"/>
+                                  <Component id="jTextField288" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1nsstotalDef" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nsstotalDef" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField293" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="t1nssr1Def" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="t1nssr1Def" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssr1Def" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField295" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="jTextField295" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1nssr2Def" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssr2Def" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1nssr3Def" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField300" alignment="0" pref="26" max="32767" attributes="0"/>
+                                  <Component id="jTextField300" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssr3Def" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2nssr4Def" alignment="0" pref="21" max="32767" attributes="0"/>
+                                  <Component id="t2nssr4Def" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField307" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1nssr4Def" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="t2nssr5Def" alignment="0" pref="22" max="32767" attributes="0"/>
+                                  <Component id="t2nssr5Def" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t1nssr5Def" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField308" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t2nssSuccessDefRate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField298" alignment="1" pref="51" max="32767" attributes="0"/>
+                                  <Component id="jTextField298" alignment="1" max="32767" attributes="0"/>
                                   <Component id="t1nssSuccessDefRate" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="t1nssErrorDefRate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField302" alignment="0" pref="43" max="32767" attributes="0"/>
+                                  <Component id="jTextField302" alignment="0" max="32767" attributes="0"/>
                                   <Component id="t2nssErrorDefRate" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>

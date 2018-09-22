@@ -147,32 +147,32 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             latestPositionMapOpp.put(1, latestPositionMapOpp.get(2));
             latestPositionMapOpp.put(2, latestPositionMapOpp.get(3));
             latestPositionMapOpp.put(3, latestPositionMapOpp.get(4));
-//            Player playerP = null;
-//            int i = 0;
-//            if (latestPositionMap.get(5).getChestNo().equals(Controller.panMatchSet.initialPositionMap.get(7).getChestNo())) {
-//                for (Map.Entry<Integer, Player> entrySub : Controller.panMatchSet.substituePositionMap.entrySet()) {
-//                    boolean found = false;
-//                    Integer integer = entrySub.getKey();
-//                    Player player = entrySub.getValue();
-//                    if (integer != 7) {
-//                        for (Map.Entry<Integer, Player> entryRally : latestPositionMap.entrySet()) {
-//                            if (player.getChestNo().equals(entryRally.getValue().getChestNo())) {
-//                                found = true;
-//                                break;
-//                            }
-//                        }
-//                        if (!found) {
-//                            playerP = player;
-//                        }
-//                    }
-//                    i++;
-//                }
-//                if (playerP != null) {
-//                    latestPositionMap.put(4, playerP);
-//                }
-//            } else {
-//                latestPositionMap.put(4, latestPositionMap.get(5));
-//            }
+            Player playerP = null;
+            int i = 0;
+            if (latestPositionMapOpp.get(5).getChestNo().equals(Controller.panMatchSet.initialPositionMapOpp.get(7).getChestNo())) {
+                for (Map.Entry<Integer, Player> entrySub : Controller.panMatchSet.initialPositionMapOpp.entrySet()) {
+                    boolean found = false;
+                    Integer integer = entrySub.getKey();
+                    Player player = entrySub.getValue();
+                    if (integer != 7) {
+                        for (Map.Entry<Integer, Player> entryRally : latestPositionMapOpp.entrySet()) {
+                            if (player.getChestNo().equals(entryRally.getValue().getChestNo())) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            playerP = player;
+                        }
+                    }
+                    i++;
+                }
+                if (playerP != null) {
+                    latestPositionMapOpp.put(4, playerP);
+                }
+            } else {
+                latestPositionMapOpp.put(4, latestPositionMap.get(5));
+            }
             latestPositionMapOpp.put(4, latestPositionMapOpp.get(5));
             latestPositionMapOpp.put(5, latestPositionMapOpp.get(6));
             latestPositionMapOpp.put(6, temp);
@@ -392,18 +392,14 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         rallyInsert.setRallyPositionMapOpp(rallyPositionMapOpp);
         for (RallyEvaluationSkillScore rallyEvaluationSkillScore : rallyEvaluation.getRallyEvaluationSkillScore()) {
             try {
-
                 RallyEvaluationSkillScore rs = rallyEvaluationSkillScore;
                 rs.setSkill(rallyEvaluationSkillScore.getSkill());
-
                 if (rallyEvaluationSkillScore.getSkill().equals(Skill.OP.getType())) {
                     Controller.panMatchSet.op++;
                     Controller.panMatchSet.lblOp.setText("" + Controller.panMatchSet.op);
-
                 } else if (rallyEvaluationSkillScore.getSkill().equals(Skill.TF.getType())) {
                     Controller.panMatchSet.tf++;
                     Controller.panMatchSet.lblTf.setText("" + Controller.panMatchSet.tf);
-
                 }
                 rs.setChestNo(rallyEvaluationSkillScore.getChestNo());
                 rs.setPlayerId(rallyEvaluationSkillScore.getPlayerId());

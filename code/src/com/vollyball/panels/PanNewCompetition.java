@@ -80,14 +80,14 @@ public class PanNewCompetition extends javax.swing.JPanel {
         date = sdf.parse(cb.getStartDate());
         calendar.setTime(date);
         year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH) + 1;
+        month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         modelStart.setDate(year, month, day);
         modelStart.setSelected(true);
         date = sdf.parse(cb.getEndDate());
         calendar.setTime(date);
         year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH) + 1;
+        month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
         modelEnd.setDate(year, month, day);
