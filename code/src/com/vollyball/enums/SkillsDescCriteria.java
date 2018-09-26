@@ -31,7 +31,7 @@ public enum SkillsDescCriteria {
     AttackE(15, " Attacking From Zone", 2, 0),
     AttackF(16, "Attacking To Zone", 2, 0),
     AttackG(17, " Attack in phase", 2, 1),
-    AttackH(18, " Attackers position", 2, 1),
+    AttackH(18, " Attackers position", 2, 0),
     AttackI(19, "Block", 2, 1),
     AttackJ(20, " Opponent Defence Formation", 2, 1),
     AttackK(21, " Attack Defended Zone", 2, 0),
@@ -74,8 +74,8 @@ public enum SkillsDescCriteria {
     ReceptionE(58, "Receiver Position", 5, 1),
     ReceptionF(59, "Parabola of Received ball for setter", 5, 1),
     ReceptionG(60, "Reception at", 5, 1),
-    ReceptionH(61, "Type of set", 5, 1),
-    ReceptionI(62, "Set tempo", 5, 1),
+    //    ReceptionH(61, "Type of set", 5, 1),
+    //    ReceptionI(62, "Set tempo", 5, 1),
     ReceptionJ(63, "Score at the time of Reception", 5, 0),
     ReceptionK(64, "Setter Position", 5, 0),
     DefenceA(65, "Type of Attack by opponent", 6, 1),
@@ -92,7 +92,7 @@ public enum SkillsDescCriteria {
     DefenceL(76, "Parabola of Defended Ball for Setter", 6, 1),
     DefenceM(77, " Defence in phase", 6, 1),
     DefenceN(78, " Setter position", 6, 0),
-    DefenceO(79, " Type of set", 6, 1),
+    //    DefenceO(79, " Type of set", 6, 1),
     DefenceP(80, " Score at time of Defence", 6, 0),
     DefenceQ(81, "Direction of Attack", 6, 0),
     ServiceDig(82, "Diagram Points", 1, 0),
@@ -101,7 +101,13 @@ public enum SkillsDescCriteria {
     SetDig(85, "Diagram Points", 4, 0),
     ReceptionDig(86, "Diagram Points", 5, 0),
     DefenceDig(87, "Diagram Points", 6, 0),
-    BlockQ(88, "Direction Of Block", 3, 0);
+    BlockQ(88, "Direction Of Block", 3, 0),
+    SetN(89, "Defence System", 4, 1),
+    DefenceS(90, "Type of Defended Ball", 6, 1),
+    AttackR(91, "Ball Reflected Zone", 2, 0),
+    AttackS(92, "Attack Approach Run from", 2, 0),
+    AttackT(93, "Attack Approach Run to", 2, 0),
+    AttackU(94, "Type of approach run", 2, 1);
 
     int id;
     String type;

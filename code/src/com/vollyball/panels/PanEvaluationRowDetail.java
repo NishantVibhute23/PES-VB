@@ -532,6 +532,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             skillDescIdPanMap.get(16).lblOption.setText(DetailUtils.getToZone(pan2));
             skillDescIdPanMap.get(21).lblOption.setText(DetailUtils.getToZone(pan2));
             skillDescIdPanMap.get(22).lblOption.setText(DetailUtils.getReceiverPosition(pan2));
+
         } else if (skill.equals(Skill.Reception.getType())) {
 
             skillDescIdPanMap.get(56).lblOption.setText(DetailUtils.getFromZone(pan2));
@@ -659,14 +660,19 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         p.currentPanRow.txtPlayer.setText(txtPlayer.getText());
         chestNo = txtPlayer.getText();
         diagramPoints.add(chestNo);
+        String position = "";
         for (Map.Entry<JLabel, JPanel> entry : mapPlayerComponent.entrySet()) {
 
             if (txtPlayer == entry.getKey()) {
+
                 mapPlayerComponent.get(entry.getKey()).setBackground(Color.ORANGE);
             } else {
                 mapPlayerComponent.get(entry.getKey()).setBackground(Color.WHITE);
             }
 
+        }
+        if (skill.equals(Skill.Attack.getType())) {
+            skillDescIdPanMap.get(18).lblOption.setText(DetailUtils.getPosition(ChestMap.get(chestNo)));
         }
         save();
     }

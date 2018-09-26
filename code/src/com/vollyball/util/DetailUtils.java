@@ -133,6 +133,31 @@ public class DetailUtils {
         return zone;
     }
 
+    public static String getPosition(Player player) {
+        String pos = "";
+        switch (player.getPosition()) {
+            case 1:
+                pos = "S";
+                break;
+            case 2:
+                pos = "L";
+                break;
+            case 3:
+                pos = "U";
+                break;
+            case 4:
+                pos = "OH";
+                break;
+            case 5:
+                pos = "MB";
+                break;
+            case 6:
+                pos = "S";
+                break;
+        }
+        return pos;
+    }
+
     public static String getReceiverPosition(String pan2) {
         int zone;
         String pos = "";

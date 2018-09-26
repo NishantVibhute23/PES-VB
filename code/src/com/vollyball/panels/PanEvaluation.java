@@ -89,6 +89,7 @@ public class PanEvaluation extends javax.swing.JPanel {
      */
     public PanEvaluation(int setNum, int matchId, int teamEvaluateId, int opponentId, int evaluationType, int matchEvaluationTeamId) {
 
+//      
         initComponents();
 
         initializePlayer();
