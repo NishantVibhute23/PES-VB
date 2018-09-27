@@ -76,7 +76,7 @@ public class PanEvaluation extends javax.swing.JPanel {
 
     List<Player> playerList, playerListOpp;
     public int homeScore = 0, opponentScore = 0;
-    String currentScore;
+    String currentScore, evaluatorName;
     String startTime, endTime;
     int op = 0, tf = 0;
     int evaluationType, matchEvaluationTeamId;
@@ -89,7 +89,7 @@ public class PanEvaluation extends javax.swing.JPanel {
      */
     public PanEvaluation(int setNum, int matchId, int teamEvaluateId, int opponentId, int evaluationType, int matchEvaluationTeamId) {
 
-//      
+//
         initComponents();
 
         initializePlayer();
@@ -102,6 +102,11 @@ public class PanEvaluation extends javax.swing.JPanel {
         this.opponentId = opponentId;
         this.evaluationType = evaluationType;
         this.matchEvaluationTeamId = matchEvaluationTeamId;
+        setValues();
+
+    }
+
+    public void setValues() {
         initialPositionMap = new LinkedHashMap<>();
 //        rallyPositionMap = new LinkedHashMap<>();
         initialPositionMapOpp = new LinkedHashMap<>();
@@ -133,7 +138,7 @@ public class PanEvaluation extends javax.swing.JPanel {
             lblopponentName.setText(opponentName);
 //            lblTimeOutEvalTeam.setText(evaluationName);
 //            lblTimeOutOppTeam.setText(opponentName);
-//            txtEvaluator.setText(ms.getEvaluator());
+            this.evaluatorName = ms.getEvaluator();
             lblScore.setText(ms.getHomeScore() + " - " + ms.getOpponentScore());
             homeScore = ms.getHomeScore();
             opponentScore = ms.getOpponentScore();
@@ -205,6 +210,8 @@ public class PanEvaluation extends javax.swing.JPanel {
             lblevaluationName.setText(evaluationName);
             lblopponentName.setText(opponentName);
         }
+        validate();
+        repaint();
     }
 
     public void initializePlayer() {
@@ -906,7 +913,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
         setRotationDialog = new DialogPanEvaluationRotationOrder();
-        setRotationDialog.init(this.teamEvaluateId, this.opponentId, this.matchId, lblevaluationName.getText(), lblopponentName.getText(), setNum, this.matchEvaluationTeamId);
+        setRotationDialog.init(this.teamEvaluateId, this.opponentId, this.matchId, lblevaluationName.getText(), lblopponentName.getText(), setNum, this.matchEvaluationTeamId, "Update", evaluatorName);
         setRotationDialog.show();
     }//GEN-LAST:event_jLabel7MouseClicked
 

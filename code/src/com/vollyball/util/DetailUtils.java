@@ -65,36 +65,45 @@ public class DetailUtils {
         List<String> corners = new ArrayList<>();
         List<String> nel = new ArrayList<>();
         List<String> nsl = new ArrayList<>();
+        List<String> blockTouch = new ArrayList<>();
+
         corners.add("O1A");
         corners.add("O1B");
-        corners.add("O1D");
+//        corners.add("O1D");
         corners.add("O2A");
-        corners.add("O2C");
-        corners.add("O2D");
+        corners.add("O2B");
+//        corners.add("O2D");
+        corners.add("O4A");
         corners.add("O4B");
-        corners.add("O4C");
-        corners.add("O4D");
+//        corners.add("O4D");
         corners.add("O5A");
         corners.add("O5B");
-        corners.add("O5C");
+//        corners.add("O5C");
 
-        nel.add("O1A");
-        nel.add("O1B");
+//        nel.add("O1A");
+//        nel.add("O1B");
         nel.add("O6A");
         nel.add("O6B");
-        nel.add("O5A");
-        nel.add("O5B");
+//        nel.add("O5A");
+//        nel.add("O5B");
 
-        nsl.add("O2A");
+//        nsl.add("O2A");
         nsl.add("O2D");
         nsl.add("O11A");
         nsl.add("O11D");
         nsl.add("O1D");
-        nsl.add("O4B");
-        nsl.add("O4C");
+//        nsl.add("O4B");
+//        nsl.add("O4C");
         nsl.add("O51B");
         nsl.add("O51C");
         nsl.add("O5C");
+
+        blockTouch.add("O2D");
+        blockTouch.add("O2C");
+        blockTouch.add("O3D");
+        blockTouch.add("O3C");
+        blockTouch.add("O4D");
+        blockTouch.add("O4C");
 
         if (corners.contains(pan2)) {
             tactics = "DC";
@@ -102,6 +111,8 @@ public class DetailUtils {
             tactics = "NEL";
         } else if (nsl.contains(pan2)) {
             tactics = "NSL";
+        } else if (blockTouch.contains(pan2)) {
+            tactics = "BT";
         }
         return tactics;
     }

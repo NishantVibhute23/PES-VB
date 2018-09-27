@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -226,7 +226,7 @@ public enum SkillDescCriteriaPoint {
     SetJ1(210, "", "SGL", 50, 26),
     SetJ2(211, "", "DBL", 50, 27),
     SetJ3(212, "", "TPL", 50, 28),
-    SetJ4(213, "", "NB", 50, 0),
+    SetJ4(213, "", "NB", 50, 84),
     SetK1(214, "", "K1", 51, 19),
     SetK2(215, "", "K2", 51, 20),
     SetK3(216, "", "TP", 51, 21),
@@ -432,7 +432,10 @@ public enum SkillDescCriteriaPoint {
     AttackT6(427, "", "6", 93, 0),
     AttackU1(428, "", "C", 94, 81),
     AttackU2(429, "", "S", 94, 82),
-    AttackU3(430, "", "D", 94, 83);
+    AttackU3(430, "", "D", 94, 83),
+    AttackI4(431, "", "NB", 19, 84),
+    BlockK4(432, "", "NB", 37, 84),
+    DefenceE4(433, "", "NB", 69, 84);
 
     int id;
     String type;

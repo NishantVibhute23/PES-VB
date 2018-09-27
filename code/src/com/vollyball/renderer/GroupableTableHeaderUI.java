@@ -5,7 +5,6 @@
  */
 package com.vollyball.renderer;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -25,11 +24,11 @@ import javax.swing.table.TableColumnModel;
  * @author nishant.vibhute
  */
 public class GroupableTableHeaderUI extends BasicTableHeaderUI {
-    
+
     protected GroupableTableHeader getHeader() {
         return (GroupableTableHeader) header;
     }
-    
+
     @Override
     public void paint(Graphics g, JComponent c) {
         Rectangle clipBounds = g.getClipBounds();
@@ -40,7 +39,7 @@ public class GroupableTableHeaderUI extends BasicTableHeaderUI {
         Dimension size = header.getSize();
         Rectangle cellRect = new Rectangle(0, 0, size.width, size.height);
         Map<ColumnGroup, Rectangle> groupSizeMap = new HashMap<ColumnGroup, Rectangle>();
-        
+
         for (Enumeration<TableColumn> enumeration = header.getColumnModel().getColumns(); enumeration.hasMoreElements();) {
             cellRect.height = size.height;
             cellRect.y = 0;
@@ -69,7 +68,7 @@ public class GroupableTableHeaderUI extends BasicTableHeaderUI {
             column++;
         }
     }
-    
+
     private void paintCell(Graphics g, Rectangle cellRect, int columnIndex) {
         TableColumn aColumn = header.getColumnModel().getColumn(columnIndex);
         TableCellRenderer renderer = aColumn.getHeaderRenderer();
@@ -78,24 +77,23 @@ public class GroupableTableHeaderUI extends BasicTableHeaderUI {
         }
         Component c = renderer.getTableCellRendererComponent(header.getTable(), aColumn.getHeaderValue(), false, false,
                 -1, columnIndex);
-        
-        c.setBackground(new Color(57, 74, 108));
-        
+
+//        c.setBackground(new Color(57, 74, 108));
         rendererPane.paintComponent(g, c, header, cellRect.x, cellRect.y, cellRect.width, cellRect.height, true);
     }
-    
+
     private void paintCell(Graphics g, Rectangle cellRect, ColumnGroup cGroup) {
         TableCellRenderer renderer = cGroup.getHeaderRenderer();
         if (renderer == null) {
             renderer = getHeader().getDefaultRenderer();
         }
-        
+
         Component component = renderer.getTableCellRendererComponent(header.getTable(), cGroup.getHeaderValue(), false,
                 false, -1, -1);
         rendererPane
                 .paintComponent(g, component, header, cellRect.x, cellRect.y, cellRect.width, cellRect.height, true);
     }
-    
+
     private int getHeaderHeight() {
         int headerHeight = 0;
         TableColumnModel columnModel = header.getColumnModel();
@@ -105,7 +103,7 @@ public class GroupableTableHeaderUI extends BasicTableHeaderUI {
             if (renderer == null) {
                 renderer = getHeader().getDefaultRenderer();
             }
-            
+
             Component comp = renderer.getTableCellRendererComponent(header.getTable(), aColumn.getHeaderValue(), false,
                     false, -1, column);
             int cHeight = comp.getPreferredSize().height;
@@ -117,7 +115,7 @@ public class GroupableTableHeaderUI extends BasicTableHeaderUI {
         }
         return headerHeight;
     }
-    
+
     @Override
     public Dimension getPreferredSize(JComponent c) {
         int width = 0;
@@ -127,7 +125,7 @@ public class GroupableTableHeaderUI extends BasicTableHeaderUI {
         }
         return createHeaderSize(width);
     }
-    
+
     private Dimension createHeaderSize(int width) {
         TableColumnModel columnModel = header.getColumnModel();
         width += columnModel.getColumnMargin() * columnModel.getColumnCount();
@@ -136,5 +134,5 @@ public class GroupableTableHeaderUI extends BasicTableHeaderUI {
         }
         return new Dimension(width, getHeaderHeight());
     }
-    
+
 }

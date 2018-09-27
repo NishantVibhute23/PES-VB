@@ -61,7 +61,7 @@ public class TeamDao {
                             ps2.setInt(3, id);
                             ps2.setInt(4, p.getPosition());
                             ps2.setInt(5, p.isCaptain() == true ? TrueFalse.TRUE.getId() : TrueFalse.FALSE.getId());
-                            ps2.setInt(6, 0);
+//                            ps2.setInt(6, 0);
                             ps2.executeUpdate();
                         }
                     }

@@ -41,14 +41,17 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     public LinkedHashMap<Integer, Player> initialHomePositionMap;
     public LinkedHashMap<Integer, Player> initialOppPositionMap;
     MatchDao matchDao = new MatchDao();
+    String type, evaluatorName;
 
     /**
      * Creates new form PanEvaluationRotation
      */
-    public PanEvaluationRotation(int homeTeamId, int oppTeamId, int matchId, String homeTeam, String oppteam, int set, int matchEvaluationTeamId) {
+    public PanEvaluationRotation(int homeTeamId, int oppTeamId, int matchId, String homeTeam, String oppteam, int set, int matchEvaluationTeamId, String type, String evaluatorName) {
         initComponents();
         this.set = set;
         this.matchEvaluationTeamId = matchEvaluationTeamId;
+        this.type = type;
+        this.evaluatorName = evaluatorName;
         lblHome.setText(homeTeam);
         lblOpp.setText(oppteam);
         setHomePlayers(homeTeamId, matchId);
@@ -66,30 +69,34 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
             if (selectedPlayersHome.contains(player.getId())) {
                 Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
                 modelSelectedPlayerHome.addRow(row);
-//                if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
-//                    for (int i = 1; i <= 7; i++) {
-//                        if (Controller.panMatchSet.initialPositionMap.get(i).getChestNo().equals(player.getChestNo())) {
-//                            for (int k = 0; k < tbPlayersHome.getRowCount(); k++) {
-//                                if (player.getChestNo().equals((String) tbPlayersHome.getValueAt(k, 1))) {
-//                                    modelSelectedPlayerHome.removeRow(k);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
+                if (type.equals("Update")) {
+                    if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
+                        for (int i = 1; i <= 7; i++) {
+                            if (Controller.panMatchSet.initialPositionMap.get(i).getChestNo().equals(player.getChestNo())) {
+                                for (int k = 0; k < tbPlayersHome.getRowCount(); k++) {
+                                    if (player.getChestNo().equals((String) tbPlayersHome.getValueAt(k, 1))) {
+                                        modelSelectedPlayerHome.removeRow(k);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+        if (type.equals("Update")) {
+            txtEvaluatorName.setText(evaluatorName);
+            if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
 
-//        if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
-//
-//            pos1Home.setText(Controller.panMatchSet.initialPositionMap.get(1).getChestNo());
-//            pos2Home.setText(Controller.panMatchSet.initialPositionMap.get(2).getChestNo());
-//            pos3Home.setText(Controller.panMatchSet.initialPositionMap.get(3).getChestNo());
-//            pos4Home.setText(Controller.panMatchSet.initialPositionMap.get(4).getChestNo());
-//            pos5Home.setText(Controller.panMatchSet.initialPositionMap.get(5).getChestNo());
-//            pos6Home.setText(Controller.panMatchSet.initialPositionMap.get(6).getChestNo());
-//            liberoHome.setText(Controller.panMatchSet.initialPositionMap.get(7).getChestNo());
-//        }
+                pos1Home.setText(Controller.panMatchSet.initialPositionMap.get(1).getChestNo());
+                pos2Home.setText(Controller.panMatchSet.initialPositionMap.get(2).getChestNo());
+                pos3Home.setText(Controller.panMatchSet.initialPositionMap.get(3).getChestNo());
+                pos4Home.setText(Controller.panMatchSet.initialPositionMap.get(4).getChestNo());
+                pos5Home.setText(Controller.panMatchSet.initialPositionMap.get(5).getChestNo());
+                pos6Home.setText(Controller.panMatchSet.initialPositionMap.get(6).getChestNo());
+                liberoHome.setText(Controller.panMatchSet.initialPositionMap.get(7).getChestNo());
+            }
+        }
         tbPlayersHome.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -176,29 +183,32 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
             if (selectedPlayersOpp.contains(player.getId())) {
                 Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
                 modelSelectedPlayerOpp.addRow(row);
-//                if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
-//                    for (int i = 1; i <= 7; i++) {
-//                        if (Controller.panMatchSet.initialPositionMapOpp.get(i).getChestNo().equals(player.getChestNo())) {
-//                            for (int k = 0; k < tbPlayersOpp.getRowCount(); k++) {
-//                                if (player.getChestNo().equals((String) tbPlayersOpp.getValueAt(k, 1))) {
-//                                    modelSelectedPlayerOpp.removeRow(k);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
+                if (type.equals("Update")) {
+                    if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
+                        for (int i = 1; i <= 7; i++) {
+                            if (Controller.panMatchSet.initialPositionMapOpp.get(i).getChestNo().equals(player.getChestNo())) {
+                                for (int k = 0; k < tbPlayersOpp.getRowCount(); k++) {
+                                    if (player.getChestNo().equals((String) tbPlayersOpp.getValueAt(k, 1))) {
+                                        modelSelectedPlayerOpp.removeRow(k);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-
-//        if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
-//            pos1Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(1).getChestNo());
-//            pos2Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(2).getChestNo());
-//            pos3Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(3).getChestNo());
-//            pos4Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(4).getChestNo());
-//            pos5Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(5).getChestNo());
-//            pos6Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(6).getChestNo());
-//            liberoOpp.setText(Controller.panMatchSet.initialPositionMapOpp.get(7).getChestNo());
-//        }
+        if (type.equals("Update")) {
+            if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
+                pos1Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(1).getChestNo());
+                pos2Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(2).getChestNo());
+                pos3Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(3).getChestNo());
+                pos4Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(4).getChestNo());
+                pos5Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(5).getChestNo());
+                pos6Opp.setText(Controller.panMatchSet.initialPositionMapOpp.get(6).getChestNo());
+                liberoOpp.setText(Controller.panMatchSet.initialPositionMapOpp.get(7).getChestNo());
+            }
+        }
         tbPlayersOpp.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -947,6 +957,11 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
 
                 jPanel14.setBackground(new java.awt.Color(57, 74, 108));
                 jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        jPanel14MouseClicked(evt);
+                    }
+                });
 
                 jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
                 jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -1291,12 +1306,22 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         ms.setEnd_time("00:00");
         ms.setDate("");
 
-        int id = matchDao.insertMatchSet(ms);
-
+        int id = 0;
+        if (type.equals("Update")) {
+            id = matchDao.updateRotationOrder(ms);
+        } else {
+            id = matchDao.insertMatchSet(ms);
+        }
         if (id == 0) {
             JOptionPane.showMessageDialog(this, "Failed to Save");
         } else {
-            Controller.panMatchEvaluationHome.objRotationOrder.close();
+            JOptionPane.showMessageDialog(this, "Saved Successfully");
+            if (type.equals("Update")) {
+                Controller.panMatchSet.setRotationDialog.close();
+                Controller.panMatchSet.setValues();
+            } else {
+                Controller.panMatchEvaluationHome.objRotationOrder.close();
+            }
         }
 
     }//GEN-LAST:event_jLabel6MouseClicked
@@ -1305,6 +1330,10 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         // TODO add your handling code here:
         Controller.panMatchEvaluationHome.objRotationOrder.close();
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel14MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
