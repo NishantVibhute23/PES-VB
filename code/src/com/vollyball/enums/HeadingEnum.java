@@ -27,7 +27,9 @@ public enum HeadingEnum {
     HeadinEnum14(14, "Type of Set"),
     HeadinEnum15(15, "Ball at Net"),
     HeadinEnum16(16, "Block and Defence Tactic"),
-    HeadinEnum17(17, "Type of Block");
+    HeadinEnum17(17, "Type of Block"),
+    HeadinEnum18(18, "Type of Defended Ball"),
+    HeadinEnum19(19, "Type of approach run");
 
     String longForm;
     int id;

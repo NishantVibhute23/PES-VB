@@ -17,7 +17,7 @@ import com.vollyball.enums.SkillZoneWiseReport;
 import com.vollyball.enums.SkillsDescCriteria;
 import com.vollyball.renderer.ColumnGroup;
 import com.vollyball.renderer.GroupableTableHeader;
-import com.vollyball.renderer.TableHeaderRenderer;
+import com.vollyball.renderer.TableHeaderRendererForReport;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -179,7 +179,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 
         tbheader.setOpaque(false);
         tbheader.setPreferredSize(new Dimension(100, 55));
-        tbheader.setDefaultRenderer(new TableHeaderRenderer(tbTable));
+        tbheader.setDefaultRenderer(new TableHeaderRendererForReport(tbTable));
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         tbTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
@@ -241,7 +241,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 
         tbheader.setOpaque(false);
         tbheader.setPreferredSize(new Dimension(100, 55));
-        tbheader.setDefaultRenderer(new TableHeaderRenderer(tbTable));
+        tbheader.setDefaultRenderer(new TableHeaderRendererForReport(tbTable));
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         tbTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
@@ -305,7 +305,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 
         tbheader.setOpaque(false);
         tbheader.setPreferredSize(new Dimension(100, 55));
-        tbheader.setDefaultRenderer(new TableHeaderRenderer(tbTable));
+        tbheader.setDefaultRenderer(new TableHeaderRendererForReport(tbTable));
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         tbTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
@@ -393,7 +393,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         zoneCountMap.put(6, new ZoneHitCount());
 
         JTableHeader header = table.getTableHeader();
-        header.setDefaultRenderer(new TableHeaderRenderer(table));
+        header.setDefaultRenderer(new TableHeaderRendererForReport(table));
         table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);

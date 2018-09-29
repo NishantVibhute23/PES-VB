@@ -13,7 +13,7 @@ import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.enums.HomeOpponent;
-import com.vollyball.renderer.TableHeaderRenderer;
+import com.vollyball.renderer.TableHeaderRendererForReport;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -65,7 +65,7 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
     public PanZoneRotationMain(int cb, int matchId) {
         initComponents();
         JTableHeader header = tbOverall.getTableHeader();
-        header.setDefaultRenderer(new TableHeaderRenderer(tbOverall));
+        header.setDefaultRenderer(new TableHeaderRendererForReport(tbOverall));
         tbOverall.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         tbOverall.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         tbOverall.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);

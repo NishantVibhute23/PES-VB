@@ -859,12 +859,12 @@ public class ReportDao {
                 sf.setFailure(rs.getInt(2));
                 tempo.setHigh(sf);
                 SuccessFailure sf1 = new SuccessFailure();
-                sf.setSuccess(rs.getInt(3));
-                sf.setFailure(rs.getInt(4));
+                sf1.setSuccess(rs.getInt(3));
+                sf1.setFailure(rs.getInt(4));
                 tempo.setMedium(sf1);
                 SuccessFailure sf2 = new SuccessFailure();
-                sf.setSuccess(rs.getInt(5));
-                sf.setFailure(rs.getInt(6));
+                sf2.setSuccess(rs.getInt(5));
+                sf2.setFailure(rs.getInt(6));
                 tempo.setLow(sf2);
             }
             db.closeConnection(con);
@@ -889,16 +889,16 @@ public class ReportDao {
                 sf.setFailure(rs.getInt(2));
                 tempo.setNb(sf);
                 SuccessFailure sf1 = new SuccessFailure();
-                sf.setSuccess(rs.getInt(3));
-                sf.setFailure(rs.getInt(4));
+                sf1.setSuccess(rs.getInt(3));
+                sf1.setFailure(rs.getInt(4));
                 tempo.setSgl(sf1);
                 SuccessFailure sf2 = new SuccessFailure();
-                sf.setSuccess(rs.getInt(5));
-                sf.setFailure(rs.getInt(6));
+                sf2.setSuccess(rs.getInt(5));
+                sf2.setFailure(rs.getInt(6));
                 tempo.setDbl(sf2);
                 SuccessFailure sf3 = new SuccessFailure();
-                sf.setSuccess(rs.getInt(7));
-                sf.setFailure(rs.getInt(8));
+                sf3.setSuccess(rs.getInt(7));
+                sf3.setFailure(rs.getInt(8));
                 tempo.setTpl(sf3);
             }
             db.closeConnection(con);
@@ -923,16 +923,16 @@ public class ReportDao {
                 sf.setFailure(rs.getInt(2));
                 tempo.setJf(sf);
                 SuccessFailure sf1 = new SuccessFailure();
-                sf.setSuccess(rs.getInt(3));
-                sf.setFailure(rs.getInt(4));
+                sf1.setSuccess(rs.getInt(3));
+                sf1.setFailure(rs.getInt(4));
                 tempo.setJp(sf1);
                 SuccessFailure sf2 = new SuccessFailure();
-                sf.setSuccess(rs.getInt(5));
-                sf.setFailure(rs.getInt(6));
+                sf2.setSuccess(rs.getInt(5));
+                sf2.setFailure(rs.getInt(6));
                 tempo.setSf(sf2);
                 SuccessFailure sf3 = new SuccessFailure();
-                sf.setSuccess(rs.getInt(7));
-                sf.setFailure(rs.getInt(8));
+                sf3.setSuccess(rs.getInt(7));
+                sf3.setFailure(rs.getInt(8));
                 tempo.setSs(sf3);
             }
             db.closeConnection(con);

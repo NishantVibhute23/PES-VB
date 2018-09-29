@@ -156,6 +156,8 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
             }
 
         }
+        validate();
+        repaint();
     }
 
     public void createTable() {
@@ -406,7 +408,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         Controller.teamDialog = new CreateTeamDialog();
         Controller.teamDialog.init();
         Controller.teamDialog.show();
-        setRow(null);
+
     }//GEN-LAST:event_lblNewTeamMouseClicked
 
     private void txtFilterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterKeyTyped

@@ -2109,7 +2109,7 @@ public class PanNewTeam extends javax.swing.JPanel {
     private void lblSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaveMouseClicked
 
         playerList = new ArrayList<>();
-
+        Team team = null;
         String msg = validateFields();
         if (!msg.isEmpty()) {
             JOptionPane.showMessageDialog(this, msg);
@@ -2119,7 +2119,7 @@ public class PanNewTeam extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, msg);
             } else {
                 TeamDao teamDao = new TeamDao();
-                Team team = new Team();
+                team = new Team();
                 team.setName(txtTeamName.getText());
                 team.setShortCode(txtShortCode.getText());
                 team.setCoach(txtCoachName.getText());

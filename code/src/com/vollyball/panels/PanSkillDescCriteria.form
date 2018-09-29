@@ -30,7 +30,7 @@
               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Component id="lblHeading" min="-2" pref="120" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="lblOption" pref="94" max="32767" attributes="0"/>
+              <Component id="lblOption" min="-2" pref="94" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>

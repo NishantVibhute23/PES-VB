@@ -71,10 +71,10 @@ public enum ShortCutEnum {
     ShortCutEnum55(55, "W3", "FP", "Full Push Ball", 14),
     ShortCutEnum56(56, "W4", "HP", "Half Push Ball", 14),
     ShortCutEnum57(57, "W5", "BC", "Back Court", 14),
-    ShortCutEnum58(58, "N1", "ON", "Over Net favour setter", 15),
-    ShortCutEnum59(59, "N2", "CN", "Close to Net favour setter", 15),
-    ShortCutEnum60(60, "N3", "AN", "Away from Net non-favour setter", 15),
-    ShortCutEnum61(61, "N4", "LT", "Low trajectory non-favour setter", 15),
+    ShortCutEnum58(58, "N1", "ON", "Over Net favourable setter", 15),
+    ShortCutEnum59(59, "N2", "CN", "Close to Net favourable setter", 15),
+    ShortCutEnum60(60, "N3", "AN", "Away from Net non-favourable setter", 15),
+    ShortCutEnum61(61, "N4", "LT", "Low trajectory non-favourable setter", 15),
     ShortCutEnum62(62, "LO", "LO", "Line open block", 16),
     ShortCutEnum63(63, "LK", "LC", "line close block", 16),
     ShortCutEnum64(64, "K", "Kill", "Aggressive Block Score direct point", 17),
@@ -82,7 +82,22 @@ public enum ShortCutEnum {
     ShortCutEnum66(66, "LI", "LI", "Line to Inward block", 17),
     ShortCutEnum67(67, "CB", "CB", "Crosscourt Block", 17),
     ShortCutEnum68(68, "W6", "BS", "Back Set", 14),
-    ShortCutEnum69(69, "W7", "FS", "Front Set", 14);
+    ShortCutEnum69(69, "W7", "FS", "Front Set", 14),
+    ShortCutEnum70(70, "N5", "ANF", "Away from Net favourable setter", 15),
+    ShortCutEnum71(71, "NN", "NC", "No Combination", 4),
+    ShortCutEnum72(72, "1C", "1C", "Single Combination", 4),
+    ShortCutEnum73(73, "A7", "R", "Regular", 10),
+    ShortCutEnum74(74, "A8", "BTL", "Body Turn With One leg", 10),
+    ShortCutEnum75(75, "D23", "ODF", "2-1-3", 9),
+    ShortCutEnum76(76, "DN", "ODF", "Non Organised", 9),
+    ShortCutEnum77(77, "S", "S", "Straight", 17),
+    ShortCutEnum78(78, "HA", "HA", "Home Attack", 18),
+    ShortCutEnum79(79, "HB", "HB", "Home Block", 18),
+    ShortCutEnum80(80, "HD", "HD", "Home Defence", 18),
+    ShortCutEnum81(81, "C1", "C", "Curvature", 19),
+    ShortCutEnum82(82, "C2", "S", "Straight", 19),
+    ShortCutEnum83(83, "C3", "D", "Diagonal", 19),
+    ShortCutEnum84(84, "E4", "NB", "No Block", 8);
 
     int shortCutId, headingId;
     String code, abbr, longForm;

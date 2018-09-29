@@ -213,6 +213,62 @@ public class MatchDao {
         return mid;
     }
 
+    public int updateRotationOrder(MatchSet ms) {
+        int id = 0, mid = 0;
+        try {
+            this.con = db.getConnection();
+
+            PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.latest.matchset.id"));
+            ps3.setInt(1, ms.getMatchEvaluationTeamId());
+            ps3.setInt(2, ms.getSetNo());
+            ResultSet rs = ps3.executeQuery();
+            while (rs.next()) {
+                mid = rs.getInt(1);
+            }
+            for (SetRotationOrder s : ms.getRotationOrder()) {
+                PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchset.rotationorder"));
+                ps1.setInt(2, s.getPosition());
+                ps1.setInt(1, s.getPlayerId());
+                ps1.setInt(3, mid);
+                ps1.setInt(4, 1);
+                id = ps1.executeUpdate();
+            }
+
+            for (SetRotationOrder s : ms.getRotationOrderOpp()) {
+                PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchset.rotationorder"));
+                ps1.setInt(2, s.getPosition());
+                ps1.setInt(1, s.getPlayerId());
+                ps1.setInt(3, mid);
+                ps1.setInt(4, 2);
+                id = ps1.executeUpdate();
+            }
+
+            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.setLatestorder"));
+
+            for (int i = 0; i < 6; i++) {
+
+                ps1.setInt(i + 1, ms.getRotationOrder().get(i).getPlayerId());
+            }
+
+            ps1.setInt(7, mid);
+            id = ps1.executeUpdate();
+
+            ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.setLatestorder.opp"));
+
+            for (int i = 0; i < 6; i++) {
+                ps1.setInt(i + 1, ms.getRotationOrderOpp().get(i).getPlayerId());
+            }
+
+            ps1.setInt(7, mid);
+            id = ps1.executeUpdate();
+
+            db.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
     public int insertMatchSet(MatchSet ms) {
         int id = 0, mid = 0;
         try {

@@ -17,7 +17,7 @@ import com.vollyball.dao.RallyDao;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.dao.TeamReportDao;
-import com.vollyball.renderer.TableHeaderRenderer;
+import com.vollyball.renderer.TableHeaderRendererForReport;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -182,7 +182,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
         JTableHeader header = tbSetDetails.getTableHeader();
-        header.setDefaultRenderer(new TableHeaderRenderer(tbSetDetails));
+        header.setDefaultRenderer(new TableHeaderRendererForReport(tbSetDetails));
         tbSetDetails.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         tbSetDetails.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         tbSetDetails.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
@@ -190,7 +190,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbSetDetails.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
 
         JTableHeader header1 = tbTeam1Win.getTableHeader();
-        header1.setDefaultRenderer(new TableHeaderRenderer(tbTeam1Win));
+        header1.setDefaultRenderer(new TableHeaderRendererForReport(tbTeam1Win));
         tbTeam1Win.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         tbTeam1Win.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         tbTeam1Win.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
@@ -199,7 +199,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbTeam1Win.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
 
         JTableHeader header2 = tbTeam1Loss.getTableHeader();
-        header2.setDefaultRenderer(new TableHeaderRenderer(tbTeam1Loss));
+        header2.setDefaultRenderer(new TableHeaderRendererForReport(tbTeam1Loss));
         tbTeam1Loss.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         tbTeam1Loss.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         tbTeam1Loss.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
@@ -211,7 +211,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbTeam1Loss.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
 
         JTableHeader header3 = tbTeam2Win.getTableHeader();
-        header3.setDefaultRenderer(new TableHeaderRenderer(tbTeam2Win));
+        header3.setDefaultRenderer(new TableHeaderRendererForReport(tbTeam2Win));
         tbTeam2Win.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         tbTeam2Win.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         tbTeam2Win.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
@@ -220,7 +220,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbTeam2Win.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
 
         JTableHeader header4 = tbTeam2Loss.getTableHeader();
-        header4.setDefaultRenderer(new TableHeaderRenderer(tbTeam2Loss));
+        header4.setDefaultRenderer(new TableHeaderRendererForReport(tbTeam2Loss));
         tbTeam2Loss.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         tbTeam2Loss.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         tbTeam2Loss.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
@@ -232,7 +232,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbTeam2Loss.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
 
         JTableHeader header5 = team1PlayerTable.getTableHeader();
-        header5.setDefaultRenderer(new TableHeaderRenderer(team1PlayerTable));
+        header5.setDefaultRenderer(new TableHeaderRendererForReport(team1PlayerTable));
         team1PlayerTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 //        team1PlayerTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         team1PlayerTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
@@ -247,7 +247,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team1PlayerTable.setBackground(ivory);
 
         JTableHeader header6 = team2PlayerTable.getTableHeader();
-        header6.setDefaultRenderer(new TableHeaderRenderer(team2PlayerTable));
+        header6.setDefaultRenderer(new TableHeaderRendererForReport(team2PlayerTable));
         team2PlayerTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 //        team2PlayerTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         team2PlayerTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);

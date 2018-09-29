@@ -458,7 +458,7 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         int id = matchDao.getMatchSetId(this.matchEvaluationTeamId, set);
         if (id == 0) {
             objRotationOrder = new DialogPanEvaluationRotationOrder();
-            objRotationOrder.init(this.teamId, this.oppId, this.matchId, this.homeTeam, this.oppteam, set, this.matchEvaluationTeamId);
+            objRotationOrder.init(this.teamId, this.oppId, this.matchId, this.homeTeam, this.oppteam, set, this.matchEvaluationTeamId, "Save", "");
             objRotationOrder.show();
         }
 

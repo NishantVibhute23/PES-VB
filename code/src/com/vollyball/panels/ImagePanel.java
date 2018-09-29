@@ -9,6 +9,7 @@ import com.vollyball.bean.DigPoints;
 import com.vollyball.bean.Player;
 import com.vollyball.controller.Controller;
 import com.vollyball.enums.PlayerPosition;
+import com.vollyball.enums.Skill;
 import com.vollyball.util.CommonUtil;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -311,19 +312,6 @@ public class ImagePanel extends JPanel {
         repaint();
         int k = 0;
         List<String> panels = new ArrayList<>(panel);
-//        if (CommonUtil.isNumeric(panels.get(0))) {
-//            Point p = getPlayerPoints(panels.get(0));
-//            DigPoints dp = new DigPoints();
-//            dp.setX1((int) p.getX());
-//            dp.setY1((int) p.getY());
-//            dp.setMidx(dp.getX1());
-//            dp.setMidy(dp.getY1());
-//            JPanel p1 = panGrid.get(panels.get(1));
-//            dp.setX2((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
-//            dp.setY2((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
-//            shapes.add(dp);
-//            k++;
-//        }
         String playerNum = "";
         int playerPos = -1;
         String homeCourt = "";
@@ -374,11 +362,33 @@ public class ImagePanel extends JPanel {
             dp.setY1((int) p.getY());
             dp.setMidx(dp.getX1());
             dp.setMidy(dp.getY1());
-            JPanel p1 = panGrid.get(homeCourt);
-            dp.setPlayerMoved(1);
-            dp.setX2((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
-            dp.setY2((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
-            shapes.add(dp);
+
+            if (skill.equals(Skill.Set.getType())) {
+                JPanel p1 = panGrid.get("H2D");
+                dp.setPlayerMoved(1);
+                dp.setX2((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+                dp.setY2((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+                shapes.add(dp);
+
+                DigPoints dpNew = new DigPoints();
+                dp.setPlayerMoved(2);
+                dpNew.setX1((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+                dpNew.setY1((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+                dpNew.setMidx(dpNew.getX1());
+                dpNew.setMidy(dpNew.getY1());
+                JPanel p2 = panGrid.get(homeCourt);
+                dpNew.setPlayerMoved(1);
+                dpNew.setX2((int) (p2.getParent().getLocation().getX() + p2.getLocation().getX() + (p2.getWidth() / 2)));
+                dpNew.setY2((int) (p2.getParent().getLocation().getY() + p2.getLocation().getY() + (p2.getHeight() / 2)));
+                shapes.add(dpNew);
+
+            } else {
+                JPanel p1 = panGrid.get(homeCourt);
+                dp.setPlayerMoved(1);
+                dp.setX2((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+                dp.setY2((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+                shapes.add(dp);
+            }
         }
 
         repaint();
@@ -519,6 +529,12 @@ public class ImagePanel extends JPanel {
                 g.drawImage(imgHand, dp.getX2() - 15, dp.getY2() - 15, null);
 //                imgHand = new ImageIcon("src\\com\\vollyball\\images\\153657649317869378 (1).png").getImage();
 //                g.drawImage(imgHand, dp.getX1() - 15, dp.getY1() - 15, null);
+            } else if (dp.getPlayerMoved() == 2) {
+                Stroke dashed = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 0, new float[]{10}, 5);
+                g2.setColor(Color.BLACK);
+                g2.setStroke(dashed);
+                g.setColor(Color.RED);
+                g.fillOval(dp.getX2() - 5, dp.getY2() - 5, 10, 10);
             } else {
                 g2.setColor(Color.WHITE);
                 g2.setStroke(new BasicStroke(3));
