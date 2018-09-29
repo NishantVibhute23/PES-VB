@@ -1821,19 +1821,19 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                         selectSkill(lblService);
                         break;
                     case "W":
-                        selectSkill(lblAttack);
-                        break;
-                    case "E":
-                        selectSkill(lblBlock);
-                        break;
-                    case "R":
-                        selectSkill(lblDefence);
-                        break;
-                    case "T":
                         selectSkill(lblReception);
                         break;
-                    case "Y":
+                    case "E":
+                        selectSkill(lblAttack);
+                        break;
+                    case "R":
                         selectSkill(lblSet);
+                        break;
+                    case "T":
+                        selectSkill(lblBlock);
+                        break;
+                    case "Y":
+                        selectSkill(lblDefence);
                         break;
                     case "U":
                         selectSkill(lblOp);

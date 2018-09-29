@@ -5,9 +5,7 @@
  */
 package com.vollyball.renderer;
 
-import java.awt.Color;
 import java.awt.Component;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -32,9 +30,9 @@ public class TableHeaderRenderer implements TableCellRenderer {
             boolean hasFocus, int row, int col) {
         JLabel lbl = (JLabel) renderer.getTableCellRendererComponent(
                 table, value, isSelected, hasFocus, row, col);
-        lbl.setBorder(BorderFactory.createEmptyBorder());
-        lbl.setForeground(Color.WHITE);
-        lbl.setBackground(new Color(57, 74, 108));
+//        lbl.setBorder(BorderFactory.createEmptyBorder());
+//        lbl.setForeground(Color.WHITE);
+//        lbl.setBackground(new Color(57, 74, 108));
         return lbl;
     }
 }
