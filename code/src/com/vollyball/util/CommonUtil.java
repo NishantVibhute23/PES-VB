@@ -6,7 +6,6 @@
 package com.vollyball.util;
 
 import java.awt.Color;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -23,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class CommonUtil {
 
-    public static String propertyUrl = System.getProperty("user.dir");
+//    public static String propertyUrl = System.getProperty("user.dir");
     static InputStream input = null;
     static Properties prop = new Properties();
 
@@ -31,8 +30,9 @@ public class CommonUtil {
 
         try {
 
-//            input = new FileInputStream(path + "WEB-INF\\classes\\com\\pritient\\properties\\resource.properties");
-            input = new FileInputStream(propertyUrl + "\\src\\com\\vollyball\\properties\\resource.properties");
+//            InputStream input = CommonUtil.class.getClassLoader().getResourceAsStream("resource.properties");
+            input = getClass().getResourceAsStream("/com/vollyball/properties/resource.properties");
+//            input = new FileInputStream(propertyUrl + "\\src\\com\\vollyball\\properties\\resource.properties");
             prop.load(input);
 
         } catch (Exception ex) {
