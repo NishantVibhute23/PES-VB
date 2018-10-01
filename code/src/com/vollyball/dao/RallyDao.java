@@ -503,12 +503,12 @@ public class RallyDao {
                         re.rallyPositionMap.put(5, playerMap.get(rs2.getInt(5)));
                         re.rallyPositionMap.put(6, playerMap.get(rs2.getInt(6)));
 
-                        re.rallyPositionMapOpp.put(1, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(7)));
-                        re.rallyPositionMapOpp.put(2, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(8)));
-                        re.rallyPositionMapOpp.put(3, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(9)));
-                        re.rallyPositionMapOpp.put(4, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(10)));
-                        re.rallyPositionMapOpp.put(5, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(11)));
-                        re.rallyPositionMapOpp.put(6, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(12)));
+//                        re.rallyPositionMapOpp.put(1, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(7)));
+//                        re.rallyPositionMapOpp.put(2, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(8)));
+//                        re.rallyPositionMapOpp.put(3, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(9)));
+//                        re.rallyPositionMapOpp.put(4, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(10)));
+//                        re.rallyPositionMapOpp.put(5, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(11)));
+//                        re.rallyPositionMapOpp.put(6, Controller.panMatchSet.playerMapOpp.get(rs2.getInt(12)));
                     }
                 }
 
