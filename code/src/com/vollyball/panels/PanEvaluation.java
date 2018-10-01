@@ -89,6 +89,8 @@ public class PanEvaluation extends javax.swing.JPanel {
      */
     public PanEvaluation(int setNum, int matchId, int teamEvaluateId, int opponentId, int evaluationType, int matchEvaluationTeamId) {
 
+//        PanShorcutView p = new PanShorcutView();
+//        p.createTable();
         initComponents();
 
         initializePlayer();
@@ -151,16 +153,15 @@ public class PanEvaluation extends javax.swing.JPanel {
                 initialPositionMap.put(s.getPosition(), playerMap.get(s.getPlayerId()));
             }
 
-            if (initialPositionMap.size() > 6) {
-                pos1.setText(initialPositionMap.get(1).getChestNo());
-                pos2.setText(initialPositionMap.get(2).getChestNo());
-                pos3.setText(initialPositionMap.get(3).getChestNo());
-                pos4.setText(initialPositionMap.get(4).getChestNo());
-                pos5.setText(initialPositionMap.get(5).getChestNo());
-                pos6.setText(initialPositionMap.get(6).getChestNo());
-//            libero.setText(initialPositionMap.get(7).getChestNo());
-            }
-
+//            if (initialPositionMap.size() > 6) {
+//                pos1.setText(initialPositionMap.get(1).getChestNo());
+//                pos2.setText(initialPositionMap.get(2).getChestNo());
+//                pos3.setText(initialPositionMap.get(3).getChestNo());
+//                pos4.setText(initialPositionMap.get(4).getChestNo());
+//                pos5.setText(initialPositionMap.get(5).getChestNo());
+//                pos6.setText(initialPositionMap.get(6).getChestNo());
+////            libero.setText(initialPositionMap.get(7).getChestNo());
+//            }
             for (SetRotationOrder s : ms.getRotationOrderOpp()) {
                 initialPositionMapOpp.put(s.getPosition(), playerMapOpp.get(s.getPlayerId()));
             }
@@ -227,7 +228,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     }
 
     private void registerLibrary() {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "H:\\vollyball\\PES-VB\\VLC\\VLC64");
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "E:\\old data\\Personal\\Madhuri sadgir\\PES-VB\\PES-VB\\VLC\\VLC64");
         Native
                 .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
                 );
@@ -283,14 +284,6 @@ public class PanEvaluation extends javax.swing.JPanel {
         lblCurrentRally = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel43 = new javax.swing.JPanel();
-        pos4 = new javax.swing.JTextField();
-        pos3 = new javax.swing.JTextField();
-        pos2 = new javax.swing.JTextField();
-        pos5 = new javax.swing.JTextField();
-        pos6 = new javax.swing.JTextField();
-        pos1 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
@@ -502,83 +495,6 @@ public class PanEvaluation extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jPanel43.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel43.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        pos4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pos4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pos4.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        pos4.setEnabled(false);
-
-        pos3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pos3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pos3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        pos3.setEnabled(false);
-
-        pos2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pos2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pos2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        pos2.setEnabled(false);
-
-        pos5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pos5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pos5.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        pos5.setEnabled(false);
-
-        pos6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pos6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pos6.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        pos6.setEnabled(false);
-
-        pos1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pos1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pos1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        pos1.setEnabled(false);
-
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Initial Rotation Order");
-
-        javax.swing.GroupLayout jPanel43Layout = new javax.swing.GroupLayout(jPanel43);
-        jPanel43.setLayout(jPanel43Layout);
-        jPanel43Layout.setHorizontalGroup(
-            jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel43Layout.createSequentialGroup()
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel43Layout.createSequentialGroup()
-                .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel43Layout.createSequentialGroup()
-                        .addComponent(pos4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(pos3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel43Layout.createSequentialGroup()
-                        .addComponent(pos5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(pos6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pos1, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                    .addComponent(pos2, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel43Layout.setVerticalGroup(
-            jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel43Layout.createSequentialGroup()
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pos4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pos3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pos2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pos1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(pos5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(pos6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
-
         jPanel5.setBackground(new java.awt.Color(57, 74, 108));
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -708,28 +624,28 @@ public class PanEvaluation extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel14.setText("Date : ");
 
-        jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel15.setText("Time : ");
 
-        jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel16.setText("Score : ");
 
-        jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel17.setText("Won By : ");
 
-        lblDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblDate.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblDate.setText(" ");
 
-        lblTime.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblTime.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblTime.setText(" ");
 
-        lblScore.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblScore.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblScore.setText(" ");
 
-        lblWonBy.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lblWonBy.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblWonBy.setText(" ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -738,31 +654,28 @@ public class PanEvaluation extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblWonBy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblWonBy, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTime)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(lblTime))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(52, 52, 52)
+                        .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -772,7 +685,6 @@ public class PanEvaluation extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -801,21 +713,21 @@ public class PanEvaluation extends javax.swing.JPanel {
 
         jPanel9.setBackground(new java.awt.Color(57, 74, 108));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Evaluating Team :");
+        jLabel3.setText("Evaluating :");
 
-        lblevaluationName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblevaluationName.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         lblevaluationName.setForeground(new java.awt.Color(255, 255, 255));
         lblevaluationName.setText(" ");
 
-        lblopponentName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblopponentName.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         lblopponentName.setForeground(new java.awt.Color(255, 255, 255));
         lblopponentName.setText(" ");
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Opponent Team :");
+        jLabel6.setText("Opponent :");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -826,7 +738,7 @@ public class PanEvaluation extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblevaluationName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblopponentName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -874,7 +786,7 @@ public class PanEvaluation extends javax.swing.JPanel {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(panEvalRallyRow, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+                .addComponent(panEvalRallyRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -884,14 +796,13 @@ public class PanEvaluation extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panPlayer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -903,8 +814,8 @@ public class PanEvaluation extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(panPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -1127,12 +1038,12 @@ public class PanEvaluation extends javax.swing.JPanel {
     }
 
     public void setRotations() {
-        pos1.setText(initialPositionMap.get(1).getChestNo());
-        pos2.setText(initialPositionMap.get(2).getChestNo());
-        pos3.setText(initialPositionMap.get(3).getChestNo());
-        pos4.setText(initialPositionMap.get(4).getChestNo());
-        pos5.setText(initialPositionMap.get(5).getChestNo());
-        pos6.setText(initialPositionMap.get(6).getChestNo());
+//        pos1.setText(initialPositionMap.get(1).getChestNo());
+//        pos2.setText(initialPositionMap.get(2).getChestNo());
+//        pos3.setText(initialPositionMap.get(3).getChestNo());
+//        pos4.setText(initialPositionMap.get(4).getChestNo());
+//        pos5.setText(initialPositionMap.get(5).getChestNo());
+//        pos6.setText(initialPositionMap.get(6).getChestNo());
 
         substituePositionMap.putAll(initialPositionMap);
 //        libero.setText(initialPositionMap.get(7).getChestNo());
@@ -1142,7 +1053,6 @@ public class PanEvaluation extends javax.swing.JPanel {
     private javax.swing.JComboBox cmbRallies;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1167,7 +1077,6 @@ public class PanEvaluation extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel43;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -1186,11 +1095,5 @@ public class PanEvaluation extends javax.swing.JPanel {
     private javax.swing.JLabel lblopponentName;
     private javax.swing.JPanel panEvalRallyRow;
     private javax.swing.JPanel panPlayer;
-    private javax.swing.JTextField pos1;
-    private javax.swing.JTextField pos2;
-    private javax.swing.JTextField pos3;
-    private javax.swing.JTextField pos4;
-    private javax.swing.JTextField pos5;
-    private javax.swing.JTextField pos6;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,16 +32,16 @@ public enum SkillsDescCriteria {
     AttackF(16, "Attacking To Zone", 2, 0),
     AttackG(17, " Attack in phase", 2, 1),
     AttackH(18, " Attackers position", 2, 0),
-    AttackI(19, "Block", 2, 1),
+    AttackI(19, "No. of Blockers", 2, 1),
     AttackJ(20, " Opponent Defence Formation", 2, 1),
     AttackK(21, " Attack Defended Zone", 2, 0),
     AttackL(22, " Defender Role", 2, 0),
     AttackM(23, " Score at time of attack", 2, 0),
     AttackN(24, " Setter position", 2, 0),
     AttackO(25, "Direction of Attack", 2, 0),
-    AttackP(26, "Attack Against Block", 2, 1),
+    AttackP(26, "Type of Block", 2, 1),
     BlockA(27, " Type of Block", 3, 1),
-    BlockB(28, " Blocking Tactics", 3, 1),
+    BlockB(28, "Technique of Block", 3, 1),
     BlockC(29, "Block on Type of Attack", 3, 1),
     BlockD(30, " Block on Combination of attack", 3, 1),
     BlockE(31, " Block on Attacking Tempo", 3, 1),
@@ -50,7 +50,7 @@ public enum SkillsDescCriteria {
     BlockH(34, "Block Deflected ball at Zone", 3, 0),
     BlockI(35, " Blocking in phase", 3, 1),
     BlockJ(36, " Blockers Position", 3, 0),
-    BlockK(37, " No of Blockers", 3, 1),
+    BlockK(37, " No. of Blockers", 3, 1),
     BlockL(38, " Defence Formation", 3, 1),
     BlockM(39, " Block Defended court", 3, 0),
     BlockN(40, " Score at time of Block", 3, 0),
@@ -63,7 +63,7 @@ public enum SkillsDescCriteria {
     SetF(47, "Set delivery from Zone", 4, 0),
     SetG(48, "Set delivery to Zone", 4, 0),
     SetH(49, "Combination of attack", 4, 1),
-    SetI(50, "Type of Blockers", 4, 1),
+    SetI(50, "No. of Blockers", 4, 1),
     SetJ(51, "Game of phase", 4, 1),
     SetK(52, "Attackers position", 4, 0),
     SetL(53, "Score at the time of set", 4, 0),
@@ -82,7 +82,7 @@ public enum SkillsDescCriteria {
     DefenceB(66, "Attack on Tempo", 6, 1),
     DefenceC(67, "Combination of Attack", 6, 1),
     DefenceD(68, "Blocking at Zone", 6, 0),
-    DefenceE(69, "Type of Block", 6, 1),
+    DefenceE(69, "No. of Blockers", 6, 1),
     DefenceF(70, "Block Cover", 6, 1),
     DefenceG(71, "Defence Formation ", 6, 1),
     DefenceH(72, "Defence Sent From Zone", 6, 0),
@@ -107,7 +107,8 @@ public enum SkillsDescCriteria {
     AttackR(91, "Ball Reflected Zone", 2, 0),
     AttackS(92, "Attack Approach Run from", 2, 0),
     AttackT(93, "Attack Approach Run to", 2, 0),
-    AttackU(94, "Type of approach run", 2, 1);
+    AttackU(94, "Type of approach run", 2, 1),
+    DefenceT(95, "Attack Cover", 6, 1);
 
     int id;
     String type;
@@ -183,6 +184,21 @@ public enum SkillsDescCriteria {
             if (e.skillId == skillId && e.view == 0) {
                 list2.add(e);
             }
+        }
+        list1.addAll(list2);
+        return list1;
+    }
+
+    public static List<SkillsDescCriteria> getViewableSkillDescCriteriaBySkill(int skillId) {
+        List<SkillsDescCriteria> list1 = new ArrayList<>();
+        List<SkillsDescCriteria> list2 = new ArrayList<>();
+        for (SkillsDescCriteria e : values()) {
+            if (e.skillId == skillId && e.view == 1) {
+                list1.add(e);
+            }
+//            if (e.skillId == skillId && e.view == 0) {
+//                list2.add(e);
+//            }
         }
         list1.addAll(list2);
         return list1;

@@ -97,7 +97,11 @@ public enum ShortCutEnum {
     ShortCutEnum81(81, "C1", "C", "Curvature", 19),
     ShortCutEnum82(82, "C2", "S", "Straight", 19),
     ShortCutEnum83(83, "C3", "D", "Diagonal", 19),
-    ShortCutEnum84(84, "E4", "NB", "No Block", 8);
+    ShortCutEnum84(84, "E4", "NB", "No Block", 8),
+    ShortCutEnum85(85, "OA", "OA", "Opponent Attack", 18),
+    ShortCutEnum86(86, "OB", "OB", "Opponent Block", 18),
+    shortCutEnum87(87, "T4", "ODB", "On Direct Ball", 5),
+    ShortCutEnum88(88, "B4", "ZB", "None", 11);
 
     int shortCutId, headingId;
     String code, abbr, longForm;

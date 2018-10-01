@@ -266,6 +266,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             }
         });
 //        txtInput.requestFocus();
+
     }
 
     public void save() {
@@ -429,6 +430,12 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         if (!chestNo.equals("")) {
             mapPlayerComponent.get(mapPlayerLabel.get(chestNo)).setBackground(Color.ORANGE);
         }
+        if (!skill.equalsIgnoreCase(Skill.OP.getType()) && !skill.equalsIgnoreCase(Skill.TF.getType())) {
+            viewComponents(skill);
+            for (Map.Entry<Integer, String> entry : rallyEvaluationSkillScore.getDetailsValues().entrySet()) {
+                skillDescIdPanMap.get(entry.getKey()).lblOption.setText(entry.getValue());
+            }
+        }
 
         if (rallyEvaluationSkillScore1.getDetailsValues().size() > 0) {
             int id = getDigramId(skill);
@@ -445,12 +452,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 }
             }
         }
-        if (!skill.equalsIgnoreCase(Skill.OP.getType()) && !skill.equalsIgnoreCase(Skill.TF.getType())) {
-            viewComponents(skill);
-            for (Map.Entry<Integer, String> entry : rallyEvaluationSkillScore.getDetailsValues().entrySet()) {
-                skillDescIdPanMap.get(entry.getKey()).lblOption.setText(entry.getValue());
-            }
-        }
+
         panel.refresh();
 
     }
@@ -609,11 +611,11 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         int skillId = Skill.getIdByName(skill).getId();
         List<SkillsDescCriteria> lst = SkillsDescCriteria.getSkillDescCriteriaBySkillandView(skillId);
-        panDesc1.setLayout(new GridLayout(9, 1));
-        panDesc2.setLayout(new GridLayout(9, 1));
+        panDesc1.setLayout(new GridLayout(5, 1));
+        panDesc2.setLayout(new GridLayout(5, 1));
         int i = 0;
         for (SkillsDescCriteria sdc : lst) {
-            i++;
+
             List<String> pointList = new ArrayList<>();
             PanSkillDescCriteria pan = new PanSkillDescCriteria();
             pan.lblHeading.setText("<HTML>" + sdc.getType() + "</HTML>");
@@ -635,18 +637,21 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     pointList.add(shortcut);
                 }
             }
-            if (i <= 9) {
-                panDesc1.add(pan);
-            } else if (i <= 18) {
-                panDesc2.add(pan);
+            if (sdc.getView() == 1) {
+                i++;
+                if (i <= 5) {
+                    panDesc1.add(pan);
+                } else if (i <= 10) {
+                    panDesc2.add(pan);
+                }
             }
             pan.setPointsMap(pointsMap);
             panPoints.put(pan, pointList);
         }
 
-        for (int j = i; j < 18; j++) {
+        for (int j = i; j < 10; j++) {
             PanSkillDescCriteria pan = new PanSkillDescCriteria();
-            if (j <= 8) {
+            if (j <= 4) {
                 panDesc1.add(pan);
             } else {
                 panDesc2.add(pan);
@@ -825,8 +830,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             panOppRLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panOppRLLayout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(panRLOpp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7))
+                .addComponent(panRLOpp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         panOppRLLayout.setVerticalGroup(
@@ -1676,7 +1680,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         );
         panDesc1Layout.setVerticalGroup(
             panDesc1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 234, Short.MAX_VALUE)
+            .addGap(0, 129, Short.MAX_VALUE)
         );
 
         panDesc2.setBackground(new java.awt.Color(255, 255, 255));
@@ -1689,7 +1693,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         );
         panDesc2Layout.setVerticalGroup(
             panDesc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 234, Short.MAX_VALUE)
+            .addGap(0, 129, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
