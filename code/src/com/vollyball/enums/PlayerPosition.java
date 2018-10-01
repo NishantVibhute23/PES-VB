@@ -16,9 +16,9 @@ public enum PlayerPosition {
     SELECT(0, "Select", Color.WHITE),
     SERVER(1, "Server", Color.ORANGE),
     LIBERO(2, "Libero", Color.BLACK),
-    UNIVERSAL(3, "Universal", Color.CYAN),
+    UNIVERSAL(3, "Universal", new Color(192, 159, 1)),
     OUTSIDEHITTER(4, "Outside Hitter", Color.BLUE),
-    MIDDLEBLOCKER(5, "Middle Blocker", Color.GREEN),
+    MIDDLEBLOCKER(5, "Middle Blocker", new Color(29, 152, 68)),
     SETTER(6, "Setter", Color.RED);
 
     int id;
