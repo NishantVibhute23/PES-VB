@@ -8,6 +8,7 @@ package com.vollyball.training.dao;
 import com.vollyball.bean.CompetitionBean;
 import com.vollyball.db.DbUtil;
 import com.vollyball.training.bean.Batch;
+import com.vollyball.training.bean.BatchMatch;
 import com.vollyball.training.bean.Trainee;
 import com.vollyball.util.CommonUtil;
 import java.sql.Connection;
@@ -208,5 +209,75 @@ public class BatchDao {
         return count;
 
     }
+    public int insertBatchMatch(BatchMatch bm) {
+        int count = 0;
+
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.batchTeam"));
+            ps.setString(1, bm.getTeam1Name());
+            ps.setInt(2, bm.getBatchId());
+            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.batchTeam"));
+            ps1.setString(1, bm.getTeam2Name());
+            ps1.setInt(2, bm.getBatchId());
+            count = ps.executeUpdate();
+            count = ps1.executeUpdate();
+
+            if (count == 1) {
+                insertBatchMatchPlayer(bm);
+            }
+
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return count;
+
+    }
+
+    public int insertBatchMatchPlayer(BatchMatch bm) {
+        int count = 0;
+        int teamId[] = new int[10];
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.batchTeam"));
+            ps.setInt(1, bm.getBatchId());
+            ResultSet rs = ps.executeQuery();
+
+            int i = 0;
+            while (rs.next()) {
+                teamId[i] = rs.getInt(1);
+                i++;
+            }
+            if (teamId.length != 0) {
+                for (Trainee trainee : bm.getTeam1List()) {
+                    PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.batchMatchTeam"));
+                    if (trainee.getId() != 0) {
+                        ps1.setInt(1, teamId[0]);
+                        ps1.setInt(2, trainee.getId());
+                        ps1.setInt(3, trainee.getPosition());
+                        count = ps1.executeUpdate();
+                    }
+
+                }
+                for (Trainee trainee : bm.getTeam2List()) {
+                    PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.batchMatchTeam"));
+                    if (trainee.getId() != 0) {
+                        ps1.setInt(1, teamId[1]);
+                        ps1.setInt(2, trainee.getId());
+                        ps1.setInt(3, trainee.getPosition());
+                        count = ps1.executeUpdate();
+                    }
+                }
+
+            }
+
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+
 
 }

@@ -44,7 +44,9 @@ public enum SetupEnum {
     Batch(31, "Batch"),
     Trainee(32, "Trainee"),
     Setting(33, "Setting"),
-    InsertSettings(34, "Insert Setting");
+    InsertSettings(34, "Insert Setting"),
+    BatchMatch(35, "Batch Team"),
+    BatchMatchPlayer(36, "Batch Match Player");
 
     int step;
 

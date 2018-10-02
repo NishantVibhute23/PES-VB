@@ -74,6 +74,8 @@ public class Setup extends Thread {
             createTraineeTable(75);
             createSettingTable(80);
             insertDefaultSettings(80);
+            createBatchTeamTable(90);
+            createBatchMatchPlayerTable(100);
 
             FrmRegister.lblStatus.setText("Done");
             FrmRegister.lblFinish.setVisible(true);
@@ -196,6 +198,12 @@ public class Setup extends Thread {
 
     public void createSettingTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.settings"), SetupEnum.Setting, status);
+    }
+    public void createBatchTeamTable(int status) {
+        executeQuery(CommonUtil.getResourceProperty("create.batchTeam"), SetupEnum.BatchMatch, status);
+    }
+    public void createBatchMatchPlayerTable(int status) {
+        executeQuery(CommonUtil.getResourceProperty("create.batchMatchPlayer"), SetupEnum.BatchMatchPlayer, status);
     }
 
     public void insertRatings(int status) {

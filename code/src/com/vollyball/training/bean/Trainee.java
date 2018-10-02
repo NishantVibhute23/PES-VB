@@ -16,6 +16,7 @@ public class Trainee {
     int batchId;
 //    String batchName;
      int isDeleted;
+     int position;
 
     public int getId() {
         return id;
@@ -57,6 +58,15 @@ public class Trainee {
     public void setIsDeleted(int isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+    
     
     
     

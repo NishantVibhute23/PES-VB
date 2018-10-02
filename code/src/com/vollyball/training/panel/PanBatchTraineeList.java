@@ -14,6 +14,7 @@ import com.vollyball.renderer.GroupableTableHeader;
 import com.vollyball.renderer.TableHeaderRenderer;
 import com.vollyball.training.bean.Trainee;
 import com.vollyball.training.dao.BatchDao;
+import com.vollyball.training.dialog.CreateBatchMatchDailog;
 import com.vollyball.training.dialog.CreateTraineeDailog;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -187,6 +188,8 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         lblNewTeam = new javax.swing.JLabel();
         txtFilter = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        lblNewTeam1 = new javax.swing.JLabel();
 
         panReport.setLayout(new java.awt.BorderLayout());
 
@@ -228,6 +231,31 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
             }
         });
 
+        jPanel3.setBackground(new java.awt.Color(57, 74, 108));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblNewTeam1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblNewTeam1.setForeground(new java.awt.Color(255, 255, 255));
+        lblNewTeam1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNewTeam1.setText("Match Schedule");
+        lblNewTeam1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblNewTeam1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNewTeam1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblNewTeam1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblNewTeam1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -235,7 +263,9 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 417, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
                 .addComponent(lblReportHeading)
                 .addGap(34, 34, 34)
                 .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,7 +280,8 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
                         .addGap(4, 4, 4)
                         .addComponent(lblReportHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtFilter))
+                    .addComponent(txtFilter)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -285,11 +316,21 @@ public class PanBatchTraineeList extends javax.swing.JPanel {
         newFilter();
     }//GEN-LAST:event_txtFilterKeyTyped
 
+    private void lblNewTeam1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewTeam1MouseClicked
+        // TODO add your handling code here:
+        CreateBatchMatchDailog createBatchMatchDailog = new CreateBatchMatchDailog();
+        createBatchMatchDailog.setValues(batchId);
+        createBatchMatchDailog.init();
+        createBatchMatchDailog.show();
+    }//GEN-LAST:event_lblNewTeam1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblNewTeam;
+    private javax.swing.JLabel lblNewTeam1;
     public javax.swing.JLabel lblReportHeading;
     private javax.swing.JPanel panReport;
     private javax.swing.JTextField txtFilter;
