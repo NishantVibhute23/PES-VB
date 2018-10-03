@@ -5,8 +5,7 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.bean.CompetitionBean;
-import com.vollyball.panels.PanMatchConsolidatedReportHome;
+import com.vollyball.panels.report.PanMatchConsolidatedReportHome;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -25,12 +24,11 @@ public class DialogPanMatchReportConsolidated {
     private JDialog dialog;
     int matchId;
     int cb;
-    
-    public void setValues(int cb,int matchId){
-        this.cb=cb;
-        this.matchId=matchId;
+
+    public void setValues(int cb, int matchId) {
+        this.cb = cb;
+        this.matchId = matchId;
     }
-    
 
     public void init() {
         try {
@@ -53,7 +51,7 @@ public class DialogPanMatchReportConsolidated {
     }
 
     protected Container createPane() {
-        PanMatchConsolidatedReportHome panMatch = new PanMatchConsolidatedReportHome(cb,matchId);
+        PanMatchConsolidatedReportHome panMatch = new PanMatchConsolidatedReportHome(cb, matchId);
 
         return panMatch;
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vollyball.panels;
+package com.vollyball.panels.report;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -21,30 +21,28 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Supriya
+ * @author nishant.vibhute
  */
-public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
+public class PanTeamReportShow extends javax.swing.JPanel {
 
-    PanMatchReportConsolidated panC;
-    PanZoneSkillwiseMain panZ;
-    PanZoneRotationMain panR;
-    int cb, matchId;
     List<JPanel> panListToPrint = new ArrayList<>();
+    int cb;
+    int matchId;
 
     /**
-     * Creates new form PanMatchConsolidatedReportHome
+     * Creates new form PanTeamReportShow
      */
-    public PanMatchConsolidatedReportHome(int cb, int matchId) {
+    public PanTeamReportShow(int cb, int matchId, int type) {
         initComponents();
-        this.cb = cb;
-        this.matchId = matchId;
-        panC = new PanMatchReportConsolidated(cb, matchId);
-        panR = new PanZoneRotationMain(cb, matchId);
-        panZ = new PanZoneSkillwiseMain(cb, matchId);
-        panListToPrint.add(panC);
-        panListToPrint.add(panR);
-        panListToPrint.add(panZ);
-        panReport.add(panC, BorderLayout.CENTER);
+        if (type == 1) {
+            PanTeamReportSkill panTeamReportSkill = new PanTeamReportSkill(cb, matchId);
+            panView.add(panTeamReportSkill, BorderLayout.CENTER);
+            panListToPrint.add(panTeamReportSkill);
+        } else if (type == 2) {
+            PanTeamReportOFAttack panTeamReportOFAttack = new PanTeamReportOFAttack();
+            panView.add(panTeamReportOFAttack, BorderLayout.CENTER);
+            panListToPrint.add(panTeamReportOFAttack);
+        }
     }
 
     /**
@@ -59,12 +57,8 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         panPrint1 = new javax.swing.JPanel();
         lblPrint1 = new javax.swing.JLabel();
-        scrPan = new javax.swing.JScrollPane();
-        panReport = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        lblmatchReport = new javax.swing.JLabel();
-        lblRotationReport = new javax.swing.JLabel();
-        lblSkilReport = new javax.swing.JLabel();
+        panShow = new javax.swing.JScrollPane();
+        panView = new javax.swing.JPanel();
 
         panPrint1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -100,7 +94,7 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(621, 621, 621)
                 .addComponent(panPrint1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(362, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,76 +104,24 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        panReport.setLayout(new java.awt.BorderLayout());
-        scrPan.setViewportView(panReport);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        lblmatchReport.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblmatchReport.setText("Match");
-        lblmatchReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lblmatchReport.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblmatchReportMouseClicked(evt);
-            }
-        });
-
-        lblRotationReport.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRotationReport.setText("Rotation");
-        lblRotationReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lblRotationReport.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblRotationReportMouseClicked(evt);
-            }
-        });
-
-        lblSkilReport.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSkilReport.setText("Skill");
-        lblSkilReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lblSkilReport.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSkilReportMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblRotationReport, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblSkilReport, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addComponent(lblmatchReport, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 687, Short.MAX_VALUE)))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblRotationReport, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-            .addComponent(lblSkilReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(lblmatchReport, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
-        );
+        panView.setLayout(new java.awt.BorderLayout());
+        panShow.setViewportView(panView);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(scrPan)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panShow, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(scrPan, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panShow, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,57 +130,22 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         panPrint1.setVisible(false);
         printComponenet(panListToPrint);
         panPrint1.setVisible(true);
-
     }//GEN-LAST:event_lblPrint1MouseClicked
-
-    private void lblmatchReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblmatchReportMouseClicked
-        // TODO add your handling code here:
-        panReport.removeAll();
-        panReport.add(panC, BorderLayout.CENTER);
-        validate();
-        repaint();
-
-    }//GEN-LAST:event_lblmatchReportMouseClicked
-
-    private void lblRotationReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRotationReportMouseClicked
-        // TODO add your handling code here:
-        panReport.removeAll();
-        panReport.add(panR, BorderLayout.CENTER);
-        validate();
-        repaint();
-    }//GEN-LAST:event_lblRotationReportMouseClicked
-
-    private void lblSkilReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSkilReportMouseClicked
-        // TODO add your handling code here:
-        panReport.removeAll();
-
-        panReport.add(panZ, BorderLayout.CENTER);
-        validate();
-        repaint();
-    }//GEN-LAST:event_lblSkilReportMouseClicked
 
     public void printComponenet(final List<JPanel> comp) {
 
         PageFormat documentPageFormat = new PageFormat();
         documentPageFormat.setOrientation(PageFormat.PORTRAIT);
-
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setJobName("Score Report_-_");
-
         Book book = new Book();
-
         for (Component c : comp) {
             final Component comp1 = c;
             Printable p1 = new Printable() {
 
                 @Override
                 public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-//                    if (pageIndex > 0) {
-//                        return Printable.NO_SUCH_PAGE;
-//                    }
 
-//                format.setOrientation(PageFormat.LANDSCAPE);
-                    // get the bounds of the component
                     Dimension dim = comp1.getSize();
                     double cHeight = dim.getHeight();
                     double cWidth = dim.getWidth();
@@ -276,26 +183,12 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
             // handle exception
         }
 
-//
-//        if (pj.printDialog() == false) {
-//            return;
-//        }
-//
-//        try {
-//            pj.print();
-//        } catch (PrinterException ex) {
-//            // handle exception
-//        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblPrint1;
-    private javax.swing.JLabel lblRotationReport;
-    private javax.swing.JLabel lblSkilReport;
-    private javax.swing.JLabel lblmatchReport;
     private javax.swing.JPanel panPrint1;
-    private javax.swing.JPanel panReport;
-    private javax.swing.JScrollPane scrPan;
+    private javax.swing.JScrollPane panShow;
+    private javax.swing.JPanel panView;
     // End of variables declaration//GEN-END:variables
 }

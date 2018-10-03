@@ -3,59 +3,72 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vollyball.panels;
+package com.vollyball.panels.report;
 
-import com.vollyball.bean.Player;
-import com.vollyball.enums.PlayerPosition;
+import com.vollyball.panels.*;
+import com.vollyball.bean.ZoneHitCount;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
+import java.awt.Polygon;
 
 /**
  *
  * @author nishant.vibhute
  */
-public class PanZoneRotationPanel extends javax.swing.JPanel {
+public class PanZoneSkillwisePanel extends javax.swing.JPanel {
 
-    Player player;
+    ZoneHitCount zhc;
 
     /**
      * Creates new form PanZoneSkillwiseReport
      */
-    public PanZoneRotationPanel(Player player) {
+    public PanZoneSkillwisePanel() {
         initComponents();
-        this.player = player;
+
         repaint();
     }
 
-    @Override
+    public void setValues(ZoneHitCount zhc) {
+        this.zhc = zhc;
+        repaint();
+    }
+
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        int centerX = 25, centerY = 25;
-        int ovalWidth = 30, ovalHeight = 30;
 
-//        Player player = new Player();
-//        player.setChestNo("11");
-//        player.setPosition(3);
-        String text = player.getChestNo();
-        // Draw oval
-        GradientPaint redtowhite = new GradientPaint(centerX - ovalWidth / 2, centerY - ovalHeight / 2, PlayerPosition.getNameById(player.getPosition()).getColor(), centerX - ovalWidth / 2 + 60, centerY - ovalHeight / 2, Color.white);
-        g2.setPaint(redtowhite);
-        g2.fill(new Ellipse2D.Double(centerX - ovalWidth / 2, centerY - ovalHeight / 2, 30, 30));
-        g2.setPaint(Color.WHITE);
+        if (zhc.isIsMaxSuccess()) {
+            Polygon poly = new Polygon(new int[]{0, 50, 50, 0}, new int[]{0, 0, 10, 40}, 4);
+            g2.setColor(new Color(34, 177, 76));
+            g2.fill(poly);
+        }
 
-        // Draw centered text
+        if (zhc.isIsMaxFail()) {
+            Polygon poly2 = new Polygon(new int[]{0, 50, 50, 0}, new int[]{40, 10, 50, 50}, 4);
+            g2.setColor(new Color(182, 14, 22));
+            g2.fill(poly2);
+        }
+        g2.setStroke(new BasicStroke(1));
+        g2.setColor(Color.BLACK);
+        g2.drawLine(0, 40, 50, 10);
+
         FontMetrics fm = g.getFontMetrics();
-        double textWidth = fm.getStringBounds(text, g).getWidth();
-        Font font = new Font("Serif", Font.BOLD, 20);
+        int centerX = 5, centerY = 15;
+        double textWidth = fm.getStringBounds("1%", g).getWidth();
+        Font font = new Font("Serif", Font.BOLD, 11);
         g2.setFont(font);
-        g.setColor(Color.WHITE);
-        g.drawString(text, (int) (centerX - textWidth / 1.2),
-                (int) (centerY + fm.getMaxAscent() / 1.5));
+        g.setColor(Color.BLACK);
+        g.drawString("S:" + zhc.getSuccessPerc() + "%", centerX, centerY);
+
+        centerX = 20;
+        centerY = 43;
+//        textWidth = fm.getStringBounds("%" + zone, g).getWidth();
+        g2.setFont(font);
+        g.setColor(Color.BLACK);
+        g.drawString("F:" + zhc.getFailPerc() + "%", centerX, centerY);
     }
 
     /**
@@ -73,11 +86,11 @@ public class PanZoneRotationPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 44, Short.MAX_VALUE)
+            .addGap(0, 41, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 44, Short.MAX_VALUE)
+            .addGap(0, 41, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

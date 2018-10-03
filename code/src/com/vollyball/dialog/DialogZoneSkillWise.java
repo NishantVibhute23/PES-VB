@@ -5,7 +5,7 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.panels.PanZoneWiseReport;
+import com.vollyball.panels.report.PanTeamReportShow;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -22,9 +22,15 @@ public class DialogZoneSkillWise {
 
     private JFrame parentFrame;
     private JDialog dialog;
+    int cb;
+    int matchId;
+    int type;
 
-    public void init() {
+    public void init(int cb, int matchId, int type) {
         try {
+            this.cb = cb;
+            this.matchId = matchId;
+            this.type = type;
             this.dialog = new JDialog(this.parentFrame, "New Match", true);
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());
@@ -37,13 +43,13 @@ public class DialogZoneSkillWise {
     }
 
     protected Container createPane() {
-        PanZoneWiseReport panMatch = new PanZoneWiseReport();
+        PanTeamReportShow panMatch = new PanTeamReportShow(cb, matchId, type);
         return panMatch;
     }
 
     public void show() {
         if (this.dialog == null) {
-            init();
+            init(cb, matchId, type);
         }
         this.dialog.setVisible(true);
     }

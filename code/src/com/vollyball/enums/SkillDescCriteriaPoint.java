@@ -513,4 +513,14 @@ public enum SkillDescCriteriaPoint {
         return list;
     }
 
+    public static List<SkillDescCriteriaPoint> getTypeByskillDescCriteriaId(int skillDescCriteriaId) {
+        List<SkillDescCriteriaPoint> list = new ArrayList<>();
+        for (SkillDescCriteriaPoint e : values()) {
+            if (e.skillDescCriteriaId == skillDescCriteriaId) {
+                list.add(e);
+            }
+        }
+        return list;
+    }
+
 }

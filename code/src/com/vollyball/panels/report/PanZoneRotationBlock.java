@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vollyball.panels;
+package com.vollyball.panels.report;
 
+import com.vollyball.panels.*;
 import com.vollyball.bean.Player;
 import com.vollyball.bean.PlayerPositionBean;
 import java.awt.BorderLayout;
