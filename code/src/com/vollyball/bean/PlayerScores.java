@@ -51,6 +51,14 @@ public class PlayerScores {
     double attemptRate;
     String attemptRatePerc;
 
+    int successAttempt;
+    double attemptSuccessRate;
+    String attemptSuccessRatePerc;
+
+    int failureAttempt;
+    double attemptFailureRate;
+    String attemptFailureRatePerc;
+
     public String getMatchPhase() {
         return matchPhase;
     }
@@ -321,6 +329,54 @@ public class PlayerScores {
 
     public void setChestNo(String chestNo) {
         this.chestNo = chestNo;
+    }
+
+    public int getSuccessAttempt() {
+        return successAttempt;
+    }
+
+    public void setSuccessAttempt(int successAttempt) {
+        this.successAttempt = successAttempt;
+    }
+
+    public double getAttemptSuccessRate() {
+        return attemptSuccessRate;
+    }
+
+    public void setAttemptSuccessRate(double attemptSuccessRate) {
+        this.attemptSuccessRate = attemptSuccessRate;
+    }
+
+    public String getAttemptSuccessRatePerc() {
+        return attemptSuccessRatePerc;
+    }
+
+    public void setAttemptSuccessRatePerc(String attemptSuccessRatePerc) {
+        this.attemptSuccessRatePerc = attemptSuccessRatePerc;
+    }
+
+    public int getFailureAttempt() {
+        return failureAttempt;
+    }
+
+    public void setFailureAttempt(int failureAttempt) {
+        this.failureAttempt = failureAttempt;
+    }
+
+    public double getAttemptFailureRate() {
+        return attemptFailureRate;
+    }
+
+    public void setAttemptFailureRate(double attemptFailureRate) {
+        this.attemptFailureRate = attemptFailureRate;
+    }
+
+    public String getAttemptFailureRatePerc() {
+        return attemptFailureRatePerc;
+    }
+
+    public void setAttemptFailureRatePerc(String attemptFailureRatePerc) {
+        this.attemptFailureRatePerc = attemptFailureRatePerc;
     }
 
 }

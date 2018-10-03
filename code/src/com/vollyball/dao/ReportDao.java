@@ -942,4 +942,36 @@ public class ReportDao {
         }
         return tempo;
     }
+
+    public List<PlayerScores> getMatchReportForPlayerSkills(int evId, int skillId) {
+        List<PlayerScores> list = new ArrayList<>();
+
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps;
+            ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.matchPlayer.successFailure.byplayer"));
+            ps.setInt(1, evId);
+            ps.setInt(2, skillId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                PlayerScores playerScores = new PlayerScores();
+                playerScores.setId(rs.getInt(1));
+                playerScores.setPlayerName(rs.getString(2));
+                playerScores.setTotalAttempt(rs.getInt(3));
+                playerScores.setSuccessAttempt(rs.getInt(4));
+                playerScores.setFailureAttempt(rs.getInt(5));
+                playerScores.setAttemptSuccessRate(playerScores.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) playerScores.getSuccessAttempt() / (double) playerScores.getTotalAttempt() * 100, 2)));
+                playerScores.setAttemptSuccessRatePerc(playerScores.getAttemptSuccessRate() == 0 ? "0%" : df.format(playerScores.getAttemptSuccessRate()));
+                playerScores.setAttemptFailureRate(playerScores.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) playerScores.getFailureAttempt() / (double) playerScores.getTotalAttempt() * 100, 2)));
+                playerScores.setAttemptFailureRatePerc(playerScores.getAttemptFailureRate() == 0 ? "0%" : df.format(playerScores.getAttemptFailureRate()));
+                list.add(playerScores);
+            }
+
+            db.closeConnection(con);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return list;
+
+    }
 }
