@@ -976,23 +976,25 @@ public class ReportDao {
 
     }
 
-    public Complex getComplexReport(int matchevaluationId, int skillDescCriteriaId) {
+    public Complex getComplexReport(int matchevaluationId, int skillDescCriteriaId,int skillDescCriteriaIdComplex,int skillId) {
         Complex complex = new Complex();
 
-        complex.setK1(getAttackReportSkilDescWiseComplexWiseK1(matchevaluationId, skillDescCriteriaId));
-        complex.setK2(getAttackReportSkilDescWiseComplexWiseK2(matchevaluationId, skillDescCriteriaId));
-        complex.setTp(getAttackReportSkilDescWiseComplexWiseTp(matchevaluationId, skillDescCriteriaId));
+        complex.setK1(getAttackReportSkilDescWiseComplexWiseK1(matchevaluationId, skillDescCriteriaId,skillDescCriteriaIdComplex,skillId));
+        complex.setK2(getAttackReportSkilDescWiseComplexWiseK2(matchevaluationId, skillDescCriteriaId,skillDescCriteriaIdComplex,skillId));
+        complex.setTp(getAttackReportSkilDescWiseComplexWiseTp(matchevaluationId, skillDescCriteriaId,skillDescCriteriaIdComplex,skillId));
 
         return complex;
     }
 
-    public Tempo getAttackReportSkilDescWiseComplexWiseK1(int matchevaluationId, int skillDescCriteriaId) {
+    public Tempo getAttackReportSkilDescWiseComplexWiseK1(int matchevaluationId, int skillDescCriteriaId,int skillDescCriteriaIdComplex,int skillId) {
         Tempo tempo = new Tempo();
         try {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k1.1"));
-            ps.setInt(1, matchevaluationId);
-            ps.setInt(2, skillDescCriteriaId);
+            ps.setInt(1, skillDescCriteriaIdComplex);
+            ps.setInt(2, skillId);
+            ps.setInt(3, matchevaluationId);
+            ps.setInt(4, skillDescCriteriaId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1036,8 +1038,10 @@ public class ReportDao {
 
             }
             PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k1.2"));
-            ps1.setInt(1, matchevaluationId);
-            ps1.setInt(2, skillDescCriteriaId);
+            ps1.setInt(1, skillDescCriteriaIdComplex);
+            ps1.setInt(2, skillId);
+            ps1.setInt(3, matchevaluationId);
+            ps1.setInt(4, skillDescCriteriaId);
             ResultSet rs1 = ps1.executeQuery();
             while (rs1.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1081,8 +1085,10 @@ public class ReportDao {
                 tempo.setNb(sf3);
             }
             PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k1.3"));
-            ps1.setInt(1, matchevaluationId);
-            ps1.setInt(2, skillDescCriteriaId);
+            ps2.setInt(1, skillDescCriteriaIdComplex);
+            ps2.setInt(2, skillId);
+            ps2.setInt(3, matchevaluationId);
+            ps2.setInt(4, skillDescCriteriaId);
             ResultSet rs2 = ps2.executeQuery();
             while (rs2.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1166,8 +1172,10 @@ public class ReportDao {
                 tempo.setBtl(sf7);
             }
             PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k1.4"));
-            ps1.setInt(1, matchevaluationId);
-            ps1.setInt(2, skillDescCriteriaId);
+            ps3.setInt(1, skillDescCriteriaIdComplex);
+            ps3.setInt(2, skillId);
+            ps3.setInt(3, matchevaluationId);
+            ps3.setInt(4, skillDescCriteriaId);
             ResultSet rs3 = ps3.executeQuery();
             while (rs3.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1239,13 +1247,15 @@ public class ReportDao {
         return tempo;
     }
 
-    public Tempo getAttackReportSkilDescWiseComplexWiseK2(int matchevaluationId, int skillDescCriteriaId) {
+    public Tempo getAttackReportSkilDescWiseComplexWiseK2(int matchevaluationId, int skillDescCriteriaId,int skillDescCriteriaIdComplex,int skillId) {
         Tempo tempo = new Tempo();
         try {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k2.1"));
-            ps.setInt(1, matchevaluationId);
-            ps.setInt(2, skillDescCriteriaId);
+            ps.setInt(1, skillDescCriteriaIdComplex);
+            ps.setInt(2, skillId);
+            ps.setInt(3, matchevaluationId);
+            ps.setInt(4, skillDescCriteriaId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1289,8 +1299,10 @@ public class ReportDao {
                 tempo.setOdb(sf3);
             }
             PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k2.2"));
-            ps1.setInt(1, matchevaluationId);
-            ps1.setInt(2, skillDescCriteriaId);
+            ps1.setInt(1, skillDescCriteriaIdComplex);
+            ps1.setInt(2, skillId);
+            ps1.setInt(3, matchevaluationId);
+            ps1.setInt(4, skillDescCriteriaId);
             ResultSet rs1 = ps1.executeQuery();
             while (rs1.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1335,8 +1347,10 @@ public class ReportDao {
                 tempo.setNb(sf3);
             }
             PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k2.3"));
-            ps1.setInt(1, matchevaluationId);
-            ps1.setInt(2, skillDescCriteriaId);
+            ps2.setInt(1, skillDescCriteriaIdComplex);
+            ps2.setInt(2, skillId);
+            ps2.setInt(3, matchevaluationId);
+            ps2.setInt(4, skillDescCriteriaId);
             ResultSet rs2 = ps2.executeQuery();
             while (rs2.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1421,8 +1435,10 @@ public class ReportDao {
 
             }
             PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k2.4"));
-            ps1.setInt(1, matchevaluationId);
-            ps1.setInt(2, skillDescCriteriaId);
+            ps3.setInt(1, skillDescCriteriaIdComplex);
+            ps3.setInt(2, skillId);
+            ps3.setInt(3, matchevaluationId);
+            ps3.setInt(4, skillDescCriteriaId);
             ResultSet rs3 = ps3.executeQuery();
             while (rs3.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1494,13 +1510,15 @@ public class ReportDao {
         return tempo;
     }
 
-    public Tempo getAttackReportSkilDescWiseComplexWiseTp(int matchevaluationId, int skillDescCriteriaId) {
+    public Tempo getAttackReportSkilDescWiseComplexWiseTp(int matchevaluationId, int skillDescCriteriaId,int skillDescCriteriaIdComplex,int skillId) {
         Tempo tempo = new Tempo();
         try {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.tp.1"));
-            ps.setInt(1, matchevaluationId);
-            ps.setInt(2, skillDescCriteriaId);
+            ps.setInt(1, skillDescCriteriaIdComplex);
+            ps.setInt(2, skillId);
+            ps.setInt(3, matchevaluationId);
+            ps.setInt(4, skillDescCriteriaId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1544,8 +1562,10 @@ public class ReportDao {
                 tempo.setOdb(sf3);
             }
             PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.tp.2"));
-            ps1.setInt(1, matchevaluationId);
-            ps1.setInt(2, skillDescCriteriaId);
+            ps1.setInt(1, skillDescCriteriaIdComplex);
+            ps1.setInt(2, skillId);
+            ps1.setInt(3, matchevaluationId);
+            ps1.setInt(4, skillDescCriteriaId);
             ResultSet rs1 = ps1.executeQuery();
             while (rs1.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1589,8 +1609,10 @@ public class ReportDao {
                 tempo.setNb(sf3);
             }
             PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.tp.3"));
-            ps1.setInt(1, matchevaluationId);
-            ps1.setInt(2, skillDescCriteriaId);
+            ps2.setInt(1, skillDescCriteriaIdComplex);
+            ps2.setInt(2, skillId);
+            ps2.setInt(3, matchevaluationId);
+            ps2.setInt(4, skillDescCriteriaId);
             ResultSet rs2 = ps2.executeQuery();
             while (rs2.next()) {
                 SuccessFailure sf = new SuccessFailure();
@@ -1675,8 +1697,10 @@ public class ReportDao {
 
             }
             PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.tp.4"));
-            ps1.setInt(1, matchevaluationId);
-            ps1.setInt(2, skillDescCriteriaId);
+            ps3.setInt(1, skillDescCriteriaIdComplex);
+            ps3.setInt(2, skillId);
+            ps3.setInt(3, matchevaluationId);
+            ps3.setInt(4, skillDescCriteriaId);
             ResultSet rs3 = ps3.executeQuery();
             while (rs3.next()) {
                 SuccessFailure sf = new SuccessFailure();
