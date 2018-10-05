@@ -76,9 +76,10 @@ public class ImagePanel extends JPanel {
         setSize(size);
         this.setLayout(new GridLayout(8, 5));
 
-        rallyPositionMap.putAll(p.rallyPositionMap);
-        rallyPositionMapOpp.putAll(p.rallyPositionMapOpp);
-
+        if (p != null) {
+            rallyPositionMap.putAll(p.rallyPositionMap);
+            rallyPositionMapOpp.putAll(p.rallyPositionMapOpp);
+        }
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 5; j++) {
 

@@ -327,6 +327,7 @@ public class PanMatchDetails extends javax.swing.JPanel {
         jPanel29 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         panSkillReports = new javax.swing.JPanel();
 
         jPanel1.setBackground(new java.awt.Color(57, 74, 108));
@@ -1372,6 +1373,15 @@ public class PanMatchDetails extends javax.swing.JPanel {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("ServiceReport");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
         jPanel34.setLayout(jPanel34Layout);
         jPanel34Layout.setHorizontalGroup(
@@ -1379,7 +1389,11 @@ public class PanMatchDetails extends javax.swing.JPanel {
             .addGroup(jPanel34Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
+            .addGroup(jPanel34Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel34Layout.createSequentialGroup()
                     .addGap(50, 50, 50)
@@ -1391,7 +1405,9 @@ public class PanMatchDetails extends javax.swing.JPanel {
             .addGroup(jPanel34Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addGap(105, 105, 105)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addGap(63, 63, 63))
             .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel34Layout.createSequentialGroup()
                     .addGap(112, 112, 112)
@@ -1608,6 +1624,13 @@ public class PanMatchDetails extends javax.swing.JPanel {
         createDialogZoneSkillWise.show();
     }//GEN-LAST:event_jLabel7MouseClicked
 
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        DialogZoneSkillWise createDialogZoneSkillWise = new DialogZoneSkillWise();
+        createDialogZoneSkillWise.init(cb, matchId, 3);
+        createDialogZoneSkillWise.show();
+    }//GEN-LAST:event_jLabel8MouseClicked
+
     public void setPlayerReport(int skillid) {
         panSkillReports.remove(panMatchBestTeamScorer);
         panSkillReports.add(panMatchSkillWisePlayerReport, BorderLayout.CENTER);
@@ -1697,6 +1720,7 @@ public class PanMatchDetails extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;

@@ -5,10 +5,16 @@
  */
 package com.vollyball.panels.report;
 
+import com.vollyball.bean.PlayerScores;
 import com.vollyball.bean.TeamSkillScore;
+import com.vollyball.dao.ReportDao;
 import com.vollyball.dao.TeamReportDao;
 import com.vollyball.enums.Skill;
 import java.text.DecimalFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -20,16 +26,18 @@ public class PanTeamReportSkillRow extends javax.swing.JPanel {
 
     TeamReportDao trd = new TeamReportDao();
     DecimalFormat df = new DecimalFormat("##.##%");
+    ReportDao reportDao = new ReportDao();
+    DefaultTableModel dm;
 
     /**
      * Creates new form PanTeamReportSkillRow
      */
-    public PanTeamReportSkillRow(int cb, int i, int matchId, int team1id, int evaluationteamId) {
+    public PanTeamReportSkillRow(int cb, int skillId, int matchId, int team1id, int evaluationteamId) {
         initComponents();
         resizeColumns();
-        skillName.setText(Skill.getNameById(i).getType());
+        skillName.setText(Skill.getNameById(skillId).getType());
 
-        TeamSkillScore tsc = trd.getTeamSkillWiseScoreReport(cb, i, matchId, team1id, evaluationteamId);
+        TeamSkillScore tsc = trd.getTeamSkillWiseScoreReport(cb, skillId, matchId, team1id, evaluationteamId);
 
         lblAttempt.setText("" + tsc.getTotalAttempt());
 
@@ -38,6 +46,40 @@ public class PanTeamReportSkillRow extends javax.swing.JPanel {
 
         rate = tsc.getOne() == 0 || tsc.getTotalAttempt() == 0 ? 0 : (double) tsc.getOne() / (double) tsc.getTotalAttempt();
         lblFailureRate.setText(rate == 0 ? "0%" : df.format(rate));
+
+        dm = (DefaultTableModel) tblPlayerReport.getModel();
+
+        List<PlayerScores> lsList = reportDao.getMatchReportForPlayerSkills(evaluationteamId, skillId);
+
+        Collections.sort(lsList, new Comparator<PlayerScores>() {
+            @Override
+            public int compare(PlayerScores c1, PlayerScores c2) {
+
+                return Double.compare(c2.getAttemptSuccessRate(), c1.getAttemptSuccessRate());
+            }
+        });
+
+        for (int i = dm.getRowCount() - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
+
+        int j = 0;
+        for (int i = 0; i < lsList.size(); i++) {
+
+            if (i <= 6) {
+                j++;
+                PlayerScores p = lsList.get(i);
+                Object[] row = {p.getPlayerName(), p.getTotalAttempt(), p.getSuccessAttempt(), p.getAttemptSuccessRatePerc(), p.getFailureAttempt(), p.getAttemptFailureRatePerc()};
+                dm.addRow(row);
+            }
+
+        }
+
+        for (int k = j; k < 6; k++) {
+            Object[] row = {"", "", "", "", "", ""};
+            dm.addRow(row);
+        }
+
     }
 
     float[] columnWidthPercentage = {40.0f, 12.0f, 12.0f, 12.0f, 12.0f, 12.0f};
@@ -190,20 +232,21 @@ public class PanTeamReportSkillRow extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
+                        .addGap(16, 16, 16)
+                        .addComponent(skillName))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(skillName)))
-                .addGap(8, 8, 8))
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(3, 3, 3)
+                .addContainerGap()
                 .addComponent(skillName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +255,7 @@ public class PanTeamReportSkillRow extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5))
+                .addGap(7, 7, 7))
         );
     }// </editor-fold>//GEN-END:initComponents
 

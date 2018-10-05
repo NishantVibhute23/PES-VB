@@ -9,14 +9,13 @@ import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.panels.ImagePanel;
 import java.awt.BorderLayout;
 import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
  *
  * @author nishant.vibhute
  */
-public class PanTeamReportOFAttack extends javax.swing.JPanel {
+public class PanTeamReportOFSet extends javax.swing.JPanel {
 
     String datatr = "";
     ImagePanel imgTPL, imgDBL, imgSGL, imgNB;
@@ -31,26 +30,26 @@ public class PanTeamReportOFAttack extends javax.swing.JPanel {
     /**
      * Creates new form PanTeamReportOFAttack
      */
-    public PanTeamReportOFAttack() {
+    public PanTeamReportOFSet() {
         initComponents();
         createComplexOverviewTable();
         createAttackBlockOverviewTable();
 
-        imgTPL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
-        panTPL.setLayout(new BorderLayout());
-        panTPL.add(imgTPL, BorderLayout.CENTER);
-
-        imgDBL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
-        PanDBL.setLayout(new BorderLayout());
-        PanDBL.add(imgDBL, BorderLayout.CENTER);
-
-        imgSGL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
-        PanSBL.setLayout(new BorderLayout());
-        PanSBL.add(imgSGL, BorderLayout.CENTER);
-
-        imgNB = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
-        PanNB.setLayout(new BorderLayout());
-        PanNB.add(imgNB, BorderLayout.CENTER);
+//        imgTPL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+//        panTPL.setLayout(new BorderLayout());
+//        panTPL.add(imgTPL, BorderLayout.CENTER);
+//
+//        imgDBL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+//        PanDBL.setLayout(new BorderLayout());
+//        PanDBL.add(imgDBL, BorderLayout.CENTER);
+//
+//        imgSGL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+//        PanSBL.setLayout(new BorderLayout());
+//        PanSBL.add(imgSGL, BorderLayout.CENTER);
+//
+//        imgNB = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+//        PanNB.setLayout(new BorderLayout());
+//        PanNB.add(imgNB, BorderLayout.CENTER);
     }
 
     public void createComplexOverviewTable() {

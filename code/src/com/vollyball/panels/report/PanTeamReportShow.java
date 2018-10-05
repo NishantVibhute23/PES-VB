@@ -42,6 +42,10 @@ public class PanTeamReportShow extends javax.swing.JPanel {
             PanTeamReportOFAttack panTeamReportOFAttack = new PanTeamReportOFAttack();
             panView.add(panTeamReportOFAttack, BorderLayout.CENTER);
             panListToPrint.add(panTeamReportOFAttack);
+        } else if (type == 3) {
+            PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService();
+            panView.add(panTeamReportOfService, BorderLayout.CENTER);
+            panListToPrint.add(panTeamReportOfService);
         }
     }
 
@@ -113,7 +117,7 @@ public class PanTeamReportShow extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panShow, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panShow, javax.swing.GroupLayout.PREFERRED_SIZE, 1046, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
