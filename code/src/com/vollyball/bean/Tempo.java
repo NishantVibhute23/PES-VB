@@ -14,6 +14,7 @@ public class Tempo {
     public SuccessFailure high;
     public SuccessFailure medium;
     public SuccessFailure low;
+    public SuccessFailure odb;
     public SuccessFailure nb;
     public SuccessFailure sgl;
     public SuccessFailure dbl;
@@ -22,6 +23,22 @@ public class Tempo {
     public SuccessFailure jp;
     public SuccessFailure sf;
     public SuccessFailure ss;
+
+    public SuccessFailure in;
+    public SuccessFailure ot;
+    public SuccessFailure bt;
+    public SuccessFailure ol;
+    public SuccessFailure d;
+    public SuccessFailure bc;
+    public SuccessFailure r;
+    public SuccessFailure btl;
+
+    public SuccessFailure one;
+    public SuccessFailure two;
+    public SuccessFailure three;
+    public SuccessFailure four;
+    public SuccessFailure five;
+    public SuccessFailure six;
 
     public SuccessFailure getHigh() {
         return high;
@@ -109,6 +126,126 @@ public class Tempo {
 
     public void setSs(SuccessFailure ss) {
         this.ss = ss;
+    }
+
+    public SuccessFailure getIn() {
+        return in;
+    }
+
+    public void setIn(SuccessFailure in) {
+        this.in = in;
+    }
+
+    public SuccessFailure getOt() {
+        return ot;
+    }
+
+    public void setOt(SuccessFailure ot) {
+        this.ot = ot;
+    }
+
+    public SuccessFailure getBt() {
+        return bt;
+    }
+
+    public void setBt(SuccessFailure bt) {
+        this.bt = bt;
+    }
+
+    public SuccessFailure getOl() {
+        return ol;
+    }
+
+    public void setOl(SuccessFailure ol) {
+        this.ol = ol;
+    }
+
+    public SuccessFailure getD() {
+        return d;
+    }
+
+    public void setD(SuccessFailure d) {
+        this.d = d;
+    }
+
+    public SuccessFailure getBc() {
+        return bc;
+    }
+
+    public void setBc(SuccessFailure bc) {
+        this.bc = bc;
+    }
+
+    public SuccessFailure getR() {
+        return r;
+    }
+
+    public void setR(SuccessFailure r) {
+        this.r = r;
+    }
+
+    public SuccessFailure getOne() {
+        return one;
+    }
+
+    public void setOne(SuccessFailure one) {
+        this.one = one;
+    }
+
+    public SuccessFailure getTwo() {
+        return two;
+    }
+
+    public void setTwo(SuccessFailure two) {
+        this.two = two;
+    }
+
+    public SuccessFailure getThree() {
+        return three;
+    }
+
+    public void setThree(SuccessFailure three) {
+        this.three = three;
+    }
+
+    public SuccessFailure getFour() {
+        return four;
+    }
+
+    public void setFour(SuccessFailure four) {
+        this.four = four;
+    }
+
+    public SuccessFailure getFive() {
+        return five;
+    }
+
+    public void setFive(SuccessFailure five) {
+        this.five = five;
+    }
+
+    public SuccessFailure getSix() {
+        return six;
+    }
+
+    public void setSix(SuccessFailure six) {
+        this.six = six;
+    }
+
+    public SuccessFailure getOdb() {
+        return odb;
+    }
+
+    public void setOdb(SuccessFailure odb) {
+        this.odb = odb;
+    }
+
+    public SuccessFailure getBtl() {
+        return btl;
+    }
+
+    public void setBtl(SuccessFailure btl) {
+        this.btl = btl;
     }
 
 }
