@@ -5,6 +5,12 @@
  */
 package com.vollyball.panels.report;
 
+import com.vollyball.bean.MatchBean;
+import com.vollyball.bean.SuccessFailure;
+import com.vollyball.controller.Controller;
+import com.vollyball.dao.MatchDao;
+import com.vollyball.dao.ReportDao;
+import com.vollyball.enums.Skill;
 import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.panels.ImagePanel;
 import java.awt.BorderLayout;
@@ -16,10 +22,18 @@ import javax.swing.JLabel;
  *
  * @author nishant.vibhute
  */
-public class PanTeamReportOFAttack extends javax.swing.JPanel {
+public class PanTeamReportOfAttack extends javax.swing.JPanel {
 
     String datatr = "";
     ImagePanel imgTPL, imgDBL, imgSGL, imgNB;
+    ReportDao reportDao = new ReportDao();
+
+    int cb;
+    int matchId;
+    MatchDao matchDao = new MatchDao();
+
+    int evaluationteamId, evaluationteamId2;
+    int team1id, team2id;
 
     String html = "<html><head>\n"
             + "<style type=\"text/css\">\n"
@@ -31,8 +45,20 @@ public class PanTeamReportOFAttack extends javax.swing.JPanel {
     /**
      * Creates new form PanTeamReportOFAttack
      */
-    public PanTeamReportOFAttack() {
+    public PanTeamReportOfAttack(int cb, int matchId) {
         initComponents();
+
+        MatchBean team = matchDao.getMatchesById(Controller.competitionId, matchId);
+
+//        team1Name.setText(team.getTeam1name());
+//        team2Name.setText(team.getTeam2name());
+        team1id = team.getTeam1();
+        team2id = team.getTeam2();
+
+        evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
+
+        evaluationteamId2 = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
+
         createComplexOverviewTable();
         createAttackBlockOverviewTable();
 
@@ -76,12 +102,20 @@ public class PanTeamReportOFAttack extends javax.swing.JPanel {
         List<SkillDescCriteriaPoint> lst = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(criteriaid);
 
         for (int i = 0; i < lst.size(); i++) {
+
             datatr = datatr + "<tr>";
             if (i == 0) {
                 datatr = datatr + "<td width=62 rowspan=" + lst.size() + ">" + type + "</td>";
 
             }
-            datatr = datatr + "<td  width=60>" + lst.get(i).getAbbreviation() + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+            datatr = datatr + "<td  width=60>" + lst.get(i).getAbbreviation() + "</td>";
+
+            SuccessFailure sf = reportDao.getAttackComplexReport(lst.get(i).getAbbreviation(), 17, "K1", 2, evaluationteamId, criteriaid);
+            datatr = datatr + "<td>" + sf.getTotalAttempt() + "</td><td>" + sf.getSuccessPerc() + "</td><td>" + sf.getFailurePerc() + "</td>";
+            sf = reportDao.getAttackComplexReport(lst.get(i).getAbbreviation(), 17, "K2", 2, evaluationteamId, criteriaid);
+            datatr = datatr + "<td>" + sf.getTotalAttempt() + "</td><td>" + sf.getSuccessPerc() + "</td><td>" + sf.getFailurePerc() + "</td>";
+            sf = reportDao.getAttackComplexReport(lst.get(i).getAbbreviation(), 17, "TP", 2, evaluationteamId, criteriaid);
+            datatr = datatr + "<td>" + sf.getTotalAttempt() + "</td><td>" + sf.getSuccessPerc() + "</td><td>" + sf.getFailurePerc() + "</td>";
         }
     }
 
@@ -96,31 +130,53 @@ public class PanTeamReportOFAttack extends javax.swing.JPanel {
                 + "<th width=75>Attk. Comb.</th>"
                 + "<th width=75>Overall</th></tr>";
 
-        createAttackBlockOverviewTableData();
+        createAttackBlockOverviewTableData(19, 14);
         htmlAttackBlock = header + datatr + "</table></div></html>";
         JLabel lbl = new JLabel();
 
         lbl.setText(htmlAttackBlock);
         panAttackBlock.add(lbl, BorderLayout.CENTER);
+
     }
 
-    public void createAttackBlockOverviewTableData() {
-        List<SkillDescCriteriaPoint> lstBlock = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(19);
+    public void createAttackBlockOverviewTableData(int skillDescId, int skillDescIdIn) {
+        List<SkillDescCriteriaPoint> lstBlock = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skillDescId);
 
         for (int i = 0; i < lstBlock.size(); i++) {
             datatr = datatr + "<tr><td colspan=7>" + lstBlock.get(i).getAbbreviation() + "</td></tr>";
 
-            List<SkillDescCriteriaPoint> lstTempo = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(14);
+            List<SkillDescCriteriaPoint> lstTempo = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skillDescIdIn);
             for (int j = 0; j < lstTempo.size(); j++) {
 
                 datatr = datatr + "<tr><td rowspan=" + 3 + ">" + lstTempo.get(j).getAbbreviation() + "</td>";
-                datatr = datatr + "<td>S</td><td></td><td></td><td></td><td></td><td></td></tr>";
+                datatr = datatr + "<td>S</td>"
+                        + "<td>" + getValue(11, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td>" + getValue(15, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td>" + getValue(17, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td>" + getValue(12, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td></td></tr>";
 
-                datatr = datatr + "<tr><td>F+</td><td></td><td></td><td></td><td></td><td></td></tr>";
-                datatr = datatr + "<tr><td>F</td><td></td><td></td><td></td><td></td><td></td></tr>";
+                datatr = datatr + "<td>F+</td>"
+                        + "<td>" + getValue(11, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td>" + getValue(15, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td>" + getValue(17, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td>" + getValue(12, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td></td></tr>";
+
+                datatr = datatr + "<td>F</td>"
+                        + "<td>" + getValue(11, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td>" + getValue(15, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td>" + getValue(17, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td>" + getValue(12, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, lstBlock.get(i).getAbbreviation(), skillDescId) + "</td>"
+                        + "<td></td></tr>";
             }
         }
 
+    }
+
+    public String getValue(int skillDescCriteriaId, int rating, String rowSkillDesc, int rowSkillDescId, String colSkillDesc, int colSkillDescId) {
+        String value = reportDao.getSkillSuccessForTeamWithBlock(skillDescCriteriaId, Skill.Attack.getId(), evaluationteamId, rowSkillDesc, rowSkillDescId, colSkillDesc, colSkillDescId, rating);
+        return value;
     }
 
     /**
@@ -394,7 +450,7 @@ public class PanTeamReportOFAttack extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panAttackBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
+                        .addGap(126, 126, 126)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)

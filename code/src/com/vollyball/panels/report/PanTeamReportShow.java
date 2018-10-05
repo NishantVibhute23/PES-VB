@@ -39,13 +39,21 @@ public class PanTeamReportShow extends javax.swing.JPanel {
             panView.add(panTeamReportSkill, BorderLayout.CENTER);
             panListToPrint.add(panTeamReportSkill);
         } else if (type == 2) {
-            PanTeamReportOFAttack panTeamReportOFAttack = new PanTeamReportOFAttack();
+            PanTeamReportOfAttack panTeamReportOFAttack = new PanTeamReportOfAttack(cb, matchId);
             panView.add(panTeamReportOFAttack, BorderLayout.CENTER);
             panListToPrint.add(panTeamReportOFAttack);
         } else if (type == 3) {
-            PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService();
+            PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService(cb, matchId);
             panView.add(panTeamReportOfService, BorderLayout.CENTER);
             panListToPrint.add(panTeamReportOfService);
+        } else if (type == 4) {
+            PanTeamReportOfSet panTeamReportOfSet = new PanTeamReportOfSet(cb, matchId);
+            panView.add(panTeamReportOfSet, BorderLayout.CENTER);
+            panListToPrint.add(panTeamReportOfSet);
+        } else if (type == 5) {
+            PanTeamReportOfReception panTeamReportOfReception = new PanTeamReportOfReception(cb, matchId);
+            panView.add(panTeamReportOfReception, BorderLayout.CENTER);
+            panListToPrint.add(panTeamReportOfReception);
         }
     }
 
@@ -137,7 +145,6 @@ public class PanTeamReportShow extends javax.swing.JPanel {
     }//GEN-LAST:event_lblPrint1MouseClicked
 
     public void printComponenet(final List<JPanel> comp) {
-
         PageFormat documentPageFormat = new PageFormat();
         documentPageFormat.setOrientation(PageFormat.PORTRAIT);
         PrinterJob pj = PrinterJob.getPrinterJob();
@@ -146,47 +153,36 @@ public class PanTeamReportShow extends javax.swing.JPanel {
         for (Component c : comp) {
             final Component comp1 = c;
             Printable p1 = new Printable() {
-
                 @Override
                 public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-
                     Dimension dim = comp1.getSize();
                     double cHeight = dim.getHeight();
                     double cWidth = dim.getWidth();
-
                     // get the bounds of the printable area
                     double pHeight = pageFormat.getImageableHeight();
                     double pWidth = pageFormat.getImageableWidth();
-
                     double pXStart = pageFormat.getImageableX();
                     double pYStart = pageFormat.getImageableY();
-
                     double xRatio = pWidth / cWidth;
                     double yRatio = pHeight / cHeight;
-
                     Graphics2D g2 = (Graphics2D) graphics;
                     g2.translate(pXStart, pYStart);
                     g2.scale(xRatio, yRatio);
                     comp1.printAll(g2);
-
                     return Printable.PAGE_EXISTS;
                 }
             };
             book.append(p1, documentPageFormat);
         }
-
         pj.setPageable(book);
-
         if (pj.printDialog() == false) {
             return;
         }
-
         try {
             pj.print();
         } catch (PrinterException ex) {
             // handle exception
         }
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

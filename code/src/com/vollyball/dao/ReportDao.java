@@ -5,7 +5,6 @@
  */
 package com.vollyball.dao;
 
-import com.vollyball.bean.Complex;
 import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.Player;
 import com.vollyball.bean.PlayerPositionBean;
@@ -16,6 +15,7 @@ import com.vollyball.bean.SuccessFailure;
 import com.vollyball.bean.Team;
 import com.vollyball.bean.Tempo;
 import com.vollyball.db.DbUtil;
+import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.enums.SkillZoneWiseReport;
 import com.vollyball.util.CommonUtil;
 import java.sql.Connection;
@@ -26,6 +26,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,7 +38,7 @@ public class ReportDao {
 
     DbUtil db = new DbUtil();
     Connection con;
-    DecimalFormat df = new DecimalFormat("##.##%");
+    DecimalFormat df = new DecimalFormat(".##%");
 
     public List<PlayerReportBean> getPlayerReportList(int skill, int compId) {
         List<PlayerReportBean> playerReportList = new ArrayList<>();
@@ -976,799 +977,144 @@ public class ReportDao {
 
     }
 
-    public Complex getComplexReport(int matchevaluationId, int skillDescCriteriaId,int skillDescCriteriaIdComplex,int skillId) {
-        Complex complex = new Complex();
-
-        complex.setK1(getAttackReportSkilDescWiseComplexWiseK1(matchevaluationId, skillDescCriteriaId,skillDescCriteriaIdComplex,skillId));
-        complex.setK2(getAttackReportSkilDescWiseComplexWiseK2(matchevaluationId, skillDescCriteriaId,skillDescCriteriaIdComplex,skillId));
-        complex.setTp(getAttackReportSkilDescWiseComplexWiseTp(matchevaluationId, skillDescCriteriaId,skillDescCriteriaIdComplex,skillId));
-
-        return complex;
-    }
-
-    public Tempo getAttackReportSkilDescWiseComplexWiseK1(int matchevaluationId, int skillDescCriteriaId,int skillDescCriteriaIdComplex,int skillId) {
-        Tempo tempo = new Tempo();
+    public SuccessFailure getAttackComplexReport(String rowCriteriaType, int headerSkillDescCriteriaId, String headerCriteriaType, int skillId, int matchevaluationId, int rowCriteriaId) {
+        SuccessFailure sf = new SuccessFailure();
         try {
             this.con = db.getConnection();
-            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k1.1"));
-            ps.setInt(1, skillDescCriteriaIdComplex);
-            ps.setInt(2, skillId);
-            ps.setInt(3, matchevaluationId);
-            ps.setInt(4, skillDescCriteriaId);
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.attack.query"));
+            ps.setString(1, rowCriteriaType);
+            ps.setString(2, rowCriteriaType);
+            ps.setString(3, rowCriteriaType);
+            ps.setInt(4, headerSkillDescCriteriaId);
+            ps.setString(5, headerCriteriaType);
+            ps.setInt(6, skillId);
+            ps.setInt(7, matchevaluationId);
+            ps.setInt(8, rowCriteriaId);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
-                SuccessFailure sf = new SuccessFailure();
+
                 sf.setSuccess(rs.getInt(1));
                 sf.setFailure(rs.getInt(2));
-                sf.setTotalAttempt(rs.getInt(9));
+                sf.setTotalAttempt(rs.getInt(3));
                 sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
                 sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
                 sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
                 sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setHigh(sf);
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs.getInt(3));
-                sf1.setFailure(rs.getInt(4));
-                sf1.setTotalAttempt(rs.getInt(9));
-                sf1.setSuccessRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf1.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf1.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-
-                tempo.setMedium(sf1);
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs.getInt(5));
-                sf2.setFailure(rs.getInt(6));
-                sf2.setTotalAttempt(rs.getInt(9));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-
-                tempo.setLow(sf2);
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs.getInt(7));
-                sf3.setFailure(rs.getInt(8));
-                sf3.setTotalAttempt(rs.getInt(9));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setOdb(sf3);
-
             }
-            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k1.2"));
-            ps1.setInt(1, skillDescCriteriaIdComplex);
-            ps1.setInt(2, skillId);
-            ps1.setInt(3, matchevaluationId);
-            ps1.setInt(4, skillDescCriteriaId);
-            ResultSet rs1 = ps1.executeQuery();
-            while (rs1.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs1.getInt(1));
-                sf.setFailure(rs1.getInt(2));
-                sf.setTotalAttempt(rs1.getInt(9));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setSgl(sf);
 
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs1.getInt(3));
-                sf1.setFailure(rs1.getInt(4));
-                sf1.setTotalAttempt(rs1.getInt(9));
-                sf1.setSuccessRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf1.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf1.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setDbl(sf1);
-
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs1.getInt(5));
-                sf2.setFailure(rs1.getInt(6));
-                sf2.setTotalAttempt(rs1.getInt(9));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setTpl(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs1.getInt(7));
-                sf3.setFailure(rs1.getInt(8));
-                sf3.setTotalAttempt(rs1.getInt(9));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setNb(sf3);
-            }
-            PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k1.3"));
-            ps2.setInt(1, skillDescCriteriaIdComplex);
-            ps2.setInt(2, skillId);
-            ps2.setInt(3, matchevaluationId);
-            ps2.setInt(4, skillDescCriteriaId);
-            ResultSet rs2 = ps2.executeQuery();
-            while (rs2.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs2.getInt(1));
-                sf.setFailure(rs2.getInt(2));
-                sf.setTotalAttempt(rs2.getInt(17));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setIn(sf);
-
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs2.getInt(3));
-                sf1.setFailure(rs2.getInt(4));
-                sf1.setTotalAttempt(rs2.getInt(17));
-                sf1.setSuccessRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf1.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf1.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setOt(sf1);
-
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs2.getInt(5));
-                sf2.setFailure(rs2.getInt(6));
-                sf2.setTotalAttempt(rs2.getInt(17));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setBt(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs2.getInt(7));
-                sf3.setFailure(rs2.getInt(8));
-                sf3.setTotalAttempt(rs2.getInt(17));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setOl(sf3);
-
-                SuccessFailure sf4 = new SuccessFailure();
-                sf4.setSuccess(rs2.getInt(9));
-                sf4.setFailure(rs2.getInt(10));
-                sf4.setTotalAttempt(rs2.getInt(17));
-                sf4.setSuccessRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getSuccess() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setSuccessPerc(sf4.getSuccessRate() == 0 ? "0%" : df.format(sf4.getSuccessRate()));
-                sf4.setFailureRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getFailure() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setFailurePerc(sf4.getFailureRate() == 0 ? "0%" : df.format(sf4.getFailureRate()));
-                tempo.setD(sf4);
-
-                SuccessFailure sf5 = new SuccessFailure();
-                sf5.setSuccess(rs2.getInt(11));
-                sf5.setFailure(rs2.getInt(12));
-                sf5.setTotalAttempt(rs2.getInt(17));
-                sf5.setSuccessRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getSuccess() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setSuccessPerc(sf5.getSuccessRate() == 0 ? "0%" : df.format(sf5.getSuccessRate()));
-                sf5.setFailureRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getFailure() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setFailurePerc(sf5.getFailureRate() == 0 ? "0%" : df.format(sf5.getFailureRate()));
-                tempo.setBc(sf5);
-
-                SuccessFailure sf6 = new SuccessFailure();
-                sf6.setSuccess(rs2.getInt(13));
-                sf6.setFailure(rs2.getInt(14));
-                sf6.setTotalAttempt(rs2.getInt(17));
-                sf6.setSuccessRate(sf6.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf6.getSuccess() / (double) sf6.getTotalAttempt() * 100, 2)));
-                sf6.setSuccessPerc(sf6.getSuccessRate() == 0 ? "0%" : df.format(sf6.getSuccessRate()));
-                sf6.setFailureRate(sf6.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf6.getFailure() / (double) sf6.getTotalAttempt() * 100, 2)));
-                sf6.setFailurePerc(sf6.getFailureRate() == 0 ? "0%" : df.format(sf6.getFailureRate()));
-                tempo.setR(sf6);
-
-                SuccessFailure sf7 = new SuccessFailure();
-                sf7.setSuccess(rs2.getInt(15));
-                sf7.setFailure(rs2.getInt(16));
-                sf7.setTotalAttempt(rs2.getInt(17));
-                sf7.setSuccessRate(sf7.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf7.getSuccess() / (double) sf7.getTotalAttempt() * 100, 2)));
-                sf7.setSuccessPerc(sf7.getSuccessRate() == 0 ? "0%" : df.format(sf7.getSuccessRate()));
-                sf7.setFailureRate(sf7.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf7.getFailure() / (double) sf7.getTotalAttempt() * 100, 2)));
-                sf7.setFailurePerc(sf7.getFailureRate() == 0 ? "0%" : df.format(sf7.getFailureRate()));
-                tempo.setBtl(sf7);
-            }
-            PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k1.4"));
-            ps3.setInt(1, skillDescCriteriaIdComplex);
-            ps3.setInt(2, skillId);
-            ps3.setInt(3, matchevaluationId);
-            ps3.setInt(4, skillDescCriteriaId);
-            ResultSet rs3 = ps3.executeQuery();
-            while (rs3.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs3.getInt(1));
-                sf.setFailure(rs3.getInt(2));
-                sf.setTotalAttempt(rs3.getInt(13));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setOne(sf);
-
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs3.getInt(3));
-                sf1.setFailure(rs3.getInt(4));
-                sf1.setTotalAttempt(rs3.getInt(13));
-                sf1.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setTwo(sf1);
-
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs3.getInt(5));
-                sf2.setFailure(rs3.getInt(6));
-                sf2.setTotalAttempt(rs3.getInt(13));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setThree(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs3.getInt(7));
-                sf3.setFailure(rs3.getInt(8));
-                sf3.setTotalAttempt(rs3.getInt(13));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setFour(sf3);
-
-                SuccessFailure sf4 = new SuccessFailure();
-                sf4.setSuccess(rs3.getInt(9));
-                sf4.setFailure(rs3.getInt(10));
-                sf4.setTotalAttempt(rs3.getInt(13));
-                sf4.setSuccessRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getSuccess() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setSuccessPerc(sf4.getSuccessRate() == 0 ? "0%" : df.format(sf4.getSuccessRate()));
-                sf4.setFailureRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getFailure() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setFailurePerc(sf4.getFailureRate() == 0 ? "0%" : df.format(sf4.getFailureRate()));
-                tempo.setFive(sf4);
-
-                SuccessFailure sf5 = new SuccessFailure();
-                sf5.setSuccess(rs3.getInt(11));
-                sf5.setFailure(rs3.getInt(12));
-                sf5.setTotalAttempt(rs3.getInt(13));
-                sf5.setSuccessRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getSuccess() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setSuccessPerc(sf5.getSuccessRate() == 0 ? "0%" : df.format(sf5.getSuccessRate()));
-                sf5.setFailureRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getFailure() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setFailurePerc(sf5.getFailureRate() == 0 ? "0%" : df.format(sf5.getFailureRate()));
-                tempo.setSix(sf5);
-
-            }
-            db.closeConnection(con);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return tempo;
+        return sf;
     }
 
-    public Tempo getAttackReportSkilDescWiseComplexWiseK2(int matchevaluationId, int skillDescCriteriaId,int skillDescCriteriaIdComplex,int skillId) {
-        Tempo tempo = new Tempo();
+    public String getSkillSuccessForTeamWithBlock(int skillDescCriteriaId, int skillId, int matchevaluationId, String rowSkillDesc, int rowSkillDescId, String colSkillDesc, int colSkillDescId, int rate) {
+        LinkedHashMap<String, Integer> values = new LinkedHashMap<>();
+        String val = "";
         try {
-            this.con = db.getConnection();
-            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k2.1"));
-            ps.setInt(1, skillDescCriteriaIdComplex);
-            ps.setInt(2, skillId);
-            ps.setInt(3, matchevaluationId);
-            ps.setInt(4, skillDescCriteriaId);
+            List<SkillDescCriteriaPoint> lst = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skillDescCriteriaId);
+            String select = "";
+            int i = 1;
+            for (SkillDescCriteriaPoint sdcp : lst) {
+                values.put(sdcp.getAbbreviation(), 0);
+//                valAbbr.put(i, sdcp.getAbbreviation());
+                String h = CommonUtil.getResourceProperty("get.skillteamsuccess.select").replace("?", sdcp.getAbbreviation());
+                h = h.replace("+", "" + rate);
+                select = select + h;
+                i++;
+
+            }
+
+            select = select.substring(0, select.lastIndexOf(","));
+
+            String query = CommonUtil.getResourceProperty("get.skillteamsuccess.query.withBlock").replace("+", select);
+
+            PreparedStatement ps = this.con.prepareStatement(query);
+
+            ps.setInt(1, skillId);
+            ps.setInt(2, matchevaluationId);
+            ps.setInt(3, skillDescCriteriaId);
+            ps.setString(4, rowSkillDesc);
+            ps.setInt(5, rowSkillDescId);
+            ps.setString(6, colSkillDesc);
+            ps.setInt(7, colSkillDescId);
             ResultSet rs = ps.executeQuery();
+
+            int j = 1;
             while (rs.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs.getInt(1));
-                sf.setFailure(rs.getInt(2));
-                sf.setTotalAttempt(rs.getInt(9));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setHigh(sf);
 
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs.getInt(3));
-                sf1.setFailure(rs.getInt(4));
-                sf1.setTotalAttempt(rs.getInt(9));
-                sf1.setSuccessRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf1.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf1.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setMedium(sf1);
-
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs.getInt(5));
-                sf2.setFailure(rs.getInt(6));
-                sf2.setTotalAttempt(rs.getInt(9));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setLow(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs.getInt(7));
-                sf3.setFailure(rs.getInt(8));
-                sf3.setTotalAttempt(rs.getInt(9));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setOdb(sf3);
-            }
-            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k2.2"));
-            ps1.setInt(1, skillDescCriteriaIdComplex);
-            ps1.setInt(2, skillId);
-            ps1.setInt(3, matchevaluationId);
-            ps1.setInt(4, skillDescCriteriaId);
-            ResultSet rs1 = ps1.executeQuery();
-            while (rs1.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs1.getInt(1));
-                sf.setFailure(rs1.getInt(2));
-                sf.setTotalAttempt(rs1.getInt(9));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setSgl(sf);
-
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs1.getInt(3));
-                sf1.setFailure(rs1.getInt(4));
-                sf1.setTotalAttempt(rs1.getInt(9));
-                sf1.setSuccessRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf1.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf1.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setDbl(sf1);
-
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs1.getInt(5));
-                sf2.setFailure(rs1.getInt(6));
-                sf2.setTotalAttempt(rs1.getInt(9));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setTpl(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs1.getInt(7));
-                sf3.setFailure(rs1.getInt(8));
-                sf3.setTotalAttempt(rs1.getInt(9));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-
-                tempo.setNb(sf3);
-            }
-            PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k2.3"));
-            ps2.setInt(1, skillDescCriteriaIdComplex);
-            ps2.setInt(2, skillId);
-            ps2.setInt(3, matchevaluationId);
-            ps2.setInt(4, skillDescCriteriaId);
-            ResultSet rs2 = ps2.executeQuery();
-            while (rs2.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs2.getInt(1));
-                sf.setFailure(rs2.getInt(2));
-                sf.setTotalAttempt(rs2.getInt(17));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setIn(sf);
-
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs2.getInt(3));
-                sf1.setFailure(rs2.getInt(4));
-                sf1.setTotalAttempt(rs2.getInt(17));
-                sf1.setSuccessRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf1.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf1.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setOt(sf1);
-
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs2.getInt(5));
-                sf2.setFailure(rs2.getInt(6));
-                sf2.setTotalAttempt(rs2.getInt(17));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setBt(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs2.getInt(7));
-                sf3.setFailure(rs2.getInt(8));
-                sf3.setTotalAttempt(rs2.getInt(17));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setOl(sf3);
-
-                SuccessFailure sf4 = new SuccessFailure();
-                sf4.setSuccess(rs2.getInt(9));
-                sf4.setFailure(rs2.getInt(10));
-                sf4.setTotalAttempt(rs2.getInt(17));
-                sf4.setSuccessRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getSuccess() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setSuccessPerc(sf4.getSuccessRate() == 0 ? "0%" : df.format(sf4.getSuccessRate()));
-                sf4.setFailureRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getFailure() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setFailurePerc(sf4.getFailureRate() == 0 ? "0%" : df.format(sf4.getFailureRate()));
-                tempo.setD(sf4);
-
-                SuccessFailure sf5 = new SuccessFailure();
-                sf5.setSuccess(rs2.getInt(11));
-                sf5.setFailure(rs2.getInt(12));
-                sf5.setTotalAttempt(rs2.getInt(17));
-                sf5.setSuccessRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getSuccess() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setSuccessPerc(sf5.getSuccessRate() == 0 ? "0%" : df.format(sf5.getSuccessRate()));
-                sf5.setFailureRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getFailure() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setFailurePerc(sf5.getFailureRate() == 0 ? "0%" : df.format(sf5.getFailureRate()));
-                tempo.setBc(sf5);
-
-                SuccessFailure sf6 = new SuccessFailure();
-                sf6.setSuccess(rs2.getInt(13));
-                sf6.setFailure(rs2.getInt(14));
-                sf6.setTotalAttempt(rs2.getInt(17));
-                sf6.setSuccessRate(sf6.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf6.getSuccess() / (double) sf6.getTotalAttempt() * 100, 2)));
-                sf6.setSuccessPerc(sf6.getSuccessRate() == 0 ? "0%" : df.format(sf6.getSuccessRate()));
-                sf6.setFailureRate(sf6.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf6.getFailure() / (double) sf6.getTotalAttempt() * 100, 2)));
-                sf6.setFailurePerc(sf6.getFailureRate() == 0 ? "0%" : df.format(sf6.getFailureRate()));
-                tempo.setR(sf6);
-
-                SuccessFailure sf7 = new SuccessFailure();
-                sf7.setSuccess(rs2.getInt(15));
-                sf7.setFailure(rs2.getInt(16));
-                sf7.setTotalAttempt(rs2.getInt(17));
-                sf7.setSuccessRate(sf7.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf7.getSuccess() / (double) sf7.getTotalAttempt() * 100, 2)));
-                sf7.setSuccessPerc(sf7.getSuccessRate() == 0 ? "0%" : df.format(sf7.getSuccessRate()));
-                sf7.setFailureRate(sf7.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf7.getFailure() / (double) sf7.getTotalAttempt() * 100, 2)));
-                sf7.setFailurePerc(sf7.getFailureRate() == 0 ? "0%" : df.format(sf7.getFailureRate()));
-                tempo.setBtl(sf7);
+//                rs.getString(1);
+//                rs.getInt(2);
+                for (Map.Entry<String, Integer> entry : values.entrySet()) {
+                    entry.setValue(rs.getInt(j));
+                    j++;
+                }
 
             }
-            PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.k2.4"));
-            ps3.setInt(1, skillDescCriteriaIdComplex);
-            ps3.setInt(2, skillId);
-            ps3.setInt(3, matchevaluationId);
-            ps3.setInt(4, skillDescCriteriaId);
-            ResultSet rs3 = ps3.executeQuery();
-            while (rs3.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs3.getInt(1));
-                sf.setFailure(rs3.getInt(2));
-                sf.setTotalAttempt(rs3.getInt(13));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setOne(sf);
 
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs3.getInt(3));
-                sf1.setFailure(rs3.getInt(4));
-                sf1.setTotalAttempt(rs3.getInt(13));
-                sf1.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setTwo(sf1);
+            Map<String, Integer> sortedMap = CommonUtil.sortByValue(values);
 
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs3.getInt(5));
-                sf2.setFailure(rs3.getInt(6));
-                sf2.setTotalAttempt(rs3.getInt(13));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setThree(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs3.getInt(7));
-                sf3.setFailure(rs3.getInt(8));
-                sf3.setTotalAttempt(rs3.getInt(13));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setFour(sf3);
-
-                SuccessFailure sf4 = new SuccessFailure();
-                sf4.setSuccess(rs3.getInt(9));
-                sf4.setFailure(rs3.getInt(10));
-                sf4.setTotalAttempt(rs3.getInt(13));
-                sf4.setSuccessRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getSuccess() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setSuccessPerc(sf4.getSuccessRate() == 0 ? "0%" : df.format(sf4.getSuccessRate()));
-                sf4.setFailureRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getFailure() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setFailurePerc(sf4.getFailureRate() == 0 ? "0%" : df.format(sf4.getFailureRate()));
-                tempo.setFive(sf4);
-
-                SuccessFailure sf5 = new SuccessFailure();
-                sf5.setSuccess(rs3.getInt(11));
-                sf5.setFailure(rs3.getInt(12));
-                sf5.setTotalAttempt(rs3.getInt(13));
-                sf5.setSuccessRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getSuccess() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setSuccessPerc(sf5.getSuccessRate() == 0 ? "0%" : df.format(sf5.getSuccessRate()));
-                sf5.setFailureRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getFailure() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setFailurePerc(sf5.getFailureRate() == 0 ? "0%" : df.format(sf5.getFailureRate()));
-                tempo.setSix(sf5);
-
+            if (sortedMap.get(sortedMap.keySet().toArray()[0]) != 0) {
+                val = sortedMap.keySet().toArray()[0].toString();
             }
-            db.closeConnection(con);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return tempo;
+        return val;
     }
 
-    public Tempo getAttackReportSkilDescWiseComplexWiseTp(int matchevaluationId, int skillDescCriteriaId,int skillDescCriteriaIdComplex,int skillId) {
-        Tempo tempo = new Tempo();
+    public String getSkillSuccessForTeam(int skillDescCriteriaId, int skillId, int matchevaluationId, String rowSkillDesc, int rowSkillDescId, int rate) {
+        LinkedHashMap<String, Integer> values = new LinkedHashMap<>();
+        String val = "";
         try {
-            this.con = db.getConnection();
-            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.tp.1"));
-            ps.setInt(1, skillDescCriteriaIdComplex);
-            ps.setInt(2, skillId);
-            ps.setInt(3, matchevaluationId);
-            ps.setInt(4, skillDescCriteriaId);
+            List<SkillDescCriteriaPoint> lst = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skillDescCriteriaId);
+            String select = "";
+            int i = 1;
+            for (SkillDescCriteriaPoint sdcp : lst) {
+                values.put(sdcp.getAbbreviation(), 0);
+//                valAbbr.put(i, sdcp.getAbbreviation());
+                String h = CommonUtil.getResourceProperty("get.skillteamsuccess.select").replace("?", sdcp.getAbbreviation());
+                h = h.replace("+", "" + rate);
+                select = select + h;
+                i++;
+
+            }
+
+            select = select.substring(0, select.lastIndexOf(","));
+
+            String query = CommonUtil.getResourceProperty("get.skillteamsuccess.query").replace("+", select);
+
+            PreparedStatement ps = this.con.prepareStatement(query);
+
+            ps.setInt(1, skillId);
+            ps.setInt(2, matchevaluationId);
+            ps.setInt(3, skillDescCriteriaId);
+            ps.setString(4, rowSkillDesc);
+            ps.setInt(5, rowSkillDescId);
             ResultSet rs = ps.executeQuery();
+
+            int j = 1;
             while (rs.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs.getInt(1));
-                sf.setFailure(rs.getInt(2));
-                sf.setTotalAttempt(rs.getInt(9));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setHigh(sf);
 
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs.getInt(3));
-                sf1.setFailure(rs.getInt(4));
-                sf1.setTotalAttempt(rs.getInt(9));
-                sf1.setSuccessRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf1.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf1.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setMedium(sf1);
-
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs.getInt(5));
-                sf2.setFailure(rs.getInt(6));
-                sf2.setTotalAttempt(rs.getInt(9));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setLow(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs.getInt(7));
-                sf3.setFailure(rs.getInt(8));
-                sf3.setTotalAttempt(rs.getInt(9));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setOdb(sf3);
-            }
-            PreparedStatement ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.tp.2"));
-            ps1.setInt(1, skillDescCriteriaIdComplex);
-            ps1.setInt(2, skillId);
-            ps1.setInt(3, matchevaluationId);
-            ps1.setInt(4, skillDescCriteriaId);
-            ResultSet rs1 = ps1.executeQuery();
-            while (rs1.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs1.getInt(1));
-                sf.setFailure(rs1.getInt(2));
-                sf.setTotalAttempt(rs1.getInt(9));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setSgl(sf);
-
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs1.getInt(3));
-                sf1.setFailure(rs1.getInt(4));
-                sf1.setTotalAttempt(rs1.getInt(9));
-                sf1.setSuccessRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf1.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf1.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setDbl(sf1);
-
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs1.getInt(5));
-                sf2.setFailure(rs1.getInt(6));
-                sf2.setTotalAttempt(rs1.getInt(9));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setTpl(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs1.getInt(7));
-                sf3.setFailure(rs1.getInt(8));
-                sf3.setTotalAttempt(rs1.getInt(9));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setNb(sf3);
-            }
-            PreparedStatement ps2 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.tp.3"));
-            ps2.setInt(1, skillDescCriteriaIdComplex);
-            ps2.setInt(2, skillId);
-            ps2.setInt(3, matchevaluationId);
-            ps2.setInt(4, skillDescCriteriaId);
-            ResultSet rs2 = ps2.executeQuery();
-            while (rs2.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs2.getInt(1));
-                sf.setFailure(rs2.getInt(2));
-                sf.setTotalAttempt(rs2.getInt(17));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setIn(sf);
-
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs2.getInt(3));
-                sf1.setFailure(rs2.getInt(4));
-                sf1.setTotalAttempt(rs2.getInt(17));
-                sf1.setSuccessRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf1.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf1.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf1.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setOt(sf1);
-
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs2.getInt(5));
-                sf2.setFailure(rs2.getInt(6));
-                sf2.setTotalAttempt(rs2.getInt(17));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setBt(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs2.getInt(7));
-                sf3.setFailure(rs2.getInt(8));
-                sf3.setTotalAttempt(rs2.getInt(17));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setOl(sf3);
-
-                SuccessFailure sf4 = new SuccessFailure();
-                sf4.setSuccess(rs2.getInt(9));
-                sf4.setFailure(rs2.getInt(10));
-                sf4.setTotalAttempt(rs2.getInt(17));
-                sf4.setSuccessRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getSuccess() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setSuccessPerc(sf4.getSuccessRate() == 0 ? "0%" : df.format(sf4.getSuccessRate()));
-                sf4.setFailureRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getFailure() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setFailurePerc(sf4.getFailureRate() == 0 ? "0%" : df.format(sf4.getFailureRate()));
-                tempo.setD(sf4);
-
-                SuccessFailure sf5 = new SuccessFailure();
-                sf5.setSuccess(rs2.getInt(11));
-                sf5.setFailure(rs2.getInt(12));
-                sf5.setTotalAttempt(rs2.getInt(17));
-                sf5.setSuccessRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getSuccess() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setSuccessPerc(sf5.getSuccessRate() == 0 ? "0%" : df.format(sf5.getSuccessRate()));
-                sf5.setFailureRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getFailure() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setFailurePerc(sf5.getFailureRate() == 0 ? "0%" : df.format(sf5.getFailureRate()));
-                tempo.setBc(sf5);
-
-                SuccessFailure sf6 = new SuccessFailure();
-                sf6.setSuccess(rs2.getInt(13));
-                sf6.setFailure(rs2.getInt(14));
-                sf6.setTotalAttempt(rs2.getInt(17));
-                sf6.setSuccessRate(sf6.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf6.getSuccess() / (double) sf6.getTotalAttempt() * 100, 2)));
-                sf6.setSuccessPerc(sf6.getSuccessRate() == 0 ? "0%" : df.format(sf6.getSuccessRate()));
-                sf6.setFailureRate(sf6.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf6.getFailure() / (double) sf6.getTotalAttempt() * 100, 2)));
-                sf6.setFailurePerc(sf6.getFailureRate() == 0 ? "0%" : df.format(sf6.getFailureRate()));
-                tempo.setR(sf6);
-
-                SuccessFailure sf7 = new SuccessFailure();
-                sf7.setSuccess(rs2.getInt(15));
-                sf7.setFailure(rs2.getInt(16));
-                sf7.setTotalAttempt(rs2.getInt(17));
-                sf7.setSuccessRate(sf7.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf7.getSuccess() / (double) sf7.getTotalAttempt() * 100, 2)));
-                sf7.setSuccessPerc(sf7.getSuccessRate() == 0 ? "0%" : df.format(sf7.getSuccessRate()));
-                sf7.setFailureRate(sf7.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf7.getFailure() / (double) sf7.getTotalAttempt() * 100, 2)));
-                sf7.setFailurePerc(sf7.getFailureRate() == 0 ? "0%" : df.format(sf7.getFailureRate()));
-                tempo.setBtl(sf7);
+//                rs.getString(1);
+//                rs.getInt(2);
+                for (Map.Entry<String, Integer> entry : values.entrySet()) {
+                    entry.setValue(rs.getInt(j));
+                    j++;
+                }
 
             }
-            PreparedStatement ps3 = this.con.prepareStatement(CommonUtil.getResourceProperty("get.complexwise.descwise.successFailure.tp.4"));
-            ps3.setInt(1, skillDescCriteriaIdComplex);
-            ps3.setInt(2, skillId);
-            ps3.setInt(3, matchevaluationId);
-            ps3.setInt(4, skillDescCriteriaId);
-            ResultSet rs3 = ps3.executeQuery();
-            while (rs3.next()) {
-                SuccessFailure sf = new SuccessFailure();
-                sf.setSuccess(rs3.getInt(1));
-                sf.setFailure(rs3.getInt(2));
-                sf.setTotalAttempt(rs3.getInt(13));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
-                tempo.setOne(sf);
 
-                SuccessFailure sf1 = new SuccessFailure();
-                sf1.setSuccess(rs3.getInt(3));
-                sf1.setFailure(rs3.getInt(4));
-                sf1.setTotalAttempt(rs3.getInt(13));
-                sf1.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getSuccess() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf1.getSuccessRate()));
-                sf1.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf1.getFailure() / (double) sf1.getTotalAttempt() * 100, 2)));
-                sf1.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf1.getFailureRate()));
-                tempo.setTwo(sf1);
+            Map<String, Integer> sortedMap = CommonUtil.sortByValue(values);
 
-                SuccessFailure sf2 = new SuccessFailure();
-                sf2.setSuccess(rs3.getInt(5));
-                sf2.setFailure(rs3.getInt(6));
-                sf2.setTotalAttempt(rs3.getInt(13));
-                sf2.setSuccessRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getSuccess() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setSuccessPerc(sf2.getSuccessRate() == 0 ? "0%" : df.format(sf2.getSuccessRate()));
-                sf2.setFailureRate(sf2.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf2.getFailure() / (double) sf2.getTotalAttempt() * 100, 2)));
-                sf2.setFailurePerc(sf2.getFailureRate() == 0 ? "0%" : df.format(sf2.getFailureRate()));
-                tempo.setThree(sf2);
-
-                SuccessFailure sf3 = new SuccessFailure();
-                sf3.setSuccess(rs3.getInt(7));
-                sf3.setFailure(rs3.getInt(8));
-                sf3.setTotalAttempt(rs3.getInt(13));
-                sf3.setSuccessRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getSuccess() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setSuccessPerc(sf3.getSuccessRate() == 0 ? "0%" : df.format(sf3.getSuccessRate()));
-                sf3.setFailureRate(sf3.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf3.getFailure() / (double) sf3.getTotalAttempt() * 100, 2)));
-                sf3.setFailurePerc(sf3.getFailureRate() == 0 ? "0%" : df.format(sf3.getFailureRate()));
-                tempo.setFour(sf3);
-
-                SuccessFailure sf4 = new SuccessFailure();
-                sf4.setSuccess(rs3.getInt(9));
-                sf4.setFailure(rs3.getInt(10));
-                sf4.setTotalAttempt(rs3.getInt(13));
-                sf4.setSuccessRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getSuccess() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setSuccessPerc(sf4.getSuccessRate() == 0 ? "0%" : df.format(sf4.getSuccessRate()));
-                sf4.setFailureRate(sf4.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf4.getFailure() / (double) sf4.getTotalAttempt() * 100, 2)));
-                sf4.setFailurePerc(sf4.getFailureRate() == 0 ? "0%" : df.format(sf4.getFailureRate()));
-                tempo.setFive(sf4);
-
-                SuccessFailure sf5 = new SuccessFailure();
-                sf5.setSuccess(rs3.getInt(11));
-                sf5.setFailure(rs3.getInt(12));
-                sf5.setTotalAttempt(rs3.getInt(13));
-                sf5.setSuccessRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getSuccess() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setSuccessPerc(sf5.getSuccessRate() == 0 ? "0%" : df.format(sf5.getSuccessRate()));
-                sf5.setFailureRate(sf5.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf5.getFailure() / (double) sf5.getTotalAttempt() * 100, 2)));
-                sf5.setFailurePerc(sf5.getFailureRate() == 0 ? "0%" : df.format(sf5.getFailureRate()));
-                tempo.setSix(sf5);
-
+            if (sortedMap.get(sortedMap.keySet().toArray()[0]) != 0) {
+                val = sortedMap.keySet().toArray()[0].toString();
             }
-            db.closeConnection(con);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return tempo;
+        return val;
     }
+
 }
