@@ -80,9 +80,11 @@ public class Controller {
     public static void main(String args[]) {
 
         new CommonUtil();
-
-        File file = new File(CommonUtil.getResourceProperty("db.name"));
-        if (!file.exists()) {
+        String path = System.getProperty("user.home") + File.separator + "Documents";
+        path += File.separator + CommonUtil.getResourceProperty("folder.name");
+//        File file = new File(CommonUtil.getResourceProperty("db.name"));
+        File file = new File(path + File.separator + CommonUtil.getResourceProperty("db.name"));
+        if (!file.exists() || file == null) {
             frmMain = new FrmRegister();
         } else {
             new FrmLogin();
