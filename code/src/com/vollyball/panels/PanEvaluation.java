@@ -229,7 +229,14 @@ public class PanEvaluation extends javax.swing.JPanel {
     }
 
     private void registerLibrary() {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), CommonUtil.getResourceProperty("vlc.path"));
+        String path="";
+        String osArch=System.getenv("PROCESSOR_ARCHITECTURE");
+        if(osArch.endsWith("64")){
+            path=CommonUtil.getResourceProperty("pfx64Path") +File.separator+ CommonUtil.getResourceProperty("folder.name")+File.separator+"VLC\\VLC64";
+        }else{
+            path=CommonUtil.getResourceProperty("pfx32Path") +File.separator+ CommonUtil.getResourceProperty("folder.name")+File.separator+"VLC\\VLC32";
+        }
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), path);
         Native
                 .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
                 );
