@@ -5,7 +5,6 @@
  */
 package com.vollyball.panels.report;
 
-import com.vollyball.panels.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -13,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.Book;
 import java.awt.print.PageFormat;
+import java.awt.print.Paper;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -148,14 +148,14 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 335, Short.MAX_VALUE)
                 .addComponent(lblRotationReport, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSkilReport, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addComponent(lblmatchReport, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 687, Short.MAX_VALUE)))
+                    .addComponent(lblmatchReport, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 703, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,6 +221,10 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
     public void printComponenet(final List<JPanel> comp) {
 
         PageFormat documentPageFormat = new PageFormat();
+        Paper PAPER = new Paper();
+        PAPER.setSize(595.4, 841.69);
+        PAPER.setImageableArea(36, 36, 523.4, 769.69);
+        documentPageFormat.setPaper(PAPER);
         documentPageFormat.setOrientation(PageFormat.PORTRAIT);
 
         PrinterJob pj = PrinterJob.getPrinterJob();

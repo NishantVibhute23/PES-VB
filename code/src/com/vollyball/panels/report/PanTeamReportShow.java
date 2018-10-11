@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.Book;
 import java.awt.print.PageFormat;
+import java.awt.print.Paper;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -54,6 +55,14 @@ public class PanTeamReportShow extends javax.swing.JPanel {
             PanTeamReportOfReception panTeamReportOfReception = new PanTeamReportOfReception(cb, matchId);
             panView.add(panTeamReportOfReception, BorderLayout.CENTER);
             panListToPrint.add(panTeamReportOfReception);
+        } else if (type == 6) {
+            PanTeamReportOfDefence panTeamReportOfDefence = new PanTeamReportOfDefence(cb, matchId);
+            panView.add(panTeamReportOfDefence, BorderLayout.CENTER);
+            panListToPrint.add(panTeamReportOfDefence);
+        } else if (type == 7) {
+            PanTeamReportOfBlock panTeamReportOfBlock = new PanTeamReportOfBlock(cb, matchId);
+            panView.add(panTeamReportOfBlock, BorderLayout.CENTER);
+            panListToPrint.add(panTeamReportOfBlock);
         }
     }
 
@@ -146,9 +155,15 @@ public class PanTeamReportShow extends javax.swing.JPanel {
 
     public void printComponenet(final List<JPanel> comp) {
         PageFormat documentPageFormat = new PageFormat();
+        Paper PAPER = new Paper();
+        PAPER.setSize(595.4, 841.69);
+        PAPER.setImageableArea(36, 36, 523.4, 769.69);
+
+        documentPageFormat.setPaper(PAPER);
         documentPageFormat.setOrientation(PageFormat.PORTRAIT);
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setJobName("Score Report_-_");
+
         Book book = new Book();
         for (Component c : comp) {
             final Component comp1 = c;
@@ -159,6 +174,7 @@ public class PanTeamReportShow extends javax.swing.JPanel {
                     double cHeight = dim.getHeight();
                     double cWidth = dim.getWidth();
                     // get the bounds of the printable area
+
                     double pHeight = pageFormat.getImageableHeight();
                     double pWidth = pageFormat.getImageableWidth();
                     double pXStart = pageFormat.getImageableX();

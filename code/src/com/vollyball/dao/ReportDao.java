@@ -997,9 +997,9 @@ public class ReportDao {
                 sf.setSuccess(rs.getInt(1));
                 sf.setFailure(rs.getInt(2));
                 sf.setTotalAttempt(rs.getInt(3));
-                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getSuccess() / (double) sf.getTotalAttempt() * 100, 2)));
+                sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (double) sf.getSuccess() / (double) sf.getTotalAttempt());
                 sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
-                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) sf.getFailure() / (double) sf.getTotalAttempt() * 100, 2)));
+                sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (double) sf.getFailure() / (double) sf.getTotalAttempt());
                 sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
             }
 

@@ -19,7 +19,6 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -229,11 +228,25 @@ public class PanEvaluation extends javax.swing.JPanel {
     }
 
     private void registerLibrary() {
+
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), CommonUtil.getResourceProperty("vlc.path"));
         Native
                 .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
                 );
         LibXUtil.initialise();
+//
+//        URL url = getClass().getResource("/com/vollyball/dll/VLC64");
+//        try {
+//            File f = new File(url.toURI());
+//            NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), f.getAbsolutePath());
+//            Native
+//                    .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
+//                    );
+//            LibXUtil.initialise();
+//        } catch (URISyntaxException ex) {
+//            Logger.getLogger(PanEvaluation.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
     }
 
     /**
