@@ -7,6 +7,7 @@ package com.vollyball.panels.report;
 
 import com.vollyball.panels.*;
 import com.vollyball.bean.MatchBean;
+import com.vollyball.bean.SuccessFailure;
 import com.vollyball.bean.Tempo;
 import com.vollyball.bean.ZoneHitCount;
 import com.vollyball.controller.Controller;
@@ -14,6 +15,7 @@ import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.enums.Rating;
 import com.vollyball.enums.Skill;
+import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.enums.SkillZoneWiseReport;
 import com.vollyball.enums.SkillsDescCriteria;
 import com.vollyball.renderer.ColumnGroup;
@@ -26,6 +28,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -61,15 +64,27 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
     DefaultTableModel defaultHomeServiceModel;
     DefaultTableModel defaultHomeAttackModel;
     DefaultTableModel defaultHomeBlockModel;
+    DefaultTableModel defaultHomeSetModel;
+    DefaultTableModel defaultHomeReceptionModel;
+    DefaultTableModel defaultHomeDefenceModel;
     DefaultTableModel defaultOppServiceModel;
     DefaultTableModel defaultOppAttackModel;
     DefaultTableModel defaultOppBlockModel;
+    DefaultTableModel defaultOppSetModel;
+    DefaultTableModel defaultOppReceptionModel;
+    DefaultTableModel defaultOppDefenceModel;
     JTable tbHomeServiceTable;
     JTable tbHomeAttackTable;
     JTable tbHomeBlockTable;
+    JTable tbHomeSetTable;
+    JTable tbHomeReceptionTable;
+    JTable tbHomeDefenceTable;
     JTable tbOppServiceTable;
     JTable tbOppAttackTable;
     JTable tbOppBlockTable;
+    JTable tbOppSetTable;
+    JTable tbOppReceptionTable;
+    JTable tbOppDefenceTable;
 
     /**
      * Creates new form PanZoneReport
@@ -130,12 +145,24 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         createServiceTable(tbOppServiceTable, panOppServiceTable, defaultOppServiceModel = new DefaultTableModel());
         createAttackTable(tbOppAttackTable, panOppAttackTable, defaultOppAttackModel = new DefaultTableModel());
         createBlockTable(tbOppBlockTable, panOppBlockTable, defaultOppBlockModel = new DefaultTableModel());
-        setAttackRow(defaultHomeAttackModel, evaluationteamIdHome, 14);
-        setAttackRow(defaultOppAttackModel, evaluationteamIdOpp, 14);
-        setBlockRow(defaultHomeBlockModel, evaluationteamIdHome, 37);
-        setBlockRow(defaultOppBlockModel, evaluationteamIdOpp, 37);
-        setServiceRow(defaultHomeServiceModel, evaluationteamIdHome, 1);
-        setServiceRow(defaultOppServiceModel, evaluationteamIdOpp, 1);
+        createSetTable(tbHomeSetTable, panHomeSetTable, defaultHomeSetModel = new DefaultTableModel());
+        createSetTable(tbOppSetTable, panOppSetTable, defaultOppSetModel = new DefaultTableModel());
+        createReceptionTable(tbHomeReceptionTable, panHomeReceptionTable, defaultHomeReceptionModel = new DefaultTableModel());
+        createReceptionTable(tbOppReceptionTable, panOppReceptionTable, defaultOppReceptionModel = new DefaultTableModel());
+        createDefenceTable(tbHomeDefenceTable, panHomeDefenceTable, defaultHomeDefenceModel = new DefaultTableModel());
+        createDefenceTable(tbOppDefenceTable, panOppDefenceTable, defaultOppDefenceModel = new DefaultTableModel());
+        setAttackRow(defaultHomeAttackModel, evaluationteamIdHome, 11, 2);
+        setAttackRow(defaultOppAttackModel, evaluationteamIdOpp, 11, 2);
+        setBlockRow(defaultHomeBlockModel, evaluationteamIdHome, 37, 3);
+        setBlockRow(defaultOppBlockModel, evaluationteamIdOpp, 37, 3);
+        setServiceRow(defaultHomeServiceModel, evaluationteamIdHome, 1, 1);
+        setServiceRow(defaultOppServiceModel, evaluationteamIdOpp, 1, 1);
+        setSetRow(defaultHomeSetModel, evaluationteamIdHome, 43, 4);
+        setSetRow(defaultOppSetModel, evaluationteamIdOpp, 43, 4);
+        setReceptionRow(defaultHomeReceptionModel, evaluationteamIdHome, 60, 5);
+        setReceptionRow(defaultOppReceptionModel, evaluationteamIdOpp, 60, 5);
+        setDefenceRow(defaultHomeDefenceModel, evaluationteamIdHome, 75, 6);
+        setDefenceRow(defaultOppDefenceModel, evaluationteamIdOpp, 75, 6);
 
     }
 
@@ -209,7 +236,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 //        defaultModel = new DefaultTableModel();
 
         defaultModel.setDataVector(new Object[][]{},
-                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
+                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
 
         tbTable = new JTable(defaultModel) {
             protected JTableHeader createDefaultTableHeader() {
@@ -220,20 +247,40 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         tbTable.setFont(new java.awt.Font("Times New Roman", 0, 8));
         TableColumnModel cm = tbTable.getColumnModel();
 
-        ColumnGroup g_nameHigh = new ColumnGroup("High");
-        g_nameHigh.add(cm.getColumn(0));
-        g_nameHigh.add(cm.getColumn(1));
-        ColumnGroup g_nameMedium = new ColumnGroup("Medium");
-        g_nameMedium.add(cm.getColumn(2));
-        g_nameMedium.add(cm.getColumn(3));
-        ColumnGroup g_nameLow = new ColumnGroup("Low");
-        g_nameLow.add(cm.getColumn(4));
-        g_nameLow.add(cm.getColumn(5));
+        ColumnGroup g_nameIn = new ColumnGroup("IN");
+        g_nameIn.add(cm.getColumn(0));
+        g_nameIn.add(cm.getColumn(1));
+        ColumnGroup g_nameOt = new ColumnGroup("OT");
+        g_nameOt.add(cm.getColumn(2));
+        g_nameOt.add(cm.getColumn(3));
+        ColumnGroup g_nameBt = new ColumnGroup("BT");
+        g_nameBt.add(cm.getColumn(4));
+        g_nameBt.add(cm.getColumn(5));
+        ColumnGroup g_nameOl = new ColumnGroup("OL");
+        g_nameOl.add(cm.getColumn(6));
+        g_nameOl.add(cm.getColumn(7));
+        ColumnGroup g_nameD = new ColumnGroup("D");
+        g_nameD.add(cm.getColumn(8));
+        g_nameD.add(cm.getColumn(9));
+        ColumnGroup g_nameBc = new ColumnGroup("BC");
+        g_nameBc.add(cm.getColumn(10));
+        g_nameBc.add(cm.getColumn(11));
+        ColumnGroup g_nameR = new ColumnGroup("R");
+        g_nameR.add(cm.getColumn(12));
+        g_nameR.add(cm.getColumn(13));
+        ColumnGroup g_nameBtl = new ColumnGroup("BTL");
+        g_nameBtl.add(cm.getColumn(14));
+        g_nameBtl.add(cm.getColumn(15));
 
         GroupableTableHeader header = (GroupableTableHeader) tbTable.getTableHeader();
-        header.addColumnGroup(g_nameHigh);
-        header.addColumnGroup(g_nameMedium);
-        header.addColumnGroup(g_nameLow);
+        header.addColumnGroup(g_nameIn);
+        header.addColumnGroup(g_nameOt);
+        header.addColumnGroup(g_nameBt);
+        header.addColumnGroup(g_nameOl);
+        header.addColumnGroup(g_nameD);
+        header.addColumnGroup(g_nameBc);
+        header.addColumnGroup(g_nameR);
+        header.addColumnGroup(g_nameBtl);
         JScrollPane scroll = new JScrollPane(tbTable);
 
         Color heading = new Color(204, 204, 204);
@@ -253,6 +300,16 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         tbTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
         tbTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
         tbTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(9).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(10).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(11).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(12).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(13).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(14).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(15).setCellRenderer(centerRenderer);
 
         Color ivory = new Color(255, 255, 255);
         tbTable.setOpaque(true);
@@ -263,6 +320,19 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         resizeColumns(tbTable);
         panTable.add(scroll, BorderLayout.CENTER);
 
+    }
+    float[] columnWidthPercentage = {8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f};
+
+    private void resizeColumns(JTable tbTable) {
+        int tW = tbTable.getPreferredSize().width;
+        TableColumn column;
+        TableColumnModel jTableColumnModel = tbTable.getColumnModel();
+        int cantCols = jTableColumnModel.getColumnCount();
+        for (int i = 0; i < cantCols; i++) {
+            column = jTableColumnModel.getColumn(i);
+            int pWidth = Math.round(columnWidthPercentage[i] * tW);
+            column.setPreferredWidth(pWidth);
+        }
     }
 
     public void createBlockTable(JTable tbTable, JPanel panTable, DefaultTableModel defaultModel) {
@@ -330,6 +400,213 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         panTable.add(scroll, BorderLayout.CENTER);
 
     }
+
+    public void createSetTable(JTable tbTable, JPanel panTable, DefaultTableModel defaultModel) {
+//        defaultModel = new DefaultTableModel();
+
+        defaultModel.setDataVector(new Object[][]{},
+                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
+
+        tbTable = new JTable(defaultModel) {
+            protected JTableHeader createDefaultTableHeader() {
+                return new GroupableTableHeader(columnModel);
+            }
+        };
+
+        tbTable.setFont(new java.awt.Font("Times New Roman", 0, 8));
+        TableColumnModel cm = tbTable.getColumnModel();
+
+        ColumnGroup g_nameHigh = new ColumnGroup("HIGH");
+        g_nameHigh.add(cm.getColumn(0));
+        g_nameHigh.add(cm.getColumn(1));
+        ColumnGroup g_nameMedium = new ColumnGroup("MEDIUM");
+        g_nameMedium.add(cm.getColumn(2));
+        g_nameMedium.add(cm.getColumn(3));
+        ColumnGroup g_nameLow = new ColumnGroup("LOW");
+        g_nameLow.add(cm.getColumn(4));
+        g_nameLow.add(cm.getColumn(5));
+
+        GroupableTableHeader header = (GroupableTableHeader) tbTable.getTableHeader();
+        header.addColumnGroup(g_nameHigh);
+        header.addColumnGroup(g_nameMedium);
+        header.addColumnGroup(g_nameLow);
+        JScrollPane scroll = new JScrollPane(tbTable);
+
+        Color heading = new Color(204, 204, 204);
+        defaultModel = (DefaultTableModel) tbTable.getModel();
+        JTableHeader tbheader = tbTable.getTableHeader();
+
+        tbheader.setOpaque(false);
+        tbheader.setPreferredSize(new Dimension(100, 55));
+        tbheader.setDefaultRenderer(new TableHeaderRendererForReport(tbTable));
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        tbTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(0).setWidth(5);
+
+        tbTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+
+        Color ivory = new Color(255, 255, 255);
+        tbTable.setOpaque(true);
+        tbTable.setFillsViewportHeight(true);
+        tbTable.setBackground(ivory);
+
+        tbTable.setRowHeight(25);
+        resizeColumns2(tbTable);
+        panTable.add(scroll, BorderLayout.CENTER);
+
+    }
+
+    float[] columnWidthPercentage2 = {8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f};
+
+    private void resizeColumns2(JTable tbTable) {
+        int tW = tbTable.getPreferredSize().width;
+        TableColumn column;
+        TableColumnModel jTableColumnModel = tbTable.getColumnModel();
+        int cantCols = jTableColumnModel.getColumnCount();
+        for (int i = 0; i < cantCols; i++) {
+            column = jTableColumnModel.getColumn(i);
+            int pWidth = Math.round(columnWidthPercentage2[i] * tW);
+            column.setPreferredWidth(pWidth);
+        }
+    }
+
+    public void createReceptionTable(JTable tbTable, JPanel panTable, DefaultTableModel defaultModel) {
+//        defaultModel = new DefaultTableModel();
+
+        defaultModel.setDataVector(new Object[][]{},
+                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
+
+        tbTable = new JTable(defaultModel) {
+            protected JTableHeader createDefaultTableHeader() {
+                return new GroupableTableHeader(columnModel);
+            }
+        };
+
+        tbTable.setFont(new java.awt.Font("Times New Roman", 0, 8));
+        TableColumnModel cm = tbTable.getColumnModel();
+
+        ColumnGroup g_nameOn = new ColumnGroup("ON");
+        g_nameOn.add(cm.getColumn(0));
+        g_nameOn.add(cm.getColumn(1));
+        ColumnGroup g_nameCn = new ColumnGroup("CN");
+        g_nameCn.add(cm.getColumn(2));
+        g_nameCn.add(cm.getColumn(3));
+        ColumnGroup g_nameAn = new ColumnGroup("AN");
+        g_nameAn.add(cm.getColumn(4));
+        g_nameAn.add(cm.getColumn(5));
+        ColumnGroup g_nameLt = new ColumnGroup("LT");
+        g_nameLt.add(cm.getColumn(6));
+        g_nameLt.add(cm.getColumn(7));
+
+        GroupableTableHeader header = (GroupableTableHeader) tbTable.getTableHeader();
+        header.addColumnGroup(g_nameOn);
+        header.addColumnGroup(g_nameCn);
+        header.addColumnGroup(g_nameAn);
+        header.addColumnGroup(g_nameLt);
+        JScrollPane scroll = new JScrollPane(tbTable);
+
+        Color heading = new Color(204, 204, 204);
+        defaultModel = (DefaultTableModel) tbTable.getModel();
+        JTableHeader tbheader = tbTable.getTableHeader();
+
+        tbheader.setOpaque(false);
+        tbheader.setPreferredSize(new Dimension(100, 55));
+        tbheader.setDefaultRenderer(new TableHeaderRendererForReport(tbTable));
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        tbTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(0).setWidth(5);
+
+        tbTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
+
+        Color ivory = new Color(255, 255, 255);
+        tbTable.setOpaque(true);
+        tbTable.setFillsViewportHeight(true);
+        tbTable.setBackground(ivory);
+
+        tbTable.setRowHeight(25);
+        resizeColumns1(tbTable);
+        panTable.add(scroll, BorderLayout.CENTER);
+
+    }
+
+    public void createDefenceTable(JTable tbTable, JPanel panTable, DefaultTableModel defaultModel) {
+//        defaultModel = new DefaultTableModel();
+
+        defaultModel.setDataVector(new Object[][]{},
+                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
+
+        tbTable = new JTable(defaultModel) {
+            protected JTableHeader createDefaultTableHeader() {
+                return new GroupableTableHeader(columnModel);
+            }
+        };
+
+        tbTable.setFont(new java.awt.Font("Times New Roman", 0, 8));
+        TableColumnModel cm = tbTable.getColumnModel();
+
+        ColumnGroup g_nameOn = new ColumnGroup("ON");
+        g_nameOn.add(cm.getColumn(0));
+        g_nameOn.add(cm.getColumn(1));
+        ColumnGroup g_nameCn = new ColumnGroup("CN");
+        g_nameCn.add(cm.getColumn(2));
+        g_nameCn.add(cm.getColumn(3));
+        ColumnGroup g_nameAn = new ColumnGroup("AN");
+        g_nameAn.add(cm.getColumn(4));
+        g_nameAn.add(cm.getColumn(5));
+        ColumnGroup g_nameLt = new ColumnGroup("LT");
+        g_nameLt.add(cm.getColumn(6));
+        g_nameLt.add(cm.getColumn(7));
+
+        GroupableTableHeader header = (GroupableTableHeader) tbTable.getTableHeader();
+        header.addColumnGroup(g_nameOn);
+        header.addColumnGroup(g_nameCn);
+        header.addColumnGroup(g_nameAn);
+        header.addColumnGroup(g_nameLt);
+        JScrollPane scroll = new JScrollPane(tbTable);
+
+        Color heading = new Color(204, 204, 204);
+        defaultModel = (DefaultTableModel) tbTable.getModel();
+        JTableHeader tbheader = tbTable.getTableHeader();
+
+        tbheader.setOpaque(false);
+        tbheader.setPreferredSize(new Dimension(100, 55));
+        tbheader.setDefaultRenderer(new TableHeaderRendererForReport(tbTable));
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        tbTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(0).setWidth(5);
+
+        tbTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+        tbTable.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
+
+        Color ivory = new Color(255, 255, 255);
+        tbTable.setOpaque(true);
+        tbTable.setFillsViewportHeight(true);
+        tbTable.setBackground(ivory);
+
+        tbTable.setRowHeight(25);
+        resizeColumns1(tbTable);
+        panTable.add(scroll, BorderLayout.CENTER);
+
+    }
+
     float[] columnWidthPercentage1 = {8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f};
 
     private void resizeColumns1(JTable tbTable) {
@@ -344,44 +621,63 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         }
     }
 
-    float[] columnWidthPercentage = {8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f};
-
-    private void resizeColumns(JTable tbTable) {
-        int tW = tbTable.getPreferredSize().width;
-        TableColumn column;
-        TableColumnModel jTableColumnModel = tbTable.getColumnModel();
-        int cantCols = jTableColumnModel.getColumnCount();
-        for (int i = 0; i < cantCols; i++) {
-            column = jTableColumnModel.getColumn(i);
-            int pWidth = Math.round(columnWidthPercentage[i] * tW);
-            column.setPreferredWidth(pWidth);
-        }
-    }
-
-    public void setAttackRow(DefaultTableModel defaultModel, int evlId, int skilDescId) {
+    public void setAttackRow(DefaultTableModel defaultModel, int evlId, int skilDescId, int skillId) {
         for (int i = defaultModel.getRowCount() - 1; i >= 0; i--) {
             defaultModel.removeRow(i);
         }
-        Tempo tempo = reportDao.getAttackReportTempoWise(evlId, skilDescId);
-        Object[] row = {tempo.getHigh().getSuccess(), tempo.getHigh().getFailure(), tempo.getMedium().getSuccess(), tempo.getMedium().getFailure(), tempo.getLow().getSuccess(), tempo.getLow().getFailure()};
+        List<SkillDescCriteriaPoint> sdcPoint = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skilDescId);
+        Map<String, SuccessFailure> sfMap = reportDao.getReportZoneSkillWise(evlId, skilDescId, skillId);
+        Object[] row = {sfMap.get(sdcPoint.get(0).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(0).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(4).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(4).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(5).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(5).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(6).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(6).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(7).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(7).getAbbreviation()).getFailure()};
         defaultModel.addRow(row);
     }
 
-    public void setBlockRow(DefaultTableModel defaultModel, int evlId, int skilDescId) {
+    public void setBlockRow(DefaultTableModel defaultModel, int evlId, int skilDescId, int skillId) {
         for (int i = defaultModel.getRowCount() - 1; i >= 0; i--) {
             defaultModel.removeRow(i);
         }
-        Tempo tempo = reportDao.getBlockReportSkilDescWise(evlId, skilDescId);
-        Object[] row = {tempo.getNb().getSuccess(), tempo.getNb().getFailure(), tempo.getSgl().getSuccess(), tempo.getSgl().getFailure(), tempo.getDbl().getSuccess(), tempo.getDbl().getFailure(), tempo.getTpl().getSuccess(), tempo.getTpl().getFailure()};
+        List<SkillDescCriteriaPoint> sdcPoint = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skilDescId);
+        Map<String, SuccessFailure> sfMap = reportDao.getReportZoneSkillWise(evlId, skilDescId, skillId);
+        Object[] row = {sfMap.get(sdcPoint.get(0).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(0).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getFailure()};
         defaultModel.addRow(row);
     }
 
-    public void setServiceRow(DefaultTableModel defaultModel, int evlId, int skilDescId) {
+    public void setServiceRow(DefaultTableModel defaultModel, int evlId, int skilDescId, int skillId) {
         for (int i = defaultModel.getRowCount() - 1; i >= 0; i--) {
             defaultModel.removeRow(i);
         }
-        Tempo tempo = reportDao.getServiceReportSkilDescWise(evlId, skilDescId);
-        Object[] row = {tempo.getJf().getSuccess(), tempo.getJf().getFailure(), tempo.getJp().getSuccess(), tempo.getJp().getFailure(), tempo.getSf().getSuccess(), tempo.getSf().getFailure(), tempo.getSs().getSuccess(), tempo.getSs().getFailure()};
+        List<SkillDescCriteriaPoint> sdcPoint = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skilDescId);
+        Map<String, SuccessFailure> sfMap = reportDao.getReportZoneSkillWise(evlId, skilDescId, skillId);
+        Object[] row = {sfMap.get(sdcPoint.get(0).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(0).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getFailure()};
+        defaultModel.addRow(row);
+    }
+
+    public void setSetRow(DefaultTableModel defaultModel, int evlId, int skilDescId, int skillId) {
+        for (int i = defaultModel.getRowCount() - 1; i >= 0; i--) {
+            defaultModel.removeRow(i);
+        }
+        List<SkillDescCriteriaPoint> sdcPoint = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skilDescId);
+        Map<String, SuccessFailure> sfMap = reportDao.getReportZoneSkillWise(evlId, skilDescId, skillId);
+        Object[] row = {sfMap.get(sdcPoint.get(0).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(0).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getFailure()};
+        defaultModel.addRow(row);
+    }
+
+    public void setReceptionRow(DefaultTableModel defaultModel, int evlId, int skilDescId, int skillId) {
+        for (int i = defaultModel.getRowCount() - 1; i >= 0; i--) {
+            defaultModel.removeRow(i);
+        }
+        List<SkillDescCriteriaPoint> sdcPoint = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skilDescId);
+        Map<String, SuccessFailure> sfMap = reportDao.getReportZoneSkillWise(evlId, skilDescId, skillId);
+        Object[] row = {sfMap.get(sdcPoint.get(0).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(0).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getFailure()};
+        defaultModel.addRow(row);
+    }
+
+    public void setDefenceRow(DefaultTableModel defaultModel, int evlId, int skilDescId, int skillId) {
+        for (int i = defaultModel.getRowCount() - 1; i >= 0; i--) {
+            defaultModel.removeRow(i);
+        }
+        List<SkillDescCriteriaPoint> sdcPoint = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skilDescId);
+        Map<String, SuccessFailure> sfMap = reportDao.getReportZoneSkillWise(evlId, skilDescId, skillId);
+        Object[] row = {sfMap.get(sdcPoint.get(0).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(0).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getFailure()};
         defaultModel.addRow(row);
     }
 
@@ -528,18 +824,24 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         tblHomeReception = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
+        panHomeReceptionTable = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         digHomeSet = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblHomeSet = new javax.swing.JTable();
         jPanel10 = new javax.swing.JPanel();
+        panHomeSetTable = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         digHomeDefence = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblHomeDefence = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
+        panHomeDefenceTable = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
         lblHomeTeamName = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
@@ -548,12 +850,16 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jScrollPane7 = new javax.swing.JScrollPane();
         tblOppDefence = new javax.swing.JTable();
         jPanel15 = new javax.swing.JPanel();
+        panOppDefenceTable = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         digOppSet = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tblOppSet = new javax.swing.JTable();
         jPanel17 = new javax.swing.JPanel();
+        panOppSetTable = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         digOppService = new javax.swing.JPanel();
@@ -568,6 +874,8 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         jScrollPane10 = new javax.swing.JScrollPane();
         tblOppReception = new javax.swing.JTable();
         jPanel21 = new javax.swing.JPanel();
+        panOppReceptionTable = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         digOppAttack = new javax.swing.JPanel();
@@ -754,7 +1062,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         panHomeAttackTable.setLayout(new java.awt.BorderLayout());
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel2.setText("Tempo");
+        jLabel2.setText("Techniques");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -945,6 +1253,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        panHomeReceptionTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panHomeReceptionTable.setLayout(new java.awt.BorderLayout());
+
+        jLabel24.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel24.setText("Reception At");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -957,7 +1271,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(digHomeReception, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel12))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(panHomeReceptionTable, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -971,7 +1290,11 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel24)
+                .addGap(10, 10, 10)
+                .addComponent(panHomeReceptionTable, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
@@ -1026,6 +1349,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        panHomeSetTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panHomeSetTable.setLayout(new java.awt.BorderLayout());
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel7.setText("Tempo");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -1038,7 +1367,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(digHomeSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel13))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(panHomeSetTable, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -1052,7 +1386,11 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panHomeSetTable, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -1107,6 +1445,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        panHomeDefenceTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panHomeDefenceTable.setLayout(new java.awt.BorderLayout());
+
+        jLabel21.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel21.setText("Defence At");
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -1119,7 +1463,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(digHomeDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel14))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(panHomeDefenceTable, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -1133,7 +1482,11 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panHomeDefenceTable, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         lblHomeTeamName.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
@@ -1204,6 +1557,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        panOppDefenceTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panOppDefenceTable.setLayout(new java.awt.BorderLayout());
+
+        jLabel22.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel22.setText("Defence At");
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -1216,7 +1575,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(digOppDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel15))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(panOppDefenceTable, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -1230,7 +1594,11 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel22)
+                .addGap(14, 14, 14)
+                .addComponent(panOppDefenceTable, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
@@ -1285,6 +1653,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        panOppSetTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panOppSetTable.setLayout(new java.awt.BorderLayout());
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel8.setText("Tempo");
+
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
@@ -1297,7 +1671,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(digOppSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel16))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(panOppSetTable, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
@@ -1311,7 +1690,11 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addGap(15, 15, 15)
+                .addComponent(panOppSetTable, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanel18.setBackground(new java.awt.Color(255, 255, 255));
@@ -1466,6 +1849,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        panOppReceptionTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panOppReceptionTable.setLayout(new java.awt.BorderLayout());
+
+        jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel23.setText("Reception At");
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
@@ -1478,7 +1867,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                         .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(digOppReception, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel18))
+                    .addGroup(jPanel20Layout.createSequentialGroup()
+                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18)
+                            .addComponent(panOppReceptionTable, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel23))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel20Layout.setVerticalGroup(
@@ -1492,7 +1886,11 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel23)
+                .addGap(14, 14, 14)
+                .addComponent(panOppReceptionTable, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         jPanel22.setBackground(new java.awt.Color(255, 255, 255));
@@ -1551,7 +1949,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         panOppAttackTable.setLayout(new java.awt.BorderLayout());
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel5.setText("Tempo");
+        jLabel5.setText("Technique");
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -1786,10 +2184,16 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -1832,10 +2236,16 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
     private javax.swing.JLabel lblOppTeamName;
     private javax.swing.JPanel panHomeAttackTable;
     private javax.swing.JPanel panHomeBlockTable;
+    private javax.swing.JPanel panHomeDefenceTable;
+    private javax.swing.JPanel panHomeReceptionTable;
     private javax.swing.JPanel panHomeServiceTable;
+    private javax.swing.JPanel panHomeSetTable;
     private javax.swing.JPanel panOppAttackTable;
     private javax.swing.JPanel panOppBlockTable;
+    private javax.swing.JPanel panOppDefenceTable;
+    private javax.swing.JPanel panOppReceptionTable;
     private javax.swing.JPanel panOppServiceTable;
+    private javax.swing.JPanel panOppSetTable;
     private javax.swing.JTable tblHomeAttack;
     private javax.swing.JTable tblHomeBlock;
     private javax.swing.JTable tblHomeDefence;
