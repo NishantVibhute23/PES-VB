@@ -5,7 +5,9 @@
  */
 package com.vollyball.panels;
 
+import com.vollyball.bean.DigPanelLocation;
 import com.vollyball.bean.DigPoints;
+import com.vollyball.bean.DigTrianglePoints;
 import com.vollyball.bean.Player;
 import com.vollyball.controller.Controller;
 import com.vollyball.enums.PlayerPosition;
@@ -22,6 +24,7 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Stroke;
@@ -52,7 +55,8 @@ public class ImagePanel extends JPanel {
     int midX = 0;
     int midY = 0;
     private Image imgHand;
-    static LinkedHashMap<String, JPanel> panGrid = new LinkedHashMap<String, JPanel>();
+    LinkedHashMap<String, JPanel> panGrid = new LinkedHashMap<String, JPanel>();
+    LinkedHashMap<String, DigPanelLocation> panGridLocations = new LinkedHashMap<String, DigPanelLocation>();
 
     static LinkedHashMap<Integer, Point> homeChestNumShow = new LinkedHashMap<Integer, Point>();
     static LinkedHashMap<Integer, Point> oppChestNumShow = new LinkedHashMap<Integer, Point>();
@@ -60,11 +64,37 @@ public class ImagePanel extends JPanel {
     public LinkedHashMap<Integer, Player> rallyPositionMap = new LinkedHashMap<Integer, Player>();
     public LinkedHashMap<Integer, Player> rallyPositionMapOpp = new LinkedHashMap<Integer, Player>();
 
+    boolean isTriangle = false;
     List<DigPoints> shapes = new ArrayList<>();
 
     public ImagePanel(String img, PanEvaluationRally p) {
         this(new ImageIcon(img).getImage(), p);
 
+    }
+
+    public void drawTriangle(List<DigTrianglePoints> points) {
+
+        for (DigTrianglePoints p : points) {
+            this.isTriangle = true;
+            DigPoints dp = new DigPoints();
+            JPanel p2 = panGrid.get(p.getToB());
+            JPanel p1 = panGrid.get(p.getToA());
+            JPanel p3 = panGrid.get(p.getFrom());
+
+            DigPanelLocation dplP1 = panGridLocations.get(p.getToA());
+            DigPanelLocation dplP2 = panGridLocations.get(p.getToB());
+            DigPanelLocation dplP3 = panGridLocations.get(p.getFrom());
+
+            dp.setX1((int) (((dplP1.getParentX() * 50) + (dplP1.getCurrentX() * p1.getWidth())) + (p1.getWidth() / 2)));
+            dp.setY1((int) (((dplP1.getParentY() * 50) + (dplP1.getCurrentY() * p1.getHeight())) + (p1.getHeight() / 2)));
+            dp.setX2((int) (((dplP2.getParentX() * 50) + (dplP2.getCurrentX() * p2.getWidth())) + (p2.getWidth() / 2)));
+            dp.setY2((int) (((dplP2.getParentY() * 50) + (dplP2.getCurrentY() * p2.getHeight())) + (p2.getHeight() / 2)));
+            dp.setMidx((int) (((dplP3.getParentX() * 50) + (dplP3.getCurrentX() * p3.getWidth())) + (p3.getWidth())));
+            dp.setMidy((int) (((dplP3.getParentY() * 50) + (dplP3.getCurrentY() * p3.getHeight())) + (p3.getHeight())));
+            dp.setColor(p.getColor());
+            shapes.add(dp);
+        }
+        repaint();
     }
 
     public ImagePanel(Image img, PanEvaluationRally p) {
@@ -96,7 +126,7 @@ public class ImagePanel extends JPanel {
                     } else if (j == 5) {
                         panCode = panCode + "L4";
                     }
-                    addPanel(panCode);
+                    addPanel(panCode, i, j);
                 }
 
                 if (i == 2) {
@@ -112,7 +142,7 @@ public class ImagePanel extends JPanel {
                     } else if (j == 5) {
                         panCode = panCode + "L3";
                     }
-                    addPanel(panCode);
+                    addPanel(panCode, i, j);
                 }
 
                 if (i == 3) {
@@ -128,7 +158,7 @@ public class ImagePanel extends JPanel {
                     } else if (j == 5) {
                         panCode = panCode + "L2";
                     }
-                    addPanel(panCode);
+                    addPanel(panCode, i, j);
                 }
 
                 if (i == 4) {
@@ -144,7 +174,7 @@ public class ImagePanel extends JPanel {
                     } else if (j == 5) {
                         panCode = panCode + "L1";
                     }
-                    addPanel(panCode);
+                    addPanel(panCode, i, j);
                 }
 
                 if (i == 5) {
@@ -160,7 +190,7 @@ public class ImagePanel extends JPanel {
                     } else if (j == 5) {
                         panCode = panCode + "R1";
                     }
-                    addPanel(panCode);
+                    addPanel(panCode, i, j);
                 }
 
                 if (i == 6) {
@@ -176,7 +206,7 @@ public class ImagePanel extends JPanel {
                     } else if (j == 5) {
                         panCode = panCode + "R2";
                     }
-                    addPanel(panCode);
+                    addPanel(panCode, i, j);
                 }
 
                 if (i == 7) {
@@ -192,7 +222,7 @@ public class ImagePanel extends JPanel {
                     } else if (j == 5) {
                         panCode = panCode + "R3";
                     }
-                    addPanel(panCode);
+                    addPanel(panCode, i, j);
 
                 }
 
@@ -209,7 +239,7 @@ public class ImagePanel extends JPanel {
                     } else if (j == 5) {
                         panCode = panCode + "R4";
                     }
-                    addPanel(panCode);
+                    addPanel(panCode, i, j);
                 }
 
             }
@@ -217,7 +247,7 @@ public class ImagePanel extends JPanel {
 
     }
 
-    public void addPanel(String panCode) {
+    public void addPanel(String panCode, int parenty, int parentx) {
         JPanel p = new JPanel();
         p.setSize(50, 50);
         p.setLayout(new GridLayout(2, 2));
@@ -242,12 +272,18 @@ public class ImagePanel extends JPanel {
                     }
                 }
 
+                DigPanelLocation dpl = new DigPanelLocation();
+                dpl.setParentX(parentx - 1);
+                dpl.setParentY(parenty - 1);
+                dpl.setCurrentX(k - 1);
+                dpl.setCurrentY(l - 1);
                 JPanel pin = new JPanel();
                 pin.setSize(25, 25);
                 pin.setBorder(BorderFactory.createDashedBorder(new Color(150, 222, 235), 1, 10));
                 pin.setOpaque(false);
                 p.add(pin);
                 panGrid.put(code, pin);
+                panGridLocations.put(code, dpl);
             }
         }
         this.add(p);
@@ -273,12 +309,12 @@ public class ImagePanel extends JPanel {
 
     public static DigPoints getPoints(String pan1, String pan2) {
         DigPoints dp = new DigPoints();
-        JPanel p1 = panGrid.get(pan1);
-        JPanel p2 = panGrid.get(pan2);
-        dp.setX1((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
-        dp.setY1((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
-        dp.setX2((int) (p2.getParent().getLocation().getX() + p2.getLocation().getX() + (p2.getWidth() / 2)));
-        dp.setY2((int) (p2.getParent().getLocation().getY() + p2.getLocation().getY() + (p2.getHeight() / 2)));
+//        JPanel p1 = panGrid.get(pan1);
+//        JPanel p2 = panGrid.get(pan2);
+//        dp.setX1((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+//        dp.setY1((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+//        dp.setX2((int) (p2.getParent().getLocation().getX() + p2.getLocation().getX() + (p2.getWidth() / 2)));
+//        dp.setY2((int) (p2.getParent().getLocation().getY() + p2.getLocation().getY() + (p2.getHeight() / 2)));
         return dp;
     }
 
@@ -463,89 +499,114 @@ public class ImagePanel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
-        showPlayerChestNum();
-        g.drawImage(img, 0, 0, null);
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(3));
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        for (Map.Entry<Integer, Player> entry : rallyPositionMap.entrySet()) {
+        if (!isTriangle) {
+            showPlayerChestNum();
+            g.drawImage(img, 0, 0, null);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setStroke(new BasicStroke(3));
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            Point p = homeChestNumShow.get(entry.getKey());
-            Player player = entry.getValue();
-            String text = player.getChestNo();
-            int centerX = (int) p.getX(), centerY = (int) p.getY();
-            int ovalWidth = 30, ovalHeight = 30;
+            for (Map.Entry<Integer, Player> entry : rallyPositionMap.entrySet()) {
 
-            // Draw oval
-            GradientPaint redtowhite = new GradientPaint(centerX - ovalWidth / 2, centerY - ovalHeight / 2, PlayerPosition.getNameById(player.getPosition()).getColor(), centerX - ovalWidth / 2 + 60, centerY - ovalHeight / 2, Color.white);
-            g2.setPaint(redtowhite);
-            g2.fill(new Ellipse2D.Double(centerX - ovalWidth / 2, centerY - ovalHeight / 2, 30, 30));
-            g2.setPaint(Color.black);
+                Point p = homeChestNumShow.get(entry.getKey());
+                Player player = entry.getValue();
+                String text = player.getChestNo();
+                int centerX = (int) p.getX(), centerY = (int) p.getY();
+                int ovalWidth = 30, ovalHeight = 30;
 
-            Font font = new Font("Serif", Font.BOLD, 20);
-            g2.setFont(font);
-            // Draw centered text
-            FontMetrics fm = g.getFontMetrics();
-            double textWidth = fm.getStringBounds(text, g).getWidth();
+                // Draw oval
+                GradientPaint redtowhite = new GradientPaint(centerX - ovalWidth / 2, centerY - ovalHeight / 2, PlayerPosition.getNameById(player.getPosition()).getColor(), centerX - ovalWidth / 2 + 60, centerY - ovalHeight / 2, Color.white);
+                g2.setPaint(redtowhite);
+                g2.fill(new Ellipse2D.Double(centerX - ovalWidth / 2, centerY - ovalHeight / 2, 30, 30));
+                g2.setPaint(Color.black);
 
-            g.setColor(Color.WHITE);
-            g.drawString(text, (int) (centerX - textWidth / 2),
-                    (int) (centerY + fm.getMaxAscent() / 3));
-        }
+                Font font = new Font("Serif", Font.BOLD, 20);
+                g2.setFont(font);
+                // Draw centered text
+                FontMetrics fm = g.getFontMetrics();
+                double textWidth = fm.getStringBounds(text, g).getWidth();
 
-        for (Map.Entry<Integer, Player> entry : rallyPositionMapOpp.entrySet()) {
-            Point p = oppChestNumShow.get(entry.getKey());
-            Player player = entry.getValue();
-            String text = player.getChestNo();
-            int centerX = (int) p.getX(), centerY = (int) p.getY();
-            int ovalWidth = 30, ovalHeight = 30;
+                g.setColor(Color.WHITE);
+                g.drawString(text, (int) (centerX - textWidth / 2),
+                        (int) (centerY + fm.getMaxAscent() / 3));
+            }
 
-            // Draw oval
-            GradientPaint redtowhite = new GradientPaint(centerX - ovalWidth / 2, centerY - ovalHeight / 2, PlayerPosition.getNameById(player.getPosition()).getColor(), centerX - ovalWidth / 2 + 60, centerY - ovalHeight / 2, Color.white);
-            g2.setPaint(redtowhite);
-            g2.fill(new Ellipse2D.Double(centerX - ovalWidth / 2, centerY - ovalHeight / 2, 30, 30));
-            g2.setPaint(Color.black);
+            for (Map.Entry<Integer, Player> entry : rallyPositionMapOpp.entrySet()) {
+                Point p = oppChestNumShow.get(entry.getKey());
+                Player player = entry.getValue();
+                String text = player.getChestNo();
+                int centerX = (int) p.getX(), centerY = (int) p.getY();
+                int ovalWidth = 30, ovalHeight = 30;
 
-            // Draw centered text
-            FontMetrics fm = g.getFontMetrics();
-            double textWidth = fm.getStringBounds(text, g).getWidth();
-            Font font = new Font("Serif", Font.BOLD, 20);
-            g2.setFont(font);
-            g.setColor(Color.WHITE);
-            g.drawString(text, (int) (centerX - textWidth / 2),
-                    (int) (centerY + fm.getMaxAscent() / 3));
-        }
+                // Draw oval
+                GradientPaint redtowhite = new GradientPaint(centerX - ovalWidth / 2, centerY - ovalHeight / 2, PlayerPosition.getNameById(player.getPosition()).getColor(), centerX - ovalWidth / 2 + 60, centerY - ovalHeight / 2, Color.white);
+                g2.setPaint(redtowhite);
+                g2.fill(new Ellipse2D.Double(centerX - ovalWidth / 2, centerY - ovalHeight / 2, 30, 30));
+                g2.setPaint(Color.black);
 
-        for (DigPoints dp : shapes) {
-            Path2D p = new GeneralPath();
-            p.moveTo(dp.getX1(), dp.getY1());
-            p.curveTo(dp.getX1(), dp.getY1(), dp.getMidx(), dp.getMidy(), dp.getX2(), dp.getY2());
+                // Draw centered text
+                FontMetrics fm = g.getFontMetrics();
+                double textWidth = fm.getStringBounds(text, g).getWidth();
+                Font font = new Font("Serif", Font.BOLD, 20);
+                g2.setFont(font);
+                g.setColor(Color.WHITE);
+                g.drawString(text, (int) (centerX - textWidth / 2),
+                        (int) (centerY + fm.getMaxAscent() / 3));
+            }
 
-            if (dp.getPlayerMoved() == 1) {
-                Stroke dashed = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 0, new float[]{10}, 5);
-                g2.setColor(Color.blue);
-                g2.setStroke(dashed);
-                imgHand = new ImageIcon("src\\com\\vollyball\\images\\153657649317869378.png").getImage();
-                g.drawImage(imgHand, dp.getX2() - 15, dp.getY2() - 15, null);
+            for (DigPoints dp : shapes) {
+                Path2D p = new GeneralPath();
+                p.moveTo(dp.getX1(), dp.getY1());
+                p.curveTo(dp.getX1(), dp.getY1(), dp.getMidx(), dp.getMidy(), dp.getX2(), dp.getY2());
+
+                if (dp.getPlayerMoved() == 1) {
+                    Stroke dashed = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 0, new float[]{10}, 5);
+                    g2.setColor(Color.blue);
+                    g2.setStroke(dashed);
+                    imgHand = new ImageIcon("src\\com\\vollyball\\images\\153657649317869378.png").getImage();
+                    g.drawImage(imgHand, dp.getX2() - 15, dp.getY2() - 15, null);
 //                imgHand = new ImageIcon("src\\com\\vollyball\\images\\153657649317869378 (1).png").getImage();
 //                g.drawImage(imgHand, dp.getX1() - 15, dp.getY1() - 15, null);
-            } else if (dp.getPlayerMoved() == 2) {
-                Stroke dashed = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 0, new float[]{10}, 5);
-                g2.setColor(Color.BLACK);
-                g2.setStroke(dashed);
-                g.setColor(Color.RED);
-                g.fillOval(dp.getX2() - 5, dp.getY2() - 5, 10, 10);
-            } else {
-                g2.setColor(Color.WHITE);
-                g2.setStroke(new BasicStroke(3));
+                } else if (dp.getPlayerMoved() == 2) {
+                    Stroke dashed = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 0, new float[]{10}, 5);
+                    g2.setColor(Color.BLACK);
+                    g2.setStroke(dashed);
+                    g.setColor(Color.RED);
+                    g.fillOval(dp.getX2() - 5, dp.getY2() - 5, 10, 10);
+                } else {
+                    g2.setColor(Color.WHITE);
+                    g2.setStroke(new BasicStroke(3));
 
-                Point sw = new Point(dp.getMidx(), dp.getMidy());
-                Point ne = new Point(dp.getX1(), dp.getY1());
+                    Point sw = new Point(dp.getMidx(), dp.getMidy());
+                    Point ne = new Point(dp.getX1(), dp.getY1());
 
-                drawArrowHead(g2, sw, ne, Color.WHITE);
+                    drawArrowHead(g2, sw, ne, Color.WHITE);
+                }
+                g2.draw(p);
             }
-            g2.draw(p);
+        } else {
+            g.drawImage(img, 0, 0, null);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setStroke(new BasicStroke(3));
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            int n = 3;
+            int x[] = new int[n];
+            int y[] = new int[n];
+
+            for (DigPoints dp : shapes) {
+                x[0] = dp.getX1();
+                x[1] = dp.getMidx();
+                x[2] = dp.getX2();
+                y[0] = dp.getY1();
+                y[1] = dp.getMidy();
+                y[2] = dp.getY2();
+
+                Polygon p = new Polygon(x, y, n);  // This polygon represents a triangle with the above
+                //   vertices.
+                g.setColor(dp.getColor());
+                g.fillPolygon(p);
+            }
         }
 
     }

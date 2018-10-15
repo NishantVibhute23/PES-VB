@@ -5,6 +5,7 @@
  */
 package com.vollyball.util;
 
+import com.vollyball.dao.ReportDao;
 import java.awt.Color;
 import java.io.InputStream;
 import java.text.DateFormat;
@@ -152,5 +153,17 @@ public class CommonUtil {
             System.out.println("Key : " + entry.getKey()
                     + " Value : " + entry.getValue());
         }
+    }
+
+    public static String getValue(int skillDescCriteriaId, int rating, String rowSkillDesc, int rowSkillDescId, int evaluationteamId, int skillid) {
+        ReportDao reportDao = new ReportDao();
+        String value = "";
+        Map<String, Integer> sortedMap = reportDao.getSkillSuccessForTeam(skillDescCriteriaId, skillid, evaluationteamId, rowSkillDesc, rowSkillDescId, rating);
+
+        if (sortedMap.get(sortedMap.keySet().toArray()[0]) != 0) {
+            value = sortedMap.keySet().toArray()[0].toString();
+        }
+
+        return value;
     }
 }

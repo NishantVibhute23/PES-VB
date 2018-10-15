@@ -5,7 +5,6 @@
  */
 package com.vollyball.panels.report;
 
-import com.vollyball.panels.*;
 import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.Player;
 import com.vollyball.bean.PlayerPositionBean;
@@ -204,14 +203,14 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
                 int loss = (int) (Math.round((double) pb.getTotalLoss() / pb.getRotationCount() * 100));
 
                 if (team == HomeOpponent.HOME.getId()) {
-                    homeSuccessful.put(success, "S-" + setNum + " R-" + i);
+                    homeSuccessful.put(success, "Set -" + setNum + " Rotation -" + i);
                 } else {
-                    oppSuccessful.put(success, "S-" + setNum + " R-" + i);
+                    oppSuccessful.put(success, "Set -" + setNum + " Rotation -" + i);
                 }
                 if (team == HomeOpponent.HOME.getId()) {
-                    homeWeakest.put(loss, "S-" + setNum + " R-" + i);
+                    homeWeakest.put(loss, "Set -" + setNum + " Rotation -" + i);
                 } else {
-                    oppWeakest.put(loss, "S-" + setNum + " R-" + i);
+                    oppWeakest.put(loss, "Set -" + setNum + " Rotation -" + i);
                 }
                 pb.setSuccessPerc(success);
                 pb.setLossPerc(loss);
@@ -265,6 +264,7 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbOverall = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -646,6 +646,10 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel1.setText("OVERALL");
 
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Rotation Performance");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -654,11 +658,14 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -689,6 +696,7 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

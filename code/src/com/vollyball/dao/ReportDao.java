@@ -13,7 +13,6 @@ import com.vollyball.bean.PlayerScores;
 import com.vollyball.bean.PlayerSkillScore;
 import com.vollyball.bean.SuccessFailure;
 import com.vollyball.bean.Team;
-import com.vollyball.bean.Tempo;
 import com.vollyball.db.DbUtil;
 import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.enums.SkillZoneWiseReport;
@@ -1007,6 +1006,7 @@ public class ReportDao {
         LinkedHashMap<String, Integer> values = new LinkedHashMap<>();
         String val = "";
         try {
+            this.con = db.getConnection();
             List<SkillDescCriteriaPoint> lst = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skillDescCriteriaId);
             String select = "";
             int i = 1;
@@ -1022,7 +1022,7 @@ public class ReportDao {
 
             select = select.substring(0, select.lastIndexOf(","));
 
-            String query = CommonUtil.getResourceProperty("get.skillteamsuccess.query.withBlock").replace("+", select);
+            String query = CommonUtil.getResourceProperty("get.skillteamsuccess.query.withTwoConditions").replace("+", select);
 
             PreparedStatement ps = this.con.prepareStatement(query);
 
@@ -1054,14 +1054,18 @@ public class ReportDao {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            this.db.closeConnection(con);
         }
         return val;
     }
 
-    public String getSkillSuccessForTeam(int skillDescCriteriaId, int skillId, int matchevaluationId, String rowSkillDesc, int rowSkillDescId, int rate) {
+    public Map<String, Integer> getSkillSuccessForTeam(int skillDescCriteriaId, int skillId, int matchevaluationId, String rowSkillDesc, int rowSkillDescId, int rate) {
         LinkedHashMap<String, Integer> values = new LinkedHashMap<>();
+        Map<String, Integer> sortedMap = new LinkedHashMap<>();
         String val = "";
         try {
+            this.con = db.getConnection();
             List<SkillDescCriteriaPoint> lst = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skillDescCriteriaId);
             String select = "";
             int i = 1;
@@ -1100,15 +1104,14 @@ public class ReportDao {
 
             }
 
-            Map<String, Integer> sortedMap = CommonUtil.sortByValue(values);
+            sortedMap = CommonUtil.sortByValue(values);
 
-            if (sortedMap.get(sortedMap.keySet().toArray()[0]) != 0) {
-                val = sortedMap.keySet().toArray()[0].toString();
-            }
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            this.db.closeConnection(con);
         }
-        return val;
+        return sortedMap;
     }
 
 }

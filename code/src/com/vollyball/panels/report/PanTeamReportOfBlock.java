@@ -12,7 +12,9 @@ import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.enums.Skill;
 import com.vollyball.enums.SkillDescCriteriaPoint;
+import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
+import java.io.Serializable;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -20,7 +22,7 @@ import javax.swing.JLabel;
  *
  * @author nishant.vibhute
  */
-public class PanTeamReportOfBlock extends javax.swing.JPanel {
+public class PanTeamReportOfBlock extends javax.swing.JPanel implements Serializable {
 
     String datatr = "";
 
@@ -35,7 +37,7 @@ public class PanTeamReportOfBlock extends javax.swing.JPanel {
     String html = "<html><head>\n"
             + "<style type=\"text/css\">\n"
             + "table {width: 100%}\n"
-            + "td, th {background-color: white;text-align: center;height: 8px;font-family: Arial; font-size: 10pt;}\n"
+            + "td, th {background-color: white;text-align: center;font-family: Arial; font-size: 14pt;}\n"
             + "</style>\n"
             + "</head><body><div style=\"background-color: black\"><table >";
 
@@ -63,10 +65,10 @@ public class PanTeamReportOfBlock extends javax.swing.JPanel {
                 + "<th colspan=3>Single</th>"
                 + "<th colspan=3>Double</th>"
                 + "<th colspan=3>Triple</th></tr><tr>"
-                + "<th width=18>A</th><th width=18>+(%)</th><th width=18>-(%)</th>"
-                + "<th width=18>A</th><th width=18>+(%)</th><th width=18>-(%)</th>"
-                + "<th width=18>A</th><th width=18>+(%)</th><th width=18>-(%)</th>"
-                + "<th width=18>A</th><th width=18>+(%)</th><th width=18>-(%)</th></tr>";
+                + "<th width=30>A</th><th width=30>+(%)</th><th width=30>-(%)</th>"
+                + "<th width=30>A</th><th width=30>+(%)</th><th width=30>-(%)</th>"
+                + "<th width=30>A</th><th width=30>+(%)</th><th width=30>-(%)</th>"
+                + "<th width=30>A</th><th width=30>+(%)</th><th width=30>-(%)</th></tr>";
         createComplexOverviewTableData(29, "Type of Attack");
         createComplexOverviewTableData(31, "Tempo");
         createComplexOverviewTableData(28, "Blocking Tactics");
@@ -134,35 +136,30 @@ public class PanTeamReportOfBlock extends javax.swing.JPanel {
 
             datatr = datatr + "<tr><td rowspan=" + 3 + ">" + lstTempo.get(j).getAbbreviation() + "</td>";
             datatr = datatr + "<td>S</td>"
-                    + "<td>" + getValue(29, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(31, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(33, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(35, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(30, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(28, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td></tr>";
+                    + "<td>" + CommonUtil.getValue(29, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(31, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(33, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(35, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(30, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(28, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td></tr>";
 
             datatr = datatr + "<td>F+</td>"
-                    + "<td>" + getValue(29, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(31, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(33, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(35, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(30, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(28, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td></tr>";
+                    + "<td>" + CommonUtil.getValue(29, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(31, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(33, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(35, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(30, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(28, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td></tr>";
 
             datatr = datatr + "<td>F</td>"
-                    + "<td>" + getValue(29, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(31, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(33, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(35, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(30, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(28, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td></tr>";
+                    + "<td>" + CommonUtil.getValue(29, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(31, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(33, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(35, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(30, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(28, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Block.getId()) + "</td></tr>";
         }
 
-    }
-
-    public String getValue(int skillDescCriteriaId, int rating, String rowSkillDesc, int rowSkillDescId) {
-        String value = reportDao.getSkillSuccessForTeam(skillDescCriteriaId, Skill.Block.getId(), evaluationteamId, rowSkillDesc, rowSkillDescId, rating);
-        return value;
     }
 
     /**
@@ -185,40 +182,39 @@ public class PanTeamReportOfBlock extends javax.swing.JPanel {
         panComplex.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panComplex.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel1.setText("Service : Overview");
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel1.setText("Block : Overview");
 
         panServiceSuccess.setBackground(new java.awt.Color(255, 255, 255));
         panServiceSuccess.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panServiceSuccess.setLayout(new java.awt.BorderLayout());
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel2.setText("Service Success");
+        jLabel2.setText("Block Success");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(panComplex, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-                    .addComponent(panServiceSuccess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(451, Short.MAX_VALUE))
+                    .addComponent(panServiceSuccess, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panComplex, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panServiceSuccess, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(panServiceSuccess, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

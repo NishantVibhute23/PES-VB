@@ -5,6 +5,7 @@
  */
 package com.vollyball.panels.report;
 
+import com.vollyball.bean.DigTrianglePoints;
 import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.SuccessFailure;
 import com.vollyball.controller.Controller;
@@ -13,9 +14,15 @@ import com.vollyball.dao.ReportDao;
 import com.vollyball.enums.Skill;
 import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.panels.ImagePanel;
+import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -24,7 +31,7 @@ import javax.swing.JLabel;
 public class PanTeamReportOfSet extends javax.swing.JPanel {
 
     String datatr = "";
-    ImagePanel imgTPL, imgDBL, imgSGL, imgNB;
+    ImagePanel imgJS, imgRB, imgFP, imgHP, imgBC, imgR;
 
     ReportDao reportDao = new ReportDao();
     int cb;
@@ -32,6 +39,8 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
     MatchDao matchDao = new MatchDao();
     int evaluationteamId, evaluationteamId2;
     int team1id, team2id;
+    LinkedHashMap<Integer, ImagePanel> imgId = new LinkedHashMap<>();
+    LinkedHashMap<ImagePanel, JPanel> imgPan = new LinkedHashMap<>();
 
     String html = "<html><head>\n"
             + "<style type=\"text/css\">\n"
@@ -54,6 +63,71 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
 
         createComplexOverviewTable();
         createAttackBlockOverviewTable();
+
+        imgJS = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(0, imgJS);
+        imgPan.put(imgJS, panJS);
+
+        imgRB = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(1, imgRB);
+        imgPan.put(imgRB, panRB);
+
+        imgFP = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(2, imgFP);
+        imgPan.put(imgFP, panFP);
+
+        imgHP = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(3, imgHP);
+        imgPan.put(imgHP, panHP);
+
+        imgBC = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(4, imgBC);
+        imgPan.put(imgBC, panBC);
+
+        imgR = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(5, imgR);
+        imgPan.put(imgR, panR);
+
+        //id of service teachnique
+        createDiagram(42);
+    }
+
+    public void createDiagram(int skillDescIdIn) {
+        List<SkillDescCriteriaPoint> lstTempo = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skillDescIdIn);
+
+        for (int j = 0; j < lstTempo.size(); j++) {
+
+            ImagePanel img = imgId.get(j);
+            JPanel pan = imgPan.get(img);
+            pan.setLayout(new BorderLayout());
+            pan.add(img, BorderLayout.CENTER);
+
+            List<DigTrianglePoints> points = new ArrayList();
+
+            String fromValSuc = CommonUtil.getValue(47, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId());
+            if (!fromValSuc.isEmpty()) {
+                String toValSuc = getValueForDig(48, 5, fromValSuc, 47, lstTempo.get(j).getAbbreviation(), skillDescIdIn);
+                DigTrianglePoints pointSuc = new DigTrianglePoints("H" + fromValSuc + "A", "H" + toValSuc + "A", "H" + toValSuc + "C", Color.GREEN);
+                points.add(pointSuc);
+            }
+            String fromValFav = CommonUtil.getValue(47, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId());
+            if (!fromValFav.isEmpty()) {
+                String toValFav = getValueForDig(48, 4, fromValFav, 47, lstTempo.get(j).getAbbreviation(), skillDescIdIn);
+                DigTrianglePoints pointFav = new DigTrianglePoints("H" + fromValFav + "A", "H" + toValFav + "A", "H" + toValFav + "C", Color.ORANGE);
+                points.add(pointFav);
+            }
+
+            String fromValFail = CommonUtil.getValue(47, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId());
+            if (!fromValFail.isEmpty()) {
+                String toValFail = getValueForDig(48, 1, fromValFail, 47, lstTempo.get(j).getAbbreviation(), skillDescIdIn);
+                DigTrianglePoints pointFail = new DigTrianglePoints("H" + fromValFail + "A", "H" + toValFail + "A", "H" + toValFail + "C", Color.RED);
+                points.add(pointFail);
+            }
+
+            if (points.size() != 0) {
+                img.drawTriangle(points);
+            }
+        }
     }
 
     public void createComplexOverviewTable() {
@@ -121,34 +195,34 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
 
             datatr = datatr + "<tr><td rowspan=" + 3 + ">" + lstTempo.get(j).getAbbreviation() + "</td>";
             datatr = datatr + "<td>S</td>"
-                    + "<td>" + getValue(43, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(50, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(48, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(46, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(51, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(49, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td></tr>";
+                    + "<td>" + CommonUtil.getValue(43, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(50, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(48, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(46, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(51, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(49, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td></tr>";
 
             datatr = datatr + "<td>F+</td>"
-                    + "<td>" + getValue(43, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(50, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(48, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(46, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(51, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(49, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td></tr>";
+                    + "<td>" + CommonUtil.getValue(43, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(50, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(48, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(46, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(51, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(49, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td></tr>";
 
             datatr = datatr + "<td>F</td>"
-                    + "<td>" + getValue(43, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(50, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(48, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(46, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(51, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(49, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td></tr>";
+                    + "<td>" + CommonUtil.getValue(43, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(50, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(48, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(46, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(51, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(49, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Set.getId()) + "</td></tr>";
         }
 
     }
 
-    public String getValue(int skillDescCriteriaId, int rating, String rowSkillDesc, int rowSkillDescId) {
-        String value = reportDao.getSkillSuccessForTeam(skillDescCriteriaId, Skill.Set.getId(), evaluationteamId, rowSkillDesc, rowSkillDescId, rating);
+    public String getValueForDig(int skillDescCriteriaId, int rating, String rowSkillDesc, int rowSkillDescId, String colSkillDesc, int colSkillDescId) {
+        String value = reportDao.getSkillSuccessForTeamWithBlock(skillDescCriteriaId, Skill.Set.getId(), evaluationteamId, rowSkillDesc, rowSkillDescId, colSkillDesc, colSkillDescId, rating);
         return value;
     }
 
@@ -167,30 +241,23 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        panTPL = new javax.swing.JPanel();
+        panJS = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        PanDBL = new javax.swing.JPanel();
+        panRB = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        PanSBL = new javax.swing.JPanel();
+        panHP = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        PanNB = new javax.swing.JPanel();
+        panBC = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        PanDBL1 = new javax.swing.JPanel();
+        panFP = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        PanDBL2 = new javax.swing.JPanel();
+        panR = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -214,7 +281,7 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        panTPL.setLayout(new java.awt.BorderLayout());
+        panJS.setLayout(new java.awt.BorderLayout());
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -228,7 +295,7 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(panTPL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panJS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,19 +303,19 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panTPL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panJS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout PanDBLLayout = new javax.swing.GroupLayout(PanDBL);
-        PanDBL.setLayout(PanDBLLayout);
-        PanDBLLayout.setHorizontalGroup(
-            PanDBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panRBLayout = new javax.swing.GroupLayout(panRB);
+        panRB.setLayout(panRBLayout);
+        panRBLayout.setHorizontalGroup(
+            panRBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        PanDBLLayout.setVerticalGroup(
-            PanDBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panRBLayout.setVerticalGroup(
+            panRBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
@@ -260,7 +327,7 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanDBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panRB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
@@ -272,19 +339,19 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanDBL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panRB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout PanSBLLayout = new javax.swing.GroupLayout(PanSBL);
-        PanSBL.setLayout(PanSBLLayout);
-        PanSBLLayout.setHorizontalGroup(
-            PanSBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panHPLayout = new javax.swing.GroupLayout(panHP);
+        panHP.setLayout(panHPLayout);
+        panHPLayout.setHorizontalGroup(
+            panHPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        PanSBLLayout.setVerticalGroup(
-            PanSBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panHPLayout.setVerticalGroup(
+            panHPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
@@ -296,7 +363,7 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanSBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panHP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
@@ -308,19 +375,19 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanSBL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panHP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout PanNBLayout = new javax.swing.GroupLayout(PanNB);
-        PanNB.setLayout(PanNBLayout);
-        PanNBLayout.setHorizontalGroup(
-            PanNBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panBCLayout = new javax.swing.GroupLayout(panBC);
+        panBC.setLayout(panBCLayout);
+        panBCLayout.setHorizontalGroup(
+            panBCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        PanNBLayout.setVerticalGroup(
-            PanNBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panBCLayout.setVerticalGroup(
+            panBCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
@@ -332,7 +399,7 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanNB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panBC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
@@ -344,19 +411,19 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanNB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panBC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout PanDBL1Layout = new javax.swing.GroupLayout(PanDBL1);
-        PanDBL1.setLayout(PanDBL1Layout);
-        PanDBL1Layout.setHorizontalGroup(
-            PanDBL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panFPLayout = new javax.swing.GroupLayout(panFP);
+        panFP.setLayout(panFPLayout);
+        panFPLayout.setHorizontalGroup(
+            panFPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        PanDBL1Layout.setVerticalGroup(
-            PanDBL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panFPLayout.setVerticalGroup(
+            panFPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
@@ -368,7 +435,7 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanDBL1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panFP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -380,19 +447,19 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanDBL1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panFP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout PanDBL2Layout = new javax.swing.GroupLayout(PanDBL2);
-        PanDBL2.setLayout(PanDBL2Layout);
-        PanDBL2Layout.setHorizontalGroup(
-            PanDBL2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panRLayout = new javax.swing.GroupLayout(panR);
+        panR.setLayout(panRLayout);
+        panRLayout.setHorizontalGroup(
+            panRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        PanDBL2Layout.setVerticalGroup(
-            PanDBL2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panRLayout.setVerticalGroup(
+            panRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
@@ -404,7 +471,7 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanDBL2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
@@ -416,7 +483,7 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanDBL2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -453,25 +520,9 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
                             .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
-
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel3.setText("Abbreavations:");
-
-        jLabel4.setText("  A      : Total Attempt in number");
-
-        jLabel5.setText("+(%) : Successful attempt in Percentage");
-
-        jLabel6.setText("-(%)  : Failure attempt in Percentage");
-
-        jLabel7.setText("S : Successful");
-
-        jLabel8.setText("F+ : Favourable");
-
-        jLabel9.setText("F : Failure");
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel10.setText("Diagramtic Presentation");
@@ -485,66 +536,33 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel10)
                     .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(panAttackBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10))
-                            .addComponent(panAttackBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 855, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel10))
+                    .addComponent(panAttackBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 855, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanDBL;
-    private javax.swing.JPanel PanDBL1;
-    private javax.swing.JPanel PanDBL2;
-    private javax.swing.JPanel PanNB;
-    private javax.swing.JPanel PanSBL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -554,13 +572,6 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -569,7 +580,12 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel panAttackBlock;
+    private javax.swing.JPanel panBC;
     private javax.swing.JPanel panComplex;
-    private javax.swing.JPanel panTPL;
+    private javax.swing.JPanel panFP;
+    private javax.swing.JPanel panHP;
+    private javax.swing.JPanel panJS;
+    private javax.swing.JPanel panR;
+    private javax.swing.JPanel panRB;
     // End of variables declaration//GEN-END:variables
 }

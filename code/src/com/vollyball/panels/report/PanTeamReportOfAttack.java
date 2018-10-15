@@ -5,6 +5,7 @@
  */
 package com.vollyball.panels.report;
 
+import com.vollyball.bean.DigTrianglePoints;
 import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.SuccessFailure;
 import com.vollyball.controller.Controller;
@@ -13,10 +14,15 @@ import com.vollyball.dao.ReportDao;
 import com.vollyball.enums.Skill;
 import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.panels.ImagePanel;
+import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -34,6 +40,9 @@ public class PanTeamReportOfAttack extends javax.swing.JPanel {
 
     int evaluationteamId, evaluationteamId2;
     int team1id, team2id;
+
+    LinkedHashMap<Integer, ImagePanel> imgId = new LinkedHashMap<>();
+    LinkedHashMap<ImagePanel, JPanel> imgPan = new LinkedHashMap<>();
 
     String html = "<html><head>\n"
             + "<style type=\"text/css\">\n"
@@ -62,21 +71,69 @@ public class PanTeamReportOfAttack extends javax.swing.JPanel {
         createComplexOverviewTable();
         createAttackBlockOverviewTable();
 
-        imgTPL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
-        panTPL.setLayout(new BorderLayout());
-        panTPL.add(imgTPL, BorderLayout.CENTER);
+        imgSGL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(0, imgSGL);
+        imgPan.put(imgSGL, PanSBL);
 
         imgDBL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
-        PanDBL.setLayout(new BorderLayout());
-        PanDBL.add(imgDBL, BorderLayout.CENTER);
 
-        imgSGL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
-        PanSBL.setLayout(new BorderLayout());
-        PanSBL.add(imgSGL, BorderLayout.CENTER);
+        imgId.put(1, imgDBL);
+        imgPan.put(imgDBL, PanDBL);
+
+        imgTPL = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(2, imgTPL);
+        imgPan.put(imgTPL, panTPL);
 
         imgNB = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
-        PanNB.setLayout(new BorderLayout());
-        PanNB.add(imgNB, BorderLayout.CENTER);
+
+        imgId.put(3, imgNB);
+        imgPan.put(imgNB, PanNB);
+
+        createDiagram(19);
+    }
+
+    public void createDiagram(int skillDescIdIn) {
+        List<SkillDescCriteriaPoint> lstTempo = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skillDescIdIn);
+
+        for (int j = 0; j < lstTempo.size(); j++) {
+
+            ImagePanel img = imgId.get(j);
+            JPanel pan = imgPan.get(img);
+            pan.setLayout(new BorderLayout());
+            pan.add(img, BorderLayout.CENTER);
+
+            List<DigTrianglePoints> points = new ArrayList();
+
+            String fromValSuc = CommonUtil.getValue(15, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Attack.getId());
+            if (!fromValSuc.isEmpty()) {
+                String toValSuc = getValueForDig(16, 5, fromValSuc, 15, lstTempo.get(j).getAbbreviation(), skillDescIdIn);
+                if (!toValSuc.isEmpty()) {
+                    DigTrianglePoints pointSuc = new DigTrianglePoints("H" + fromValSuc + "A", "O" + toValSuc + "A", "O" + toValSuc + "C", Color.GREEN);
+                    points.add(pointSuc);
+                }
+            }
+            String fromValFav = CommonUtil.getValue(15, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Attack.getId());
+            if (!fromValFav.isEmpty()) {
+                String toValFav = getValueForDig(16, 4, fromValFav, 15, lstTempo.get(j).getAbbreviation(), skillDescIdIn);
+                if (!toValFav.isEmpty()) {
+                    DigTrianglePoints pointFav = new DigTrianglePoints("H" + fromValFav + "A", "O" + toValFav + "A", "O" + toValFav + "C", Color.ORANGE);
+                    points.add(pointFav);
+                }
+            }
+
+            String fromValFail = CommonUtil.getValue(15, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Attack.getId());
+            if (!fromValFail.isEmpty()) {
+                String toValFail = getValueForDig(16, 1, fromValFail, 15, lstTempo.get(j).getAbbreviation(), skillDescIdIn);
+                if (!toValFail.isEmpty()) {
+                    DigTrianglePoints pointFail = new DigTrianglePoints("H" + fromValFail + "A", "O" + toValFail + "A", "O" + toValFail + "C", Color.RED);
+                    points.add(pointFail);
+                }
+            }
+
+            if (points.size() != 0) {
+                img.drawTriangle(points);
+            }
+        }
     }
 
     public void createComplexOverviewTable() {
@@ -179,6 +236,11 @@ public class PanTeamReportOfAttack extends javax.swing.JPanel {
         return value;
     }
 
+    public String getValueForDig(int skillDescCriteriaId, int rating, String rowSkillDesc, int rowSkillDescId, String colSkillDesc, int colSkillDescId) {
+        String value = reportDao.getSkillSuccessForTeamWithBlock(skillDescCriteriaId, Skill.Attack.getId(), evaluationteamId, rowSkillDesc, rowSkillDescId, colSkillDesc, colSkillDescId, rating);
+        return value;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -205,13 +267,6 @@ public class PanTeamReportOfAttack extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         PanNB = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -397,21 +452,6 @@ public class PanTeamReportOfAttack extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel3.setText("Abbreavations:");
-
-        jLabel4.setText("  A      : Total Attempt in number");
-
-        jLabel5.setText("+(%) : Successful attempt in Percentage");
-
-        jLabel6.setText("-(%)  : Failure attempt in Percentage");
-
-        jLabel7.setText("S : Successful");
-
-        jLabel8.setText("F+ : Favourable");
-
-        jLabel9.setText("F : Failure");
-
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel10.setText("Diagramtic Presentation");
 
@@ -426,18 +466,11 @@ public class PanTeamReportOfAttack extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel10))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(panAttackBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)))
+                    .addComponent(panAttackBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,20 +483,6 @@ public class PanTeamReportOfAttack extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panAttackBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(126, 126, 126)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -485,13 +504,6 @@ public class PanTeamReportOfAttack extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;

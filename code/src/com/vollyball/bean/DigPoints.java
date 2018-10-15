@@ -5,6 +5,8 @@
  */
 package com.vollyball.bean;
 
+import java.awt.Color;
+
 /**
  *
  * @author nishant.vibhute
@@ -18,6 +20,7 @@ public class DigPoints {
     int midx;
     int midy;
     int playerMoved = 0;
+    Color color;
 
     public int getX1() {
         return x1;
@@ -73,6 +76,14 @@ public class DigPoints {
 
     public void setPlayerMoved(int playerMoved) {
         this.playerMoved = playerMoved;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
 }

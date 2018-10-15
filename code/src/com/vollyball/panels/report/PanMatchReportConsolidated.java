@@ -5,7 +5,6 @@
  */
 package com.vollyball.panels.report;
 
-import com.vollyball.panels.*;
 import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.MatchSet;
 import com.vollyball.bean.Player;
@@ -1045,6 +1044,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team1WonPointsLabel = new javax.swing.JLabel();
         team2label = new javax.swing.JLabel();
         team2WonPointLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -1110,7 +1110,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(match, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                     .addComponent(phase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(matchDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1146,7 +1146,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField20.setBackground(new java.awt.Color(204, 204, 204));
         jTextField20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField20.setText("Tot Pt.");
+        jTextField20.setText("Att.");
         jTextField20.setBorder(null);
         jTextField20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1475,7 +1475,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField31.setBackground(new java.awt.Color(204, 204, 204));
         jTextField31.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField31.setText("Tot Pt.");
+        jTextField31.setText("Att.");
         jTextField31.setBorder(null);
         jTextField31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1720,7 +1720,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField88.setBackground(new java.awt.Color(204, 204, 204));
         jTextField88.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField88.setText("Tot Pt.");
+        jTextField88.setText("Att.");
         jTextField88.setBorder(null);
         jTextField88.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2042,7 +2042,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField109.setBackground(new java.awt.Color(204, 204, 204));
         jTextField109.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField109.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField109.setText("Tot Pt.");
+        jTextField109.setText("Att.");
         jTextField109.setBorder(null);
         jTextField109.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2371,7 +2371,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField263.setBackground(new java.awt.Color(204, 204, 204));
         jTextField263.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField263.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField263.setText("Tot Pt.");
+        jTextField263.setText("Att.");
         jTextField263.setBorder(null);
         jTextField263.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2617,7 +2617,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField288.setBackground(new java.awt.Color(204, 204, 204));
         jTextField288.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField288.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField288.setText("Tot Pt.");
+        jTextField288.setText("Att.");
         jTextField288.setBorder(null);
         jTextField288.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3552,7 +3552,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 {"V", "0", "8", "0", "0", "0"}
             },
             new String [] {
-                "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "OP +"
+                "SET No", "Att.", "SRV", "BLK", "ATK", "OP +"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -3603,7 +3603,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 {"V", "0", "0", "0", "0", "0", "0", "0", "8"}
             },
             new String [] {
-                "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "REC", "SET", "DEF", "TF -"
+                "SET No", "Att.", "SRV", "BLK", "ATK", "REC", "SET", "DEF", "TF -"
             }
         ));
         tbTeam1Loss.setRowHeight(20);
@@ -3760,7 +3760,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 {"V", "0", "0", "0", "0", "8"}
             },
             new String [] {
-                "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "OP +"
+                "SET No", "Att.", "SRV", "BLK", "ATK", "OP +"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -3811,7 +3811,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 {"V", "0", "0", "0", "0", "0", "0", "0", "8"}
             },
             new String [] {
-                "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "REC", "SET", "DEF", "TF -"
+                "SET No", "Att.", "SRV", "BLK", "ATK", "REC", "SET", "DEF", "TF -"
             }
         ));
         tbTeam2Loss.setRowHeight(20);
@@ -3967,6 +3967,10 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Match Report");
+
         javax.swing.GroupLayout panMatchReport1Layout = new javax.swing.GroupLayout(panMatchReport1);
         panMatchReport1.setLayout(panMatchReport1Layout);
         panMatchReport1Layout.setHorizontalGroup(
@@ -3974,25 +3978,30 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMatchReport1Layout.createSequentialGroup()
-                .addGroup(panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
             .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panMatchReport1Layout.createSequentialGroup()
+                .addGroup(panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
+            .addGroup(panMatchReport1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panMatchReport1Layout.setVerticalGroup(
             panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panMatchReport1Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
+                .addGap(8, 8, 8)
+                .addGroup(panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panMatchReport1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4005,9 +4014,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel11.setText("Tot Pt : ");
+        jLabel11.setText("Att.  :");
 
-        jLabel12.setText("Total Points");
+        jLabel12.setText("Total Attempt");
 
         jLabel14.setText("SRV : ");
 
@@ -4266,6 +4275,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;

@@ -5,10 +5,8 @@
  */
 package com.vollyball.panels.report;
 
-import com.vollyball.panels.*;
 import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.SuccessFailure;
-import com.vollyball.bean.Tempo;
 import com.vollyball.bean.ZoneHitCount;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
@@ -170,7 +168,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 //        defaultModel = new DefaultTableModel();
 
         defaultModel.setDataVector(new Object[][]{},
-                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
+                new Object[]{"<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>"});
 
         tbTable = new JTable(defaultModel) {
             protected JTableHeader createDefaultTableHeader() {
@@ -236,7 +234,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 //        defaultModel = new DefaultTableModel();
 
         defaultModel.setDataVector(new Object[][]{},
-                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
+                new Object[]{"<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>"});
 
         tbTable = new JTable(defaultModel) {
             protected JTableHeader createDefaultTableHeader() {
@@ -339,7 +337,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 //        defaultModel = new DefaultTableModel();
 
         defaultModel.setDataVector(new Object[][]{},
-                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
+                new Object[]{"<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>"});
 
         tbTable = new JTable(defaultModel) {
             protected JTableHeader createDefaultTableHeader() {
@@ -405,7 +403,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 //        defaultModel = new DefaultTableModel();
 
         defaultModel.setDataVector(new Object[][]{},
-                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
+                new Object[]{"<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>"});
 
         tbTable = new JTable(defaultModel) {
             protected JTableHeader createDefaultTableHeader() {
@@ -479,7 +477,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 //        defaultModel = new DefaultTableModel();
 
         defaultModel.setDataVector(new Object[][]{},
-                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
+                new Object[]{"<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>"});
 
         tbTable = new JTable(defaultModel) {
             protected JTableHeader createDefaultTableHeader() {
@@ -545,7 +543,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
 //        defaultModel = new DefaultTableModel();
 
         defaultModel.setDataVector(new Object[][]{},
-                new Object[]{"<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>", "<html>Success</html>", "<html>Failure</html>"});
+                new Object[]{"<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>", "<html>+</html>", "<html>-</html>"});
 
         tbTable = new JTable(defaultModel) {
             protected JTableHeader createDefaultTableHeader() {
@@ -893,6 +891,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         panOppBlockTable = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         lblOppTeamName = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -2092,43 +2091,52 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         lblOppTeamName.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblOppTeamName.setText("DELHI");
 
+        jLabel25.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("Zonewise Skill Performance");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(lblHomeTeamName)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(lblOppTeamName)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblHomeTeamName)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblOppTeamName)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHomeTeamName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -2188,6 +2196,7 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

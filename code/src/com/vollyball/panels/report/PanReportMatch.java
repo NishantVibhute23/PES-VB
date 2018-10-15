@@ -7,8 +7,21 @@ package com.vollyball.panels.report;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.Book;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -20,23 +33,36 @@ public class PanReportMatch extends javax.swing.JPanel {
     PanMatchReportConsolidated panC;
     PanZoneSkillwiseMain panZ;
     PanZoneRotationMain panR;
+    PanTeamReportSkill panT;
     int cb, matchId;
     List<JPanel> panListToPrint = new ArrayList<>();
+    LinkedHashMap<JLabel, JPanel> mapMenu = new LinkedHashMap<JLabel, JPanel>();
+    String name = "Consolidated";
 
     /**
      * Creates new form PanReportMatch
      */
-    public PanReportMatch() {
+    public PanReportMatch(int cb, int matchId) {
         initComponents();
         this.cb = cb;
         this.matchId = matchId;
+
+        mapMenu.put(lblRotation, panRotation);
+        mapMenu.put(lblmatch, panMatch);
+        mapMenu.put(lblTeam, panTeam);
+        mapMenu.put(lblSkil1, panSkill1);
         panC = new PanMatchReportConsolidated(cb, matchId);
         panR = new PanZoneRotationMain(cb, matchId);
         panZ = new PanZoneSkillwiseMain(cb, matchId);
+        panT = new PanTeamReportSkill(cb, matchId);
         panListToPrint.add(panC);
         panListToPrint.add(panR);
         panListToPrint.add(panZ);
+        panListToPrint.add(panT);
         panReport.add(panC, BorderLayout.CENTER);
+
+        lblmatch.setForeground(Color.BLACK);
+        panMatch.setBackground(Color.WHITE);
     }
 
     /**
@@ -50,60 +76,22 @@ public class PanReportMatch extends javax.swing.JPanel {
 
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         panMatch = new javax.swing.JPanel();
         lblmatch = new javax.swing.JLabel();
         panRotation = new javax.swing.JPanel();
         lblRotation = new javax.swing.JLabel();
-        panSkill = new javax.swing.JPanel();
-        lblSkil = new javax.swing.JLabel();
+        panTeam = new javax.swing.JPanel();
+        lblTeam = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        panSkill1 = new javax.swing.JPanel();
+        lblSkil1 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         panReport = new javax.swing.JPanel();
-
-        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jPanel11.setBackground(new java.awt.Color(57, 74, 108));
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("PRINT All");
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
-        );
 
         panMatch.setBackground(new java.awt.Color(57, 74, 108));
         panMatch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -153,42 +141,87 @@ public class PanReportMatch extends javax.swing.JPanel {
             .addComponent(lblRotation, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        panSkill.setBackground(new java.awt.Color(57, 74, 108));
-        panSkill.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panTeam.setBackground(new java.awt.Color(57, 74, 108));
+        panTeam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        lblSkil.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        lblSkil.setForeground(new java.awt.Color(255, 255, 255));
-        lblSkil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSkil.setText("Zone wise Skill Performance");
-        lblSkil.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblTeam.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblTeam.setForeground(new java.awt.Color(255, 255, 255));
+        lblTeam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTeam.setText("Best Player Performance");
+        lblTeam.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSkilMouseClicked(evt);
+                lblTeamMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout panSkillLayout = new javax.swing.GroupLayout(panSkill);
-        panSkill.setLayout(panSkillLayout);
-        panSkillLayout.setHorizontalGroup(
-            panSkillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblSkil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout panTeamLayout = new javax.swing.GroupLayout(panTeam);
+        panTeam.setLayout(panTeamLayout);
+        panTeamLayout.setHorizontalGroup(
+            panTeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTeam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        panSkillLayout.setVerticalGroup(
-            panSkillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblSkil, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        panTeamLayout.setVerticalGroup(
+            panTeamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTeam, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel16.setBackground(new java.awt.Color(57, 74, 108));
+        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        jPanel11.setBackground(new java.awt.Color(57, 74, 108));
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addGap(365, 365, 365)
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panSkill1.setBackground(new java.awt.Color(57, 74, 108));
+        panSkill1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblSkil1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSkil1.setForeground(new java.awt.Color(255, 255, 255));
+        lblSkil1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSkil1.setText("Zone wise Skill Performance");
+        lblSkil1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSkil1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panSkill1Layout = new javax.swing.GroupLayout(panSkill1);
+        panSkill1.setLayout(panSkill1Layout);
+        panSkill1Layout.setHorizontalGroup(
+            panSkill1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSkill1Layout.createSequentialGroup()
+                .addComponent(lblSkil1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panSkill1Layout.setVerticalGroup(
+            panSkill1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblSkil1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -197,8 +230,9 @@ public class PanReportMatch extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panMatch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panRotation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panSkill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panTeam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panSkill1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +242,9 @@ public class PanReportMatch extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(panRotation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panSkill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panSkill1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(panTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -218,15 +254,12 @@ public class PanReportMatch extends javax.swing.JPanel {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(2, 2, 2))
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -236,15 +269,27 @@ public class PanReportMatch extends javax.swing.JPanel {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("PRINT");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 872, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(716, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         panReport.setLayout(new java.awt.BorderLayout());
@@ -300,56 +345,152 @@ public class PanReportMatch extends javax.swing.JPanel {
 
     private void lblRotationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRotationMouseClicked
         // TODO add your handling code here:
-        lblRotation.setForeground(Color.BLACK);
-        panRotation.setBackground(Color.WHITE);
 
-        lblmatch.setForeground(Color.WHITE);
-        panMatch.setBackground(new Color(57, 74, 108));
-
-        lblSkil.setForeground(Color.WHITE);
-        panSkill.setBackground(new Color(57, 74, 108));
+        changeColor(evt);
 
         panReport.removeAll();
         panReport.add(panR, BorderLayout.CENTER);
+        setPrint(panR, "Rotation Performance");
         validate();
         repaint();
 
     }//GEN-LAST:event_lblRotationMouseClicked
 
-    private void lblSkilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSkilMouseClicked
+    private void lblTeamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTeamMouseClicked
         // TODO add your handling code here:
-        lblSkil.setForeground(Color.BLACK);
-        panSkill.setBackground(Color.WHITE);
-
-        lblRotation.setForeground(Color.WHITE);
-        panRotation.setBackground(new Color(57, 74, 108));
-
-        lblmatch.setForeground(Color.WHITE);
-        panMatch.setBackground(new Color(57, 74, 108));
+        changeColor(evt);
 
         panReport.removeAll();
-        panReport.add(panZ, BorderLayout.CENTER);
+        panReport.add(panT, BorderLayout.CENTER);
+        setPrint(panT, "Best Player Performance");
         validate();
         repaint();
-    }//GEN-LAST:event_lblSkilMouseClicked
+    }//GEN-LAST:event_lblTeamMouseClicked
 
     private void lblmatchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblmatchMouseClicked
         // TODO add your handling code here:
-        lblmatch.setForeground(Color.BLACK);
-        panMatch.setBackground(Color.WHITE);
-
-        lblRotation.setForeground(Color.WHITE);
-        panRotation.setBackground(new Color(57, 74, 108));
-
-        lblSkil.setForeground(Color.WHITE);
-        panSkill.setBackground(new Color(57, 74, 108));
+        changeColor(evt);
 
         panReport.removeAll();
         panReport.add(panC, BorderLayout.CENTER);
+        setPrint(panC, "Consolidated");
         validate();
         repaint();
     }//GEN-LAST:event_lblmatchMouseClicked
 
+    public void changeColor(java.awt.event.MouseEvent evt) {
+        JLabel lblClicked = (JLabel) evt.getSource();
+
+        for (Map.Entry<JLabel, JPanel> entry : mapMenu.entrySet()) {
+
+            if (entry.getKey() == lblClicked) {
+                entry.getKey().setForeground(Color.BLACK);
+                entry.getValue().setBackground(Color.WHITE);
+            } else {
+                entry.getKey().setForeground(Color.WHITE);
+                entry.getValue().setBackground(new Color(57, 74, 108));
+
+            }
+
+        }
+    }
+
+    private void lblSkil1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSkil1MouseClicked
+        // TODO add your handling code here:
+        changeColor(evt);
+
+        panReport.removeAll();
+        panReport.add(panZ, BorderLayout.CENTER);
+        setPrint(panZ, "Zone wise Skill Performance");
+        validate();
+        repaint();
+    }//GEN-LAST:event_lblSkil1MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        printComponenet(panListToPrint, name);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    public void setPrint(JPanel pan, String name) {
+        panListToPrint = new ArrayList<>();
+        panListToPrint.add(pan);
+        this.name = name;
+    }
+
+    public void printComponenet(final List<JPanel> comp, String name) {
+
+        PageFormat documentPageFormat = new PageFormat();
+        Paper PAPER = new Paper();
+        PAPER.setSize(595.4, 841.69);
+        PAPER.setImageableArea(36, 36, 523.4, 769.69);
+        documentPageFormat.setPaper(PAPER);
+        documentPageFormat.setOrientation(PageFormat.PORTRAIT);
+
+        PrinterJob pj = PrinterJob.getPrinterJob();
+        pj.setJobName(name);
+
+        Book book = new Book();
+
+        for (Component c : comp) {
+            final Component comp1 = c;
+            Printable p1 = new Printable() {
+
+                @Override
+                public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+//                    if (pageIndex > 0) {
+//                        return Printable.NO_SUCH_PAGE;
+//                    }
+
+//                format.setOrientation(PageFormat.LANDSCAPE);
+                    // get the bounds of the component
+                    Dimension dim = comp1.getSize();
+                    double cHeight = dim.getHeight();
+                    double cWidth = dim.getWidth();
+
+                    // get the bounds of the printable area
+                    double pHeight = pageFormat.getImageableHeight();
+                    double pWidth = pageFormat.getImageableWidth();
+
+                    double pXStart = pageFormat.getImageableX();
+                    double pYStart = pageFormat.getImageableY();
+
+                    double xRatio = pWidth / cWidth;
+                    double yRatio = pHeight / cHeight;
+
+                    Graphics2D g2 = (Graphics2D) graphics;
+                    g2.translate(pXStart, pYStart);
+                    g2.scale(xRatio, yRatio);
+                    comp1.printAll(g2);
+
+                    return Printable.PAGE_EXISTS;
+                }
+            };
+            book.append(p1, documentPageFormat);
+        }
+
+        pj.setPageable(book);
+
+        if (pj.printDialog() == false) {
+            return;
+        }
+
+        try {
+            pj.print();
+        } catch (PrinterException ex) {
+            // handle exception
+        }
+
+//
+//        if (pj.printDialog() == false) {
+//            return;
+//        }
+//
+//        try {
+//            pj.print();
+//        } catch (PrinterException ex) {
+//            // handle exception
+//        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel11;
@@ -358,15 +499,16 @@ public class PanReportMatch extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRotation;
-    private javax.swing.JLabel lblSkil;
+    private javax.swing.JLabel lblSkil1;
+    private javax.swing.JLabel lblTeam;
     private javax.swing.JLabel lblmatch;
     private javax.swing.JPanel panMatch;
     private javax.swing.JPanel panReport;
     private javax.swing.JPanel panRotation;
-    private javax.swing.JPanel panSkill;
+    private javax.swing.JPanel panSkill1;
+    private javax.swing.JPanel panTeam;
     // End of variables declaration//GEN-END:variables
 }

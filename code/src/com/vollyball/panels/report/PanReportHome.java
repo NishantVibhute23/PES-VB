@@ -25,7 +25,7 @@ public class PanReportHome extends javax.swing.JPanel {
         initComponents();
         this.cb = cb;
         this.matchId = matchId;
-        PanReportMatch panReportMatch = new PanReportMatch();
+        PanReportMatch panReportMatch = new PanReportMatch(cb, matchId);
         panShow.add(panReportMatch, BorderLayout.CENTER);
     }
 
@@ -186,7 +186,7 @@ public class PanReportHome extends javax.swing.JPanel {
         panDatasheet.setBackground(new Color(57, 74, 108));
 
         panShow.removeAll();
-        PanReportMatch panReportMatch = new PanReportMatch();
+        PanReportMatch panReportMatch = new PanReportMatch(cb, matchId);
         panShow.add(panReportMatch, BorderLayout.CENTER);
         validate();
         repaint();
