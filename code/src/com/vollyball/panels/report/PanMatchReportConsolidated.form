@@ -55,12 +55,14 @@
               <Component id="jPanel25" alignment="1" max="32767" attributes="0"/>
               <Component id="jPanel20" alignment="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jPanel3" max="32767" attributes="0"/>
+                      <Component id="jPanel1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="483" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="210" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="470" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -78,9 +80,10 @@
                       <Group type="102" attributes="0">
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel1" pref="0" max="32767" attributes="0"/>
+                          <Component id="jPanel1" pref="39" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" min="-2" pref="127" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="127" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jPanel26" min="-2" max="-2" attributes="0"/>
@@ -119,12 +122,12 @@
                           <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="match" pref="278" max="32767" attributes="0"/>
-                          <Component id="phase" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="phase" alignment="0" pref="180" max="32767" attributes="0"/>
+                          <Component id="match" alignment="0" max="32767" attributes="0"/>
                           <Component id="matchDate" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="165" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -6007,29 +6010,35 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="team1label" min="-2" pref="171" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="team1WonPointsLabel" min="-2" pref="41" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                      <Component id="team2label" min="-2" pref="180" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="team2WonPointLabel" min="-2" pref="19" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="team1label" min="-2" pref="142" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="team1WonPointsLabel" min="-2" pref="33" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="team2label" min="-2" pref="156" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="team2WonPointLabel" min="-2" pref="19" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="87" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="team1label" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="team1WonPointsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="team2label" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="team2WonPointLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -6080,6 +6089,54 @@
             <Property name="text" type="java.lang.String" value="Match Report"/>
           </Properties>
         </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="excellenceTable">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="3" rowCount="5">
+                    <Column editable="true" title="SET" type="java.lang.Object">
+                      <Data value="I"/>
+                      <Data value="II"/>
+                      <Data value="III"/>
+                      <Data value="IV"/>
+                      <Data value="V"/>
+                    </Column>
+                    <Column editable="true" title="Team1" type="java.lang.Object"/>
+                    <Column editable="true" title="Team2" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel2">
