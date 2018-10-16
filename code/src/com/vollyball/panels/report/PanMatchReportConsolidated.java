@@ -758,8 +758,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         }
     }
 
-Map<Integer, Integer> reportMap = new HashMap<>();
-Map<Integer, Integer> reportMap1 = new HashMap<>();
+    Map<Integer, Integer> reportMap = new HashMap<>();
+    Map<Integer, Integer> reportMap1 = new HashMap<>();
+
     public void setTeamRallyReportExcellenceWise(List<MatchSet> lstMatchSetTeam) {
         int countRally = 0;
         for (MatchSet ms : lstMatchSetTeam) {
@@ -767,6 +768,7 @@ Map<Integer, Integer> reportMap1 = new HashMap<>();
             reportMap.put(ms.getSetNo(), countRally);
         }
     }
+
     public void setTeam2RallyReportExcellenceWise(List<MatchSet> lstMatchSetTeam) {
         int countRally = 0;
         for (MatchSet ms : lstMatchSetTeam) {
@@ -777,17 +779,19 @@ Map<Integer, Integer> reportMap1 = new HashMap<>();
 
     public void setExcellenceRow() {
         int row = 0, col = 1;
-        double total=0;
-        for(int i=1;i<=reportMap.size();i++){
-//            total=reportMap.get(i)+reportMap1.get(i);
-            excellenceTable.setValueAt(reportMap.get(i), i-1, col); 
+        double total = 0;
+        for (int i = 1; i <= 5; i++) {
+            total = (reportMap.get(i) != null ? reportMap.get(i) : 0) + (reportMap1.get(i) != null ? reportMap1.get(i) : 0);
+            excellenceTable.setValueAt(((reportMap.get(i) == null ? 0 : reportMap.get(i)) == 0 ? 0 : (reportMap.get(i) / total) * 100)+"%", i - 1, col);
         }
         col++;
-        for(int i=1;i<=reportMap1.size();i++){
+        for (int i = 1; i <= 5; i++) {
+            total = (reportMap.get(i) != null ? reportMap.get(i) : 0) + (reportMap1.get(i) != null ? reportMap1.get(i) : 0);
 //            total=reportMap.get(i)+reportMap1.get(i);
-            excellenceTable.setValueAt(reportMap1.get(i), i-1, col); 
+            excellenceTable.setValueAt(((reportMap1.get(i) == null ? 0 : reportMap1.get(i)) == 0 ? 0 : (reportMap1.get(i) / total) * 100)+"%", i - 1, col);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
