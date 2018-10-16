@@ -361,7 +361,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
                         .addComponent(lblReportHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFilter))
-                .addContainerGap())
+                .addGap(5, 5, 5))
         );
 
         panReport.setLayout(new java.awt.BorderLayout());
@@ -381,7 +381,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
             .addGroup(panSkillReportsLayout.createSequentialGroup()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panReport, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addComponent(panReport, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 

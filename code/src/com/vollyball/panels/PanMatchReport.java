@@ -13,14 +13,12 @@ import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.dialog.CreateMatchDialog;
 import com.vollyball.dialog.CreateSelectTeamDialog;
-import com.vollyball.dialog.DialogMatchDetails;
 import com.vollyball.enums.EvaluationType;
 import com.vollyball.enums.Phase;
-import com.vollyball.renderer.ColumnGroup;
+import com.vollyball.panels.report.PanReportHome;
 import com.vollyball.renderer.EditButtonRenderer;
 import com.vollyball.renderer.GroupableTableHeader;
 import com.vollyball.renderer.LiveButtonRenderer;
-import com.vollyball.renderer.PostButtonRenderer;
 import com.vollyball.renderer.ReportButtonRenderer;
 import com.vollyball.renderer.TableHeaderRenderer;
 import java.awt.BorderLayout;
@@ -69,7 +67,7 @@ public class PanMatchReport extends javax.swing.JPanel {
         ((JLabel) cmbTeam1.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         ((JLabel) cmbTeam2.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         ((JLabel) cmbPhase.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-        model = new DefaultTableModel(){
+        model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 //all cells false
@@ -78,7 +76,7 @@ public class PanMatchReport extends javax.swing.JPanel {
         };
 
         model.setDataVector(new Object[][]{},
-                new Object[]{"SR No.", "Match", "Won By", "Date", "Time", "Phase", "Place", "Day Number", "Match Number", "Report", "LIVE", "POST", "Action"});
+                new Object[]{"SR No.", "Match", "Won By", "Date", "Time", "Phase", "Place", "Day Number", "Match Number", "Report", "Evaluate", "Action"});
 
         tbMatch = new JTable(model) {
 
@@ -89,13 +87,13 @@ public class PanMatchReport extends javax.swing.JPanel {
 
         tbMatch.setFont(new java.awt.Font("Times New Roman", 0, 14));
         TableColumnModel cm = tbMatch.getColumnModel();
-        ColumnGroup g_name = new ColumnGroup("EVALUATION");
-
-        g_name.add(cm.getColumn(10));
-        g_name.add(cm.getColumn(11));
-
+//        ColumnGroup g_name = new ColumnGroup("EVALUATION");
+//
+//        g_name.add(cm.getColumn(10));
+//        g_name.add(cm.getColumn(11));
+//
         GroupableTableHeader header1 = (GroupableTableHeader) tbMatch.getTableHeader();
-        header1.addColumnGroup(g_name);
+//        header1.addColumnGroup(g_name);
 
         JScrollPane scroll = new JScrollPane(tbMatch);
 
@@ -133,11 +131,10 @@ public class PanMatchReport extends javax.swing.JPanel {
         LiveButtonRenderer liveButtonRenderer = new LiveButtonRenderer();
         tbMatch.getColumnModel().getColumn(10).setCellRenderer(liveButtonRenderer);
 
-        PostButtonRenderer postButtonRenderer = new PostButtonRenderer();
-        tbMatch.getColumnModel().getColumn(11).setCellRenderer(postButtonRenderer);
-
+//        PostButtonRenderer postButtonRenderer = new PostButtonRenderer();
+//        tbMatch.getColumnModel().getColumn(11).setCellRenderer(postButtonRenderer);
         EditButtonRenderer editButtonRenderer = new EditButtonRenderer();
-        tbMatch.getColumnModel().getColumn(12).setCellRenderer(editButtonRenderer);
+        tbMatch.getColumnModel().getColumn(11).setCellRenderer(editButtonRenderer);
 
         tbMatch.setRowHeight(35);
 
@@ -172,11 +169,21 @@ public class PanMatchReport extends javax.swing.JPanel {
                     if (selectedRow >= 0) {
                         if (selectedCol == 9) {
                             id = matchIdmap.get((int) tbMatch.getValueAt(selectedRow, 0));
-                            DialogMatchDetails createDialogPanMatchWiseReport = new DialogMatchDetails();
-                            createDialogPanMatchWiseReport.init(cb.getId(), id);
+//                            DialogMatchDetails createDialogPanMatchWiseReport = new DialogMatchDetails();
+//                            createDialogPanMatchWiseReport.init(cb.getId(), id);
+//
+//                            tbMatch.clearSelection();
+//                            createDialogPanMatchWiseReport.show();
+                            PanReportHome panMatch = new PanReportHome(cb.getId(), id);
+                            Controller.panCompetitionReportHome.panData.removeAll();
+                            Controller.panCompetitionReportHome.panData.add(panMatch, BorderLayout.CENTER);
 
-                            tbMatch.clearSelection();
-                            createDialogPanMatchWiseReport.show();
+                            MatchBean team = matchDao.getMatchesById(cb.getId(), id);
+                            Controller.panCompetitionReportHome.lblComHeading.setText(team.getTeam1name() + " vs " + team.getTeam2name());
+                            Controller.panCompetitionReportHome.lblBack.setText("Back");
+                            Controller.panCompetitionReportHome.panData.validate();
+                            Controller.panCompetitionReportHome.panData.repaint();
+
                         } else if (selectedCol == 10) {
                             id = matchIdmap.get((int) tbMatch.getValueAt(selectedRow, 0));
                             CreateSelectTeamDialog obj = new CreateSelectTeamDialog();
@@ -184,14 +191,15 @@ public class PanMatchReport extends javax.swing.JPanel {
                             obj.setValues(id, EvaluationType.LIVE.getId());
                             obj.init();
                             obj.show();
-                        } else if (selectedCol == 11) {
-                            id = matchIdmap.get((int) tbMatch.getValueAt(selectedRow, 0));
-                            CreateSelectTeamDialog obj = new CreateSelectTeamDialog();
-                            tbMatch.clearSelection();
-                            obj.setValues(id, EvaluationType.POST.getId());
-                            obj.init();
-                            obj.show();
-                        } else if (selectedCol == 12) {
+                        } //                            else if (selectedCol == 11) {
+                        //                            id = matchIdmap.get((int) tbMatch.getValueAt(selectedRow, 0));
+                        //                            CreateSelectTeamDialog obj = new CreateSelectTeamDialog();
+                        //                            tbMatch.clearSelection();
+                        //                            obj.setValues(id, EvaluationType.POST.getId());
+                        //                            obj.init();
+                        //                            obj.show();
+                        //                        }
+                        else if (selectedCol == 11) {
                             id = matchIdmap.get((int) tbMatch.getValueAt(selectedRow, 0));
                             CreateMatchDialog obj = new CreateMatchDialog();
                             tbMatch.clearSelection();
@@ -214,7 +222,7 @@ public class PanMatchReport extends javax.swing.JPanel {
         for (MatchBean match : matchList) {
             i++;
             matchIdmap.put(i, match.getId());
-            Object[] row = {i, match.getMatch(), "", match.getDate(), match.getTime(), match.getPhase(), match.getPlace(), match.getDayNumber(), match.getMatchNumber(), new JPanel(), new JPanel(), new JPanel(), new JPanel()};
+            Object[] row = {i, match.getMatch(), "", match.getDate(), match.getTime(), match.getPhase(), match.getPlace(), match.getDayNumber(), match.getMatchNumber(), new JPanel(), new JPanel(), new JPanel()};
             model.addRow(row);
         }
 
@@ -289,8 +297,9 @@ public class PanMatchReport extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         panMatchList.setBackground(new java.awt.Color(255, 255, 255));
-        panMatchList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panMatchList.setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -314,7 +323,9 @@ public class PanMatchReport extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,16 +337,15 @@ public class PanMatchReport extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -375,7 +385,7 @@ public class PanMatchReport extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
         );
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
@@ -433,7 +443,7 @@ public class PanMatchReport extends javax.swing.JPanel {
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmbTeam1)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(5, 5, 5))
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -459,15 +469,19 @@ public class PanMatchReport extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panMatchList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panMatchList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panMatchList, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panMatchList, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

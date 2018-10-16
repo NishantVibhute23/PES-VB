@@ -8,7 +8,7 @@ package com.vollyball.frames;
 import com.vollyball.controller.Controller;
 import com.vollyball.dialog.CreateSettingDialog;
 import com.vollyball.dialog.CreateUserDialog;
-import com.vollyball.panels.PanPESVBHome;
+import com.vollyball.panels.PanCompetitionList;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -31,8 +31,8 @@ public class FrmDashboard extends javax.swing.JFrame {
         } catch (Exception ex) {
         }
         panMyProfile.setVisible(false);
-        Controller.panPESVBHome = new PanPESVBHome();
-        panContent.add(Controller.panPESVBHome, BorderLayout.CENTER);
+        Controller.panCompetitionList = new PanCompetitionList();
+        panContent.add(Controller.panCompetitionList, BorderLayout.CENTER);
         this.validate();
         this.repaint();
     }
@@ -238,7 +238,11 @@ public class FrmDashboard extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         panContent.removeAll();
-        panContent.add(Controller.panPESVBHome, BorderLayout.CENTER);
+        Controller.panCompetitionList = new PanCompetitionList();
+
+        Controller.frmDashBoard.panMyProfile.setVisible(false);
+        panContent.add(Controller.panCompetitionList, BorderLayout.CENTER);
+
         this.validate();
         this.repaint();
     }//GEN-LAST:event_jLabel1MouseClicked
