@@ -281,7 +281,11 @@ public class FrmLogin extends javax.swing.JFrame {
             .addComponent(txtIpAddr, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
-        lblNewUser.setText("New User");
+        lblNewUser.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblNewUser.setForeground(new java.awt.Color(0, 102, 255));
+        lblNewUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNewUser.setText("<html><u>New User</u></html>");
+        lblNewUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblNewUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblNewUserMouseClicked(evt);
@@ -297,7 +301,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblNewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblNewUser))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -349,7 +353,7 @@ public class FrmLogin extends javax.swing.JFrame {
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(lblNewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblNewUser)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
