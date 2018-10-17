@@ -84,7 +84,8 @@ public class Setup extends Thread {
     }
 
     public String setupDb() {
-        boolean isCreated = db.createNewDatabase();
+//        boolean isCreated = db.createNewDatabase();
+        boolean isCreated = db.createMysqlDatabase();
         if (isCreated) {
             Controller.stepCompleted.put(SetupEnum.Database.getStep(), SetupEnum.Database.getValue());
             FrmRegister.pgrStatus.setValue(70);
@@ -199,9 +200,11 @@ public class Setup extends Thread {
     public void createSettingTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.settings"), SetupEnum.Setting, status);
     }
+
     public void createBatchTeamTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.batchTeam"), SetupEnum.BatchMatch, status);
     }
+
     public void createBatchMatchPlayerTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.batchMatchPlayer"), SetupEnum.BatchMatchPlayer, status);
     }

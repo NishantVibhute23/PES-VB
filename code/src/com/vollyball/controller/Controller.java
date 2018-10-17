@@ -35,7 +35,6 @@ import com.vollyball.training.dialog.CreateTraineeDailog;
 import com.vollyball.training.panel.PanBatchList;
 import com.vollyball.training.panel.PanBatchTraineeList;
 import com.vollyball.util.CommonUtil;
-import java.io.File;
 import java.util.LinkedHashMap;
 import javax.swing.JPanel;
 
@@ -76,19 +75,17 @@ public class Controller {
     public static PanPESVBHome panPESVBHome;
     public static PanEvaluationRally panEvaluationRally;
     public static CreateTraineeDailog createTraineeDailog;
+    public static String databaseIpAdd;
 
     public static void main(String args[]) {
 
         new CommonUtil();
-        String path = System.getProperty("user.home") + File.separator + "Documents";
-        path += File.separator + CommonUtil.getResourceProperty("folder.name");
-//        File file = new File(CommonUtil.getResourceProperty("db.name"));
-        File file = new File(path + File.separator + CommonUtil.getResourceProperty("db.name"));
-        if (!file.exists() || file == null) {
-            frmMain = new FrmRegister();
-        } else {
-            new FrmLogin();
-        }
+        new FrmLogin();
+//        String path = System.getProperty("user.home") + File.separator + "Documents";
+//        path += File.separator + CommonUtil.getResourceProperty("folder.name");
+////        File file = new File(CommonUtil.getResourceProperty("db.name"));
+//        File file = new File(path + File.separator + CommonUtil.getResourceProperty("db.name"));
+
     }
 
 }

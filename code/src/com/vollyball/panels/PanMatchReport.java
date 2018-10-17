@@ -12,7 +12,6 @@ import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.dialog.CreateMatchDialog;
-import com.vollyball.dialog.CreateSelectTeamDialog;
 import com.vollyball.enums.EvaluationType;
 import com.vollyball.enums.Phase;
 import com.vollyball.panels.report.PanReportHome;
@@ -186,11 +185,23 @@ public class PanMatchReport extends javax.swing.JPanel {
 
                         } else if (selectedCol == 10) {
                             id = matchIdmap.get((int) tbMatch.getValueAt(selectedRow, 0));
-                            CreateSelectTeamDialog obj = new CreateSelectTeamDialog();
+//                            CreateSelectTeamDialog obj = new CreateSelectTeamDialog();
                             tbMatch.clearSelection();
-                            obj.setValues(id, EvaluationType.LIVE.getId());
-                            obj.init();
-                            obj.show();
+//                            obj.setValues(id, EvaluationType.LIVE.getId());
+//                            obj.init();
+//                            obj.show();
+
+                            PanSelectTeam panSelectTeam = new PanSelectTeam(id, EvaluationType.LIVE.getId());
+
+                            Controller.panCompetitionReportHome.panData.removeAll();
+                            Controller.panCompetitionReportHome.panData.add(panSelectTeam, BorderLayout.CENTER);
+
+                            MatchBean team = matchDao.getMatchesById(cb.getId(), id);
+                            Controller.panCompetitionReportHome.lblComHeading.setText(team.getTeam1name() + " vs " + team.getTeam2name());
+                            Controller.panCompetitionReportHome.lblBack.setText("Back");
+                            Controller.panCompetitionReportHome.panData.validate();
+                            Controller.panCompetitionReportHome.panData.repaint();
+
                         } //                            else if (selectedCol == 11) {
                         //                            id = matchIdmap.get((int) tbMatch.getValueAt(selectedRow, 0));
                         //                            CreateSelectTeamDialog obj = new CreateSelectTeamDialog();
