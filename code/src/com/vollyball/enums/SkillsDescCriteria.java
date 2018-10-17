@@ -84,7 +84,7 @@ public enum SkillsDescCriteria {
     DefenceD(68, "Blocking at Zone", 6, 0),
     DefenceE(69, "No. of Blockers", 6, 1),
     DefenceF(70, "Block Cover", 6, 1),
-    DefenceG(71, "Defence Formation ", 6, 1),
+    DefenceG(71, "Defence System ", 6, 1),
     DefenceH(72, "Defence Sent From Zone", 6, 0),
     DefenceI(73, "Defence Sent To Zone", 6, 0),
     DefenceJ(74, "Defenders Role", 6, 0),

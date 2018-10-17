@@ -19,6 +19,7 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -228,11 +229,31 @@ public class PanEvaluation extends javax.swing.JPanel {
     }
 
     private void registerLibrary() {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "H:\\vollyball\\PES-VB\\VLC\\VLC64");
+        String path = "";
+        String osArch = System.getenv("PROCESSOR_ARCHITECTURE");
+        if (osArch.endsWith("64")) {
+            path = CommonUtil.getResourceProperty("pfx64Path") + File.separator + CommonUtil.getResourceProperty("folder.name") + File.separator + "VLC\\VLC64";
+        } else {
+            path = CommonUtil.getResourceProperty("pfx32Path") + File.separator + CommonUtil.getResourceProperty("folder.name") + File.separator + "VLC\\VLC32";
+        }
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), path);
         Native
                 .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
                 );
         LibXUtil.initialise();
+//
+//        URL url = getClass().getResource("/com/vollyball/dll/VLC64");
+//        try {
+//            File f = new File(url.toURI());
+//            NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), f.getAbsolutePath());
+//            Native
+//                    .loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class
+//                    );
+//            LibXUtil.initialise();
+//        } catch (URISyntaxException ex) {
+//            Logger.getLogger(PanEvaluation.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
     }
 
     /**

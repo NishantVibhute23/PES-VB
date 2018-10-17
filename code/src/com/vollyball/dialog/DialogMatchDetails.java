@@ -5,7 +5,7 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.panels.PanMatchDetails;
+import com.vollyball.panels.report.PanReportHome;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JRootPane;
 
 /**
  *
@@ -31,17 +32,16 @@ public class DialogMatchDetails {
 
             this.matchId = matchId;
 
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             this.dialog = new JDialog(this.parentFrame, "New Match", true);
-
-            this.dialog.setResizable(false);
+            this.dialog.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
+            this.dialog.setResizable(true);
+            Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
+            this.dialog.setLocation(0, 0);
+            this.dialog.setSize(Size.width, Size.height);//
             this.dialog.getContentPane().add(createPane());
             this.dialog.pack();
-//            this.dialog.setSize(418, 505);//
 
-            Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
-            this.dialog.setLocation(new Double((Size.getWidth() / 2) - (dialog.getWidth() / 2)).intValue(), new Double((Size.getHeight() / 2) - (dialog.getHeight() / 2)).intValue());
-
+//
         } catch (Exception ex) {
 
             Logger.getLogger(CreateMatchDialog.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,7 +49,7 @@ public class DialogMatchDetails {
     }
 
     protected Container createPane() {
-        PanMatchDetails panMatch = new PanMatchDetails(compId, matchId);
+        PanReportHome panMatch = new PanReportHome(compId, matchId);
 
         return panMatch;
     }

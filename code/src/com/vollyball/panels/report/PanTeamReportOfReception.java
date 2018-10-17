@@ -5,6 +5,7 @@
  */
 package com.vollyball.panels.report;
 
+import com.vollyball.bean.DigTrianglePoints;
 import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.SuccessFailure;
 import com.vollyball.controller.Controller;
@@ -13,9 +14,15 @@ import com.vollyball.dao.ReportDao;
 import com.vollyball.enums.Skill;
 import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.panels.ImagePanel;
+import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -24,7 +31,7 @@ import javax.swing.JLabel;
 public class PanTeamReportOfReception extends javax.swing.JPanel {
 
     String datatr = "";
-    ImagePanel imgTPL, imgDBL, imgSGL, imgNB;
+    ImagePanel img2M, img3M, img4M, img5M;
 
     ReportDao reportDao = new ReportDao();
     int cb;
@@ -32,6 +39,8 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
     MatchDao matchDao = new MatchDao();
     int evaluationteamId, evaluationteamId2;
     int team1id, team2id;
+    LinkedHashMap<Integer, ImagePanel> imgId = new LinkedHashMap<>();
+    LinkedHashMap<ImagePanel, JPanel> imgPan = new LinkedHashMap<>();
 
     String html = "<html><head>\n"
             + "<style type=\"text/css\">\n"
@@ -54,6 +63,63 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
 
         createComplexOverviewTable();
         createAttackBlockOverviewTable();
+
+        img2M = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(0, img2M);
+        imgPan.put(img2M, pan2M);
+
+        img3M = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(1, img3M);
+        imgPan.put(img3M, pan3M);
+
+        img4M = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(2, img4M);
+        imgPan.put(img4M, pan4M);
+
+        img5M = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), null);
+        imgId.put(3, img5M);
+        imgPan.put(img5M, pan5M);
+
+        createDiagram(55);
+
+    }
+
+    public void createDiagram(int skillDescIdIn) {
+        List<SkillDescCriteriaPoint> lstTempo = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skillDescIdIn);
+
+        for (int j = 0; j < lstTempo.size(); j++) {
+
+            ImagePanel img = imgId.get(j);
+            JPanel pan = imgPan.get(img);
+            pan.setLayout(new BorderLayout());
+            pan.add(img, BorderLayout.CENTER);
+
+            List<DigTrianglePoints> points = new ArrayList();
+
+            String fromValSuc = CommonUtil.getValue(56, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId());
+            if (!fromValSuc.isEmpty()) {
+                String toValSuc = getValueForDig(57, 5, fromValSuc, 56, lstTempo.get(j).getAbbreviation(), skillDescIdIn);
+                DigTrianglePoints pointSuc = new DigTrianglePoints("H" + fromValSuc + "A", "H" + toValSuc + "A", "H" + toValSuc + "C", Color.GREEN);
+                points.add(pointSuc);
+            }
+            String fromValFav = CommonUtil.getValue(56, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId());
+            if (!fromValFav.isEmpty()) {
+                String toValFav = getValueForDig(57, 4, fromValFav, 56, lstTempo.get(j).getAbbreviation(), skillDescIdIn);
+                DigTrianglePoints pointFav = new DigTrianglePoints("H" + fromValFav + "A", "H" + toValFav + "A", "H" + toValFav + "C", Color.ORANGE);
+                points.add(pointFav);
+            }
+
+            String fromValFail = CommonUtil.getValue(56, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId());
+            if (!fromValFail.isEmpty()) {
+                String toValFail = getValueForDig(57, 1, fromValFail, 56, lstTempo.get(j).getAbbreviation(), skillDescIdIn);
+                DigTrianglePoints pointFail = new DigTrianglePoints("H" + fromValFail + "A", "H" + toValFail + "A", "H" + toValFail + "C", Color.RED);
+                points.add(pointFail);
+            }
+
+            if (points.size() != 0) {
+                img.drawTriangle(points);
+            }
+        }
     }
 
     public void createComplexOverviewTable() {
@@ -126,30 +192,30 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
 
             datatr = datatr + "<tr><td rowspan=" + 3 + ">" + lstTempo.get(j).getAbbreviation() + "</td>";
             datatr = datatr + "<td>S</td>"
-                    + "<td>" + getValue(54, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(60, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(56, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(59, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(58, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td></tr>";
+                    + "<td>" + CommonUtil.getValue(54, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(60, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(56, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(59, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(58, 5, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td></tr>";
 
             datatr = datatr + "<td>F+</td>"
-                    + "<td>" + getValue(54, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(60, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(56, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(59, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(58, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td></tr>";
+                    + "<td>" + CommonUtil.getValue(54, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(60, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(56, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(59, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(58, 4, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td></tr>";
             datatr = datatr + "<td>F</td>"
-                    + "<td>" + getValue(54, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(60, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(56, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(59, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td>"
-                    + "<td>" + getValue(58, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn) + "</td></tr>";
+                    + "<td>" + CommonUtil.getValue(54, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(60, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(56, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(59, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td>"
+                    + "<td>" + CommonUtil.getValue(58, 1, lstTempo.get(j).getAbbreviation(), skillDescIdIn, evaluationteamId, Skill.Reception.getId()) + "</td></tr>";
         }
 
     }
 
-    public String getValue(int skillDescCriteriaId, int rating, String rowSkillDesc, int rowSkillDescId) {
-        String value = reportDao.getSkillSuccessForTeam(skillDescCriteriaId, Skill.Reception.getId(), evaluationteamId, rowSkillDesc, rowSkillDescId, rating);
+    public String getValueForDig(int skillDescCriteriaId, int rating, String rowSkillDesc, int rowSkillDescId, String colSkillDesc, int colSkillDescId) {
+        String value = reportDao.getSkillSuccessForTeamWithBlock(skillDescCriteriaId, Skill.Reception.getId(), evaluationteamId, rowSkillDesc, rowSkillDescId, colSkillDesc, colSkillDescId, rating);
         return value;
     }
 
@@ -168,24 +234,17 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        panTPL = new javax.swing.JPanel();
+        pan2M = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        PanDBL = new javax.swing.JPanel();
+        pan3M = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        PanSBL = new javax.swing.JPanel();
+        pan4M = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        PanNB = new javax.swing.JPanel();
+        pan5M = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -209,7 +268,7 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        panTPL.setLayout(new java.awt.BorderLayout());
+        pan2M.setLayout(new java.awt.BorderLayout());
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -223,7 +282,7 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(panTPL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pan2M, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,19 +290,19 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panTPL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pan2M, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout PanDBLLayout = new javax.swing.GroupLayout(PanDBL);
-        PanDBL.setLayout(PanDBLLayout);
-        PanDBLLayout.setHorizontalGroup(
-            PanDBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pan3MLayout = new javax.swing.GroupLayout(pan3M);
+        pan3M.setLayout(pan3MLayout);
+        pan3MLayout.setHorizontalGroup(
+            pan3MLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        PanDBLLayout.setVerticalGroup(
-            PanDBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pan3MLayout.setVerticalGroup(
+            pan3MLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
@@ -255,7 +314,7 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanDBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pan3M, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
@@ -267,19 +326,19 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanDBL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pan3M, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout PanSBLLayout = new javax.swing.GroupLayout(PanSBL);
-        PanSBL.setLayout(PanSBLLayout);
-        PanSBLLayout.setHorizontalGroup(
-            PanSBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pan4MLayout = new javax.swing.GroupLayout(pan4M);
+        pan4M.setLayout(pan4MLayout);
+        pan4MLayout.setHorizontalGroup(
+            pan4MLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        PanSBLLayout.setVerticalGroup(
-            PanSBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pan4MLayout.setVerticalGroup(
+            pan4MLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
@@ -291,7 +350,7 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanSBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pan4M, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
@@ -303,19 +362,19 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanSBL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pan4M, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout PanNBLayout = new javax.swing.GroupLayout(PanNB);
-        PanNB.setLayout(PanNBLayout);
-        PanNBLayout.setHorizontalGroup(
-            PanNBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pan5MLayout = new javax.swing.GroupLayout(pan5M);
+        pan5M.setLayout(pan5MLayout);
+        pan5MLayout.setHorizontalGroup(
+            pan5MLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        PanNBLayout.setVerticalGroup(
-            PanNBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pan5MLayout.setVerticalGroup(
+            pan5MLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
@@ -327,7 +386,7 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanNB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pan5M, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
@@ -339,7 +398,7 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanNB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pan5M, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -367,21 +426,6 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel3.setText("Abbreavations:");
-
-        jLabel4.setText("  A      : Total Attempt in number");
-
-        jLabel5.setText("+(%) : Successful attempt in Percentage");
-
-        jLabel6.setText("-(%)  : Failure attempt in Percentage");
-
-        jLabel7.setText("S : Successful");
-
-        jLabel8.setText("F+ : Favourable");
-
-        jLabel9.setText("F : Failure");
-
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel10.setText("Diagramtic Presentation");
 
@@ -390,33 +434,17 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)))
-                    .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panAttackBlock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(panAttackBlock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(885, 885, 885))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addGap(113, 113, 113)
+                        .addComponent(jLabel2))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -428,36 +456,17 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panAttackBlock, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                        .addGap(321, 321, 321))
-                    .addComponent(panComplex, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
-                .addGap(19, 19, 19)
+                    .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panAttackBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(169, 169, 169)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addContainerGap())
+                .addContainerGap(311, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanDBL;
-    private javax.swing.JPanel PanNB;
-    private javax.swing.JPanel PanSBL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -465,20 +474,16 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel pan2M;
+    private javax.swing.JPanel pan3M;
+    private javax.swing.JPanel pan4M;
+    private javax.swing.JPanel pan5M;
     private javax.swing.JPanel panAttackBlock;
     private javax.swing.JPanel panComplex;
-    private javax.swing.JPanel panTPL;
     // End of variables declaration//GEN-END:variables
 }

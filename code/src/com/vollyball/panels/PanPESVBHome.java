@@ -22,10 +22,12 @@ public class PanPESVBHome extends javax.swing.JPanel {
      */
     public PanPESVBHome() {
         initComponents();
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("src\\com\\vollyball\\images\\volley-comp.jpg").getImage().getScaledInstance(306, 320, Image.SCALE_SMOOTH));
-        jLabel1.setIcon(imageIcon);
-        ImageIcon iconcomp = new ImageIcon(new ImageIcon("src\\com\\vollyball\\images\\volley-train.jpg").getImage().getScaledInstance(306, 320, Image.SCALE_SMOOTH));
-        jLabel2.setIcon(iconcomp);
+//        ImageIcon imageIcon = new ImageIcon(new ImageIcon("src\\com\\vollyball\\images\\volley-comp.jpg").getImage().getScaledInstance(306, 320, Image.SCALE_SMOOTH));
+//        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/com/vollyball/images/volley-comp.jpg"));
+
+        jLabel1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/volley-comp.jpg")).getImage().getScaledInstance(306, 320, Image.SCALE_SMOOTH)));
+//        ImageIcon iconcomp = new ImageIcon(new ImageIcon("src\\com\\vollyball\\images\\volley-train.jpg").getImage().getScaledInstance(306, 320, Image.SCALE_SMOOTH));
+        jLabel2.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/volley-train.jpg")).getImage().getScaledInstance(306, 320, Image.SCALE_SMOOTH)));
     }
 
     /**

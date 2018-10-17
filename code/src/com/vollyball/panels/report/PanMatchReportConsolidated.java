@@ -5,7 +5,6 @@
  */
 package com.vollyball.panels.report;
 
-import com.vollyball.panels.*;
 import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.MatchSet;
 import com.vollyball.bean.Player;
@@ -26,6 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -105,6 +105,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             showScoreBoard(lstMatchSetTeam1, 1);
         }
 
+        setTeamRallyReportExcellenceWise(lstMatchSetTeam1);
+        setTeam2RallyReportExcellenceWise(lstMatchSetTeam2);
+        setExcellenceRow();
         TeamScores team1SuccessScores = trd.getTeamSuccessReportSkillwise(cb, matchId, team1id);
         TeamScores team1ErrorScores = trd.getTeamErrorReportSkillwise(cb, matchId, team1id);
         team1Sum.setText(team.getTeam1name());
@@ -755,6 +758,40 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         }
     }
 
+    Map<Integer, Integer> reportMap = new HashMap<>();
+    Map<Integer, Integer> reportMap1 = new HashMap<>();
+
+    public void setTeamRallyReportExcellenceWise(List<MatchSet> lstMatchSetTeam) {
+        int countRally = 0;
+        for (MatchSet ms : lstMatchSetTeam) {
+            countRally = rd.getRallyCountByEvaluationId(ms.getId());
+            reportMap.put(ms.getSetNo(), countRally);
+        }
+    }
+
+    public void setTeam2RallyReportExcellenceWise(List<MatchSet> lstMatchSetTeam) {
+        int countRally = 0;
+        for (MatchSet ms : lstMatchSetTeam) {
+            countRally = rd.getRallyCountByEvaluationId(ms.getId());
+            reportMap1.put(ms.getSetNo(), countRally);
+        }
+    }
+
+    public void setExcellenceRow() {
+        int row = 0, col = 1;
+        double total = 0;
+        for (int i = 1; i <= 5; i++) {
+            total = (reportMap.get(i) != null ? reportMap.get(i) : 0) + (reportMap1.get(i) != null ? reportMap1.get(i) : 0);
+            excellenceTable.setValueAt(((reportMap.get(i) == null ? 0 : reportMap.get(i)) == 0 ? 0 : (reportMap.get(i) / total) * 100)+"%", i - 1, col);
+        }
+        col++;
+        for (int i = 1; i <= 5; i++) {
+            total = (reportMap.get(i) != null ? reportMap.get(i) : 0) + (reportMap1.get(i) != null ? reportMap1.get(i) : 0);
+//            total=reportMap.get(i)+reportMap1.get(i);
+            excellenceTable.setValueAt(((reportMap1.get(i) == null ? 0 : reportMap1.get(i)) == 0 ? 0 : (reportMap1.get(i) / total) * 100)+"%", i - 1, col);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1045,6 +1082,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team1WonPointsLabel = new javax.swing.JLabel();
         team2label = new javax.swing.JLabel();
         team2WonPointLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        excellenceTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -1106,9 +1146,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(match, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                    .addComponent(phase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(phase, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(match, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(matchDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1146,7 +1186,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField20.setBackground(new java.awt.Color(204, 204, 204));
         jTextField20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField20.setText("Tot Pt.");
+        jTextField20.setText("Att.");
         jTextField20.setBorder(null);
         jTextField20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1475,7 +1515,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField31.setBackground(new java.awt.Color(204, 204, 204));
         jTextField31.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField31.setText("Tot Pt.");
+        jTextField31.setText("Att.");
         jTextField31.setBorder(null);
         jTextField31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1720,7 +1760,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField88.setBackground(new java.awt.Color(204, 204, 204));
         jTextField88.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField88.setText("Tot Pt.");
+        jTextField88.setText("Att.");
         jTextField88.setBorder(null);
         jTextField88.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2042,7 +2082,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField109.setBackground(new java.awt.Color(204, 204, 204));
         jTextField109.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField109.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField109.setText("Tot Pt.");
+        jTextField109.setText("Att.");
         jTextField109.setBorder(null);
         jTextField109.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2371,7 +2411,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField263.setBackground(new java.awt.Color(204, 204, 204));
         jTextField263.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField263.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField263.setText("Tot Pt.");
+        jTextField263.setText("Att.");
         jTextField263.setBorder(null);
         jTextField263.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2617,7 +2657,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jTextField288.setBackground(new java.awt.Color(204, 204, 204));
         jTextField288.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField288.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField288.setText("Tot Pt.");
+        jTextField288.setText("Att.");
         jTextField288.setBorder(null);
         jTextField288.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3552,7 +3592,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 {"V", "0", "8", "0", "0", "0"}
             },
             new String [] {
-                "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "OP +"
+                "SET No", "Att.", "SRV", "BLK", "ATK", "OP +"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -3603,7 +3643,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 {"V", "0", "0", "0", "0", "0", "0", "0", "8"}
             },
             new String [] {
-                "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "REC", "SET", "DEF", "TF -"
+                "SET No", "Att.", "SRV", "BLK", "ATK", "REC", "SET", "DEF", "TF -"
             }
         ));
         tbTeam1Loss.setRowHeight(20);
@@ -3760,7 +3800,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 {"V", "0", "0", "0", "0", "8"}
             },
             new String [] {
-                "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "OP +"
+                "SET No", "Att.", "SRV", "BLK", "ATK", "OP +"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -3811,7 +3851,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 {"V", "0", "0", "0", "0", "0", "0", "0", "8"}
             },
             new String [] {
-                "SET No", "Tot Pt.", "SRV", "BLK", "ATK", "REC", "SET", "DEF", "TF -"
+                "SET No", "Att.", "SRV", "BLK", "ATK", "REC", "SET", "DEF", "TF -"
             }
         ));
         tbTeam2Loss.setRowHeight(20);
@@ -3945,27 +3985,47 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(team1label, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(team1WonPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(team2label, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(team2WonPointLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(team1label, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(team1WonPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(team2label, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(team2WonPointLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(team1label)
-                    .addComponent(team1WonPointsLabel)
+                    .addComponent(team1WonPointsLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(team2label)
-                    .addComponent(team2WonPointLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(team2WonPointLabel)))
         );
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Match Report");
+
+        excellenceTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"I", null, null},
+                {"II", null, null},
+                {"III", null, null},
+                {"IV", null, null},
+                {"V", null, null}
+            },
+            new String [] {
+                "SET", "Team1", "Team2"
+            }
+        ));
+        jScrollPane2.setViewportView(excellenceTable);
 
         javax.swing.GroupLayout panMatchReport1Layout = new javax.swing.GroupLayout(panMatchReport1);
         panMatchReport1.setLayout(panMatchReport1Layout);
@@ -3974,25 +4034,33 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMatchReport1Layout.createSequentialGroup()
+            .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panMatchReport1Layout.createSequentialGroup()
                 .addGroup(panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
-            .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE))
+            .addGroup(panMatchReport1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panMatchReport1Layout.setVerticalGroup(
             panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panMatchReport1Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
+                .addGap(8, 8, 8)
+                .addGroup(panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panMatchReport1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4005,9 +4073,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel11.setText("Tot Pt : ");
+        jLabel11.setText("Att.  :");
 
-        jLabel12.setText("Total Points");
+        jLabel12.setText("Total Attempt");
 
         jLabel14.setText("SRV : ");
 
@@ -4256,6 +4324,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     }//GEN-LAST:event_team1SumSerErrorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable excellenceTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -4266,6 +4335,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -4327,6 +4397,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
