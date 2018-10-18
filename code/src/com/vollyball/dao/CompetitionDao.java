@@ -35,9 +35,11 @@ public class CompetitionDao {
             ps.setString(4, cb.getEndDate());
             ps.setString(5, cb.getAgeGroup());
             count = ps.executeUpdate();
-            db.closeConnection(con);
+            
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return count;
     }
@@ -58,10 +60,11 @@ public class CompetitionDao {
                 cb.setAgeGroup(rs.getString(6));
                 cb.setIsDeleted(rs.getInt(7));
                 competitionList.add(cb);
-            }
-            db.closeConnection(con);
+            }           
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return competitionList;
     }
@@ -81,9 +84,10 @@ public class CompetitionDao {
                 cb.setEndDate(rs.getString(5));
                 cb.setAgeGroup(rs.getString(6));
             }
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return cb;
     }
@@ -100,9 +104,10 @@ public class CompetitionDao {
             ps.setString(5, cb.getAgeGroup());
             ps.setInt(6, cb.getId());
             count = ps.executeUpdate();
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return count;
     }
