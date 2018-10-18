@@ -152,9 +152,10 @@ public class RallyDao {
 
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
 
         return rid;
@@ -336,9 +337,10 @@ public class RallyDao {
                 }
             }
             updateMatchScore(re.getMatchEvaluationId());
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
 
         return rid;
@@ -383,6 +385,8 @@ public class RallyDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
     }
 
@@ -438,9 +442,10 @@ public class RallyDao {
                 re.setWonby(rs.getInt(9));
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return re;
     }
@@ -537,9 +542,10 @@ public class RallyDao {
                 }
                 re.setRallyEvaluationSkillScore(rallyEvaluationSkillScore);
             }
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return re;
     }
@@ -564,10 +570,10 @@ public class RallyDao {
                 re.setMatchEvaluationId(rs.getInt(7));
                 reList.add(re);
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return reList;
     }
@@ -587,10 +593,10 @@ public class RallyDao {
                 r.setRallyNum(rs.getInt(2));
                 list.add(r);
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return list;
 
@@ -632,6 +638,8 @@ public class RallyDao {
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class
                     .getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return rallyPositionMap;
     }
@@ -671,6 +679,8 @@ public class RallyDao {
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class
                     .getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return rallyPositionMap;
     }
@@ -700,6 +710,8 @@ public class RallyDao {
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class
                     .getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return rallyPositionMap;
     }
@@ -724,6 +736,8 @@ public class RallyDao {
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class
                     .getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return rallyPositionMap;
     }
@@ -753,10 +767,10 @@ public class RallyDao {
                 v.setTo(rs.getInt(11));
 
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return v;
     }
@@ -773,10 +787,10 @@ public class RallyDao {
             while (rs.next()) {
                 count = rs.getInt(1);
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return count;
     }
@@ -833,6 +847,8 @@ public class RallyDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return rallyDetailsList;
     }
@@ -855,6 +871,8 @@ public class RallyDao {
             id = ps1.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -877,6 +895,8 @@ public class RallyDao {
             id = ps1.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -905,6 +925,8 @@ public class RallyDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return ss;
     }
@@ -927,6 +949,8 @@ public class RallyDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(RallyDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
     }
 
