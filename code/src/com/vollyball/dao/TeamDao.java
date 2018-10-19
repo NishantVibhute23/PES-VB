@@ -69,9 +69,10 @@ public class TeamDao {
 
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return count;
 
@@ -97,6 +98,8 @@ public class TeamDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return teamList;
     }
@@ -117,9 +120,10 @@ public class TeamDao {
             ps.setInt(9, team.getId());
             count = ps.executeUpdate();
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return count;
 
@@ -148,6 +152,8 @@ public class TeamDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return playerList;
     }
@@ -170,6 +176,8 @@ public class TeamDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return playerList;
     }
@@ -195,6 +203,8 @@ public class TeamDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return playerList;
 
@@ -223,6 +233,8 @@ public class TeamDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return t;
     }
@@ -249,6 +261,8 @@ public class TeamDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return p;
     }
@@ -272,9 +286,10 @@ public class TeamDao {
                 }
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return count;
 
@@ -300,9 +315,10 @@ public class TeamDao {
                 }
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return count;
 
@@ -315,10 +331,10 @@ public class TeamDao {
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("delete.player"));
             ps.setInt(1, id);
             count = ps.executeUpdate();
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return count;
     }

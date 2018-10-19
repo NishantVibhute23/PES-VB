@@ -35,9 +35,10 @@ public class LoginDao {
                 count = rs.getInt(1);
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return count;
 
@@ -56,9 +57,10 @@ public class LoginDao {
                 ub.setEmailId(rs.getString(3));
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return ub;
 

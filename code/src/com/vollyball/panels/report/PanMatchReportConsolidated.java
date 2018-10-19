@@ -106,7 +106,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         }
 
         setTeamRallyReportExcellenceWise(lstMatchSetTeam1);
-        setTeam2RallyReportExcellenceWise(lstMatchSetTeam2);
+
         setExcellenceRow();
         TeamScores team1SuccessScores = trd.getTeamSuccessReportSkillwise(cb, matchId, team1id);
         TeamScores team1ErrorScores = trd.getTeamErrorReportSkillwise(cb, matchId, team1id);
@@ -764,18 +764,11 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
     public void setTeamRallyReportExcellenceWise(List<MatchSet> lstMatchSetTeam) {
         int countRally = 0;
         for (MatchSet ms : lstMatchSetTeam) {
-            countRally = rd.getRallyCountByEvaluationId(ms.getId());
-            reportMap.put(ms.getSetNo(), countRally);
+            reportMap.put(ms.getSetNo(), ms.getHomeScore());
+            reportMap1.put(ms.getSetNo(), ms.getOpponentScore());
         }
     }
 
-    public void setTeam2RallyReportExcellenceWise(List<MatchSet> lstMatchSetTeam) {
-        int countRally = 0;
-        for (MatchSet ms : lstMatchSetTeam) {
-            countRally = rd.getRallyCountByEvaluationId(ms.getId());
-            reportMap1.put(ms.getSetNo(), countRally);
-        }
-    }
 
     public void setExcellenceRow() {
         int row = 0, col = 1;

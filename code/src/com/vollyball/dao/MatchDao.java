@@ -78,10 +78,10 @@ public class MatchDao {
                 }
 
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return count;
 
@@ -117,6 +117,8 @@ public class MatchDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return matchList;
     }
@@ -152,6 +154,8 @@ public class MatchDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return mb;
     }
@@ -173,9 +177,10 @@ public class MatchDao {
 
                 count = ps.executeUpdate();
             }
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return count;
     }
@@ -192,6 +197,8 @@ public class MatchDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -209,6 +216,8 @@ public class MatchDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return mid;
     }
@@ -262,9 +271,10 @@ public class MatchDao {
             ps1.setInt(7, mid);
             id = ps1.executeUpdate();
 
-            db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -330,9 +340,10 @@ public class MatchDao {
                     ps1.executeUpdate();
                 }
             }
-            db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return mid;
     }
@@ -392,10 +403,10 @@ public class MatchDao {
                 ps5.executeUpdate();
 
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
 
         return mid;
@@ -533,10 +544,10 @@ public class MatchDao {
                 ms.setSetTimeout(setTimeout);
 
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
 
         return ms;
@@ -557,9 +568,10 @@ public class MatchDao {
             ps1.setInt(6, type);
 
             id = ps1.executeUpdate();
-            this.db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -577,9 +589,10 @@ public class MatchDao {
             ps1.setInt(5, type);
 
             id = ps1.executeUpdate();
-            this.db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -594,9 +607,10 @@ public class MatchDao {
             while (rs1.next()) {
                 id = rs1.getInt(1);
             }
-            this.db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -639,9 +653,10 @@ public class MatchDao {
                 id = ps2.executeUpdate();
             }
 
-            this.db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -657,9 +672,10 @@ public class MatchDao {
             while (rs1.next()) {
                 id = rs1.getInt(1);
             }
-            this.db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -675,9 +691,10 @@ public class MatchDao {
             while (rs.next()) {
                 id = rs.getInt(1);
             }
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return id;
 
@@ -705,6 +722,8 @@ public class MatchDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return setTimeout;
     }
@@ -718,9 +737,10 @@ public class MatchDao {
             ps1.setInt(2, s.getScoreB());
             ps1.setInt(3, s.getId());
             id = ps1.executeUpdate();
-            this.db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -753,6 +773,8 @@ public class MatchDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return setSubstitutions;
     }
@@ -771,9 +793,10 @@ public class MatchDao {
             ps1.setString(1, score);
             ps1.setInt(2, subid);
             id = ps1.executeUpdate();
-            this.db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -788,9 +811,10 @@ public class MatchDao {
             ps1.setInt(1, wonby);
             ps1.setInt(2, evalId);
             id = ps1.executeUpdate();
-            this.db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -807,9 +831,10 @@ public class MatchDao {
                 re.setStartby(rs.getInt(4));
                 re.setWonby(rs.getInt(5));
             }
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return re;
     }
@@ -856,6 +881,8 @@ public class MatchDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return matchList;
     }
@@ -874,6 +901,8 @@ public class MatchDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return setWonBy;
     }
@@ -888,9 +917,10 @@ public class MatchDao {
             ps1.setInt(2, matchId);
 
             id = ps1.executeUpdate();
-            this.db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection(con);
         }
         return id;
     }
@@ -945,9 +975,10 @@ public class MatchDao {
 
                     matchList.add(m);
                 }
-                this.db.closeConnection(con);
             } catch (SQLException ex) {
                 Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                db.closeConnection(con);
             }
 
         }
@@ -1013,9 +1044,10 @@ public class MatchDao {
                 count = ps3.executeUpdate();
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
         }
         return count;
     }

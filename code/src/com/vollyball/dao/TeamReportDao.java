@@ -112,9 +112,10 @@ public class TeamReportDao {
             t.setAttemptRate(t.getTotalAttempt() == 0 ? 0 : (double) t.getBestAttempt() / (double) t.getTotalAttempt());
             t.setAttemptRatePerc(t.getAttemptRate() == 0 ? "0%" : df.format(t.getAttemptRate()));
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return t;
 
@@ -198,10 +199,10 @@ public class TeamReportDao {
 
             t.setAttemptRate(t.getTotalAttempt() == 0 ? 0 : (double) t.getBestAttempt() / (double) t.getTotalAttempt());
             t.setAttemptRatePerc(t.getAttemptRate() == 0 ? "0%" : df.format(t.getAttemptRate()));
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return t;
 
@@ -251,6 +252,8 @@ public class TeamReportDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return skill;
     }
@@ -281,6 +284,8 @@ public class TeamReportDao {
             tsMap.put("" + setId, tsl);
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return tsMap;
     }
@@ -311,6 +316,8 @@ public class TeamReportDao {
             tsMap.put("" + setId, tsl);
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return tsMap;
     }
@@ -358,6 +365,8 @@ public class TeamReportDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return playerMap;
     }

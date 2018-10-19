@@ -59,10 +59,10 @@ public class ReportDao {
                 cb.setTeamName(rs.getString(5));
                 playerReportList.add(cb);
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
 
         return playerReportList;
@@ -93,10 +93,10 @@ public class ReportDao {
                 cb.setSuccessrate(df.format(((double) rs.getInt(4) / (double) rs.getInt(3))));
                 playerReportList.add(cb);
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
 
         return playerReportList;
@@ -127,10 +127,10 @@ public class ReportDao {
                 cb.setSuccessrate(df.format(((double) rs.getInt(5) / (double) rs.getInt(4))));
 
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
 
         return cb;
@@ -154,10 +154,10 @@ public class ReportDao {
                 cb.setSuccessrate(df.format(((double) rs.getInt(4) / (double) rs.getInt(3))));
                 playerReportList.add(cb);
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
 
         return playerReportList;
@@ -183,10 +183,10 @@ public class ReportDao {
                 cb.setSuccessrate(df.format(((double) rs.getInt(4) / (double) rs.getInt(3))));
                 playerReportList.add(cb);
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
 
         return playerReportList;
@@ -303,9 +303,10 @@ public class ReportDao {
                 p.setMatchesPlayed(rs1.getInt(1));
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return p;
 
@@ -348,6 +349,8 @@ public class ReportDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return skill;
     }
@@ -382,6 +385,8 @@ public class ReportDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return list;
     }
@@ -465,9 +470,10 @@ public class ReportDao {
 
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return p;
 
@@ -485,9 +491,10 @@ public class ReportDao {
                 id.add(rs1.getInt(1));
 
             }
-            db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return id;
     }
@@ -505,9 +512,10 @@ public class ReportDao {
                 id = rs1.getInt(1);
 
             }
-            db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return id;
     }
@@ -570,10 +578,10 @@ public class ReportDao {
                 p.setPlayerName(rs1.getString(1));
                 p.setMatchPhase(rs1.getString(2));
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return p;
 
@@ -594,6 +602,8 @@ public class ReportDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return p;
     }
@@ -659,10 +669,10 @@ public class ReportDao {
                 p.setAttemptRatePerc(p.getAttemptRate() == 0 ? "0%" : df.format(p.getAttemptRate()));
                 list.add(p);
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return list;
 
@@ -695,6 +705,8 @@ public class ReportDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return skill;
     }
@@ -787,10 +799,10 @@ public class ReportDao {
                 list.add(p);
 
             }
-
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return list;
 
@@ -813,9 +825,10 @@ public class ReportDao {
                 skillZoneWiseReport.setRating(rs.getInt(2));
                 listZoneDetails.add(skillZoneWiseReport);
             }
-            db.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return listZoneDetails;
     }
@@ -839,10 +852,10 @@ public class ReportDao {
                 ppb.setWonby(rs1.getInt(7));
                 list.add(ppb);
             }
-            db.closeConnection(con);
-
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return list;
     }
@@ -867,10 +880,10 @@ public class ReportDao {
                 }
                 techniqueMap.put(skillDescCriteriaPoint.getAbbreviation(), sf);
             }
-            db.closeConnection(con);
-
         } catch (SQLException ex) {
             Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return techniqueMap;
     }
@@ -962,9 +975,10 @@ public class ReportDao {
                 list.add(playerScores);
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return list;
 
@@ -998,6 +1012,8 @@ public class ReportDao {
 
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return sf;
     }
