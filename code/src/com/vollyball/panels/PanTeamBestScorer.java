@@ -116,7 +116,11 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         });
     }
 
-    public void setRow(Team Team) {
+    public void setRow() {
+
+    }
+
+    public void setRowForScore(Team Team) {
         List<PlayerScores> playerScoresList = new ArrayList<>();
 
         for (int i = dm.getRowCount() - 1; i >= 0; i--) {
