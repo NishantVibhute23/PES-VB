@@ -852,7 +852,7 @@ public class MatchDao {
             if (team2 != 0) {
                 query = query + " and team2=" + team2;
             }
-            if (!phase.equalsIgnoreCase("Select")) {
+            if (!phase.equalsIgnoreCase("phase")) {
                 query = query + " and phase='" + phase + "'";
             }
             query = query + " order by date asc; ";

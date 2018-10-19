@@ -9,6 +9,8 @@ import com.vollyball.bean.MatchBean;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dialog.CreateMatchEvaluationDialog;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.LinkedHashMap;
 
 /**
@@ -182,24 +184,28 @@ public class PanSelectTeam extends javax.swing.JPanel {
     private void lblTeam1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTeam1MouseClicked
         // TODO add your handling code here:
         int matchEvaluationTeamId = matchDao.getMatchEvaluationTeamId(matchId, team1id);
-
-        CreateMatchEvaluationDialog obj = new CreateMatchEvaluationDialog();
-        obj.setMatchId(team1id, team2id, evaluationType, homeTeam, oppteam, matchId, matchEvaluationTeamId);
-        obj.init();
-        obj.show();
-
+        set(team1id, team2id, homeTeam, oppteam, matchEvaluationTeamId);
     }//GEN-LAST:event_lblTeam1MouseClicked
 
     private void lblTeam2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTeam2MouseClicked
         // TODO add your handling code here:
         int matchEvaluationTeamId = matchDao.getMatchEvaluationTeamId(matchId, team2id);
-        CreateMatchEvaluationDialog obj = new CreateMatchEvaluationDialog();
-        obj.setMatchId(team2id, team1id, evaluationType, oppteam, homeTeam, matchId, matchEvaluationTeamId);
-        obj.init();
-        obj.show();
-
+        set(team2id, team1id, oppteam, homeTeam, matchEvaluationTeamId);
     }//GEN-LAST:event_lblTeam2MouseClicked
 
+    public void set(int homeId, int oppId,String homeTeam,String oppteam, int matchEvaluationTeamId)
+    {
+        Controller.panMatchEvaluationHome = new PanMatchEvaluationHome(homeId, oppId, evaluationType, homeTeam, oppteam, matchId, matchEvaluationTeamId);
+        
+         Controller.panCompetitionReportHome.panData.removeAll();
+                            Controller.panCompetitionReportHome.panData.add(Controller.panMatchEvaluationHome, BorderLayout.CENTER);
+
+                            Controller.panCompetitionReportHome.panData.validate();
+                            Controller.panCompetitionReportHome.panData.repaint();
+
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

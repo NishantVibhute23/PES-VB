@@ -5,11 +5,16 @@
  */
 package com.vollyball.frames;
 
+import com.vollyball.bean.CompetitionBean;
 import com.vollyball.controller.Controller;
 import com.vollyball.dialog.CreateSettingDialog;
 import com.vollyball.dialog.CreateUserDialog;
 import com.vollyball.panels.PanCompetitionList;
+import com.vollyball.panels.PanCompetitionReportHome;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -32,9 +37,13 @@ public class FrmDashboard extends javax.swing.JFrame {
         }
         panMyProfile.setVisible(false);
         Controller.panCompetitionList = new PanCompetitionList();
+        
         panContent.add(Controller.panCompetitionList, BorderLayout.CENTER);
+        lblSecond.setVisible(false);
+        lblThird.setVisible(false);
         this.validate();
         this.repaint();
+        
     }
 
     /**
@@ -49,6 +58,8 @@ public class FrmDashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
+        lblSecond = new javax.swing.JLabel();
+        lblThird = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         panContent = new javax.swing.JPanel();
@@ -65,9 +76,16 @@ public class FrmDashboard extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("PES-VB");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
             }
         });
 
@@ -81,6 +99,35 @@ public class FrmDashboard extends javax.swing.JFrame {
             }
         });
 
+        lblSecond.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        lblSecond.setForeground(new java.awt.Color(255, 255, 255));
+        lblSecond.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/arraowright.png"))); // NOI18N
+        lblSecond.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSecond.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSecondMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSecondMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSecondMouseExited(evt);
+            }
+        });
+
+        lblThird.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        lblThird.setForeground(new java.awt.Color(255, 255, 255));
+        lblThird.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/arraowright.png"))); // NOI18N
+        lblThird.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThird.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblThirdMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblThirdMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -88,7 +135,11 @@ public class FrmDashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 633, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblSecond)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblThird, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 577, Short.MAX_VALUE)
                 .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -96,10 +147,16 @@ public class FrmDashboard extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblName))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblThird, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblName)))
                 .addGap(10, 10, 10))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSecond, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(251, 205, 1));
@@ -117,7 +174,7 @@ public class FrmDashboard extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(panContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panContent, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         jPanel4Layout.setVerticalGroup(
@@ -229,7 +286,7 @@ public class FrmDashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 465, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 467, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -241,6 +298,8 @@ public class FrmDashboard extends javax.swing.JFrame {
         Controller.panCompetitionList = new PanCompetitionList();
 
         Controller.frmDashBoard.panMyProfile.setVisible(false);
+        Controller.frmDashBoard.lblSecond.setVisible(false);
+        lblThird.setVisible(false);
         panContent.add(Controller.panCompetitionList, BorderLayout.CENTER);
 
         this.validate();
@@ -272,6 +331,54 @@ public class FrmDashboard extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel5MouseClicked
 
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        // TODO add your handling code here:
+        jLabel1.setForeground(Color.ORANGE);
+        
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        // TODO add your handling code here:
+            jLabel1.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void lblSecondMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSecondMouseEntered
+        // TODO add your handling code here:
+          lblSecond.setForeground(Color.ORANGE);
+    }//GEN-LAST:event_lblSecondMouseEntered
+
+    private void lblSecondMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSecondMouseExited
+        // TODO add your handling code here:
+          lblSecond.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lblSecondMouseExited
+
+    private void lblThirdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThirdMouseEntered
+        // TODO add your handling code here:
+        
+         lblThird.setForeground(Color.ORANGE);
+    }//GEN-LAST:event_lblThirdMouseEntered
+
+    private void lblThirdMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThirdMouseExited
+        // TODO add your handling code here:
+        lblThird.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lblThirdMouseExited
+
+    private void lblSecondMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSecondMouseClicked
+        // TODO add your handling code here:
+ 
+
+                            Controller.panCompetitionReportHome = new PanCompetitionReportHome(Controller.competitionBean );
+                            Controller.competitionId = Controller.competitionBean .getId();
+                            Dimension dim = Controller.frmDashBoard.panContent.getSize();
+                            Controller.panCompetitionList.setVisible(false);
+                            Controller.frmDashBoard.panContent.removeAll();
+//        Controller.panComptitionHome.setBounds(0, 0, 800, 686);
+                            Controller.frmDashBoard.panContent.add(Controller.panCompetitionReportHome, BorderLayout.CENTER);
+                            Controller.frmDashBoard.panContent.validate();
+                            Controller.frmDashBoard.panContent.repaint();
+                                lblThird.setVisible(false);
+    }//GEN-LAST:event_lblSecondMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -282,6 +389,8 @@ public class FrmDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     public javax.swing.JLabel lblName;
+    public javax.swing.JLabel lblSecond;
+    public javax.swing.JLabel lblThird;
     public javax.swing.JPanel panContent;
     public javax.swing.JPanel panMyProfile;
     // End of variables declaration//GEN-END:variables
