@@ -8,6 +8,9 @@ package com.vollyball.util;
 import com.vollyball.dao.ReportDao;
 import java.awt.Color;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -214,6 +217,22 @@ public class CommonUtil {
         }
         return false;
 
+    }
+
+    public static String encrypt(String code) {
+        String hash = "";
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hashInBytes = md.digest(code.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashInBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            hash = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return hash;
     }
 
 }

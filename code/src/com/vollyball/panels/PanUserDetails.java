@@ -52,6 +52,10 @@ public class PanUserDetails extends javax.swing.JPanel {
         txtConfPass = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        lblUserValidate = new javax.swing.JLabel();
+        lblEmailValidate = new javax.swing.JLabel();
+        lblPasswordValidate = new javax.swing.JLabel();
+        lblValidateConfPass = new javax.swing.JLabel();
 
         panActivate.setBackground(new java.awt.Color(4, 139, 168));
 
@@ -217,22 +221,35 @@ public class PanUserDetails extends javax.swing.JPanel {
                 .addGap(5, 5, 5))
         );
 
+        lblUserValidate.setFont(new java.awt.Font("Times New Roman", 0, 10)); // NOI18N
+
+        lblEmailValidate.setFont(new java.awt.Font("Times New Roman", 0, 10)); // NOI18N
+
+        lblPasswordValidate.setFont(new java.awt.Font("Times New Roman", 0, 10)); // NOI18N
+
+        lblValidateConfPass.setFont(new java.awt.Font("Times New Roman", 0, 10)); // NOI18N
+
         javax.swing.GroupLayout panActivateLayout = new javax.swing.GroupLayout(panActivate);
         panActivate.setLayout(panActivateLayout);
         panActivateLayout.setHorizontalGroup(
             panActivateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panActivateLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addGroup(panActivateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel4)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panActivateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panActivateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel4)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblUserValidate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmailValidate, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPasswordValidate, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblValidateConfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(610, Short.MAX_VALUE))
         );
         panActivateLayout.setVerticalGroup(
@@ -242,21 +259,29 @@ public class PanUserDetails extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
+                .addComponent(lblUserValidate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEmailValidate)
+                .addGap(5, 5, 5)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
+                .addComponent(lblPasswordValidate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblValidateConfPass)
+                .addGap(11, 11, 11)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -273,15 +298,61 @@ public class PanUserDetails extends javax.swing.JPanel {
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
-        UserBean ub = Controller.userBean;
-        ub.setUserName(txtUserName.getText());
-        ub.setPassword(new String(txtPassword.getPassword()));
-        ub.setEmailId(txtEmail.getText());
 
-        Controller.panLoading = new panLoading();
-        Controller.panUserDetails.setVisible(false);
-        FrmRegister.panDetails.add(Controller.panLoading, BorderLayout.CENTER);
+        int count = validateForm();
+        if (count == 0) {
+            UserBean ub = Controller.userBean;
+            ub.setUserName(txtUserName.getText());
+            ub.setPassword(new String(txtPassword.getPassword()));
+            ub.setEmailId(txtEmail.getText());
+
+            Controller.panLoading = new panLoading();
+            Controller.panUserDetails.setVisible(false);
+            FrmRegister.panDetails.add(Controller.panLoading, BorderLayout.CENTER);
+        }
+
     }//GEN-LAST:event_jPanel2MouseClicked
+
+    public int validateForm() {
+        int count = 0;
+        lblUserValidate.setText("");
+        lblPasswordValidate.setText("");
+        lblEmailValidate.setText("");
+        lblValidateConfPass.setText("");
+        if (txtUserName.getText().equals("")) {
+            lblUserValidate.setText("UserName cannot be Blank");
+            count++;
+        }
+
+        if (txtPassword.getText().equals("")) {
+            lblPasswordValidate.setText("Password cannot be Blank");
+//            msg = msg + "Password cannot be Blank\n";
+            count++;
+        }
+        if (txtEmail.getText().equals("")) {
+            lblEmailValidate.setText("E-Mail cannot be Blank");
+//            msg = msg + "E-Mail cannot be Blank\n";
+            count++;
+        }
+        if (!txtEmail.getText().equals("")) {
+            String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+            Boolean b = txtEmail.getText().matches(EMAIL_REGEX);
+            if (!b) {
+                lblEmailValidate.setText("E-Mail is Incorrect");
+//            msg = msg + "E-Mail is Incorrect\n";
+                count++;
+            }
+
+        }
+        if (!txtPassword.equals(txtConfPass)) {
+            lblValidateConfPass.setText("Password Didn't match");
+            count++;
+        }
+
+        return count;
+
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -296,6 +367,10 @@ public class PanUserDetails extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JLabel lblEmailValidate;
+    private javax.swing.JLabel lblPasswordValidate;
+    private javax.swing.JLabel lblUserValidate;
+    private javax.swing.JLabel lblValidateConfPass;
     private javax.swing.JPanel panActivate;
     private javax.swing.JPasswordField txtConfPass;
     private javax.swing.JTextField txtEmail;

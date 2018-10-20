@@ -9,6 +9,7 @@ import com.vollyball.bean.UserBean;
 import com.vollyball.controller.Controller;
 import com.vollyball.enums.SubscriptionCodeEnum;
 import com.vollyball.frames.FrmRegister;
+import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -218,45 +219,31 @@ public class PanActivate extends javax.swing.JPanel {
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
         // TODO add your handling code here:
-       
+
 
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-         UserBean ub = Controller.userBean;
+        UserBean ub = Controller.userBean;
         ub.setCode(txtCode.getText());
         boolean isValid = true;
-        if(!"".equals(txtCode.getText()))
-        {
-            
-             try {
-                 MessageDigest md = MessageDigest.getInstance("MD5");
-                 byte[] hashInBytes = md.digest(txtCode.getText().getBytes(StandardCharsets.UTF_8));
-                 StringBuilder sb = new StringBuilder();
-                 for (byte b : hashInBytes) {
-                     sb.append(String.format("%02x", b));
-                 }
-                 String code = sb.toString();
-                 
-                 isValid= SubscriptionCodeEnum.checkCode(code);
-                 if(isValid)
-                 {
-                     ub.setIsValid(1);
-                 }else{
-                     lblMsg.setText("*Invalid product Key");
-                 } } catch (NoSuchAlgorithmException ex) {
-                 Logger.getLogger(PanActivate.class.getName()).log(Level.SEVERE, null, ex);
-             }
-                        
-        }else{
+        if (!"".equals(txtCode.getText())) {
+            String code = CommonUtil.encrypt(txtCode.getText());
+            isValid = SubscriptionCodeEnum.checkCode(code);
+            if (isValid) {
+                ub.setIsValid(1);
+            } else {
+                lblMsg.setText("*Invalid product Key");
+            }
+
+        } else {
             ub.setIsValid(0);
         }
-        if(isValid)
-        {
-        Controller.panUserDetails = new PanUserDetails();
-        Controller.panActivate.setVisible(false);
-        FrmRegister.panDetails.add(Controller.panUserDetails, BorderLayout.CENTER);
+        if (isValid) {
+            Controller.panUserDetails = new PanUserDetails();
+            Controller.panActivate.setVisible(false);
+            FrmRegister.panDetails.add(Controller.panUserDetails, BorderLayout.CENTER);
         }
     }//GEN-LAST:event_jLabel5MouseClicked
 
