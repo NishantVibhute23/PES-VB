@@ -36,9 +36,12 @@ import com.vollyball.training.dialog.CreateTraineeDailog;
 import com.vollyball.training.panel.PanBatchList;
 import com.vollyball.training.panel.PanBatchTraineeList;
 import com.vollyball.util.CommonUtil;
-import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -80,16 +83,14 @@ public class Controller {
     public static CreateTraineeDailog createTraineeDailog;
     public static String databaseIpAdd;
     public static CompetitionBean competitionBean;
-    
-   
-    public static void main(String args[]) {
+    public static FrmLogin frmLogin;
 
-        new CommonUtil();
-        new FrmLogin();
-//        String path = System.getProperty("user.home") + File.separator + "Documents";
-//        path += File.separator + CommonUtil.getResourceProperty("folder.name");
-////        File file = new File(CommonUtil.getResourceProperty("db.name"));
-//        File file = new File(path + File.separator + CommonUtil.getResourceProperty("db.name"));
+    public static void main(String args[]) {
+        
+        
+            new CommonUtil();
+            frmLogin = new FrmLogin();
+
 
     }
 

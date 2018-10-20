@@ -59,10 +59,15 @@ public class DbUtil {
         Statement statement = null;
         try {
             String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
+            url = DATABASE_URL + "" + dbName;
             DriverManager.setLoginTimeout(23);
-            con = DriverManager.getConnection(DATABASE_URL, "root", "root");
-            String sql_stmt = "CREATE USER 'root'@'%' IDENTIFIED BY 'root';\n"
-                    + "GRANT ALL PRIVILEGES ON vollyball.* TO 'root'@'%' WITH GRANT OPTION;";
+            con = DriverManager.getConnection(url, "root", "root");
+            String sql_stmt = "CREATE USER 'root'@'%' IDENTIFIED BY 'root'";
+                 
+            statement = con.createStatement();
+            statement.execute(sql_stmt);
+            
+            sql_stmt = "GRANT ALL PRIVILEGES ON vollyball.* TO 'root'@'%' WITH GRANT OPTION";
             statement = con.createStatement();
             statement.execute(sql_stmt);
 

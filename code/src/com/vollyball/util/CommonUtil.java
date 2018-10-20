@@ -189,7 +189,26 @@ public class CommonUtil {
 
     public static boolean getDaysLeft(String createdOn) {
         try {
-            Date sf = new SimpleDateFormat("yyyy-MM-dd").parse(createdOn);
+
+            DateFormat formatter;
+            Date joinedOn, currentDate;
+            formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            joinedOn = (Date) formatter.parse(createdOn);
+            currentDate = new Date();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Calendar c = Calendar.getInstance();
+            c.setTime(joinedOn); // Now use today date.
+            c.add(Calendar.DATE, 7); // Adding 7 days
+
+            Date expiry = c.getTime();
+
+            if (currentDate.compareTo(expiry) <= 0) {
+                return true;
+            } else {
+                return false;
+            }
+
         } catch (ParseException ex) {
             Logger.getLogger(CommonUtil.class.getName()).log(Level.SEVERE, null, ex);
         }

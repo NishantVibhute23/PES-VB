@@ -306,7 +306,7 @@ public class Setup extends Thread {
             preparedStmt.setString(1, ub.getUserName());
             preparedStmt.setString(2, ub.getEmailId());
             preparedStmt.setString(3, ub.getCode());
-            preparedStmt.setInt(4, 1);
+            preparedStmt.setInt(4, ub.getIsValid());
             preparedStmt.setString(5, "");
             preparedStmt.setString(6, ub.getPassword());
             resp = preparedStmt.executeUpdate();

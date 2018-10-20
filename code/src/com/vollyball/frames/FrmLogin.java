@@ -10,6 +10,7 @@ import static com.vollyball.controller.Controller.databaseIpAdd;
 import static com.vollyball.controller.Controller.frmMain;
 import com.vollyball.dao.LoginDao;
 import com.vollyball.db.DbUtil;
+import com.vollyball.dialog.SubscriptionDialog;
 import com.vollyball.util.CommonUtil;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -29,6 +30,9 @@ public class FrmLogin extends javax.swing.JFrame {
 
     DbUtil db = new DbUtil();
     String item = "  PC - 1";
+    public SubscriptionDialog sd = null;
+
+    
 
     /**
      * Creates new form FrmLogin
@@ -406,17 +410,28 @@ public class FrmLogin extends javax.swing.JFrame {
 
                 if (i != 0) {
                     Controller.userBean = lg.getUserDetails(user);
-                    CommonUtil.getDaysLeft(Controller.userBean.getCreatedOn());
-//            JOptionPane.showMessageDialog(this, "Success");
-                    this.dispose();
-                    Controller.frmDashBoard = new FrmDashboard();
-//            System.out.println("name"+Controller.userBean.getUserName());
-                    Controller.frmDashBoard.lblName.setText(Controller.userBean.getUserName().equals("") || Controller.userBean.getUserName() == null ? "User" : Controller.userBean.getUserName());
+                    boolean isValid = true,isInSubscription=false;
+                    if (Controller.userBean.getIsValid() == 0) {
+                        isValid = CommonUtil.getDaysLeft(Controller.userBean.getCreatedOn());
+                        this.dispose();
+                        isInSubscription = true;
+                         sd = new SubscriptionDialog();
+                        sd.init(isValid);
+                        sd.show();
+                    }
 
+                    if (isValid && !isInSubscription) {
+                        this.dispose();
+                        Controller.frmDashBoard = new FrmDashboard();
+                        Controller.frmDashBoard.lblName.setText(Controller.userBean.getUserName().equals("") || Controller.userBean.getUserName() == null ? "User" : Controller.userBean.getUserName());
+                    } else {
+
+                    }
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed");
                 }
             } else {
+                this.dispose();
                 frmMain = new FrmRegister();
             }
         } else {
