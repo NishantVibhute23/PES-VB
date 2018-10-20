@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 public class FrmLogin extends javax.swing.JFrame {
 
     DbUtil db = new DbUtil();
+    String item = "  PC - 1";
 
     /**
      * Creates new form FrmLogin
@@ -387,7 +388,13 @@ public class FrmLogin extends javax.swing.JFrame {
         LoginDao lg = new LoginDao();
         String user = txtUser.getText();
         String pass = new String(txtPass.getPassword());
-        Controller.databaseIpAdd = txtIpAddr.getText();
+
+        if (item.equalsIgnoreCase("  PC - 2")) {
+            Controller.databaseIpAdd = txtIpAddr.getText();
+        } else {
+            Controller.databaseIpAdd = "localhost";
+        }
+
         if (db.checkMysqlInstalled()) {
             if (db.checkDatabaseExist()) {
 
@@ -422,7 +429,9 @@ public class FrmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             String item = (String) evt.getItem();
+            this.item = item;
             if (item.equalsIgnoreCase("  PC - 2")) {
+
                 lblIpAdd.setText("PC - 1 IP");
                 txtIpAddr.setText("");
             } else {

@@ -7,7 +7,11 @@
             <file>file:/H:/vollyball/PES-VB/code/src/com/vollyball/bean/Player.java</file>
             <file>file:/H:/vollyball/PES-VB/code/src/com/vollyball/panels/PanEvaluationRotation.java</file>
             <file>file:/H:/vollyball/PES-VB/code/src/com/vollyball/panels/PanEvaluation.java</file>
+            <file>file:/H:/vollyball/PES-VB/code/src/com/vollyball/panels/PanTeamBestScorer.java</file>
+            <file>file:/H:/vollyball/PES-VB/code/src/com/vollyball/dao/CompetitionDao.java</file>
             <file>file:/H:/vollyball/PES-VB/code/src/com/vollyball/dao/TeamDao.java</file>
+            <file>file:/H:/vollyball/PES-VB/code/src/com/vollyball/frames/FrmLogin.java</file>
+            <file>file:/H:/vollyball/PES-VB/code/src/com/vollyball/dao/LoginDao.java</file>
             <file>file:/H:/vollyball/PES-VB/code/src/com/vollyball/properties/resource.properties</file>
             <file>file:/H:/vollyball/PES-VB/code/src/com/vollyball/db/DbUtil.java</file>
         </group>
