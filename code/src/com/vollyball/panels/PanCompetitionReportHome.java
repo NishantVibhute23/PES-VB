@@ -14,6 +14,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,6 +33,7 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
     LinkedHashMap<Integer, PlayerReportBean> playerId = new LinkedHashMap<Integer, PlayerReportBean>();
     String skillName;
     int skillId;
+    LinkedHashMap<JLabel, JPanel> mapMenu = new LinkedHashMap<JLabel, JPanel>();
 
     /**
      * Creates new form PanCompReportHome
@@ -39,23 +42,32 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
         initComponents();
 
         this.cb = cb;
-        lblComHeading.setText(cb.getName());
-        panPlayer.setBackground(new Color(255, 255, 255));
-        panDashboard.setBackground(new Color(57, 74, 108));
-        panMatches.setBackground(new Color(255, 255, 255));
-        panMatches1.setBackground(new Color(255, 255, 255));
 
-        lblDashBorad.setForeground(Color.WHITE);
-        lblMatch.setForeground(new Color(57, 74, 108));
-        lblTeam.setForeground(new Color(57, 74, 108));
-        lblPlayer.setForeground(new Color(57, 74, 108));
+        
+        Controller.frmDashBoard.lblSecond.setText(cb.getName());
+        
+        Controller.frmDashBoard.lblSecond.setVisible(true);
+        mapMenu.put(lblDashBorad, panDashboard);
+          mapMenu.put(lblMatch, panMatches);
+            mapMenu.put(lblTeam, panMatches1);
+              mapMenu.put(lblPlayer, panPlayer);
+        
+//        panPlayer.setBackground(new Color(255, 255, 255));
+//        panDashboard.setBackground(new Color(57, 74, 108));
+//        panMatches.setBackground(new Color(255, 255, 255));
+//        panMatches1.setBackground(new Color(255, 255, 255));
+//
+//        lblDashBorad.setForeground(Color.WHITE);
+//        lblMatch.setForeground(new Color(57, 74, 108));
+//        lblTeam.setForeground(new Color(57, 74, 108));
+//        lblPlayer.setForeground(new Color(57, 74, 108));
 
         PanDashboard p = new PanDashboard(cb);
         panReports.removeAll();
         panReports.add(p, BorderLayout.CENTER);
         panReports.validate();
         panReports.repaint();
-        lblBack.setText("");
+
 
     }
 
@@ -68,9 +80,6 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        lblComHeading = new javax.swing.JLabel();
-        lblBack = new javax.swing.JLabel();
         panData = new javax.swing.JPanel();
         panReports = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -83,41 +92,6 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
         panPlayer = new javax.swing.JPanel();
         lblPlayer = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        lblComHeading.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        lblComHeading.setForeground(new java.awt.Color(244, 195, 1));
-        lblComHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblComHeading.setText("jLabel1");
-
-        lblBack.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblBack.setForeground(new java.awt.Color(51, 255, 51));
-        lblBack.setText("Back");
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBackMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblComHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(lblComHeading, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                .addComponent(lblBack))
-        );
-
         panData.setBackground(new java.awt.Color(255, 255, 255));
         panData.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panData.setLayout(new java.awt.BorderLayout());
@@ -126,11 +100,11 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
         panReports.setLayout(new java.awt.BorderLayout());
         panData.add(panReports, java.awt.BorderLayout.CENTER);
 
-        panMatches.setBackground(new java.awt.Color(255, 255, 255));
-        panMatches.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panMatches.setBackground(new java.awt.Color(57, 74, 108));
+        panMatches.setForeground(new java.awt.Color(255, 255, 255));
 
         lblMatch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblMatch.setForeground(new java.awt.Color(57, 74, 108));
+        lblMatch.setForeground(new java.awt.Color(255, 255, 255));
         lblMatch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMatch.setText("MATCHES");
         lblMatch.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -145,18 +119,18 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
             panMatchesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panMatchesLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(lblMatch, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
+                .addComponent(lblMatch, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addGap(1, 1, 1))
         );
         panMatchesLayout.setVerticalGroup(
             panMatchesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblMatch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        panMatches1.setBackground(new java.awt.Color(255, 255, 255));
-        panMatches1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panMatches1.setBackground(new java.awt.Color(57, 74, 108));
 
         lblTeam.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblTeam.setForeground(new java.awt.Color(57, 74, 108));
+        lblTeam.setForeground(new java.awt.Color(255, 255, 255));
         lblTeam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTeam.setText("TEAM");
         lblTeam.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -169,7 +143,7 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
         panMatches1.setLayout(panMatches1Layout);
         panMatches1Layout.setHorizontalGroup(
             panMatches1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTeam, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+            .addComponent(lblTeam, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
         );
         panMatches1Layout.setVerticalGroup(
             panMatches1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +151,6 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
         );
 
         panDashboard.setBackground(new java.awt.Color(255, 255, 255));
-        panDashboard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblDashBorad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblDashBorad.setForeground(new java.awt.Color(57, 74, 108));
@@ -193,18 +166,17 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
         panDashboard.setLayout(panDashboardLayout);
         panDashboardLayout.setHorizontalGroup(
             panDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblDashBorad, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+            .addComponent(lblDashBorad, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
         );
         panDashboardLayout.setVerticalGroup(
             panDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblDashBorad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        panPlayer.setBackground(new java.awt.Color(255, 255, 255));
-        panPlayer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panPlayer.setBackground(new java.awt.Color(57, 74, 108));
 
         lblPlayer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblPlayer.setForeground(new java.awt.Color(57, 74, 108));
+        lblPlayer.setForeground(new java.awt.Color(255, 255, 255));
         lblPlayer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPlayer.setText("PLAYER");
         lblPlayer.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,7 +189,9 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
         panPlayer.setLayout(panPlayerLayout);
         panPlayerLayout.setHorizontalGroup(
             panPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPlayerLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(lblPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
         );
         panPlayerLayout.setVerticalGroup(
             panPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,28 +227,26 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panData, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
+                .addComponent(panData, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblMatchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMatchMouseClicked
         // TODO add your handling code here:
-        panMatches.setBackground(new Color(57, 74, 108));
-        panPlayer.setBackground(new Color(255, 255, 255));
-        panMatches1.setBackground(new Color(255, 255, 255));
-        panDashboard.setBackground(new Color(255, 255, 255));
-        lblMatch.setForeground(Color.WHITE);
-        lblPlayer.setForeground(new Color(57, 74, 108));
-        lblTeam.setForeground(new Color(57, 74, 108));
-        lblDashBorad.setForeground(new Color(57, 74, 108));
+//        panMatches.setBackground(new Color(57, 74, 108));
+//        panPlayer.setBackground(new Color(255, 255, 255));
+//        panMatches1.setBackground(new Color(255, 255, 255));
+//        panDashboard.setBackground(new Color(255, 255, 255));
+//        lblMatch.setForeground(Color.WHITE);
+//        lblPlayer.setForeground(new Color(57, 74, 108));
+//        lblTeam.setForeground(new Color(57, 74, 108));
+//        lblDashBorad.setForeground(new Color(57, 74, 108));
+changeColor(evt);
         Controller.panMatchReport = new PanMatchReport(cb);
         panReports.removeAll();
         panReports.add(Controller.panMatchReport, BorderLayout.CENTER);
@@ -285,15 +257,16 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
 
     private void lblTeamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTeamMouseClicked
         // TODO add your handling code here:
-        panMatches1.setBackground(new Color(57, 74, 108));
-        panPlayer.setBackground(new Color(255, 255, 255));
-        panMatches.setBackground(new Color(255, 255, 255));
-        panDashboard.setBackground(new Color(255, 255, 255));
-
-        lblTeam.setForeground(Color.WHITE);
-        lblMatch.setForeground(new Color(57, 74, 108));
-        lblPlayer.setForeground(new Color(57, 74, 108));
-        lblDashBorad.setForeground(new Color(57, 74, 108));
+//        panMatches1.setBackground(new Color(57, 74, 108));
+//        panPlayer.setBackground(new Color(255, 255, 255));
+//        panMatches.setBackground(new Color(255, 255, 255));
+//        panDashboard.setBackground(new Color(255, 255, 255));
+//
+//        lblTeam.setForeground(Color.WHITE);
+//        lblMatch.setForeground(new Color(57, 74, 108));
+//        lblPlayer.setForeground(new Color(57, 74, 108));
+//        lblDashBorad.setForeground(new Color(57, 74, 108));
+changeColor(evt);
         PanTeamSkillWiseReport p = new PanTeamSkillWiseReport(cb);
         panReports.removeAll();
         panReports.add(p, BorderLayout.CENTER);
@@ -303,16 +276,17 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
 
     private void lblPlayerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPlayerMouseClicked
         // TODO add your handling code here:
-        panPlayer.setBackground(new Color(57, 74, 108));
-        panMatches.setBackground(new Color(255, 255, 255));
-        panMatches1.setBackground(new Color(255, 255, 255));
-        panDashboard.setBackground(new Color(255, 255, 255));
+//        panPlayer.setBackground(new Color(57, 74, 108));
+//        panMatches.setBackground(new Color(255, 255, 255));
+//        panMatches1.setBackground(new Color(255, 255, 255));
+//        panDashboard.setBackground(new Color(255, 255, 255));
+//
+//        lblPlayer.setForeground(Color.WHITE);
+//        lblMatch.setForeground(new Color(57, 74, 108));
+//        lblTeam.setForeground(new Color(57, 74, 108));
+//        lblDashBorad.setForeground(new Color(57, 74, 108));
 
-        lblPlayer.setForeground(Color.WHITE);
-        lblMatch.setForeground(new Color(57, 74, 108));
-        lblTeam.setForeground(new Color(57, 74, 108));
-        lblDashBorad.setForeground(new Color(57, 74, 108));
-
+        changeColor(evt);
         PanPlayerSkillWiseReport p = new PanPlayerSkillWiseReport(cb);
         panReports.removeAll();
         panReports.add(p, BorderLayout.CENTER);
@@ -324,16 +298,17 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
     private void lblDashBoradMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashBoradMouseClicked
         // TODO add your handling code here:
         // TODO add your handling code here:
-        panPlayer.setBackground(new Color(255, 255, 255));
-        panDashboard.setBackground(new Color(57, 74, 108));
-        panMatches.setBackground(new Color(255, 255, 255));
-        panMatches1.setBackground(new Color(255, 255, 255));
+//        panPlayer.setBackground(new Color(255, 255, 255));
+//        panDashboard.setBackground(new Color(57, 74, 108));
+//        panMatches.setBackground(new Color(255, 255, 255));
+//        panMatches1.setBackground(new Color(255, 255, 255));
+//
+//        lblDashBorad.setForeground(Color.WHITE);
+//        lblMatch.setForeground(new Color(57, 74, 108));
+//        lblTeam.setForeground(new Color(57, 74, 108));
+//        lblPlayer.setForeground(new Color(57, 74, 108));
 
-        lblDashBorad.setForeground(Color.WHITE);
-        lblMatch.setForeground(new Color(57, 74, 108));
-        lblTeam.setForeground(new Color(57, 74, 108));
-        lblPlayer.setForeground(new Color(57, 74, 108));
-
+changeColor(evt);
         PanDashboard p = new PanDashboard(cb);
         panReports.removeAll();
         panReports.add(p, BorderLayout.CENTER);
@@ -341,38 +316,25 @@ public class PanCompetitionReportHome extends javax.swing.JPanel {
         panReports.repaint();
     }//GEN-LAST:event_lblDashBoradMouseClicked
 
-    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
-        // TODO add your handling code here:
-        Controller.panCompetitionReportHome = new PanCompetitionReportHome(cb);
-        Controller.competitionId = cb.getId();
+    public void changeColor(java.awt.event.MouseEvent evt) {
+        JLabel lblClicked = (JLabel) evt.getSource();
 
-        Controller.panCompetitionList.setVisible(false);
-        Controller.frmDashBoard.panContent.removeAll();
-//        Controller.panComptitionHome.setBounds(0, 0, 800, 686);
-        Controller.frmDashBoard.panContent.add(Controller.panCompetitionReportHome, BorderLayout.CENTER);
-        Controller.frmDashBoard.panContent.validate();
-        Controller.frmDashBoard.panContent.repaint();
+        for (Map.Entry<JLabel, JPanel> entry : mapMenu.entrySet()) {
 
-        panMatches.setBackground(new Color(57, 74, 108));
-        panPlayer.setBackground(new Color(255, 255, 255));
-        panMatches1.setBackground(new Color(255, 255, 255));
-        panDashboard.setBackground(new Color(255, 255, 255));
-        lblMatch.setForeground(Color.WHITE);
-        lblPlayer.setForeground(new Color(57, 74, 108));
-        lblTeam.setForeground(new Color(57, 74, 108));
-        lblDashBorad.setForeground(new Color(57, 74, 108));
-        Controller.panMatchReport = new PanMatchReport(cb);
-        panReports.removeAll();
-        panReports.add(Controller.panMatchReport, BorderLayout.CENTER);
-        panReports.validate();
-        panReports.repaint();
-    }//GEN-LAST:event_lblBackMouseClicked
+            if (entry.getKey() == lblClicked) {
+                entry.getKey().setForeground(new Color(57, 74, 108));
+                entry.getValue().setBackground(Color.WHITE);
+            } else {
+                entry.getKey().setForeground(Color.WHITE);
+                entry.getValue().setBackground(new Color(57, 74, 108));
 
+            }
+
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    public javax.swing.JLabel lblBack;
-    public javax.swing.JLabel lblComHeading;
     private javax.swing.JLabel lblDashBorad;
     private javax.swing.JLabel lblMatch;
     private javax.swing.JLabel lblPlayer;

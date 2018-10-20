@@ -350,6 +350,8 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
 
                 setBackground(new java.awt.Color(0, 0, 0));
 
+                jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
                 tbPlayersOpp.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
                 tbPlayersOpp.setModel(new javax.swing.table.DefaultTableModel(
                     new Object [][] {
@@ -362,6 +364,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 tbPlayersOpp.setRowHeight(25);
                 jScrollPane1.setViewportView(tbPlayersOpp);
 
+                jPanel2.setBackground(new java.awt.Color(255, 255, 255));
                 jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 78, 108)));
 
                 pos4Opp.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -532,6 +535,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addGap(6, 6, 6))
                 );
 
+                jPanel4.setBackground(new java.awt.Color(255, 255, 255));
                 jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 78, 108)));
 
                 jPanel5.setBackground(new java.awt.Color(54, 78, 108));
@@ -593,6 +597,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addGap(20, 20, 20))
                 );
 
+                lblOpp.setBackground(new java.awt.Color(255, 255, 255));
                 lblOpp.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
                 lblOpp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lblOpp.setText("jLabel5");
@@ -628,6 +633,8 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addContainerGap())
                 );
 
+                jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
                 tbPlayersHome.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
                 tbPlayersHome.setModel(new javax.swing.table.DefaultTableModel(
                     new Object [][] {
@@ -640,6 +647,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 tbPlayersHome.setRowHeight(25);
                 jScrollPane2.setViewportView(tbPlayersHome);
 
+                jPanel7.setBackground(new java.awt.Color(255, 255, 255));
                 jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 78, 108)));
 
                 pos4Home.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -810,6 +818,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addGap(6, 6, 6))
                 );
 
+                jPanel9.setBackground(new java.awt.Color(255, 255, 255));
                 jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 78, 108)));
 
                 jPanel10.setBackground(new java.awt.Color(54, 78, 108));
@@ -931,6 +940,8 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addContainerGap())
                 );
 
+                jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+
                 jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
                 jLabel5.setText("Name Of the Evaluator : ");
 
@@ -955,8 +966,10 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addContainerGap())
                 );
 
+                jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+
                 jPanel14.setBackground(new java.awt.Color(57, 74, 108));
-                jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
                 jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         jPanel14MouseClicked(evt);
@@ -987,7 +1000,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 );
 
                 jPanel15.setBackground(new java.awt.Color(57, 74, 108));
-                jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
                 jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
                 jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -1304,7 +1317,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         ms.setEvaluator(txtEvaluatorName.getText());
         ms.setStart_time("00:00");
         ms.setEnd_time("00:00");
-        ms.setDate("");
+        ms.setDate("1990-01-31");
 
         int id = 0;
         if (type.equals("Update")) {

@@ -194,7 +194,7 @@ public class PanEvaluationTimeout extends javax.swing.JPanel {
         cmbTeam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select" }));
 
         jPanel3.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -274,6 +274,7 @@ public class PanEvaluationTimeout extends javax.swing.JPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));

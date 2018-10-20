@@ -402,19 +402,19 @@ public class PanEditTeam extends javax.swing.JPanel {
         if (txtCoachName.getText().equals("")) {
             msg = msg + "Coach cannot be Blank\n";
         }
-        if (txtAsstCoachName.getText().equals("")) {
-            msg = msg + "Assistant coach cannot be Blank\n";
-        }
-        if (txtrainerName.getText().equals("")) {
-            msg = msg + "Trainer Name cannot be Blank\n";
-        }
-        if (txtanalyzerName.getText().equals("")) {
-            msg = msg + "Analyzer Name cannot be Blank\n";
-        }
-        if (txtmedicalOfficerName.getText().equals("")) {
-            msg = msg + "Medical Officer Name cannot be Blank\n";
-        }
-//      
+//        if (txtAsstCoachName.getText().equals("")) {
+//            msg = msg + "Assistant coach cannot be Blank\n";
+//        }
+//        if (txtrainerName.getText().equals("")) {
+//            msg = msg + "Trainer Name cannot be Blank\n";
+//        }
+//        if (txtanalyzerName.getText().equals("")) {
+//            msg = msg + "Analyzer Name cannot be Blank\n";
+//        }
+//        if (txtmedicalOfficerName.getText().equals("")) {
+//            msg = msg + "Medical Officer Name cannot be Blank\n";
+//        }
+////      
         return msg;
 
     }

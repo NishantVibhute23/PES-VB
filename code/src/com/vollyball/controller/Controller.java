@@ -5,6 +5,7 @@
  */
 package com.vollyball.controller;
 
+import com.vollyball.bean.CompetitionBean;
 import com.vollyball.bean.UserBean;
 import com.vollyball.dialog.CreateCompetitionDialog;
 import com.vollyball.dialog.CreateMatchDialog;
@@ -35,7 +36,9 @@ import com.vollyball.training.dialog.CreateTraineeDailog;
 import com.vollyball.training.panel.PanBatchList;
 import com.vollyball.training.panel.PanBatchTraineeList;
 import com.vollyball.util.CommonUtil;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -76,7 +79,9 @@ public class Controller {
     public static PanEvaluationRally panEvaluationRally;
     public static CreateTraineeDailog createTraineeDailog;
     public static String databaseIpAdd;
-
+    public static CompetitionBean competitionBean;
+    
+   
     public static void main(String args[]) {
 
         new CommonUtil();

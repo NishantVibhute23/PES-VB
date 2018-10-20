@@ -29,7 +29,7 @@ public class DialogEvaluationTimeout {
             this.setNum = setNum;
             this.matchEvaluationTeamId = matchEvaluationTeamId;
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            this.dialog = new JDialog(this.parentFrame, "New Match", true);
+            this.dialog = new JDialog(this.parentFrame, "Timeout", true);
 
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());

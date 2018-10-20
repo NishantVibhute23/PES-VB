@@ -96,13 +96,13 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
                             selectedName = (String) tbReport.getValueAt(selectedRow, 1);
                         }
                         if (selectedName != null) {
-                            if (selectedCol == 10) {
-                                DialogTamDetail createDialogPanMatchWiseReport = new DialogTamDetail();
-                                createDialogPanMatchWiseReport.init(cb.getId(), playerTeamMap.get(selectedName).getId());
-                                tbReport.clearSelection();
-                                createDialogPanMatchWiseReport.show();
-                            }
-                            if (selectedCol == 11) {
+//                            if (selectedCol == 10) {
+//                                DialogTamDetail createDialogPanMatchWiseReport = new DialogTamDetail();
+//                                createDialogPanMatchWiseReport.init(cb.getId(), playerTeamMap.get(selectedName).getId());
+//                                tbReport.clearSelection();
+//                                createDialogPanMatchWiseReport.show();
+//                            }
+                            if (selectedCol == 8) {
                                 Controller.teamDialog = new CreateTeamDialog();
                                 Controller.teamDialog.setValues(cb.getId(), playerTeamMap.get(selectedName).getId());
                                 Controller.teamDialog.init();
@@ -117,6 +117,40 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
     }
 
     public void setRow(Team Team) {
+       List<Team> teamList = td.getTeams(cb.getId());
+        
+        for (int i = dm.getRowCount() - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
+        
+        if (Team == null) {
+                      
+
+            int i = 0;
+            for (Team p : teamList) {
+                
+                Team t = td.getteamDetail(p.getId());
+                Object[] row = {i + 1, t.getName(), t.getShortCode(), t.getCoach(), t.getTrainer(), t.getAsstCoach(), t.getAnalyzer(), t.getMedicalOffice(), new JPanel()};
+                dm.addRow(row);
+                i++;
+            }
+        } else {
+
+            Team t = td.getteamDetail(Team.getId());
+            int i = 0;
+          
+                Object[] row = {i + 1, t.getName(), t.getShortCode(), t.getCoach(), t.getTrainer(), t.getAsstCoach(), t.getAnalyzer(), t.getMedicalOffice(), new JPanel()};
+                dm.addRow(row);
+                i++;
+            
+
+        }
+        validate();
+        repaint();
+
+    }
+
+    public void setRowForScore(Team Team) {
         List<PlayerScores> playerScoresList = new ArrayList<>();
 
         for (int i = dm.getRowCount() - 1; i >= 0; i--) {
@@ -161,6 +195,92 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
     }
 
     public void createTable() {
+        dm = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
+                return false;//This causes all cells to be not editable
+            }
+        };
+//        model = new DefaultTableModel() {
+//            @Override
+//            public boolean isCellEditable(int row, int column) {
+//                //all cells false
+//                return false;
+//            }
+//        };
+
+        dm.setDataVector(new Object[][]{},
+                new Object[]{"SR No.", "Team Name","Shortcut Code","Coach","Trainer","Asst. Coach","Analyzer","Medical Officer","Action"});
+
+        tbReport = new JTable(dm) {
+            protected JTableHeader createDefaultTableHeader() {
+                return new GroupableTableHeader(columnModel);
+            }
+        };
+
+        sorter = new TableRowSorter<TableModel>(tbReport.getModel());
+        tbReport.setRowSorter(sorter);
+
+        tbReport.setFont(new java.awt.Font("Times New Roman", 0, 14));
+
+
+        JScrollPane scroll = new JScrollPane(tbReport);
+
+        Color heading = new Color(204, 204, 204);
+        model = (DefaultTableModel) tbReport.getModel();
+        JTableHeader tbheader = tbReport.getTableHeader();
+
+        tbheader.setOpaque(false);
+        tbheader.setPreferredSize(new Dimension(100, 45));
+        tbheader.setDefaultRenderer(new TableHeaderRenderer(tbReport));
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        tbReport.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(0).setWidth(10);
+
+        tbReport.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+        tbReport.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
+        
+
+        EditButtonRenderer editButtonRenderer = new EditButtonRenderer();
+        tbReport.getColumnModel().getColumn(8).setCellRenderer(editButtonRenderer);
+
+        Color ivory = new Color(255, 255, 255);
+        tbReport.setOpaque(true);
+        tbReport.setFillsViewportHeight(true);
+        tbReport.setBackground(ivory);
+
+        tbReport.setRowHeight(30);
+        tbReport.setSelectionBackground(Color.WHITE);
+        tbReport.setSelectionForeground(Color.BLACK);
+
+        MouseMotionAdapter mma;
+        mma = new MouseMotionAdapter() {
+            public void mouseMoved(MouseEvent e) {
+                Point p = e.getPoint();
+                if (tbReport.columnAtPoint(p) == 8 ) {
+                    tbReport.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                } else {
+                    tbReport.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                }
+            }
+        };
+
+        // Register the previous MouseMotionAdapter object as a listener
+        // to mouse movement events originating from the table.
+        tbReport.addMouseMotionListener(mma);
+
+//        resizeColumns();
+        panReport.add(scroll, BorderLayout.CENTER);
+    }
+    
+    
+    
+    public void createTableforScores() {
         dm = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
                 return false;//This causes all cells to be not editable
@@ -292,23 +412,19 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
 
         panSkillReports = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
-        lblReportHeading = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblNewTeam = new javax.swing.JLabel();
         txtFilter = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         panReport = new javax.swing.JPanel();
 
         panSkillReports.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblReportHeading.setBackground(new java.awt.Color(255, 255, 255));
-        lblReportHeading.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblReportHeading.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblReportHeading.setText("TEAM SEARCH");
-
-        jPanel2.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 51));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         lblNewTeam.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblNewTeam.setForeground(new java.awt.Color(255, 255, 255));
@@ -329,14 +445,41 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblNewTeam, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addComponent(lblNewTeam, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
         );
 
+        txtFilter.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtFilter.setForeground(new java.awt.Color(153, 153, 153));
+        txtFilter.setText("Search Team");
+        txtFilter.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFilterFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFilterFocusLost(evt);
+            }
+        });
         txtFilter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtFilterKeyTyped(evt);
             }
         });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setText("Teams");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -344,24 +487,25 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 397, Short.MAX_VALUE)
-                .addComponent(lblReportHeading)
-                .addGap(34, 34, 34)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 444, Short.MAX_VALUE)
                 .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(lblReportHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtFilter))
-                .addGap(5, 5, 5))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtFilter, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(8, 8, 8))
         );
 
         panReport.setLayout(new java.awt.BorderLayout());
@@ -395,7 +539,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 301, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(panSkillReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -416,11 +560,26 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         newFilter();
     }//GEN-LAST:event_txtFilterKeyTyped
 
+    private void txtFilterFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFilterFocusGained
+        // TODO add your handling code here:
+         txtFilter.setText("");
+            txtFilter.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtFilterFocusGained
+
+    private void txtFilterFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFilterFocusLost
+        // TODO add your handling code here:
+         if (txtFilter.getText().isEmpty()) {
+            txtFilter.setForeground(Color.GRAY);
+            txtFilter.setText("Search Team");
+        }
+    }//GEN-LAST:event_txtFilterFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblNewTeam;
-    public javax.swing.JLabel lblReportHeading;
     private javax.swing.JPanel panReport;
     private javax.swing.JPanel panSkillReports;
     private javax.swing.JTextField txtFilter;

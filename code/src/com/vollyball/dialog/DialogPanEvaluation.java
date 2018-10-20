@@ -45,7 +45,7 @@ public class DialogPanEvaluation {
             this.teamName = teamName;
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-            this.dialog = new JDialog(this.parentFrame, "New Match", true);
+            this.dialog = new JDialog(this.parentFrame, "Set "+setNum, true);
 
             this.dialog.setResizable(true);
             this.dialog.getContentPane().add(createPane());

@@ -197,7 +197,9 @@ public class TeamDao {
                 p.setId(rs.getInt(1));
                 p.setName(rs.getString(2));
                 p.setChestNo(rs.getString(3));
+                p.setPosition(rs.getInt(4));
                 p.setTeamName(rs.getString(5));
+                p.setCaptain(rs.getBoolean(6));
                 playerList.add(p);
             }
 

@@ -87,6 +87,7 @@ public class Setup extends Thread {
 //        boolean isCreated = db.createNewDatabase();
         boolean isCreated = db.createMysqlDatabase();
         if (isCreated) {
+            db.grantPermission();
             Controller.stepCompleted.put(SetupEnum.Database.getStep(), SetupEnum.Database.getValue());
             FrmRegister.pgrStatus.setValue(70);
         }

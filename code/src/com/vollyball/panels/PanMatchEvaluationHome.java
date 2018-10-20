@@ -68,6 +68,12 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
             List<Player> playerList = td.getTeamPlayers(teamId);
             matchDao.insertMatchPlayers(this.matchId, this.teamId, playerList);
         }
+        
+        selectedPlayers = td.getMatchPlayers(this.matchId, oppId);
+        if (selectedPlayers.isEmpty()) {
+            List<Player> playerList = td.getTeamPlayers(oppId);
+            matchDao.insertMatchPlayers(this.matchId, this.oppId, playerList);
+        }
 
     }
 
@@ -116,11 +122,12 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         selectOpponentTeam = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setForeground(new java.awt.Color(57, 74, 108));
 
         jPanel4.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         set1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         set1.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,7 +151,7 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         );
 
         jPanel6.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         set2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         set2.setForeground(new java.awt.Color(255, 255, 255));
@@ -168,7 +175,7 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         );
 
         jPanel7.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         set5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         set5.setForeground(new java.awt.Color(255, 255, 255));
@@ -192,7 +199,7 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         );
 
         jPanel8.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         set4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         set4.setForeground(new java.awt.Color(255, 255, 255));
@@ -216,7 +223,7 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         );
 
         jPanel10.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         set3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         set3.setForeground(new java.awt.Color(255, 255, 255));
@@ -244,14 +251,14 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(400, 400, 400)
+                .addContainerGap(400, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(400, 400, 400))
+                .addContainerGap(400, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,6 +276,7 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(58, 74, 108)));
 
         jPanel14.setBackground(new java.awt.Color(58, 74, 108));
@@ -416,7 +424,7 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))

@@ -54,6 +54,24 @@ public class DbUtil {
         }
     }
 
+    public void grantPermission() {
+
+        Statement statement = null;
+        try {
+            String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
+            DriverManager.setLoginTimeout(23);
+            con = DriverManager.getConnection(DATABASE_URL, "root", "root");
+            String sql_stmt = "GRANT ALL PRIVILEGES ON database_name.* TO 'root'@'%' WITH GRANT OPTION;";
+            statement = con.createStatement();
+            statement.execute(sql_stmt);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }
+
     public boolean checkDatabaseExist() {
         try {
 //            url = "jdbc:mysql://127.9.126.2:3306/pritienterprises";

@@ -424,7 +424,7 @@ public class PanNewCompetition extends javax.swing.JPanel {
                     Controller.createCompetitionDialog.close();
 
                     Controller.panCompetitionList.refresh();
-                    JOptionPane.showMessageDialog(this, "Inserted");
+                    JOptionPane.showMessageDialog(this, "Competition \""+cb.getName()+"\" Created Successfully");
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed");

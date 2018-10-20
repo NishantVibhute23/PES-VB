@@ -30,7 +30,7 @@ public class DialogEvaluationSubstitute {
             this.setNum = setNum;
             this.matchEvaluationTeamId = matchEvaluationTeamId;
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            this.dialog = new JDialog(this.parentFrame, "New Match", true);
+            this.dialog = new JDialog(this.parentFrame, "Substitute Player", true);
 
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());
