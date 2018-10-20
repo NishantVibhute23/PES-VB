@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -166,4 +167,34 @@ public class CommonUtil {
 
         return value;
     }
+
+    public static String getDate() {
+        Date now = new Date();
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+        String mysqlDateString = formatter.format(now);
+        return mysqlDateString;
+    }
+
+    public static boolean isUserSubscritionExpire(Date subDate) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date()); // Now use today date.
+        c.add(Calendar.DATE, 5); // Adding 5 days
+        String output = sdf.format(c.getTime());
+        System.out.println(output);
+        return false;
+    }
+
+    public static boolean getDaysLeft(String createdOn) {
+        try {
+            Date sf = new SimpleDateFormat("yyyy-MM-dd").parse(createdOn);
+        } catch (ParseException ex) {
+            Logger.getLogger(CommonUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+
 }

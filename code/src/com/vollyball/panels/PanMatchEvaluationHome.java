@@ -68,7 +68,7 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
             List<Player> playerList = td.getTeamPlayers(teamId);
             matchDao.insertMatchPlayers(this.matchId, this.teamId, playerList);
         }
-        
+
         selectedPlayers = td.getMatchPlayers(this.matchId, oppId);
         if (selectedPlayers.isEmpty()) {
             List<Player> playerList = td.getTeamPlayers(oppId);
@@ -468,12 +468,12 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
             objRotationOrder = new DialogPanEvaluationRotationOrder();
             objRotationOrder.init(this.teamId, this.oppId, this.matchId, this.homeTeam, this.oppteam, set, this.matchEvaluationTeamId, "Save", "");
             objRotationOrder.show();
+        } else {
+            obj = new DialogPanEvaluation();
+            obj.setSetFields(set, this.matchId, this.teamId, this.oppId, evaluationType, matchEvaluationTeamId);
+            obj.init();
+            obj.show();
         }
-
-        obj = new DialogPanEvaluation();
-        obj.setSetFields(set, this.matchId, this.teamId, this.oppId, evaluationType, matchEvaluationTeamId);
-        obj.init();
-        obj.show();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

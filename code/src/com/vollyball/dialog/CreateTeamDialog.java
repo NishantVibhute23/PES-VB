@@ -41,7 +41,7 @@ public class CreateTeamDialog {
                 this.dialog.setResizable(false);
                 this.dialog.getContentPane().add(createPane());
                 this.dialog.pack();
-                this.dialog.setSize(708, 827);
+//                this.dialog.setSize(708, 827);
 
                 Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
                 this.dialog.setLocation(new Double((Size.getWidth() / 2) - (dialog.getWidth() / 2)).intValue(), new Double((Size.getHeight() / 2) - (dialog.getHeight() / 2)).intValue());
@@ -49,7 +49,7 @@ public class CreateTeamDialog {
 
                 Logger.getLogger(CreateMatchDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
@@ -73,7 +73,7 @@ public class CreateTeamDialog {
             PanNewTeam panTeam = new PanNewTeam();
             return panTeam;
         } else {
-            PanEditTeam panEditTeam = new PanEditTeam(compId,teamId);
+            PanEditTeam panEditTeam = new PanEditTeam(compId, teamId);
             return panEditTeam;
         }
 

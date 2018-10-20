@@ -27,7 +27,6 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -144,7 +143,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         scoreKeys = ShortKeysUtil.scoreKeys();
         diagramKeys = ShortKeysUtil.diagramKeys();
 
-        panel = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), p);
+        panel = new ImagePanel(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/panVollyCourtNewGrid.png")).getImage(), p);
         panCourt.add(panel, BorderLayout.CENTER);
 
         playerLabelList = new ArrayList<JLabel>(mapPlayerComponent.keySet());

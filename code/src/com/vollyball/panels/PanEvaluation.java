@@ -787,6 +787,15 @@ public class PanEvaluation extends javax.swing.JPanel {
         lblStart.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblStart.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblStart.setText("START");
+        lblStart.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                lblStartAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         lblStart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblStartMouseClicked(evt);
@@ -836,7 +845,7 @@ public class PanEvaluation extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                        .addComponent(panPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -911,8 +920,7 @@ public class PanEvaluation extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cmbRalliesItemStateChanged
 
-    public void nextRally()
-    {
+    public void nextRally() {
         if (homeScore >= 25 || opponentScore >= 25) {
             List<Integer> arr = new ArrayList();
             arr.add(homeScore);
@@ -946,13 +954,10 @@ public class PanEvaluation extends javax.swing.JPanel {
             repaint();
         }
     }
-    
-    
+
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-nextRally();
-        
-
+        nextRally();
 
     }//GEN-LAST:event_jLabel2MouseClicked
 
@@ -1008,6 +1013,10 @@ nextRally();
         dialogEvaluationTimeout.show();
     }//GEN-LAST:event_jPanel11MouseClicked
 
+    private void lblStartAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblStartAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblStartAncestorAdded
+
     public void setScore() {
         currentScore = homeScore + " - " + opponentScore;
         lblScore.setText(currentScore);
@@ -1025,7 +1034,7 @@ nextRally();
     }
 
     public void next() {
-     
+
         cmbRallies.addItem(rallyNumNext);
 
         if (homeScore >= 25 || opponentScore >= 25) {

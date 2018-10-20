@@ -10,6 +10,8 @@ import static com.vollyball.controller.Controller.databaseIpAdd;
 import static com.vollyball.controller.Controller.frmMain;
 import com.vollyball.dao.LoginDao;
 import com.vollyball.db.DbUtil;
+import com.vollyball.util.CommonUtil;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
@@ -41,6 +43,8 @@ public class FrmLogin extends javax.swing.JFrame {
 
             InetAddress inetAddress = InetAddress.getLocalHost();
             txtIpAddr.setText(inetAddress.getHostAddress());
+            txtIpAddr.setEditable(false);
+            txtIpAddr.setBackground(Color.WHITE);
             setVisible(true);
         } catch (UnknownHostException ex) {
             Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -402,6 +406,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
                 if (i != 0) {
                     Controller.userBean = lg.getUserDetails(user);
+                    CommonUtil.getDaysLeft(Controller.userBean.getCreatedOn());
 //            JOptionPane.showMessageDialog(this, "Success");
                     this.dispose();
                     Controller.frmDashBoard = new FrmDashboard();
@@ -433,12 +438,16 @@ public class FrmLogin extends javax.swing.JFrame {
             if (item.equalsIgnoreCase("  PC - 2")) {
                 lblIpAdd.setText("PC - 1 IP");
                 txtIpAddr.setText("");
+                txtIpAddr.setEditable(true);
+
             } else {
                 lblIpAdd.setText("IP Addr");
                 InetAddress inetAddress;
                 try {
                     inetAddress = InetAddress.getLocalHost();
                     txtIpAddr.setText(inetAddress.getHostAddress());
+                    txtIpAddr.setEditable(false);
+                    txtIpAddr.setBackground(Color.WHITE);
                 } catch (UnknownHostException ex) {
                     Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
                 }

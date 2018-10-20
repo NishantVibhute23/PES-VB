@@ -17,6 +17,9 @@ public class UserBean {
     String emailId;
     String code;
     int isValid;
+    String macAddress;
+    String keyCode;
+    String createdOn;
 
     public int getId() {
         return id;
@@ -64,6 +67,30 @@ public class UserBean {
 
     public void setIsValid(int isValid) {
         this.isValid = isValid;
+    }
+
+    public String getMacAddress() {
+        return macAddress;
+    }
+
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
+    }
+
+    public String getKeyCode() {
+        return keyCode;
+    }
+
+    public void setKeyCode(String keyCode) {
+        this.keyCode = keyCode;
+    }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
     }
 
 }

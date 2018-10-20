@@ -88,7 +88,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panPlayer" pref="596" max="32767" attributes="0"/>
+                      <Component id="panPlayer" pref="112" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jPanel10" max="32767" attributes="0"/>
               </Group>
@@ -909,6 +909,7 @@
                 <Property name="text" type="java.lang.String" value="START"/>
               </Properties>
               <Events>
+                <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="lblStartAncestorAdded"/>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStartMouseClicked"/>
               </Events>
               <Constraints>

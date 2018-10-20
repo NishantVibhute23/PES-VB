@@ -17,12 +17,12 @@ import java.sql.ResultSet;
  * @author nishant.vibhute
  */
 public class LoginDao {
-
+    
     DbUtil db = new DbUtil();
     Connection con;
-
+    
     public int checkLogin(String name, String password) {
-
+        
         int count = 0;
         try {
             this.con = db.getConnection();
@@ -30,20 +30,20 @@ public class LoginDao {
             ps.setString(1, name);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
-
+            
             while (rs.next()) {
                 count = rs.getInt(1);
             }
-
+            
         } catch (Exception ex) {
             ex.printStackTrace();
-        }finally{
+        } finally {
             db.closeConnection(con);
         }
         return count;
-
+        
     }
-
+    
     public UserBean getUserDetails(String name) {
         UserBean ub = new UserBean();
         try {
@@ -55,15 +55,19 @@ public class LoginDao {
                 ub.setId(rs.getInt(1));
                 ub.setUserName(rs.getString(2));
                 ub.setEmailId(rs.getString(3));
+                ub.setKeyCode(rs.getString(4));
+                ub.setIsValid(rs.getInt(5));
+                ub.setMacAddress(rs.getString(6));
+                ub.setCreatedOn(rs.getString(7));
             }
-
+            
         } catch (Exception ex) {
             ex.printStackTrace();
-        }finally{
+        } finally {
             db.closeConnection(con);
         }
         return ub;
-
+        
     }
-
+    
 }

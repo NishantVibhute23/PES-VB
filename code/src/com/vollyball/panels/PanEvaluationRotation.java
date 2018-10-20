@@ -12,6 +12,7 @@ import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.enums.PlayerPosition;
+import com.vollyball.util.CommonUtil;
 import java.awt.Color;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -1317,7 +1318,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         ms.setEvaluator(txtEvaluatorName.getText());
         ms.setStart_time("00:00");
         ms.setEnd_time("00:00");
-        ms.setDate("1990-01-31");
+        ms.setDate(CommonUtil.getDate());
 
         int id = 0;
         if (type.equals("Update")) {

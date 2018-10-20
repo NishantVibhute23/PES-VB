@@ -61,7 +61,8 @@ public class DbUtil {
             String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
             DriverManager.setLoginTimeout(23);
             con = DriverManager.getConnection(DATABASE_URL, "root", "root");
-            String sql_stmt = "GRANT ALL PRIVILEGES ON database_name.* TO 'root'@'%' WITH GRANT OPTION;";
+            String sql_stmt = "CREATE USER 'root'@'%' IDENTIFIED BY 'root';\n"
+                    + "GRANT ALL PRIVILEGES ON vollyball.* TO 'root'@'%' WITH GRANT OPTION;";
             statement = con.createStatement();
             statement.execute(sql_stmt);
 
@@ -147,7 +148,7 @@ public class DbUtil {
         try {
 //            url = "jdbc:mysql://127.9.126.2:3306/pritienterprises";
             String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
-            url = DATABASE_URL + "" + dbName;
+            url = DATABASE_URL + "" + dbName + "?autoReconnect=true&useSSL=false";
             Class.forName("com.mysql.jdbc.Driver");
 //            this.con = DriverManager.getConnection(url, "adminGnXBLDP", "dt78KgjZGwUD");
             this.con = DriverManager.getConnection(url, "root", "root");
