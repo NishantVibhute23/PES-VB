@@ -10,11 +10,15 @@ import com.vollyball.bean.TeamSkillScore;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.dao.TeamReportDao;
 import com.vollyball.enums.Skill;
+import com.vollyball.renderer.TableHeaderRendererForReport;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -69,11 +73,27 @@ public class PanTeamReportSkillRow extends javax.swing.JPanel {
             if (i <= 6) {
                 j++;
                 PlayerScores p = lsList.get(i);
-                Object[] row = {p.getPlayerName(), p.getTotalAttempt(), p.getSuccessAttempt(), p.getAttemptSuccessRatePerc(), p.getFailureAttempt(), p.getAttemptFailureRatePerc()};
+                Object[] row = {p.getPlayerName(), 
+                    p.getTotalAttempt()==0?"-":p.getTotalAttempt(), 
+                    p.getSuccessAttempt()==0?"-":p.getSuccessAttempt(), 
+                    p.getAttemptSuccessRatePerc()=="0%"?"-":p.getAttemptSuccessRatePerc(), 
+                    p.getFailureAttempt()==0?"-":p.getFailureAttempt(), 
+                    p.getAttemptFailureRatePerc()=="0%"?"-":p.getAttemptFailureRatePerc()};
                 dm.addRow(row);
             }
 
         }
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        
+        JTableHeader header1 = tblPlayerReport.getTableHeader();
+        header1.setDefaultRenderer(new TableHeaderRendererForReport(tblPlayerReport));
+//        tblPlayerReport.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tblPlayerReport.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tblPlayerReport.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        tblPlayerReport.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        tblPlayerReport.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        tblPlayerReport.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
 
         for (int k = j; k < 6; k++) {
             Object[] row = {"", "", "", "", "", ""};
@@ -82,7 +102,7 @@ public class PanTeamReportSkillRow extends javax.swing.JPanel {
 
     }
 
-    float[] columnWidthPercentage = {40.0f, 12.0f, 12.0f, 12.0f, 12.0f, 12.0f};
+    float[] columnWidthPercentage = {40.0f, 15.0f, 7.0f, 15.0f, 7.0f, 15.0f};
 
     private void resizeColumns() {
         int tW = tblPlayerReport.getPreferredSize().width;
@@ -209,7 +229,7 @@ public class PanTeamReportSkillRow extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Player Name", "Attempt", "+", "+ %", "-", "- %"
+                "Player Name", "Att.", "+", "+ %", "-", "- %"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -237,9 +257,9 @@ public class PanTeamReportSkillRow extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

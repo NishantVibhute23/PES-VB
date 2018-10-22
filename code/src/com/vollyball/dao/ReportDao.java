@@ -968,9 +968,9 @@ public class ReportDao {
                 playerScores.setTotalAttempt(rs.getInt(3));
                 playerScores.setSuccessAttempt(rs.getInt(4));
                 playerScores.setFailureAttempt(rs.getInt(5));
-                playerScores.setAttemptSuccessRate(playerScores.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) playerScores.getSuccessAttempt() / (double) playerScores.getTotalAttempt() * 100, 2)));
+                playerScores.setAttemptSuccessRate(playerScores.getTotalAttempt() == 0 ? 0 : (double) playerScores.getSuccessAttempt() / (double) playerScores.getTotalAttempt() );
                 playerScores.setAttemptSuccessRatePerc(playerScores.getAttemptSuccessRate() == 0 ? "0%" : df.format(playerScores.getAttemptSuccessRate()));
-                playerScores.setAttemptFailureRate(playerScores.getTotalAttempt() == 0 ? 0 : (CommonUtil.round((double) playerScores.getFailureAttempt() / (double) playerScores.getTotalAttempt() * 100, 2)));
+                playerScores.setAttemptFailureRate(playerScores.getTotalAttempt() == 0 ? 0 : (double) playerScores.getFailureAttempt() / (double) playerScores.getTotalAttempt() );
                 playerScores.setAttemptFailureRatePerc(playerScores.getAttemptFailureRate() == 0 ? "0%" : df.format(playerScores.getAttemptFailureRate()));
                 list.add(playerScores);
             }

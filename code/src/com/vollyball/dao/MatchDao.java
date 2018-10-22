@@ -801,7 +801,7 @@ public class MatchDao {
         return id;
     }
 
-    public int updateMatchSetWonBy(int wonby, int evalId) {
+    public int updateMatchSetWonBy(int wonby, int evalId,String endTime) {
         int id = 0;
         try {
 
@@ -809,7 +809,8 @@ public class MatchDao {
             PreparedStatement ps1;
             ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("update.matchsetWonby"));
             ps1.setInt(1, wonby);
-            ps1.setInt(2, evalId);
+            ps1.setString(2,endTime);
+            ps1.setInt(3, evalId);
             id = ps1.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(MatchDao.class.getName()).log(Level.SEVERE, null, ex);

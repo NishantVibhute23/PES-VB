@@ -9,6 +9,8 @@ import com.vollyball.bean.UserBean;
 import com.vollyball.controller.Controller;
 import com.vollyball.frames.FrmRegister;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 
 /**
  *
@@ -321,16 +323,22 @@ public class PanUserDetails extends javax.swing.JPanel {
         lblValidateConfPass.setText("");
         if (txtUserName.getText().equals("")) {
             lblUserValidate.setText("UserName cannot be Blank");
+            lblUserValidate.setForeground(Color.red);
+            lblUserValidate.setFont(new Font("Times New Roman", Font.BOLD, 14));
             count++;
         }
 
-        if (txtPassword.getText().equals("")) {
+        if (new String(txtPassword.getPassword()).equals("")) {
             lblPasswordValidate.setText("Password cannot be Blank");
+            lblPasswordValidate.setForeground(Color.red);
+            lblPasswordValidate.setFont(new Font("Times New Roman", Font.BOLD, 14));
 //            msg = msg + "Password cannot be Blank\n";
             count++;
         }
         if (txtEmail.getText().equals("")) {
             lblEmailValidate.setText("E-Mail cannot be Blank");
+            lblEmailValidate.setForeground(Color.red);
+            lblEmailValidate.setFont(new Font("Times New Roman", Font.BOLD, 14));
 //            msg = msg + "E-Mail cannot be Blank\n";
             count++;
         }
@@ -339,13 +347,17 @@ public class PanUserDetails extends javax.swing.JPanel {
             Boolean b = txtEmail.getText().matches(EMAIL_REGEX);
             if (!b) {
                 lblEmailValidate.setText("E-Mail is Incorrect");
+                lblEmailValidate.setForeground(Color.red);
+            lblEmailValidate.setFont(new Font("Times New Roman", Font.BOLD, 14));
 //            msg = msg + "E-Mail is Incorrect\n";
                 count++;
             }
 
         }
-        if (!txtPassword.equals(txtConfPass)) {
+        if (!new String(txtPassword.getPassword()).equals(new String(txtConfPass.getPassword()))) {
             lblValidateConfPass.setText("Password Didn't match");
+            lblValidateConfPass.setForeground(Color.red);
+            lblValidateConfPass.setFont(new Font("Times New Roman", Font.BOLD, 14));
             count++;
         }
 

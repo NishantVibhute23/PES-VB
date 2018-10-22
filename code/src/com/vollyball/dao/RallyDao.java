@@ -19,8 +19,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -372,12 +374,15 @@ public class RallyDao {
                 int max = Collections.max(arr);
                 int min = Collections.min(arr);
                 if ((max - min) >= 2) {
+                    SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
+                      Date date = new Date();
+                String endTime =  formatterTime.format(date);
                     if (max == homeScore) {
 
-                        matchDao.updateMatchSetWonBy(Controller.panMatchSet.teamEvaluateId, Controller.panMatchSet.matchEvaluationId);
+                        matchDao.updateMatchSetWonBy(Controller.panMatchSet.teamEvaluateId, Controller.panMatchSet.matchEvaluationId,endTime);
                     } else {
 
-                        matchDao.updateMatchSetWonBy(Controller.panMatchSet.opponentId, Controller.panMatchSet.matchEvaluationId);
+                        matchDao.updateMatchSetWonBy(Controller.panMatchSet.opponentId, Controller.panMatchSet.matchEvaluationId,endTime);
                     }
 
                 }

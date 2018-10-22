@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.TreeMap;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -155,6 +156,18 @@ public class PanZoneRotationMain extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tbOverall.getModel();
         model.addRow(new Object[]{team1Name, homeSuccessful.values().toArray().length > 1 ? homeSuccessful.values().toArray()[0] : "", homeWeakest.values().toArray().length > 1 ? homeWeakest.values().toArray()[0] : "", homeSuccessful.values().toArray().length > 2 ? homeSuccessful.values().toArray()[1] : "", homeWeakest.values().toArray().length > 1 ? homeWeakest.values().toArray()[1] : ""});
         model.addRow(new Object[]{team2Name, oppSuccessful.values().toArray().length > 1 ? oppSuccessful.values().toArray()[0] : "", oppWeakest.values().toArray().length > 1 ? oppWeakest.values().toArray()[0] : "", oppSuccessful.values().toArray().length > 2 ? oppSuccessful.values().toArray()[1] : "", oppWeakest.values().toArray().length > 1 ? oppWeakest.values().toArray()[1] : ""});
+        
+        
+         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        tbOverall.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tbOverall.getColumnModel().getColumn(0).setWidth(5);
+
+        tbOverall.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tbOverall.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        tbOverall.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        tbOverall.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+
     }
 
     public LinkedHashMap<Integer, PlayerPositionBean> setMap(int evaluationId, int setNum, LinkedHashMap<Integer, Player> playerMap, int team) {

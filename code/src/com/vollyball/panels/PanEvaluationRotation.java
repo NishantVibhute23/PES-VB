@@ -11,6 +11,7 @@ import com.vollyball.bean.SetRotationOrder;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.TeamDao;
+import com.vollyball.dialog.DialogPanEvaluation;
 import com.vollyball.enums.PlayerPosition;
 import com.vollyball.util.CommonUtil;
 import java.awt.Color;
@@ -43,6 +44,9 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     public LinkedHashMap<Integer, Player> initialOppPositionMap;
     MatchDao matchDao = new MatchDao();
     String type, evaluatorName;
+    int matchId;
+    int homeTeamId;
+    int oppTeamId;
 
     /**
      * Creates new form PanEvaluationRotation
@@ -57,6 +61,10 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         lblOpp.setText(oppteam);
         setHomePlayers(homeTeamId, matchId);
         setOppPlayers(oppTeamId, matchId);
+        this.matchId = matchId;
+        this.homeTeamId = homeTeamId;
+        this.oppTeamId = oppTeamId;
+        
 
     }
 
@@ -901,7 +909,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(10, 12, Short.MAX_VALUE))))
                 );
                 jPanel6Layout.setVerticalGroup(
                     jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -970,7 +978,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
                 jPanel14.setBackground(new java.awt.Color(57, 74, 108));
-                jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+                jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                 jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         jPanel14MouseClicked(evt);
@@ -984,6 +992,11 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         jLabel6MouseClicked(evt);
+                    }
+                });
+                jLabel6.addKeyListener(new java.awt.event.KeyAdapter() {
+                    public void keyPressed(java.awt.event.KeyEvent evt) {
+                        jLabel6KeyPressed(evt);
                     }
                 });
 
@@ -1001,7 +1014,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 );
 
                 jPanel15.setBackground(new java.awt.Color(57, 74, 108));
-                jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+                jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
                 jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
                 jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -1334,7 +1347,12 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 Controller.panMatchSet.setRotationDialog.close();
                 Controller.panMatchSet.setValues();
             } else {
-                Controller.panMatchEvaluationHome.objRotationOrder.close();
+                 Controller.panMatchEvaluationHome.objRotationOrder.close();
+             DialogPanEvaluation   obj = new DialogPanEvaluation();
+            obj.setSetFields(set, this.matchId, this.homeTeamId, this.oppTeamId, 1, matchEvaluationTeamId);
+            obj.init();
+            obj.show();
+               
             }
         }
 
@@ -1348,6 +1366,10 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel14MouseClicked
+
+    private void jLabel6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel6KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6KeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

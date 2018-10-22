@@ -19,13 +19,17 @@ import com.vollyball.dao.TeamDao;
 import com.vollyball.dao.TeamReportDao;
 import com.vollyball.renderer.TableHeaderRendererForReport;
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -72,6 +76,17 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         matchDate.setText(team.getDate());
         team1label.setText(team.getTeam1name());
         team2label.setText(team.getTeam2name());
+        
+        
+        
+        JTableHeader th = excellenceTable.getTableHeader();
+TableColumnModel tcm = th.getColumnModel();
+TableColumn tc = tcm.getColumn(1);
+tc.setHeaderValue( team.getTeam1name());
+ tc = tcm.getColumn(2);
+tc.setHeaderValue( team.getTeam2name());
+resizeColumnsExcellence();
+th.repaint();
 
         team1id = team.getTeam1();
         team2id = team.getTeam2();
@@ -234,6 +249,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         tbTeam2Loss.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
         tbTeam2Loss.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
         tbTeam2Loss.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
+        
+        
+        
 
         JTableHeader header5 = team1PlayerTable.getTableHeader();
         header5.setDefaultRenderer(new TableHeaderRendererForReport(team1PlayerTable));
@@ -262,6 +280,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team2PlayerTable.setOpaque(true);
         team2PlayerTable.setFillsViewportHeight(true);
         team2PlayerTable.setBackground(ivory);
+        
+         JTableHeader header7 = excellenceTable.getTableHeader();
+        header7.setDefaultRenderer(new TableHeaderRendererForReport(excellenceTable));
+        excellenceTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        excellenceTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        excellenceTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+      
 
     }
 
@@ -287,11 +312,32 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 tbSetDetails.setValueAt(timeoutCount, 0, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 0, 4);
 
-                String start_time[] = ms.getStart_time().split(":");
-                String end_time[] = ms.getEnd_time().split(":");
-                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
-                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
-                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 0, 1);
+                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+                
+                Date d1 = null;
+		Date d2 = null;
+
+                try {
+                    d1 = format.parse(ms.getStart_time());
+                    d2 = format.parse(ms.getEnd_time());
+                     long diff = d2.getTime() - d1.getTime();
+                     
+                     long diffSeconds = diff / 1000 % 60;
+			long diffMinutes = diff / (60 * 1000) % 60;
+                        tbSetDetails.setValueAt(diffMinutes+":" + diffSeconds, 0, 1);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PanMatchReportConsolidated.class.getName()).log(Level.SEVERE, null, ex);
+                }
+			
+                
+                      
+                
+//                
+//                String start_time[] = ms.getStart_time().split(":");
+//                String end_time[] = ms.getEnd_time().split(":");
+//                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
+//                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
+                
                 if (ms.getWon_by() == team1id) {
                     team1wonBy++;
                 } else if (ms.getWon_by() == team2id) {
@@ -301,11 +347,30 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 tbSetDetails.setValueAt(countRally, 1, 2);
                 tbSetDetails.setValueAt(timeoutCount, 1, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 1, 4);
-                String start_time[] = ms.getStart_time().split(":");
-                String end_time[] = ms.getEnd_time().split(":");
-                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
-                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
-                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 1, 1);
+                
+                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+                
+                Date d1 = null;
+		Date d2 = null;
+
+                try {
+                    d1 = format.parse(ms.getStart_time());
+                    d2 = format.parse(ms.getEnd_time());
+                     long diff = d2.getTime() - d1.getTime();
+                     
+                     long diffSeconds = diff / 1000 % 60;
+			long diffMinutes = diff / (60 * 1000) % 60;
+                        tbSetDetails.setValueAt(diffMinutes+":" + diffSeconds, 1, 1);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PanMatchReportConsolidated.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+//                String start_time[] = ms.getStart_time().split(":");
+//                String end_time[] = ms.getEnd_time().split(":");
+//                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
+//                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
+//                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 1, 1);
 
                 if (ms.getWon_by() == team1id) {
                     team1wonBy++;
@@ -316,11 +381,29 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 tbSetDetails.setValueAt(countRally, 2, 2);
                 tbSetDetails.setValueAt(timeoutCount, 2, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 2, 4);
-                String start_time[] = ms.getStart_time().split(":");
-                String end_time[] = ms.getEnd_time().split(":");
-                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
-                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
-                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 2, 1);
+                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+                
+                Date d1 = null;
+		Date d2 = null;
+
+                try {
+                    d1 = format.parse(ms.getStart_time());
+                    d2 = format.parse(ms.getEnd_time());
+                     long diff = d2.getTime() - d1.getTime();
+                     
+                     long diffSeconds = diff / 1000 % 60;
+			long diffMinutes = diff / (60 * 1000) % 60;
+                        tbSetDetails.setValueAt(diffMinutes+":" + diffSeconds, 2, 1);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PanMatchReportConsolidated.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+//                String start_time[] = ms.getStart_time().split(":");
+//                String end_time[] = ms.getEnd_time().split(":");
+//                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
+//                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
+//                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 2, 1);
 
                 if (ms.getWon_by() == team1id) {
                     team1wonBy++;
@@ -331,11 +414,29 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 tbSetDetails.setValueAt(countRally, 3, 2);
                 tbSetDetails.setValueAt(timeoutCount, 3, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 3, 4);
-                String start_time[] = ms.getStart_time().split(":");
-                String end_time[] = ms.getEnd_time().split(":");
-                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
-                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
-                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 3, 1);
+                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+                
+                Date d1 = null;
+		Date d2 = null;
+
+                try {
+                    d1 = format.parse(ms.getStart_time());
+                    d2 = format.parse(ms.getEnd_time());
+                     long diff = d2.getTime() - d1.getTime();
+                     
+                     long diffSeconds = diff / 1000 % 60;
+			long diffMinutes = diff / (60 * 1000) % 60;
+                        tbSetDetails.setValueAt(diffMinutes+":" + diffSeconds,3, 1);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PanMatchReportConsolidated.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+//                String start_time[] = ms.getStart_time().split(":");
+//                String end_time[] = ms.getEnd_time().split(":");
+//                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
+//                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
+//                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 3, 1);
 
                 if (ms.getWon_by() == team1id) {
                     team1wonBy++;
@@ -346,12 +447,29 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 tbSetDetails.setValueAt(countRally, 4, 2);
                 tbSetDetails.setValueAt(timeoutCount, 4, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 4, 4);
+SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+                
+                Date d1 = null;
+		Date d2 = null;
 
-                String start_time[] = ms.getStart_time().split(":");
-                String end_time[] = ms.getEnd_time().split(":");
-                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
-                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
-                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 4, 1);
+                try {
+                    d1 = format.parse(ms.getStart_time());
+                    d2 = format.parse(ms.getEnd_time());
+                     long diff = d2.getTime() - d1.getTime();
+                     
+                     long diffSeconds = diff / 1000 % 60;
+			long diffMinutes = diff / (60 * 1000) % 60;
+                        tbSetDetails.setValueAt(diffMinutes+":" + diffSeconds,4, 1);
+                } catch (ParseException ex) {
+                    Logger.getLogger(PanMatchReportConsolidated.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+//                String start_time[] = ms.getStart_time().split(":");
+//                String end_time[] = ms.getEnd_time().split(":");
+//                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
+//                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
+//                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 4, 1);
                 if (ms.getWon_by() == team1id) {
                     team1wonBy++;
                 } else if (ms.getWon_by() == team2id) {
@@ -378,7 +496,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         for (Map.Entry<PlayerScores, List<Integer>> entry : playerSetDetails.entrySet()) {
             PlayerScores key = entry.getKey();
             List<Integer> value = entry.getValue();
-            Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0), value.get(1), value.get(2), value.get(3), value.get(4)};
+            Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0)==0?"-":value.get(0), value.get(1)==0?"-":value.get(1),value.get(2)==0?"-":value.get(2), value.get(3)==0?"-":value.get(3), value.get(4)==0?"-":value.get(4)};
             team1Playermodel.addRow(row);
         }
 
@@ -431,7 +549,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         for (Map.Entry<PlayerScores, List<Integer>> entry : playerSetDetails.entrySet()) {
             PlayerScores key = entry.getKey();
             List<Integer> value = entry.getValue();
-            Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0), value.get(1), value.get(2), value.get(3), value.get(4)};
+            Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0)==0?"-":value.get(0), value.get(1)==0?"-":value.get(1),value.get(2)==0?"-":value.get(2), value.get(3)==0?"-":value.get(3), value.get(4)==0?"-":value.get(4)};
             team2Playermodel.addRow(row);
         }
 
@@ -590,11 +708,11 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                         + entry.getValue().get(1).getTotalAttempt()
                         + entry.getValue().get(2).getTotalAttempt()
                         + entry.getValue().get(6).getTotalAttempt();
-                Object[] row = {entry.getKey().toString(), total,
-                    entry.getValue().get(0).getTotalAttempt(),
-                    entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt(),
-                    entry.getValue().get(6).getTotalAttempt()};
+                Object[] row = {entry.getKey().toString(), total==0?"-":total,
+                    entry.getValue().get(0).getTotalAttempt()==0?"-":entry.getValue().get(0).getTotalAttempt(),
+                    entry.getValue().get(2).getTotalAttempt()==0?"-":entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt()==0?"-":entry.getValue().get(1).getTotalAttempt(),
+                    entry.getValue().get(6).getTotalAttempt()==0?"-":entry.getValue().get(6).getTotalAttempt()};
                 team1WinTablemodel.addRow(row);
 
             }
@@ -617,11 +735,11 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                         + entry.getValue().get(1).getTotalAttempt()
                         + entry.getValue().get(2).getTotalAttempt()
                         + entry.getValue().get(6).getTotalAttempt();
-                Object[] row = {entry.getKey().toString(), total,
-                    entry.getValue().get(0).getTotalAttempt(),
-                    entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt(),
-                    entry.getValue().get(6).getTotalAttempt()};
+                Object[] row = {entry.getKey().toString(),  total==0?"-":total,
+                     entry.getValue().get(0).getTotalAttempt()==0?"-":entry.getValue().get(0).getTotalAttempt(),
+                    entry.getValue().get(2).getTotalAttempt()==0?"-":entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt()==0?"-":entry.getValue().get(1).getTotalAttempt(),
+                    entry.getValue().get(6).getTotalAttempt()==0?"-":entry.getValue().get(6).getTotalAttempt()};
                 team2WinTablemodel.addRow(row);
 
             }
@@ -642,6 +760,22 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             column.setPreferredWidth(pWidth);
         }
     }
+    
+    float[] ColumnsExcellencePercentage1 = {20.0f, 40.0f, 40.0f};
+
+    private void resizeColumnsExcellence() {
+        int tW = excellenceTable.getPreferredSize().width;
+        TableColumn column;
+        TableColumnModel jTableColumnModel = excellenceTable.getColumnModel();
+        int cantCols = jTableColumnModel.getColumnCount();
+        for (int i = 0; i < cantCols; i++) {
+            column = jTableColumnModel.getColumn(i);
+            int pWidth = Math.round(ColumnsExcellencePercentage1[i] * tW);
+            column.setPreferredWidth(pWidth);
+        }
+    }
+    
+    
     float[] ColumnsTeam2WinWidthPercentage1 = {5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
 
     private void resizeColumnsTeam2Win() {
@@ -685,13 +819,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                         + entry.getValue().get(5).getTotalAttempt()
                         + entry.getValue().get(7).getTotalAttempt();
                 Object[] row = {entry.getKey().toString(),
-                    total, entry.getValue().get(0).getTotalAttempt(),
-                    entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt(),
-                    entry.getValue().get(4).getTotalAttempt(),
-                    entry.getValue().get(3).getTotalAttempt(),
-                    entry.getValue().get(5).getTotalAttempt(),
-                    entry.getValue().get(7).getTotalAttempt()};
+                    total ==0?"-":total, entry.getValue().get(0).getTotalAttempt()==0?"-":entry.getValue().get(0).getTotalAttempt(),
+                    entry.getValue().get(2).getTotalAttempt()==0?"-":entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt()==0?"-":entry.getValue().get(1).getTotalAttempt(),
+                    entry.getValue().get(4).getTotalAttempt()==0?"-":entry.getValue().get(4).getTotalAttempt(),
+                    entry.getValue().get(3).getTotalAttempt()==0?"-":entry.getValue().get(3).getTotalAttempt(),
+                    entry.getValue().get(5).getTotalAttempt()==0?"-":entry.getValue().get(5).getTotalAttempt(),
+                    entry.getValue().get(7).getTotalAttempt()==0?"-":entry.getValue().get(7).getTotalAttempt()};
                 team1LossTablemodel.addRow(row);
 
             }
@@ -717,13 +851,13 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                         + entry.getValue().get(4).getTotalAttempt()
                         + entry.getValue().get(5).getTotalAttempt()
                         + entry.getValue().get(7).getTotalAttempt();
-                Object[] row = {entry.getKey().toString(), total, entry.getValue().get(0).getTotalAttempt(),
-                    entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt(),
-                    entry.getValue().get(4).getTotalAttempt(),
-                    entry.getValue().get(3).getTotalAttempt(),
-                    entry.getValue().get(5).getTotalAttempt(),
-                    entry.getValue().get(7).getTotalAttempt()};
+                Object[] row = {entry.getKey().toString(), total==0?"-":total, entry.getValue().get(0).getTotalAttempt()==0?"-":entry.getValue().get(0).getTotalAttempt(),
+                    entry.getValue().get(2).getTotalAttempt()==0?"-":entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt()==0?"-":entry.getValue().get(1).getTotalAttempt(),
+                    entry.getValue().get(4).getTotalAttempt()==0?"-":entry.getValue().get(4).getTotalAttempt(),
+                    entry.getValue().get(3).getTotalAttempt()==0?"-":entry.getValue().get(3).getTotalAttempt(),
+                    entry.getValue().get(5).getTotalAttempt()==0?"-":entry.getValue().get(5).getTotalAttempt(),
+                    entry.getValue().get(7).getTotalAttempt()==0?"-":entry.getValue().get(7).getTotalAttempt()};
                 team2LossTablemodel.addRow(row);
 
             }
@@ -776,13 +910,58 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         for (int i = 1; i <= 5; i++) {
             total = (reportMap.get(i) != null ? reportMap.get(i) : 0) + (reportMap1.get(i) != null ? reportMap1.get(i) : 0);
             excellenceTable.setValueAt(((reportMap.get(i) == null ? 0 : reportMap.get(i)) == 0 ? 0 : (reportMap.get(i) / total) * 100)+"%", i - 1, col);
+            String val = "-";
+            if(reportMap.get(i) == null )
+            {
+                val = "-";
+            }else{
+               
+                        val = getGrade((reportMap.get(i) / total) * 100);
+                        
+                        
+            }
+             excellenceTable.setValueAt(val, i - 1, col);
         }
         col++;
         for (int i = 1; i <= 5; i++) {
             total = (reportMap.get(i) != null ? reportMap.get(i) : 0) + (reportMap1.get(i) != null ? reportMap1.get(i) : 0);
 //            total=reportMap.get(i)+reportMap1.get(i);
             excellenceTable.setValueAt(((reportMap1.get(i) == null ? 0 : reportMap1.get(i)) == 0 ? 0 : (reportMap1.get(i) / total) * 100)+"%", i - 1, col);
+            String val = "-";
+             if(reportMap1.get(i) == null )
+            {
+                val = "-";
+            }else{
+                
+                        val = getGrade((reportMap1.get(i) / total) * 100);
+                        
+                        
+            }
+             excellenceTable.setValueAt(val, i - 1, col);
         }
+    }
+    
+    public String getGrade(double value)
+    {
+        String grade ="-";
+        if(value>=50)
+        {
+            grade = "Excellent";
+        }else if(value>=44&&value<50)
+        {
+            grade = "Above Average";
+        }else if(value>=38&&value<44)
+        {
+            grade = "Average";
+        }else if(value>=32&&value<38)
+        {
+            grade = "Below Average";
+        }
+        else if(value<32)
+        {
+            grade = "Poor";
+        }
+        return grade;
     }
 
     /**
@@ -3528,7 +3707,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 {"V", "-", "-", "-", "-"}
             },
             new String [] {
-                "SET", "DURATION", "TOTAL RALLIES", "TOTAL TIMEOUT", "SCORE"
+                "SET", "DURATION", "RALLIES", "TIMEOUT", "SCORE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -3617,7 +3796,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3659,7 +3838,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3704,12 +3883,12 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team1playerDetailsPan.setLayout(team1playerDetailsPanLayout);
         team1playerDetailsPanLayout.setHorizontalGroup(
             team1playerDetailsPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
         );
         team1playerDetailsPanLayout.setVerticalGroup(
             team1playerDetailsPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(team1playerDetailsPanLayout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -3825,7 +4004,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3867,7 +4046,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addGroup(jPanel44Layout.createSequentialGroup()
                 .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3915,7 +4094,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -3959,14 +4138,14 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        team1label.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        team1label.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         team1label.setText("Maharashtra");
 
         team1WonPointsLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         team1WonPointsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         team1WonPointsLabel.setText("-");
 
-        team2label.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        team2label.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         team2label.setText("Andhra Pradesh");
 
         team2WonPointLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -3996,7 +4175,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(team1label)
                     .addComponent(team1WonPointsLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(team2label)
                     .addComponent(team2WonPointLabel)))
@@ -4018,6 +4197,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 "SET", "Team1", "Team2"
             }
         ));
+        excellenceTable.setRowHeight(20);
+        excellenceTable.setShowHorizontalLines(false);
         jScrollPane2.setViewportView(excellenceTable);
 
         javax.swing.GroupLayout panMatchReport1Layout = new javax.swing.GroupLayout(panMatchReport1);
@@ -4033,9 +4214,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
             .addGroup(panMatchReport1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -4046,14 +4227,14 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jLabel2)
                 .addGap(8, 8, 8)
-                .addGroup(panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panMatchReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panMatchReport1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

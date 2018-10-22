@@ -51,18 +51,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         mapMenu.put(lblDefence, panDefence);
 
         PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService(cb, matchId);
-        PanTeamReportOfAttack panTeamReportOFAttack = new PanTeamReportOfAttack(cb, matchId);
-        PanTeamReportOfBlock panTeamReportOfBlock = new PanTeamReportOfBlock(cb, matchId);
-        PanTeamReportOfReception panTeamReportOfReception = new PanTeamReportOfReception(cb, matchId);
-        PanTeamReportOfSet panTeamReportOfSet = new PanTeamReportOfSet(cb, matchId);
-        PanTeamReportOfDefence panTeamReportOfDefence = new PanTeamReportOfDefence(cb, matchId);
-
-        panListToPrint.add(panTeamReportOfService);
-        panListToPrint.add(panTeamReportOFAttack);
-        panListToPrint.add(panTeamReportOfBlock);
-        panListToPrint.add(panTeamReportOfReception);
-        panListToPrint.add(panTeamReportOfSet);
-        panListToPrint.add(panTeamReportOfDefence);
+       
 
         panView.add(panTeamReportOfService, BorderLayout.CENTER);
         lblService.setForeground(Color.BLACK);

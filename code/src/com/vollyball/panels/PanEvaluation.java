@@ -1044,12 +1044,15 @@ public class PanEvaluation extends javax.swing.JPanel {
             int max = Collections.max(arr);
             int min = Collections.min(arr);
             if ((max - min) >= 2) {
+                Date date = new Date();
+                String endTime =  formatterTime.format(date);
+                
                 if (max == homeScore) {
                     lblWonBy.setText(lblevaluationName.getText());
-                    matchDao.updateMatchSetWonBy(teamEvaluateId, matchEvaluationId);
+                    matchDao.updateMatchSetWonBy(teamEvaluateId, matchEvaluationId,endTime);
                 } else {
                     lblWonBy.setText(lblopponentName.getText());
-                    matchDao.updateMatchSetWonBy(opponentId, matchEvaluationId);
+                    matchDao.updateMatchSetWonBy(opponentId, matchEvaluationId,endTime);
                 }
                 setScore();
 
