@@ -23,7 +23,7 @@ public class LoginDao {
 
     public int checkLogin(String name, String password) {
 
-        int count = 0;
+        int id = 0;
         try {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("check.login"));
@@ -32,7 +32,7 @@ public class LoginDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                count = rs.getInt(1);
+                id = rs.getInt(1);
             }
 
         } catch (Exception ex) {
@@ -40,16 +40,16 @@ public class LoginDao {
         } finally {
             db.closeConnection(con);
         }
-        return count;
+        return id;
 
     }
 
-    public UserBean getUserDetails(String name) {
+    public UserBean getUserDetails(int id) {
         UserBean ub = new UserBean();
         try {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("get.userDetails"));
-            ps.setString(1, name);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ub.setId(rs.getInt(1));
@@ -77,7 +77,8 @@ public class LoginDao {
             this.con = db.getConnection();
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.validity"));
             ps.setInt(1, ub.getIsValid());
-            ps.setInt(2, ub.getId());
+            ps.setString(2, ub.getCode());
+            ps.setInt(3, ub.getId());
             count = ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -86,6 +87,24 @@ public class LoginDao {
         }
         return count;
 
+    }
+
+    public int updateUserPassword(UserBean ub) {
+        int count = 0;
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.user"));
+            ps.setString(1, ub.getUserName());
+            ps.setString(2, ub.getPassword());
+            ps.setInt(3, ub.getId());
+            count = ps.executeUpdate();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return count;
     }
 
 }

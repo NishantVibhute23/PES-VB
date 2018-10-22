@@ -10,6 +10,7 @@ import com.vollyball.dao.LoginDao;
 import com.vollyball.enums.SubscriptionCodeEnum;
 import com.vollyball.frames.FrmDashboard;
 import com.vollyball.util.CommonUtil;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +19,7 @@ import com.vollyball.util.CommonUtil;
 public class PanUserSubscription extends javax.swing.JPanel {
 
     boolean isvalid;
-    LoginDao loginDao=new LoginDao();
+    LoginDao loginDao = new LoginDao();
 
     /**
      * Creates new form PanUserSubscription
@@ -261,18 +262,24 @@ public class PanUserSubscription extends javax.swing.JPanel {
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
         boolean isValid = false;
-        String code="";
+        String code = "";
         if (isvalid) {
             Controller.frmLogin.sd.close();
             Controller.frmDashBoard = new FrmDashboard();
             Controller.frmDashBoard.lblName.setText(Controller.userBean.getUserName().equals("") || Controller.userBean.getUserName() == null ? "User" : Controller.userBean.getUserName());
             if (!txtCode.getText().equals("")) {
-               code=CommonUtil.encrypt(txtCode.getText());
+                code = CommonUtil.encrypt(txtCode.getText());
             }
             isValid = SubscriptionCodeEnum.checkCode(code);
             if (isValid) {
                 Controller.userBean.setIsValid(1);
-                int status=loginDao.updateStatus(Controller.userBean);
+                Controller.userBean.setCode(txtCode.getText());
+                int status = loginDao.updateStatus(Controller.userBean);
+                if (status != 0) {
+                    JOptionPane.showMessageDialog(this, "You are Suscribed");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Unable to Suscribe");
+                }
             } else {
                 lblMsg.setText("*Invalid product Key");
             }
