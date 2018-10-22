@@ -32,8 +32,6 @@ public class FrmLogin extends javax.swing.JFrame {
     String item = "  PC - 1";
     public SubscriptionDialog sd = null;
 
-    
-
     /**
      * Creates new form FrmLogin
      */
@@ -406,16 +404,16 @@ public class FrmLogin extends javax.swing.JFrame {
         if (db.checkMysqlInstalled()) {
             if (db.checkDatabaseExist()) {
 
-                int i = lg.checkLogin(user, pass);
+                int id = lg.checkLogin(user, pass);
 
-                if (i != 0) {
-                    Controller.userBean = lg.getUserDetails(user);
-                    boolean isValid = true,isInSubscription=false;
+                if (id != 0) {
+                    Controller.userBean = lg.getUserDetails(id);
+                    boolean isValid = true, isInSubscription = false;
                     if (Controller.userBean.getIsValid() == 0) {
                         isValid = CommonUtil.getDaysLeft(Controller.userBean.getCreatedOn());
                         this.dispose();
                         isInSubscription = true;
-                         sd = new SubscriptionDialog();
+                        sd = new SubscriptionDialog();
                         sd.init(isValid);
                         sd.show();
                     }
