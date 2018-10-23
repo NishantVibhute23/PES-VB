@@ -61,8 +61,8 @@ public class ImagePanel extends JPanel {
     static LinkedHashMap<Integer, Point> homeChestNumShow = new LinkedHashMap<Integer, Point>();
     static LinkedHashMap<Integer, Point> oppChestNumShow = new LinkedHashMap<Integer, Point>();
 
-    public LinkedHashMap<Integer, Player> rallyPositionMap = new LinkedHashMap<Integer, Player>();
-    public LinkedHashMap<Integer, Player> rallyPositionMapOpp = new LinkedHashMap<Integer, Player>();
+    public static LinkedHashMap<Integer, Player> rallyPositionMap = new LinkedHashMap<Integer, Player>();
+    public static LinkedHashMap<Integer, Player> rallyPositionMapOpp = new LinkedHashMap<Integer, Player>();
 
     boolean isTriangle = false;
     List<DigPoints> shapes = new ArrayList<>();
@@ -288,7 +288,7 @@ public class ImagePanel extends JPanel {
         }
         this.add(p);
     }
-
+ 
     public void showPlayerChestNum() {
 
         homeChestNumShow.put(1, getPoint("H1A"));
@@ -304,6 +304,24 @@ public class ImagePanel extends JPanel {
         oppChestNumShow.put(4, getPoint("O4A"));
         oppChestNumShow.put(5, getPoint("O5A"));
         oppChestNumShow.put(6, getPoint("O6A"));
+
+    }
+    
+    public void showPlayerChestNum2() {
+
+        homeChestNumShow.put(1, getPoint2("H1A"));
+        homeChestNumShow.put(2, getPoint2("H2A"));
+        homeChestNumShow.put(3, getPoint2("H3A"));
+        homeChestNumShow.put(4, getPoint2("H4A"));
+        homeChestNumShow.put(5, getPoint2("H5A"));
+        homeChestNumShow.put(6, getPoint2("H6A"));
+
+        oppChestNumShow.put(1, getPoint2("O1A"));
+        oppChestNumShow.put(2, getPoint2("O2A"));
+        oppChestNumShow.put(3, getPoint2("O3A"));
+        oppChestNumShow.put(4, getPoint2("O4A"));
+        oppChestNumShow.put(5, getPoint2("O5A"));
+        oppChestNumShow.put(6, getPoint2("O6A"));
 
     }
 
@@ -323,7 +341,7 @@ public class ImagePanel extends JPanel {
         Point p = null;
         int centerX, centerY;
 
-        for (Map.Entry<Integer, Player> entry : Controller.panEvaluationRally.rallyPositionMap.entrySet()) {
+        for (Map.Entry<Integer, Player> entry : rallyPositionMap.entrySet()) {
             Player player = entry.getValue();
             String text = player.getChestNo();
             if (text.equals(chestNo)) {
@@ -339,8 +357,22 @@ public class ImagePanel extends JPanel {
 
     public Point getPoint(String pan) {
         JPanel p1 = panGrid.get(pan);
-        int x = (int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth()));
+int x = (int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth()));
         int y = (int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight()));
+        Point p = new Point(x, y);
+        return p;
+    }
+    
+     public Point getPoint2(String pan) {
+        JPanel p1 = panGrid.get(pan);
+         DigPanelLocation dplP1 = panGridLocations.get(pan);
+        int x = ((int) (((dplP1.getParentX() * 50) + (dplP1.getCurrentX() * p1.getWidth())) + (p1.getWidth() / 2)));
+       int y =  ((int) (((dplP1.getParentY() * 50) + (dplP1.getCurrentY() * p1.getHeight())) + (p1.getHeight() / 2)));
+        
+        
+        
+//        int x = (int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth()));
+//        int y = (int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight()));
         Point p = new Point(x, y);
         return p;
     }
@@ -431,6 +463,140 @@ public class ImagePanel extends JPanel {
         repaint();
     }
 
+    public void digEditDetails(String skill, List<String> panel, int tempo) {
+       showPlayerChestNum2();
+        int k = 0;
+        List<String> panels = new ArrayList<>(panel);
+        String playerNum = "";
+        int playerPos = -1;
+        String homeCourt = "";
+        boolean isHomeFound = false;
+        for (int i = 0; i < panels.size(); i++) {
+            if (CommonUtil.isNumeric(panels.get(i))) {
+                playerNum = panels.get(i);
+                playerPos = i;
+            } else {
+                if (panels.get(i).startsWith("H") && !isHomeFound) {
+                    homeCourt = panels.get(i);
+                    isHomeFound = true;
+                }
+            }
+
+        }
+
+        if (playerPos != -1) {
+            panels.remove(playerPos);
+        }
+
+        if (panels.size() > 1) {
+            JPanel p1 = panGrid.get(panels.get(0));
+            DigPanelLocation dplP1 = panGridLocations.get(panels.get(0));
+            for (int i = 1; i < panels.size(); i++) {
+                DigPoints dp = new DigPoints();
+                JPanel p2 = panGrid.get(panels.get(i));
+                               
+            DigPanelLocation dplP2 = panGridLocations.get(panels.get(i));
+           
+
+            dp.setX1((int) (((dplP1.getParentX() * 50) + (dplP1.getCurrentX() * p1.getWidth())) + (p1.getWidth() / 2)));
+            dp.setY1((int) (((dplP1.getParentY() * 50) + (dplP1.getCurrentY() * p1.getHeight())) + (p1.getHeight() / 2)));
+            dp.setX2((int) (((dplP2.getParentX() * 50) + (dplP2.getCurrentX() * p2.getWidth())) + (p2.getWidth() / 2)));
+            dp.setY2((int) (((dplP2.getParentY() * 50) + (dplP2.getCurrentY() * p2.getHeight())) + (p2.getHeight() / 2)));
+            
+         
+//             dp.setX1((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+//                dp.setY1((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+//                dp.setX2((int) (p2.getParent().getLocation().getX() + p2.getLocation().getX() + (p2.getWidth() / 2)));
+//                dp.setY2((int) (p2.getParent().getLocation().getY() + p2.getLocation().getY() + (p2.getHeight() / 2)));
+                
+                
+                
+                
+                if (skill.equalsIgnoreCase("Set")) {
+                    Point p = setCurve(dp, tempo);
+                    dp.setMidx((int) p.getX());
+                    dp.setMidy((int) p.getY());
+                } else {
+                    dp.setMidx(dp.getX2());
+                    dp.setMidy(dp.getY2());
+                }
+                shapes.add(dp);
+                p1 = panGrid.get(panels.get(i));
+                dplP1 = panGridLocations.get(panels.get(i));
+            }
+        }
+
+        if (!playerNum.isEmpty() && isHomeFound) {
+            Point p = getPlayerPoints(playerNum);
+            DigPoints dp = new DigPoints();
+            dp.setX1((int) p.getX());
+            dp.setY1((int) p.getY());
+            dp.setMidx(dp.getX1());
+            dp.setMidy(dp.getY1());
+//
+            if (skill.equals(Skill.Set.getType())) {
+                JPanel p1 = panGrid.get("H2D");
+                DigPanelLocation dplP1 = panGridLocations.get("H2D");
+                dp.setPlayerMoved(1);
+//                dp.setX2((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+//                dp.setY2((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+            dp.setX2((int) (((dplP1.getParentX() * 50) + (dplP1.getCurrentX() * p1.getWidth())) + (p1.getWidth() / 2)));
+            dp.setY2((int) (((dplP1.getParentY() * 50) + (dplP1.getCurrentY() * p1.getHeight())) + (p1.getHeight() / 2)));
+
+                shapes.add(dp);
+
+                DigPoints dpNew = new DigPoints();
+                dp.setPlayerMoved(2);
+//                dpNew.setX1((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+//                dpNew.setY1((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+
+ dpNew.setX1((int) (((dplP1.getParentX() * 50) + (dplP1.getCurrentX() * p1.getWidth())) + (p1.getWidth() / 2)));
+            dpNew.setY1((int) (((dplP1.getParentY() * 50) + (dplP1.getCurrentY() * p1.getHeight())) + (p1.getHeight() / 2)));
+                dpNew.setMidx(dpNew.getX1());
+                dpNew.setMidy(dpNew.getY1());
+                JPanel p2 = panGrid.get(homeCourt);
+                DigPanelLocation dplP2 = panGridLocations.get(homeCourt);
+                dpNew.setPlayerMoved(1);
+//                dpNew.setX2((int) (p2.getParent().getLocation().getX() + p2.getLocation().getX() + (p2.getWidth() / 2)));
+//                dpNew.setY2((int) (p2.getParent().getLocation().getY() + p2.getLocation().getY() + (p2.getHeight() / 2)));
+                
+                 dpNew.setX2((int) (((dplP2.getParentX() * 50) + (dplP2.getCurrentX() * p2.getWidth())) + (p2.getWidth() / 2)));
+            dpNew.setY2((int) (((dplP2.getParentY() * 50) + (dplP2.getCurrentY() * p2.getHeight())) + (p2.getHeight() / 2)));
+                shapes.add(dpNew);
+
+            } else {
+                JPanel p1 = panGrid.get(homeCourt);
+                 DigPanelLocation dplP1 = panGridLocations.get(homeCourt);
+                dp.setPlayerMoved(1);
+//                dp.setX2((int) (p1.getParent().getLocation().getX() + p1.getLocation().getX() + (p1.getWidth() / 2)));
+//                dp.setY2((int) (p1.getParent().getLocation().getY() + p1.getLocation().getY() + (p1.getHeight() / 2)));
+//                
+                 dp.setX2((int) (((dplP1.getParentX() * 50) + (dplP1.getCurrentX() * p1.getWidth())) + (p1.getWidth() / 2)));
+            dp.setY2((int) (((dplP1.getParentY() * 50) + (dplP1.getCurrentY() * p1.getHeight())) + (p1.getHeight() / 2)));
+                shapes.add(dp);
+            }
+        }
+
+        repaint();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public Point setCurve(DigPoints dp, int tempo) {
         Point p = new Point();
         int val = tempo;

@@ -1085,6 +1085,20 @@ public class PanEvaluation extends javax.swing.JPanel {
                 Controller.panMatchSet.repaint();
             } else {
                 setScore();
+                totalRallies++;
+            rallyNumNext++;
+            lblCurrentRally.setText("RALLY : " + rallyNumNext);
+            // TODO add your handling code here:
+            panEvalRallyRow.removeAll();
+//        ph = new PanEvaluationRallyHead(rallyNumNext, matchEvaluationId, rallyPositionMap, evaluationType);
+            Controller.panEvaluationRally = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
+//        panRallyEvalHead.add(ph, BorderLayout.CENTER);
+            panEvalRallyRow.add(Controller.panEvaluationRally, BorderLayout.CENTER);
+            validate();
+            repaint();
+                
+                
+                
             }
         } else {
             setScore();

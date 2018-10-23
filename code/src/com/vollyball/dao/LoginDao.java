@@ -21,6 +21,7 @@ public class LoginDao {
     DbUtil db = new DbUtil();
     Connection con;
 
+
     public int checkLogin(String name, String password) {
 
         int id = 0;
@@ -59,6 +60,7 @@ public class LoginDao {
                 ub.setIsValid(rs.getInt(5));
                 ub.setMacAddress(rs.getString(6));
                 ub.setCreatedOn(rs.getString(7));
+                ub.setPassword(rs.getString(8));
             }
 
         } catch (Exception ex) {
@@ -96,7 +98,9 @@ public class LoginDao {
             PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("update.user"));
             ps.setString(1, ub.getUserName());
             ps.setString(2, ub.getPassword());
-            ps.setInt(3, ub.getId());
+            ps.setString(3, ub.getEmailId());
+            ps.setInt(4, ub.getId());
+            
             count = ps.executeUpdate();
 
         } catch (Exception ex) {

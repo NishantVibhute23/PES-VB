@@ -444,9 +444,9 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 diagramPoints = new ArrayList<String>(Arrays.asList(arr));
                 if (diagramPoints.size() > 2) {
                     if (skill.equals(Skill.Set.getType())) {
-                        panel.dig(skill, diagramPoints, TempoEnum.getTempoByName(skillDescIdPanMap.get(43).lblOption.getText()));
+                        panel.digEditDetails(skill, diagramPoints, TempoEnum.getTempoByName(skillDescIdPanMap.get(43).lblOption.getText()));
                     } else {
-                        panel.dig(skill, diagramPoints, 0);
+                        panel.digEditDetails(skill, diagramPoints, 0);
                     }
                 }
             }
@@ -626,7 +626,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             skillDescIdPanMap.put(sdc.getId(), pan);
             LinkedHashMap<String, Integer> pointsMap = new LinkedHashMap<>();
             for (SkillDescCriteriaPoint sdcp : lstPoints) {
-                if (sdc.getView() == 1) {
+//                if (sdc.getView() == 1) {
                     //get shortcut code from database by passing shortcutId
                     String shortcut = getShortcutById(sdcp.getShortcutId());
                     //------//
@@ -634,16 +634,16 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     pointsShortcut.put(shortcut, sdcp.getAbbreviation());
                     pointsMap.put(sdcp.getAbbreviation(), sdcp.getId());
                     pointList.add(shortcut);
-                }
+//                }
             }
-            if (sdc.getView() == 1) {
+//            if (sdc.getView() == 1) {
                 i++;
                 if (i <= 5) {
                     panDesc1.add(pan);
                 } else if (i <= 10) {
                     panDesc2.add(pan);
                 }
-            }
+//            }
             pan.setPointsMap(pointsMap);
             panPoints.put(pan, pointList);
         }

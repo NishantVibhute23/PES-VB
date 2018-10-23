@@ -14,7 +14,9 @@ import com.vollyball.enums.Rating;
 import com.vollyball.enums.SetupEnum;
 import com.vollyball.enums.ShortCutEnum;
 import com.vollyball.enums.Skill;
+import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.enums.SkillDetails;
+import com.vollyball.enums.SkillsDescCriteria;
 import com.vollyball.enums.VollyCourtCoordinate;
 import com.vollyball.frames.FrmRegister;
 import com.vollyball.util.CommonUtil;
@@ -68,6 +70,8 @@ public class Setup extends Thread {
             insertRatings(89);
             insertSkills(90);
             insertSkillDetails(91);
+            insertSkillDescCriteria(92);
+            insertSkillDescCriteriaPoint(93);
             insertUser(92);
             insertVollyCoordinate(93);
             createBatchTable(94);
@@ -238,6 +242,63 @@ public class Setup extends Thread {
         }
     }
 
+    public void insertSkillDescCriteria(int status) {
+        int count = 0;
+        String query = CommonUtil.getResourceProperty("insert.skilldeccriteria");
+        for (SkillsDescCriteria dir : SkillsDescCriteria.values()) {
+            Connection conn = db.getConnection();
+            int resp = 0;
+            try {
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.setInt(1, dir.getId());
+                preparedStmt.setString(2, dir.getType());
+                preparedStmt.setInt(3, dir.getSkillId());
+                resp = preparedStmt.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(Setup.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                db.closeConnection(conn);
+            }
+            count = count + resp;
+        }
+        int total = SkillsDescCriteria.values().length;
+        if (total == count) {
+            Controller.stepCompleted.put(SetupEnum.InsertSkillDescCriteria.getStep(), SetupEnum.InsertSkillDescCriteria.getValue());
+            FrmRegister.pgrStatus.setValue(status);
+        }
+    }
+
+    
+    public void insertSkillDescCriteriaPoint(int status) {
+        int count = 0;
+        String query = CommonUtil.getResourceProperty("insert.skilldeccriteriapoint");
+        for (SkillDescCriteriaPoint dir : SkillDescCriteriaPoint.values()) {
+            Connection conn = db.getConnection();
+            int resp = 0;
+            try {
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.setInt(1, dir.getId());
+                preparedStmt.setString(2, dir.getType());
+                preparedStmt.setString(3, dir.getAbbreviation());
+                  preparedStmt.setInt(4, dir.getSkillDescCriteriaId());
+                resp = preparedStmt.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(Setup.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                db.closeConnection(conn);
+            }
+            count = count + resp;
+        }
+        int total = SkillDescCriteriaPoint.values().length;
+        if (total == count) {
+            Controller.stepCompleted.put(SetupEnum.InsertSkillDescCriteriaPoint.getStep(), SetupEnum.InsertSkillDescCriteriaPoint.getValue());
+            FrmRegister.pgrStatus.setValue(status);
+        }
+    }
+    
+    
+    
+    
     public void insertSkills(int status) {
         int count = 0;
         String query = CommonUtil.getResourceProperty("insert.skills");

@@ -15,6 +15,8 @@ import com.vollyball.dialog.DialogPanEvaluation;
 import com.vollyball.enums.PlayerPosition;
 import com.vollyball.util.CommonUtil;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +50,8 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     int homeTeamId;
     int oppTeamId;
 
+    public List<JTextField> textFields = new ArrayList<>();
+
     /**
      * Creates new form PanEvaluationRotation
      */
@@ -64,7 +68,22 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         this.matchId = matchId;
         this.homeTeamId = homeTeamId;
         this.oppTeamId = oppTeamId;
-        
+
+        textFields.add(pos1Home);
+        textFields.add(pos2Home);
+        textFields.add(pos3Home);
+        textFields.add(pos4Home);
+        textFields.add(pos5Home);
+        textFields.add(pos6Home);
+        textFields.add(liberoHome);
+
+        textFields.add(pos1Opp);
+        textFields.add(pos2Opp);
+        textFields.add(pos3Opp);
+        textFields.add(pos4Opp);
+        textFields.add(pos5Opp);
+        textFields.add(pos6Opp);
+        textFields.add(liberoOpp);
 
     }
 
@@ -1293,6 +1312,15 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
+        
+         boolean isValid = true;
+
+        for (JTextField txt : textFields) {
+            if (txt.getText().equals("")) {
+                isValid = false;
+            }
+        }
+         if (isValid) {
         initialHomePositionMap = new LinkedHashMap<>();
         initialHomePositionMap.put(1, playerMapHome.get(pos1Home.getText()));
         initialHomePositionMap.put(2, playerMapHome.get(pos2Home.getText()));
@@ -1328,32 +1356,40 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
             ms.getRotationOrderOpp().add(sro);
         }
 
-        ms.setEvaluator(txtEvaluatorName.getText());
-        ms.setStart_time("00:00");
-        ms.setEnd_time("00:00");
-        ms.setDate(CommonUtil.getDate());
+       
 
-        int id = 0;
-        if (type.equals("Update")) {
-            id = matchDao.updateRotationOrder(ms);
-        } else {
-            id = matchDao.insertMatchSet(ms);
-        }
-        if (id == 0) {
-            JOptionPane.showMessageDialog(this, "Failed to Save");
-        } else {
-            JOptionPane.showMessageDialog(this, "Saved Successfully");
+       
+
+            ms.setEvaluator(txtEvaluatorName.getText());
+            ms.setStart_time("00:00");
+            ms.setEnd_time("00:00");
+            ms.setDate(CommonUtil.getDate());
+
+            int id = 0;
             if (type.equals("Update")) {
-                Controller.panMatchSet.setRotationDialog.close();
-                Controller.panMatchSet.setValues();
+                id = matchDao.updateRotationOrder(ms);
             } else {
-                 Controller.panMatchEvaluationHome.objRotationOrder.close();
-             DialogPanEvaluation   obj = new DialogPanEvaluation();
-            obj.setSetFields(set, this.matchId, this.homeTeamId, this.oppTeamId, 1, matchEvaluationTeamId);
-            obj.init();
-            obj.show();
-               
+                id = matchDao.insertMatchSet(ms);
             }
+            if (id == 0) {
+                JOptionPane.showMessageDialog(this, "Failed to Save");
+            } else {
+                JOptionPane.showMessageDialog(this, "Saved Successfully");
+                if (type.equals("Update")) {
+                    Controller.panMatchSet.setRotationDialog.close();
+                    Controller.panMatchSet.setValues();
+                } else {
+                    Controller.panMatchEvaluationHome.objRotationOrder.close();
+                    Controller.panMatchEvaluationHome.obj = new DialogPanEvaluation();
+                    Controller.panMatchEvaluationHome.obj.setSetFields(set, this.matchId, this.homeTeamId, this.oppTeamId, 1, matchEvaluationTeamId);
+                    Controller.panMatchEvaluationHome.obj.init();
+                    Controller.panMatchEvaluationHome.obj.show();
+
+                }
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Please Select all rotation players");
         }
 
     }//GEN-LAST:event_jLabel6MouseClicked

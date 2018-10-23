@@ -8,6 +8,8 @@ package com.vollyball.panels;
 import com.vollyball.bean.UserBean;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.LoginDao;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,11 +25,16 @@ public class PanUserProfile extends javax.swing.JPanel {
      */
     public PanUserProfile() {
         initComponents();
-        lblName.setText("");
-        lblPassword.setText("");
-        lblConfPassword.setText("");
+        lblUser.setText(" ");
+        lblPassword.setText(" ");
+        lblConfPassword.setText(" ");
+        lblEmail.setText(" ");
 //        txtPassword.setText(Controller.userBean.getEmailId());
         txtuserName.setText(Controller.userBean.getUserName());
+        txtEmail.setText(Controller.userBean.getEmailId());
+        txtPassword.setText(Controller.userBean.getPassword());
+        txtConfPassword.setText(Controller.userBean.getPassword());
+         txtEmail.setEditable(false);
         txtuserName.setEditable(false);
         txtPassword.setEditable(false);
         txtConfPassword.setEditable(false);
@@ -56,6 +63,14 @@ public class PanUserProfile extends javax.swing.JPanel {
         lblPassword = new javax.swing.JLabel();
         lblConfPassword = new javax.swing.JLabel();
         lbledit = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        PlayerLabel2 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(57, 74, 108));
 
@@ -69,16 +84,16 @@ public class PanUserProfile extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(lblHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGap(23, 23, 23)
+                .addComponent(lblHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(5, 5, 5)
                 .addComponent(lblHeading)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5, 5, 5))
         );
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -93,7 +108,7 @@ public class PanUserProfile extends javax.swing.JPanel {
         PlayerLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         PlayerLabel1.setForeground(new java.awt.Color(255, 255, 255));
         PlayerLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PlayerLabel1.setText("OK");
+        PlayerLabel1.setText("Save");
         PlayerLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PlayerLabel1MouseClicked(evt);
@@ -104,19 +119,15 @@ public class PanUserProfile extends javax.swing.JPanel {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PlayerLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+            .addComponent(PlayerLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PlayerLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+            .addComponent(PlayerLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
         );
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel3.setText("Confirm Password");
-
-        txtPassword.setText("jPasswordField1");
-
-        txtConfPassword.setText("jPasswordField2");
 
         lblName.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         lblName.setForeground(new java.awt.Color(255, 0, 0));
@@ -133,65 +144,118 @@ public class PanUserProfile extends javax.swing.JPanel {
         lbledit.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         lbledit.setForeground(new java.awt.Color(0, 0, 255));
         lbledit.setText("[Edit]");
+        lbledit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbledit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbleditMouseClicked(evt);
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel4.setText("Email");
+
+        jPanel13.setBackground(new java.awt.Color(57, 74, 108));
+        jPanel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        PlayerLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        PlayerLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        PlayerLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PlayerLabel2.setText("Cancel");
+        PlayerLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PlayerLabel2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PlayerLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PlayerLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+        );
+
+        lblEmail.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(255, 0, 0));
+        lblEmail.setText("lbl");
+
+        lblUser.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(255, 0, 0));
+        lblUser.setText("lbl");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbledit)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addComponent(jLabel3)
-                                .addComponent(txtuserName)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                                .addComponent(txtConfPassword)
-                                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblConfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbledit))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                            .addComponent(txtConfPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblConfPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtuserName)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbledit, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lbledit, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtuserName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addGap(0, 0, 0)
                 .addComponent(lblName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(3, 3, 3)
+                .addComponent(lblUser)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(lblEmail)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(3, 3, 3)
                 .addComponent(lblPassword)
-                .addGap(10, 10, 10)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtConfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(3, 3, 3)
                 .addComponent(lblConfPassword)
-                .addGap(19, 19, 19)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -202,33 +266,69 @@ public class PanUserProfile extends javax.swing.JPanel {
             UserBean ub = new UserBean();
             ub.setId(Controller.userBean.getId());
             ub.setUserName(txtuserName.getText());
+            
+            ub.setEmailId(txtEmail.getText());
             ub.setPassword(new String(txtPassword.getPassword()));
             int status = loginDao.updateUserPassword(ub);
             if (status != 0) {
-                JOptionPane.showMessageDialog(this, "Password Updated Successfully");
+                JOptionPane.showMessageDialog(this, "Profile Updated Successfully");
+                 Controller.userBean = loginDao.getUserDetails(Controller.userBean.getId());
             } else {
-                JOptionPane.showMessageDialog(this, "Password not updated");
+                JOptionPane.showMessageDialog(this, "Failed to update Profile");
             }
+            Controller.createUserDialog.close();
         }
-        Controller.createUserDialog.close();
+        
     }//GEN-LAST:event_PlayerLabel1MouseClicked
 
     private void lbleditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbleditMouseClicked
         // TODO add your handling code here:
+        
+                 txtEmail.setEditable(true);
+        txtuserName.setEditable(true);
+        txtPassword.setEditable(true);
+        txtConfPassword.setEditable(true);
 
     }//GEN-LAST:event_lbleditMouseClicked
 
+    private void PlayerLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayerLabel2MouseClicked
+        // TODO add your handling code here:
+         Controller.createUserDialog.close();
+        
+        
+    }//GEN-LAST:event_PlayerLabel2MouseClicked
+
     public int validateForm() {
         int count = 0;
-        lblName.setText("");
-        lblPassword.setText("");
-        lblConfPassword.setText("");
+        lblUser.setText(" ");
+        lblPassword.setText(" ");
+        lblConfPassword.setText(" ");
+        lblEmail.setText(" ");
         if (txtuserName.getText().equals("")) {
-            lblName.setText("UserName cannot be Blank");
+            lblUser.setText("UserName cannot be Blank");
+            count++;
         }
 
+        if (txtEmail.getText().equals("")) {
+            lblEmail.setText("E-Mail cannot be Blank");
+            count++;
+         
+        }
+        if (!txtEmail.getText().equals("")) {
+            String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+            Boolean b = txtEmail.getText().matches(EMAIL_REGEX);
+            if (!b) {
+                lblEmail.setText("E-Mail is Incorrect");
+               
+//            msg = msg + "E-Mail is Incorrect\n";
+                count++;
+            }
+
+        }
+        
         if (new String(txtPassword.getPassword()).equals("")) {
             lblPassword.setText("Password cannot be Blank");
+            count++;
         }
 
         if (!new String(txtPassword.getPassword()).equals(new String(txtConfPassword.getPassword()))) {
@@ -242,17 +342,23 @@ public class PanUserProfile extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PlayerLabel1;
+    private javax.swing.JLabel PlayerLabel2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JLabel lblConfPassword;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblHeading;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JLabel lbledit;
     private javax.swing.JPasswordField txtConfPassword;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtuserName;
     // End of variables declaration//GEN-END:variables

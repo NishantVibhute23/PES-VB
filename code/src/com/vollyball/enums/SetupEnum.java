@@ -46,7 +46,9 @@ public enum SetupEnum {
     Setting(33, "Setting"),
     InsertSettings(34, "Insert Setting"),
     BatchMatch(35, "Batch Team"),
-    BatchMatchPlayer(36, "Batch Match Player");
+    BatchMatchPlayer(36, "Batch Match Player"),
+    InsertSkillDescCriteria(37, "Insert Skill Desc Criteria"),
+    InsertSkillDescCriteriaPoint(38, "Insert Skill Desc Criteria Point");
 
     int step;
 
