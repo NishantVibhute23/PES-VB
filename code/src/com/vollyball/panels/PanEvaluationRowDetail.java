@@ -269,6 +269,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     }
 
     public void save() {
+        rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
         if (isFirst && isNew) {
             isFirst = false;
             Date time = new Date();
@@ -467,6 +468,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     }
 
     public void selectScore(JLabel j) {
+       
         JLabel lblScore = j;
         p.currentPanRow.txtRate.setText(lblScore.getText());
         score = Integer.parseInt(lblScore.getText());
@@ -584,6 +586,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     }
 
     public void selectSkill(JLabel j) {
+        skillDescIdPanMap = new LinkedHashMap<>();
         JLabel lblSkill = j;
         p.currentPanRow.txtSkill.setText(lblSkill.getText());
         skill = lblSkill.getText();

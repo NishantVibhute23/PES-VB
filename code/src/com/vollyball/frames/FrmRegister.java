@@ -140,7 +140,7 @@ public class FrmRegister extends javax.swing.JFrame {
     private void lblFinishMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFinishMouseClicked
         // TODO add your handling code here:
         dispose();
-        new FrmLogin();
+        Controller.frmLogin = new FrmLogin();
     }//GEN-LAST:event_lblFinishMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -84,7 +84,7 @@ public class DbUtil {
             String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
             url = DATABASE_URL + "" + dbName;
             DriverManager.setLoginTimeout(5);
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 //            this.con = DriverManager.getConnection(url, "adminGnXBLDP", "dt78KgjZGwUD");
             this.con = DriverManager.getConnection(url, "root", "root");
             return true;
@@ -154,7 +154,7 @@ public class DbUtil {
 //            url = "jdbc:mysql://127.9.126.2:3306/pritienterprises";
             String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
             url = DATABASE_URL + "" + dbName + "?autoReconnect=true&useSSL=false";
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 //            this.con = DriverManager.getConnection(url, "adminGnXBLDP", "dt78KgjZGwUD");
             this.con = DriverManager.getConnection(url, "root", "root");
             return con;
