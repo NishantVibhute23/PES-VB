@@ -11,8 +11,12 @@ import com.vollyball.bean.SetRotationOrder;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.TeamDao;
+import com.vollyball.dialog.DialogPanEvaluation;
 import com.vollyball.enums.PlayerPosition;
+import com.vollyball.util.CommonUtil;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +46,11 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     public LinkedHashMap<Integer, Player> initialOppPositionMap;
     MatchDao matchDao = new MatchDao();
     String type, evaluatorName;
+    int matchId;
+    int homeTeamId;
+    int oppTeamId;
+
+    public List<JTextField> textFields = new ArrayList<>();
 
     /**
      * Creates new form PanEvaluationRotation
@@ -56,6 +65,25 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         lblOpp.setText(oppteam);
         setHomePlayers(homeTeamId, matchId);
         setOppPlayers(oppTeamId, matchId);
+        this.matchId = matchId;
+        this.homeTeamId = homeTeamId;
+        this.oppTeamId = oppTeamId;
+
+        textFields.add(pos1Home);
+        textFields.add(pos2Home);
+        textFields.add(pos3Home);
+        textFields.add(pos4Home);
+        textFields.add(pos5Home);
+        textFields.add(pos6Home);
+        textFields.add(liberoHome);
+
+        textFields.add(pos1Opp);
+        textFields.add(pos2Opp);
+        textFields.add(pos3Opp);
+        textFields.add(pos4Opp);
+        textFields.add(pos5Opp);
+        textFields.add(pos6Opp);
+        textFields.add(liberoOpp);
 
     }
 
@@ -350,6 +378,8 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
 
                 setBackground(new java.awt.Color(0, 0, 0));
 
+                jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
                 tbPlayersOpp.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
                 tbPlayersOpp.setModel(new javax.swing.table.DefaultTableModel(
                     new Object [][] {
@@ -362,6 +392,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 tbPlayersOpp.setRowHeight(25);
                 jScrollPane1.setViewportView(tbPlayersOpp);
 
+                jPanel2.setBackground(new java.awt.Color(255, 255, 255));
                 jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 78, 108)));
 
                 pos4Opp.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -532,6 +563,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addGap(6, 6, 6))
                 );
 
+                jPanel4.setBackground(new java.awt.Color(255, 255, 255));
                 jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 78, 108)));
 
                 jPanel5.setBackground(new java.awt.Color(54, 78, 108));
@@ -593,6 +625,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addGap(20, 20, 20))
                 );
 
+                lblOpp.setBackground(new java.awt.Color(255, 255, 255));
                 lblOpp.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
                 lblOpp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lblOpp.setText("jLabel5");
@@ -628,6 +661,8 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addContainerGap())
                 );
 
+                jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
                 tbPlayersHome.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
                 tbPlayersHome.setModel(new javax.swing.table.DefaultTableModel(
                     new Object [][] {
@@ -640,6 +675,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 tbPlayersHome.setRowHeight(25);
                 jScrollPane2.setViewportView(tbPlayersHome);
 
+                jPanel7.setBackground(new java.awt.Color(255, 255, 255));
                 jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 78, 108)));
 
                 pos4Home.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -810,6 +846,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addGap(6, 6, 6))
                 );
 
+                jPanel9.setBackground(new java.awt.Color(255, 255, 255));
                 jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 78, 108)));
 
                 jPanel10.setBackground(new java.awt.Color(54, 78, 108));
@@ -891,7 +928,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(10, 12, Short.MAX_VALUE))))
                 );
                 jPanel6Layout.setVerticalGroup(
                     jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -931,6 +968,8 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addContainerGap())
                 );
 
+                jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+
                 jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
                 jLabel5.setText("Name Of the Evaluator : ");
 
@@ -955,6 +994,8 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                         .addContainerGap())
                 );
 
+                jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+
                 jPanel14.setBackground(new java.awt.Color(57, 74, 108));
                 jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                 jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -970,6 +1011,11 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         jLabel6MouseClicked(evt);
+                    }
+                });
+                jLabel6.addKeyListener(new java.awt.event.KeyAdapter() {
+                    public void keyPressed(java.awt.event.KeyEvent evt) {
+                        jLabel6KeyPressed(evt);
                     }
                 });
 
@@ -1266,6 +1312,15 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
+        
+         boolean isValid = true;
+
+        for (JTextField txt : textFields) {
+            if (txt.getText().equals("")) {
+                isValid = false;
+            }
+        }
+         if (isValid) {
         initialHomePositionMap = new LinkedHashMap<>();
         initialHomePositionMap.put(1, playerMapHome.get(pos1Home.getText()));
         initialHomePositionMap.put(2, playerMapHome.get(pos2Home.getText()));
@@ -1301,27 +1356,40 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
             ms.getRotationOrderOpp().add(sro);
         }
 
-        ms.setEvaluator(txtEvaluatorName.getText());
-        ms.setStart_time("00:00");
-        ms.setEnd_time("00:00");
-        ms.setDate("");
+       
 
-        int id = 0;
-        if (type.equals("Update")) {
-            id = matchDao.updateRotationOrder(ms);
-        } else {
-            id = matchDao.insertMatchSet(ms);
-        }
-        if (id == 0) {
-            JOptionPane.showMessageDialog(this, "Failed to Save");
-        } else {
-            JOptionPane.showMessageDialog(this, "Saved Successfully");
+       
+
+            ms.setEvaluator(txtEvaluatorName.getText());
+            ms.setStart_time("00:00");
+            ms.setEnd_time("00:00");
+            ms.setDate(CommonUtil.getDate());
+
+            int id = 0;
             if (type.equals("Update")) {
-                Controller.panMatchSet.setRotationDialog.close();
-                Controller.panMatchSet.setValues();
+                id = matchDao.updateRotationOrder(ms);
             } else {
-                Controller.panMatchEvaluationHome.objRotationOrder.close();
+                id = matchDao.insertMatchSet(ms);
             }
+            if (id == 0) {
+                JOptionPane.showMessageDialog(this, "Failed to Save");
+            } else {
+                JOptionPane.showMessageDialog(this, "Saved Successfully");
+                if (type.equals("Update")) {
+                    Controller.panMatchSet.setRotationDialog.close();
+                    Controller.panMatchSet.setValues();
+                } else {
+                    Controller.panMatchEvaluationHome.objRotationOrder.close();
+                    Controller.panMatchEvaluationHome.obj = new DialogPanEvaluation();
+                    Controller.panMatchEvaluationHome.obj.setSetFields(set, this.matchId, this.homeTeamId, this.oppTeamId, 1, matchEvaluationTeamId);
+                    Controller.panMatchEvaluationHome.obj.init();
+                    Controller.panMatchEvaluationHome.obj.show();
+
+                }
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Please Select all rotation players");
         }
 
     }//GEN-LAST:event_jLabel6MouseClicked
@@ -1334,6 +1402,10 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel14MouseClicked
+
+    private void jLabel6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel6KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6KeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

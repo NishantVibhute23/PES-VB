@@ -27,7 +27,6 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -144,7 +143,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         scoreKeys = ShortKeysUtil.scoreKeys();
         diagramKeys = ShortKeysUtil.diagramKeys();
 
-        panel = new ImagePanel(new ImageIcon("src\\com\\vollyball\\images\\panVollyCourtNewGrid.png").getImage(), p);
+        panel = new ImagePanel(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/panVollyCourtNewGrid.png")).getImage(), p);
         panCourt.add(panel, BorderLayout.CENTER);
 
         playerLabelList = new ArrayList<JLabel>(mapPlayerComponent.keySet());
@@ -270,6 +269,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     }
 
     public void save() {
+        rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
         if (isFirst && isNew) {
             isFirst = false;
             Date time = new Date();
@@ -445,9 +445,9 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 diagramPoints = new ArrayList<String>(Arrays.asList(arr));
                 if (diagramPoints.size() > 2) {
                     if (skill.equals(Skill.Set.getType())) {
-                        panel.dig(skill, diagramPoints, TempoEnum.getTempoByName(skillDescIdPanMap.get(43).lblOption.getText()));
+                        panel.digEditDetails(skill, diagramPoints, TempoEnum.getTempoByName(skillDescIdPanMap.get(43).lblOption.getText()));
                     } else {
-                        panel.dig(skill, diagramPoints, 0);
+                        panel.digEditDetails(skill, diagramPoints, 0);
                     }
                 }
             }
@@ -468,6 +468,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     }
 
     public void selectScore(JLabel j) {
+       
         JLabel lblScore = j;
         p.currentPanRow.txtRate.setText(lblScore.getText());
         score = Integer.parseInt(lblScore.getText());
@@ -585,6 +586,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     }
 
     public void selectSkill(JLabel j) {
+        skillDescIdPanMap = new LinkedHashMap<>();
         JLabel lblSkill = j;
         p.currentPanRow.txtSkill.setText(lblSkill.getText());
         skill = lblSkill.getText();
@@ -627,7 +629,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             skillDescIdPanMap.put(sdc.getId(), pan);
             LinkedHashMap<String, Integer> pointsMap = new LinkedHashMap<>();
             for (SkillDescCriteriaPoint sdcp : lstPoints) {
-                if (sdc.getView() == 1) {
+//                if (sdc.getView() == 1) {
                     //get shortcut code from database by passing shortcutId
                     String shortcut = getShortcutById(sdcp.getShortcutId());
                     //------//
@@ -635,16 +637,16 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     pointsShortcut.put(shortcut, sdcp.getAbbreviation());
                     pointsMap.put(sdcp.getAbbreviation(), sdcp.getId());
                     pointList.add(shortcut);
-                }
+//                }
             }
-            if (sdc.getView() == 1) {
+//            if (sdc.getView() == 1) {
                 i++;
                 if (i <= 5) {
                     panDesc1.add(pan);
                 } else if (i <= 10) {
                     panDesc2.add(pan);
                 }
-            }
+//            }
             pan.setPointsMap(pointsMap);
             panPoints.put(pan, pointList);
         }

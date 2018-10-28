@@ -14,7 +14,9 @@ import com.vollyball.enums.Rating;
 import com.vollyball.enums.SetupEnum;
 import com.vollyball.enums.ShortCutEnum;
 import com.vollyball.enums.Skill;
+import com.vollyball.enums.SkillDescCriteriaPoint;
 import com.vollyball.enums.SkillDetails;
+import com.vollyball.enums.SkillsDescCriteria;
 import com.vollyball.enums.VollyCourtCoordinate;
 import com.vollyball.frames.FrmRegister;
 import com.vollyball.util.CommonUtil;
@@ -41,51 +43,58 @@ public class Setup extends Thread {
     public void run() {
         String resp = setupDb();
         if (resp.equalsIgnoreCase("success")) {
-            createUserTable(60);
-            createCompetationTable(65);
-            createTeamTable(70);
-            createPlayersTable(75);
-            createPoolTable(80);
-            createMatchesTable(80);
-            createMSkillsTable(80);
-            createMRatingTable(80);
-            createMatchEvaluationTable(80);
-            createMSkillDescCriteriaTable(80);
-            createMSkillDetailsTable(80);
-            createMSkillDescCriteriaPointTable(80);
-            createMatchEvaluationSetTable(80);
-            createRallyTable(80);
-            createRallyDetailsTable(80);
+            createUserTable(52);
+            createCompetationTable(54);
+            createTeamTable(56);
+            createPlayersTable(58);
+            createPoolTable(60);
+            createMatchesTable(62);
+            createMSkillsTable(64);
+            createMRatingTable(66);
+            createMatchEvaluationTable(68);
+            createMSkillDescCriteriaTable(70);
+            createMSkillDetailsTable(72);
+            createMSkillDescCriteriaPointTable(74);
+            createMatchEvaluationSetTable(76);
+            createRallyTable(78);
+            createRallyDetailsTable(79);
             createRallyDetailsCriteriaTable(80);
-            createsetRotationOrderTable(80);
-            createsetsubstitutionTable(80);
-            createsetplusminusTable(80);
-            createsettimeoutTable(80);
-            createRallyRotationOrder(80);
-            createMatchPlayer(80);
-            createVollyCoordinate(80);
-            creatematchevaluationsetlatestrotation(80);
-            insertRatings(90);
-            insertSkills(95);
-            insertSkillDetails(97);
-            insertUser(100);
-            insertVollyCoordinate(100);
-            createBatchTable(70);
-            createTraineeTable(75);
-            createSettingTable(80);
-            insertDefaultSettings(80);
-            createBatchTeamTable(90);
+            createsetRotationOrderTable(81);
+            createsetsubstitutionTable(82);
+            createsetplusminusTable(83);
+            createsettimeoutTable(84);
+            createRallyRotationOrder(85);
+            createMatchPlayer(86);
+            createVollyCoordinate(87);
+            creatematchevaluationsetlatestrotation(88);
+            insertRatings(89);
+            insertSkills(90);
+            insertSkillDetails(91);
+            insertSkillDescCriteria(92);
+            insertSkillDescCriteriaPoint(93);
+            insertUser(92);
+            insertVollyCoordinate(93);
+            createBatchTable(94);
+            createTraineeTable(95);
+            createSettingTable(96);
+            insertDefaultSettings(97);
+            createBatchTeamTable(99);
             createBatchMatchPlayerTable(100);
 
             FrmRegister.lblStatus.setText("Done");
             FrmRegister.lblFinish.setVisible(true);
+            FrmRegister.lblHeader.setText("");
+            Controller.panLoading.lblSpinner.setIcon(null);
+            Controller.panLoading.lblSpinnerHead.setText("Finished");
         }
 
     }
 
     public String setupDb() {
-        boolean isCreated = db.createNewDatabase();
+//        boolean isCreated = db.createNewDatabase();
+        boolean isCreated = db.createMysqlDatabase();
         if (isCreated) {
+            db.grantPermission();
             Controller.stepCompleted.put(SetupEnum.Database.getStep(), SetupEnum.Database.getValue());
             FrmRegister.pgrStatus.setValue(70);
         }
@@ -199,9 +208,11 @@ public class Setup extends Thread {
     public void createSettingTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.settings"), SetupEnum.Setting, status);
     }
+
     public void createBatchTeamTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.batchTeam"), SetupEnum.BatchMatch, status);
     }
+
     public void createBatchMatchPlayerTable(int status) {
         executeQuery(CommonUtil.getResourceProperty("create.batchMatchPlayer"), SetupEnum.BatchMatchPlayer, status);
     }
@@ -231,6 +242,63 @@ public class Setup extends Thread {
         }
     }
 
+    public void insertSkillDescCriteria(int status) {
+        int count = 0;
+        String query = CommonUtil.getResourceProperty("insert.skilldeccriteria");
+        for (SkillsDescCriteria dir : SkillsDescCriteria.values()) {
+            Connection conn = db.getConnection();
+            int resp = 0;
+            try {
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.setInt(1, dir.getId());
+                preparedStmt.setString(2, dir.getType());
+                preparedStmt.setInt(3, dir.getSkillId());
+                resp = preparedStmt.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(Setup.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                db.closeConnection(conn);
+            }
+            count = count + resp;
+        }
+        int total = SkillsDescCriteria.values().length;
+        if (total == count) {
+            Controller.stepCompleted.put(SetupEnum.InsertSkillDescCriteria.getStep(), SetupEnum.InsertSkillDescCriteria.getValue());
+            FrmRegister.pgrStatus.setValue(status);
+        }
+    }
+
+    
+    public void insertSkillDescCriteriaPoint(int status) {
+        int count = 0;
+        String query = CommonUtil.getResourceProperty("insert.skilldeccriteriapoint");
+        for (SkillDescCriteriaPoint dir : SkillDescCriteriaPoint.values()) {
+            Connection conn = db.getConnection();
+            int resp = 0;
+            try {
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.setInt(1, dir.getId());
+                preparedStmt.setString(2, dir.getType());
+                preparedStmt.setString(3, dir.getAbbreviation());
+                  preparedStmt.setInt(4, dir.getSkillDescCriteriaId());
+                resp = preparedStmt.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(Setup.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                db.closeConnection(conn);
+            }
+            count = count + resp;
+        }
+        int total = SkillDescCriteriaPoint.values().length;
+        if (total == count) {
+            Controller.stepCompleted.put(SetupEnum.InsertSkillDescCriteriaPoint.getStep(), SetupEnum.InsertSkillDescCriteriaPoint.getValue());
+            FrmRegister.pgrStatus.setValue(status);
+        }
+    }
+    
+    
+    
+    
     public void insertSkills(int status) {
         int count = 0;
         String query = CommonUtil.getResourceProperty("insert.skills");
@@ -302,7 +370,7 @@ public class Setup extends Thread {
             preparedStmt.setString(1, ub.getUserName());
             preparedStmt.setString(2, ub.getEmailId());
             preparedStmt.setString(3, ub.getCode());
-            preparedStmt.setInt(4, 1);
+            preparedStmt.setInt(4, ub.getIsValid());
             preparedStmt.setString(5, "");
             preparedStmt.setString(6, ub.getPassword());
             resp = preparedStmt.executeUpdate();

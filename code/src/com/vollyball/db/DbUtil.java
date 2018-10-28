@@ -5,12 +5,14 @@
  */
 package com.vollyball.db;
 
+import com.vollyball.controller.Controller;
 import com.vollyball.util.CommonUtil;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +27,9 @@ public class DbUtil {
     String dbName = CommonUtil.getResourceProperty("db.name");
     String dbUrl;
 
+    String url;
+    Connection con;
+
     public void createFolder() {
         File customDir = new File(userpath + File.separator + foldername);
 
@@ -34,6 +39,76 @@ public class DbUtil {
             dbUrl = userpath + File.separator + foldername + File.separator + dbName;
         } else {
             System.out.println(customDir + " was not created");
+        }
+    }
+
+    public boolean checkMysqlInstalled() {
+        try {
+            String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
+            DriverManager.setLoginTimeout(5);
+            con = DriverManager.getConnection(DATABASE_URL, "root", "root");
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public void grantPermission() {
+
+        Statement statement = null;
+        try {
+            String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
+            url = DATABASE_URL + "" + dbName;
+            DriverManager.setLoginTimeout(23);
+            con = DriverManager.getConnection(url, "root", "root");
+            String sql_stmt = "CREATE USER 'root'@'%' IDENTIFIED BY 'root'";
+                 
+            statement = con.createStatement();
+            statement.execute(sql_stmt);
+            
+            sql_stmt = "GRANT ALL PRIVILEGES ON vollyball.* TO 'root'@'%' WITH GRANT OPTION";
+            statement = con.createStatement();
+            statement.execute(sql_stmt);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }
+
+    public boolean checkDatabaseExist() {
+        try {
+//            url = "jdbc:mysql://127.9.126.2:3306/pritienterprises";
+            String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
+            url = DATABASE_URL + "" + dbName;
+            DriverManager.setLoginTimeout(5);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+//            this.con = DriverManager.getConnection(url, "adminGnXBLDP", "dt78KgjZGwUD");
+            this.con = DriverManager.getConnection(url, "root", "root");
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    public boolean createMysqlDatabase() {
+        Statement statement = null;
+        try {
+            String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
+            DriverManager.setLoginTimeout(23);
+            con = DriverManager.getConnection(DATABASE_URL, "root", "root");
+            String sql_stmt = "CREATE DATABASE IF NOT EXISTS " + dbName + ";";
+            statement = con.createStatement();
+            statement.executeUpdate(sql_stmt);
+            return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 
@@ -65,15 +140,29 @@ public class DbUtil {
     }
 
     public Connection getConnection() {
-        dbUrl = userpath + File.separator + foldername + File.separator + dbName;
-        Connection c = null;
+//        dbUrl = userpath + File.separator + foldername + File.separator + dbName;
+//        Connection c = null;
+//        try {
+//            Class.forName("org.sqlite.JDBC");
+//            c = DriverManager.getConnection("jdbc:sqlite:" + dbUrl);
+//        } catch (Exception e) {
+//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+//        }
+//        return c;
+
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:" + dbUrl);
+//            url = "jdbc:mysql://127.9.126.2:3306/pritienterprises";
+            String DATABASE_URL = "jdbc:mysql://" + Controller.databaseIpAdd + ":3306/";
+            url = DATABASE_URL + "" + dbName + "?autoReconnect=true&useSSL=false";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+//            this.con = DriverManager.getConnection(url, "adminGnXBLDP", "dt78KgjZGwUD");
+            this.con = DriverManager.getConnection(url, "root", "root");
+            return con;
+
         } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.out.println(e);
         }
-        return c;
+        return con;
     }
 
     public void closeConnection(Connection con) {

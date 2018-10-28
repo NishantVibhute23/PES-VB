@@ -24,8 +24,6 @@ import java.awt.event.MouseEvent;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import javax.swing.ImageIcon;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -38,7 +36,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
-
 import uk.co.caprica.vlcj.binding.LibVlcConst;
 import uk.co.caprica.vlcj.filter.swing.SwingFileFilterFactory;
 import uk.co.caprica.vlcj.player.MediaPlayer;
@@ -117,35 +114,35 @@ public class PlayerControlsPanel extends JPanel {
         chapterLabel = new JLabel("00/00");
 
         previousChapterButton = new JButton();
-        previousChapterButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\control_start_blue.png"));
+        previousChapterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/control_start_blue.png")));
         previousChapterButton.setToolTipText("Go to previous chapter");
 
         rewindButton = new JButton();
-        rewindButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\control_rewind_blue.png"));
+        rewindButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/control_rewind_blue.png")));
         rewindButton.setToolTipText("Skip back");
 
         stopButton = new JButton();
-        stopButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\control_stop_blue.png"));
+        stopButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/control_stop_blue.png")));
         stopButton.setToolTipText("Stop");
 
         pauseButton = new JButton();
-        pauseButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\control_pause_blue.png"));
+        pauseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/control_pause_blue.png")));
         pauseButton.setToolTipText("Play/pause");
 
         playButton = new JButton();
-        playButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\control_play_blue.png"));
+        playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/control_play_blue.png")));
         playButton.setToolTipText("Play");
 
         fastForwardButton = new JButton();
-        fastForwardButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\control_fastforward_blue.png"));
+        fastForwardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/control_fastforward_blue.png")));
         fastForwardButton.setToolTipText("Skip forward");
 
         nextChapterButton = new JButton();
-        nextChapterButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\control_end_blue.png"));
+        nextChapterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/control_end_blue.png")));
         nextChapterButton.setToolTipText("Go to next chapter");
 
         toggleMuteButton = new JButton();
-        toggleMuteButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\sound_mute.png"));
+        toggleMuteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/sound_mute.png")));
         toggleMuteButton.setToolTipText("Toggle Mute");
 
         cmbPlayBackSpeed = new JComboBox<String>();
@@ -167,15 +164,15 @@ public class PlayerControlsPanel extends JPanel {
         volumeSlider.setToolTipText("Change volume");
 
         captureButton = new JButton();
-        captureButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\camera.png"));
+        captureButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/camera.png")));
         captureButton.setToolTipText("Take picture");
 
         ejectButton = new JButton();
-        ejectButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\control_eject_blue.png"));
+        ejectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/control_eject_blue.png")));
         ejectButton.setToolTipText("Load media");
 
         connectButton = new JButton();
-        connectButton.setIcon(new ImageIcon("src\\com\\vollyball\\images\\playericon\\connect.png"));
+        connectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/playericon/connect.png")));
         connectButton.setToolTipText("Connect to media");
 
         fileChooser = new JFileChooser();

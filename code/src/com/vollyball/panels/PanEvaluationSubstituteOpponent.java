@@ -563,7 +563,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         jLabel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jPanel16.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel16.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         but1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         but1.setForeground(new java.awt.Color(255, 255, 255));
@@ -587,7 +587,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         );
 
         jPanel25.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel25.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel25.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         but2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         but2.setForeground(new java.awt.Color(255, 255, 255));
@@ -611,7 +611,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         );
 
         jPanel27.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel27.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel27.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         but3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         but3.setForeground(new java.awt.Color(255, 255, 255));
@@ -635,7 +635,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         );
 
         jPanel29.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel29.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel29.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel28.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
@@ -659,7 +659,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         );
 
         but4.setBackground(new java.awt.Color(57, 74, 108));
-        but4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        but4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         but5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         but5.setForeground(new java.awt.Color(255, 255, 255));
@@ -683,7 +683,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         );
 
         jPanel33.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel33.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel33.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         but6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         but6.setForeground(new java.awt.Color(255, 255, 255));
@@ -904,7 +904,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         });
 
         selectSubmit.setBackground(new java.awt.Color(57, 74, 108));
-        selectSubmit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        selectSubmit.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -998,7 +998,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         selectPanelLayout.setVerticalGroup(
             selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(selectPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
                 .addGroup(selectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(selectRO, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1043,12 +1043,11 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(selectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addContainerGap(40, Short.MAX_VALUE))
+            .addComponent(selectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -1384,6 +1383,8 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel2.setText("Score :");
 
@@ -1464,7 +1465,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
         lblMsg.setText("Select OUT Player");
 
         jPanel7.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -1572,19 +1573,13 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 728, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 572, Short.MAX_VALUE)
+            .addGap(0, 532, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1659,7 +1654,7 @@ public class PanEvaluationSubstituteOpponent extends javax.swing.JPanel {
             }
 
             rallyDao.updateLatestOrderOpp(latestPositionMap, ms.getId());
-            Controller.panMatchSet.next();
+            Controller.panMatchSet.nextRally();
 //            Controller.panMatchSet.rallyPositionMapOpp.putAll(latestPositionMap);
             Controller.panMatchSet.dialogEvaluationSubstitute.close();
 

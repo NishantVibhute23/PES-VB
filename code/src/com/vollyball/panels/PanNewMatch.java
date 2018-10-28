@@ -518,7 +518,7 @@ public class PanNewMatch extends javax.swing.JPanel {
 
                     Controller.matchDialog.close();
                     Controller.panMatchReport.Refresh();
-                    JOptionPane.showMessageDialog(this, "Added New Match '" + teamsMap.get(team1) + "' vs '" + teamsMap.get(team2) + "'");
+                    JOptionPane.showMessageDialog(this, "Added New Match \"" + team1 + "\" vs \"" + team2 + "\"");
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed");
@@ -544,7 +544,7 @@ public class PanNewMatch extends javax.swing.JPanel {
 
 //                    Controller.matchDialog.close();
                     Controller.panMatchReport.Refresh();
-                    JOptionPane.showMessageDialog(this, "Updated New Match '" + teamsMap.get(team1) + "' vs '" + teamsMap.get(team2) + "'");
+                    JOptionPane.showMessageDialog(this, "Updated New Match \"" + team1 + "\" vs \"" + team2 + "\"");
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed");

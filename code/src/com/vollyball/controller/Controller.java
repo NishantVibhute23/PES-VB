@@ -5,6 +5,7 @@
  */
 package com.vollyball.controller;
 
+import com.vollyball.bean.CompetitionBean;
 import com.vollyball.bean.UserBean;
 import com.vollyball.dialog.CreateCompetitionDialog;
 import com.vollyball.dialog.CreateMatchDialog;
@@ -35,8 +36,12 @@ import com.vollyball.training.dialog.CreateTraineeDailog;
 import com.vollyball.training.panel.PanBatchList;
 import com.vollyball.training.panel.PanBatchTraineeList;
 import com.vollyball.util.CommonUtil;
-import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -76,19 +81,17 @@ public class Controller {
     public static PanPESVBHome panPESVBHome;
     public static PanEvaluationRally panEvaluationRally;
     public static CreateTraineeDailog createTraineeDailog;
+    public static String databaseIpAdd;
+    public static CompetitionBean competitionBean;
+    public static FrmLogin frmLogin;
 
     public static void main(String args[]) {
+        
+        
+            new CommonUtil();
+            frmLogin = new FrmLogin();
 
-        new CommonUtil();
-        String path = System.getProperty("user.home") + File.separator + "Documents";
-        path += File.separator + CommonUtil.getResourceProperty("folder.name");
-//        File file = new File(CommonUtil.getResourceProperty("db.name"));
-        File file = new File(path + File.separator + CommonUtil.getResourceProperty("db.name"));
-        if (!file.exists() || file == null) {
-            frmMain = new FrmRegister();
-        } else {
-            new FrmLogin();
-        }
+
     }
 
 }

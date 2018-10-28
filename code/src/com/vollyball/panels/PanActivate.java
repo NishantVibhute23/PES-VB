@@ -7,8 +7,15 @@ package com.vollyball.panels;
 
 import com.vollyball.bean.UserBean;
 import com.vollyball.controller.Controller;
+import com.vollyball.enums.SubscriptionCodeEnum;
 import com.vollyball.frames.FrmRegister;
+import com.vollyball.util.CommonUtil;
 import java.awt.BorderLayout;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +28,7 @@ public class PanActivate extends javax.swing.JPanel {
      */
     public PanActivate() {
         initComponents();
+        lblMsg.setText("");
     }
 
     /**
@@ -43,6 +51,7 @@ public class PanActivate extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lblMsg = new javax.swing.JLabel();
 
         panActivate.setBackground(new java.awt.Color(4, 139, 168));
 
@@ -52,7 +61,7 @@ public class PanActivate extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Product Code");
+        jLabel4.setText("Product Key");
 
         jPanel3.setBackground(new java.awt.Color(46, 64, 87));
 
@@ -96,15 +105,17 @@ public class PanActivate extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Continue");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,6 +161,10 @@ public class PanActivate extends javax.swing.JPanel {
                 .addGap(0, 17, Short.MAX_VALUE))
         );
 
+        lblMsg.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblMsg.setForeground(new java.awt.Color(204, 0, 51));
+        lblMsg.setText("*Invalid product Key");
+
         javax.swing.GroupLayout panActivateLayout = new javax.swing.GroupLayout(panActivate);
         panActivate.setLayout(panActivateLayout);
         panActivateLayout.setHorizontalGroup(
@@ -162,7 +177,8 @@ public class PanActivate extends javax.swing.JPanel {
                         .addGroup(panActivateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(75, Short.MAX_VALUE))
@@ -178,7 +194,9 @@ public class PanActivate extends javax.swing.JPanel {
                 .addGroup(panActivateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(50, 50, 50)
+                .addGap(0, 0, 0)
+                .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -201,13 +219,33 @@ public class PanActivate extends javax.swing.JPanel {
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
         // TODO add your handling code here:
-        UserBean ub = Controller.userBean;
-        ub.setCode(txtCode.getText());
-        Controller.panUserDetails = new PanUserDetails();
-        Controller.panActivate.setVisible(false);
-        FrmRegister.panDetails.add(Controller.panUserDetails, BorderLayout.CENTER);
+
 
     }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        UserBean ub = Controller.userBean;
+        ub.setCode(txtCode.getText());
+        boolean isValid = true;
+        if (!"".equals(txtCode.getText())) {
+            String code = CommonUtil.encrypt(txtCode.getText());
+            isValid = SubscriptionCodeEnum.checkCode(code);
+            if (isValid) {
+                ub.setIsValid(1);
+            } else {
+                lblMsg.setText("*Invalid product Key");
+            }
+
+        } else {
+            ub.setIsValid(0);
+        }
+        if (isValid) {
+            Controller.panUserDetails = new PanUserDetails();
+            Controller.panActivate.setVisible(false);
+            FrmRegister.panDetails.add(Controller.panUserDetails, BorderLayout.CENTER);
+        }
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
@@ -219,6 +257,7 @@ public class PanActivate extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel lblMsg;
     private javax.swing.JPanel panActivate;
     private javax.swing.JTextField txtCode;
     // End of variables declaration//GEN-END:variables

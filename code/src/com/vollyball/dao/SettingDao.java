@@ -47,9 +47,10 @@ public class SettingDao {
                 }
             }
 
-            db.closeConnection(con);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
         }
         return count;
     }
@@ -80,6 +81,8 @@ public class SettingDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return settingMap;
     }
@@ -103,6 +106,8 @@ public class SettingDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return count;
     }
@@ -123,6 +128,8 @@ public class SettingDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return set;
     }
@@ -141,6 +148,8 @@ public class SettingDao {
 
         } catch (SQLException ex) {
             Logger.getLogger(TeamDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            db.closeConnection(con);
         }
         return count;
     }
