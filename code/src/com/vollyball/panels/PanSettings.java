@@ -115,6 +115,8 @@ public class PanSettings extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jPanel1.setBackground(new java.awt.Color(57, 74, 108));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
@@ -135,8 +137,11 @@ public class PanSettings extends javax.swing.JPanel {
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
+        mainComponent.setBackground(new java.awt.Color(255, 255, 255));
         mainComponent.setPreferredSize(new java.awt.Dimension(681, 704));
         mainComponent.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(57, 74, 108));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -285,9 +290,8 @@ public class PanSettings extends javax.swing.JPanel {
         Set<String> set = new HashSet<String>();
         for (int k = 0; k < a.length - 1; k++) {
             Settings s = (Settings) a[k];
-            if(set.add(s.getCode()) == false)
-            {
-                status=true;
+            if (set.add(s.getCode()) == false) {
+                status = true;
                 System.out.println("Duplicate: " + s.getCode());
             }
 //            for (int l = 1; l < a.length - 1; l++) {
@@ -306,14 +310,14 @@ public class PanSettings extends javax.swing.JPanel {
             int val = sd.updateSettings(listSetting);
             if (val != 0) {
                 Controller.createSettingDialog.close();
-                JOptionPane.showMessageDialog(this, "Code Shortcut Updated");
+                JOptionPane.showMessageDialog(this, "Settings Updated");
             } else {
-                JOptionPane.showMessageDialog(this, "Code Shortcut Failed To Update");
+                JOptionPane.showMessageDialog(this, "Failed To Update Settings");
             }
 
         } else {
 
-            JOptionPane.showMessageDialog(this, "Code Shortcut Cannot be Same");
+            JOptionPane.showMessageDialog(this, "Shortcut Code must be Unique");
         }
 
     }//GEN-LAST:event_jLabel1MouseClicked

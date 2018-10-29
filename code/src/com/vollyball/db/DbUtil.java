@@ -63,10 +63,9 @@ public class DbUtil {
             DriverManager.setLoginTimeout(23);
             con = DriverManager.getConnection(url, "root", "root");
             String sql_stmt = "CREATE USER 'root'@'%' IDENTIFIED BY 'root'";
-                 
-            statement = con.createStatement();
-            statement.execute(sql_stmt);
-            
+
+//            statement = con.createStatement();
+//            statement.execute(sql_stmt);
             sql_stmt = "GRANT ALL PRIVILEGES ON vollyball.* TO 'root'@'%' WITH GRANT OPTION";
             statement = con.createStatement();
             statement.execute(sql_stmt);
