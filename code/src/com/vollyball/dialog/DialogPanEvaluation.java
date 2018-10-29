@@ -87,6 +87,7 @@ public class DialogPanEvaluation {
     public void close() {
         this.dialog.dispose();
         this.dialog.setVisible(false);
+        Controller.panMatchSet.p1.getMediaPlayer().stop();
     }
 
     public void setFrame(JFrame frame) {

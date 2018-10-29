@@ -84,6 +84,7 @@ public class PanEvaluation extends javax.swing.JPanel {
     MatchSet ms;
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
+    public PlayerControlsPanel p1;
 
     /**
      * Creates new form PanEvaluation
@@ -224,7 +225,7 @@ public class PanEvaluation extends javax.swing.JPanel {
         final EmbeddedMediaPlayer mediaPlayer = createPlayer(vlcArgs, videoSurface);
         panPlayer.add(videoSurface, BorderLayout.CENTER);
 //        mediaPlayer.playMedia("E:\\A Happy Child - CBSE Poem Class -1.mp4");
-        PlayerControlsPanel p1 = new PlayerControlsPanel(mediaPlayer);
+        p1 = new PlayerControlsPanel(mediaPlayer);
         panPlayer.add(p1, BorderLayout.SOUTH);
     }
 

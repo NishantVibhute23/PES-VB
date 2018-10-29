@@ -390,7 +390,10 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         rallyInsert.setMatchEvaluationId(Controller.panMatchSet.matchEvaluationId);
         rallyInsert.setRallyPositionMap(rallyPositionMap);
         rallyInsert.setRallyPositionMapOpp(rallyPositionMapOpp);
-        for (RallyEvaluationSkillScore rallyEvaluationSkillScore : rallyEvaluation.getRallyEvaluationSkillScore()) {
+        for (PanEvaluationRallyRowText panRowText : panListRow) {
+
+                PanEvaluationRowDetail pan = panRallyRow.get(panRowText);
+                RallyEvaluationSkillScore rallyEvaluationSkillScore = pan.getRallyEvaluationSkillScore();
             try {
                 RallyEvaluationSkillScore rs = rallyEvaluationSkillScore;
                 rs.setSkill(rallyEvaluationSkillScore.getSkill());
@@ -479,7 +482,8 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                     p.isAddClicked = false;
                     panListRow.remove(i);
                     panRallyRow.remove(p);
-                    break;
+                    k--;
+                                        break;
                 }
                 i++;
             }
@@ -493,7 +497,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             PanEvaluationRallyRowText panel = new PanEvaluationRallyRowText(PanEvaluationRally.this);
             currentPanRow = panel;
             panEvalDetail.removeAll();
-            PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(PanEvaluationRally.this, false);
+            PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(PanEvaluationRally.this, first);
             panRallyRow.put(panel, panEvaluationRowDetail);
             panEvalDetail.add(panEvaluationRowDetail, BorderLayout.CENTER);
             panEvalDetail.validate();

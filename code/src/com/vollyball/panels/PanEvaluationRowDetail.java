@@ -18,6 +18,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.HierarchyEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
@@ -53,14 +54,11 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     ImagePanel panel;
     TeamDao teamDao = new TeamDao();
     String skill = "";
+     String code = "";
     String chestNo = "";
     int score = 0;
     JTextField txtRallyRow = new JTextField();
-//    public LinkedHashMap<Integer, Player> playerMap = new LinkedHashMap<>();
-//    public LinkedHashMap<String, Player> ChestMap = new LinkedHashMap<>();
     public DialogReplaceLibero dialogReplaceLibero;
-
-//    List<JLabel> playerLabelList = new ArrayList<>();
     List<Integer> pixel = new ArrayList<>();
     PanEvaluationRally p;
     boolean isNew = true;
@@ -127,7 +125,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             panRLHome.setVisible(false);
             panRLOpp.setVisible(false);
         }
-
         mapScoreComponent.put(lblRate1, panRate1);
         mapScoreComponent.put(lblRate2, panRate2);
         mapScoreComponent.put(lblRate3, panRate3);
@@ -138,18 +135,14 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         mapScoreLabel.put(3, lblRate3);
         mapScoreLabel.put(4, lblRate4);
         mapScoreLabel.put(5, lblRate5);
-
         skillKeys = ShortKeysUtil.skillKeys();
         scoreKeys = ShortKeysUtil.scoreKeys();
         diagramKeys = ShortKeysUtil.diagramKeys();
-
         panel = new ImagePanel(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/panVollyCourtNewGrid.png")).getImage(), p);
         panCourt.add(panel, BorderLayout.CENTER);
-
         playerLabelList = new ArrayList<JLabel>(mapPlayerComponent.keySet());
         for (JLabel label : playerLabelList) {
             label.setVisible(false);
-
         }
 
         int i = 0;
@@ -262,13 +255,15 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 txtInput.requestFocus();
-            }
+    }
         });
 //        txtInput.requestFocus();
 
     }
 
     public void save() {
+        if(!p.isInserted)
+        {
         rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
         if (isFirst && isNew) {
             isFirst = false;
@@ -276,7 +271,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             p.startTime = formatterTime.format(time);
             p.lblRallyStartTime.setText(p.startTime);
         }
-
         if (skill.equalsIgnoreCase("op+") || skill.equalsIgnoreCase("tf-")) {
             if (skill.equalsIgnoreCase("tf-")) {
                 mapScoreComponent.get(lblRate1).setBackground(new Color(255, 11, 0));
@@ -291,17 +285,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
             rallyEvaluationSkillScore.setChestNo("0");
             rallyEvaluationSkillScore.setPlayerId(0);
             rallyEvaluationSkillScore.setCode(txtInput.getText());
-//            if (diagramPoints.size() > 0) {
-//                String points = "";
-//                for (String point : diagramPoints) {
-//                    points = points + "-" + point;
-//                }
-//
-//                int id = getDigramId(skill);
-//
-////                rallyEvaluationSkillScore.getDetailsValues().put(id, points);
-//            }
-
             isSelected = true;
 
         } else if (!skill.equals("") && !chestNo.equals("") && score != 0) {
@@ -333,7 +316,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         if (isSelected) {
             p.rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
-            switch (score) {
+             switch (score) {
                 case 1:
                     if (!p.isInserted) {
                         Controller.panMatchSet.opponentScore++;
@@ -377,6 +360,91 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     break;
             }
         }
+        }
+    }
+    
+    public void update() {
+        if (isFirst && isNew) {
+            isFirst = false;
+            Date time = new Date();
+            p.startTime = formatterTime.format(time);
+            p.lblRallyStartTime.setText(p.startTime);
+        }
+        if (skill.equalsIgnoreCase("op+") || skill.equalsIgnoreCase("tf-")) {
+            if (skill.equalsIgnoreCase("tf-")) {
+                mapScoreComponent.get(lblRate1).setBackground(new Color(255, 11, 0));
+                score = 1;
+            } else {
+                mapScoreComponent.get(lblRate5).setBackground(new Color(255, 11, 0));
+                score = 5;
+            }
+            rallyEvaluationSkillScore.setSkill(skill);
+            rallyEvaluationSkillScore.setSkillId(Skill.getIdByName(skill).getId());
+            rallyEvaluationSkillScore.setScore(score);
+            rallyEvaluationSkillScore.setChestNo("0");
+            rallyEvaluationSkillScore.setPlayerId(0);
+            rallyEvaluationSkillScore.setCode(txtInput.getText());
+            isSelected = true;
+
+        } else if (!skill.equals("") && !chestNo.equals("") && score != 0) {
+            rallyEvaluationSkillScore.setSkill(skill);
+            rallyEvaluationSkillScore.setSkillId(Skill.getIdByName(skill).getId());
+            rallyEvaluationSkillScore.setScore(score);
+            rallyEvaluationSkillScore.setChestNo(chestNo);
+            rallyEvaluationSkillScore.setPlayerId(Controller.panMatchSet.ChestMap.get(chestNo).getId());
+            rallyEvaluationSkillScore.setCode(txtInput.getText());
+            if (diagramPoints.size() > 0) {
+                String points = "";
+                for (String point : diagramPoints) {
+                    points = points + point + "-";
+                }
+                int id = getDigramId(skill);
+                rallyEvaluationSkillScore.getDetailsValues().put(id, points);
+
+                for (Map.Entry<Integer, PanSkillDescCriteria> entry : skillDescIdPanMap.entrySet()) {
+                    int skillDescCriteriaId = entry.getKey();
+                    PanSkillDescCriteria panel = entry.getValue();
+                    if (skillDescCriteriaId != id) {
+                        rallyEvaluationSkillScore.getDetailsValues().put(skillDescCriteriaId, panel.lblOption.getText());
+                    }
+                }
+
+            }
+            isSelected = true;
+        }
+
+        if (isSelected) {
+            p.rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
+            switch (score) {
+                case 1:
+                    
+                    Date time = new Date();
+                    p.endTime = formatterTime.format(time);
+                    p.lblRallyEndTime.setText(p.endTime);
+                   
+                    break;
+                case 5:
+                    if (skill.equals(Skill.Service.getType()) || skill.equals(Skill.Attack.getType()) || skill.equals(Skill.Block.getType()) || skill.equals(Skill.OP.getType())) {
+                       
+                        Date time1 = new Date();
+                        p.endTime = formatterTime.format(time1);
+                        p.lblRallyEndTime.setText(p.endTime);
+                        
+                    } else {
+                        if (isNew || isLast) {
+                            isLast = false;
+                            
+                        }
+                    }
+                    break;
+                default:
+                    if (isNew || isLast) {
+                        isLast = false;
+                        
+                    }
+                    break;
+            }
+        }
     }
 
     public int getDigramId(String skill) {
@@ -412,6 +480,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         p.currentPanRow.txtSkill.setText(skill);
         p.currentPanRow.txtPlayer.setText(chestNo);
         score = rallyEvaluationSkillScore1.getScore();
+        code= rallyEvaluationSkillScore1.getCode();
         txtInput.setText(rallyEvaluationSkillScore1.getCode());
         JLabel lblScore = mapScoreLabel.get(score);
         if (lblScore == lblRate1) {
@@ -440,7 +509,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         if (rallyEvaluationSkillScore1.getDetailsValues().size() > 0) {
             int id = getDigramId(skill);
             String digPoints = rallyEvaluationSkillScore1.getDetailsValues().get(id);
-            if (digPoints != null || !digPoints.isEmpty()) {
+            if (digPoints != null && !digPoints.isEmpty()) {
                 String arr[] = digPoints.split("-");
                 diagramPoints = new ArrayList<String>(Arrays.asList(arr));
                 if (diagramPoints.size() > 2) {
@@ -450,6 +519,8 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                         panel.digEditDetails(skill, diagramPoints, 0);
                     }
                 }
+            }else{
+                diagramPoints.add(chestNo);
             }
         }
 
@@ -1856,8 +1927,12 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     private void txtInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInputKeyPressed
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if (c == '-') {
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String val = txtInput.getText();
+            
+            if(!val.equals(code))
+            {
+            
             int valIndex = val.lastIndexOf("-") == -1 ? 0 : val.lastIndexOf("-") + 1;
             command = val.substring(valIndex);
             System.out.println(command);
@@ -1926,6 +2001,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     } else {
                         setDetailValuesByDiagram(skill, diagramPoints, 0);
                     }
+                   
 
                 }
             } else if (detailsShortcutKeys.contains(a)) {
@@ -1938,6 +2014,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                         break;
                     }
                 }
+                
             } else {
                 int i = 0;
                 for (Player pl : Controller.panMatchSet.playerList) {
@@ -1947,8 +2024,14 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     i++;
                 }
             }
+            txtInput.setText(txtInput.getText()+"-");
+            if(p.isInserted)
+        {
+            update();
         }
-
+        }
+        
+        }
     }//GEN-LAST:event_txtInputKeyPressed
 
     public void refresh() {
