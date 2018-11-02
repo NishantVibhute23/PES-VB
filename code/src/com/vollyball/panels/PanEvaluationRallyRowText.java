@@ -147,6 +147,7 @@ public class PanEvaluationRallyRowText extends javax.swing.JPanel {
         this.txtSkill.setForeground(Color.BLACK);
         this.txtRate.setForeground(Color.BLACK);
         panEvaluationRowDetail.setIsNew(false);
+        panEvaluationRowDetail.setButtonText();
         p.currentPanRow = this;
 
         for (Map.Entry<PanEvaluationRallyRowText, PanEvaluationRowDetail> entry : p.panRallyRow.entrySet()) {

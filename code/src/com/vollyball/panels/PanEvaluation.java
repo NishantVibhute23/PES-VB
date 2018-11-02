@@ -739,11 +739,11 @@ public class PanEvaluation extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Evaluating :");
 
-        lblevaluationName.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        lblevaluationName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lblevaluationName.setForeground(new java.awt.Color(255, 255, 255));
         lblevaluationName.setText(" ");
 
-        lblopponentName.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        lblopponentName.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lblopponentName.setForeground(new java.awt.Color(255, 255, 255));
         lblopponentName.setText(" ");
 

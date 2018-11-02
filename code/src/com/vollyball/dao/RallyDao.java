@@ -272,7 +272,8 @@ public class RallyDao {
                                     while (rs7.next()) {
                                         rallyDetailsCriteriaId = rs7.getInt(1);
                                     }
-
+                             
+                                    
                                     if (rallyDetailsCriteriaId == 0) {
                                         PreparedStatement ps8 = this.con.prepareStatement(CommonUtil.getResourceProperty("insert.rallydetails.criteria"));
                                         ps8.setInt(1, key);
