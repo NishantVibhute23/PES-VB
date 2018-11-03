@@ -81,6 +81,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     LinkedHashMap<String, String> pointsShortcut = new LinkedHashMap<>();
     RallyEvaluationSkillScore rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
     String oldText = "";
+    DialogPAnEvaluationRallyRowEdit dig ;
 
     /**
      * Creates new form PanEvaluationRowDetail
@@ -377,8 +378,10 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     
     public void update(RallyEvaluationSkillScore rallyEvaluationSkillScore) {
         
-        p.rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
-        
+//        p.rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
+
+this.rallyEvaluationSkillScore=rallyEvaluationSkillScore;
+setValues(rallyEvaluationSkillScore);
 //        int idm = rallyEvaluationSkillScore.getId();
 //        rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
 //        rallyEvaluationSkillScore.setId(idm);
@@ -2122,22 +2125,12 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         }
         else if(txt.getText().equalsIgnoreCase("edit"))
         {
-            DialogPAnEvaluationRallyRowEdit dig = new DialogPAnEvaluationRallyRowEdit();
+            dig = new DialogPAnEvaluationRallyRowEdit();
             dig.init(skill, chestNo, ""+score,this.rallyEvaluationSkillScore,this);
             dig.show();
             
-            
-//            oldText = txtInput.getText();
-//            txtInput.setText("");
-//            txtInput.setEditable(true);
-            txt.setText("Cancel");
         }
-        else if(txt.getText().equalsIgnoreCase("Cancel"))
-        {
-             txtInput.setText(oldText);
-             txtInput.setEditable(false);
-             txt.setText("Edit");
-        }
+        
     }//GEN-LAST:event_butResetMouseClicked
 
     private void lblNEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNEMouseClicked
@@ -2238,6 +2231,6 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     private javax.swing.JPanel panService;
     private javax.swing.JPanel panSet;
     private javax.swing.JPanel panTF;
-    private javax.swing.JTextField txtInput;
+    public javax.swing.JTextField txtInput;
     // End of variables declaration//GEN-END:variables
 }

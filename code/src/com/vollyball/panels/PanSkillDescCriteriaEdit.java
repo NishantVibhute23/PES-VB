@@ -5,12 +5,16 @@
  */
 package com.vollyball.panels;
 
+import com.vollyball.bean.Settings;
+import com.vollyball.dao.SettingDao;
 import com.vollyball.enums.SkillDescCriteriaPoint;
 import java.awt.BorderLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedHashMap;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -26,7 +30,11 @@ public class PanSkillDescCriteriaEdit extends javax.swing.JPanel {
     LinkedHashMap<String, Integer> pointsMap = new LinkedHashMap<>();
     public JTextField txtVal;
     public JComboBox cmbVal;
-    String value;
+    String value="";
+    SettingDao settingDao = new SettingDao();
+    LinkedHashMap<String, Integer> shorcutId = new LinkedHashMap<>();
+    String code = "";
+    
     /**
      * Creates new form PanSkillDescCriteria
      */
@@ -35,21 +43,30 @@ public class PanSkillDescCriteriaEdit extends javax.swing.JPanel {
         this.id = idm;
         if(idm==0)
         {
-            txtVal=new JTextField();
-            txtVal.addFocusListener(new FocusListener() {
+                              txtVal=new JTextField();
+           
+            txtVal.addKeyListener(new KeyListener() {
                 @Override
-                public void focusGained(FocusEvent e) {
+                public void keyTyped(KeyEvent e) {
+                       
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
                     
                 }
 
                 @Override
-                public void focusLost(FocusEvent e) {
-                   value = txtVal.getText();
+                public void keyReleased(KeyEvent e) {
+                    value = txtVal.getText().toUpperCase();
+                       code= value;
                 }
             });
             
             panSelect.add(txtVal,BorderLayout.CENTER);
         }
+        
+      
         else
         {
         List<SkillDescCriteriaPoint> lstPoints = SkillDescCriteriaPoint.getTypeBySkillDescId(id);
@@ -59,6 +76,19 @@ public class PanSkillDescCriteriaEdit extends javax.swing.JPanel {
             public void itemStateChanged(ItemEvent e) {
                if(e.getStateChange() == ItemEvent.SELECTED) {
                    value = (String) cmbVal.getSelectedItem();
+                   if(value.equalsIgnoreCase("Select"))
+                   {
+                       value="";
+                       code="";
+                   }else{
+                     int id=  shorcutId.get(value);
+                     
+                     if(id!=0)
+                     {
+                     Settings s= settingDao.getCodeForId(id);
+                     code = s.getCode();
+                     }                   
+                   }
                 }
             }
         });
@@ -68,6 +98,7 @@ public class PanSkillDescCriteriaEdit extends javax.swing.JPanel {
             
             cmbVal .addItem("Select");
             for (SkillDescCriteriaPoint val : lstPoints) {
+                shorcutId.put(val.getAbbreviation(), val.getShortcutId());
                 cmbVal.addItem(val.getAbbreviation());
             }
         }
@@ -78,6 +109,9 @@ public class PanSkillDescCriteriaEdit extends javax.swing.JPanel {
         if(id==0)
         {
             txtVal.setText(val);
+             value = txtVal.getText().toUpperCase();
+                       code= value;
+          
         }else{
             cmbVal.setSelectedItem(val);
         }

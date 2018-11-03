@@ -39,12 +39,12 @@ public class DialogPAnEvaluationRallyRowEdit {
            
 
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            this.dialog = new JDialog(this.parentFrame, "New Match", true);
+            this.dialog = new JDialog(this.parentFrame, "Edit Rally", true);
 
             this.dialog.setResizable(true);
             this.dialog.getContentPane().add(createPane());
             this.dialog.pack();
-            this.dialog.setSize(450, 470);//
+            this.dialog.setSize(499, 526);//
 
             Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
             this.dialog.setLocation(new Double((Size.getWidth() / 2) - (dialog.getWidth() / 2)).intValue(), new Double((Size.getHeight() / 2) - (dialog.getHeight() / 2)).intValue());
@@ -68,7 +68,7 @@ public class DialogPAnEvaluationRallyRowEdit {
         this.dialog.setVisible(true);
     }
 
-    protected void close() {
+    public void close() {
         this.dialog.dispose();
         this.dialog.setVisible(false);
     }
