@@ -9,6 +9,7 @@ import com.vollyball.bean.CompetitionBean;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.CompetitionDao;
 import com.vollyball.dialog.CreateCompetitionDialog;
+import com.vollyball.renderer.DeleteButtonRenderer;
 import com.vollyball.renderer.EditButtonRenderer;
 import com.vollyball.renderer.TableHeaderRenderer;
 import com.vollyball.renderer.ViewButtonRenderer;
@@ -21,6 +22,7 @@ import java.awt.GridBagLayout;
 import java.util.LinkedHashMap;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -59,8 +61,7 @@ public class PanCompetitionList extends javax.swing.JPanel {
 ////        }
 ////        panCompListValue.setBounds(0, 0, dim.width, dim.height);
 //        panListContent.add(panCompListValue, BorderLayout.CENTER);
-
-        model = new DefaultTableModel() {
+ model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 //all cells false
@@ -69,13 +70,13 @@ public class PanCompetitionList extends javax.swing.JPanel {
         };
 
         model.setDataVector(new Object[][]{},
-                new Object[]{"SR No.", "Competition Name ", "Venue", "Start Date", "End Date", "Age Group", "View", "Action"});
+                new Object[]{"SR No.", "Competition Name ", "Venue", "Start Date", "End Date", "Age Group", "View", "Edit","Delete"});
 
         tbComp = new JTable(model);
 
         tbComp.setFont(new java.awt.Font("Times New Roman", 0, 13));
 
-        JScrollPane scroll = new JScrollPane(tbComp);
+      
 
         Color heading = new Color(204, 204, 204);
         Color ivory = new Color(255, 255, 255);
@@ -102,6 +103,8 @@ public class PanCompetitionList extends javax.swing.JPanel {
 
         EditButtonRenderer editButtonRenderer = new EditButtonRenderer();
         tbComp.getColumnModel().getColumn(7).setCellRenderer(editButtonRenderer);
+        DeleteButtonRenderer deleteButtonRenderer = new DeleteButtonRenderer();
+        tbComp.getColumnModel().getColumn(8).setCellRenderer(deleteButtonRenderer);
 
         tbComp.setRowHeight(40);
 
@@ -121,7 +124,9 @@ public class PanCompetitionList extends javax.swing.JPanel {
                     tbComp.clearSelection();
                     if (selectedRow >= 0) {
                         if (selectedCol == 6) {
-                            CompetitionBean comp = compMap.get(tbComp.getValueAt(selectedRow, 1));
+                            id = (int) tbComp.getValueAt(selectedRow, 0);
+                             String name =  (String) tbComp.getValueAt(selectedRow,1);
+                            CompetitionBean comp =  compMap.get(name+"-"+id);
 Controller.competitionBean = comp;
                             Controller.panCompetitionReportHome = new PanCompetitionReportHome(comp);
                             Controller.competitionId = comp.getId();
@@ -134,34 +139,53 @@ Controller.competitionBean = comp;
                             
                         } else if (selectedCol == 7) {
                             id = (int) tbComp.getValueAt(selectedRow, 0);
+                            String name =  (String) tbComp.getValueAt(selectedRow,1);
+                            
+                            CompetitionBean c = compMap.get(name+"-"+id);
+
                             Controller.createCompetitionDialog = new CreateCompetitionDialog();
 
-                            Controller.createCompetitionDialog.setValues(id);
+                            Controller.createCompetitionDialog.setValues(c.getId());
                             Controller.createCompetitionDialog.init();
                             Controller.createCompetitionDialog.show();
+                        }else if(selectedCol ==8)
+                        {
+                            id = (int) tbComp.getValueAt(selectedRow, 0);
+                            String name =  (String) tbComp.getValueAt(selectedRow,1);
+                            
+                            CompetitionBean c = compMap.get(name+"-"+id);
+                                                     
+                             int dialogButton = JOptionPane.YES_NO_OPTION;
+                            int dialogResult = JOptionPane.showConfirmDialog(null, "Are You Sure want to delete \""+name+"\" ?", "Warning", dialogButton);
+                            if (dialogResult == JOptionPane.YES_OPTION) {
+                                int count = competitionDao.deleteCompetition(c.getId());
+                                                       if (count != 0) {
+                                                            refresh();
+                                    JOptionPane.showMessageDialog(null, "Competition Deleted Successfully");
+                                    
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Not Able to Delete Competition");
+                                }
+                            }
                         }
 
                     }
                 }
             }
         });
-        resizeColumns();
-
-        List<CompetitionBean> competitionList = competitionDao.getCompetitionList();
-        int i = 0;
-        for (CompetitionBean comp : competitionList) {
-            i++;
-            compMap.put(comp.getName(), comp);
-            Object[] row = {i, comp.getName(), comp.getVenue(), comp.getStartDate(), comp.getEndDate(), comp.getAgeGroup(), new JPanel(), new JPanel()};
-            model.addRow(row);
-        }
-        panListContent.add(scroll, BorderLayout.CENTER);
+        
+          JScrollPane scroll = new JScrollPane(tbComp);
+            panListContent.add(scroll, BorderLayout.CENTER);
         validate();
         repaint();
+        resizeColumns();
+       refresh();
 
     }
+    
+    
 
-    float[] columnWidthPercentage = {5.0f, 25.0f, 25.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f};
+    float[] columnWidthPercentage = {5.0f, 25.0f, 25.0f, 12.0f, 12.0f, 10.0f, 8.0f, 8.0f,10.0f};
 
     private void resizeColumns() {
         int tW = tbComp.getPreferredSize().width;
@@ -183,8 +207,8 @@ Controller.competitionBean = comp;
         int i = 0;
         for (CompetitionBean comp : competitionList) {
             i++;
-            compMap.put(comp.getName(), comp);
-            Object[] row = {i, comp.getName(), comp.getVenue(), comp.getStartDate(), comp.getEndDate(), comp.getAgeGroup(), new JPanel(), new JPanel()};
+            compMap.put(comp.getName()+"-"+i, comp);
+            Object[] row = {i, comp.getName(), comp.getVenue(), comp.getStartDate(), comp.getEndDate(), comp.getAgeGroup(), new JPanel(), new JPanel(), new JPanel()};
             model.addRow(row);
         }
 
@@ -252,42 +276,25 @@ Controller.competitionBean = comp;
 
         panListContent = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        lblNewCompetition = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        lblNewCompetition = new javax.swing.JLabel();
 
         panListContent.setBackground(new java.awt.Color(255, 255, 255));
         panListContent.setLayout(new java.awt.BorderLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel5.setBackground(new java.awt.Color(0, 102, 51));
-        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(57, 74, 108));
+        jLabel2.setText("Competition");
 
-        lblNewCompetition.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblNewCompetition.setForeground(new java.awt.Color(255, 255, 255));
-        lblNewCompetition.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNewCompetition.setText("New ");
+        lblNewCompetition.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button (1).png"))); // NOI18N
+        lblNewCompetition.setToolTipText("Add New ");
         lblNewCompetition.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblNewCompetitionMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblNewCompetition, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblNewCompetition, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-        );
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(57, 74, 108));
-        jLabel2.setText("Competition");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -296,21 +303,18 @@ Controller.competitionBean = comp;
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 794, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 864, Short.MAX_VALUE)
+                .addComponent(lblNewCompetition, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(lblNewCompetition, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -326,13 +330,13 @@ Controller.competitionBean = comp;
                 .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panListContent, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE))
+                .addComponent(panListContent, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblNewCompetitionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNewCompetitionMouseClicked
         // TODO add your handling code here:
-        Controller.createCompetitionDialog = new CreateCompetitionDialog();
+            Controller.createCompetitionDialog = new CreateCompetitionDialog();
         Controller.createCompetitionDialog.init();
         Controller.createCompetitionDialog.show();
     }//GEN-LAST:event_lblNewCompetitionMouseClicked
@@ -340,7 +344,6 @@ Controller.competitionBean = comp;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblNewCompetition;
     private javax.swing.JPanel panListContent;
     // End of variables declaration//GEN-END:variables

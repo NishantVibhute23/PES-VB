@@ -27,15 +27,16 @@ public class DeleteButtonRenderer extends DefaultTableCellRenderer {
 
         if (value instanceof JPanel) {
             //This time return only the JLabel without icon
-            JLabel l = new JLabel("DELETE");
-            l.setForeground(Color.BLACK);
+            JLabel l = new JLabel("");
+//            l.setForeground(Color.WHITE);
             l.setHorizontalAlignment(CENTER);
-            l.setFont(new java.awt.Font("Times New Roman", 0, 12));
+//            l.setFont(new java.awt.Font("Times New Roman", 0, 12));
+l.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_delete.png")));
             JPanel p = (JPanel) value;
             p.setLayout(new BorderLayout());
             p.add(l, BorderLayout.CENTER);
-            p.setBackground(new Color(255, 0, 0));
-            p.setBorder(new LineBorder(Color.WHITE, 4));
+            p.setBackground(Color.WHITE);
+            p.setBorder(new LineBorder(Color.WHITE, 2));
             return p;
         } else {
             return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);

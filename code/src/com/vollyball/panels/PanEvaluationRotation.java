@@ -57,6 +57,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
      */
     public PanEvaluationRotation(int homeTeamId, int oppTeamId, int matchId, String homeTeam, String oppteam, int set, int matchEvaluationTeamId, String type, String evaluatorName) {
         initComponents();
+//        Controller.panMatchEvaluationHome.objCreateWaitDialog.close();
         this.set = set;
         this.matchEvaluationTeamId = matchEvaluationTeamId;
         this.type = type;

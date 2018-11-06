@@ -111,4 +111,20 @@ public class CompetitionDao {
         }
         return count;
     }
+    
+    public int deleteCompetition(int id) {
+        int count = 0;
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("delete.competition"));
+            ps.setInt(1, id);
+           
+            count = ps.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
+        }
+        return count;
+    }
 }

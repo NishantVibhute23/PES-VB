@@ -204,6 +204,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("LOGIN");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
@@ -232,6 +233,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         cmbPcNum.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cmbPcNum.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "  PC - 1", "  PC - 2" }));
+        cmbPcNum.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbPcNum.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbPcNumItemStateChanged(evt);

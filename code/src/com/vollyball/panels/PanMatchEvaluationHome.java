@@ -6,13 +6,18 @@
 package com.vollyball.panels;
 
 import com.vollyball.bean.MatchBean;
+import com.vollyball.bean.MatchSet;
 import com.vollyball.bean.Player;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
+import com.vollyball.dao.RallyDao;
 import com.vollyball.dao.TeamDao;
+import com.vollyball.dialog.CreateWaitDialog;
 import com.vollyball.dialog.DialogPanEvaluation;
 import com.vollyball.dialog.DialogPanEvaluationRotationOrder;
 import com.vollyball.dialog.SelectTeamPlayerDialog;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -35,6 +40,10 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
     List<Integer> selectedPlayers;
     DialogPanEvaluation obj;
     DialogPanEvaluationRotationOrder objRotationOrder;
+    Thread threadWait;
+    public CreateWaitDialog createWaitDialog;
+    List<MatchSet> lstMatchSetTeam1 = new ArrayList<>();
+    RallyDao rd = new RallyDao();
 
     /**
      * Creates new form MatchEvaluationHome
@@ -51,6 +60,77 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         this.matchId = matchId;
         this.matchEvaluationTeamId = matchEvaluationTeamId;
         setTeamName();
+
+        for (int i = 1; i <= 5; i++) {
+            MatchSet ms1 = matchDao.getMatchSet(i, matchEvaluationTeamId);
+            if (ms1.getId() != 0) {
+                lstMatchSetTeam1.add(ms1);
+            }
+        }
+
+        for (MatchSet ms : lstMatchSetTeam1) {
+            String homeScore, oppScore;
+            homeScore = "" + ms.getHomeScore();
+            oppScore = "" + ms.getOpponentScore();
+
+            int countRally = rd.getRallyCountByEvaluationId(ms.getId());
+
+            if (ms.getSetNo() == 1) {
+                lblSetTotalRallies1.setText("Total Rallies : " + countRally);
+                lblSetScore1.setText("|  Score : " + homeScore + ":" + oppScore);
+
+                if (ms.getWon_by() != 0) {
+                    panSet1.setBackground(new Color(43, 64, 19));
+                } else {
+                    panSet1.setBackground(new Color(121, 86, 14));
+                }
+            }
+
+            if (ms.getSetNo() == 2) {
+                lblSetTotalRallies2.setText("Total Rallies : " + countRally);
+                lblSetScore2.setText("|  Score : " + homeScore + ":" + oppScore);
+
+                if (ms.getWon_by() != 0) {
+                    panSet2.setBackground(new Color(43, 64, 19));
+                } else {
+                    panSet2.setBackground(new Color(121, 86, 14));
+                }
+            }
+
+            if (ms.getSetNo() == 3) {
+                lblSetTotalRallies3.setText("Total Rallies : " + countRally);
+                lblSetScore3.setText("|  Score : " + homeScore + ":" + oppScore);
+
+                if (ms.getWon_by() != 0) {
+                    panSet3.setBackground(new Color(43, 64, 19));
+                } else {
+                    panSet3.setBackground(new Color(121, 86, 14));
+                }
+            }
+
+            if (ms.getSetNo() == 4) {
+                lblSetTotalRallies4.setText("Total Rallies : " + countRally);
+                lblSetScore4.setText("|  Score : " + homeScore + ":" + oppScore);
+
+                if (ms.getWon_by() != 0) {
+                    panSet4.setBackground(new Color(43, 64, 19));
+                } else {
+                    panSet4.setBackground(new Color(121, 86, 14));
+                }
+            }
+
+            if (ms.getSetNo() == 5) {
+                lblSetTotalRallies5.setText("Total Rallies : " + countRally);
+                lblSetScore5.setText("|  Score : " + homeScore + ":" + oppScore);
+
+                if (ms.getWon_by() != 0) {
+                    panSet5.setBackground(new Color(43, 64, 19));
+                } else {
+                    panSet5.setBackground(new Color(121, 86, 14));
+                }
+            }
+
+        }
 
     }
 
@@ -99,15 +179,25 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        panSet1 = new javax.swing.JPanel();
         set1 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        lblSetTotalRallies1 = new javax.swing.JLabel();
+        lblSetScore1 = new javax.swing.JLabel();
+        panSet2 = new javax.swing.JPanel();
+        lblSetScore2 = new javax.swing.JLabel();
+        lblSetTotalRallies2 = new javax.swing.JLabel();
         set2 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        panSet5 = new javax.swing.JPanel();
+        lblSetScore5 = new javax.swing.JLabel();
+        lblSetTotalRallies5 = new javax.swing.JLabel();
         set5 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        panSet4 = new javax.swing.JPanel();
+        lblSetScore4 = new javax.swing.JLabel();
+        lblSetTotalRallies4 = new javax.swing.JLabel();
         set4 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
+        panSet3 = new javax.swing.JPanel();
+        lblSetScore3 = new javax.swing.JLabel();
+        lblSetTotalRallies3 = new javax.swing.JLabel();
         set3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -119,124 +209,225 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setForeground(new java.awt.Color(57, 74, 108));
 
-        jPanel4.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panSet1.setBackground(new java.awt.Color(57, 74, 108));
+        panSet1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        set1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        set1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         set1.setForeground(new java.awt.Color(255, 255, 255));
         set1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        set1.setText("SET 1");
+        set1.setText("Set 1");
+        set1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         set1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 set1MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(set1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+        lblSetTotalRallies1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSetTotalRallies1.setForeground(new java.awt.Color(255, 255, 255));
+        lblSetTotalRallies1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblSetTotalRallies1.setText("Total Rallies : 0");
+
+        lblSetScore1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSetScore1.setForeground(new java.awt.Color(255, 255, 255));
+        lblSetScore1.setText("|  Score : 0-0");
+
+        javax.swing.GroupLayout panSet1Layout = new javax.swing.GroupLayout(panSet1);
+        panSet1.setLayout(panSet1Layout);
+        panSet1Layout.setHorizontalGroup(
+            panSet1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet1Layout.createSequentialGroup()
+                .addComponent(lblSetTotalRallies1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSetScore1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(set1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(set1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+        panSet1Layout.setVerticalGroup(
+            panSet1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet1Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(set1)
+                .addGap(0, 0, 0)
+                .addGroup(panSet1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSetTotalRallies1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSetScore1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)))
         );
 
-        jPanel6.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panSet2.setBackground(new java.awt.Color(57, 74, 108));
+        panSet2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        set2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblSetScore2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSetScore2.setForeground(new java.awt.Color(255, 255, 255));
+        lblSetScore2.setText("|  Score : 0-0");
+
+        lblSetTotalRallies2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSetTotalRallies2.setForeground(new java.awt.Color(255, 255, 255));
+        lblSetTotalRallies2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblSetTotalRallies2.setText("Total Rallies : 0");
+        lblSetTotalRallies2.setToolTipText("");
+
+        set2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         set2.setForeground(new java.awt.Color(255, 255, 255));
         set2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        set2.setText("SET 2");
+        set2.setText("Set 2");
+        set2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         set2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 set2MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(set2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+        javax.swing.GroupLayout panSet2Layout = new javax.swing.GroupLayout(panSet2);
+        panSet2.setLayout(panSet2Layout);
+        panSet2Layout.setHorizontalGroup(
+            panSet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet2Layout.createSequentialGroup()
+                .addComponent(lblSetTotalRallies2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblSetScore2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(set2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(set2, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+        panSet2Layout.setVerticalGroup(
+            panSet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet2Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(set2)
+                .addGap(0, 0, 0)
+                .addGroup(panSet2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSetTotalRallies2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(lblSetScore2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel7.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panSet5.setBackground(new java.awt.Color(57, 74, 108));
+        panSet5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        set5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblSetScore5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSetScore5.setForeground(new java.awt.Color(255, 255, 255));
+        lblSetScore5.setText("|  Score : 0-0");
+
+        lblSetTotalRallies5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSetTotalRallies5.setForeground(new java.awt.Color(255, 255, 255));
+        lblSetTotalRallies5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblSetTotalRallies5.setText("Total Rallies : 0");
+
+        set5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         set5.setForeground(new java.awt.Color(255, 255, 255));
         set5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        set5.setText("SET 5");
+        set5.setText("Set 5");
+        set5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         set5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 set5MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(set5, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+        javax.swing.GroupLayout panSet5Layout = new javax.swing.GroupLayout(panSet5);
+        panSet5.setLayout(panSet5Layout);
+        panSet5Layout.setHorizontalGroup(
+            panSet5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet5Layout.createSequentialGroup()
+                .addComponent(lblSetTotalRallies5, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSetScore5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(set5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(set5, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+        panSet5Layout.setVerticalGroup(
+            panSet5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet5Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(set5)
+                .addGap(0, 0, 0)
+                .addGroup(panSet5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSetTotalRallies5, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(lblSetScore5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel8.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panSet4.setBackground(new java.awt.Color(57, 74, 108));
+        panSet4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        set4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblSetScore4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSetScore4.setForeground(new java.awt.Color(255, 255, 255));
+        lblSetScore4.setText("|  Score : 0-0");
+
+        lblSetTotalRallies4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSetTotalRallies4.setForeground(new java.awt.Color(255, 255, 255));
+        lblSetTotalRallies4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblSetTotalRallies4.setText("Total Rallies : 0");
+
+        set4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         set4.setForeground(new java.awt.Color(255, 255, 255));
         set4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        set4.setText("SET 4");
+        set4.setText("Set 4");
+        set4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         set4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 set4MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(set4, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+        javax.swing.GroupLayout panSet4Layout = new javax.swing.GroupLayout(panSet4);
+        panSet4.setLayout(panSet4Layout);
+        panSet4Layout.setHorizontalGroup(
+            panSet4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet4Layout.createSequentialGroup()
+                .addComponent(lblSetTotalRallies4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSetScore4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(set4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(set4, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+        panSet4Layout.setVerticalGroup(
+            panSet4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet4Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(set4)
+                .addGap(0, 0, 0)
+                .addGroup(panSet4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSetTotalRallies4, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(lblSetScore4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel10.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panSet3.setBackground(new java.awt.Color(57, 74, 108));
+        panSet3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        set3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblSetScore3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSetScore3.setForeground(new java.awt.Color(255, 255, 255));
+        lblSetScore3.setText("|  Score : 0-0");
+
+        lblSetTotalRallies3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblSetTotalRallies3.setForeground(new java.awt.Color(255, 255, 255));
+        lblSetTotalRallies3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblSetTotalRallies3.setText("Total Rallies : 0");
+
+        set3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         set3.setForeground(new java.awt.Color(255, 255, 255));
         set3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        set3.setText("SET 3");
+        set3.setText("Set 3");
+        set3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         set3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 set3MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(set3, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+        javax.swing.GroupLayout panSet3Layout = new javax.swing.GroupLayout(panSet3);
+        panSet3.setLayout(panSet3Layout);
+        panSet3Layout.setHorizontalGroup(
+            panSet3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet3Layout.createSequentialGroup()
+                .addComponent(lblSetTotalRallies3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSetScore3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(set3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(set3, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+        panSet3Layout.setVerticalGroup(
+            panSet3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panSet3Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(set3)
+                .addGap(0, 0, 0)
+                .addGroup(panSet3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSetTotalRallies3, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(lblSetScore3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -244,29 +435,29 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(400, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(400, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panSet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panSet2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panSet3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panSet4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panSet5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addComponent(panSet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panSet2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panSet3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panSet4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addComponent(panSet5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(57, 74, 108));
@@ -296,7 +487,7 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(hometeamname, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(selectOpponentTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,8 +509,8 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,44 +527,49 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
         showPanMatchSet(1);
     }//GEN-LAST:event_set1MouseClicked
 
+
     private void set2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_set2MouseClicked
         // TODO add your handling code here:
-        showPanMatchSet(2);
+         showPanMatchSet(2);
     }//GEN-LAST:event_set2MouseClicked
 
     private void set3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_set3MouseClicked
         // TODO add your handling code here:
-        showPanMatchSet(3);
+         showPanMatchSet(3);
     }//GEN-LAST:event_set3MouseClicked
 
     private void set4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_set4MouseClicked
         // TODO add your handling code here:
-        showPanMatchSet(4);
+         showPanMatchSet(4);
     }//GEN-LAST:event_set4MouseClicked
 
     private void set5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_set5MouseClicked
         // TODO add your handling code here:
-        showPanMatchSet(5);
-
-//        DialogPanEvaluation obj = new DialogPanEvaluation();
-//
-//        obj.init();
-//        obj.show();
+         showPanMatchSet(5);
     }//GEN-LAST:event_set5MouseClicked
 
     public void showPanMatchSet(int set) {
 
-        int id = matchDao.getMatchSetId(this.matchEvaluationTeamId, set);
-        if (id == 0) {
-            objRotationOrder = new DialogPanEvaluationRotationOrder();
-            objRotationOrder.init(this.teamId, this.oppId, this.matchId, this.homeTeam, this.oppteam, set, this.matchEvaluationTeamId, "Save", "");
-            objRotationOrder.show();
-        } else {
-            obj = new DialogPanEvaluation();
-            obj.setSetFields(set, this.matchId, this.teamId, this.oppId, evaluationType, matchEvaluationTeamId);
-            obj.init();
-            obj.show();
-        }
+        createWaitDialog = new CreateWaitDialog();
+        threadWait = new Thread(createWaitDialog);
+        threadWait.start();
+
+        new Thread() {
+            public void run() {
+                int id = matchDao.getMatchSetId(matchEvaluationTeamId, set);
+                if (id == 0) {
+                    objRotationOrder = new DialogPanEvaluationRotationOrder();
+                    objRotationOrder.init(teamId, oppId, matchId, homeTeam, oppteam, set, matchEvaluationTeamId, "Save", "");
+                    objRotationOrder.show();
+                } else {
+                    obj = new DialogPanEvaluation();
+                    obj.setSetFields(set, matchId, teamId, oppId, evaluationType, matchEvaluationTeamId);
+                    obj.init();
+                    obj.show();
+                }
+            }
+        }.start();
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -381,12 +577,22 @@ public class PanMatchEvaluationHome extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JLabel lblSetScore1;
+    private javax.swing.JLabel lblSetScore2;
+    private javax.swing.JLabel lblSetScore3;
+    private javax.swing.JLabel lblSetScore4;
+    private javax.swing.JLabel lblSetScore5;
+    private javax.swing.JLabel lblSetTotalRallies1;
+    private javax.swing.JLabel lblSetTotalRallies2;
+    private javax.swing.JLabel lblSetTotalRallies3;
+    private javax.swing.JLabel lblSetTotalRallies4;
+    private javax.swing.JLabel lblSetTotalRallies5;
+    private javax.swing.JPanel panSet1;
+    private javax.swing.JPanel panSet2;
+    private javax.swing.JPanel panSet3;
+    private javax.swing.JPanel panSet4;
+    private javax.swing.JPanel panSet5;
     private javax.swing.JLabel selectOpponentTeam;
     private javax.swing.JLabel set1;
     private javax.swing.JLabel set2;

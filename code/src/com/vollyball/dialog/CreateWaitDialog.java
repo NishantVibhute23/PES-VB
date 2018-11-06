@@ -5,8 +5,8 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.controller.Controller;
-import com.vollyball.panels.PanEvaluationRotation;
+import com.vollyball.panels.PanUserProfile;
+import com.vollyball.panels.WaitPanel;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -17,36 +17,25 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author nishant.vibhute
+ * @author #dabbu
  */
-public class DialogPanEvaluationRotationOrder {
-
+public class CreateWaitDialog implements Runnable{
     private JFrame parentFrame;
     private JDialog dialog;
+   
 
-    int homeTeamId, oppTeamId, matchId, set, matchEvaluationId;
-    String homeTeam, evaluatorName;
-    String oppteam;
-    String type;
-
-    public void init(int homeTeamId, int oppTeamId, int matchId, String homeTeam, String oppteam, int set, int matchEvaluationId, String type, String evaluatorName) {
+    
+     
+    public void init() {
         try {
-            this.homeTeamId = homeTeamId;
-            this.oppTeamId = oppTeamId;
-            this.matchId = matchId;
-            this.homeTeam = homeTeam;
-            this.oppteam = oppteam;
-            this.set = set;
-            this.matchEvaluationId = matchEvaluationId;
-            this.type = type;
-            this.evaluatorName = evaluatorName;
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            this.dialog = new JDialog(this.parentFrame, "Player Rotation", true);
+
+            this.dialog = new JDialog(this.parentFrame, "Please Wait", true);
 
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());
             this.dialog.pack();
-//            this.dialog.setSize(418, 505);//
+//            this.dialog.setSize(470, 560);
 
             Dimension Size = Toolkit.getDefaultToolkit().getScreenSize();
             this.dialog.setLocation(new Double((Size.getWidth() / 2) - (dialog.getWidth() / 2)).intValue(), new Double((Size.getHeight() / 2) - (dialog.getHeight() / 2)).intValue());
@@ -58,17 +47,17 @@ public class DialogPanEvaluationRotationOrder {
     }
 
     protected Container createPane() {
-        PanEvaluationRotation panRallyRotation = new PanEvaluationRotation(homeTeamId, oppTeamId, matchId, homeTeam, oppteam, set, matchEvaluationId, type, evaluatorName);
-
-        return panRallyRotation;
+        
+        WaitPanel panUser =new WaitPanel();
+        
+        return panUser;
     }
 
     public void show() {
         if (this.dialog == null) {
-            init(homeTeamId, oppTeamId, matchId, homeTeam, oppteam, set, matchEvaluationId, type, evaluatorName);
+            init();
         }
         this.dialog.setVisible(true);
-        Controller.panMatchEvaluationHome.createWaitDialog.close();
     }
 
     public void close() {
@@ -79,4 +68,12 @@ public class DialogPanEvaluationRotationOrder {
     public void setFrame(JFrame frame) {
         parentFrame = (JFrame) frame;
     }
+
+    @Override
+    public void run() {
+       show();
+        
+       
+    }
+
 }

@@ -82,6 +82,7 @@ public class DialogPanEvaluation {
             init();
         }
         this.dialog.setVisible(true);
+        Controller.panMatchEvaluationHome.createWaitDialog.close();
     }
 
     public void close() {
