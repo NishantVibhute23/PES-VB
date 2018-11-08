@@ -289,7 +289,8 @@ Controller.competitionBean = comp;
         jLabel2.setText("Competition");
 
         lblNewCompetition.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button (1).png"))); // NOI18N
-        lblNewCompetition.setToolTipText("Add New ");
+        lblNewCompetition.setToolTipText("New Competition");
+        lblNewCompetition.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblNewCompetition.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblNewCompetitionMouseClicked(evt);

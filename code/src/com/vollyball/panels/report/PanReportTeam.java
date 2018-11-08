@@ -51,7 +51,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         mapMenu.put(lblDefence, panDefence);
 
         PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService(cb, matchId);
-       
+       setPrint(panTeamReportOfService, "Team Report - Service");
 
         panView.add(panTeamReportOfService, BorderLayout.CENTER);
         lblService.setForeground(Color.BLACK);
@@ -153,8 +153,6 @@ public class PanReportTeam extends javax.swing.JPanel {
         panBlock = new javax.swing.JPanel();
         lblBlock = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         panReception = new javax.swing.JPanel();
         lblReception = new javax.swing.JLabel();
         panSet = new javax.swing.JPanel();
@@ -175,6 +173,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         lblService.setForeground(new java.awt.Color(255, 255, 255));
         lblService.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblService.setText("Service");
+        lblService.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblService.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblServiceMouseClicked(evt);
@@ -199,6 +198,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         lblAttack.setForeground(new java.awt.Color(255, 255, 255));
         lblAttack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAttack.setText("Attack");
+        lblAttack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblAttack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblAttackMouseClicked(evt);
@@ -223,6 +223,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         lblBlock.setForeground(new java.awt.Color(255, 255, 255));
         lblBlock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBlock.setText("Block");
+        lblBlock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBlock.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBlockMouseClicked(evt);
@@ -243,46 +244,15 @@ public class PanReportTeam extends javax.swing.JPanel {
         jPanel16.setBackground(new java.awt.Color(57, 74, 108));
         jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        jPanel11.setBackground(new java.awt.Color(57, 74, 108));
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("PRINT All");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 198, Short.MAX_VALUE)
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap(192, Short.MAX_VALUE)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 234, Short.MAX_VALUE)
         );
 
         panReception.setBackground(new java.awt.Color(57, 74, 108));
@@ -292,6 +262,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         lblReception.setForeground(new java.awt.Color(255, 255, 255));
         lblReception.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblReception.setText("Reception");
+        lblReception.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblReception.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblReceptionMouseClicked(evt);
@@ -316,6 +287,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         lblSet.setForeground(new java.awt.Color(255, 255, 255));
         lblSet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSet.setText("Set");
+        lblSet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblSet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSetMouseClicked(evt);
@@ -340,6 +312,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         lblDefence.setForeground(new java.awt.Color(255, 255, 255));
         lblDefence.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDefence.setText("Defence");
+        lblDefence.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDefence.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblDefenceMouseClicked(evt);
@@ -418,7 +391,8 @@ public class PanReportTeam extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("PRINT");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/printer.png"))); // NOI18N
+        jLabel5.setText("Print");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
@@ -436,7 +410,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -490,10 +464,17 @@ public class PanReportTeam extends javax.swing.JPanel {
         panView.removeAll();
         PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService(cb, matchId);
         panView.add(panTeamReportOfService, BorderLayout.CENTER);
+        setPrint(panTeamReportOfService, "Team Report - Service");
         validate();
         repaint();
     }//GEN-LAST:event_lblServiceMouseClicked
 
+    public void setPrint(JPanel pan, String name) {
+        panListToPrint = new ArrayList<>();
+        panListToPrint.add(pan);
+        this.name = name;
+    }
+    
     public void changeColor(java.awt.event.MouseEvent evt) {
         JLabel lblClicked = (JLabel) evt.getSource();
 
@@ -522,11 +503,6 @@ public class PanReportTeam extends javax.swing.JPanel {
         repaint();
     }//GEN-LAST:event_lblAttackMouseClicked
 
-    public void setPrint(JPanel pan, String name) {
-        panListToPrint = new ArrayList<>();
-        panListToPrint.add(pan);
-        this.name = name;
-    }
 
     private void lblBlockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBlockMouseClicked
         // TODO add your handling code here:
@@ -570,20 +546,13 @@ public class PanReportTeam extends javax.swing.JPanel {
         repaint();
     }//GEN-LAST:event_lblDefenceMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO add your handling code here:
-        printComponenet(panListToPrint, name);
-    }//GEN-LAST:event_jLabel4MouseClicked
-
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         printComponenet(panListToPrint, name);
     }//GEN-LAST:event_jLabel5MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel5;

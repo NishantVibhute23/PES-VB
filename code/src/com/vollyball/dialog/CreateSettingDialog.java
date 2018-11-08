@@ -27,7 +27,7 @@ public class CreateSettingDialog {
         try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-            this.dialog = new JDialog(this.parentFrame, "User Detail", true);
+            this.dialog = new JDialog(this.parentFrame, "Settings", true);
 
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());

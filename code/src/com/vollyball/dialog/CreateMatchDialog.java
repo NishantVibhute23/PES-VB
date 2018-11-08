@@ -33,9 +33,9 @@ public class CreateMatchDialog {
         try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             if (matchId == 0) {
-                this.dialog = new JDialog(this.parentFrame, "New Match", true);
+                this.dialog = new JDialog(this.parentFrame, "Match", true);
             } else {
-                this.dialog = new JDialog(this.parentFrame, "Edit Match", true);
+                this.dialog = new JDialog(this.parentFrame, "Match", true);
             }
 
             this.dialog.setResizable(false);
