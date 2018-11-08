@@ -28,6 +28,7 @@ public class FrmRegister extends javax.swing.JFrame {
         pgrStatus.setValue(25);
         pgrStatus.setStringPainted(true);
         lblFinish.setVisible(false);
+        setIconImage((new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_pes-vb.png")).getImage()));
     }
 
     /**

@@ -127,11 +127,12 @@ public class PanBestScorer extends javax.swing.JPanel {
                             int dialogButton = JOptionPane.YES_NO_OPTION;
                             int dialogResult = JOptionPane.showConfirmDialog(null, "Are You Sure ?", "Warning", dialogButton);
                             if (dialogResult == JOptionPane.YES_OPTION) {
-//                                int count = td.deletePlayer(id);
-                                int count = 0;
+                                int count = td.deletePlayer(id);
+//                                int count = 0;
                                 if (count != 0) {
+                                    setRow(null);
                                     JOptionPane.showMessageDialog(null, "Player Deleted Successfully");
-                                } else {
+                                                                    } else {
                                     JOptionPane.showMessageDialog(null, "Not Able to Delete Player");
                                 }
                             }
@@ -145,17 +146,13 @@ public class PanBestScorer extends javax.swing.JPanel {
     }
     
     public void setRow(Player player) {
-     
-
         for (int i = dm.getRowCount() - 1; i >= 0; i--) {
             dm.removeRow(i);
         }
 
         if (player == null) {
-           
-           
-
             int i = 1;
+            List<Player> playerList = td.getAlPlayers(cb.getId());
             for (Player p : playerList) {
                 teamchestPlayerMap.put(p.getTeamName() + "-" + p.getChestNo(), p.getId());
                 Object[] row = {i, p.getName(),p.getChestNo(), p.getTeamName(), PlayerPosition.getNameById(p.getPosition()), p.isCaptain()==true?"Captain":"", new JPanel(), new JPanel()};
@@ -163,16 +160,10 @@ public class PanBestScorer extends javax.swing.JPanel {
                 i++;
             }
         } else {
-
-            
-
             int i = 0;
-            
-                Object[] row = {i, player.getName(),player.getChestNo(), player.getTeamName(), PlayerPosition.getNameById(player.getPosition()), player.isCaptain()==true?"Captain":"", new JPanel(), new JPanel()};
-                dm.addRow(row);
-                i++;
-            
-
+            Object[] row = {i, player.getName(),player.getChestNo(), player.getTeamName(), PlayerPosition.getNameById(player.getPosition()), player.isCaptain()==true?"Captain":"", new JPanel(), new JPanel()};
+            dm.addRow(row);
+            i++;            
         }
     }
 
@@ -239,14 +230,7 @@ public class PanBestScorer extends javax.swing.JPanel {
 
         sorter = new TableRowSorter<TableModel>(tbReport.getModel());
         tbReport.setRowSorter(sorter);
-
-//        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
-//        sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-//        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
-//        sorter.setSortKeys(sortKeys);
         tbReport.setFont(new java.awt.Font("Times New Roman", 0, 14));
-              
-
         JScrollPane scroll = new JScrollPane(tbReport);
 
         Color heading = new Color(204, 204, 204);

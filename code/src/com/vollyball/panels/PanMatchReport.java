@@ -15,6 +15,7 @@ import com.vollyball.dialog.CreateMatchDialog;
 import com.vollyball.enums.EvaluationType;
 import com.vollyball.enums.Phase;
 import com.vollyball.panels.report.PanReportHome;
+import com.vollyball.renderer.DeleteButtonRenderer;
 import com.vollyball.renderer.EditButtonRenderer;
 import com.vollyball.renderer.GroupableTableHeader;
 import com.vollyball.renderer.LiveButtonRenderer;
@@ -31,6 +32,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -75,7 +77,7 @@ public class PanMatchReport extends javax.swing.JPanel {
         };
 
         model.setDataVector(new Object[][]{},
-                new Object[]{"SR No.", "Match", "Won By", "Date", "Time", "Phase", "Place", "Day Number", "Match Number", "Report", "Evaluate", "Action"});
+                new Object[]{"SR No.", "Match", "Won By", "Date", "Time", "Phase", "Place", "Day Number", "Match Number", "Report", "Evaluate", "Edit", "Delete"});
 
         tbMatch = new JTable(model) {
 
@@ -134,6 +136,8 @@ public class PanMatchReport extends javax.swing.JPanel {
 //        tbMatch.getColumnModel().getColumn(11).setCellRenderer(postButtonRenderer);
         EditButtonRenderer editButtonRenderer = new EditButtonRenderer();
         tbMatch.getColumnModel().getColumn(11).setCellRenderer(editButtonRenderer);
+         DeleteButtonRenderer deleteButtonRenderer = new DeleteButtonRenderer();
+        tbMatch.getColumnModel().getColumn(12).setCellRenderer(deleteButtonRenderer);
 
         tbMatch.setRowHeight(35);
 
@@ -220,9 +224,25 @@ public class PanMatchReport extends javax.swing.JPanel {
                             Controller.matchDialog.init();
                             Controller.matchDialog.show();
                         }
-
+                        else if (selectedCol == 12) {
+                            id = (int) matchIdmap.get((int) tbMatch.getValueAt(selectedRow, 0));
+                            String name =  (String) tbMatch.getValueAt(selectedRow,1);
+                            
+                                                                           
+                             int dialogButton = JOptionPane.YES_NO_OPTION;
+                            int dialogResult = JOptionPane.showConfirmDialog(null, "Are You Sure want to delete \""+name+"\" ?", "Warning", dialogButton);
+                            if (dialogResult == JOptionPane.YES_OPTION) {
+                                int count = matchDao.deleteMatch(id);
+                                                       if (count != 0) {
+                                                 Refresh();          
+                                    JOptionPane.showMessageDialog(null, "Match Deleted Successfully");
+                                    
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Not Able to Delete Match");
+                                }
+                            }
+                        }
                     }
-
                 }
             }
         });
@@ -235,7 +255,7 @@ public class PanMatchReport extends javax.swing.JPanel {
         for (MatchBean match : matchList) {
             i++;
             matchIdmap.put(i, match.getId());
-            Object[] row = {i, match.getMatch(), "", match.getDate(), match.getTime(), match.getPhase(), match.getPlace(), match.getDayNumber(), match.getMatchNumber(), new JPanel(), new JPanel(), new JPanel()};
+            Object[] row = {i, match.getMatch(), "", match.getDate(), match.getTime(), match.getPhase(), match.getPlace(), match.getDayNumber(), match.getMatchNumber(), new JPanel(), new JPanel(), new JPanel(), new JPanel()};
             model.addRow(row);
         }
 
@@ -255,7 +275,7 @@ public class PanMatchReport extends javax.swing.JPanel {
 
     }
 
-    float[] columnWidthPercentage = {5.0f, 25.0f, 10.0f, 8.0f, 8.0f, 14.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f};
+    float[] columnWidthPercentage = {5.0f, 25.0f, 10.0f, 8.0f, 8.0f, 14.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f};
 
     private void resizeColumns() {
         int tW = tbMatch.getPreferredSize().width;
@@ -280,7 +300,7 @@ public class PanMatchReport extends javax.swing.JPanel {
         for (MatchBean match : matchList) {
             i++;
             matchIdmap.put(i, match.getId());
-            Object[] row = {i, match.getMatch(), "", match.getDate(), match.getTime(), match.getPhase(), match.getPlace(), match.getDayNumber(), match.getMatchNumber(), new JPanel(), new JPanel(), new JPanel(), new JPanel()};
+            Object[] row = {i, match.getMatch(), "", match.getDate(), match.getTime(), match.getPhase(), match.getPlace(), match.getDayNumber(), match.getMatchNumber(), new JPanel(), new JPanel(), new JPanel(), new JPanel(), new JPanel()};
             model.addRow(row);
         }
     }

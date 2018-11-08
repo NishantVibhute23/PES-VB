@@ -1052,4 +1052,21 @@ public class MatchDao {
         }
         return count;
     }
+    
+    
+     public int deleteMatch(int id) {
+        int count = 0;
+        try {
+            this.con = db.getConnection();
+            PreparedStatement ps = this.con.prepareStatement(CommonUtil.getResourceProperty("delete.match"));
+            ps.setInt(1, id);
+           
+            count = ps.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }finally{
+            db.closeConnection(con);
+        }
+        return count;
+    }
 }

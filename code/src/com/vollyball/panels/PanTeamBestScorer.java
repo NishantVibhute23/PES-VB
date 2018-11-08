@@ -12,8 +12,8 @@ import com.vollyball.controller.Controller;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.dialog.CreateTeamDialog;
-import com.vollyball.dialog.DialogTamDetail;
 import com.vollyball.renderer.ColumnGroup;
+import com.vollyball.renderer.DeleteButtonRenderer;
 import com.vollyball.renderer.EditButtonRenderer;
 import com.vollyball.renderer.GroupableTableHeader;
 import com.vollyball.renderer.ReportButtonRenderer;
@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import static java.time.zone.ZoneRulesProvider.refresh;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -108,6 +110,24 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
                                 Controller.teamDialog.init();
                                 Controller.teamDialog.show();
                             }
+                            if (selectedCol == 9) {
+                            int id = (int) playerTeamMap.get(selectedName).getId();
+                            
+              
+                             int dialogButton = JOptionPane.YES_NO_OPTION;
+                            int dialogResult = JOptionPane.showConfirmDialog(null, "Are You Sure want to delete \""+selectedName+"\" ?", "Warning", dialogButton);
+                            if (dialogResult == JOptionPane.YES_OPTION) {
+                                int count = td.deleteTeam(id);
+                                                       if (count != 0) {
+                                                           setRow(null);
+                                    JOptionPane.showMessageDialog(null, "Team Deleted Successfully");
+                                    
+                                    
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Not Able to Delete Team");
+                                }
+                            }
+                            }
                             tbReport.clearSelection();
                         }
                     }
@@ -130,7 +150,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
             for (Team p : teamList) {
                 
                 Team t = td.getteamDetail(p.getId());
-                Object[] row = {i + 1, t.getName(), t.getShortCode(), t.getCoach(), t.getTrainer(), t.getAsstCoach(), t.getAnalyzer(), t.getMedicalOffice(), new JPanel()};
+                Object[] row = {i + 1, t.getName(), t.getShortCode(), t.getCoach(), t.getTrainer(), t.getAsstCoach(), t.getAnalyzer(), t.getMedicalOffice(), new JPanel(), new JPanel()};
                 dm.addRow(row);
                 i++;
             }
@@ -139,7 +159,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
             Team t = td.getteamDetail(Team.getId());
             int i = 0;
           
-                Object[] row = {i + 1, t.getName(), t.getShortCode(), t.getCoach(), t.getTrainer(), t.getAsstCoach(), t.getAnalyzer(), t.getMedicalOffice(), new JPanel()};
+                Object[] row = {i + 1, t.getName(), t.getShortCode(), t.getCoach(), t.getTrainer(), t.getAsstCoach(), t.getAnalyzer(), t.getMedicalOffice(), new JPanel(), new JPanel()};
                 dm.addRow(row);
                 i++;
             
@@ -209,7 +229,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
 //        };
 
         dm.setDataVector(new Object[][]{},
-                new Object[]{"SR No.", "Team Name","Shortcut Code","Coach","Trainer","Asst. Coach","Analyzer","Medical Officer","Action"});
+                new Object[]{"SR No.", "Team Name","Shortcut Code","Coach","Trainer","Asst. Coach","Analyzer","Medical Officer","Edit","Delete"});
 
         tbReport = new JTable(dm) {
             protected JTableHeader createDefaultTableHeader() {
@@ -248,6 +268,8 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
 
         EditButtonRenderer editButtonRenderer = new EditButtonRenderer();
         tbReport.getColumnModel().getColumn(8).setCellRenderer(editButtonRenderer);
+        DeleteButtonRenderer deleteButtonRenderer = new DeleteButtonRenderer();
+        tbReport.getColumnModel().getColumn(9).setCellRenderer(deleteButtonRenderer);
 
         Color ivory = new Color(255, 255, 255);
         tbReport.setOpaque(true);
@@ -376,7 +398,7 @@ public class PanTeamBestScorer extends javax.swing.JPanel {
         resizeColumns();
         panReport.add(scroll, BorderLayout.CENTER);
     }
-    float[] columnWidthPercentage = {5.0f, 23.0f, 9.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f};
+    float[] columnWidthPercentage = {5.0f, 23.0f, 9.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f, 8.0f,8.0f};
 
     private void resizeColumns() {
         int tW = tbReport.getPreferredSize().width;

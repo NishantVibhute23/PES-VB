@@ -37,7 +37,7 @@ public class FrmDashboard extends javax.swing.JFrame {
         }
         panMyProfile.setVisible(false);
         Controller.panCompetitionList = new PanCompetitionList();
-        
+        setIconImage((new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_pes-vb.png")).getImage()));
         panContent.add(Controller.panCompetitionList, BorderLayout.CENTER);
         lblSecond.setVisible(false);
         lblThird.setVisible(false);

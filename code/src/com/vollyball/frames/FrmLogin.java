@@ -20,6 +20,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,6 +48,8 @@ public class FrmLogin extends javax.swing.JFrame {
             txtIpAddr.setText(inetAddress.getHostAddress());
             txtIpAddr.setEditable(false);
             txtIpAddr.setBackground(Color.WHITE);
+           
+setIconImage((new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_pes-vb.png")).getImage()));
             setVisible(true);
         } catch (UnknownHostException ex) {
             Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
