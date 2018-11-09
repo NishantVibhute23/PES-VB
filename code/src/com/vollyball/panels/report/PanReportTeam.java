@@ -34,7 +34,7 @@ public class PanReportTeam extends javax.swing.JPanel {
     int cb;
     int matchId;
     List<Component> panListToPrint = new ArrayList<>();
-    String name = "Service";
+    String name = "Team Report - Service";
 
     /**
      * Creates new form PanReportTeam
@@ -498,7 +498,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         panView.removeAll();
         PanTeamReportOfAttack panTeamReportOFAttack = new PanTeamReportOfAttack(cb, matchId);
         panView.add(panTeamReportOFAttack, BorderLayout.CENTER);
-        setPrint(panTeamReportOFAttack, "Attack");
+        setPrint(panTeamReportOFAttack, "Team Report - Attack");
         validate();
         repaint();
     }//GEN-LAST:event_lblAttackMouseClicked
@@ -511,7 +511,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         PanTeamReportOfBlock panTeamReportOfBlock = new PanTeamReportOfBlock(cb, matchId);
         panView.add(panTeamReportOfBlock, BorderLayout.CENTER);
 
-        setPrint(panTeamReportOfBlock, "Block");
+        setPrint(panTeamReportOfBlock, "Team Report - Block");
         validate();
         repaint();
     }//GEN-LAST:event_lblBlockMouseClicked
@@ -521,7 +521,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         panView.removeAll();
         PanTeamReportOfReception panTeamReportOfReception = new PanTeamReportOfReception(cb, matchId);
         panView.add(panTeamReportOfReception, BorderLayout.CENTER);
-        setPrint(panTeamReportOfReception, "Reception");
+        setPrint(panTeamReportOfReception, "Team Report - Reception");
         validate();
         repaint();
     }//GEN-LAST:event_lblReceptionMouseClicked
@@ -531,7 +531,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         panView.removeAll();
         PanTeamReportOfSet panTeamReportOfSet = new PanTeamReportOfSet(cb, matchId);
         panView.add(panTeamReportOfSet, BorderLayout.CENTER);
-        setPrint(panTeamReportOfSet, "Set");
+        setPrint(panTeamReportOfSet, "Team Report - Set");
         validate();
         repaint();
     }//GEN-LAST:event_lblSetMouseClicked
@@ -541,7 +541,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         panView.removeAll();
         PanTeamReportOfDefence panTeamReportOfDefence = new PanTeamReportOfDefence(cb, matchId);
         panView.add(panTeamReportOfDefence, BorderLayout.CENTER);
-        setPrint(panTeamReportOfDefence, "Defence");
+        setPrint(panTeamReportOfDefence, "Team Report - Defence");
         validate();
         repaint();
     }//GEN-LAST:event_lblDefenceMouseClicked

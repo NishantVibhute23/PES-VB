@@ -90,7 +90,7 @@ public enum ShortCutEnum {
     ShortCutEnum74(74, "A8", "BTL", "Body Turn With One leg", 10),
     ShortCutEnum75(75, "D23", "ODF", "2-1-3", 9),
     ShortCutEnum76(76, "DN", "ODF", "Non Organised", 9),
-    ShortCutEnum77(77, "S", "S", "Straight", 17),
+    ShortCutEnum77(77, "ST", "ST", "Straight", 17),
     ShortCutEnum78(78, "HA", "HA", "Home Attack", 18),
     ShortCutEnum79(79, "HB", "HB", "Home Block", 18),
     ShortCutEnum80(80, "HD", "HD", "Home Defence", 18),

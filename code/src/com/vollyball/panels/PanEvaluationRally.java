@@ -679,15 +679,15 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         panSave = new javax.swing.JPanel();
         lblAction = new javax.swing.JLabel();
         panWonBy = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        panEndByHome = new javax.swing.JPanel();
         lblHomePlus = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        panEndByOpp = new javax.swing.JPanel();
         lblOppPlus = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         panStartBy = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        panStartbyHome = new javax.swing.JPanel();
         lblHomeStartBy = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        panStartByOpp = new javax.swing.JPanel();
         lblOppStartBy = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -827,13 +827,12 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         panWonBy.setBackground(new java.awt.Color(102, 102, 102));
         panWonBy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jPanel4.setBackground(new java.awt.Color(0, 102, 204));
+        panEndByHome.setBackground(new java.awt.Color(255, 255, 255));
 
         lblHomePlus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblHomePlus.setForeground(new java.awt.Color(255, 255, 255));
         lblHomePlus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHomePlus.setText("jLabel1");
-        lblHomePlus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lblHomePlus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblHomePlus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblHomePlus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -841,26 +840,25 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panEndByHomeLayout = new javax.swing.GroupLayout(panEndByHome);
+        panEndByHome.setLayout(panEndByHomeLayout);
+        panEndByHomeLayout.setHorizontalGroup(
+            panEndByHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblHomePlus, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        panEndByHomeLayout.setVerticalGroup(
+            panEndByHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panEndByHomeLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblHomePlus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(204, 0, 51));
+        panEndByOpp.setBackground(new java.awt.Color(255, 255, 255));
 
         lblOppPlus.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblOppPlus.setForeground(new java.awt.Color(255, 255, 255));
         lblOppPlus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblOppPlus.setText("jLabel2");
-        lblOppPlus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lblOppPlus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblOppPlus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblOppPlus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -868,14 +866,14 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panEndByOppLayout = new javax.swing.GroupLayout(panEndByOpp);
+        panEndByOpp.setLayout(panEndByOppLayout);
+        panEndByOppLayout.setHorizontalGroup(
+            panEndByOppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblOppPlus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panEndByOppLayout.setVerticalGroup(
+            panEndByOppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblOppPlus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
@@ -889,35 +887,34 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             panWonByLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panWonByLayout.createSequentialGroup()
                 .addGroup(panWonByLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panEndByHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panWonByLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)))
                 .addGap(0, 0, 0)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panEndByOpp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panWonByLayout.setVerticalGroup(
             panWonByLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panWonByLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panEndByOpp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panWonByLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jLabel2)
                 .addGap(5, 5, 5)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panEndByHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panStartBy.setBackground(new java.awt.Color(102, 102, 102));
         panStartBy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jPanel6.setBackground(new java.awt.Color(0, 102, 204));
+        panStartbyHome.setBackground(new java.awt.Color(255, 255, 255));
 
         lblHomeStartBy.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblHomeStartBy.setForeground(new java.awt.Color(255, 255, 255));
         lblHomeStartBy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHomeStartBy.setText("jLabel1");
-        lblHomeStartBy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lblHomeStartBy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblHomeStartBy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblHomeStartBy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -925,26 +922,25 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panStartbyHomeLayout = new javax.swing.GroupLayout(panStartbyHome);
+        panStartbyHome.setLayout(panStartbyHomeLayout);
+        panStartbyHomeLayout.setHorizontalGroup(
+            panStartbyHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblHomeStartBy, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+        panStartbyHomeLayout.setVerticalGroup(
+            panStartbyHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panStartbyHomeLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblHomeStartBy, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel7.setBackground(new java.awt.Color(204, 0, 51));
+        panStartByOpp.setBackground(new java.awt.Color(255, 255, 255));
 
         lblOppStartBy.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblOppStartBy.setForeground(new java.awt.Color(255, 255, 255));
         lblOppStartBy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblOppStartBy.setText("jLabel2");
-        lblOppStartBy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lblOppStartBy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblOppStartBy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblOppStartBy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -952,14 +948,14 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panStartByOppLayout = new javax.swing.GroupLayout(panStartByOpp);
+        panStartByOpp.setLayout(panStartByOppLayout);
+        panStartByOppLayout.setHorizontalGroup(
+            panStartByOppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblOppStartBy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panStartByOppLayout.setVerticalGroup(
+            panStartByOppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblOppStartBy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
@@ -973,23 +969,23 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             panStartByLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panStartByLayout.createSequentialGroup()
                 .addGroup(panStartByLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panStartbyHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panStartByLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panStartByOpp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         panStartByLayout.setVerticalGroup(
             panStartByLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panStartByLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panStartByOpp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panStartByLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jLabel1)
                 .addGap(5, 5, 5)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panStartbyHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1052,6 +1048,11 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         // TODO add your handling code here:
         Controller.panMatchSet.homeScore++;
         
+         lblHomePlus.setForeground(Color.WHITE);
+        panEndByHome.setBackground(new Color(57,74,108));
+          lblOppPlus.setForeground(Color.black);
+        panEndByOpp.setBackground(Color.WHITE);
+        
         
         setEndData("Home");
         
@@ -1061,17 +1062,30 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     private void lblOppPlusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOppPlusMouseClicked
         // TODO add your handling code here:
         Controller.panMatchSet.opponentScore++;
+        lblOppPlus.setForeground(Color.WHITE);
+        panEndByOpp.setBackground(new Color(57,74,108));
+          lblHomePlus.setForeground(Color.black);
+        panEndByHome.setBackground(Color.WHITE);
          setEndData("opp");
         save();
     }//GEN-LAST:event_lblOppPlusMouseClicked
 
     private void lblHomeStartByMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHomeStartByMouseClicked
         // TODO add your handling code here:
+        lblHomeStartBy.setForeground(Color.WHITE);
+        panStartbyHome.setBackground(new Color(57,74,108));
+          lblOppStartBy.setForeground(Color.black);
+        panStartByOpp.setBackground(Color.WHITE);
+        
          setStartData("Home");
     }//GEN-LAST:event_lblHomeStartByMouseClicked
 
     private void lblOppStartByMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOppStartByMouseClicked
         // TODO add your handling code here:
+lblOppStartBy         .setForeground(Color.WHITE);
+        panStartByOpp.setBackground(new Color(57,74,108));
+          lblHomeStartBy.setForeground(Color.black);
+    panStartbyHome    .setBackground(Color.WHITE);
          setStartData("opp");
     }//GEN-LAST:event_lblOppStartByMouseClicked
 
@@ -1144,10 +1158,6 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel lblAction;
     private javax.swing.JLabel lblHomePlus;
     private javax.swing.JLabel lblHomeStartBy;
@@ -1157,10 +1167,14 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     private javax.swing.JLabel lblRallyNum;
     public javax.swing.JLabel lblRallyStartTime;
     public javax.swing.JLabel lblResult;
+    private javax.swing.JPanel panEndByHome;
+    private javax.swing.JPanel panEndByOpp;
     public javax.swing.JPanel panEvalDetail;
     public javax.swing.JPanel panRallyList;
     private javax.swing.JPanel panSave;
     private javax.swing.JPanel panStartBy;
+    private javax.swing.JPanel panStartByOpp;
+    private javax.swing.JPanel panStartbyHome;
     private javax.swing.JPanel panWonBy;
     // End of variables declaration//GEN-END:variables
 

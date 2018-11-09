@@ -350,6 +350,7 @@ public class PanNewMatch extends javax.swing.JPanel {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_save.png"))); // NOI18N
         jLabel11.setToolTipText("Save");
+        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel11MouseClicked(evt);
@@ -358,6 +359,7 @@ public class PanNewMatch extends javax.swing.JPanel {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_cancel.png"))); // NOI18N
         jLabel13.setToolTipText("Cancel");
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel13MouseClicked(evt);
@@ -470,12 +472,9 @@ public class PanNewMatch extends javax.swing.JPanel {
                 .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(20, 20, 20))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(20, 20, 20))))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -522,9 +521,10 @@ public class PanNewMatch extends javax.swing.JPanel {
                 if (count != 0) {
 
                     
-                    JOptionPane.showMessageDialog(this, "Added New Match \"" + team1 + "\" vs \"" + team2 + "\"");
+                    
                     Controller.matchDialog.close();
                     Controller.panMatchReport.Refresh();
+                    JOptionPane.showMessageDialog(this, "Added New Match \"" + team1 + "\" vs \"" + team2 + "\"");
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed To add Match");
@@ -549,9 +549,10 @@ public class PanNewMatch extends javax.swing.JPanel {
                 if (count != 0) {
 
                    
-                    JOptionPane.showMessageDialog(this, "Updated New Match \"" + team1 + "\" vs \"" + team2 + "\"");
+                    
                     Controller.matchDialog.close();
                     Controller.panMatchReport.Refresh();
+                    JOptionPane.showMessageDialog(this, "Updated New Match \"" + team1 + "\" vs \"" + team2 + "\"");
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed To update Match");

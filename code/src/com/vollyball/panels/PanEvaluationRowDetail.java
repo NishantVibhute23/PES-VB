@@ -163,18 +163,18 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                int x = e.getX();
-                int y = e.getY();
-                pixel.add(x);
-                pixel.add(y);
-
-                if (pixel.size() > 2) {
-                    panel.drawImage(pixel.get(0), pixel.get(1), pixel.get(2), pixel.get(3));
-                    panCourt.removeAll();
-                    panCourt.add(panel, BorderLayout.CENTER);
-                    panCourt.validate();
-                    panCourt.repaint();
-                }
+//                int x = e.getX();
+//                int y = e.getY();
+//                pixel.add(x);
+//                pixel.add(y);
+//
+//                if (pixel.size() > 2) {
+//                    panel.drawImage(pixel.get(0), pixel.get(1), pixel.get(2), pixel.get(3));
+//                    panCourt.removeAll();
+//                    panCourt.add(panel, BorderLayout.CENTER);
+//                    panCourt.validate();
+//                    panCourt.repaint();
+//                }
             }
 
             @Override
@@ -202,7 +202,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    selectPlayer((JLabel) e.getSource());
+//                    selectPlayer((JLabel) e.getSource());
                 }
 
                 @Override
@@ -233,7 +233,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    selectScore((JLabel) e.getSource());
+//                    selectScore((JLabel) e.getSource());
 
                 }
 
@@ -275,8 +275,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     }
 
     public void save() {
-        if(!p.isInserted)
-        {
+        
         rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
         if (isFirst && isNew) {
             isFirst = false;
@@ -373,7 +372,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     break;
             }
         }
-        }
+        
     }
     
     public void update(RallyEvaluationSkillScore rallyEvaluationSkillScore) {
@@ -1019,6 +1018,11 @@ setValues(rallyEvaluationSkillScore);
         lblRate1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRate1.setText("1");
         lblRate1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblRate1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRate1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panRate1Layout = new javax.swing.GroupLayout(panRate1);
         panRate1.setLayout(panRate1Layout);
@@ -1944,35 +1948,35 @@ setValues(rallyEvaluationSkillScore);
     }// </editor-fold>//GEN-END:initComponents
     private void lblDefenceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDefenceMouseClicked
         // TODO add your handling code here:
-        selectSkill((JLabel) evt.getSource());
+         //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblDefenceMouseClicked
     private void lblServiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblServiceMouseClicked
         // TODO add your handling code here:
-        selectSkill((JLabel) evt.getSource());
+         //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblServiceMouseClicked
     private void lblTFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTFMouseClicked
         // TODO add your handling code here:
-        selectSkill((JLabel) evt.getSource());
+         //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblTFMouseClicked
     private void lblOpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpMouseClicked
         // TODO add your handling code here:
-        selectSkill((JLabel) evt.getSource());
+         //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblOpMouseClicked
     private void lblAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAttackMouseClicked
         // TODO add your handling code here:
-        selectSkill((JLabel) evt.getSource());
+         //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblAttackMouseClicked
     private void lblBlockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBlockMouseClicked
         // TODO add your handling code here:
-        selectSkill((JLabel) evt.getSource());
+         //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblBlockMouseClicked
     private void lblReceptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReceptionMouseClicked
         // TODO add your handling code here:
-        selectSkill((JLabel) evt.getSource());
+         //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblReceptionMouseClicked
     private void lblSetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSetMouseClicked
         // TODO add your handling code here:
-        selectSkill((JLabel) evt.getSource());
+         //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblSetMouseClicked
     private void txtInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInputKeyPressed
         // TODO add your handling code here:
@@ -2136,6 +2140,10 @@ setValues(rallyEvaluationSkillScore);
     private void lblNEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNEMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_lblNEMouseClicked
+
+    private void lblRate1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRate1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblRate1MouseClicked
 
     public RallyEvaluationSkillScore getRallyEvaluationSkillScore() {
         return rallyEvaluationSkillScore;

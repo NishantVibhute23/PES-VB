@@ -40,6 +40,7 @@ public class PanMatchReportHeading extends javax.swing.JPanel {
         lblOp.setText("" + ms.getOp());
         lblTf.setText("" + ms.getTf());
         lblWonBy.setText(teamsMap.get(ms.getWon_by()));
+        lblSet.setText(""+ms.getSetNo());
 
         txtEvaluator.setText(ms.getEvaluator());
         lblScore.setText(ms.getHomeScore() + " - " + ms.getOpponentScore());

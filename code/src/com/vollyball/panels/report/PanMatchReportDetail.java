@@ -495,7 +495,7 @@ int totalRallies = rallyList.size();
         documentPageFormat.setOrientation(PageFormat.PORTRAIT);
 
         PrinterJob pj = PrinterJob.getPrinterJob();
-        pj.setJobName("Score Report_-_");
+        pj.setJobName("Datasheet");
 
         Book book = new Book();
 

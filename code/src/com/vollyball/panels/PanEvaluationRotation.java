@@ -372,9 +372,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 jLabel5 = new javax.swing.JLabel();
                 txtEvaluatorName = new javax.swing.JTextField();
                 jPanel13 = new javax.swing.JPanel();
-                jPanel14 = new javax.swing.JPanel();
                 jLabel6 = new javax.swing.JLabel();
-                jPanel15 = new javax.swing.JPanel();
                 jLabel8 = new javax.swing.JLabel();
 
                 setBackground(new java.awt.Color(0, 0, 0));
@@ -773,17 +771,17 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                 pos1Home.setHorizontalAlignment(javax.swing.JTextField.CENTER);
                 pos1Home.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
                 pos1Home.setCaretColor(new java.awt.Color(255, 255, 255));
-                pos1Home.addMouseListener(new java.awt.event.MouseAdapter() {
-                    public void mouseClicked(java.awt.event.MouseEvent evt) {
-                        pos1HomeMouseClicked(evt);
-                    }
-                });
                 pos1Home.addFocusListener(new java.awt.event.FocusAdapter() {
                     public void focusGained(java.awt.event.FocusEvent evt) {
                         pos1HomeFocusGained(evt);
                     }
                     public void focusLost(java.awt.event.FocusEvent evt) {
                         pos1HomeFocusLost(evt);
+                    }
+                });
+                pos1Home.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        pos1HomeMouseClicked(evt);
                     }
                 });
 
@@ -997,18 +995,12 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
 
                 jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
-                jPanel14.setBackground(new java.awt.Color(57, 74, 108));
-                jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
-                    public void mouseClicked(java.awt.event.MouseEvent evt) {
-                        jPanel14MouseClicked(evt);
-                    }
-                });
-
                 jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
                 jLabel6.setForeground(new java.awt.Color(255, 255, 255));
                 jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabel6.setText("SAVE");
+                jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_save.png"))); // NOI18N
+                jLabel6.setToolTipText("Save");
+                jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
                 jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         jLabel6MouseClicked(evt);
@@ -1020,61 +1012,36 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
                     }
                 });
 
-                javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-                jPanel14.setLayout(jPanel14Layout);
-                jPanel14Layout.setHorizontalGroup(
-                    jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                );
-                jPanel14Layout.setVerticalGroup(
-                    jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))
-                );
-
-                jPanel15.setBackground(new java.awt.Color(57, 74, 108));
-                jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
                 jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
                 jLabel8.setForeground(new java.awt.Color(255, 255, 255));
                 jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabel8.setText("CANCEL");
+                jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_cancel.png"))); // NOI18N
+                jLabel8.setToolTipText("Cancel");
+                jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
                 jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         jLabel8MouseClicked(evt);
                     }
                 });
 
-                javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-                jPanel15.setLayout(jPanel15Layout);
-                jPanel15Layout.setHorizontalGroup(
-                    jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                );
-                jPanel15Layout.setVerticalGroup(
-                    jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                );
-
                 javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
                 jPanel13.setLayout(jPanel13Layout);
                 jPanel13Layout.setHorizontalGroup(
                     jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(337, 337, 337)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(411, 411, 411)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
                 jPanel13Layout.setVerticalGroup(
                     jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                         .addGap(13, 13, 13))
                 );
 
@@ -1400,10 +1367,6 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         Controller.panMatchEvaluationHome.objRotationOrder.close();
     }//GEN-LAST:event_jLabel8MouseClicked
 
-    private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel14MouseClicked
-
     private void jLabel6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel6KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel6KeyPressed
@@ -1422,8 +1385,6 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

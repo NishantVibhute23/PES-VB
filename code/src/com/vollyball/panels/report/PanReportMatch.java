@@ -37,7 +37,7 @@ public class PanReportMatch extends javax.swing.JPanel {
     int cb, matchId;
     List<JPanel> panListToPrint = new ArrayList<>();
     LinkedHashMap<JLabel, JPanel> mapMenu = new LinkedHashMap<JLabel, JPanel>();
-    String name = "Consolidated";
+    String name = "Match Report - Consolidated";
 
     /**
      * Creates new form PanReportMatch
@@ -356,7 +356,7 @@ public class PanReportMatch extends javax.swing.JPanel {
 
         panReport.removeAll();
         panReport.add(panR, BorderLayout.CENTER);
-        setPrint(panR, "Rotation Performance");
+        setPrint(panR, "Match Report - Rotation Performance");
         validate();
         repaint();
 
@@ -368,7 +368,7 @@ public class PanReportMatch extends javax.swing.JPanel {
 
         panReport.removeAll();
         panReport.add(panT, BorderLayout.CENTER);
-        setPrint(panT, "Best Player Performance");
+        setPrint(panT, "Match Report - Best Player Performance");
         validate();
         repaint();
     }//GEN-LAST:event_lblTeamMouseClicked
@@ -379,7 +379,7 @@ public class PanReportMatch extends javax.swing.JPanel {
 
         panReport.removeAll();
         panReport.add(panC, BorderLayout.CENTER);
-        setPrint(panC, "Consolidated");
+        setPrint(panC, "Match Report - Consolidated");
         validate();
         repaint();
     }//GEN-LAST:event_lblmatchMouseClicked
