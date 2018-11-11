@@ -433,7 +433,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 frmMain = new FrmRegister();
             }
         } else {
-
+            JOptionPane.showMessageDialog(this, "Please INstall");
         }
 
     }//GEN-LAST:event_jLabel3MouseClicked
