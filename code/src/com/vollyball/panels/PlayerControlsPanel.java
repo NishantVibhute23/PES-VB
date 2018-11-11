@@ -498,4 +498,11 @@ public class PlayerControlsPanel extends JPanel {
         volumeSlider.setValue(value);
     }
 
+    public EmbeddedMediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+
+    
+    
+    
 }

@@ -32,7 +32,7 @@ public class CreatePlayerDialog {
         try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-            this.dialog = new JDialog(this.parentFrame, "New Competition", true);
+            this.dialog = new JDialog(this.parentFrame, "Player", true);
 
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());

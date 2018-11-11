@@ -5,7 +5,6 @@
  */
 package com.vollyball.panels.report;
 
-import com.vollyball.panels.PanMatchReportDetail;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -55,6 +54,7 @@ public class PanReportHome extends javax.swing.JPanel {
         lblMatch.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblMatch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMatch.setText("Match");
+        lblMatch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblMatch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblMatchMouseClicked(evt);
@@ -82,6 +82,7 @@ public class PanReportHome extends javax.swing.JPanel {
         lblTeam.setForeground(new java.awt.Color(255, 255, 255));
         lblTeam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTeam.setText("Team");
+        lblTeam.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblTeam.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblTeamMouseClicked(evt);
@@ -109,6 +110,7 @@ public class PanReportHome extends javax.swing.JPanel {
         lblDatasheet.setForeground(new java.awt.Color(255, 255, 255));
         lblDatasheet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDatasheet.setText("Datasheet");
+        lblDatasheet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDatasheet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblDatasheetMouseClicked(evt);
@@ -158,10 +160,7 @@ public class PanReportHome extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(panShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(panShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

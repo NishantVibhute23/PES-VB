@@ -28,17 +28,18 @@ public class ViewButtonRenderer extends DefaultTableCellRenderer {
 
         if (value instanceof JPanel) {
             //This time return only the JLabel without icon
-            JLabel l = new JLabel("VIEW");
-            l.setForeground(Color.WHITE);
+            JLabel l = new JLabel("");
+//            l.setForeground(Color.WHITE);
             l.setHorizontalAlignment(CENTER);
-            l.setFont(new java.awt.Font("Times New Roman", 0, 12));
-            l.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//            l.setFont(new java.awt.Font("Times New Roman", 0, 12));
+//            l.setCursor(new Cursor(Cursor.HAND_CURSOR));
+l.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_view.png")));
             JPanel p = (JPanel) value;
             p.setLayout(new BorderLayout());
             p.add(l, BorderLayout.CENTER);
-            p.setBackground(new Color(57, 74, 108));
+            p.setBackground(Color.WHITE);
             p.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            p.setBorder(new LineBorder(Color.WHITE, 4));
+            p.setBorder(new LineBorder(Color.WHITE, 2));
             return p;
         } else {
             return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);

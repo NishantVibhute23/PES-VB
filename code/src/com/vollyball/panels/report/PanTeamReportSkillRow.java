@@ -70,7 +70,7 @@ public class PanTeamReportSkillRow extends javax.swing.JPanel {
         int j = 0;
         for (int i = 0; i < lsList.size(); i++) {
 
-            if (i <= 6) {
+            if (j < 6) {
                 j++;
                 PlayerScores p = lsList.get(i);
                 Object[] row = {p.getPlayerName(), 

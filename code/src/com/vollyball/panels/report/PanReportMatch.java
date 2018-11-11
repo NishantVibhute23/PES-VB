@@ -37,7 +37,7 @@ public class PanReportMatch extends javax.swing.JPanel {
     int cb, matchId;
     List<JPanel> panListToPrint = new ArrayList<>();
     LinkedHashMap<JLabel, JPanel> mapMenu = new LinkedHashMap<JLabel, JPanel>();
-    String name = "Consolidated";
+    String name = "Match Report - Consolidated";
 
     /**
      * Creates new form PanReportMatch
@@ -100,6 +100,7 @@ public class PanReportMatch extends javax.swing.JPanel {
         lblmatch.setForeground(new java.awt.Color(255, 255, 255));
         lblmatch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblmatch.setText("Consolidated");
+        lblmatch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblmatch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblmatchMouseClicked(evt);
@@ -124,6 +125,7 @@ public class PanReportMatch extends javax.swing.JPanel {
         lblRotation.setForeground(new java.awt.Color(255, 255, 255));
         lblRotation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRotation.setText("Rotation Performance");
+        lblRotation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblRotation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblRotationMouseClicked(evt);
@@ -148,6 +150,7 @@ public class PanReportMatch extends javax.swing.JPanel {
         lblTeam.setForeground(new java.awt.Color(255, 255, 255));
         lblTeam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTeam.setText("Best Player Performance");
+        lblTeam.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblTeam.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblTeamMouseClicked(evt);
@@ -205,6 +208,7 @@ public class PanReportMatch extends javax.swing.JPanel {
         lblSkil1.setForeground(new java.awt.Color(255, 255, 255));
         lblSkil1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSkil1.setText("Zone wise Skill Performance");
+        lblSkil1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblSkil1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSkil1MouseClicked(evt);
@@ -271,7 +275,9 @@ public class PanReportMatch extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("PRINT");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/printer.png"))); // NOI18N
+        jLabel4.setText("Print");
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -289,7 +295,7 @@ public class PanReportMatch extends javax.swing.JPanel {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
         );
 
         panReport.setLayout(new java.awt.BorderLayout());
@@ -312,7 +318,7 @@ public class PanReportMatch extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -350,7 +356,7 @@ public class PanReportMatch extends javax.swing.JPanel {
 
         panReport.removeAll();
         panReport.add(panR, BorderLayout.CENTER);
-        setPrint(panR, "Rotation Performance");
+        setPrint(panR, "Match Report - Rotation Performance");
         validate();
         repaint();
 
@@ -362,7 +368,7 @@ public class PanReportMatch extends javax.swing.JPanel {
 
         panReport.removeAll();
         panReport.add(panT, BorderLayout.CENTER);
-        setPrint(panT, "Best Player Performance");
+        setPrint(panT, "Match Report - Best Player Performance");
         validate();
         repaint();
     }//GEN-LAST:event_lblTeamMouseClicked
@@ -373,7 +379,7 @@ public class PanReportMatch extends javax.swing.JPanel {
 
         panReport.removeAll();
         panReport.add(panC, BorderLayout.CENTER);
-        setPrint(panC, "Consolidated");
+        setPrint(panC, "Match Report - Consolidated");
         validate();
         repaint();
     }//GEN-LAST:event_lblmatchMouseClicked

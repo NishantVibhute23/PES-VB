@@ -263,7 +263,10 @@ public class PanUserSubscription extends javax.swing.JPanel {
         // TODO add your handling code here:
         boolean isValid = false;
         String code = "";
-        if (isvalid) {
+        
+        
+        
+        if (isvalid || !txtCode.getText().equals("")) {
             Controller.frmLogin.sd.close();
             Controller.frmDashBoard = new FrmDashboard();
             Controller.frmDashBoard.lblName.setText(Controller.userBean.getUserName().equals("") || Controller.userBean.getUserName() == null ? "User" : Controller.userBean.getUserName());

@@ -36,7 +36,7 @@ public class CreateTeamDialog {
             try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-                this.dialog = new JDialog(this.parentFrame, "New Team", true);
+                this.dialog = new JDialog(this.parentFrame, "Team", true);
 
                 this.dialog.setResizable(false);
                 this.dialog.getContentPane().add(createPane());
@@ -53,7 +53,7 @@ public class CreateTeamDialog {
             try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-                this.dialog = new JDialog(this.parentFrame, "Team Info", true);
+                this.dialog = new JDialog(this.parentFrame, "Team", true);
 
                 this.dialog.setResizable(false);
                 this.dialog.getContentPane().add(createPane());

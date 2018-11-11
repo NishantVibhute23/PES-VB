@@ -5,7 +5,7 @@
  */
 package com.vollyball.dialog;
 
-import com.vollyball.panels.PanMatchReportDetail;
+import com.vollyball.panels.report.PanMatchReportDetail;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;

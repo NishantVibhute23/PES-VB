@@ -16,6 +16,7 @@ public class FrmMatchEvaluation extends javax.swing.JFrame {
      */
     public FrmMatchEvaluation() {
         initComponents();
+        setIconImage((new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_pes-vb.png")).getImage()));
     }
 
     /**

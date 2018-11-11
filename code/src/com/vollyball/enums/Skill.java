@@ -18,7 +18,8 @@ public enum Skill {
     Reception(5, "Reception"),
     Defence(6, "Defence"),
     OP(7, "OP+"),
-    TF(8, "TF-");
+    TF(8, "TF-"),
+    NE(9, "NE");
 
     int id;
 

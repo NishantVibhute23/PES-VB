@@ -1005,9 +1005,9 @@ public class ReportDao {
                 sf.setFailure(rs.getInt(2));
                 sf.setTotalAttempt(rs.getInt(3));
                 sf.setSuccessRate(sf.getTotalAttempt() == 0 ? 0 : (double) sf.getSuccess() / (double) sf.getTotalAttempt());
-                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "0%" : df.format(sf.getSuccessRate()));
+                sf.setSuccessPerc(sf.getSuccessRate() == 0 ? "" : df.format(sf.getSuccessRate()));
                 sf.setFailureRate(sf.getTotalAttempt() == 0 ? 0 : (double) sf.getFailure() / (double) sf.getTotalAttempt());
-                sf.setFailurePerc(sf.getFailureRate() == 0 ? "0%" : df.format(sf.getFailureRate()));
+                sf.setFailurePerc(sf.getFailureRate() == 0 ? "" : df.format(sf.getFailureRate()));
             }
 
         } catch (Exception ex) {

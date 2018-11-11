@@ -325,7 +325,6 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         lblIn = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         lblMsg = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(57, 74, 108));
@@ -562,7 +561,7 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         jLabel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
         jPanel16.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel16.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jPanel16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         but1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         but1.setForeground(new java.awt.Color(255, 255, 255));
@@ -586,7 +585,7 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         );
 
         jPanel25.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel25.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jPanel25.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         but2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         but2.setForeground(new java.awt.Color(255, 255, 255));
@@ -610,7 +609,7 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         );
 
         jPanel27.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel27.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jPanel27.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         but3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         but3.setForeground(new java.awt.Color(255, 255, 255));
@@ -634,7 +633,7 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         );
 
         jPanel29.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel29.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jPanel29.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         buts4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         buts4.setForeground(new java.awt.Color(255, 255, 255));
@@ -658,7 +657,7 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         );
 
         but4.setBackground(new java.awt.Color(57, 74, 108));
-        but4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        but4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         but5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         but5.setForeground(new java.awt.Color(255, 255, 255));
@@ -682,7 +681,7 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         );
 
         jPanel33.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel33.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jPanel33.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         but6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         but6.setForeground(new java.awt.Color(255, 255, 255));
@@ -902,14 +901,13 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
             }
         });
 
-        selectSubmit.setBackground(new java.awt.Color(57, 74, 108));
-        selectSubmit.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        selectSubmit.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("SUBMIT");
-        jLabel7.setToolTipText("");
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_save.png"))); // NOI18N
+        jLabel7.setToolTipText("Save");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel7MouseClicked(evt);
@@ -920,13 +918,11 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         selectSubmit.setLayout(selectSubmitLayout);
         selectSubmitLayout.setHorizontalGroup(
             selectSubmitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(selectSubmitLayout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
         );
         selectSubmitLayout.setVerticalGroup(
             selectSubmitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         selectPoint1Score.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -1016,9 +1012,9 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
                     .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(selectPoint2RallyNo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(selectPoint2Score, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(selectSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1457,30 +1453,16 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         lblMsg.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblMsg.setText("Select OUT Player");
 
-        jPanel5.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
-
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("SAVE");
-        jLabel6.setToolTipText("");
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_save.png"))); // NOI18N
+        jLabel6.setToolTipText("Save");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -1512,8 +1494,8 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(304, 304, 304)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(309, 309, 309)
+                .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -1533,13 +1515,12 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
                                 .addGap(21, 21, 21)
                                 .addComponent(lblIn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
                 .addComponent(lblMsg)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel6)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1791,7 +1772,6 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField jTextField12;

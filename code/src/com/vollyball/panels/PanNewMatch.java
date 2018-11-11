@@ -86,6 +86,7 @@ public class PanNewMatch extends javax.swing.JPanel {
     public PanNewMatch(int id) throws ParseException {
         initComponents();
         this.matchId = id;
+        lblMatchHead.setText("Match Info");
 //        System.out.println("id panmatchnew" + id);
         MatchDao md = new MatchDao();
         MatchBean mb = md.getMatchesById(Controller.competitionId, matchId);
@@ -181,16 +182,16 @@ public class PanNewMatch extends javax.swing.JPanel {
         txtCity = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtMatchNum = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        lblMatchHead = new javax.swing.JLabel();
         cmbPhase = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         cmbSubPhase = new javax.swing.JComboBox<>();
         cmbHH = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         cmbMm = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -279,49 +280,26 @@ public class PanNewMatch extends javax.swing.JPanel {
             }
         });
 
-        jPanel5.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jLabel11.setBackground(new java.awt.Color(0, 153, 255));
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("SAVE");
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
         jPanel1.setBackground(new java.awt.Color(57, 74, 108));
 
-        jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("New Match");
+        lblMatchHead.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblMatchHead.setForeground(new java.awt.Color(255, 255, 255));
+        lblMatchHead.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblMatchHead.setText("New Match");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblMatchHead, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12)
+                .addComponent(lblMatchHead)
                 .addContainerGap())
         );
 
@@ -366,15 +344,33 @@ public class PanNewMatch extends javax.swing.JPanel {
 
         cmbMm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
 
+        jLabel11.setBackground(new java.awt.Color(0, 153, 255));
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_save.png"))); // NOI18N
+        jLabel11.setToolTipText("Save");
+        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_cancel.png"))); // NOI18N
+        jLabel13.setToolTipText("Cancel");
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,6 +415,12 @@ public class PanNewMatch extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbMm, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(20, 20, 20))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel13)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,8 +470,10 @@ public class PanNewMatch extends javax.swing.JPanel {
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13))
                 .addGap(20, 20, 20))
         );
 
@@ -516,12 +520,14 @@ public class PanNewMatch extends javax.swing.JPanel {
 
                 if (count != 0) {
 
+                    
+                    
                     Controller.matchDialog.close();
                     Controller.panMatchReport.Refresh();
                     JOptionPane.showMessageDialog(this, "Added New Match \"" + team1 + "\" vs \"" + team2 + "\"");
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "Failed");
+                    JOptionPane.showMessageDialog(this, "Failed To add Match");
                 }
             } else {
                 MatchDao matchDao = new MatchDao();
@@ -542,12 +548,14 @@ public class PanNewMatch extends javax.swing.JPanel {
 
                 if (count != 0) {
 
-//                    Controller.matchDialog.close();
+                   
+                    
+                    Controller.matchDialog.close();
                     Controller.panMatchReport.Refresh();
                     JOptionPane.showMessageDialog(this, "Updated New Match \"" + team1 + "\" vs \"" + team2 + "\"");
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "Failed");
+                    JOptionPane.showMessageDialog(this, "Failed To update Match");
                 }
             }
         } else {
@@ -644,6 +652,11 @@ public class PanNewMatch extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cmbPhaseItemStateChanged
 
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        // TODO add your handling code here:
+        Controller.matchDialog.close();
+    }//GEN-LAST:event_jLabel13MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbHH;
     private javax.swing.JComboBox<String> cmbMm;
@@ -653,7 +666,7 @@ public class PanNewMatch extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -666,8 +679,8 @@ public class PanNewMatch extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel lblMatchHead;
     public javax.swing.JComboBox team1combo;
     public javax.swing.JComboBox team2combo;
     private javax.swing.JTextField txtCity;

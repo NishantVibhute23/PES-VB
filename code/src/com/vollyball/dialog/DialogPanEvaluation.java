@@ -82,11 +82,13 @@ public class DialogPanEvaluation {
             init();
         }
         this.dialog.setVisible(true);
+        Controller.panMatchEvaluationHome.createWaitDialog.close();
     }
 
     public void close() {
         this.dialog.dispose();
         this.dialog.setVisible(false);
+        Controller.panMatchSet.p1.getMediaPlayer().stop();
     }
 
     public void setFrame(JFrame frame) {

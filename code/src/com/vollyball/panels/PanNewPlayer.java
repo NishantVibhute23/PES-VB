@@ -64,6 +64,7 @@ public class PanNewPlayer extends javax.swing.JPanel {
 
     public PanNewPlayer(int playerId) {
         initComponents();
+        playerLabel.setText("Player Info");
         this.playerId = playerId;
         TeamDao teamDao = new TeamDao();
         List<Team> teams = teamDao.getTeams(Controller.competitionId);
@@ -100,10 +101,8 @@ public class PanNewPlayer extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         team1combo1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        savePlayerLabel = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        playerLabel = new javax.swing.JLabel();
         txtPlayerName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
@@ -113,6 +112,8 @@ public class PanNewPlayer extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         team1position = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
+        savePlayerLabel = new javax.swing.JLabel();
+        lblCancel = new javax.swing.JLabel();
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -126,49 +127,26 @@ public class PanNewPlayer extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("Team");
 
-        jPanel8.setBackground(new java.awt.Color(57, 74, 108));
-        jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        savePlayerLabel.setBackground(new java.awt.Color(0, 153, 255));
-        savePlayerLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        savePlayerLabel.setForeground(new java.awt.Color(255, 255, 255));
-        savePlayerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        savePlayerLabel.setText("SAVE");
-        savePlayerLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                savePlayerLabelMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(savePlayerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(savePlayerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
         jPanel9.setBackground(new java.awt.Color(57, 74, 108));
 
-        jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("New Player");
+        playerLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        playerLabel.setForeground(new java.awt.Color(255, 255, 255));
+        playerLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        playerLabel.setText("New Player");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGap(0, 22, Short.MAX_VALUE)
+                .addComponent(playerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12)
+                .addComponent(playerLabel)
                 .addContainerGap())
         );
 
@@ -243,15 +221,31 @@ public class PanNewPlayer extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel6.setText("Position");
 
+        savePlayerLabel.setBackground(new java.awt.Color(0, 153, 255));
+        savePlayerLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        savePlayerLabel.setForeground(new java.awt.Color(255, 255, 255));
+        savePlayerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        savePlayerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_save.png"))); // NOI18N
+        savePlayerLabel.setToolTipText("Save");
+        savePlayerLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                savePlayerLabelMouseClicked(evt);
+            }
+        });
+
+        lblCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_cancel.png"))); // NOI18N
+        lblCancel.setToolTipText("Cancel");
+        lblCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCancelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(119, Short.MAX_VALUE)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,6 +272,12 @@ public class PanNewPlayer extends javax.swing.JPanel {
                                     .addComponent(jLabel6)
                                     .addComponent(team1position, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(savePlayerLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblCancel)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,11 +302,16 @@ public class PanNewPlayer extends javax.swing.JPanel {
                     .addComponent(team1position, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(46, 46, 46)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(savePlayerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(20, 20, 20))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(lblCancel)
+                        .addGap(20, 20, 20))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -434,6 +439,12 @@ public class PanNewPlayer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_team1positionItemStateChanged
 
+    private void lblCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseClicked
+        // TODO add your handling code here:
+        Controller.createPlayerDialog.close();
+        
+    }//GEN-LAST:event_lblCancelMouseClicked
+
     public void enabledDisabledCheckBox(java.awt.event.ItemEvent evt) {
         captain1.setForeground(Color.BLACK);
         String type = "";
@@ -540,15 +551,15 @@ public class PanNewPlayer extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox captain1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel lblCancel;
+    private javax.swing.JLabel playerLabel;
     private javax.swing.JLabel savePlayerLabel;
     public javax.swing.JComboBox team1combo1;
     public javax.swing.JComboBox team1position;

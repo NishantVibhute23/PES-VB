@@ -5,6 +5,7 @@
  */
 package com.vollyball.dialog;
 
+import com.vollyball.controller.Controller;
 import com.vollyball.panels.PanEvaluationRotation;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -67,6 +68,7 @@ public class DialogPanEvaluationRotationOrder {
             init(homeTeamId, oppTeamId, matchId, homeTeam, oppteam, set, matchEvaluationId, type, evaluatorName);
         }
         this.dialog.setVisible(true);
+        Controller.panMatchEvaluationHome.createWaitDialog.close();
     }
 
     public void close() {

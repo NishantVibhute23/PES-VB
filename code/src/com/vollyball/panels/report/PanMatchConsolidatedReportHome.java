@@ -119,6 +119,7 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         lblmatchReport.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblmatchReport.setText("Match");
         lblmatchReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblmatchReport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblmatchReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblmatchReportMouseClicked(evt);
@@ -128,6 +129,7 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         lblRotationReport.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRotationReport.setText("Rotation");
         lblRotationReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblRotationReport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblRotationReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblRotationReportMouseClicked(evt);
@@ -137,6 +139,7 @@ public class PanMatchConsolidatedReportHome extends javax.swing.JPanel {
         lblSkilReport.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSkilReport.setText("Skill");
         lblSkilReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblSkilReport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblSkilReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSkilReportMouseClicked(evt);
