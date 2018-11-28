@@ -552,7 +552,7 @@ public class PanNewMatch extends javax.swing.JPanel {
                     
                     Controller.matchDialog.close();
                     Controller.panMatchReport.Refresh();
-                    JOptionPane.showMessageDialog(this, "Updated New Match \"" + team1 + "\" vs \"" + team2 + "\"");
+                    JOptionPane.showMessageDialog(this, "Updated Match \"" + team1 + "\" vs \"" + team2 + "\"");
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed To update Match");

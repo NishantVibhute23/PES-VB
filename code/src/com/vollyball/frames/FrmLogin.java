@@ -48,8 +48,8 @@ public class FrmLogin extends javax.swing.JFrame {
             txtIpAddr.setText(inetAddress.getHostAddress());
             txtIpAddr.setEditable(false);
             txtIpAddr.setBackground(Color.WHITE);
-           
-setIconImage((new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_pes-vb.png")).getImage()));
+
+            setIconImage((new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/images/button_pes-vb.png")).getImage()));
             setVisible(true);
         } catch (UnknownHostException ex) {
             Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -423,7 +423,7 @@ setIconImage((new javax.swing.ImageIcon(getClass().getResource("/com/vollyball/i
                 frmMain = new FrmRegister();
             }
         } else {
-
+            JOptionPane.showMessageDialog(this, "MySql Not fond on this system. Please Install MySql First");
         }
 
     }//GEN-LAST:event_jLabel3MouseClicked

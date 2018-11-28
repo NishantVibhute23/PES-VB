@@ -125,7 +125,7 @@ public class PanBestScorer extends javax.swing.JPanel {
                             String key = tbReport.getValueAt(selectedRow, 3) + "-" + tbReport.getValueAt(selectedRow, 2);
                             id = teamchestPlayerMap.get(key);
                             int dialogButton = JOptionPane.YES_NO_OPTION;
-                            int dialogResult = JOptionPane.showConfirmDialog(null, "Are You Sure ?", "Warning", dialogButton);
+                            int dialogResult = JOptionPane.showConfirmDialog(null, "Are You Sure want to delete \""+tbReport.getValueAt(selectedRow,1)+"\"?", "Warning", dialogButton);
                             if (dialogResult == JOptionPane.YES_OPTION) {
                                 int count = td.deletePlayer(id);
 //                                int count = 0;

@@ -5,12 +5,17 @@
  */
 package com.vollyball.panels.report;
 
+import com.vollyball.bean.MatchBean;
+import com.vollyball.controller.Controller;
+import com.vollyball.dao.MatchDao;
+import com.vollyball.dao.ReportDao;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ItemEvent;
 import java.awt.print.Book;
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
@@ -18,6 +23,7 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +41,11 @@ public class PanReportTeam extends javax.swing.JPanel {
     int matchId;
     List<Component> panListToPrint = new ArrayList<>();
     String name = "Team Report - Service";
+    MatchDao matchDao = new MatchDao();
+    int evaluationteamId;
+    int team1id, team2id;
+    ReportDao reportDao = new ReportDao();
+    HashMap<String, Integer> teamMap = new HashMap<>();
 
     /**
      * Creates new form PanReportTeam
@@ -50,8 +61,20 @@ public class PanReportTeam extends javax.swing.JPanel {
         mapMenu.put(lblReception, panReception);
         mapMenu.put(lblDefence, panDefence);
 
-        PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService(cb, matchId);
-       setPrint(panTeamReportOfService, "Team Report - Service");
+        MatchBean team = matchDao.getMatchesById(Controller.competitionId, matchId);
+        team1id = team.getTeam1();
+        team2id = team.getTeam2();
+
+        cmbTeam.addItem(team.getTeam1name());
+        cmbTeam.addItem(team.getTeam2name());
+
+        teamMap.put(team.getTeam1name(), team.getTeam1());
+        teamMap.put(team.getTeam2name(), team.getTeam2());
+
+        evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
+
+        PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService(cb, evaluationteamId);
+        setPrint(panTeamReportOfService, "Team Report - Service");
 
         panView.add(panTeamReportOfService, BorderLayout.CENTER);
         lblService.setForeground(Color.BLACK);
@@ -159,6 +182,9 @@ public class PanReportTeam extends javax.swing.JPanel {
         lblSet = new javax.swing.JLabel();
         panDefence = new javax.swing.JPanel();
         lblDefence = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        cmbTeam = new javax.swing.JComboBox<>();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         panReport = new javax.swing.JPanel();
@@ -248,11 +274,11 @@ public class PanReportTeam extends javax.swing.JPanel {
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 234, Short.MAX_VALUE)
+            .addGap(0, 90, Short.MAX_VALUE)
         );
 
         panReception.setBackground(new java.awt.Color(57, 74, 108));
@@ -273,7 +299,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         panReception.setLayout(panReceptionLayout);
         panReceptionLayout.setHorizontalGroup(
             panReceptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReception, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+            .addComponent(lblReception, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panReceptionLayout.setVerticalGroup(
             panReceptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,6 +356,38 @@ public class PanReportTeam extends javax.swing.JPanel {
             .addComponent(lblDefence, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
+        jPanel1.setBackground(new java.awt.Color(57, 74, 108));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Team");
+
+        cmbTeam.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        cmbTeam.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTeamItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
+        );
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -341,10 +399,12 @@ public class PanReportTeam extends javax.swing.JPanel {
             .addComponent(panSet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panDefence, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(panService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -404,7 +464,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(694, Short.MAX_VALUE)
+                .addContainerGap(685, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -462,7 +522,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         // TODO add your handling code here:
         changeColor(evt);
         panView.removeAll();
-        PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService(cb, matchId);
+        PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService(cb, evaluationteamId);
         panView.add(panTeamReportOfService, BorderLayout.CENTER);
         setPrint(panTeamReportOfService, "Team Report - Service");
         validate();
@@ -474,7 +534,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         panListToPrint.add(pan);
         this.name = name;
     }
-    
+
     public void changeColor(java.awt.event.MouseEvent evt) {
         JLabel lblClicked = (JLabel) evt.getSource();
 
@@ -496,7 +556,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         // TODO add your handling code here:
         changeColor(evt);
         panView.removeAll();
-        PanTeamReportOfAttack panTeamReportOFAttack = new PanTeamReportOfAttack(cb, matchId);
+        PanTeamReportOfAttack panTeamReportOFAttack = new PanTeamReportOfAttack(cb, evaluationteamId);
         panView.add(panTeamReportOFAttack, BorderLayout.CENTER);
         setPrint(panTeamReportOFAttack, "Team Report - Attack");
         validate();
@@ -508,7 +568,7 @@ public class PanReportTeam extends javax.swing.JPanel {
         // TODO add your handling code here:
         changeColor(evt);
         panView.removeAll();
-        PanTeamReportOfBlock panTeamReportOfBlock = new PanTeamReportOfBlock(cb, matchId);
+        PanTeamReportOfBlock panTeamReportOfBlock = new PanTeamReportOfBlock(cb, evaluationteamId);
         panView.add(panTeamReportOfBlock, BorderLayout.CENTER);
 
         setPrint(panTeamReportOfBlock, "Team Report - Block");
@@ -519,7 +579,7 @@ public class PanReportTeam extends javax.swing.JPanel {
     private void lblReceptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReceptionMouseClicked
         changeColor(evt);
         panView.removeAll();
-        PanTeamReportOfReception panTeamReportOfReception = new PanTeamReportOfReception(cb, matchId);
+        PanTeamReportOfReception panTeamReportOfReception = new PanTeamReportOfReception(cb, evaluationteamId);
         panView.add(panTeamReportOfReception, BorderLayout.CENTER);
         setPrint(panTeamReportOfReception, "Team Report - Reception");
         validate();
@@ -529,7 +589,7 @@ public class PanReportTeam extends javax.swing.JPanel {
     private void lblSetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSetMouseClicked
         changeColor(evt);
         panView.removeAll();
-        PanTeamReportOfSet panTeamReportOfSet = new PanTeamReportOfSet(cb, matchId);
+        PanTeamReportOfSet panTeamReportOfSet = new PanTeamReportOfSet(cb, evaluationteamId);
         panView.add(panTeamReportOfSet, BorderLayout.CENTER);
         setPrint(panTeamReportOfSet, "Team Report - Set");
         validate();
@@ -539,7 +599,7 @@ public class PanReportTeam extends javax.swing.JPanel {
     private void lblDefenceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDefenceMouseClicked
         changeColor(evt);
         panView.removeAll();
-        PanTeamReportOfDefence panTeamReportOfDefence = new PanTeamReportOfDefence(cb, matchId);
+        PanTeamReportOfDefence panTeamReportOfDefence = new PanTeamReportOfDefence(cb, evaluationteamId);
         panView.add(panTeamReportOfDefence, BorderLayout.CENTER);
         setPrint(panTeamReportOfDefence, "Team Report - Defence");
         validate();
@@ -551,8 +611,31 @@ public class PanReportTeam extends javax.swing.JPanel {
         printComponenet(panListToPrint, name);
     }//GEN-LAST:event_jLabel5MouseClicked
 
+    private void cmbTeamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTeamItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+            if (teamMap.size()!=0) {
+                int teamid = teamMap.get(cmbTeam.getSelectedItem());
+                evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(teamid, matchId);
+                PanTeamReportOfService panTeamReportOfService = new PanTeamReportOfService(cb, evaluationteamId);
+                panView.removeAll();
+                setPrint(panTeamReportOfService, "Team Report - Service");
+
+                panView.add(panTeamReportOfService, BorderLayout.CENTER);
+                validate();
+                repaint();
+            }
+        }
+
+
+    }//GEN-LAST:event_cmbTeamItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbTeam;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel5;

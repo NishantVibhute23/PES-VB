@@ -8,6 +8,8 @@ package com.vollyball.panels;
 import com.vollyball.bean.CompetitionBean;
 import com.vollyball.bean.Player;
 import com.vollyball.bean.PlayerReportBean;
+import com.vollyball.controller.Controller;
+import static com.vollyball.controller.Controller.panBestScorer;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.dao.TeamDao;
 import com.vollyball.enums.Skill;
@@ -35,7 +37,7 @@ public class PanPlayerSkillWiseReport extends javax.swing.JPanel {
     String skillName;
     int skillId;
     PanTableSkillWiseReport panTableSkillWiseReport = new PanTableSkillWiseReport();
-    PanBestScorer panBestScorer;
+  
 
     /**
      * Creates new form PanPlayerSkillWiseReport
@@ -53,9 +55,9 @@ public class PanPlayerSkillWiseReport extends javax.swing.JPanel {
         panMenuList.add(panDefender);
 
         List<Player> playerList = td.getAlPlayers(cb.getId());
-        panBestScorer = new PanBestScorer(cb, playerList);
+       Controller.panBestScorer = new PanBestScorer(cb, playerList);
 
-        panSkillReports.add(panBestScorer, BorderLayout.CENTER);
+        panSkillReports.add(Controller.panBestScorer , BorderLayout.CENTER);
         changeColor(panScorer);
 
     }

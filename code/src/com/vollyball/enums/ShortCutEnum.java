@@ -17,7 +17,7 @@ public enum ShortCutEnum {
     ShortCutEnum1(1, "S", "S", "Setter", 1),
     ShortCutEnum2(2, "A", "OH", "Outside Hitter/Ace Hitter", 1),
     ShortCutEnum3(3, "M", "MB", "Middle Blocker", 1),
-    ShortCutEnum4(4, "U", "U", "Universal Player", 1),
+    ShortCutEnum4(4, "U", "UV", "Universal Player", 1),
     ShortCutEnum5(5, "LB", "LB", "Libero", 1),
     ShortCutEnum6(6, "H", "H", "Home", 2),
     ShortCutEnum7(7, "O", "Opp", "Opponent", 2),

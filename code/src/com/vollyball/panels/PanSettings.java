@@ -10,6 +10,7 @@ import com.vollyball.controller.Controller;
 import com.vollyball.dao.SettingDao;
 import com.vollyball.enums.HeadingEnum;
 import com.vollyball.enums.ShortCutEnum;
+import com.vollyball.util.ShortKeysUtil;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -268,8 +269,17 @@ public class PanSettings extends javax.swing.JPanel {
         for (int k = 0; k < a.length - 1; k++) {
             Settings s = (Settings) a[k];
             if (set.add(s.getCode()) == false) {
-                status = true;
+               status = true;
                 System.out.println("Duplicate: " + s.getCode());
+            }else{
+                 List<String> skillKeys = ShortKeysUtil.skillKeys();
+                 List<String> rateKeys = ShortKeysUtil.scoreKeys();
+                 
+                 if(skillKeys.contains(s.getCode())||rateKeys.contains(s.getCode()))
+                 {
+                     status = true;
+                 }
+                 
             }
 //            for (int l = 1; l < a.length - 1; l++) {
 //                Settings s2 = (Settings) a[l];
@@ -287,7 +297,7 @@ public class PanSettings extends javax.swing.JPanel {
             int val = sd.updateSettings(listSetting);
             if (val != 0) {
                 Controller.createSettingDialog.close();
-                JOptionPane.showMessageDialog(this, "Settings Updated");
+                JOptionPane.showMessageDialog(this, "Settings Updated Successfully");
             } else {
                 JOptionPane.showMessageDialog(this, "Failed To Update Settings");
             }

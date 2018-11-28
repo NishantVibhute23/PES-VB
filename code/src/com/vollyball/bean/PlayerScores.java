@@ -15,6 +15,7 @@ public class PlayerScores {
     String chestNo;
     String playerName;
     String matchPhase;
+    int isDeleted;
     int matchesPlayed;
     int totalService;
     int bestService;
@@ -58,6 +59,16 @@ public class PlayerScores {
     int failureAttempt;
     double attemptFailureRate;
     String attemptFailureRatePerc;
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+    
+    
 
     public String getMatchPhase() {
         return matchPhase;

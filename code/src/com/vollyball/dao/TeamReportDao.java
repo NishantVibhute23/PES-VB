@@ -345,6 +345,7 @@ public class TeamReportDao {
                     p.setChestNo(rs.getString(3));
                 }
                 p.setTeamName(rs.getString(5));
+                p.setIsDeleted(rs.getInt(7));
 
                 for (int i = 1; i <= 5; i++) {
                     ps1 = this.con.prepareStatement(CommonUtil.getResourceProperty("player.setwise.data"));

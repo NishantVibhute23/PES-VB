@@ -17,6 +17,7 @@ import com.vollyball.frames.FrmDashboard;
 import com.vollyball.frames.FrmLogin;
 import com.vollyball.frames.FrmRegister;
 import com.vollyball.panels.PanActivate;
+import com.vollyball.panels.PanBestScorer;
 import com.vollyball.panels.PanCompetitionList;
 import com.vollyball.panels.PanCompetitionReportHome;
 import com.vollyball.panels.PanComptitionHome;
@@ -84,6 +85,7 @@ public class Controller {
     public static String databaseIpAdd;
     public static CompetitionBean competitionBean;
     public static FrmLogin frmLogin;
+    public static PanBestScorer panBestScorer;
 
     public static void main(String args[]) {
         
