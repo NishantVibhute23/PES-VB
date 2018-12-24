@@ -31,7 +31,7 @@ public class DialogReplaceLibero {
         try {
             this.p = p;
             this.type = type;
-            this.dialog = new JDialog(this.parentFrame, "New Match", true);
+            this.dialog = new JDialog(this.parentFrame, "Replace Libero", true);
             this.dialog.setResizable(false);
             this.dialog.getContentPane().add(createPane());
             this.dialog.pack();

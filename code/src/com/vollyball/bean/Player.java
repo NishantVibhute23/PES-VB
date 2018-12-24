@@ -19,6 +19,7 @@ public class Player {
     int position;
     String teamName;
     String team;
+    int isdeleted;
 
     public String getTeamName() {
         return teamName;
@@ -83,5 +84,15 @@ public class Player {
     public void setTeam(String team) {
         this.team = team;
     }
+
+    public int getIsdeleted() {
+        return isdeleted;
+    }
+
+    public void setIsdeleted(int isdeleted) {
+        this.isdeleted = isdeleted;
+    }
+    
+    
 
 }

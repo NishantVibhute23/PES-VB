@@ -56,7 +56,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     ImagePanel panel;
     TeamDao teamDao = new TeamDao();
     String skill = "";
-     String code = "";
+    String code = "";
     String chestNo = "";
     int score = 0;
     JTextField txtRallyRow = new JTextField();
@@ -81,7 +81,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
     LinkedHashMap<String, String> pointsShortcut = new LinkedHashMap<>();
     RallyEvaluationSkillScore rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
     String oldText = "";
-    DialogPAnEvaluationRallyRowEdit dig ;
+    DialogPAnEvaluationRallyRowEdit dig;
 
     /**
      * Creates new form PanEvaluationRowDetail
@@ -90,7 +90,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         initComponents();
         this.p = p;
         this.isFirst = isFirst;
-        
+
         mapSkillComponent.put(lblService, panService);
         mapSkillComponent.put(lblAttack, panAttack);
         mapSkillComponent.put(lblBlock, panBlock);
@@ -108,7 +108,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         mapSkillLabel.put(Skill.Defence.getType(), lblDefence);
         mapSkillLabel.put(Skill.OP.getType(), lblOp);
         mapSkillLabel.put(Skill.TF.getType(), lblTF);
-         mapSkillLabel.put(Skill.NE.getType(), lblNE);
+        mapSkillLabel.put(Skill.NE.getType(), lblNE);
 
         mapPlayerComponent.put(lbl1, pan1);
         mapPlayerComponent.put(lbl2, pan2);
@@ -262,20 +262,19 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 txtInput.requestFocus();
-    }
+            }
         });
 //        txtInput.requestFocus();
 
     }
-    
-    public void setButtonText()
-    {
+
+    public void setButtonText() {
         butReset.setText("Edit");
         txtInput.setEditable(false);
     }
 
     public void save() {
-        
+
         rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
         if (isFirst && isNew) {
             isFirst = false;
@@ -328,7 +327,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         if (isSelected) {
             p.rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
-             switch (score) {
+            switch (score) {
                 case 1:
                     if (!p.isInserted) {
                         Controller.panMatchSet.opponentScore++;
@@ -372,15 +371,14 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     break;
             }
         }
-        
-    }
-    
-    public void update(RallyEvaluationSkillScore rallyEvaluationSkillScore) {
-        
-//        p.rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
 
-this.rallyEvaluationSkillScore=rallyEvaluationSkillScore;
-setValues(rallyEvaluationSkillScore);
+    }
+
+    public void update(RallyEvaluationSkillScore rallyEvaluationSkillScore) {
+
+//        p.rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
+        this.rallyEvaluationSkillScore = rallyEvaluationSkillScore;
+        setValues(rallyEvaluationSkillScore);
 //        int idm = rallyEvaluationSkillScore.getId();
 //        rallyEvaluationSkillScore = new RallyEvaluationSkillScore();
 //        rallyEvaluationSkillScore.setId(idm);
@@ -437,30 +435,30 @@ setValues(rallyEvaluationSkillScore);
 //            p.rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
 //            switch (score) {
 //                case 1:
-//                    
+//
 //                    Date time = new Date();
 //                    p.endTime = formatterTime.format(time);
 //                    p.lblRallyEndTime.setText(p.endTime);
-//                   
+//
 //                    break;
 //                case 5:
 //                    if (skill.equals(Skill.Service.getType()) || skill.equals(Skill.Attack.getType()) || skill.equals(Skill.Block.getType()) || skill.equals(Skill.OP.getType())) {
-//                       
+//
 //                        Date time1 = new Date();
 //                        p.endTime = formatterTime.format(time1);
 //                        p.lblRallyEndTime.setText(p.endTime);
-//                        
+//
 //                    } else {
 //                        if (isNew || isLast) {
 //                            isLast = false;
-//                            
+//
 //                        }
 //                    }
 //                    break;
 //                default:
 //                    if (isNew || isLast) {
 //                        isLast = false;
-//                        
+//
 //                    }
 //                    break;
 //            }
@@ -500,7 +498,7 @@ setValues(rallyEvaluationSkillScore);
         p.currentPanRow.txtSkill.setText(skill);
         p.currentPanRow.txtPlayer.setText(chestNo);
         score = rallyEvaluationSkillScore1.getScore();
-        code= rallyEvaluationSkillScore1.getCode();
+        code = rallyEvaluationSkillScore1.getCode();
         txtInput.setText(rallyEvaluationSkillScore1.getCode());
         JLabel lblScore = mapScoreLabel.get(score);
         if (lblScore == lblRate1) {
@@ -539,12 +537,13 @@ setValues(rallyEvaluationSkillScore);
                         panel.digEditDetails(skill, diagramPoints, 0);
                     }
                 }
-            }else{
+            } else {
                 diagramPoints.add(chestNo);
             }
         }
 
         panel.refresh();
+        setButtonText();
 
     }
 
@@ -559,7 +558,7 @@ setValues(rallyEvaluationSkillScore);
     }
 
     public void selectScore(JLabel j) {
-       
+
         JLabel lblScore = j;
         p.currentPanRow.txtRate.setText(lblScore.getText());
         score = Integer.parseInt(lblScore.getText());
@@ -721,22 +720,22 @@ setValues(rallyEvaluationSkillScore);
             LinkedHashMap<String, Integer> pointsMap = new LinkedHashMap<>();
             for (SkillDescCriteriaPoint sdcp : lstPoints) {
 //                if (sdc.getView() == 1) {
-                    //get shortcut code from database by passing shortcutId
-                    String shortcut = getShortcutById(sdcp.getShortcutId());
-                    //------//
-                    detailsShortcutKeys.add(shortcut);
-                    pointsShortcut.put(shortcut, sdcp.getAbbreviation());
-                    pointsMap.put(sdcp.getAbbreviation(), sdcp.getId());
-                    pointList.add(shortcut);
+                //get shortcut code from database by passing shortcutId
+                String shortcut = getShortcutById(sdcp.getShortcutId());
+                //------//
+                detailsShortcutKeys.add(shortcut);
+                pointsShortcut.put(shortcut, sdcp.getAbbreviation());
+                pointsMap.put(sdcp.getAbbreviation(), sdcp.getId());
+                pointList.add(shortcut);
 //                }
             }
 //            if (sdc.getView() == 1) {
-                i++;
-                if (i <= 5) {
-                    panDesc1.add(pan);
-                } else if (i <= 10) {
-                    panDesc2.add(pan);
-                }
+            i++;
+            if (i <= 5) {
+                panDesc1.add(pan);
+            } else if (i <= 10) {
+                panDesc2.add(pan);
+            }
 //            }
             pan.setPointsMap(pointsMap);
             panPoints.put(pan, pointList);
@@ -1948,143 +1947,141 @@ setValues(rallyEvaluationSkillScore);
     }// </editor-fold>//GEN-END:initComponents
     private void lblDefenceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDefenceMouseClicked
         // TODO add your handling code here:
-         //selectSkill((JLabel) evt.getSource());
+        //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblDefenceMouseClicked
     private void lblServiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblServiceMouseClicked
         // TODO add your handling code here:
-         //selectSkill((JLabel) evt.getSource());
+        //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblServiceMouseClicked
     private void lblTFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTFMouseClicked
         // TODO add your handling code here:
-         //selectSkill((JLabel) evt.getSource());
+        //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblTFMouseClicked
     private void lblOpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOpMouseClicked
         // TODO add your handling code here:
-         //selectSkill((JLabel) evt.getSource());
+        //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblOpMouseClicked
     private void lblAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAttackMouseClicked
         // TODO add your handling code here:
-         //selectSkill((JLabel) evt.getSource());
+        //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblAttackMouseClicked
     private void lblBlockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBlockMouseClicked
         // TODO add your handling code here:
-         //selectSkill((JLabel) evt.getSource());
+        //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblBlockMouseClicked
     private void lblReceptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReceptionMouseClicked
         // TODO add your handling code here:
-         //selectSkill((JLabel) evt.getSource());
+        //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblReceptionMouseClicked
     private void lblSetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSetMouseClicked
         // TODO add your handling code here:
-         //selectSkill((JLabel) evt.getSource());
+        //selectSkill((JLabel) evt.getSource());
     }//GEN-LAST:event_lblSetMouseClicked
     private void txtInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInputKeyPressed
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String val = txtInput.getText();
-            
-            if(!val.equals(code))
-            {
-            
-            int valIndex = val.lastIndexOf("-") == -1 ? 0 : val.lastIndexOf("-") + 1;
-            command = val.substring(valIndex);
-            System.out.println(command);
 
-            String a = String.valueOf(command).toUpperCase();
+            if (!val.equals(code)) {
 
-            if (skillKeys.contains(a)) {
-                switch (a) {
-                    case "Q":
-                        selectSkill(lblService);
-                        break;
-                    case "W":
-                        selectSkill(lblReception);
-                        break;
-                    case "E":
-                        selectSkill(lblAttack);
-                        break;
-                    case "R":
-                        selectSkill(lblSet);
-                        break;
-                    case "T":
-                        selectSkill(lblBlock);
-                        break;
-                    case "Y":
-                        selectSkill(lblDefence);
-                        break;
-                    case "U":
-                        selectSkill(lblOp);
-                        break;
-                    case "I":
-                        selectSkill(lblTF);
-                        break;
-                }
-            } else if (scoreKeys.contains(a)) {
-                switch (a) {
-                    case "Z":
-                        selectScore(lblRate1);
-                        break;
-                    case "X":
-                        selectScore(lblRate2);
-                        break;
-                    case "C":
-                        selectScore(lblRate3);
-                        break;
-                    case "V":
-                        selectScore(lblRate4);
-                        break;
-                    case "B":
-                        selectScore(lblRate5);
-                        break;
-                }
-            } else if (diagramKeys.contains(a)) {
-                diagramPoints.add(a);
-                if (diagramPoints.size() > 1) {
+                int valIndex = val.lastIndexOf("-") == -1 ? 0 : val.lastIndexOf("-") + 1;
+                command = val.substring(valIndex);
+                System.out.println(command);
 
-                    if (skill.equals(Skill.Set.getType())) {
-                        panel.dig(skill, diagramPoints, TempoEnum.getTempoByName(skillDescIdPanMap.get(43).lblOption.getText()));
-                    } else {
-                        panel.dig(skill, diagramPoints, 0);
+                String a = String.valueOf(command).toUpperCase();
+
+                if (skillKeys.contains(a)) {
+                    switch (a) {
+                        case "Q":
+                            selectSkill(lblService);
+                            break;
+                        case "W":
+                            selectSkill(lblReception);
+                            break;
+                        case "E":
+                            selectSkill(lblAttack);
+                            break;
+                        case "R":
+                            selectSkill(lblSet);
+                            break;
+                        case "T":
+                            selectSkill(lblBlock);
+                            break;
+                        case "Y":
+                            selectSkill(lblDefence);
+                            break;
+                        case "U":
+                            selectSkill(lblOp);
+                            break;
+                        case "I":
+                            selectSkill(lblTF);
+                            break;
                     }
+                } else if (scoreKeys.contains(a)) {
+                    switch (a) {
+                        case "Z":
+                            selectScore(lblRate1);
+                            break;
+                        case "X":
+                            selectScore(lblRate2);
+                            break;
+                        case "C":
+                            selectScore(lblRate3);
+                            break;
+                        case "V":
+                            selectScore(lblRate4);
+                            break;
+                        case "B":
+                            selectScore(lblRate5);
+                            break;
+                    }
+                } else if (diagramKeys.contains(a)) {
+                    diagramPoints.add(a);
+                    if (diagramPoints.size() > 1) {
 
-                    if (CommonUtil.isNumeric(diagramPoints.get(0))) {
-                        if (diagramPoints.size() > 2) {
-                            setDetailValuesByDiagram(skill, diagramPoints, 1);
+                        if (skill.equals(Skill.Set.getType())) {
+                            panel.dig(skill, diagramPoints, TempoEnum.getTempoByName(skillDescIdPanMap.get(43).lblOption.getText()));
+                        } else {
+                            panel.dig(skill, diagramPoints, 0);
                         }
-                    } else {
-                        setDetailValuesByDiagram(skill, diagramPoints, 0);
-                    }
-                   
 
-                }
-            } else if (detailsShortcutKeys.contains(a)) {
+                        if (CommonUtil.isNumeric(diagramPoints.get(0))) {
+                            if (diagramPoints.size() > 2) {
+                                setDetailValuesByDiagram(skill, diagramPoints, 1);
+                            }
+                        } else {
+                            setDetailValuesByDiagram(skill, diagramPoints, 0);
+                        }
 
-                for (Map.Entry<PanSkillDescCriteria, List<String>> entry : panPoints.entrySet()) {
-                    if (entry.getValue().contains(a)) {
-                        PanSkillDescCriteria p = entry.getKey();
-                        String point = pointsShortcut.get(a);
-                        p.lblOption.setText(point);
-                        break;
+                    }
+                } else if (detailsShortcutKeys.contains(a)) {
+
+                    for (Map.Entry<PanSkillDescCriteria, List<String>> entry : panPoints.entrySet()) {
+                        if (entry.getValue().contains(a)) {
+                            PanSkillDescCriteria p = entry.getKey();
+                            String point = pointsShortcut.get(a);
+                            p.lblOption.setText(point);
+                            break;
+                        }
+                    }
+
+                } else {
+                    int i = 0;
+                    for (Player pl : Controller.panMatchSet.playerList) {
+                        if (pl.getChestNo().equals(command)) {
+                            selectPlayer(playerLabelList.get(i));
+                        }
+                        i++;
                     }
                 }
-                
-            } else {
-                int i = 0;
-                for (Player pl : Controller.panMatchSet.playerList) {
-                    if (pl.getChestNo().equals(command)) {
-                        selectPlayer(playerLabelList.get(i));
-                    }
-                    i++;
-                }
-            }
-            txtInput.setText(txtInput.getText()+"-");
+                txtInput.setText(txtInput.getText() + "-");
 //            if(p.isInserted)
 //        {
 //            update();
 //        }
-        }
-        
+            }
+
         }
     }//GEN-LAST:event_txtInputKeyPressed
 
@@ -2114,27 +2111,24 @@ setValues(rallyEvaluationSkillScore);
     private void butResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butResetMouseClicked
         // TODO add your handling code here:
         JLabel txt = (JLabel) evt.getSource();
-        
-        if(txt.getText().equalsIgnoreCase("Clear"))
-        {
-        
-        PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(p, false);
-        p.panEvalDetail.removeAll();
-        p.panEvalDetail.add(panEvaluationRowDetail, BorderLayout.CENTER);
-        p.panEvalDetail.validate();
-        p.panEvalDetail.repaint();
-        p.currentPanRow.txtPlayer.setText("-");
-        p.currentPanRow.txtRate.setText("-");
-        p.currentPanRow.txtSkill.setText("-");
-        }
-        else if(txt.getText().equalsIgnoreCase("edit"))
-        {
+
+        if (txt.getText().equalsIgnoreCase("Clear")) {
+
+            PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(p, false);
+            p.panEvalDetail.removeAll();
+            p.panEvalDetail.add(panEvaluationRowDetail, BorderLayout.CENTER);
+            p.panEvalDetail.validate();
+            p.panEvalDetail.repaint();
+            p.currentPanRow.txtPlayer.setText("-");
+            p.currentPanRow.txtRate.setText("-");
+            p.currentPanRow.txtSkill.setText("-");
+        } else if (txt.getText().equalsIgnoreCase("edit")) {
             dig = new DialogPAnEvaluationRallyRowEdit();
-            dig.init(skill, chestNo, ""+score,this.rallyEvaluationSkillScore,this);
+            dig.init(skill, chestNo, "" + score, this.rallyEvaluationSkillScore, this);
             dig.show();
-            
+
         }
-        
+
     }//GEN-LAST:event_butResetMouseClicked
 
     private void lblNEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNEMouseClicked

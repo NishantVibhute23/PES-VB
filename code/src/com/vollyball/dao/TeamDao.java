@@ -147,6 +147,7 @@ public class TeamDao {
                 t.setTeamName(rs.getString(5));
                 t.setCaptain(rs.getInt(6) == 0 ? false : true);
                 t.setTeamId(id);
+                t.setIsdeleted(rs.getInt(7));
                 playerList.add(t);
             }
 

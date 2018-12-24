@@ -496,8 +496,11 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         for (Map.Entry<PlayerScores, List<Integer>> entry : playerSetDetails.entrySet()) {
             PlayerScores key = entry.getKey();
             List<Integer> value = entry.getValue();
+            if(key.getIsDeleted()==0)
+            {
             Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0)==0?"-":value.get(0), value.get(1)==0?"-":value.get(1),value.get(2)==0?"-":value.get(2), value.get(3)==0?"-":value.get(3), value.get(4)==0?"-":value.get(4)};
             team1Playermodel.addRow(row);
+            }
         }
 
 //        for (Player p : playerList) {
@@ -549,8 +552,11 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         for (Map.Entry<PlayerScores, List<Integer>> entry : playerSetDetails.entrySet()) {
             PlayerScores key = entry.getKey();
             List<Integer> value = entry.getValue();
+            if(key.getIsDeleted()==0)
+            {
             Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0)==0?"-":value.get(0), value.get(1)==0?"-":value.get(1),value.get(2)==0?"-":value.get(2), value.get(3)==0?"-":value.get(3), value.get(4)==0?"-":value.get(4)};
             team2Playermodel.addRow(row);
+            }
         }
 
 //        for (Player p : playerList) {

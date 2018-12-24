@@ -44,14 +44,15 @@ public class PanTeamReportOfBlock extends javax.swing.JPanel implements Serializ
     /**
      * Creates new form PanTeamReportOFAttack
      */
-    public PanTeamReportOfBlock(int cb, int matchId) {
+    public PanTeamReportOfBlock(int cb, int evaluationteamId) {
         initComponents();
 
-        MatchBean team = matchDao.getMatchesById(Controller.competitionId, matchId);
-        team1id = team.getTeam1();
-        team2id = team.getTeam2();
-        evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
-        evaluationteamId2 = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
+//        MatchBean team = matchDao.getMatchesById(Controller.competitionId, matchId);
+//        team1id = team.getTeam1();
+//        team2id = team.getTeam2();
+//        evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
+//        evaluationteamId2 = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
+this.evaluationteamId=evaluationteamId;
         createComplexOverviewTable();
         createServiceSuccessTable();
 

@@ -11,6 +11,7 @@ import com.vollyball.bean.SetTimeout;
 import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.RallyDao;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -640,6 +641,8 @@ public class PanEvaluationTimeout extends javax.swing.JPanel {
 
         String score[] = txtScore.getText().split(":");
 
+        if(!cmbTeam.getSelectedItem().equals("Select"))
+        {
         SetTimeout st = new SetTimeout();
         st.setPosition(Integer.parseInt("" + cmPos.getSelectedItem()));
         st.setTeam("" + cmbTeam.getSelectedItem());
@@ -652,6 +655,9 @@ public class PanEvaluationTimeout extends javax.swing.JPanel {
 
         } else {
             Controller.panMatchSet.dialogEvaluationTimeout.close();
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Please Select Team", "Warning", 2);
         }
     }//GEN-LAST:event_jLabel6MouseClicked
 

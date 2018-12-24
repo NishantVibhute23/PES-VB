@@ -56,10 +56,7 @@ public class PanReportMatch extends javax.swing.JPanel {
         panZ = new PanZoneSkillwiseMain(cb, matchId);
         panT = new PanTeamReportSkill(cb, matchId);
         panListToPrint.add(panC);
-        panListToPrint.add(panR);
-        panListToPrint.add(panZ);
-        panListToPrint.add(panT);
-        panReport.add(panC, BorderLayout.CENTER);
+               panReport.add(panC, BorderLayout.CENTER);
 
         lblmatch.setForeground(Color.BLACK);
         panMatch.setBackground(Color.WHITE);

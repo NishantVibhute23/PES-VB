@@ -17,7 +17,7 @@ public enum ShortCutEnum {
     ShortCutEnum1(1, "S", "S", "Setter", 1),
     ShortCutEnum2(2, "A", "OH", "Outside Hitter/Ace Hitter", 1),
     ShortCutEnum3(3, "M", "MB", "Middle Blocker", 1),
-    ShortCutEnum4(4, "U", "U", "Universal Player", 1),
+    ShortCutEnum4(4, "U", "UV", "Universal Player", 1),
     ShortCutEnum5(5, "LB", "LB", "Libero", 1),
     ShortCutEnum6(6, "H", "H", "Home", 2),
     ShortCutEnum7(7, "O", "Opp", "Opponent", 2),
@@ -101,7 +101,12 @@ public enum ShortCutEnum {
     ShortCutEnum85(85, "OA", "OA", "Opponent Attack", 18),
     ShortCutEnum86(86, "OB", "OB", "Opponent Block", 18),
     shortCutEnum87(87, "T4", "ODB", "On Direct Ball", 5),
-    ShortCutEnum88(88, "B4", "ZB", "None", 11);
+    ShortCutEnum88(88, "B4", "ZB", "None", 11),
+    ShortCutEnum89(89, "NA", "NA", "Not attempted", 15),
+    ShortCutEnum90(90, "C4", "SP", "Spot Jump", 19),
+    ShortCutEnum91(91, "W6", "BS", "Back Set", 14),
+    ShortCutEnum92(92, "OD", "OD", "Opponent Direct", 18),
+    ShortCutEnum93(93, "N6", "ANSF", "Away from net semi favourable", 15);
 
     int shortCutId, headingId;
     String code, abbr, longForm;

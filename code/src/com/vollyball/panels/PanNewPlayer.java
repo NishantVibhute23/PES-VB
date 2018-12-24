@@ -384,8 +384,9 @@ public class PanNewPlayer extends javax.swing.JPanel {
 
                     if (id != 0) {
                         Controller.createPlayerDialog.close();
-
+ Controller.panBestScorer.setRow(null);
                         JOptionPane.showMessageDialog(this, "Player '" + txtPlayerName.getText() + "' Added Successfully");
+                       
                     } else {
                         JOptionPane.showMessageDialog(this, "Failed to add Player");
                     }
@@ -420,7 +421,7 @@ public class PanNewPlayer extends javax.swing.JPanel {
 
                 if (id != 0) {
                     Controller.createPlayerDialog.close();
-
+Controller.panBestScorer.setRow(null);
                     JOptionPane.showMessageDialog(this, "Player '" + txtPlayerName.getText() + "' Updated Successfully");
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed to Update Player");
@@ -477,7 +478,7 @@ public class PanNewPlayer extends javax.swing.JPanel {
         String chestNo = txtPlayerChestNo.getText();
         chestNumList = td.getTeamPlayers(teamsMap.get(team1combo1.getSelectedItem()));
         for (Player player : chestNumList) {
-            if (player.getChestNo().equals(chestNo)) {
+            if (player.getChestNo().equals(chestNo) && player.getIsdeleted()==0) {
                 msg = "Chest No Exist";
             }
         }
@@ -489,6 +490,11 @@ public class PanNewPlayer extends javax.swing.JPanel {
         String msg = "";
 
         int k = 1;
+        
+        if(team1combo1.getSelectedItem().equals("Select"))
+        {
+             msg = msg + "Select Team Name\n";
+        }
 
         if (!validate(txtPlayerName).isEmpty()) {
             msg = msg + "Name" + message + "\n";
@@ -496,7 +502,7 @@ public class PanNewPlayer extends javax.swing.JPanel {
         }
 
         if (!validateNumber(txtPlayerChestNo).isEmpty()) {
-            msg = msg + "Chest Num " + k + " : " + message + "\n";
+            msg = msg + "Chest Num  : " + message + "\n";
             txtPlayerChestNo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
         }
 

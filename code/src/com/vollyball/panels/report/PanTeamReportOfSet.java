@@ -52,14 +52,15 @@ public class PanTeamReportOfSet extends javax.swing.JPanel {
     /**
      * Creates new form PanTeamReportOFAttack
      */
-    public PanTeamReportOfSet(int cb, int matchId) {
+    public PanTeamReportOfSet(int cb, int evaluationteamId) {
         initComponents();
 
-        MatchBean team = matchDao.getMatchesById(Controller.competitionId, matchId);
-        team1id = team.getTeam1();
-        team2id = team.getTeam2();
-        evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
-        evaluationteamId2 = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
+//        MatchBean team = matchDao.getMatchesById(Controller.competitionId, matchId);
+//        team1id = team.getTeam1();
+//        team2id = team.getTeam2();
+//        evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
+//        evaluationteamId2 = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
+this.evaluationteamId=evaluationteamId;
 
         createComplexOverviewTable();
         createAttackBlockOverviewTable();

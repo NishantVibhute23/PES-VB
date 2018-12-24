@@ -53,14 +53,12 @@ public class PanTeamReportOfService extends javax.swing.JPanel implements Serial
     /**
      * Creates new form PanTeamReportOFAttack
      */
-    public PanTeamReportOfService(int cb, int matchId) {
+    public PanTeamReportOfService(int cb, int evaluationteamId) {
         initComponents();
 
-        MatchBean team = matchDao.getMatchesById(Controller.competitionId, matchId);
-        team1id = team.getTeam1();
-        team2id = team.getTeam2();
-        evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
-        evaluationteamId2 = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
+        
+        this.evaluationteamId = evaluationteamId;
+       
         createComplexOverviewTable();
         createServiceSuccessTable();
 
