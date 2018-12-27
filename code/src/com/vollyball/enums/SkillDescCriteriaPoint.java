@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -268,16 +268,16 @@ public enum SkillDescCriteriaPoint {
     ReceptionG2(252, "", "CN", 60, 59),
     ReceptionG3(253, "", "AN", 60, 60),
     ReceptionG4(254, "", "LT", 60, 61),
-//    ReceptionH1(255, "", "JS", 61, 53),
-//    ReceptionH2(256, "", "RB", 61, 54),
-//    ReceptionH3(257, "", "FP", 61, 55),
-//    ReceptionH4(258, "", "HP", 61, 56),
-//    ReceptionH5(259, "", "BC", 61, 57),
-//    ReceptionH6(260, "", "BS", 61, 68),
-//    ReceptionH7(261, "", "FS", 61, 69),
-//    ReceptionI1(262, "", "HIGH", 62, 18),
-//    ReceptionI2(263, "", "MEDIUM", 62, 17),
-//    ReceptionI3(264, "", "LOW", 62, 16),
+    //    ReceptionH1(255, "", "JS", 61, 53),
+    //    ReceptionH2(256, "", "RB", 61, 54),
+    //    ReceptionH3(257, "", "FP", 61, 55),
+    //    ReceptionH4(258, "", "HP", 61, 56),
+    //    ReceptionH5(259, "", "BC", 61, 57),
+    //    ReceptionH6(260, "", "BS", 61, 68),
+    //    ReceptionH7(261, "", "FS", 61, 69),
+    //    ReceptionI1(262, "", "HIGH", 62, 18),
+    //    ReceptionI2(263, "", "MEDIUM", 62, 17),
+    //    ReceptionI3(264, "", "LOW", 62, 16),
     ReceptionJ1(265, "", "00:00", 63, 0),
     ReceptionK1(266, "", "FR", 64, 0),
     ReceptionK2(267, "", "FM", 64, 0),
@@ -347,13 +347,13 @@ public enum SkillDescCriteriaPoint {
     DefenceN4(331, "", "RR", 78, 43),
     DefenceN5(332, "", "RM", 78, 0),
     DefenceN6(333, "", "RL", 78, 0),
-//    DefenceO1(334, "", "JS", 79, 53),
-//    DefenceO2(335, "", "RB", 79, 54),
-//    DefenceO3(336, "", "FP", 79, 55),
-//    DefenceO4(337, "", "HP", 79, 56),
-//    DefenceO5(338, "", "BC", 79, 57),
-//    DefenceO6(339, "", "BS", 79, 68),
-//    DefenceO7(340, "", "FS", 79, 69),
+    //    DefenceO1(334, "", "JS", 79, 53),
+    //    DefenceO2(335, "", "RB", 79, 54),
+    //    DefenceO3(336, "", "FP", 79, 55),
+    //    DefenceO4(337, "", "HP", 79, 56),
+    //    DefenceO5(338, "", "BC", 79, 57),
+    //    DefenceO6(339, "", "BS", 79, 68),
+    //    DefenceO7(340, "", "FS", 79, 69),
     DefenceQ1(341, "", "00:00", 80, 0),
     DefenceR1(342, "", "C", 81, 0),
     DefenceR2(343, "", "L", 81, 0),
@@ -394,7 +394,7 @@ public enum SkillDescCriteriaPoint {
     AttackD4(379, "", "ODB", 14, 87),
     BlockE4(380, "", "ODB", 31, 87),
     SetB4(381, "", "ODB", 43, 87),
-//    ReceptionI4(382, "", "ODB", 62, 87),
+    //    ReceptionI4(382, "", "ODB", 62, 87),
     DefenceB4(383, "", "ODB", 66, 87),
     SetN1(384, "", "1-2-3", 89, 29),
     SetN2(385, "", "1-3-2", 89, 30),
@@ -446,8 +446,13 @@ public enum SkillDescCriteriaPoint {
     DefenceT8(591, "", "2-1-3", 95, 75),
     DefenceT9(592, "", "Non Organised", 95, 76),
     DefenceS5(593, "", "OB", 90, 86),
-    AttackQ4(594, "", "None", 26, 95),
-    BlockA4(595, "", "None", 27, 95);
+    AttackQ4(594, "", "None", 26, 95);
+//    BlockA4(595, "", "None", 27, 95),
+//    DefenceK5(596, "", "NA", 75, 61),
+//    AttackU4(597, "", "Spot Jump", 94, 90),
+//    SetA7(598, "", "Back Set", 42, 91),
+//    DefenceS6(599, "", "OD", 90, 92),
+//    SetC6(600, "", "ANSF", 44, 93);
 
     int id;
     String type;
