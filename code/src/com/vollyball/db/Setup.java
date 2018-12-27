@@ -253,6 +253,7 @@ public class Setup extends Thread {
                 preparedStmt.setInt(1, dir.getId());
                 preparedStmt.setString(2, dir.getType());
                 preparedStmt.setInt(3, dir.getSkillId());
+                preparedStmt.setInt(4, dir.getView());
                 resp = preparedStmt.executeUpdate();
             } catch (SQLException ex) {
                 Logger.getLogger(Setup.class.getName()).log(Level.SEVERE, null, ex);
@@ -268,7 +269,6 @@ public class Setup extends Thread {
         }
     }
 
-    
     public void insertSkillDescCriteriaPoint(int status) {
         int count = 0;
         String query = CommonUtil.getResourceProperty("insert.skilldeccriteriapoint");
@@ -280,7 +280,8 @@ public class Setup extends Thread {
                 preparedStmt.setInt(1, dir.getId());
                 preparedStmt.setString(2, dir.getType());
                 preparedStmt.setString(3, dir.getAbbreviation());
-                  preparedStmt.setInt(4, dir.getSkillDescCriteriaId());
+                preparedStmt.setInt(4, dir.getSkillDescCriteriaId());
+                preparedStmt.setInt(5, dir.getShortcutId());
                 resp = preparedStmt.executeUpdate();
             } catch (SQLException ex) {
                 Logger.getLogger(Setup.class.getName()).log(Level.SEVERE, null, ex);
@@ -295,10 +296,7 @@ public class Setup extends Thread {
             FrmRegister.pgrStatus.setValue(status);
         }
     }
-    
-    
-    
-    
+
     public void insertSkills(int status) {
         int count = 0;
         String query = CommonUtil.getResourceProperty("insert.skills");
