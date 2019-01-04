@@ -6,9 +6,7 @@
 package com.vollyball.panels.report;
 
 import com.vollyball.bean.DigTrianglePoints;
-import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.SuccessFailure;
-import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.enums.Skill;
@@ -56,9 +54,8 @@ public class PanTeamReportOfService extends javax.swing.JPanel implements Serial
     public PanTeamReportOfService(int cb, int evaluationteamId) {
         initComponents();
 
-        
         this.evaluationteamId = evaluationteamId;
-       
+
         createComplexOverviewTable();
         createServiceSuccessTable();
 

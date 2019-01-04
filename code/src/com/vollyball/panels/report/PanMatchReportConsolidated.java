@@ -76,17 +76,15 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         matchDate.setText(team.getDate());
         team1label.setText(team.getTeam1name());
         team2label.setText(team.getTeam2name());
-        
-        
-        
+
         JTableHeader th = excellenceTable.getTableHeader();
-TableColumnModel tcm = th.getColumnModel();
-TableColumn tc = tcm.getColumn(1);
-tc.setHeaderValue( team.getTeam1name());
- tc = tcm.getColumn(2);
-tc.setHeaderValue( team.getTeam2name());
-resizeColumnsExcellence();
-th.repaint();
+        TableColumnModel tcm = th.getColumnModel();
+        TableColumn tc = tcm.getColumn(1);
+        tc.setHeaderValue(team.getTeam1name());
+        tc = tcm.getColumn(2);
+        tc.setHeaderValue(team.getTeam2name());
+        resizeColumnsExcellence();
+        th.repaint();
 
         team1id = team.getTeam1();
         team2id = team.getTeam2();
@@ -249,9 +247,6 @@ th.repaint();
         tbTeam2Loss.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
         tbTeam2Loss.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
         tbTeam2Loss.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
-        
-        
-        
 
         JTableHeader header5 = team1PlayerTable.getTableHeader();
         header5.setDefaultRenderer(new TableHeaderRendererForReport(team1PlayerTable));
@@ -280,13 +275,12 @@ th.repaint();
         team2PlayerTable.setOpaque(true);
         team2PlayerTable.setFillsViewportHeight(true);
         team2PlayerTable.setBackground(ivory);
-        
-         JTableHeader header7 = excellenceTable.getTableHeader();
+
+        JTableHeader header7 = excellenceTable.getTableHeader();
         header7.setDefaultRenderer(new TableHeaderRendererForReport(excellenceTable));
         excellenceTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         excellenceTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         excellenceTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-      
 
     }
 
@@ -313,31 +307,27 @@ th.repaint();
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 0, 4);
 
                 SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-                
+
                 Date d1 = null;
-		Date d2 = null;
+                Date d2 = null;
 
                 try {
                     d1 = format.parse(ms.getStart_time());
                     d2 = format.parse(ms.getEnd_time());
-                     long diff = d2.getTime() - d1.getTime();
-                     
-                     long diffSeconds = diff / 1000 % 60;
-			long diffMinutes = diff / (60 * 1000) % 60;
-                        tbSetDetails.setValueAt(diffMinutes+":" + diffSeconds, 0, 1);
+                    long diff = d2.getTime() - d1.getTime();
+
+                    long diffSeconds = diff / 1000 % 60;
+                    long diffMinutes = diff / (60 * 1000) % 60;
+                    tbSetDetails.setValueAt(diffMinutes + ":" + diffSeconds, 0, 1);
                 } catch (ParseException ex) {
                     Logger.getLogger(PanMatchReportConsolidated.class.getName()).log(Level.SEVERE, null, ex);
                 }
-			
-                
-                      
-                
+
 //                
 //                String start_time[] = ms.getStart_time().split(":");
 //                String end_time[] = ms.getEnd_time().split(":");
 //                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
 //                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
-                
                 if (ms.getWon_by() == team1id) {
                     team1wonBy++;
                 } else if (ms.getWon_by() == team2id) {
@@ -347,31 +337,29 @@ th.repaint();
                 tbSetDetails.setValueAt(countRally, 1, 2);
                 tbSetDetails.setValueAt(timeoutCount, 1, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 1, 4);
-                
+
                 SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-                
+
                 Date d1 = null;
-		Date d2 = null;
+                Date d2 = null;
 
                 try {
                     d1 = format.parse(ms.getStart_time());
                     d2 = format.parse(ms.getEnd_time());
-                     long diff = d2.getTime() - d1.getTime();
-                     
-                     long diffSeconds = diff / 1000 % 60;
-			long diffMinutes = diff / (60 * 1000) % 60;
-                        tbSetDetails.setValueAt(diffMinutes+":" + diffSeconds, 1, 1);
+                    long diff = d2.getTime() - d1.getTime();
+
+                    long diffSeconds = diff / 1000 % 60;
+                    long diffMinutes = diff / (60 * 1000) % 60;
+                    tbSetDetails.setValueAt(diffMinutes + ":" + diffSeconds, 1, 1);
                 } catch (ParseException ex) {
                     Logger.getLogger(PanMatchReportConsolidated.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
+
 //                String start_time[] = ms.getStart_time().split(":");
 //                String end_time[] = ms.getEnd_time().split(":");
 //                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
 //                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
 //                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 1, 1);
-
                 if (ms.getWon_by() == team1id) {
                     team1wonBy++;
                 } else if (ms.getWon_by() == team2id) {
@@ -382,29 +370,27 @@ th.repaint();
                 tbSetDetails.setValueAt(timeoutCount, 2, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 2, 4);
                 SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-                
+
                 Date d1 = null;
-		Date d2 = null;
+                Date d2 = null;
 
                 try {
                     d1 = format.parse(ms.getStart_time());
                     d2 = format.parse(ms.getEnd_time());
-                     long diff = d2.getTime() - d1.getTime();
-                     
-                     long diffSeconds = diff / 1000 % 60;
-			long diffMinutes = diff / (60 * 1000) % 60;
-                        tbSetDetails.setValueAt(diffMinutes+":" + diffSeconds, 2, 1);
+                    long diff = d2.getTime() - d1.getTime();
+
+                    long diffSeconds = diff / 1000 % 60;
+                    long diffMinutes = diff / (60 * 1000) % 60;
+                    tbSetDetails.setValueAt(diffMinutes + ":" + diffSeconds, 2, 1);
                 } catch (ParseException ex) {
                     Logger.getLogger(PanMatchReportConsolidated.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
+
 //                String start_time[] = ms.getStart_time().split(":");
 //                String end_time[] = ms.getEnd_time().split(":");
 //                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
 //                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
 //                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 2, 1);
-
                 if (ms.getWon_by() == team1id) {
                     team1wonBy++;
                 } else if (ms.getWon_by() == team2id) {
@@ -415,29 +401,27 @@ th.repaint();
                 tbSetDetails.setValueAt(timeoutCount, 3, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 3, 4);
                 SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-                
+
                 Date d1 = null;
-		Date d2 = null;
+                Date d2 = null;
 
                 try {
                     d1 = format.parse(ms.getStart_time());
                     d2 = format.parse(ms.getEnd_time());
-                     long diff = d2.getTime() - d1.getTime();
-                     
-                     long diffSeconds = diff / 1000 % 60;
-			long diffMinutes = diff / (60 * 1000) % 60;
-                        tbSetDetails.setValueAt(diffMinutes+":" + diffSeconds,3, 1);
+                    long diff = d2.getTime() - d1.getTime();
+
+                    long diffSeconds = diff / 1000 % 60;
+                    long diffMinutes = diff / (60 * 1000) % 60;
+                    tbSetDetails.setValueAt(diffMinutes + ":" + diffSeconds, 3, 1);
                 } catch (ParseException ex) {
                     Logger.getLogger(PanMatchReportConsolidated.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
+
 //                String start_time[] = ms.getStart_time().split(":");
 //                String end_time[] = ms.getEnd_time().split(":");
 //                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
 //                int timeout_sec = Integer.parseInt(end_time[1]) - Integer.parseInt(start_time[1]);
 //                tbSetDetails.setValueAt(timeout_min + ":" + timeout_sec, 3, 1);
-
                 if (ms.getWon_by() == team1id) {
                     team1wonBy++;
                 } else if (ms.getWon_by() == team2id) {
@@ -447,24 +431,23 @@ th.repaint();
                 tbSetDetails.setValueAt(countRally, 4, 2);
                 tbSetDetails.setValueAt(timeoutCount, 4, 3);
                 tbSetDetails.setValueAt(homeScore + ":" + oppScore, 4, 4);
-SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-                
+                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+
                 Date d1 = null;
-		Date d2 = null;
+                Date d2 = null;
 
                 try {
                     d1 = format.parse(ms.getStart_time());
                     d2 = format.parse(ms.getEnd_time());
-                     long diff = d2.getTime() - d1.getTime();
-                     
-                     long diffSeconds = diff / 1000 % 60;
-			long diffMinutes = diff / (60 * 1000) % 60;
-                        tbSetDetails.setValueAt(diffMinutes+":" + diffSeconds,4, 1);
+                    long diff = d2.getTime() - d1.getTime();
+
+                    long diffSeconds = diff / 1000 % 60;
+                    long diffMinutes = diff / (60 * 1000) % 60;
+                    tbSetDetails.setValueAt(diffMinutes + ":" + diffSeconds, 4, 1);
                 } catch (ParseException ex) {
                     Logger.getLogger(PanMatchReportConsolidated.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
+
 //                String start_time[] = ms.getStart_time().split(":");
 //                String end_time[] = ms.getEnd_time().split(":");
 //                int timeout_min = Integer.parseInt(end_time[0]) - Integer.parseInt(start_time[0]);
@@ -496,10 +479,9 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         for (Map.Entry<PlayerScores, List<Integer>> entry : playerSetDetails.entrySet()) {
             PlayerScores key = entry.getKey();
             List<Integer> value = entry.getValue();
-            if(key.getIsDeleted()==0)
-            {
-            Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0)==0?"-":value.get(0), value.get(1)==0?"-":value.get(1),value.get(2)==0?"-":value.get(2), value.get(3)==0?"-":value.get(3), value.get(4)==0?"-":value.get(4)};
-            team1Playermodel.addRow(row);
+            if (key.getIsDeleted() == 0) {
+                Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0) == 0 ? "-" : value.get(0), value.get(1) == 0 ? "-" : value.get(1), value.get(2) == 0 ? "-" : value.get(2), value.get(3) == 0 ? "-" : value.get(3), value.get(4) == 0 ? "-" : value.get(4)};
+                team1Playermodel.addRow(row);
             }
         }
 
@@ -552,10 +534,9 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         for (Map.Entry<PlayerScores, List<Integer>> entry : playerSetDetails.entrySet()) {
             PlayerScores key = entry.getKey();
             List<Integer> value = entry.getValue();
-            if(key.getIsDeleted()==0)
-            {
-            Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0)==0?"-":value.get(0), value.get(1)==0?"-":value.get(1),value.get(2)==0?"-":value.get(2), value.get(3)==0?"-":value.get(3), value.get(4)==0?"-":value.get(4)};
-            team2Playermodel.addRow(row);
+            if (key.getIsDeleted() == 0) {
+                Object[] row = {key.getChestNo(), key.getPlayerName(), value.get(0) == 0 ? "-" : value.get(0), value.get(1) == 0 ? "-" : value.get(1), value.get(2) == 0 ? "-" : value.get(2), value.get(3) == 0 ? "-" : value.get(3), value.get(4) == 0 ? "-" : value.get(4)};
+                team2Playermodel.addRow(row);
             }
         }
 
@@ -714,11 +695,11 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                         + entry.getValue().get(1).getTotalAttempt()
                         + entry.getValue().get(2).getTotalAttempt()
                         + entry.getValue().get(6).getTotalAttempt();
-                Object[] row = {entry.getKey().toString(), total==0?"-":total,
-                    entry.getValue().get(0).getTotalAttempt()==0?"-":entry.getValue().get(0).getTotalAttempt(),
-                    entry.getValue().get(2).getTotalAttempt()==0?"-":entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt()==0?"-":entry.getValue().get(1).getTotalAttempt(),
-                    entry.getValue().get(6).getTotalAttempt()==0?"-":entry.getValue().get(6).getTotalAttempt()};
+                Object[] row = {entry.getKey().toString(), total == 0 ? "-" : total,
+                    entry.getValue().get(0).getTotalAttempt() == 0 ? "-" : entry.getValue().get(0).getTotalAttempt(),
+                    entry.getValue().get(2).getTotalAttempt() == 0 ? "-" : entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt() == 0 ? "-" : entry.getValue().get(1).getTotalAttempt(),
+                    entry.getValue().get(6).getTotalAttempt() == 0 ? "-" : entry.getValue().get(6).getTotalAttempt()};
                 team1WinTablemodel.addRow(row);
 
             }
@@ -741,11 +722,11 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                         + entry.getValue().get(1).getTotalAttempt()
                         + entry.getValue().get(2).getTotalAttempt()
                         + entry.getValue().get(6).getTotalAttempt();
-                Object[] row = {entry.getKey().toString(),  total==0?"-":total,
-                     entry.getValue().get(0).getTotalAttempt()==0?"-":entry.getValue().get(0).getTotalAttempt(),
-                    entry.getValue().get(2).getTotalAttempt()==0?"-":entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt()==0?"-":entry.getValue().get(1).getTotalAttempt(),
-                    entry.getValue().get(6).getTotalAttempt()==0?"-":entry.getValue().get(6).getTotalAttempt()};
+                Object[] row = {entry.getKey().toString(), total == 0 ? "-" : total,
+                    entry.getValue().get(0).getTotalAttempt() == 0 ? "-" : entry.getValue().get(0).getTotalAttempt(),
+                    entry.getValue().get(2).getTotalAttempt() == 0 ? "-" : entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt() == 0 ? "-" : entry.getValue().get(1).getTotalAttempt(),
+                    entry.getValue().get(6).getTotalAttempt() == 0 ? "-" : entry.getValue().get(6).getTotalAttempt()};
                 team2WinTablemodel.addRow(row);
 
             }
@@ -766,7 +747,7 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
             column.setPreferredWidth(pWidth);
         }
     }
-    
+
     float[] ColumnsExcellencePercentage1 = {20.0f, 40.0f, 40.0f};
 
     private void resizeColumnsExcellence() {
@@ -780,8 +761,7 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
             column.setPreferredWidth(pWidth);
         }
     }
-    
-    
+
     float[] ColumnsTeam2WinWidthPercentage1 = {5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f};
 
     private void resizeColumnsTeam2Win() {
@@ -825,13 +805,13 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                         + entry.getValue().get(5).getTotalAttempt()
                         + entry.getValue().get(7).getTotalAttempt();
                 Object[] row = {entry.getKey().toString(),
-                    total ==0?"-":total, entry.getValue().get(0).getTotalAttempt()==0?"-":entry.getValue().get(0).getTotalAttempt(),
-                    entry.getValue().get(2).getTotalAttempt()==0?"-":entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt()==0?"-":entry.getValue().get(1).getTotalAttempt(),
-                    entry.getValue().get(4).getTotalAttempt()==0?"-":entry.getValue().get(4).getTotalAttempt(),
-                    entry.getValue().get(3).getTotalAttempt()==0?"-":entry.getValue().get(3).getTotalAttempt(),
-                    entry.getValue().get(5).getTotalAttempt()==0?"-":entry.getValue().get(5).getTotalAttempt(),
-                    entry.getValue().get(7).getTotalAttempt()==0?"-":entry.getValue().get(7).getTotalAttempt()};
+                    total == 0 ? "-" : total, entry.getValue().get(0).getTotalAttempt() == 0 ? "-" : entry.getValue().get(0).getTotalAttempt(),
+                    entry.getValue().get(2).getTotalAttempt() == 0 ? "-" : entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt() == 0 ? "-" : entry.getValue().get(1).getTotalAttempt(),
+                    entry.getValue().get(4).getTotalAttempt() == 0 ? "-" : entry.getValue().get(4).getTotalAttempt(),
+                    entry.getValue().get(3).getTotalAttempt() == 0 ? "-" : entry.getValue().get(3).getTotalAttempt(),
+                    entry.getValue().get(5).getTotalAttempt() == 0 ? "-" : entry.getValue().get(5).getTotalAttempt(),
+                    entry.getValue().get(7).getTotalAttempt() == 0 ? "-" : entry.getValue().get(7).getTotalAttempt()};
                 team1LossTablemodel.addRow(row);
 
             }
@@ -857,13 +837,13 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                         + entry.getValue().get(4).getTotalAttempt()
                         + entry.getValue().get(5).getTotalAttempt()
                         + entry.getValue().get(7).getTotalAttempt();
-                Object[] row = {entry.getKey().toString(), total==0?"-":total, entry.getValue().get(0).getTotalAttempt()==0?"-":entry.getValue().get(0).getTotalAttempt(),
-                    entry.getValue().get(2).getTotalAttempt()==0?"-":entry.getValue().get(2).getTotalAttempt(),
-                    entry.getValue().get(1).getTotalAttempt()==0?"-":entry.getValue().get(1).getTotalAttempt(),
-                    entry.getValue().get(4).getTotalAttempt()==0?"-":entry.getValue().get(4).getTotalAttempt(),
-                    entry.getValue().get(3).getTotalAttempt()==0?"-":entry.getValue().get(3).getTotalAttempt(),
-                    entry.getValue().get(5).getTotalAttempt()==0?"-":entry.getValue().get(5).getTotalAttempt(),
-                    entry.getValue().get(7).getTotalAttempt()==0?"-":entry.getValue().get(7).getTotalAttempt()};
+                Object[] row = {entry.getKey().toString(), total == 0 ? "-" : total, entry.getValue().get(0).getTotalAttempt() == 0 ? "-" : entry.getValue().get(0).getTotalAttempt(),
+                    entry.getValue().get(2).getTotalAttempt() == 0 ? "-" : entry.getValue().get(2).getTotalAttempt(),
+                    entry.getValue().get(1).getTotalAttempt() == 0 ? "-" : entry.getValue().get(1).getTotalAttempt(),
+                    entry.getValue().get(4).getTotalAttempt() == 0 ? "-" : entry.getValue().get(4).getTotalAttempt(),
+                    entry.getValue().get(3).getTotalAttempt() == 0 ? "-" : entry.getValue().get(3).getTotalAttempt(),
+                    entry.getValue().get(5).getTotalAttempt() == 0 ? "-" : entry.getValue().get(5).getTotalAttempt(),
+                    entry.getValue().get(7).getTotalAttempt() == 0 ? "-" : entry.getValue().get(7).getTotalAttempt()};
                 team2LossTablemodel.addRow(row);
 
             }
@@ -909,62 +889,50 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         }
     }
 
-
     public void setExcellenceRow() {
         int row = 0, col = 1;
         double total = 0;
         for (int i = 1; i <= 5; i++) {
             total = (reportMap.get(i) != null ? reportMap.get(i) : 0) + (reportMap1.get(i) != null ? reportMap1.get(i) : 0);
-            excellenceTable.setValueAt(((reportMap.get(i) == null ? 0 : reportMap.get(i)) == 0 ? 0 : (reportMap.get(i) / total) * 100)+"%", i - 1, col);
+            excellenceTable.setValueAt(((reportMap.get(i) == null ? 0 : reportMap.get(i)) == 0 ? 0 : (reportMap.get(i) / total) * 100) + "%", i - 1, col);
             String val = "-";
-            if(reportMap.get(i) == null )
-            {
+            if (reportMap.get(i) == null) {
                 val = "-";
-            }else{
-               
-                        val = getGrade((reportMap.get(i) / total) * 100);
-                        
-                        
+            } else {
+
+                val = getGrade((reportMap.get(i) / total) * 100);
+
             }
-             excellenceTable.setValueAt(val, i - 1, col);
+            excellenceTable.setValueAt(val, i - 1, col);
         }
         col++;
         for (int i = 1; i <= 5; i++) {
             total = (reportMap.get(i) != null ? reportMap.get(i) : 0) + (reportMap1.get(i) != null ? reportMap1.get(i) : 0);
 //            total=reportMap.get(i)+reportMap1.get(i);
-            excellenceTable.setValueAt(((reportMap1.get(i) == null ? 0 : reportMap1.get(i)) == 0 ? 0 : (reportMap1.get(i) / total) * 100)+"%", i - 1, col);
+            excellenceTable.setValueAt(((reportMap1.get(i) == null ? 0 : reportMap1.get(i)) == 0 ? 0 : (reportMap1.get(i) / total) * 100) + "%", i - 1, col);
             String val = "-";
-             if(reportMap1.get(i) == null )
-            {
+            if (reportMap1.get(i) == null) {
                 val = "-";
-            }else{
-                
-                        val = getGrade((reportMap1.get(i) / total) * 100);
-                        
-                        
+            } else {
+
+                val = getGrade((reportMap1.get(i) / total) * 100);
+
             }
-             excellenceTable.setValueAt(val, i - 1, col);
+            excellenceTable.setValueAt(val, i - 1, col);
         }
     }
-    
-    public String getGrade(double value)
-    {
-        String grade ="-";
-        if(value>=50)
-        {
+
+    public String getGrade(double value) {
+        String grade = "-";
+        if (value >= 50) {
             grade = "Excellent";
-        }else if(value>=44&&value<50)
-        {
+        } else if (value >= 44 && value < 50) {
             grade = "Above Average";
-        }else if(value>=38&&value<44)
-        {
+        } else if (value >= 38 && value < 44) {
             grade = "Average";
-        }else if(value>=32&&value<38)
-        {
+        } else if (value >= 32 && value < 38) {
             grade = "Below Average";
-        }
-        else if(value<32)
-        {
+        } else if (value < 32) {
             grade = "Poor";
         }
         return grade;
@@ -3915,7 +3883,7 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                     .addComponent(team1playerDetailsPan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 514, Short.MAX_VALUE)
+                    .addComponent(jPanel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 518, Short.MAX_VALUE)
                     .addComponent(jPanel23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel21Layout.setVerticalGroup(
@@ -4121,7 +4089,7 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel44, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 514, Short.MAX_VALUE)
+                    .addComponent(jPanel44, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 518, Short.MAX_VALUE)
                     .addComponent(jPanel43, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel25Layout.setVerticalGroup(
@@ -4237,9 +4205,9 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                     .addGroup(panMatchReport1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -4403,7 +4371,7 @@ SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(jLabel32))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
