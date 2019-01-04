@@ -19,7 +19,7 @@
 
 DROP TABLE IF EXISTS batch;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE batch (
   id int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE batch (
   age_group varchar(200) NOT NULL,
   isDeleted int(11) DEFAULT '0',
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +50,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS batchmatchplayer;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE batchmatchplayer (
   id int(11) NOT NULL AUTO_INCREMENT,
   batchteam_id int(11) DEFAULT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE batchmatchplayer (
   KEY trainee_id (trainee_id),
   CONSTRAINT batchmatchplayer_ibfk_1 FOREIGN KEY (batchteam_id) REFERENCES batchteam (id),
   CONSTRAINT batchmatchplayer_ibfk_2 FOREIGN KEY (trainee_id) REFERENCES trainee (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS batchteam;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE batchteam (
   id int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE batchteam (
   PRIMARY KEY (id),
   KEY batch_id (batch_id),
   CONSTRAINT batchteam_ibfk_1 FOREIGN KEY (batch_id) REFERENCES batch (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +105,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS competition;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE competition (
   id int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE competition (
   age_group varchar(200) NOT NULL,
   isDeleted int(11) DEFAULT '0',
   PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,12 +134,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS m_rating;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE m_rating (
   id int(11) NOT NULL,
   grade varchar(255) NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +158,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS m_skill_desc_criteria_point;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE m_skill_desc_criteria_point (
   id int(11) NOT NULL,
   `type` varchar(100) NOT NULL,
@@ -167,7 +167,7 @@ CREATE TABLE m_skill_desc_criteria_point (
   PRIMARY KEY (id),
   KEY skill_desc_criteria_id (skill_desc_criteria_id),
   CONSTRAINT m_skill_desc_criteria_point_ibfk_1 FOREIGN KEY (skill_desc_criteria_id) REFERENCES m_skills_desc_criteria (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +186,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS m_skill_details;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE m_skill_details (
   id int(11) NOT NULL,
   skill_id int(11) NOT NULL,
@@ -198,7 +198,7 @@ CREATE TABLE m_skill_details (
   KEY rating_id (rating_id),
   CONSTRAINT m_skill_details_ibfk_1 FOREIGN KEY (skill_id) REFERENCES m_skills (id),
   CONSTRAINT m_skill_details_ibfk_2 FOREIGN KEY (rating_id) REFERENCES m_rating (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,12 +217,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS m_skills;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE m_skills (
   id int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +241,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS m_skills_desc_criteria;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE m_skills_desc_criteria (
   id int(11) NOT NULL,
   `type` varchar(255) NOT NULL,
@@ -249,7 +249,7 @@ CREATE TABLE m_skills_desc_criteria (
   PRIMARY KEY (id),
   KEY skill_id (skill_id),
   CONSTRAINT m_skills_desc_criteria_ibfk_1 FOREIGN KEY (skill_id) REFERENCES m_skills (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +268,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS match_evaluation_set;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE match_evaluation_set (
   id int(11) NOT NULL AUTO_INCREMENT,
   match_evaluation_team_id int(11) NOT NULL,
@@ -283,7 +283,7 @@ CREATE TABLE match_evaluation_set (
   PRIMARY KEY (id),
   KEY match_evaluation_team_id (match_evaluation_team_id),
   CONSTRAINT match_evaluation_set_ibfk_1 FOREIGN KEY (match_evaluation_team_id) REFERENCES match_evaluation_team (id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,7 +302,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS match_evaluation_set_latest_rotation;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE match_evaluation_set_latest_rotation (
   id int(11) NOT NULL AUTO_INCREMENT,
   pos1playerId int(11) DEFAULT NULL,
@@ -321,7 +321,7 @@ CREATE TABLE match_evaluation_set_latest_rotation (
   PRIMARY KEY (id),
   KEY match_evaluation_set_id (match_evaluation_set_id),
   CONSTRAINT match_evaluation_set_latest_rotation_ibfk_1 FOREIGN KEY (match_evaluation_set_id) REFERENCES match_evaluation_set (id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,7 +340,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS match_evaluation_team;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE match_evaluation_team (
   id int(11) NOT NULL AUTO_INCREMENT,
   match_id int(11) NOT NULL,
@@ -349,7 +349,7 @@ CREATE TABLE match_evaluation_team (
   PRIMARY KEY (id),
   KEY match_id (match_id),
   CONSTRAINT match_evaluation_team_ibfk_1 FOREIGN KEY (match_id) REFERENCES matches (id)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -368,7 +368,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS match_players;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE match_players (
   id int(11) NOT NULL AUTO_INCREMENT,
   match_id int(11) NOT NULL,
@@ -381,7 +381,7 @@ CREATE TABLE match_players (
   CONSTRAINT match_players_ibfk_1 FOREIGN KEY (team1) REFERENCES teams (id),
   CONSTRAINT match_players_ibfk_2 FOREIGN KEY (player_id) REFERENCES players (id),
   CONSTRAINT match_players_ibfk_3 FOREIGN KEY (match_id) REFERENCES matches (id)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -400,7 +400,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS matches;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE matches (
   id int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -422,7 +422,7 @@ CREATE TABLE matches (
   CONSTRAINT matches_ibfk_1 FOREIGN KEY (team1) REFERENCES teams (id),
   CONSTRAINT matches_ibfk_2 FOREIGN KEY (team2) REFERENCES teams (id),
   CONSTRAINT matches_ibfk_3 FOREIGN KEY (competition_id) REFERENCES competition (id)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -441,7 +441,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS players;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE players (
   id int(11) NOT NULL AUTO_INCREMENT,
   chest_num varchar(50) NOT NULL,
@@ -453,7 +453,7 @@ CREATE TABLE players (
   PRIMARY KEY (id),
   KEY team_id (team_id),
   CONSTRAINT players_ibfk_1 FOREIGN KEY (team_id) REFERENCES teams (id)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -472,7 +472,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS pool;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE pool (
   id int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -480,7 +480,7 @@ CREATE TABLE pool (
   PRIMARY KEY (id),
   KEY competition_id (competition_id),
   CONSTRAINT pool_ibfk_1 FOREIGN KEY (competition_id) REFERENCES competition (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -498,7 +498,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS rally;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE rally (
   id int(11) NOT NULL AUTO_INCREMENT,
   `number` int(11) NOT NULL,
@@ -512,7 +512,7 @@ CREATE TABLE rally (
   PRIMARY KEY (id),
   KEY evaluation_id (evaluation_id),
   CONSTRAINT rally_ibfk_1 FOREIGN KEY (evaluation_id) REFERENCES match_evaluation_set (id)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -531,7 +531,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS rally_details;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE rally_details (
   id int(11) NOT NULL AUTO_INCREMENT,
   skill int(11) NOT NULL,
@@ -543,7 +543,7 @@ CREATE TABLE rally_details (
   PRIMARY KEY (id),
   KEY rally_id (rally_id),
   CONSTRAINT rally_details_ibfk_1 FOREIGN KEY (rally_id) REFERENCES rally (id)
-) ENGINE=InnoDB AUTO_INCREMENT=383 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=383 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -562,7 +562,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS rally_details_criteria;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE rally_details_criteria (
   id int(11) NOT NULL AUTO_INCREMENT,
   skill_desc_criteria_id int(11) NOT NULL,
@@ -573,7 +573,7 @@ CREATE TABLE rally_details_criteria (
   KEY skill_desc_criteria_id (skill_desc_criteria_id),
   CONSTRAINT rally_details_criteria_ibfk_1 FOREIGN KEY (rally_details_id) REFERENCES rally_details (id),
   CONSTRAINT rally_details_criteria_ibfk_2 FOREIGN KEY (skill_desc_criteria_id) REFERENCES m_skills_desc_criteria (id)
-) ENGINE=InnoDB AUTO_INCREMENT=5281 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5281 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -592,7 +592,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS rally_rotation_order;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE rally_rotation_order (
   id int(11) NOT NULL AUTO_INCREMENT,
   pos1playerId int(11) DEFAULT NULL,
@@ -611,7 +611,7 @@ CREATE TABLE rally_rotation_order (
   PRIMARY KEY (id),
   KEY rallyId (rallyId),
   CONSTRAINT rally_rotation_order_ibfk_1 FOREIGN KEY (rallyId) REFERENCES rally (id)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -630,7 +630,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS set_plus_minus;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE set_plus_minus (
   id int(11) NOT NULL AUTO_INCREMENT,
   opponent_error varchar(50) DEFAULT NULL,
@@ -639,7 +639,7 @@ CREATE TABLE set_plus_minus (
   PRIMARY KEY (id),
   KEY match_evaluation_id (match_evaluation_id),
   CONSTRAINT set_plus_minus_ibfk_1 FOREIGN KEY (match_evaluation_id) REFERENCES match_evaluation_set (id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -658,7 +658,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS set_substitution;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE set_substitution (
   id int(11) NOT NULL AUTO_INCREMENT,
   position int(11) DEFAULT NULL,
@@ -677,7 +677,7 @@ CREATE TABLE set_substitution (
   CONSTRAINT set_substitution_ibfk_1 FOREIGN KEY (rotation_player_id) REFERENCES players (id),
   CONSTRAINT set_substitution_ibfk_2 FOREIGN KEY (substitute_player_id) REFERENCES players (id),
   CONSTRAINT set_substitution_ibfk_3 FOREIGN KEY (match_evaluation_id) REFERENCES match_evaluation_set (id)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -696,7 +696,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS set_timeout;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE set_timeout (
   id int(11) NOT NULL AUTO_INCREMENT,
   position int(11) DEFAULT NULL,
@@ -708,7 +708,7 @@ CREATE TABLE set_timeout (
   PRIMARY KEY (id),
   KEY match_evaluation_id (match_evaluation_id),
   CONSTRAINT set_timeout_ibfk_1 FOREIGN KEY (match_evaluation_id) REFERENCES match_evaluation_set (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -726,7 +726,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS setrotationorder;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE setrotationorder (
   id int(11) NOT NULL AUTO_INCREMENT,
   position int(11) NOT NULL,
@@ -738,7 +738,7 @@ CREATE TABLE setrotationorder (
   KEY match_evaluation_id (match_evaluation_id),
   CONSTRAINT setrotationorder_ibfk_1 FOREIGN KEY (playerId) REFERENCES players (id),
   CONSTRAINT setrotationorder_ibfk_2 FOREIGN KEY (match_evaluation_id) REFERENCES match_evaluation_set (id)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -757,7 +757,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS shortcut_settings;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE shortcut_settings (
   id int(11) NOT NULL AUTO_INCREMENT,
   shortcutId int(11) DEFAULT NULL,
@@ -765,7 +765,7 @@ CREATE TABLE shortcut_settings (
   `code` varchar(100) NOT NULL,
   abbr varchar(100) NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -784,7 +784,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS teams;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE teams (
   id int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -799,7 +799,7 @@ CREATE TABLE teams (
   PRIMARY KEY (id),
   KEY competition_id (competition_id),
   CONSTRAINT teams_ibfk_1 FOREIGN KEY (competition_id) REFERENCES competition (id)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -818,7 +818,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS trainee;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE trainee (
   id int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -827,7 +827,7 @@ CREATE TABLE trainee (
   PRIMARY KEY (id),
   KEY batch_id (batch_id),
   CONSTRAINT trainee_ibfk_1 FOREIGN KEY (batch_id) REFERENCES batch (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -845,7 +845,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS user;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `user` (
   id int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -856,7 +856,7 @@ CREATE TABLE `user` (
   mac_address varchar(500) DEFAULT NULL,
   created_on timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -875,7 +875,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS vollycourtcoordinates;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE vollycourtcoordinates (
   id int(11) NOT NULL,
   `Type` varchar(50) DEFAULT NULL,
@@ -890,7 +890,7 @@ CREATE TABLE vollycourtcoordinates (
   x4 int(11) DEFAULT NULL,
   y4 int(11) DEFAULT NULL,
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

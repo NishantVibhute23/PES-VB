@@ -61,7 +61,7 @@ public class PanTeamReportOfDefence extends javax.swing.JPanel {
 //        team2id = team.getTeam2();
 //        evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
 //        evaluationteamId2 = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
-this.evaluationteamId=evaluationteamId;
+        this.evaluationteamId = evaluationteamId;
         createComplexOverviewTable();
         createServiceSuccessTable();
 
@@ -485,10 +485,10 @@ this.evaluationteamId=evaluationteamId;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panServiceSuccess, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panServiceSuccess, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                 .addGap(21, 21, 21)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
