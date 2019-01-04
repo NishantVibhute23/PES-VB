@@ -165,6 +165,7 @@ public class DetailUtils {
             case 6:
                 pos = "S";
                 break;
+
         }
         return pos;
     }
@@ -172,28 +173,31 @@ public class DetailUtils {
     public static String getReceiverPosition(String pan2) {
         int zone;
         String pos = "";
-        zone = Integer.parseInt(pan2.substring(1, 2));
-        Player player = Controller.panEvaluationRally.rallyPositionMapOpp.get(zone);
 
-        switch (player.getPosition()) {
-            case 1:
-                pos = "S";
-                break;
-            case 2:
-                pos = "L";
-                break;
-            case 3:
-                pos = "U";
-                break;
-            case 4:
-                pos = "OH";
-                break;
-            case 5:
-                pos = "MB";
-                break;
-            case 6:
-                pos = "S";
-                break;
+        if (isNumeric(pan2.substring(1, 2))) {
+            zone = Integer.parseInt(pan2.substring(1, 2));
+            Player player = Controller.panEvaluationRally.rallyPositionMapOpp.get(zone);
+
+            switch (player.getPosition()) {
+                case 1:
+                    pos = "S";
+                    break;
+                case 2:
+                    pos = "L";
+                    break;
+                case 3:
+                    pos = "U";
+                    break;
+                case 4:
+                    pos = "OH";
+                    break;
+                case 5:
+                    pos = "MB";
+                    break;
+                case 6:
+                    pos = "S";
+                    break;
+            }
         }
         return pos;
     }
@@ -300,6 +304,15 @@ public class DetailUtils {
         }
         return court;
 
+    }
+
+    public static boolean isNumeric(String str) {
+        try {
+            double d = Double.parseDouble(str);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -655,7 +655,7 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                 skillDescIdPanMap.get(32).lblOption.setText(DetailUtils.getFromZone(pan1));
                 skillDescIdPanMap.get(33).lblOption.setText(DetailUtils.getToZone(pan2));
                 skillDescIdPanMap.get(36).lblOption.setText(DetailUtils.getReceiverPosition(pan2));
-                String pan3 = diagramPoints.get(k + 2);
+                String pan3 = diagramPoints.get(k + 1);
                 skillDescIdPanMap.get(34).lblOption.setText(DetailUtils.getToZone(pan3));
                 skillDescIdPanMap.get(39).lblOption.setText(DetailUtils.getBlockDefendedCourt(pan3));
             }
