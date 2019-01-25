@@ -2057,6 +2057,10 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
                     }
                 } else if (detailsShortcutKeys.contains(a)) {
 
+                    if (skill.equals(Skill.Defence.getType())) {
+                        setDefenceValues(a);
+                    }
+
                     for (Map.Entry<PanSkillDescCriteria, List<String>> entry : panPoints.entrySet()) {
                         if (entry.getValue().contains(a)) {
                             PanSkillDescCriteria p = entry.getKey();
@@ -2084,6 +2088,51 @@ public class PanEvaluationRowDetail extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_txtInputKeyPressed
+
+    public void setDefenceValues(String val) {
+        switch (val) {
+            case "HA":
+                for (Map.Entry<PanSkillDescCriteria, List<String>> entry : panPoints.entrySet()) {
+                    if (entry.getKey().getId() == 70 || entry.getKey().getId() == 71) {
+                        PanSkillDescCriteria p = entry.getKey();
+//                                    String point = pointsShortcut.get(a);
+                        p.lblOption.setText("NA");
+                    }
+                }
+                break;
+            case "OA":
+            case "HB":
+                for (Map.Entry<PanSkillDescCriteria, List<String>> entry : panPoints.entrySet()) {
+                    if (entry.getKey().getId() == 95) {
+                        PanSkillDescCriteria p = entry.getKey();
+//                                    String point = pointsShortcut.get(a);
+                        p.lblOption.setText("NA");
+                    }
+                }
+                break;
+            case "OD":
+            case "HD":
+                for (Map.Entry<PanSkillDescCriteria, List<String>> entry : panPoints.entrySet()) {
+                    if (entry.getKey().getId() == 65 || entry.getKey().getId() == 66 || entry.getKey().getId() == 67 || entry.getKey().getId() == 68 || entry.getKey().getId() == 69 || entry.getKey().getId() == 70 || entry.getKey().getId() == 95) {
+                        PanSkillDescCriteria p = entry.getKey();
+//                                    String point = pointsShortcut.get(a);
+                        p.lblOption.setText("NA");
+                    }
+                }
+                break;
+
+            case "OB":
+                for (Map.Entry<PanSkillDescCriteria, List<String>> entry : panPoints.entrySet()) {
+                    if (entry.getKey().getId() == 65 || entry.getKey().getId() == 66 || entry.getKey().getId() == 67 || entry.getKey().getId() == 68 || entry.getKey().getId() == 69 || entry.getKey().getId() == 70 || entry.getKey().getId() == 71 || entry.getKey().getId() == 95) {
+                        PanSkillDescCriteria p = entry.getKey();
+//                                    String point = pointsShortcut.get(a);
+                        p.lblOption.setText("NA");
+                    }
+                }
+                break;
+
+        }
+    }
 
     public void refresh() {
         panel.setPlayerPosition(p.rallyPositionMap, p.rallyPositionMapOpp);

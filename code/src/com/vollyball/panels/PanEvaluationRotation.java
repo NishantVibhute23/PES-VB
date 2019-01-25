@@ -92,26 +92,26 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         playerMapHome = new LinkedHashMap<>();
         modelSelectedPlayerHome = (DefaultTableModel) tbPlayersHome.getModel();
         List<Player> playerListHome = td.getTeamPlayers(homeTeamId);
-        List<Integer> selectedPlayersHome = td.getMatchPlayers(matchId, homeTeamId);
+//        List<Integer> selectedPlayersHome = td.getMatchPlayers(matchId, homeTeamId);
         for (Player player : playerListHome) {
             playerMapHome.put(player.getChestNo(), player);
-            if (selectedPlayersHome.contains(player.getId())) {
-                Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
-                modelSelectedPlayerHome.addRow(row);
-                if (type.equals("Update")) {
-                    if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
-                        for (int i = 1; i <= 7; i++) {
-                            if (Controller.panMatchSet.initialPositionMap.get(i).getChestNo().equals(player.getChestNo())) {
-                                for (int k = 0; k < tbPlayersHome.getRowCount(); k++) {
-                                    if (player.getChestNo().equals((String) tbPlayersHome.getValueAt(k, 1))) {
-                                        modelSelectedPlayerHome.removeRow(k);
-                                    }
+//            if (selectedPlayersHome.contains(player.getId())) {
+            Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
+            modelSelectedPlayerHome.addRow(row);
+            if (type.equals("Update")) {
+                if (!Controller.panMatchSet.initialPositionMap.isEmpty()) {
+                    for (int i = 1; i <= 7; i++) {
+                        if (Controller.panMatchSet.initialPositionMap.get(i).getChestNo().equals(player.getChestNo())) {
+                            for (int k = 0; k < tbPlayersHome.getRowCount(); k++) {
+                                if (player.getChestNo().equals((String) tbPlayersHome.getValueAt(k, 1))) {
+                                    modelSelectedPlayerHome.removeRow(k);
                                 }
                             }
                         }
                     }
                 }
             }
+//            }
         }
         if (type.equals("Update")) {
             txtEvaluatorName.setText(evaluatorName);
@@ -206,26 +206,26 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         playerMapOpp = new LinkedHashMap<>();
         modelSelectedPlayerOpp = (DefaultTableModel) tbPlayersOpp.getModel();
         List<Player> playerListOpp = td.getTeamPlayers(oppTeamId);
-        List<Integer> selectedPlayersOpp = td.getMatchPlayers(matchId, oppTeamId);
+//        List<Integer> selectedPlayersOpp = td.getMatchPlayers(matchId, oppTeamId);
         for (Player player : playerListOpp) {
             playerMapOpp.put(player.getChestNo(), player);
-            if (selectedPlayersOpp.contains(player.getId())) {
-                Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
-                modelSelectedPlayerOpp.addRow(row);
-                if (type.equals("Update")) {
-                    if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
-                        for (int i = 1; i <= 7; i++) {
-                            if (Controller.panMatchSet.initialPositionMapOpp.get(i).getChestNo().equals(player.getChestNo())) {
-                                for (int k = 0; k < tbPlayersOpp.getRowCount(); k++) {
-                                    if (player.getChestNo().equals((String) tbPlayersOpp.getValueAt(k, 1))) {
-                                        modelSelectedPlayerOpp.removeRow(k);
-                                    }
+//            if (selectedPlayersOpp.contains(player.getId())) {
+            Object[] row = {player.getName(), player.getChestNo(), PlayerPosition.getNameById(player.getPosition()).getName()};
+            modelSelectedPlayerOpp.addRow(row);
+            if (type.equals("Update")) {
+                if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
+                    for (int i = 1; i <= 7; i++) {
+                        if (Controller.panMatchSet.initialPositionMapOpp.get(i).getChestNo().equals(player.getChestNo())) {
+                            for (int k = 0; k < tbPlayersOpp.getRowCount(); k++) {
+                                if (player.getChestNo().equals((String) tbPlayersOpp.getValueAt(k, 1))) {
+                                    modelSelectedPlayerOpp.removeRow(k);
                                 }
                             }
                         }
                     }
                 }
             }
+//            }
         }
         if (type.equals("Update")) {
             if (!Controller.panMatchSet.initialPositionMapOpp.isEmpty()) {
@@ -1280,53 +1280,49 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
-        
-         boolean isValid = true;
+
+        boolean isValid = true;
 
         for (JTextField txt : textFields) {
             if (txt.getText().equals("")) {
                 isValid = false;
             }
         }
-         if (isValid) {
-        initialHomePositionMap = new LinkedHashMap<>();
-        initialHomePositionMap.put(1, playerMapHome.get(pos1Home.getText()));
-        initialHomePositionMap.put(2, playerMapHome.get(pos2Home.getText()));
-        initialHomePositionMap.put(3, playerMapHome.get(pos3Home.getText()));
-        initialHomePositionMap.put(4, playerMapHome.get(pos4Home.getText()));
-        initialHomePositionMap.put(5, playerMapHome.get(pos5Home.getText()));
-        initialHomePositionMap.put(6, playerMapHome.get(pos6Home.getText()));
-        initialHomePositionMap.put(7, playerMapHome.get(liberoHome.getText()));
+        if (isValid) {
+            initialHomePositionMap = new LinkedHashMap<>();
+            initialHomePositionMap.put(1, playerMapHome.get(pos1Home.getText()));
+            initialHomePositionMap.put(2, playerMapHome.get(pos2Home.getText()));
+            initialHomePositionMap.put(3, playerMapHome.get(pos3Home.getText()));
+            initialHomePositionMap.put(4, playerMapHome.get(pos4Home.getText()));
+            initialHomePositionMap.put(5, playerMapHome.get(pos5Home.getText()));
+            initialHomePositionMap.put(6, playerMapHome.get(pos6Home.getText()));
+            initialHomePositionMap.put(7, playerMapHome.get(liberoHome.getText()));
 
-        initialOppPositionMap = new LinkedHashMap<>();
-        initialOppPositionMap.put(1, playerMapOpp.get(pos1Opp.getText()));
-        initialOppPositionMap.put(2, playerMapOpp.get(pos2Opp.getText()));
-        initialOppPositionMap.put(3, playerMapOpp.get(pos3Opp.getText()));
-        initialOppPositionMap.put(4, playerMapOpp.get(pos4Opp.getText()));
-        initialOppPositionMap.put(5, playerMapOpp.get(pos5Opp.getText()));
-        initialOppPositionMap.put(6, playerMapOpp.get(pos6Opp.getText()));
-        initialOppPositionMap.put(7, playerMapOpp.get(liberoOpp.getText()));
+            initialOppPositionMap = new LinkedHashMap<>();
+            initialOppPositionMap.put(1, playerMapOpp.get(pos1Opp.getText()));
+            initialOppPositionMap.put(2, playerMapOpp.get(pos2Opp.getText()));
+            initialOppPositionMap.put(3, playerMapOpp.get(pos3Opp.getText()));
+            initialOppPositionMap.put(4, playerMapOpp.get(pos4Opp.getText()));
+            initialOppPositionMap.put(5, playerMapOpp.get(pos5Opp.getText()));
+            initialOppPositionMap.put(6, playerMapOpp.get(pos6Opp.getText()));
+            initialOppPositionMap.put(7, playerMapOpp.get(liberoOpp.getText()));
 
-        MatchSet ms = new MatchSet();
-        ms.setMatchEvaluationTeamId(matchEvaluationTeamId);
-        ms.setSetNo(set);
-        for (Map.Entry<Integer, Player> entry : initialHomePositionMap.entrySet()) {
-            SetRotationOrder sro = new SetRotationOrder();
-            sro.setPosition(entry.getKey());
-            sro.setPlayerId(entry.getValue().getId());
-            ms.getRotationOrder().add(sro);
-        }
+            MatchSet ms = new MatchSet();
+            ms.setMatchEvaluationTeamId(matchEvaluationTeamId);
+            ms.setSetNo(set);
+            for (Map.Entry<Integer, Player> entry : initialHomePositionMap.entrySet()) {
+                SetRotationOrder sro = new SetRotationOrder();
+                sro.setPosition(entry.getKey());
+                sro.setPlayerId(entry.getValue().getId());
+                ms.getRotationOrder().add(sro);
+            }
 
-        for (Map.Entry<Integer, Player> entry : initialOppPositionMap.entrySet()) {
-            SetRotationOrder sro = new SetRotationOrder();
-            sro.setPosition(entry.getKey());
-            sro.setPlayerId(entry.getValue().getId());
-            ms.getRotationOrderOpp().add(sro);
-        }
-
-       
-
-       
+            for (Map.Entry<Integer, Player> entry : initialOppPositionMap.entrySet()) {
+                SetRotationOrder sro = new SetRotationOrder();
+                sro.setPosition(entry.getKey());
+                sro.setPlayerId(entry.getValue().getId());
+                ms.getRotationOrderOpp().add(sro);
+            }
 
             ms.setEvaluator(txtEvaluatorName.getText());
             ms.setStart_time("00:00");
@@ -1355,8 +1351,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
 
                 }
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(this, "Please Select all rotation players");
         }
 

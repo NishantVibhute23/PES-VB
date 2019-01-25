@@ -1680,23 +1680,35 @@ public class PanEvaluationSubstituteHome extends javax.swing.JPanel {
         position = 6;
     }//GEN-LAST:event_but6MouseClicked
 
+    public void setPOint1() {
+        if (!selectPoint1RallyNo.getText().equals("")) {
+            re = rallyDao.getRally(Integer.parseInt(selectPoint1RallyNo.getText()), ms.getId(), 0);
+            point1rallyId = re.getId();
+            selectPoint1Score.setText(re.getHomeScore() + " : " + re.getOpponentScore());
+        }
+    }
+
+    public void setPOint2() {
+        if (!selectPoint2RallyNo.getText().equals("")) {
+            re = rallyDao.getRally(Integer.parseInt(selectPoint2RallyNo.getText()), ms.getId(), 0);
+            point2rallyId = re.getId();
+            selectPoint2Score.setText(re.getHomeScore() + " : " + re.getOpponentScore());
+        }
+    }
+
     private void selectPoint1RallyNoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectPoint1RallyNoFocusLost
         // TODO add your handling code here:
-        selectPoint1RallyNo.getText();
-        re = rallyDao.getRally(Integer.parseInt(selectPoint1RallyNo.getText()), ms.getId(), 0);
-        point1rallyId = re.getId();
-        selectPoint1Score.setText(re.getHomeScore() + " : " + re.getOpponentScore());
+        setPOint1();
     }//GEN-LAST:event_selectPoint1RallyNoFocusLost
 
     private void selectPoint2RallyNoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectPoint2RallyNoFocusLost
         // TODO add your handling code here:
-        selectPoint2RallyNo.getText();
-        re = rallyDao.getRally(Integer.parseInt(selectPoint2RallyNo.getText()), ms.getId(), 0);
-        point2rallyId = re.getId();
-        selectPoint2Score.setText(re.getHomeScore() + " : " + re.getOpponentScore());
+        setPOint2();
     }//GEN-LAST:event_selectPoint2RallyNoFocusLost
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        setPOint1();
+        setPOint2();
         SetSubstitution setsub = new SetSubstitution();
         setsub.setId(ss.getId());
         setsub.setPosition(position);

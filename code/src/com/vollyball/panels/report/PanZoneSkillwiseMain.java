@@ -655,7 +655,12 @@ public class PanZoneSkillwiseMain extends javax.swing.JPanel {
         }
         List<SkillDescCriteriaPoint> sdcPoint = SkillDescCriteriaPoint.getTypeByskillDescCriteriaId(skilDescId);
         Map<String, SuccessFailure> sfMap = reportDao.getReportZoneSkillWise(evlId, skilDescId, skillId);
-        Object[] row = {sfMap.get(sdcPoint.get(0).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(0).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(1).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(2).getAbbreviation()).getFailure(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getSuccess(), sfMap.get(sdcPoint.get(3).getAbbreviation()).getFailure()};
+        Object[] row = {sfMap.get(sdcPoint.get(0).getAbbreviation()).getSuccess(),
+            sfMap.get(sdcPoint.get(0).getAbbreviation()).getFailure(),
+            sfMap.get(sdcPoint.get(1).getAbbreviation()).getSuccess(),
+            sfMap.get(sdcPoint.get(1).getAbbreviation()).getFailure(),
+            sfMap.get(sdcPoint.get(2).getAbbreviation()).getSuccess(),
+            sfMap.get(sdcPoint.get(2).getAbbreviation()).getFailure(),};
         defaultModel.addRow(row);
     }
 
