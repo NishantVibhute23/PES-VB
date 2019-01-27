@@ -78,6 +78,7 @@ public enum SkillsDescCriteria {
     //    ReceptionI(62, "Set tempo", 5, 1),
     ReceptionJ(63, "Score at the time of Reception", 5, 0),
     ReceptionK(64, "Setter Position", 5, 0),
+    DefenceS(90, "Type of Defended Ball", 6, 1),
     DefenceA(65, "Type of Attack by opponent", 6, 1),
     DefenceB(66, "Attack on Tempo", 6, 1),
     DefenceC(67, "Combination of Attack", 6, 1),
@@ -102,8 +103,8 @@ public enum SkillsDescCriteria {
     ReceptionDig(86, "Diagram Points", 5, 0),
     DefenceDig(87, "Diagram Points", 6, 0),
     BlockQ(88, "Direction Of Block", 3, 0),
-    SetN(89, "Attack Cover", 4, 1),
-    DefenceS(90, "Type of Defended Ball", 6, 1),
+    //    SetN(89, "Attack Cover", 4, 1),
+
     AttackR(91, "Ball Reflected Zone", 2, 0),
     AttackS(92, "Attack Approach Run from", 2, 0),
     AttackT(93, "Attack Approach Run to", 2, 0),

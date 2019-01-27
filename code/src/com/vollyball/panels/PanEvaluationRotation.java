@@ -91,7 +91,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         playerMapHome = new LinkedHashMap<>();
         modelSelectedPlayerHome = (DefaultTableModel) tbPlayersHome.getModel();
         List<Player> playerListHome = td.getTeamPlayers(homeTeamId);
-        List<Integer> selectedPlayersHome = td.getMatchPlayers(matchId, homeTeamId);
+//        List<Integer> selectedPlayersHome = td.getMatchPlayers(matchId, homeTeamId);
         for (Player player : playerListHome) {
             playerMapHome.put(player.getChestNo(), player);
 //            if (selectedPlayersHome.contains(player.getId())) {
@@ -205,7 +205,7 @@ public class PanEvaluationRotation extends javax.swing.JPanel {
         playerMapOpp = new LinkedHashMap<>();
         modelSelectedPlayerOpp = (DefaultTableModel) tbPlayersOpp.getModel();
         List<Player> playerListOpp = td.getTeamPlayers(oppTeamId);
-        List<Integer> selectedPlayersOpp = td.getMatchPlayers(matchId, oppTeamId);
+//        List<Integer> selectedPlayersOpp = td.getMatchPlayers(matchId, oppTeamId);
         for (Player player : playerListOpp) {
             playerMapOpp.put(player.getChestNo(), player);
 //            if (selectedPlayersOpp.contains(player.getId())) {
