@@ -116,8 +116,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 
     public void removePosition() {
         panCompListValue.removeRow();
-        
-        
+
     }
 
     public PanEvaluationRally(RallyEvaluation rallyEvaluation) {
@@ -164,9 +163,13 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             latestPositionMapOpp.put(1, latestPositionMapOpp.get(2));
             latestPositionMapOpp.put(2, latestPositionMapOpp.get(3));
             latestPositionMapOpp.put(3, latestPositionMapOpp.get(4));
+            latestPositionMapOpp.put(4, latestPositionMapOpp.get(5));
+            latestPositionMapOpp.put(5, latestPositionMapOpp.get(6));
+            latestPositionMapOpp.put(6, temp);
+
             Player playerP = null;
             int i = 0;
-            if (latestPositionMapOpp.get(5).getChestNo().equals(Controller.panMatchSet.initialPositionMapOpp.get(7).getChestNo())) {
+            if (latestPositionMapOpp.get(4).getChestNo().equals(Controller.panMatchSet.initialPositionMapOpp.get(7).getChestNo())) {
                 for (Map.Entry<Integer, Player> entrySub : Controller.panMatchSet.initialPositionMapOpp.entrySet()) {
                     boolean found = false;
                     Integer integer = entrySub.getKey();
@@ -187,21 +190,26 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                 if (playerP != null) {
                     latestPositionMapOpp.put(4, playerP);
                 }
-            } else {
-                latestPositionMapOpp.put(4, latestPositionMap.get(5));
             }
-            latestPositionMapOpp.put(4, latestPositionMapOpp.get(5));
-            latestPositionMapOpp.put(5, latestPositionMapOpp.get(6));
-            latestPositionMapOpp.put(6, temp);
+//            else {
+//                latestPositionMapOpp.put(4, latestPositionMap.get(5));
+//            }
+//            latestPositionMapOpp.put(4, latestPositionMapOpp.get(5));
+//            latestPositionMapOpp.put(5, latestPositionMapOpp.get(6));
+//            latestPositionMapOpp.put(6, temp);
 
         } else if (re.getStartby() == HomeOpponent.OPPONENT.getId() && re.getWonby() == HomeOpponent.HOME.getId()) {
             Player temp = latestPositionMap.get(1);
             latestPositionMap.put(1, latestPositionMap.get(2));
             latestPositionMap.put(2, latestPositionMap.get(3));
             latestPositionMap.put(3, latestPositionMap.get(4));
+            latestPositionMap.put(4, latestPositionMap.get(5));
+            latestPositionMap.put(5, latestPositionMap.get(6));
+            latestPositionMap.put(6, temp);
+
             Player playerP = null;
             int i = 0;
-            if (latestPositionMap.get(5).getChestNo().equals(Controller.panMatchSet.initialPositionMap.get(7).getChestNo())) {
+            if (latestPositionMap.get(4).getChestNo().equals(Controller.panMatchSet.initialPositionMap.get(7).getChestNo())) {
                 for (Map.Entry<Integer, Player> entrySub : Controller.panMatchSet.substituePositionMap.entrySet()) {
                     boolean found = false;
                     Integer integer = entrySub.getKey();
@@ -222,11 +230,12 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                 if (playerP != null) {
                     latestPositionMap.put(4, playerP);
                 }
-            } else {
-                latestPositionMap.put(4, latestPositionMap.get(5));
             }
-            latestPositionMap.put(5, latestPositionMap.get(6));
-            latestPositionMap.put(6, temp);
+//            else {
+//                latestPositionMap.put(4, latestPositionMap.get(5));
+//            }
+//            latestPositionMap.put(5, latestPositionMap.get(6));
+//            latestPositionMap.put(6, temp);
         }
 
 //        int i = 0;
@@ -412,12 +421,10 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 
             PanEvaluationRowDetail pan = panRallyRow.get(panRowText);
             RallyEvaluationSkillScore rallyEvaluationSkillScore = pan.getRallyEvaluationSkillScore();
-            
-                         
-            
+
             try {
                 RallyEvaluationSkillScore rs = rallyEvaluationSkillScore;
-                
+
                 rs.setSkill(rallyEvaluationSkillScore.getSkill());
                 if (rallyEvaluationSkillScore.getSkill().equals(Skill.OP.getType())) {
                     Controller.panMatchSet.op++;
@@ -444,9 +451,9 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                 Logger.getLogger(this
                         .getName()).log(Level.SEVERE, null, ex);
             }
-            insert= true;
-            }
-        
+            insert = true;
+        }
+
         RallyEvaluationSkillScore panRallyEvaluationRowStart = rallyEvaluation.getRallyEvaluationSkillScore().get(0);
         RallyEvaluationSkillScore panRallyEvaluationRowEnd = rallyEvaluation.getRallyEvaluationSkillScore().get(rallyEvaluation.getRallyEvaluationSkillScore().size() - 1);
 
@@ -511,13 +518,12 @@ public class PanEvaluationRally extends javax.swing.JPanel {
                 }
                 i++;
             }
-            if(panListRow.size()==0)
-            {
-               panStartBy.setVisible(true);
-            }else{
+            if (panListRow.size() == 0) {
+                panStartBy.setVisible(true);
+            } else {
                 panStartBy.setVisible(false);
             }
-            
+
             mainList.remove(i);
             validate();
             repaint();
@@ -525,11 +531,10 @@ public class PanEvaluationRally extends javax.swing.JPanel {
 
         public void addToPosition(boolean first) {
             int atRow = 0;
-            
-            if(first)
-            {
+
+            if (first) {
                 panStartBy.setVisible(true);
-            }else{
+            } else {
                 panStartBy.setVisible(false);
             }
             PanEvaluationRallyRowText panel = new PanEvaluationRallyRowText(PanEvaluationRally.this);
@@ -573,10 +578,9 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             currentPanRow = panel;
             panEvalDetail.removeAll();
             PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(PanEvaluationRally.this, isFirst);
-            if(isFirst)
-            {
+            if (isFirst) {
                 panStartBy.setVisible(true);
-            }else{
+            } else {
                 panStartBy.setVisible(false);
             }
             panEvalDetail.add(panEvaluationRowDetail, BorderLayout.CENTER);
@@ -614,8 +618,7 @@ public class PanEvaluationRally extends javax.swing.JPanel {
             for (RallyEvaluationSkillScore rallyEvaluationSkillScore1 : rallyEvaluationSkillScore) {
                 panStartBy.setVisible(false);
                 panWonBy.setVisible(false);
-                
-                
+
                 PanEvaluationRallyRowText panel = new PanEvaluationRallyRowText(PanEvaluationRally.this);
                 currentPanRow = panel;
                 panEvalDetail.removeAll();
@@ -1047,15 +1050,14 @@ public class PanEvaluationRally extends javax.swing.JPanel {
     private void lblHomePlusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHomePlusMouseClicked
         // TODO add your handling code here:
         Controller.panMatchSet.homeScore++;
-        
-         lblHomePlus.setForeground(Color.WHITE);
-        panEndByHome.setBackground(new Color(57,74,108));
-          lblOppPlus.setForeground(Color.black);
+
+        lblHomePlus.setForeground(Color.WHITE);
+        panEndByHome.setBackground(new Color(57, 74, 108));
+        lblOppPlus.setForeground(Color.black);
         panEndByOpp.setBackground(Color.WHITE);
-        
-        
+
         setEndData("Home");
-        
+
         save();
     }//GEN-LAST:event_lblHomePlusMouseClicked
 
@@ -1063,76 +1065,71 @@ public class PanEvaluationRally extends javax.swing.JPanel {
         // TODO add your handling code here:
         Controller.panMatchSet.opponentScore++;
         lblOppPlus.setForeground(Color.WHITE);
-        panEndByOpp.setBackground(new Color(57,74,108));
-          lblHomePlus.setForeground(Color.black);
+        panEndByOpp.setBackground(new Color(57, 74, 108));
+        lblHomePlus.setForeground(Color.black);
         panEndByHome.setBackground(Color.WHITE);
-         setEndData("opp");
+        setEndData("opp");
         save();
     }//GEN-LAST:event_lblOppPlusMouseClicked
 
     private void lblHomeStartByMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHomeStartByMouseClicked
         // TODO add your handling code here:
         lblHomeStartBy.setForeground(Color.WHITE);
-        panStartbyHome.setBackground(new Color(57,74,108));
-          lblOppStartBy.setForeground(Color.black);
+        panStartbyHome.setBackground(new Color(57, 74, 108));
+        lblOppStartBy.setForeground(Color.black);
         panStartByOpp.setBackground(Color.WHITE);
-        
-         setStartData("Home");
+
+        setStartData("Home");
     }//GEN-LAST:event_lblHomeStartByMouseClicked
 
     private void lblOppStartByMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOppStartByMouseClicked
         // TODO add your handling code here:
-lblOppStartBy         .setForeground(Color.WHITE);
-        panStartByOpp.setBackground(new Color(57,74,108));
-          lblHomeStartBy.setForeground(Color.black);
-    panStartbyHome    .setBackground(Color.WHITE);
-         setStartData("opp");
+        lblOppStartBy.setForeground(Color.WHITE);
+        panStartByOpp.setBackground(new Color(57, 74, 108));
+        lblHomeStartBy.setForeground(Color.black);
+        panStartbyHome.setBackground(Color.WHITE);
+        setStartData("opp");
     }//GEN-LAST:event_lblOppStartByMouseClicked
 
-    public void setStartData(String type)
-    {
+    public void setStartData(String type) {
         PanEvaluationRallyRowText panel = new PanEvaluationRallyRowText(PanEvaluationRally.this);
-         PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(PanEvaluationRally.this, true);
-            panRallyRow.put(panel, panEvaluationRowDetail);
+        PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(PanEvaluationRally.this, true);
+        panRallyRow.put(panel, panEvaluationRowDetail);
         SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
-        int score = type.equalsIgnoreCase("Home")?5:1;
-        
-        if(panListRow.size()==0)
-        {
+        int score = type.equalsIgnoreCase("Home") ? 5 : 1;
+
+        if (panListRow.size() == 0) {
             panListRow.add(panel);
-            
+
         }
         isManuallyStartBy = true;
-        
+
         PanEvaluationRowDetail pan = panRallyRow.get(panListRow.get(0));
         RallyEvaluationSkillScore rallyEvaluationSkillScore = pan.getRallyEvaluationSkillScore();
-        rallyEvaluationSkillScore.setSkill(type.equals("Home")?Skill.Service.getType():Skill.Reception.getType());
-        rallyEvaluationSkillScore.setSkillId(type.equals("Home")?Skill.Service.getId():Skill.Reception.getId());
+        rallyEvaluationSkillScore.setSkill(type.equals("Home") ? Skill.Service.getType() : Skill.Reception.getType());
+        rallyEvaluationSkillScore.setSkillId(type.equals("Home") ? Skill.Service.getId() : Skill.Reception.getId());
         rallyEvaluationSkillScore.setScore(0);
         rallyEvaluationSkillScore.setChestNo("0");
         rallyEvaluationSkillScore.setPlayerId(0);
         Date time = new Date();
-                    startTime = formatterTime.format(time);
-                    lblRallyStartTime.setText(startTime);
-                    rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
-          
+        startTime = formatterTime.format(time);
+        lblRallyStartTime.setText(startTime);
+        rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
+
     }
-    
-    
-    public void setEndData(String type)
-    {
+
+    public void setEndData(String type) {
         PanEvaluationRallyRowText panel = new PanEvaluationRallyRowText(PanEvaluationRally.this);
-         PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(PanEvaluationRally.this, true);
-            panRallyRow.put(panel, panEvaluationRowDetail);
+        PanEvaluationRowDetail panEvaluationRowDetail = new PanEvaluationRowDetail(PanEvaluationRally.this, true);
+        panRallyRow.put(panel, panEvaluationRowDetail);
         SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
-        int score = type.equalsIgnoreCase("Home")?5:1;
-        
-        if(isManuallyStartBy)
-        {
-           panListRow.add(panel);
+        int score = type.equalsIgnoreCase("Home") ? 5 : 1;
+
+        if (isManuallyStartBy) {
+            panListRow.add(panel);
         }
-        
-        PanEvaluationRowDetail pan = panRallyRow.get(panListRow.get(panListRow.size()-1));
+
+        PanEvaluationRowDetail pan = panRallyRow.get(panListRow.get(panListRow.size() - 1));
         RallyEvaluationSkillScore rallyEvaluationSkillScore = pan.getRallyEvaluationSkillScore();
         rallyEvaluationSkillScore.setSkill(Skill.NE.getType());
         rallyEvaluationSkillScore.setSkillId(Skill.NE.getId());
@@ -1140,13 +1137,12 @@ lblOppStartBy         .setForeground(Color.WHITE);
         rallyEvaluationSkillScore.setChestNo("0");
         rallyEvaluationSkillScore.setPlayerId(0);
         Date time = new Date();
-                    endTime = formatterTime.format(time);
-                    lblRallyEndTime.setText(endTime);
-                    rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
-          
+        endTime = formatterTime.format(time);
+        lblRallyEndTime.setText(endTime);
+        rallyEvaluation.getRallyEvaluationSkillScore().add(rallyEvaluationSkillScore);
+
     }
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addToFirst;
     private javax.swing.JLabel jLabel1;
