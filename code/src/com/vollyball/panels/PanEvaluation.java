@@ -46,7 +46,7 @@ import uk.co.caprica.vlcj.runtime.x.LibXUtil;
  */
 public class PanEvaluation extends javax.swing.JPanel {
 
-    public int scoreLimit = 25;
+    public int scoreLimit = Integer.parseInt(CommonUtil.getResourceProperty("score.limit"));
     public int currentRally = 0;
     int setNum;
     int matchId;
