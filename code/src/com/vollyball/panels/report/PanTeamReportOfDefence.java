@@ -6,9 +6,7 @@
 package com.vollyball.panels.report;
 
 import com.vollyball.bean.DigTrianglePoints;
-import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.SuccessFailure;
-import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.enums.Skill;
@@ -578,7 +576,7 @@ public class PanTeamReportOfDefence extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panComplex, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -610,11 +608,9 @@ public class PanTeamReportOfDefence extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel panAN;
-    private javax.swing.JPanel panAN1;
     private javax.swing.JPanel panCN;
     private javax.swing.JPanel panComplex;
     private javax.swing.JPanel panLT;

@@ -6,9 +6,7 @@
 package com.vollyball.panels.report;
 
 import com.vollyball.bean.DigTrianglePoints;
-import com.vollyball.bean.MatchBean;
 import com.vollyball.bean.SuccessFailure;
-import com.vollyball.controller.Controller;
 import com.vollyball.dao.MatchDao;
 import com.vollyball.dao.ReportDao;
 import com.vollyball.enums.Skill;
@@ -60,7 +58,7 @@ public class PanTeamReportOfReception extends javax.swing.JPanel {
 //        team2id = team.getTeam2();
 //        evaluationteamId = reportDao.getTeamEvaluationIdBYMatch(team1id, matchId);
 //        evaluationteamId2 = reportDao.getTeamEvaluationIdBYMatch(team2id, matchId);
-this.evaluationteamId=evaluationteamId;
+        this.evaluationteamId = evaluationteamId;
         createComplexOverviewTable();
         createAttackBlockOverviewTable();
 
@@ -456,13 +454,13 @@ this.evaluationteamId=evaluationteamId;
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panAttackBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addComponent(panAttackBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(311, Short.MAX_VALUE))
+                .addGap(311, 311, 311))
         );
     }// </editor-fold>//GEN-END:initComponents
 

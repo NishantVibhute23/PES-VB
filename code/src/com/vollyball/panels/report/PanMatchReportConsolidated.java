@@ -3692,7 +3692,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tbSetDetails.setRowHeight(20);
+        tbSetDetails.setRowHeight(19);
         tbSetDetails.setShowHorizontalLines(false);
         jScrollPane1.setViewportView(tbSetDetails);
 
@@ -3769,9 +3769,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
         );
 
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
@@ -3811,9 +3810,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
         );
 
         team1playerDetailsPan.setBackground(new java.awt.Color(255, 255, 255));
@@ -3862,7 +3860,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         team1playerDetailsPanLayout.setVerticalGroup(
             team1playerDetailsPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(team1playerDetailsPanLayout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -3977,9 +3975,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             .addGroup(jPanel43Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
         );
 
         jPanel44.setBackground(new java.awt.Color(255, 255, 255));
@@ -4019,9 +4016,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
             jPanel44Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel44Layout.createSequentialGroup()
                 .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
         );
 
         team2PlayerTable.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -4068,8 +4064,8 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jLabel28.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -4171,7 +4167,7 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                 "SET", "Team1", "Team2"
             }
         ));
-        excellenceTable.setRowHeight(20);
+        excellenceTable.setRowHeight(19);
         excellenceTable.setShowHorizontalLines(false);
         jScrollPane2.setViewportView(excellenceTable);
 
@@ -4205,9 +4201,9 @@ public class PanMatchReportConsolidated extends javax.swing.JPanel {
                     .addGroup(panMatchReport1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

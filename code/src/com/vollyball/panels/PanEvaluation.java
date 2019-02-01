@@ -46,6 +46,7 @@ import uk.co.caprica.vlcj.runtime.x.LibXUtil;
  */
 public class PanEvaluation extends javax.swing.JPanel {
 
+    public int scoreLimit = 25;
     public int currentRally = 0;
     int setNum;
     int matchId;
@@ -85,7 +86,8 @@ public class PanEvaluation extends javax.swing.JPanel {
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
     public PlayerControlsPanel p1;
-String evaluator="";
+    String evaluator = "";
+
     /**
      * Creates new form PanEvaluation
      */
@@ -853,7 +855,7 @@ String evaluator="";
     }//GEN-LAST:event_cmbRalliesItemStateChanged
 
     public void nextRally() {
-        if (homeScore >= 25 || opponentScore >= 25) {
+        if (homeScore >= scoreLimit || opponentScore >= scoreLimit) {
             List<Integer> arr = new ArrayList();
             arr.add(homeScore);
             arr.add(opponentScore);
@@ -970,22 +972,23 @@ String evaluator="";
 
         cmbRallies.addItem(rallyNumNext);
 
-        if (homeScore >= 25 || opponentScore >= 25) {
+        if (homeScore >= scoreLimit || opponentScore >= scoreLimit) {
             List<Integer> arr = new ArrayList();
+
             arr.add(homeScore);
             arr.add(opponentScore);
             int max = Collections.max(arr);
             int min = Collections.min(arr);
             if ((max - min) >= 2) {
                 Date date = new Date();
-                String endTime =  formatterTime.format(date);
-                
+                String endTime = formatterTime.format(date);
+
                 if (max == homeScore) {
                     lblWonBy.setText(lblevaluationName.getText());
-                    matchDao.updateMatchSetWonBy(teamEvaluateId, matchEvaluationId,endTime);
+                    matchDao.updateMatchSetWonBy(teamEvaluateId, matchEvaluationId, endTime);
                 } else {
                     lblWonBy.setText(lblopponentName.getText());
-                    matchDao.updateMatchSetWonBy(opponentId, matchEvaluationId,endTime);
+                    matchDao.updateMatchSetWonBy(opponentId, matchEvaluationId, endTime);
                 }
                 setScore();
 
@@ -1019,19 +1022,17 @@ String evaluator="";
             } else {
                 setScore();
                 totalRallies++;
-            rallyNumNext++;
-            lblCurrentRally.setText("RALLY : " + rallyNumNext);
-            // TODO add your handling code here:
-            panEvalRallyRow.removeAll();
+                rallyNumNext++;
+                lblCurrentRally.setText("RALLY : " + rallyNumNext);
+                // TODO add your handling code here:
+                panEvalRallyRow.removeAll();
 //        ph = new PanEvaluationRallyHead(rallyNumNext, matchEvaluationId, rallyPositionMap, evaluationType);
-            Controller.panEvaluationRally = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
+                Controller.panEvaluationRally = new PanEvaluationRally(teamEvaluateId, opponentId, rallyNumNext);
 //        panRallyEvalHead.add(ph, BorderLayout.CENTER);
-            panEvalRallyRow.add(Controller.panEvaluationRally, BorderLayout.CENTER);
-            validate();
-            repaint();
-                
-                
-                
+                panEvalRallyRow.add(Controller.panEvaluationRally, BorderLayout.CENTER);
+                validate();
+                repaint();
+
             }
         } else {
             setScore();
