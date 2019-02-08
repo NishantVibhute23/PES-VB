@@ -5,7 +5,6 @@
  */
 package com.vollyball.panels.report;
 
-import com.vollyball.panels.*;
 import com.vollyball.bean.Player;
 import com.vollyball.bean.PlayerPositionBean;
 import java.awt.BorderLayout;
@@ -127,7 +126,7 @@ public class PanZoneRotationBlock extends javax.swing.JPanel {
         lblFailurePerc1.setText("100%");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel7.setText("Repeated  : ");
+        jLabel7.setText("PRNR  : ");
 
         lblCount.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCount.setText("0");

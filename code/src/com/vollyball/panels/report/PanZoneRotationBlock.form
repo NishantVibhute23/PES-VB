@@ -203,7 +203,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Repeated  : "/>
+            <Property name="text" type="java.lang.String" value="PRNR  : "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCount">
